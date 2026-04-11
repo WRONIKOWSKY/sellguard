@@ -3,7 +3,6 @@ import Head from "next/head";
 import Layout from "../components/Layout";
 
 const CONDITIONS = ["Neuf avec étiquette", "Neuf sans étiquette", "Très bon état", "Bon état", "Satisfaisant"];
-const PLATFORMS = ["Vinted", "eBay", "Leboncoin", "Facebook Marketplace", "Rakuten", "Vestiaire Collective"];
 
 const PLATFORM_STYLE = {
   "Vinted": { bg: "#E1F5EE", color: "#0F6E56" },
@@ -12,6 +11,19 @@ const PLATFORM_STYLE = {
   "Facebook Marketplace": { bg: "#EFF6FF", color: "#1D4ED8" },
   "Rakuten": { bg: "#FEE2E2", color: "#991B1B" },
   "Vestiaire Collective": { bg: "#EDE9FE", color: "#5B21B6" },
+  "Grailed": { bg: "#FEE2E2", color: "#7F1D1D" },
+  "Depop": { bg: "#F3F4F6", color: "#111827" },
+  "Etsy": { bg: "#FFFBEB", color: "#92400E" },
+  "Vide Dressing": { bg: "#FCE7F3", color: "#9D174D" },
+};
+
+const MEASURE_FIELDS = {
+  "Haut / T-shirt": ["Poitrine (cm)", "Épaules (cm)", "Longueur dos (cm)", "Manches (cm)"],
+  "Veste / Manteau": ["Épaules (cm)", "Poitrine (cm)", "Taille (cm)", "Longueur dos (cm)", "Manches (cm)"],
+  "Pantalon / Jean": ["Tour de taille (cm)", "Tour de hanches (cm)", "Longueur jambe (cm)", "Entrejambe (cm)"],
+  "Robe / Jupe": ["Poitrine (cm)", "Taille (cm)", "Hanches (cm)", "Longueur (cm)"],
+  "Chaussures": ["Pointure EU", "Longueur semelle (cm)"],
+  "Accessoire / Sac": ["Longueur (cm)", "Hauteur (cm)", "Largeur (cm)"],
 };
 
 export default function Annonce() {
@@ -25,6 +37,8 @@ export default function Annonce() {
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState(null);
   const [copied, setCopied] = useState({});
+  const [measureCategory, setMeasureCategory] = useState("");
+  const [measures, setMeasures] = useState({});
   const fileRef = useRef();
 
   function handleFile(file) {
@@ -38,17 +52,31 @@ export default function Annonce() {
     reader.readAsDataURL(file);
   }
 
+  function setMeasure(field, value) {
+    setMeasures(m => ({ ...m, [field]: value }));
+  }
+
+  function buildMeasuresText() {
+    if (!measureCategory) return "";
+    const fields = MEASURE_FIELDS[measureCategory] || [];
+    const filled = fields.filter(f => measures[f]);
+    if (!filled.length) return "";
+    return "Mesures : " + filled.map(f => `${f.replace(" (cm)", "").replace(" EU", "")} ${measures[f]}${f.includes("EU") ? "" : "cm"}`).join(", ");
+  }
+
   async function analyze() {
     if (!imageBase64 && !extra.trim()) return;
     setLoading(true);
     setError(null);
     setResult(null);
+    const measuresText = buildMeasuresText();
+    const fullExtra = [extra, measuresText].filter(Boolean).join(" — ");
 
     try {
       const res = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ imageBase64, imageMime, condition, extra })
+        body: JSON.stringify({ imageBase64, imageMime, condition, extra: fullExtra })
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Erreur");
@@ -68,10 +96,13 @@ export default function Annonce() {
   }
 
   function reset() {
-    setResult(null); setImageBase64(null); setImagePreview(null); setExtra(""); setError(null); setActiveTab(null);
+    setResult(null); setImageBase64(null); setImagePreview(null);
+    setExtra(""); setError(null); setActiveTab(null);
+    setMeasureCategory(""); setMeasures({});
   }
 
   const activePlatform = result?.platforms?.find(p => p.name === activeTab);
+  const inp = { width: "100%", padding: "10px 12px", fontSize: 14, background: "#fff", border: "1px solid #E5E7EB", borderRadius: 10, outline: "none", fontFamily: "inherit", color: "#111" };
 
   return (
     <>
@@ -95,18 +126,51 @@ export default function Annonce() {
               <input ref={fileRef} type="file" accept="image/*" style={{ display: "none" }} onChange={e => handleFile(e.target.files[0])} />
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 16 }}>
-              <div>
-                <label style={{ fontSize: 13, fontWeight: 600, color: "#444", display: "block", marginBottom: 6 }}>État</label>
-                <select value={condition} onChange={e => setCondition(e.target.value)} style={{ width: "100%", padding: "10px 12px", fontSize: 14, background: "#fff", border: "1px solid #E5E7EB", borderRadius: 10, outline: "none", fontFamily: "inherit", color: "#111" }}>
-                  {CONDITIONS.map(c => <option key={c}>{c}</option>)}
-                </select>
-              </div>
+            <div style={{ marginBottom: 16 }}>
+              <label style={{ fontSize: 13, fontWeight: 600, color: "#444", display: "block", marginBottom: 6 }}>État</label>
+              <select value={condition} onChange={e => setCondition(e.target.value)} style={inp}>
+                {CONDITIONS.map(c => <option key={c}>{c}</option>)}
+              </select>
             </div>
 
-            <div style={{ marginBottom: 24 }}>
+            <div style={{ marginBottom: 16 }}>
               <label style={{ fontSize: 13, fontWeight: 600, color: "#444", display: "block", marginBottom: 6 }}>Infos supplémentaires <span style={{ fontWeight: 400, color: "#999" }}>(optionnel)</span></label>
-              <textarea value={extra} onChange={e => setExtra(e.target.value)} rows={2} placeholder="Marque, taille, couleur, défauts éventuels..." style={{ width: "100%", padding: "10px 12px", fontSize: 14, background: "#fff", border: "1px solid #E5E7EB", borderRadius: 10, outline: "none", resize: "none", lineHeight: 1.6, fontFamily: "inherit", color: "#111" }} />
+              <textarea value={extra} onChange={e => setExtra(e.target.value)} rows={2} placeholder="Marque, taille, couleur, défauts éventuels..." style={{ ...inp, resize: "none", lineHeight: 1.6, padding: "10px 12px" }} />
+            </div>
+
+            {/* MESURES */}
+            <div style={{ marginBottom: 24, background: "#F8FAFF", border: "1px solid #DBEAFE", borderRadius: 14, padding: "14px 16px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: measureCategory ? 12 : 0 }}>
+                <label style={{ fontSize: 13, fontWeight: 600, color: "#1D4ED8" }}>📏 Ajouter les mesures <span style={{ fontWeight: 400, color: "#64748B" }}>(recommandé)</span></label>
+              </div>
+              <select value={measureCategory} onChange={e => { setMeasureCategory(e.target.value); setMeasures({}); }}
+                style={{ ...inp, marginBottom: measureCategory ? 12 : 0, background: "#fff" }}>
+                <option value="">Choisir le type de vêtement...</option>
+                {Object.keys(MEASURE_FIELDS).map(cat => <option key={cat}>{cat}</option>)}
+              </select>
+
+              {measureCategory && (
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                  {MEASURE_FIELDS[measureCategory].map(field => (
+                    <div key={field}>
+                      <label style={{ fontSize: 11, color: "#64748B", display: "block", marginBottom: 4 }}>{field}</label>
+                      <input
+                        type="number"
+                        value={measures[field] || ""}
+                        onChange={e => setMeasure(field, e.target.value)}
+                        placeholder="—"
+                        style={{ ...inp, padding: "8px 12px", fontSize: 14 }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {measureCategory && buildMeasuresText() && (
+                <div style={{ marginTop: 10, padding: "8px 12px", background: "#EFF6FF", borderRadius: 8 }}>
+                  <p style={{ fontSize: 12, color: "#1D4ED8", margin: 0 }}>{buildMeasuresText()}</p>
+                </div>
+              )}
             </div>
 
             <button onClick={analyze} disabled={loading || (!imageBase64 && !extra.trim())}
@@ -125,6 +189,16 @@ export default function Annonce() {
               </div>
               <button onClick={reset} style={{ fontSize: 13, color: "#666", background: "#F3F4F6", border: "none", borderRadius: 8, padding: "7px 16px", cursor: "pointer", fontFamily: "inherit" }}>← Retour</button>
             </div>
+
+            {/* Mesures recap */}
+            {buildMeasuresText() && (
+              <div style={{ background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 12, padding: "10px 14px", marginBottom: 16, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <p style={{ fontSize: 13, color: "#1D4ED8", margin: 0 }}>📏 {buildMeasuresText()}</p>
+                <button onClick={() => copy("measures", buildMeasuresText())} style={{ fontSize: 11, color: "#1D4ED8", background: "transparent", border: "1px solid #BFDBFE", borderRadius: 6, padding: "3px 10px", cursor: "pointer", fontFamily: "inherit", flexShrink: 0, marginLeft: 10 }}>
+                  {copied["measures"] ? "Copié ✓" : "Copier"}
+                </button>
+              </div>
+            )}
 
             {/* Platform tabs */}
             <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
