@@ -195,6 +195,15 @@ export default function Annonce() {
               </div>
             )}
 
+            {/* AI selection banner */}
+            <div style={{ background: "#111", borderRadius: 14, padding: "14px 18px", marginBottom: 16, display: "flex", alignItems: "flex-start", gap: 12 }}>
+              <span style={{ fontSize: 20, flexShrink: 0 }}>🎯</span>
+              <div>
+                <p style={{ fontSize: 13, fontWeight: 700, color: "#fff", marginBottom: 3 }}>Plateformes sélectionnées par l IA pour cet article</p>
+                <p style={{ fontSize: 12, color: "#999", lineHeight: 1.5 }}>Poster au bon endroit = vendre 2x plus vite et jusqu à 40% plus cher. L IA analyse la marque, le style et la valeur pour choisir où tes acheteurs se trouvent vraiment.</p>
+              </div>
+            </div>
+
             {/* Platform tabs */}
             <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
               {result.platforms?.map(p => (
@@ -253,4 +262,4 @@ export default function Annonce() {
       </Layout>
     </>
   );
-}
+} 
