@@ -5,16 +5,11 @@ import Layout from "../components/Layout";
 const CONDITIONS = ["Neuf avec étiquette", "Neuf sans étiquette", "Très bon état", "Bon état", "Satisfaisant"];
 
 const PLATFORM_STYLE = {
-  "Vinted": { bg: "#E1F5EE", color: "#0F6E56" },
-  "eBay": { bg: "#FEF3C7", color: "#92400E" },
-  "Leboncoin": { bg: "#FFEDD5", color: "#9A3412" },
-  "Facebook Marketplace": { bg: "#EFF6FF", color: "#1D4ED8" },
-  "Rakuten": { bg: "#FEE2E2", color: "#991B1B" },
-  "Vestiaire Collective": { bg: "#EDE9FE", color: "#5B21B6" },
-  "Grailed": { bg: "#FEE2E2", color: "#7F1D1D" },
-  "Depop": { bg: "#F3F4F6", color: "#111827" },
-  "Etsy": { bg: "#FFFBEB", color: "#92400E" },
-  "Vide Dressing": { bg: "#FCE7F3", color: "#9D174D" },
+  "Vinted":              { bg: "#E6F9FA", color: "#09B1BA" },
+  "Depop":               { bg: "#FFF0F0", color: "#FF0000" },
+  "Grailed":             { bg: "#F5F5F5", color: "#000000" },
+  "Vestiaire Collective": { bg: "#F5F0EB", color: "#1A1A1A" },
+  "Etsy":                { bg: "#FFF3EE", color: "#F1641E" },
 };
 
 const MEASURE_FIELDS = {
