@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import Head from "next/head";
 import Layout from "../components/Layout";
+import { useLang } from "../contexts/LangContext";
 
 const CONDITIONS = ["Neuf avec étiquette", "Neuf sans étiquette", "Très bon état", "Bon état", "Satisfaisant"];
 
@@ -22,7 +23,9 @@ const MEASURE_FIELDS = {
 };
 
 export default function Annonce() {
-  const [condition, setCondition] = useState(CONDITIONS[2]);
+  const { t } = useLang();
+  const a = t.annonce;
+  const [condition, setCondition] = useState(a.conditions[2]);
   const [extra, setExtra] = useState("");
   const [imageBase64, setImageBase64] = useState(null);
   const [imageMime, setImageMime] = useState("image/jpeg");
@@ -262,4 +265,4 @@ export default function Annonce() {
       </Layout>
     </>
   );
-} 
+}
