@@ -49,15 +49,19 @@ export default function Protection() {
     canvas.width = video.videoWidth || 640; canvas.height = video.videoHeight || 480;
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     const now = new Date();
-    const text = `SellGuard · ${now.toLocaleDateString("fr-FR")} ${now.toLocaleTimeString("fr-FR")}`;
-    const fontSize = Math.max(14, canvas.width * 0.024);
+    const line1 = `SellGuard · ${now.toLocaleDateString("fr-FR")} ${now.toLocaleTimeString("fr-FR")}`;
+    const fontSize = Math.max(13, canvas.width * 0.022);
     ctx.font = `bold ${fontSize}px monospace`;
-    const tw = ctx.measureText(text).width;
-    const pad = 10;
-    ctx.fillStyle = "rgba(0,0,0,0.65)";
-    ctx.fillRect(canvas.width - tw - pad * 2 - 6, canvas.height - fontSize - pad * 2, tw + pad * 2, fontSize + pad);
-    ctx.fillStyle = "#00FF88";
-    ctx.fillText(text, canvas.width - tw - pad - 6, canvas.height - pad - 2);
+    const tw = ctx.measureText(line1).width;
+    const cx = (canvas.width - tw) / 2;
+    const cy = canvas.height / 2;
+    ctx.fillStyle = "rgba(0,0,0,0.28)";
+    const padH = 10, padV = 6;
+    ctx.fillRect(cx - padH, cy - fontSize - padV, tw + padH * 2, fontSize + padV * 2);
+    ctx.globalAlpha = 0.55;
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText(line1, cx, cy);
+    ctx.globalAlpha = 1.0;
     if (recording) {
       ctx.beginPath(); ctx.arc(18, 18, 7, 0, Math.PI * 2);
       ctx.fillStyle = Math.sin(Date.now() / 300) > 0 ? "#FF3B30" : "rgba(255,59,48,0.3)";
@@ -139,10 +143,26 @@ export default function Protection() {
             </div>
           ))}
         </div>
-        <div style={{ background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 14, padding: "14px 18px", marginBottom: 20 }}>
-          <p style={{ fontSize: 13, color: "#1D4ED8", lineHeight: 1.6 }}>
-            <strong>En cas de litige :</strong> envoie cette vidéo à Vinted via leur formulaire. La date SellGuard incrustée sur chaque frame est une preuve visuelle solide.
-          </p>
+        <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: 14, padding: "16px 20px", marginBottom: 16 }}>
+          <p style={{ fontSize: 11, fontWeight: 700, color: "#888", letterSpacing: 0.5, marginBottom: 14 }}>COMMENT UTILISER CETTE PREUVE PAR PLATEFORME</p>
+          {[
+            { name: "Vinted", color: "#0F6E56", bg: "#E1F5EE", score: "★★★☆", tip: "Litige → 'Ajouter des preuves' → upload la vidéo. La plupart des acheteurs frauduleux abandonnent dès qu'ils voient une preuve datée." },
+            { name: "eBay", color: "#854F0B", bg: "#FEF3C7", score: "★★★★", tip: "Centre de résolution → 'Soumettre des preuves' → upload. eBay reconnaît les vidéos horodatées comme preuve valable. Très efficace." },
+            { name: "Leboncoin", color: "#9A3412", bg: "#FFEDD5", score: "★★★★", tip: "Pas de système de litige intégré. Envoie la vidéo directement à l'acheteur. En cas de recours bancaire ou tribunal, c'est une preuve légale solide." },
+            { name: "Facebook Marketplace", color: "#1D4ED8", bg: "#EFF6FF", score: "★★★☆", tip: "Envoie via Messenger à l'acheteur et conserve pour tout chargeback bancaire. C'est ta principale protection sur cette plateforme." },
+            { name: "Vestiaire Collective", color: "#5B21B6", bg: "#EDE9FE", score: "★★☆☆", tip: "Contacte leur service client et joint la vidéo. Elle renforce ton dossier mais ne remplace pas leur processus d'authentification." },
+            { name: "Grailed", color: "#991B1B", bg: "#FEE2E2", score: "★★★☆", tip: "Ouvre un ticket support et joint la vidéo. Grailed est réactif sur les litiges avec preuves." },
+            { name: "Depop", color: "#333333", bg: "#F3F4F6", score: "★★★☆", tip: "Litige → 'Provide evidence' → joint la vidéo. Depop accepte les preuves externes." },
+            { name: "Etsy", color: "#D97706", bg: "#FFFBEB", score: "★★★★", tip: "Centre de résolution → 'Submit evidence' → upload. Etsy prend les preuves externes très au sérieux." },
+          ].map((pl, i) => (
+            <div key={pl.name} style={{ padding: "10px 0", borderBottom: i < 7 ? "1px solid #F9FAFB" : "none" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+                <span style={{ fontSize: 12, fontWeight: 700, padding: "2px 10px", borderRadius: 20, background: pl.bg, color: pl.color }}>{pl.name}</span>
+                <span style={{ fontSize: 11, color: "#aaa" }}>{pl.score}</span>
+              </div>
+              <p style={{ fontSize: 12, color: "#555", lineHeight: 1.5, margin: 0 }}>{pl.tip}</p>
+            </div>
+          ))}
         </div>
         <button onClick={reset} style={btn("#111", "#fff", false)}>Protéger un autre envoi</button>
       </Layout>
