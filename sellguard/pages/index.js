@@ -132,6 +132,7 @@ export default function Home() {
         .step-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 500; }
 
         .modules-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; max-width: 920px; margin: 0 auto; }
+        .antiscam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 900px; margin: 0 auto; }
         .mod-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 18px; padding: 28px; cursor: pointer; transition: border-color 0.2s, background 0.2s; text-decoration: none; display: block; }
         .mod-card:hover { background: var(--bg3); border-color: var(--border2); }
         .mod-card.wide { grid-column: 1/-1; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
@@ -168,6 +169,7 @@ export default function Home() {
           .lp-nav { padding: 0 20px; }
           .nav-links { display: none; }
           .modules-grid { grid-template-columns: 1fr; }
+          .antiscam-grid { grid-template-columns: 1fr; }
           .mod-card.wide { flex-direction: column; }
           .mod-icon-box { display: none; }
           .steps-grid { grid-template-columns: 1fr; }
@@ -299,6 +301,44 @@ export default function Home() {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* ANTI-SCAM */}
+      <section className="section" style={{ paddingTop: 60 }}>
+        <div className="section-eyebrow">Protection</div>
+        <h2 className="section-title">Ne te fais plus<br/><em>arnaquer après l'envoi.</em></h2>
+        <p className="section-sub" style={{ maxWidth: 520, margin: "0 auto 50px" }}>
+          Chaque colis est automatiquement protégé. Si un acheteur ment, tu peux le prouver.
+        </p>
+        <div className="antiscam-grid">
+          <div style={{ background: "#0A0A0A", border: "0.5px solid rgba(255,255,255,0.08)", borderRadius: 18, padding: 32 }}>
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginBottom: 16 }}>Sans SellGuard</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <div style={{ color: "#F87171" }}>✕ "Article abîmé à la réception"</div>
+              <div style={{ color: "#F87171" }}>✕ Remboursement forcé</div>
+              <div style={{ color: "#F87171" }}>✕ Perte d'argent</div>
+              <div style={{ color: "#F87171" }}>✕ Aucun moyen de prouver</div>
+            </div>
+          </div>
+          <div style={{ background: "rgba(74,222,128,0.06)", border: "0.5px solid rgba(74,222,128,0.2)", borderRadius: 18, padding: 32 }}>
+            <div style={{ fontSize: 12, color: "#4ADE80", marginBottom: 16 }}>Avec SellGuard</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <div style={{ color: "#4ADE80" }}>✓ Preuve enregistrée automatiquement</div>
+              <div style={{ color: "#4ADE80" }}>✓ Envoi certifié avant expédition</div>
+              <div style={{ color: "#4ADE80" }}>✓ Litige refusé</div>
+              <div style={{ color: "#4ADE80" }}>✓ Ton argent est protégé</div>
+            </div>
+          </div>
+        </div>
+        <div style={{ textAlign: "center", marginTop: 50 }}>
+          <p style={{ fontFamily: "var(--serif)", fontSize: 26, letterSpacing: "-0.02em", lineHeight: 1.3, maxWidth: 600, margin: "0 auto" }}>
+            Si l'acheteur ment,<br/><em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.35)" }}>tu gagnes.</em>
+          </p>
+        </div>
+        <div style={{ textAlign: "center", marginTop: 40 }}>
+          <Link href="/protection" className="btn-primary">Activer la protection</Link>
+          <div style={{ marginTop: 12, fontSize: 12, color: "rgba(255,255,255,0.3)" }}>Protection automatique · Sans effort</div>
         </div>
       </section>
 
