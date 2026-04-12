@@ -5,11 +5,11 @@ import { useLang } from "../contexts/LangContext";
 import { saveToHistory } from "./historique";
 
 const PLATFORM_STYLE = {
-  "Vinted":               { bg: "#E6F9FA", color: "#09B1BA" },
-  "Depop":                { bg: "#FFF0F0", color: "#FF0000" },
-  "Grailed":              { bg: "#F5F5F5", color: "#000000" },
-  "Vestiaire Collective": { bg: "#F5F0EB", color: "#1A1A1A" },
-  "Etsy":                 { bg: "#FFF3EE", color: "#F1641E" },
+  "Vinted":               { bg: "#E6F9FA", color: "#09B1BA", font: "'Georgia', cursive", weight: 700, transform: "none", spacing: "0px" },
+  "Depop":                { bg: "#FFF0F0", color: "#FF0000", font: "'Arial Black', sans-serif", weight: 800, transform: "none", spacing: "-0.5px" },
+  "Grailed":              { bg: "#F5F5F5", color: "#000000", font: "'Arial Narrow', 'Arial', sans-serif", weight: 700, transform: "uppercase", spacing: "2px" },
+  "Vestiaire Collective": { bg: "#F5F0EB", color: "#1A1A1A", font: "'Georgia', 'Times New Roman', serif", weight: 700, transform: "none", spacing: "0.5px" },
+  "Etsy":                 { bg: "#FFF3EE", color: "#F1641E", font: "'Helvetica Neue', sans-serif", weight: 600, transform: "none", spacing: "0px" },
 };
 
 const MEASURE_FIELDS_FR = {
@@ -241,7 +241,7 @@ export default function Annonce() {
             <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
               {result.platforms?.map(p => (
                 <button key={p.name} onClick={() => setActiveTab(p.name)}
-                  style={{ fontSize: 13, fontWeight: 600, padding: "7px 16px", borderRadius: 20, border: activeTab === p.name ? "2px solid #111" : "1px solid #E5E7EB", background: activeTab === p.name ? "#111" : "#fff", color: activeTab === p.name ? "#fff" : "#555", cursor: "pointer", fontFamily: "inherit" }}>
+                  style={{ fontSize: 13, fontWeight: PLATFORM_STYLE[p.name]?.weight || 600, padding: "7px 16px", borderRadius: 20, border: activeTab === p.name ? "2px solid #111" : "1px solid #E5E7EB", background: activeTab === p.name ? "#111" : "#fff", color: activeTab === p.name ? "#fff" : (PLATFORM_STYLE[p.name]?.color || "#555"), fontFamily: PLATFORM_STYLE[p.name]?.font || "inherit", letterSpacing: PLATFORM_STYLE[p.name]?.spacing || "0px", textTransform: PLATFORM_STYLE[p.name]?.transform || "none", cursor: "pointer" }}>
                   {p.name === result.best_platform ? "⭐ " : ""}{p.name} · {p.price_min}-{p.price_max}€
                 </button>
               ))}
@@ -251,7 +251,7 @@ export default function Annonce() {
               <div>
                 <div style={{ background: PLATFORM_STYLE[activePlatform.name]?.bg || "#F9FAFB", border: "1px solid #E5E7EB", borderRadius: 14, padding: "14px 18px", marginBottom: 12 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <span style={{ fontSize: 13, fontWeight: 600, padding: "4px 12px", borderRadius: 20, background: "#fff", color: PLATFORM_STYLE[activePlatform.name]?.color || "#333" }}>{activePlatform.name}</span>
+                    <span style={{ fontSize: 13, fontWeight: PLATFORM_STYLE[activePlatform.name]?.weight || 600, padding: "4px 12px", borderRadius: 20, background: "#fff", color: PLATFORM_STYLE[activePlatform.name]?.color || "#333", fontFamily: PLATFORM_STYLE[activePlatform.name]?.font || "inherit", letterSpacing: PLATFORM_STYLE[activePlatform.name]?.spacing || "0px", textTransform: PLATFORM_STYLE[activePlatform.name]?.transform || "none" }}>{activePlatform.name}</span>
                     <div style={{ textAlign: "right" }}>
                       <p style={{ fontSize: 22, fontWeight: 800, color: "#111" }}>{activePlatform.price_min}–{activePlatform.price_max}€</p>
                       <p style={{ fontSize: 11, color: "#888" }}>Score {activePlatform.score}/10 · {result.time_to_sell}</p>
