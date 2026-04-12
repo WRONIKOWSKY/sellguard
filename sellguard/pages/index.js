@@ -45,7 +45,7 @@ export default function Home() {
 
         <div style={{ marginTop: 32, padding: "20px 24px", background: "#111", borderRadius: 16, textAlign: "center" }}>
           <p style={{ fontSize: 13, color: "#999", marginBottom: 4 }}>{h.beta}</p>
-          <p style={{ fontSize: 15, fontWeight: 600, color: "#fff" }}>{h.pricing}</p>
+          <p style={{ fontSize: 15, fontWeight: 600, color: "#fff" }}>{h.beta_sub}</p>
         </div>
       </Layout>
     </>
