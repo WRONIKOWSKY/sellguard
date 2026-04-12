@@ -111,11 +111,11 @@ export default function Prix() {
               <div style={{ display: "flex", gap: 10, marginBottom: 16 }}>
                 <div style={{ flex: 1, background: "#F0FDF4", borderRadius: 12, padding: 14, textAlign: "center" }}>
                   <p style={{ fontSize: 11, color: "#666", marginBottom: 4 }}>{a.range}</p>
-                  <p style={{ fontSize: 20, fontWeight: 800, color: "#16A34A" }}>{result.price_min} - {result.price_max}\u20AC</p>
+                  <p style={{ fontSize: 20, fontWeight: 800, color: "#16A34A" }}>{result.price_min} - {result.price_max}€</p>
                 </div>
                 <div style={{ flex: 1, background: "#EFF6FF", borderRadius: 12, padding: 14, textAlign: "center" }}>
                   <p style={{ fontSize: 11, color: "#666", marginBottom: 4 }}>{a.avg}</p>
-                  <p style={{ fontSize: 20, fontWeight: 800, color: "#2563EB" }}>{result.price_optimal}\u20AC</p>
+                  <p style={{ fontSize: 20, fontWeight: 800, color: "#2563EB" }}>{result.price_optimal}€</p>
                 </div>
               </div>
 
@@ -151,10 +151,10 @@ export default function Prix() {
                   <div key={p.name} style={{ padding: "12px 0", borderBottom: i < result.platforms.length - 1 ? "1px solid #F3F4F6" : "none" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
                       <span style={{ fontSize: 12, fontWeight: 700, padding: "3px 12px", borderRadius: 20, background: col.bg, color: col.text }}>{p.name}</span>
-                      <span style={{ fontSize: 15, fontWeight: 800, color: "#111" }}>{p.avg_price}\u20AC</span>
+                      <span style={{ fontSize: 15, fontWeight: 800, color: "#111" }}>{p.avg_price}€</span>
                     </div>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      <span style={{ fontSize: 12, color: "#999" }}>{p.price_min} - {p.price_max}\u20AC</span>
+                      <span style={{ fontSize: 12, color: "#999" }}>{p.price_min} - {p.price_max}€</span>
                       <span style={{ fontSize: 12, color: "#666" }}>{p.sell_time}</span>
                     </div>
                     {p.tip && <p style={{ fontSize: 12, color: "#555", marginTop: 4, lineHeight: 1.4 }}>{p.tip}</p>}
