@@ -214,35 +214,35 @@ export default function Protection() {
 
   async function downloadVideo() {
     if (!recordedBlob) return;
+    // Generate cert data once and store it
     const id = "SG-" + Math.random().toString(36).substr(2, 9).toUpperCase();
     const dateStr = recordDate || new Date().toLocaleString("fr-FR");
     const name = (articleName || "envoi").replace(/\s+/g, "_");
     const ext = recordedBlob.type.includes("mp4") ? "mp4" : "webm";
     const hash = await computeHash(recordedBlob);
     const videoSizeKB = Math.round(recordedBlob.size / 1024);
-    setCertData({ id, dateStr, hash, videoSizeKB });
+    const data = { id, dateStr, hash, videoSizeKB, name, ext };
+    setCertData(data);
+    // Use the existing recordedUrl directly - dont lose it
     const a = document.createElement("a");
-    a.href = recordedUrl; a.download = `SellGuard_${id}_${name}.${ext}`; a.click();
+    a.href = recordedUrl;
+    a.download = `SellGuard_${id}_${name}.${ext}`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 
   async function downloadPDF() {
-    if (!recordedBlob) return;
+    if (!recordedBlob && !certData) return;
     setProcessing(true);
     const id = certData?.id || "SG-" + Math.random().toString(36).substr(2, 9).toUpperCase();
     const dateStr = certData?.dateStr || recordDate || new Date().toLocaleString("fr-FR");
     const hash = certData?.hash || await computeHash(recordedBlob);
-    const videoSizeKB = certData?.videoSizeKB || Math.round(recordedBlob.size / 1024);
+    const videoSizeKB = certData?.videoSizeKB || (recordedBlob ? Math.round(recordedBlob.size / 1024) : 0);
     try {
-      const res = await fetch("/api/certificat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ certId: id, article: articleName, orderRef, dateStr, hash, videoSizeKB, deviceInfo: getDeviceInfo(), lang })
-      });
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url; a.download = `SellGuard_${id}_Certificat.pdf`; a.click();
-      URL.revokeObjectURL(url);
+      // Open PDF in new tab - works on iOS Safari
+      const params = new URLSearchParams({ certId: id, article: articleName || "", orderRef: orderRef || "", dateStr, hash, videoSizeKB, deviceInfo: getDeviceInfo(), lang });
+      window.open(`/api/certificat?${params.toString()}`, "_blank");
     } catch(e) { console.error(e); }
     setProcessing(false);
     setCertified({ id, article: articleName || "Article", date: dateStr, hash });
