@@ -212,40 +212,54 @@ export default function Protection() {
 
   const [certData, setCertData] = React.useState(null);
 
+  async function shareFile(blob, filename) {
+    // Try Web Share API first (iOS native share sheet)
+    if (navigator.share && navigator.canShare) {
+      const file = new File([blob], filename, { type: blob.type });
+      if (navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], title: filename });
+          return true;
+        } catch(e) { if (e.name !== "AbortError") console.error(e); }
+      }
+    }
+    // Fallback: direct download link
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    return true;
+  }
+
   async function downloadVideo() {
     if (!recordedBlob) return;
-    // Generate cert data once and store it
     const id = "SG-" + Math.random().toString(36).substr(2, 9).toUpperCase();
     const dateStr = recordDate || new Date().toLocaleString("fr-FR");
-    const name = (articleName || "envoi").replace(/\s+/g, "_");
+    const name = (articleName || "envoi").replace(/[^a-zA-Z0-9]/g, "_");
     const ext = recordedBlob.type.includes("mp4") ? "mp4" : "webm";
     const hash = await computeHash(recordedBlob);
     const videoSizeKB = Math.round(recordedBlob.size / 1024);
-    const data = { id, dateStr, hash, videoSizeKB, name, ext };
-    setCertData(data);
-    // Use the existing recordedUrl directly - dont lose it
-    const a = document.createElement("a");
-    a.href = recordedUrl;
-    a.download = `SellGuard_${id}_${name}.${ext}`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    setCertData({ id, dateStr, hash, videoSizeKB });
+    await shareFile(recordedBlob, `SellGuard_${id}_${name}.${ext}`);
   }
 
   async function downloadPDF() {
-    if (!recordedBlob && !certData) return;
+    if (!certData && !recordedBlob) return;
     setProcessing(true);
     const id = certData?.id || "SG-" + Math.random().toString(36).substr(2, 9).toUpperCase();
     const dateStr = certData?.dateStr || recordDate || new Date().toLocaleString("fr-FR");
     const hash = certData?.hash || await computeHash(recordedBlob);
     const videoSizeKB = certData?.videoSizeKB || (recordedBlob ? Math.round(recordedBlob.size / 1024) : 0);
     try {
-      // Open PDF in new tab - works on iOS Safari
       const params = new URLSearchParams({ certId: id, article: articleName || "", orderRef: orderRef || "", dateStr, hash, videoSizeKB, deviceInfo: getDeviceInfo(), lang });
-      window.open(`/api/certificat?${params.toString()}`, "_blank");
+      const res = await fetch(`/api/certificat?${params.toString()}`);
+      const blob = await res.blob();
+      await shareFile(blob, `SellGuard_${id}_Certificat.pdf`);
+      setCertified({ id, article: articleName || "Article", date: dateStr, hash });
     } catch(e) { console.error(e); }
     setProcessing(false);
-    setCertified({ id, article: articleName || "Article", date: dateStr, hash });
   }
 
   function handleFiles(files) {
