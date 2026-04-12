@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import { useLang } from "../contexts/LangContext";
+import { saveToHistory } from "./historique";
 
 const PLATFORM_STYLE = {
   "Vinted":               { bg: "#E6F9FA", color: "#09B1BA" },
@@ -90,6 +91,7 @@ export default function Annonce() {
       if (!res.ok) throw new Error(data.error || "Erreur");
       setResult(data);
       setActiveTab(data.best_platform);
+      saveToHistory(data, condition);
     } catch (e) {
       setError(e.message);
     }
