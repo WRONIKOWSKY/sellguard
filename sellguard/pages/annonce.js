@@ -89,7 +89,7 @@ export default function Annonce() {
       var res = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ imageBase64: imageBase64, imageMime: imageMime, condition: condition, extra: fullExtra })
+        body: JSON.stringify({ imageBase64: imageBase64, imageMime: imageMime, condition: condition, extra: fullExtra, lang: lang })
       });
       var data = await res.json();
       if (!res.ok) throw new Error(data.error || "Erreur");
