@@ -10,6 +10,7 @@ export default function Layout({ children }) {
     { href: "/annonce", label: t.nav.annonce, icon: "📦" },
     { href: "/protection", label: t.nav.protection, icon: "🛡️" },
     { href: "/litige", label: t.nav.litige, icon: "⚖️" },
+    { href: "/calculateur", label: lang === "en" ? "Calculator" : "Calculateur", icon: "💰" },
     { href: "/historique", label: lang === "en" ? "History" : "Historique", icon: "📋" },
   ];
 
