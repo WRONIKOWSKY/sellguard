@@ -108,7 +108,7 @@ export default function Protection() {
     } catch (e) {
       setCameraError(lang === "en"
         ? "Cannot access camera. Please allow access in your browser settings."
-        : "Impossible d'acc\u00e9der \u00e0 la cam\u00e9ra. Autorise l'acc\u00e8s dans les param\u00e8tres de ton navigateur.");
+        : "Impossible d'accéder à la caméra. Autorise l'accès dans les paramètres de ton navigateur.");
     }
   }
 
@@ -146,7 +146,7 @@ export default function Protection() {
       setRecording(true); setElapsed(0);
       timerRef.current = setInterval(function() { setElapsed(function(e) { return e + 1; }); }, 1000);
     } catch(e) {
-      setCameraError(lang === "en" ? "Recording not supported on this browser." : "Enregistrement non support\u00e9 sur ce navigateur.");
+      setCameraError(lang === "en" ? "Recording not supported on this browser." : "Enregistrement non supporté sur ce navigateur.");
     }
   }
 
@@ -238,11 +238,11 @@ export default function Protection() {
   var btnStyle = function(bg, col, dis) { return { width: "100%", padding: 14, fontSize: 15, fontWeight: 700, borderRadius: 12, border: "none", background: dis ? "#E5E7EB" : bg, color: dis ? "#999" : col, cursor: dis ? "default" : "pointer", fontFamily: "inherit" }; };
 
   var PLATFORM_GUIDE = [
-    { name: "Vinted", color: "#09B1BA", bg: "#E6F9FA", score: "\u2605\u2605\u2605\u2606", tip: lang === "en" ? "Dispute \u2192 'Add proof' \u2192 upload video + PDF certificate." : "Litige \u2192 'Ajouter des preuves' \u2192 upload la vid\u00e9o + le certificat PDF." },
-    { name: "Depop", color: "#FF0000", bg: "#FFF0F0", score: "\u2605\u2605\u2605\u2606", tip: lang === "en" ? "Dispute \u2192 'Provide evidence' \u2192 attach both files." : "Litige \u2192 'Provide evidence' \u2192 joint les deux fichiers." },
-    { name: "Grailed", color: "#000000", bg: "#F5F5F5", score: "\u2605\u2605\u2605\u2606", tip: lang === "en" ? "Open support ticket, attach video + certificate PDF." : "Ouvre un ticket support, joint la vid\u00e9o + le certificat PDF." },
-    { name: "Vestiaire Collective", color: "#1A1A1A", bg: "#F5F0EB", score: "\u2605\u2605\u2605\u2606", tip: lang === "en" ? "Contact customer service with both files attached." : "Contacte leur service client avec les deux fichiers en pi\u00e8ce jointe." },
-    { name: "Etsy", color: "#F1641E", bg: "#FFF3EE", score: "\u2605\u2605\u2605\u2605", tip: lang === "en" ? "Resolution center \u2192 'Submit evidence' \u2192 upload both files." : "Centre de r\u00e9solution \u2192 'Submit evidence' \u2192 upload les deux fichiers." },
+    { name: "Vinted", color: "#09B1BA", bg: "#E6F9FA", score: "★★★☆", tip: lang === "en" ? "Dispute → 'Add proof' → upload video + PDF certificate." : "Litige → 'Ajouter des preuves' → upload la vidéo + le certificat PDF." },
+    { name: "Depop", color: "#FF0000", bg: "#FFF0F0", score: "★★★☆", tip: lang === "en" ? "Dispute → 'Provide evidence' → attach both files." : "Litige → 'Provide evidence' → joint les deux fichiers." },
+    { name: "Grailed", color: "#000000", bg: "#F5F5F5", score: "★★★☆", tip: lang === "en" ? "Open support ticket, attach video + certificate PDF." : "Ouvre un ticket support, joint la vidéo + le certificat PDF." },
+    { name: "Vestiaire Collective", color: "#1A1A1A", bg: "#F5F0EB", score: "★★★☆", tip: lang === "en" ? "Contact customer service with both files attached." : "Contacte leur service client avec les deux fichiers en pièce jointe." },
+    { name: "Etsy", color: "#F1641E", bg: "#FFF3EE", score: "★★★★", tip: lang === "en" ? "Resolution center → 'Submit evidence' → upload both files." : "Centre de résolution → 'Submit evidence' → upload les deux fichiers." },
   ];
 
   // ── CERTIFIED VIEW ──
@@ -251,28 +251,28 @@ export default function Protection() {
       <Head><title>SellGuard — {p.certified_title}</title></Head>
       <Layout>
         <div style={{ background: "#F0FDF4", border: "2px solid #86EFAC", borderRadius: 16, padding: 24, marginBottom: 24, textAlign: "center" }}>
-          <div style={{ fontSize: 40, marginBottom: 10 }}>{"\u2705"}</div>
+          <div style={{ fontSize: 40, marginBottom: 10 }}>{"✅"}</div>
           <h3 style={{ fontSize: 20, fontWeight: 800, color: "#15803D", marginBottom: 6 }}>{p.certified_title}</h3>
           <p style={{ fontSize: 14, color: "#166534", lineHeight: 1.6 }}>{p.certified_sub}</p>
         </div>
 
         <div style={{ background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 14, padding: "14px 18px", marginBottom: 16 }}>
           <p style={{ fontSize: 13, color: "#1D4ED8", lineHeight: 1.6, fontWeight: 600, marginBottom: 6 }}>
-            {lang === "en" ? "\ud83d\udcc4 2 files downloaded:" : "\ud83d\udcc4 2 fichiers t\u00e9l\u00e9charg\u00e9s :"}
+            {lang === "en" ? "📄 2 files downloaded:" : "📄 2 fichiers téléchargés :"}
           </p>
           <p style={{ fontSize: 13, color: "#1D4ED8", lineHeight: 1.8, whiteSpace: "pre-line" }}>
             {lang === "en"
-              ? "\u2022 Video file (.mp4 / .webm)\n\u2022 SellGuard certificate PDF with SHA-256 hash\n\nKeep both files together. They form your complete proof."
-              : "\u2022 Fichier vid\u00e9o (.mp4 / .webm)\n\u2022 Certificat PDF SellGuard avec empreinte SHA-256\n\nConserve les deux fichiers ensemble. Ils constituent ta preuve compl\u00e8te."}
+              ? "• Video file (.mp4 / .webm)\n• SellGuard certificate PDF with SHA-256 hash\n\nKeep both files together. They form your complete proof."
+              : "• Fichier vidéo (.mp4 / .webm)\n• Certificat PDF SellGuard avec empreinte SHA-256\n\nConserve les deux fichiers ensemble. Ils constituent ta preuve complète."}
           </p>
         </div>
 
         <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: 16, padding: "20px 24px", marginBottom: 16 }}>
           {[
-            [lang === "en" ? "Number" : "Num\u00e9ro", certified.id],
+            [lang === "en" ? "Number" : "Numéro", certified.id],
             [lang === "en" ? "Item" : "Article", certified.article],
             ["Date & heure", certified.date],
-            ["SHA-256", certified.hash ? certified.hash.substring(0, 16) + "..." : "\u2014"],
+            ["SHA-256", certified.hash ? certified.hash.substring(0, 16) + "..." : "—"],
           ].map(function(row) {
             return (
               <div key={row[0]} style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderBottom: "1px solid #F9FAFB" }}>
@@ -286,8 +286,8 @@ export default function Protection() {
         <div style={{ background: "#FFFBEB", border: "1px solid #FDE68A", borderRadius: 14, padding: "14px 18px", marginBottom: 16 }}>
           <p style={{ fontSize: 13, color: "#92400E", lineHeight: 1.6 }}>
             {lang === "en"
-              ? "\ud83d\udce6 You can add your tracking number and deposit receipt later from the \"My shipments\" tab."
-              : "\ud83d\udce6 Tu pourras ajouter ton num\u00e9ro de suivi et ta preuve de d\u00e9p\u00f4t plus tard depuis l'onglet \"Mes envois\"."}
+              ? "📦 You can add your tracking number and deposit receipt later from the \"My shipments\" tab."
+              : "📦 Tu pourras ajouter ton numéro de suivi et ta preuve de dépôt plus tard depuis l'onglet \"Mes envois\"."}
           </p>
         </div>
 
@@ -316,15 +316,15 @@ export default function Protection() {
       <Head><title>SellGuard — {p.title}</title></Head>
       <Layout>
         <div style={{ marginBottom: 20 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 800, color: "#111", marginBottom: 6 }}>{"\ud83d\udee1\ufe0f"} {p.title}</h2>
+          <h2 style={{ fontSize: 24, fontWeight: 800, color: "#111", marginBottom: 6 }}>{"🛡"} {p.title}</h2>
           <p style={{ fontSize: 14, color: "#666", lineHeight: 1.6 }}>{p.subtitle}</p>
         </div>
 
         {/* ── TOP TABS: Certify / My shipments ── */}
         <div style={{ display: "flex", gap: 6, marginBottom: 24, background: "#F3F4F6", borderRadius: 12, padding: 4 }}>
           {[
-            ["certify", lang === "en" ? "\ud83d\udee1\ufe0f Certify" : "\ud83d\udee1\ufe0f Certifier"],
-            ["shipments", lang === "en" ? "\ud83d\udce6 My shipments" : "\ud83d\udce6 Mes envois"]
+            ["certify", lang === "en" ? "🛡 Certify" : "🛡 Certifier"],
+            ["shipments", lang === "en" ? "📦 My shipments" : "📦 Mes envois"]
           ].map(function(item) {
             var hasCount = item[0] === "shipments" && shipments.length > 0;
             return (
@@ -343,8 +343,8 @@ export default function Protection() {
           <div>
             {shipments.length === 0 ? (
               <div style={{ textAlign: "center", padding: "40px 20px", color: "#888" }}>
-                <div style={{ fontSize: 40, marginBottom: 12 }}>{"\ud83d\udce6"}</div>
-                <p style={{ fontSize: 15, fontWeight: 600, marginBottom: 6 }}>{lang === "en" ? "No shipments yet" : "Aucun envoi certifi\u00e9"}</p>
+                <div style={{ fontSize: 40, marginBottom: 12 }}>{"📦"}</div>
+                <p style={{ fontSize: 15, fontWeight: 600, marginBottom: 6 }}>{lang === "en" ? "No shipments yet" : "Aucun envoi certifié"}</p>
                 <p style={{ fontSize: 13 }}>{lang === "en" ? "Certify a shipment to see it here." : "Certifie un envoi pour le voir ici."}</p>
               </div>
             ) : (
@@ -365,7 +365,7 @@ export default function Protection() {
 
                     <div style={{ fontSize: 12, color: "#888", marginBottom: 8 }}>
                       <span style={{ fontFamily: "monospace", background: "#F3F4F6", padding: "2px 8px", borderRadius: 6 }}>{s.id}</span>
-                      {s.orderRef ? <span style={{ marginLeft: 8 }}>{lang === "en" ? "Ref:" : "R\u00e9f:"} {s.orderRef}</span> : null}
+                      {s.orderRef ? <span style={{ marginLeft: 8 }}>{lang === "en" ? "Ref:" : "Réf:"} {s.orderRef}</span> : null}
                     </div>
 
                     {hasTracking && !isEditing && (
@@ -378,17 +378,17 @@ export default function Protection() {
                         )}
                         {s.receipt_photo && (
                           <div style={{ marginTop: 6 }}>
-                            <span style={{ fontSize: 12, color: "#666" }}>{lang === "en" ? "Deposit receipt" : "Preuve de d\u00e9p\u00f4t"} {"\u2705"}</span>
+                            <span style={{ fontSize: 12, color: "#666" }}>{lang === "en" ? "Deposit receipt" : "Preuve de dépôt"} {"✅"}</span>
                           </div>
                         )}
-                        {s.tracking_date && <p style={{ fontSize: 11, color: "#aaa", marginTop: 4 }}>{lang === "en" ? "Added" : "Ajout\u00e9"} {s.tracking_date}</p>}
+                        {s.tracking_date && <p style={{ fontSize: 11, color: "#aaa", marginTop: 4 }}>{lang === "en" ? "Added" : "Ajouté"} {s.tracking_date}</p>}
                       </div>
                     )}
 
                     {isEditing && (
                       <div style={{ background: "#F9FAFB", borderRadius: 12, padding: 14, marginBottom: 8 }}>
                         <label style={{ fontSize: 12, fontWeight: 600, color: "#444", display: "block", marginBottom: 6 }}>
-                          {lang === "en" ? "Tracking number" : "Num\u00e9ro de suivi"}
+                          {lang === "en" ? "Tracking number" : "Numéro de suivi"}
                         </label>
                         <input
                           value={trackingNum}
@@ -398,7 +398,7 @@ export default function Protection() {
                         />
 
                         <label style={{ fontSize: 12, fontWeight: 600, color: "#444", display: "block", marginBottom: 6 }}>
-                          {lang === "en" ? "Deposit receipt photo" : "Photo preuve de d\u00e9p\u00f4t"} <span style={{ fontWeight: 400, color: "#999" }}>({p.optional})</span>
+                          {lang === "en" ? "Deposit receipt photo" : "Photo preuve de dépôt"} <span style={{ fontWeight: 400, color: "#999" }}>({p.optional})</span>
                         </label>
                         <div
                           onClick={function() { receiptRef.current && receiptRef.current.click(); }}
@@ -438,7 +438,7 @@ export default function Protection() {
                         <button
                           onClick={function() { if (confirm(lang === "en" ? "Delete this shipment?" : "Supprimer cet envoi ?")) deleteShipment(s.id); }}
                           style={{ padding: "10px 14px", fontSize: 13, fontWeight: 600, borderRadius: 10, border: "1px solid #FECACA", background: "#FEF2F2", color: "#DC2626", cursor: "pointer", fontFamily: "inherit" }}>
-                          {"\ud83d\uddd1"}
+                          {"🗑"}
                         </button>
                       </div>
                     )}
@@ -480,7 +480,7 @@ export default function Protection() {
 
                   {cameraOn && !recordedUrl && (
                     <div style={{ position: "absolute", bottom: 12, left: "50%", transform: "translateX(-50%)", background: "rgba(0,0,0,0.55)", borderRadius: 8, padding: "4px 12px", whiteSpace: "nowrap" }}>
-                      <span style={{ fontSize: 12, color: "#00FF88", fontFamily: "monospace", fontWeight: 700 }}>SellGuard \u00b7 {timestamp}</span>
+                      <span style={{ fontSize: 12, color: "#00FF88", fontFamily: "monospace", fontWeight: 700 }}>SellGuard · {timestamp}</span>
                     </div>
                   )}
 
@@ -488,9 +488,9 @@ export default function Protection() {
 
                   {!cameraOn && !recordedUrl && (
                     <div style={{ minHeight: 220, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10 }}>
-                      <div style={{ fontSize: 40 }}>{"\ud83c\udfa5"}</div>
+                      <div style={{ fontSize: 40 }}>{"🎥"}</div>
                       <p style={{ fontSize: 13, color: "#888", textAlign: "center", padding: "0 20px" }}>
-                        {lang === "en" ? "Video + SHA-256 certificate generated automatically" : "Vid\u00e9o + certificat SHA-256 g\u00e9n\u00e9r\u00e9s automatiquement"}
+                        {lang === "en" ? "Video + SHA-256 certificate generated automatically" : "Vidéo + certificat SHA-256 générés automatiquement"}
                       </p>
                     </div>
                   )}
@@ -514,16 +514,16 @@ export default function Protection() {
                             <button onClick={startRecording} style={Object.assign({}, btnStyle("#DC2626", "#fff", false), { flex: 2 })}>{p.start}</button>
                             <button onClick={stopCamera} style={{ flex: 1, padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "1px solid #E5E7EB", background: "#fff", color: "#555", cursor: "pointer", fontFamily: "inherit" }}>{p.cancel}</button>
                           </>
-                        : <button onClick={stopRecording} style={btnStyle("#111", "#fff", false)}>{p.stop} \u2014 {fmt(elapsed)}</button>
+                        : <button onClick={stopRecording} style={btnStyle("#111", "#fff", false)}>{p.stop} — {fmt(elapsed)}</button>
                     }
                   </div>
                 ) : (
                   <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 20 }}>
                     <button onClick={downloadVideo} disabled={processing} style={btnStyle("#16A34A", "#fff", processing)}>
-                      {lang === "en" ? "\u2b07\ufe0f Download video" : "\u2b07\ufe0f T\u00e9l\u00e9charger la vid\u00e9o"}
+                      {lang === "en" ? "⬇️ Download video" : "⬇️ Télécharger la vidéo"}
                     </button>
                     <button onClick={downloadPDF} disabled={processing} style={btnStyle("#2563EB", "#fff", processing)}>
-                      {processing ? (lang === "en" ? "Generating..." : "G\u00e9n\u00e9ration...") : (lang === "en" ? "\ud83d\udcc4 Download PDF certificate" : "\ud83d\udcc4 T\u00e9l\u00e9charger le certificat PDF")}
+                      {processing ? (lang === "en" ? "Generating..." : "Génération...") : (lang === "en" ? "📄 Download PDF certificate" : "📄 Télécharger le certificat PDF")}
                     </button>
                     <button onClick={function() { setRecordedBlob(null); setRecordedUrl(null); setElapsed(0); startCamera(); }}
                       style={{ padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "1px solid #E5E7EB", background: "#fff", color: "#555", cursor: "pointer", fontFamily: "inherit" }}>{p.redo}</button>
@@ -551,7 +551,7 @@ export default function Protection() {
                             <img src={ph.url} style={{ width: "100%", height: 80, objectFit: "cover", borderRadius: 8, border: "1px solid #E5E7EB" }} />
                             <button onClick={function() { setPhotos(function(prev) { return prev.filter(function(_, idx) { return idx !== i; }); }); }}
                               style={{ position: "absolute", top: -6, right: -6, width: 22, height: 22, borderRadius: "50%", background: "#DC2626", color: "#fff", border: "2px solid #fff", fontSize: 12, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0, lineHeight: 1 }}>
-                              {"\u00d7"}
+                              {"×"}
                             </button>
                           </div>
                         );
@@ -560,7 +560,7 @@ export default function Protection() {
                   )}
                 </div>
                 <button onClick={certifyPhotos} disabled={!photos.length || !articleName.trim()} style={btnStyle("#111", "#fff", !photos.length || !articleName.trim())}>
-                  {lang === "en" ? "Generate certificate \u2192" : "G\u00e9n\u00e9rer le certificat \u2192"}
+                  {lang === "en" ? "Generate certificate →" : "Générer le certificat →"}
                 </button>
               </>
             )}
