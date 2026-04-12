@@ -206,8 +206,8 @@ export default function Home() {
           <span className="hero-badge-dot"></span>
           Bêta ouverte · 100% gratuit
         </div>
-        <h1 className="lp-h1">Revendre,<br/><em>sans la galère.</em></h1>
-        <p className="hero-sub">De l'annonce à la livraison, SellGuard gère tout ce que Vinted, Depop et Grailed ne font pas.</p>
+        <h1 className="lp-h1">Revends<br/><em>sans te faire arnaquer.</em></h1>
+        <p className="hero-sub">Chaque envoi est horodaté. Chaque litige est défendu. Ton argent est protégé.</p>
         <div className="hero-actions">
           <Link href="/annonce" className="btn-primary">Essayer gratuitement</Link>
           <button className="btn-ghost" onClick={function() { scrollTo("#how"); }}>Voir comment ça marche</button>
@@ -275,14 +275,14 @@ export default function Home() {
       {/* HOW IT WORKS */}
       <section className="section" id="how">
         <div className="section-eyebrow">Comment ça marche</div>
-        <h2 className="section-title">De la photo<br/><em>à la livraison.</em></h2>
-        <p className="section-sub">4 étapes. Zéro stress.</p>
+        <h2 className="section-title">Protège ton argent<br/><em>à chaque envoi.</em></h2>
+        <p className="section-sub">4 étapes. Zéro risque.</p>
         <div className="steps-grid">
           {[
-            { num: "01", name: "Tu prends une photo", desc: "L'IA génère titre, description et prix optimal pour chaque plateforme en moins de 30 secondes.", badge: "Annonce IA", color: "--violet" },
-            { num: "02", name: "Tu certifies avant envoi", desc: "Horodatage numérique automatique. Preuve légale inattaquable en cas de litige.", badge: "Protection légale", color: "--green" },
-            { num: "03", name: "Tu suis tes ventes", desc: "Toutes tes annonces centralisées. Marges, commissions et prix du marché en temps réel.", badge: "Dashboard pro", color: "--orange" },
-            { num: "04", name: "Un litige ? On gère.", desc: "Détection fraude IA instantanée. Réponse de défense générée automatiquement en un clic.", badge: "Anti-fraude", color: "--pink" },
+            { num: "01", name: "Tu prends une photo", desc: "L'IA génère ton annonce avec preuve d'authenticité intégrée. Titre, prix, description — optimisés pour vendre vite.", badge: "Annonce IA", color: "--violet" },
+            { num: "02", name: "Tu certifies avant envoi", desc: "Horodatage légal automatique. Une preuve inattaquable que l'article était en parfait état au moment de l'envoi.", badge: "Preuve légale", color: "--green" },
+            { num: "03", name: "Tu gardes la trace", desc: "Numéro de suivi, preuve de dépôt, vidéo horodatée — tout est sauvegardé. Ton dossier est blindé.", badge: "Protection totale", color: "--orange" },
+            { num: "04", name: "Un litige ? Tu prouves.", desc: "L'IA détecte les photos truquées et génère ta réponse de défense. Ton argent reste dans ta poche.", badge: "Anti-fraude", color: "--pink" },
           ].map(function(s) {
             return (
               <div key={s.num} className="step-card">
@@ -309,7 +309,7 @@ export default function Home() {
         <div className="section-eyebrow">Protection</div>
         <h2 className="section-title">Ne te fais plus<br/><em>arnaquer après l'envoi.</em></h2>
         <p className="section-sub" style={{ maxWidth: 520, margin: "0 auto 50px" }}>
-          Chaque colis est automatiquement protégé. Si un acheteur ment, tu peux le prouver.
+          Chaque semaine, des vendeurs perdent de l'argent à cause de faux litiges. SellGuard te donne la preuve pour te défendre.
         </p>
         <div className="antiscam-grid">
           <div style={{ background: "#0A0A0A", border: "0.5px solid rgba(255,255,255,0.08)", borderRadius: 18, padding: 32 }}>
@@ -345,14 +345,14 @@ export default function Home() {
       {/* MODULES */}
       <section className="section" id="modules" style={{ paddingTop: 0 }}>
         <div className="section-eyebrow">Les modules</div>
-        <h2 className="section-title">Tout ce qu'il te faut.</h2>
-        <p className="section-sub" style={{ marginBottom: 40 }}>6 outils. Une seule app.</p>
+        <h2 className="section-title">Ta protection complète.</h2>
+        <p className="section-sub" style={{ marginBottom: 40 }}>6 outils. Un seul objectif : protéger ton argent.</p>
         <div className="modules-grid">
           <Link href="/annonce" className="mod-card wide">
             <div>
               <div className="mod-eyebrow" style={{ color: "var(--violet)" }}>Annonce IA</div>
-              <div className="mod-title">Photo → annonce parfaite en secondes.</div>
-              <div className="mod-desc">Titre, description, hashtags et prix optimisés pour Vinted, Depop, Grailed et Vestiaire.</div>
+              <div className="mod-title">Annonce blindée en 30 secondes.</div>
+              <div className="mod-desc">Photo → annonce avec preuve d'authenticité. Prix vérifié sur le marché. Prête à poster sur Vinted, Depop, Grailed.</div>
               <div className="mod-pill" style={{ background: "var(--violet-bg)", color: "var(--violet)" }}>Essayer →</div>
             </div>
             <div className="mod-icon-box" style={{ background: "rgba(99,102,241,0.06)", border: "0.5px solid rgba(99,102,241,0.14)" }}>
@@ -361,26 +361,26 @@ export default function Home() {
           </Link>
           <Link href="/protection" className="mod-card">
             <div className="mod-eyebrow" style={{ color: "var(--green)" }}>Protection</div>
-            <div className="mod-title">Certifie avant d'envoyer.</div>
-            <div className="mod-desc">Horodatage légal automatique. Inattaquable en cas de litige.</div>
-            <div className="mod-pill" style={{ background: "var(--green-bg)", color: "var(--green)" }}>Légal →</div>
+            <div className="mod-title">Preuve avant envoi.</div>
+            <div className="mod-desc">Vidéo horodatée + certificat SHA-256. Si l'acheteur ment, tu as la preuve.</div>
+            <div className="mod-pill" style={{ background: "var(--green-bg)", color: "var(--green)" }}>Horodatage →</div>
           </Link>
           <Link href="/litige" className="mod-card">
             <div className="mod-eyebrow" style={{ color: "var(--pink)" }}>Litige</div>
-            <div className="mod-title">Défense automatique.</div>
-            <div className="mod-desc">Fraude IA détectée, réponse générée en 1 clic.</div>
+            <div className="mod-title">Ton argent défendu.</div>
+            <div className="mod-desc">Photos truquées détectées par l'IA. Réponse de défense prête en 1 clic.</div>
             <div className="mod-pill" style={{ background: "var(--pink-bg)", color: "var(--pink)" }}>Anti-fraude →</div>
           </Link>
           <Link href="/calculateur" className="mod-card">
             <div className="mod-eyebrow" style={{ color: "var(--orange)" }}>Calculateur</div>
-            <div className="mod-title">Marge exacte.</div>
-            <div className="mod-desc">Frais, commissions et marges nettes par plateforme.</div>
+            <div className="mod-title">Sais exactement combien tu gagnes.</div>
+            <div className="mod-desc">Commissions, frais, marge nette — par plateforme. Plus de mauvaises surprises.</div>
             <div className="mod-pill" style={{ background: "var(--orange-bg)", color: "var(--orange)" }}>Calculer →</div>
           </Link>
           <Link href="/prix" className="mod-card">
             <div className="mod-eyebrow" style={{ color: "var(--blue)" }}>Prix marché</div>
-            <div className="mod-title">Prix en un clic.</div>
-            <div className="mod-desc">Compare les prix sur toutes les plateformes simultanément.</div>
+            <div className="mod-title">Le bon prix, pas de perte.</div>
+            <div className="mod-desc">Compare les prix réels sur toutes les plateformes. Ne vends jamais en dessous du marché.</div>
             <div className="mod-pill" style={{ background: "var(--blue-bg)", color: "var(--blue)" }}>Comparer →</div>
           </Link>
         </div>
@@ -388,14 +388,14 @@ export default function Home() {
 
       {/* STATS */}
       <div className="stats-band">
-        <div className="stat-cell"><div className="stat-n">6</div><div className="stat-l">Modules inclus</div></div>
+        <div className="stat-cell"><div className="stat-n">30s</div><div className="stat-l">Pour certifier un envoi</div></div>
         <div className="stat-cell"><div className="stat-n">0 €</div><div className="stat-l">Pendant la bêta</div></div>
-        <div className="stat-cell"><div className="stat-n">4</div><div className="stat-l">Plateformes</div></div>
+        <div className="stat-cell"><div className="stat-n">5</div><div className="stat-l">Plateformes protégées</div></div>
       </div>
 
       {/* FINAL CTA */}
       <section className="final-cta" id="cta">
-        <h2 className="final-title">Commence<br/><em>maintenant.</em></h2>
+        <h2 className="final-title">Protège<br/><em>ton argent.</em></h2>
         <p className="final-sub">Gratuit pendant toute la phase bêta.<br/>Sans carte bleue. Sans engagement.</p>
         <Link href="/annonce" className="btn-primary" style={{ fontSize: 15, padding: "16px 48px" }}>Essayer gratuitement</Link>
         <div className="final-note">Vinted · Depop · Grailed · Vestiaire Collective</div>
