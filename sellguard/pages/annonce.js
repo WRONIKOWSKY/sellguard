@@ -92,6 +92,20 @@ export default function Annonce() {
       setResult(data);
       setActiveTab(data.best_platform);
       saveToHistory(data, condition, lang);
+      // Auto-select measure category based on item
+      const cat = data.item_category?.toLowerCase() || "";
+      const fields = lang === "en" ? MEASURE_FIELDS_EN : MEASURE_FIELDS_FR;
+      const autoMatch = Object.keys(fields).find(k => {
+        const kl = k.toLowerCase();
+        if (cat.includes("vest") || cat.includes("jacket") || cat.includes("manteau") || cat.includes("coat")) return kl.includes("vest") || kl.includes("jack") || kl.includes("mant");
+        if (cat.includes("pant") || cat.includes("jean") || cat.includes("trouser")) return kl.includes("pant") || kl.includes("jean");
+        if (cat.includes("robe") || cat.includes("dress") || cat.includes("jupe") || cat.includes("skirt")) return kl.includes("robe") || kl.includes("dress") || kl.includes("jupe");
+        if (cat.includes("chaussure") || cat.includes("shoe") || cat.includes("sneaker") || cat.includes("boot")) return kl.includes("chaussure") || kl.includes("shoe");
+        if (cat.includes("sac") || cat.includes("bag") || cat.includes("accessoire") || cat.includes("accessory")) return kl.includes("sac") || kl.includes("bag") || kl.includes("access");
+        if (cat.includes("t-shirt") || cat.includes("top") || cat.includes("sweat") || cat.includes("pull") || cat.includes("shirt")) return kl.includes("haut") || kl.includes("top");
+        return false;
+      });
+      if (autoMatch && !measureCategory) setMeasureCategory(autoMatch);
     } catch (e) {
       const msg = e.message || '';
       if (msg.includes('Failed to fetch') || msg.includes('NetworkError')) {
@@ -195,7 +209,16 @@ export default function Annonce() {
                 <h2 style={{ fontSize: 20, fontWeight: 800, color: "#111" }}>{result.item_name}</h2>
                 <p style={{ fontSize: 13, color: "#888", marginTop: 3 }}>{result.item_category} · {condition}</p>
               </div>
-              <button onClick={reset} style={{ fontSize: 13, color: "#666", background: "#F3F4F6", border: "none", borderRadius: 8, padding: "7px 16px", cursor: "pointer", fontFamily: "inherit" }}>{a.back}</button>
+              <div style={{ display: "flex", gap: 8 }}>
+                <button onClick={() => {
+                  const text = result.title + "\n\n" + result.description + "\n\n" + (buildMeasuresText() ? buildMeasuresText() + "\n\n" : "") + result.keywords?.map(k => "#" + k).join(" ");
+                  if (navigator.share) { navigator.share({ title: result.item_name, text }); }
+                  else { navigator.clipboard.writeText(text); alert(lang === "en" ? "Listing copied!" : "Annonce copiée !"); }
+                }} style={{ fontSize: 13, color: "#2563EB", background: "#EFF6FF", border: "none", borderRadius: 8, padding: "7px 14px", cursor: "pointer", fontFamily: "inherit" }}>
+                  {lang === "en" ? "Share" : "Partager"}
+                </button>
+                <button onClick={reset} style={{ fontSize: 13, color: "#666", background: "#F3F4F6", border: "none", borderRadius: 8, padding: "7px 16px", cursor: "pointer", fontFamily: "inherit" }}>{a.back}</button>
+              </div>
             </div>
 
             <div style={{ background: "#111", borderRadius: 14, padding: "14px 18px", marginBottom: 16, display: "flex", alignItems: "flex-start", gap: 12 }}>
