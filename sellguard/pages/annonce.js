@@ -93,7 +93,16 @@ export default function Annonce() {
       setActiveTab(data.best_platform);
       saveToHistory(data, condition, lang);
     } catch (e) {
-      setError(e.message);
+      const msg = e.message || '';
+      if (msg.includes('Failed to fetch') || msg.includes('NetworkError')) {
+        setError(lang === 'en' ? 'Connection error. Check your internet and try again.' : 'Erreur de connexion. Vérifie ta connexion internet et réessaie.');
+      } else if (msg.includes('503') || msg.includes('overloaded')) {
+        setError(lang === 'en' ? 'Server is busy. Wait a few seconds and try again.' : 'Le serveur est occupé. Attends quelques secondes et réessaie.');
+      } else if (msg.includes('413') || msg.includes('too large')) {
+        setError(lang === 'en' ? 'Photo is too large. Try with a lighter image.' : 'La photo est trop grande. Essaie avec une image plus légère.');
+      } else {
+        setError(lang === 'en' ? 'An error occurred. Please try again.' : 'Une erreur est survenue. Réessaie ou contacte le support.');
+      }
     }
     setLoading(false);
   }
