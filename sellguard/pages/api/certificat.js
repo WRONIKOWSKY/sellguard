@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).end();
-  
-  const { certId, article, orderRef, dateStr, hash, videoSizeKB, deviceInfo, lang } = req.body;
+  // Accept both GET and POST for iOS compatibility
+  const data = req.method === "GET" ? req.query : req.body;
+  const { certId, article, orderRef, dateStr, hash, videoSizeKB, deviceInfo, lang } = data;
 
   // Build PDF using raw PDF syntax - no dependencies needed
   const isEn = lang === "en";
