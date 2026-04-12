@@ -9,7 +9,7 @@ export const T = {
       m1_title: "Générer une annonce", m1_desc: "Photo → titre, description, hashtags et prix optimisés pour Vinted, Depop, Grailed et plus.", m1_tag: "Gain de temps",
       m2_title: "Protéger mon envoi", m2_desc: "Certifie tes photos avant l'envoi avec horodatage numérique. Preuve légale inattaquable en cas de litige.", m2_tag: "Protection légale",
       m3_title: "Gérer un litige", m3_desc: "Analyse les photos de l'acheteur pour détecter une fraude IA. Génère ta réponse de défense automatiquement.", m3_tag: "Anti-fraude",
-      beta: "Version Bêta — Accès gratuit", pricing: "3 utilisations gratuites · Ensuite 29€/mois",
+      beta: "Version Bêta", beta_sub: "Accès 100% gratuit pendant la phase de test",
     },
     annonce: {
       title: "Générer une annonce", subtitle: "Photo → annonces optimisées pour toutes les plateformes en 10 secondes.",
@@ -51,7 +51,7 @@ export const T = {
       m1_title: "Generate a listing", m1_desc: "Photo → title, description, hashtags and optimized prices for Vinted, Depop, Grailed and more.", m1_tag: "Time saver",
       m2_title: "Protect my shipment", m2_desc: "Certify your photos before shipping with digital timestamping. Unassailable legal proof in case of dispute.", m2_tag: "Legal protection",
       m3_title: "Handle a dispute", m3_desc: "Analyze buyer photos to detect AI fraud. Automatically generates your defense response.", m3_tag: "Anti-fraud",
-      beta: "Beta Version — Free access", pricing: "3 free uses · Then €29/month",
+      beta: "Beta Version", beta_sub: "100% free during the testing phase",
     },
     annonce: {
       title: "Generate a listing", subtitle: "Photo → optimized listings for all platforms in 10 seconds.",
