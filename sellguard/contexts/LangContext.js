@@ -11,6 +11,7 @@ export const T = {
       m3_title: "Gérer un litige", m3_desc: "Analyse les photos de l'acheteur pour détecter une fraude IA. Génère ta réponse de défense automatiquement.", m3_tag: "Anti-fraude",
       beta: "Version Bêta", beta_sub: "Accès 100% gratuit pendant la phase de test",
       m4_title: "Calculateur de prix", m4_desc: "Calcule le prix de vente optimal et ta marge nette sur chaque plateforme selon tes frais réels.", m4_tag: "Rentabilité",
+      m5_title: "Suivi des ventes", m5_desc: "Enregistre tes ventes, calcule tes bénéfices et analyse tes meilleures plateformes.", m5_tag: "Dashboard",
     },
     annonce: {
       title: "Générer une annonce", subtitle: "Photo → annonces optimisées pour toutes les plateformes en 10 secondes.",
@@ -54,6 +55,7 @@ export const T = {
       m3_title: "Handle a dispute", m3_desc: "Analyze buyer photos to detect AI fraud. Automatically generates your defense response.", m3_tag: "Anti-fraud",
       beta: "Beta Version", beta_sub: "100% free during the testing phase",
       m4_title: "Price Calculator", m4_desc: "Calculate the optimal selling price and your net margin on each platform based on your real costs.", m4_tag: "Profitability",
+      m5_title: "Sales Tracker", m5_desc: "Record your sales, calculate your profits and analyze your best performing platforms.", m5_tag: "Dashboard",
     },
     annonce: {
       title: "Generate a listing", subtitle: "Photo → optimized listings for all platforms in 10 seconds.",
