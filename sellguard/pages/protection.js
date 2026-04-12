@@ -1,8 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import Head from "next/head";
 import Layout from "../components/Layout";
+import { useLang } from "../contexts/LangContext";
 
 export default function Protection() {
+  const { t } = useLang();
+  const p = t.protection;
+
   const [mode, setMode] = useState("video");
   const [articleName, setArticleName] = useState("");
   const [orderRef, setOrderRef] = useState("");
@@ -104,7 +108,7 @@ export default function Protection() {
   }
 
   function handleFiles(files) {
-    setPhotos(p => [...p, ...Array.from(files).map(f => ({ url: URL.createObjectURL(f) }))]);
+    setPhotos(prev => [...prev, ...Array.from(files).map(f => ({ url: URL.createObjectURL(f) }))]);
   }
 
   function certifyPhotos() {
@@ -122,21 +126,27 @@ export default function Protection() {
   useEffect(() => () => stopCamera(), []);
 
   const inp = { width: "100%", padding: "10px 12px", fontSize: 14, background: "#fff", border: "1px solid #E5E7EB", borderRadius: 10, outline: "none", fontFamily: "inherit", color: "#111" };
-  const lbl = { fontSize: 13, fontWeight: 600, color: "#444", display: "block", marginBottom: 6 };
   const btn = (bg, col, dis) => ({ width: "100%", padding: 14, fontSize: 15, fontWeight: 700, borderRadius: 12, border: "none", background: dis ? "#E5E7EB" : bg, color: dis ? "#999" : col, cursor: dis ? "default" : "pointer", fontFamily: "inherit" });
+
+  const PLATFORM_GUIDE = [
+    { name: "Vinted", color: "#09B1BA", bg: "#E6F9FA", score: "★★★☆", tip: t.lang === "en" ? "Dispute → 'Add proof' → upload video. Most fraudulent buyers back down when they see dated proof." : "Litige → 'Ajouter des preuves' → upload la vidéo. La plupart des acheteurs frauduleux abandonnent dès qu'ils voient une preuve datée." },
+    { name: "Depop", color: "#FF0000", bg: "#FFF0F0", score: "★★★☆", tip: t.lang === "en" ? "Dispute → 'Provide evidence' → attach the video. Depop accepts external proof." : "Litige → 'Provide evidence' → joint la vidéo. Depop accepte les preuves externes." },
+    { name: "Grailed", color: "#000000", bg: "#F5F5F5", score: "★★★☆", tip: t.lang === "en" ? "Open a support ticket and attach the video. Grailed responds quickly to disputes with proof." : "Ouvre un ticket support et joint la vidéo. Grailed est réactif sur les litiges avec preuves." },
+    { name: "Vestiaire Collective", color: "#1A1A1A", bg: "#F5F0EB", score: "★★☆☆", tip: t.lang === "en" ? "Contact their customer service and attach the video. It strengthens your case." : "Contacte leur service client et joint la vidéo. Elle renforce ton dossier." },
+    { name: "Etsy", color: "#F1641E", bg: "#FFF3EE", score: "★★★★", tip: t.lang === "en" ? "Resolution center → 'Submit evidence' → upload. Etsy takes external proof very seriously." : "Centre de résolution → 'Submit evidence' → upload. Etsy prend les preuves externes très au sérieux." },
+  ];
 
   if (certified) return (
     <>
-      <Head><title>SellGuard — Envoi certifié</title></Head>
+      <Head><title>SellGuard — {p.certified_title}</title></Head>
       <Layout>
         <div style={{ background: "#F0FDF4", border: "2px solid #86EFAC", borderRadius: 16, padding: 24, marginBottom: 24, textAlign: "center" }}>
           <div style={{ fontSize: 40, marginBottom: 10 }}>✅</div>
-          <h3 style={{ fontSize: 20, fontWeight: 800, color: "#15803D", marginBottom: 6 }}>Envoi certifié !</h3>
-          <p style={{ fontSize: 14, color: "#166534", lineHeight: 1.6 }}>Ta preuve vidéo horodatée a été téléchargée. Conserve ce fichier précieusement.</p>
+          <h3 style={{ fontSize: 20, fontWeight: 800, color: "#15803D", marginBottom: 6 }}>{p.certified_title}</h3>
+          <p style={{ fontSize: 14, color: "#166534", lineHeight: 1.6 }}>{p.certified_sub}</p>
         </div>
         <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: 16, padding: "20px 24px", marginBottom: 16 }}>
-          <p style={{ fontSize: 11, fontWeight: 700, color: "#888", letterSpacing: 0.5, marginBottom: 16 }}>CERTIFICAT SELLGUARD</p>
-          {[["Numéro", certified.id], ["Article", certified.article], ["Date & heure", certified.date], ["Type", "Vidéo horodatée SellGuard"]].map(([l, v]) => (
+          {[["Numéro", certified.id], [p.article_label, certified.article], ["Date & heure", certified.date], ["Type", "Vidéo horodatée SellGuard"]].map(([l, v]) => (
             <div key={l} style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderBottom: "1px solid #F9FAFB" }}>
               <span style={{ fontSize: 13, color: "#888" }}>{l}</span>
               <span style={{ fontSize: 13, fontWeight: 600, color: "#111", textAlign: "right", marginLeft: 16 }}>{v}</span>
@@ -144,18 +154,9 @@ export default function Protection() {
           ))}
         </div>
         <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: 14, padding: "16px 20px", marginBottom: 16 }}>
-          <p style={{ fontSize: 11, fontWeight: 700, color: "#888", letterSpacing: 0.5, marginBottom: 14 }}>COMMENT UTILISER CETTE PREUVE PAR PLATEFORME</p>
-          {[
-            { name: "Vinted", color: "#0F6E56", bg: "#E1F5EE", score: "★★★☆", tip: "Litige → 'Ajouter des preuves' → upload la vidéo. La plupart des acheteurs frauduleux abandonnent dès qu'ils voient une preuve datée." },
-            { name: "eBay", color: "#854F0B", bg: "#FEF3C7", score: "★★★★", tip: "Centre de résolution → 'Soumettre des preuves' → upload. eBay reconnaît les vidéos horodatées comme preuve valable. Très efficace." },
-            { name: "Leboncoin", color: "#9A3412", bg: "#FFEDD5", score: "★★★★", tip: "Pas de système de litige intégré. Envoie la vidéo directement à l'acheteur. En cas de recours bancaire ou tribunal, c'est une preuve légale solide." },
-            { name: "Facebook Marketplace", color: "#1D4ED8", bg: "#EFF6FF", score: "★★★☆", tip: "Envoie via Messenger à l'acheteur et conserve pour tout chargeback bancaire. C'est ta principale protection sur cette plateforme." },
-            { name: "Vestiaire Collective", color: "#5B21B6", bg: "#EDE9FE", score: "★★☆☆", tip: "Contacte leur service client et joint la vidéo. Elle renforce ton dossier mais ne remplace pas leur processus d'authentification." },
-            { name: "Grailed", color: "#991B1B", bg: "#FEE2E2", score: "★★★☆", tip: "Ouvre un ticket support et joint la vidéo. Grailed est réactif sur les litiges avec preuves." },
-            { name: "Depop", color: "#333333", bg: "#F3F4F6", score: "★★★☆", tip: "Litige → 'Provide evidence' → joint la vidéo. Depop accepte les preuves externes." },
-            { name: "Etsy", color: "#D97706", bg: "#FFFBEB", score: "★★★★", tip: "Centre de résolution → 'Submit evidence' → upload. Etsy prend les preuves externes très au sérieux." },
-          ].map((pl, i) => (
-            <div key={pl.name} style={{ padding: "10px 0", borderBottom: i < 7 ? "1px solid #F9FAFB" : "none" }}>
+          <p style={{ fontSize: 11, fontWeight: 700, color: "#888", letterSpacing: 0.5, marginBottom: 14 }}>{p.guide_title}</p>
+          {PLATFORM_GUIDE.map((pl, i) => (
+            <div key={pl.name} style={{ padding: "10px 0", borderBottom: i < PLATFORM_GUIDE.length - 1 ? "1px solid #F9FAFB" : "none" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
                 <span style={{ fontSize: 12, fontWeight: 700, padding: "2px 10px", borderRadius: 20, background: pl.bg, color: pl.color }}>{pl.name}</span>
                 <span style={{ fontSize: 11, color: "#aaa" }}>{pl.score}</span>
@@ -164,22 +165,22 @@ export default function Protection() {
             </div>
           ))}
         </div>
-        <button onClick={reset} style={btn("#111", "#fff", false)}>Protéger un autre envoi</button>
+        <button onClick={reset} style={btn("#111", "#fff", false)}>{p.new_btn}</button>
       </Layout>
     </>
   );
 
   return (
     <>
-      <Head><title>SellGuard — Protéger mon envoi</title></Head>
+      <Head><title>SellGuard — {p.title}</title></Head>
       <Layout>
         <div style={{ marginBottom: 24 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 800, color: "#111", marginBottom: 6 }}>🛡️ Protéger mon envoi</h2>
-          <p style={{ fontSize: 14, color: "#666", lineHeight: 1.6 }}>Enregistre une vidéo avec horodatage automatique — preuve solide en cas de litige Vinted.</p>
+          <h2 style={{ fontSize: 24, fontWeight: 800, color: "#111", marginBottom: 6 }}>🛡️ {p.title}</h2>
+          <p style={{ fontSize: 14, color: "#666", lineHeight: 1.6 }}>{p.subtitle}</p>
         </div>
 
         <div style={{ display: "flex", gap: 8, marginBottom: 24 }}>
-          {[["video", "🎥 Vidéo", "Recommandé"], ["photos", "📷 Photos", ""]].map(([m, label, tag]) => (
+          {[["video", p.video_tab, p.recommended], ["photos", p.photo_tab, ""]].map(([m, label, tag]) => (
             <button key={m} onClick={() => { setMode(m); if (m === "photos") stopCamera(); }}
               style={{ flex: 1, padding: "10px 14px", fontSize: 13, fontWeight: 600, borderRadius: 10, border: mode === m ? "2px solid #111" : "1px solid #E5E7EB", background: mode === m ? "#111" : "#fff", color: mode === m ? "#fff" : "#555", cursor: "pointer", fontFamily: "inherit" }}>
               {label} {tag && <span style={{ fontSize: 10, marginLeft: 4, padding: "2px 6px", background: "#16A34A", color: "#fff", borderRadius: 10 }}>{tag}</span>}
@@ -188,13 +189,13 @@ export default function Protection() {
         </div>
 
         <div style={{ marginBottom: 16 }}>
-          <label style={lbl}>Nom de l'article *</label>
-          <input value={articleName} onChange={e => setArticleName(e.target.value)} placeholder="Ex: Levi's Trucker Jacket Type 2 - Taille M" style={inp} />
+          <label style={{ fontSize: 13, fontWeight: 600, color: "#444", display: "block", marginBottom: 6 }}>{p.article_label} *</label>
+          <input value={articleName} onChange={e => setArticleName(e.target.value)} placeholder={p.article_ph} style={inp} />
         </div>
 
         <div style={{ marginBottom: 20 }}>
-          <label style={lbl}>Référence commande <span style={{ fontWeight: 400, color: "#999" }}>(optionnel)</span></label>
-          <input value={orderRef} onChange={e => setOrderRef(e.target.value)} placeholder="Ex: Vinted #4829301" style={inp} />
+          <label style={{ fontSize: 13, fontWeight: 600, color: "#444", display: "block", marginBottom: 6 }}>{p.ref_label} <span style={{ fontWeight: 400, color: "#999" }}>({p.optional})</span></label>
+          <input value={orderRef} onChange={e => setOrderRef(e.target.value)} placeholder={p.ref_ph} style={inp} />
         </div>
 
         {mode === "video" && (
@@ -222,27 +223,25 @@ export default function Protection() {
             {!recordedUrl ? (
               <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
                 {!cameraOn
-                  ? <button onClick={startCamera} style={btn("#111", "#fff", false)}>Activer la caméra →</button>
+                  ? <button onClick={startCamera} style={btn("#111", "#fff", false)}>{p.activate}</button>
                   : !recording
                     ? <>
-                        <button onClick={startRecording} disabled={!articleName.trim()} style={{ ...btn("#DC2626", "#fff", !articleName.trim()), flex: 2 }}>⏺ Démarrer</button>
-                        <button onClick={stopCamera} style={{ flex: 1, padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "1px solid #E5E7EB", background: "#fff", color: "#555", cursor: "pointer", fontFamily: "inherit" }}>Annuler</button>
+                        <button onClick={startRecording} disabled={!articleName.trim()} style={{ ...btn("#DC2626", "#fff", !articleName.trim()), flex: 2 }}>{p.start}</button>
+                        <button onClick={stopCamera} style={{ flex: 1, padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "1px solid #E5E7EB", background: "#fff", color: "#555", cursor: "pointer", fontFamily: "inherit" }}>{p.cancel}</button>
                       </>
-                    : <button onClick={stopRecording} style={btn("#111", "#fff", false)}>⏹ Arrêter — {fmt(elapsed)}</button>
+                    : <button onClick={stopRecording} style={btn("#111", "#fff", false)}>{p.stop} — {fmt(elapsed)}</button>
                 }
               </div>
             ) : (
               <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
-                <button onClick={downloadVideo} style={{ ...btn("#16A34A", "#fff", false), flex: 2 }}>⬇️ Télécharger la preuve vidéo</button>
+                <button onClick={downloadVideo} style={{ ...btn("#16A34A", "#fff", false), flex: 2 }}>{p.download}</button>
                 <button onClick={() => { setRecordedBlob(null); setRecordedUrl(null); setElapsed(0); startCamera(); }}
-                  style={{ flex: 1, padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "1px solid #E5E7EB", background: "#fff", color: "#555", cursor: "pointer", fontFamily: "inherit" }}>Refaire</button>
+                  style={{ flex: 1, padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "1px solid #E5E7EB", background: "#fff", color: "#555", cursor: "pointer", fontFamily: "inherit" }}>{p.redo}</button>
               </div>
             )}
 
             <div style={{ background: "#FFFBEB", border: "1px solid #FDE68A", borderRadius: 14, padding: "14px 18px" }}>
-              <p style={{ fontSize: 13, color: "#92400E", lineHeight: 1.6 }}>
-                <strong>Conseils :</strong> Filme l'article, l'étiquette, puis le colis emballé avec le bon de livraison visible. 30 secondes suffisent.
-              </p>
+              <p style={{ fontSize: 13, color: "#92400E", lineHeight: 1.6 }}><strong>{p.tips_title} :</strong> {p.tips}</p>
             </div>
           </>
         )}
@@ -250,14 +249,13 @@ export default function Protection() {
         {mode === "photos" && (
           <>
             <div style={{ marginBottom: 20 }}>
-              <label style={lbl}>Photos *</label>
               <div onClick={() => fileRef.current.click()} style={{ border: "2px dashed #D1D5DB", borderRadius: 14, padding: 20, cursor: "pointer", background: "#fff", textAlign: "center", minHeight: 80, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <p style={{ fontSize: 14, color: "#888" }}>+ Ajouter des photos</p>
               </div>
               <input ref={fileRef} type="file" accept="image/*" multiple style={{ display: "none" }} onChange={e => handleFiles(e.target.files)} />
               {photos.length > 0 && (
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8, marginTop: 12 }}>
-                  {photos.map((p, i) => <img key={i} src={p.url} style={{ width: "100%", height: 80, objectFit: "cover", borderRadius: 8, border: "1px solid #E5E7EB" }} />)}
+                  {photos.map((ph, i) => <img key={i} src={ph.url} style={{ width: "100%", height: 80, objectFit: "cover", borderRadius: 8, border: "1px solid #E5E7EB" }} />)}
                 </div>
               )}
             </div>
