@@ -32,7 +32,7 @@ export default function Prix() {
     fetch("/api/prix", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ item: item, condition: cond })
+      body: JSON.stringify({ item: item, condition: cond, lang: lang })
     })
       .then(function(r) { return r.json(); })
       .then(function(data) {
