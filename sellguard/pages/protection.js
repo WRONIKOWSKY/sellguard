@@ -18,6 +18,8 @@ export default function Protection() {
   const [elapsed, setElapsed] = useState(0);
   const [cameraOn, setCameraOn] = useState(false);
   const [cameraError, setCameraError] = useState(null);
+  const [processing, setProcessing] = useState(false);
+  const [processProgress, setProcessProgress] = useState("");
   const [timestamp, setTimestamp] = useState("");
 
   const videoRef = useRef();
@@ -27,11 +29,11 @@ export default function Protection() {
   const timerRef = useRef();
   const tsTimerRef = useRef();
   const fileRef = useRef();
+  const ffmpegRef = useRef(null);
+  const ffmpegLoadedRef = useRef(false);
 
-  // Detect iOS
   const isIOS = typeof navigator !== "undefined" && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-  // Update timestamp every second for overlay display
   useEffect(() => {
     tsTimerRef.current = setInterval(() => {
       setTimestamp(new Date().toLocaleString("fr-FR"));
@@ -39,14 +41,75 @@ export default function Protection() {
     return () => clearInterval(tsTimerRef.current);
   }, []);
 
+  async function loadFFmpeg() {
+    if (ffmpegLoadedRef.current) return ffmpegRef.current;
+    setProcessProgress(lang === "en" ? "Loading video processor (first time only)..." : "Chargement du processeur vidéo (première fois uniquement)...");
+    try {
+      const { FFmpeg } = await import("@ffmpeg/ffmpeg");
+      const { fetchFile, toBlobURL } = await import("@ffmpeg/util");
+      const ffmpeg = new FFmpeg();
+      ffmpeg.on("progress", ({ progress }) => {
+        setProcessProgress(lang === "en" ? `Processing video... ${Math.round(progress * 100)}%` : `Traitement vidéo... ${Math.round(progress * 100)}%`);
+      });
+      const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+      await ffmpeg.load({
+        coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
+        wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
+      });
+      ffmpegRef.current = { ffmpeg, fetchFile };
+      ffmpegLoadedRef.current = true;
+      return ffmpegRef.current;
+    } catch(e) {
+      console.error("FFmpeg load error:", e);
+      return null;
+    }
+  }
+
+  async function embedTimestamp(blob, dateStr) {
+    const { ffmpeg, fetchFile } = await loadFFmpeg() || {};
+    if (!ffmpeg) return blob; // fallback: return original
+
+    try {
+      setProcessing(true);
+      const inputName = "input.mp4";
+      const outputName = "output.mp4";
+      ffmpeg.writeFile(inputName, await fetchFile(blob));
+
+      // Embed timestamp as text overlay using drawtext filter
+      const text = `SellGuard · ${dateStr}`;
+      const escapedText = text.replace(/'/g, "\\'").replace(/:/g, "\\:");
+      await ffmpeg.exec([
+        "-i", inputName,
+        "-vf", `drawtext=text='${escapedText}':fontsize=24:fontcolor=white:x=(w-text_w)/2:y=h/2-text_h/2:box=1:boxcolor=black@0.4:boxborderw=8`,
+        "-c:a", "copy",
+        "-preset", "ultrafast",
+        outputName
+      ]);
+
+      const data = await ffmpeg.readFile(outputName);
+      const outputBlob = new Blob([data.buffer], { type: "video/mp4" });
+      ffmpeg.deleteFile(inputName);
+      ffmpeg.deleteFile(outputName);
+      setProcessing(false);
+      setProcessProgress("");
+      return outputBlob;
+    } catch(e) {
+      console.error("FFmpeg process error:", e);
+      setProcessing(false);
+      setProcessProgress("");
+      return blob; // fallback
+    }
+  }
+
   async function startCamera() {
     try {
       setCameraError(null);
-      const constraints = { video: { facingMode: "environment" }, audio: true };
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: true });
       streamRef.current = stream;
       if (videoRef.current) { videoRef.current.srcObject = stream; videoRef.current.play(); }
       setCameraOn(true);
+      // Preload ffmpeg in background
+      loadFFmpeg().catch(() => {});
     } catch (e) {
       setCameraError(lang === "en"
         ? "Cannot access camera. Please allow camera access in your browser settings."
@@ -61,15 +124,9 @@ export default function Protection() {
   }
 
   function getSupportedMimeType() {
-    const types = [
-      "video/mp4;codecs=avc1",
-      "video/mp4",
-      "video/webm;codecs=vp9",
-      "video/webm;codecs=vp8,opus",
-      "video/webm",
-    ];
+    const types = ["video/mp4;codecs=avc1", "video/mp4", "video/webm;codecs=vp9", "video/webm;codecs=vp8,opus", "video/webm"];
     for (const type of types) {
-      if (MediaRecorder.isTypeSupported(type)) return type;
+      if (typeof MediaRecorder !== "undefined" && MediaRecorder.isTypeSupported(type)) return type;
     }
     return "";
   }
@@ -77,18 +134,22 @@ export default function Protection() {
   function startRecording() {
     if (!streamRef.current) return;
     chunksRef.current = [];
-
     const mimeType = getSupportedMimeType();
     const options = mimeType ? { mimeType } : {};
-
     try {
       const mr = new MediaRecorder(streamRef.current, options);
       mr.ondataavailable = e => { if (e.data && e.data.size > 0) chunksRef.current.push(e.data); };
-      mr.onstop = () => {
+      mr.onstop = async () => {
         const mime = mimeType || "video/mp4";
-        const blob = new Blob(chunksRef.current, { type: mime });
-        setRecordedBlob(blob);
-        setRecordedUrl(URL.createObjectURL(blob));
+        const rawBlob = new Blob(chunksRef.current, { type: mime });
+        const dateStr = new Date().toLocaleString("fr-FR");
+        setProcessProgress(lang === "en" ? "Embedding timestamp..." : "Incrustation de l'horodatage...");
+        setProcessing(true);
+        const finalBlob = await embedTimestamp(rawBlob, dateStr);
+        setRecordedBlob(finalBlob);
+        setRecordedUrl(URL.createObjectURL(finalBlob));
+        setProcessing(false);
+        setProcessProgress("");
       };
       mr.start(100);
       mediaRecorderRef.current = mr;
@@ -112,10 +173,9 @@ export default function Protection() {
     if (!recordedBlob) return;
     const certId = "SG-" + Math.random().toString(36).substr(2, 9).toUpperCase();
     const name = (articleName || "envoi").replace(/\s+/g, "_");
-    const ext = recordedBlob.type.includes("mp4") ? "mp4" : "webm";
     const a = document.createElement("a");
     a.href = recordedUrl;
-    a.download = `SellGuard_${certId}_${name}.${ext}`;
+    a.download = `SellGuard_${certId}_${name}.mp4`;
     a.click();
     setCertified({ id: certId, article: articleName || "Article", date: new Date().toLocaleString("fr-FR") });
   }
@@ -132,6 +192,7 @@ export default function Protection() {
   function reset() {
     stopCamera(); setRecordedBlob(null); setRecordedUrl(null); setPhotos([]);
     setArticleName(""); setOrderRef(""); setCertified(null); setElapsed(0);
+    setProcessing(false); setProcessProgress("");
   }
 
   function fmt(s) { return `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`; }
@@ -142,11 +203,11 @@ export default function Protection() {
   const btn = (bg, col, dis) => ({ width: "100%", padding: 14, fontSize: 15, fontWeight: 700, borderRadius: 12, border: "none", background: dis ? "#E5E7EB" : bg, color: dis ? "#999" : col, cursor: dis ? "default" : "pointer", fontFamily: "inherit" });
 
   const PLATFORM_GUIDE = [
-    { name: "Vinted", color: "#09B1BA", bg: "#E6F9FA", score: "★★★☆", tip: lang === "en" ? "Dispute → 'Add proof' → upload video. Most fraudulent buyers back down when they see dated proof." : "Litige → 'Ajouter des preuves' → upload la vidéo. La plupart des acheteurs frauduleux abandonnent dès qu'ils voient une preuve datée." },
-    { name: "Depop", color: "#FF0000", bg: "#FFF0F0", score: "★★★☆", tip: lang === "en" ? "Dispute → 'Provide evidence' → attach the video. Depop accepts external proof." : "Litige → 'Provide evidence' → joint la vidéo. Depop accepte les preuves externes." },
-    { name: "Grailed", color: "#000000", bg: "#F5F5F5", score: "★★★☆", tip: lang === "en" ? "Open a support ticket and attach the video. Grailed responds quickly to disputes with proof." : "Ouvre un ticket support et joint la vidéo. Grailed est réactif sur les litiges avec preuves." },
-    { name: "Vestiaire Collective", color: "#1A1A1A", bg: "#F5F0EB", score: "★★☆☆", tip: lang === "en" ? "Contact their customer service and attach the video." : "Contacte leur service client et joint la vidéo." },
-    { name: "Etsy", color: "#F1641E", bg: "#FFF3EE", score: "★★★★", tip: lang === "en" ? "Resolution center → 'Submit evidence' → upload. Etsy takes external proof very seriously." : "Centre de résolution → 'Submit evidence' → upload. Etsy prend les preuves externes très au sérieux." },
+    { name: "Vinted", color: "#09B1BA", bg: "#E6F9FA", score: "★★★☆", tip: lang === "en" ? "Dispute → 'Add proof' → upload video." : "Litige → 'Ajouter des preuves' → upload la vidéo." },
+    { name: "Depop", color: "#FF0000", bg: "#FFF0F0", score: "★★★☆", tip: lang === "en" ? "Dispute → 'Provide evidence' → attach video." : "Litige → 'Provide evidence' → joint la vidéo." },
+    { name: "Grailed", color: "#000000", bg: "#F5F5F5", score: "★★★☆", tip: lang === "en" ? "Open support ticket and attach video." : "Ouvre un ticket support et joint la vidéo." },
+    { name: "Vestiaire Collective", color: "#1A1A1A", bg: "#F5F0EB", score: "★★☆☆", tip: lang === "en" ? "Contact customer service and attach video." : "Contacte leur service client et joint la vidéo." },
+    { name: "Etsy", color: "#F1641E", bg: "#FFF3EE", score: "★★★★", tip: lang === "en" ? "Resolution center → 'Submit evidence' → upload." : "Centre de résolution → 'Submit evidence' → upload." },
   ];
 
   if (certified) return (
@@ -213,34 +274,29 @@ export default function Protection() {
 
         {mode === "video" && (
           <>
-            {/* iOS warning */}
-            {isIOS && !cameraOn && !recordedUrl && (
-              <div style={{ background: "#FFFBEB", border: "1px solid #FDE68A", borderRadius: 12, padding: "12px 16px", marginBottom: 16 }}>
-                <p style={{ fontSize: 13, color: "#92400E", lineHeight: 1.5 }}>
-                  {lang === "en"
-                    ? "📱 On iPhone, use Safari for best compatibility. The video will be saved directly to your phone."
-                    : "📱 Sur iPhone, utilise Safari pour une meilleure compatibilité. La vidéo sera sauvegardée directement sur ton téléphone."}
-                </p>
-              </div>
-            )}
-
             <div style={{ marginBottom: 16, borderRadius: 14, overflow: "hidden", background: "#111", position: "relative", minHeight: 220 }}>
               <video ref={videoRef} muted playsInline style={{ width: "100%", display: cameraOn && !recordedUrl ? "block" : "none", maxHeight: 340, objectFit: "cover" }} />
 
-              {/* Timestamp overlay on video */}
               {cameraOn && !recordedUrl && (
                 <div style={{ position: "absolute", bottom: 12, left: "50%", transform: "translateX(-50%)", background: "rgba(0,0,0,0.5)", borderRadius: 8, padding: "4px 12px", whiteSpace: "nowrap" }}>
                   <span style={{ fontSize: 12, color: "#00FF88", fontFamily: "monospace", fontWeight: 700 }}>SellGuard · {timestamp}</span>
                 </div>
               )}
 
-              {recordedUrl && <video src={recordedUrl} controls playsInline style={{ width: "100%", maxHeight: 340 }} />}
+              {processing && (
+                <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.8)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12 }}>
+                  <div style={{ width: 40, height: 40, border: "3px solid #333", borderTop: "3px solid #00FF88", borderRadius: "50%", animation: "spin 1s linear infinite" }} />
+                  <p style={{ fontSize: 13, color: "#fff", textAlign: "center", padding: "0 20px" }}>{processProgress}</p>
+                </div>
+              )}
+
+              {recordedUrl && !processing && <video src={recordedUrl} controls playsInline style={{ width: "100%", maxHeight: 340 }} />}
 
               {!cameraOn && !recordedUrl && (
                 <div style={{ minHeight: 220, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10 }}>
                   <div style={{ fontSize: 40 }}>🎥</div>
                   <p style={{ fontSize: 13, color: "#888", textAlign: "center", padding: "0 20px" }}>
-                    {lang === "en" ? "Timestamp automatically embedded in video" : "Date & heure SellGuard incrustées automatiquement"}
+                    {lang === "en" ? "Timestamp permanently embedded in video file" : "Horodatage gravé définitivement dans le fichier vidéo"}
                   </p>
                 </div>
               )}
@@ -253,9 +309,11 @@ export default function Protection() {
               )}
             </div>
 
+            <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+
             {cameraError && <div style={{ marginBottom: 14, padding: 12, background: "#FEF2F2", borderRadius: 10, fontSize: 13, color: "#DC2626" }}>{cameraError}</div>}
 
-            {!recordedUrl ? (
+            {!recordedUrl && !processing ? (
               <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
                 {!cameraOn
                   ? <button onClick={startCamera} disabled={!articleName.trim()} style={btn("#111", "#fff", !articleName.trim())}>{p.activate}</button>
@@ -267,11 +325,15 @@ export default function Protection() {
                     : <button onClick={stopRecording} style={btn("#111", "#fff", false)}>{p.stop} — {fmt(elapsed)}</button>
                 }
               </div>
-            ) : (
+            ) : recordedUrl && !processing ? (
               <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
                 <button onClick={downloadVideo} style={{ ...btn("#16A34A", "#fff", false), flex: 2 }}>{p.download}</button>
                 <button onClick={() => { setRecordedBlob(null); setRecordedUrl(null); setElapsed(0); startCamera(); }}
                   style={{ flex: 1, padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "1px solid #E5E7EB", background: "#fff", color: "#555", cursor: "pointer", fontFamily: "inherit" }}>{p.redo}</button>
+              </div>
+            ) : (
+              <div style={{ marginBottom: 20, padding: 14, background: "#F9FAFB", borderRadius: 12, textAlign: "center" }}>
+                <p style={{ fontSize: 14, color: "#666" }}>{processProgress}</p>
               </div>
             )}
 
