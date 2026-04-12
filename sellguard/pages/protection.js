@@ -378,7 +378,18 @@ export default function Protection() {
                         )}
                         {s.receipt_photo && (
                           <div style={{ marginTop: 6 }}>
-                            <span style={{ fontSize: 12, color: "#666" }}>{lang === "en" ? "Deposit receipt" : "Preuve de dépôt"} {"✅"}</span>
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                              <span style={{ fontSize: 12, color: "#666" }}>{lang === "en" ? "Deposit receipt" : "Preuve de dépôt"} {"✅"}</span>
+                              <button onClick={function() {
+                                var a = document.createElement("a");
+                                a.href = s.receipt_photo;
+                                a.download = "SellGuard_" + s.id + "_receipt.jpg";
+                                document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                              }} style={{ fontSize: 11, fontWeight: 600, color: "#2563EB", background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 6, padding: "4px 10px", cursor: "pointer", fontFamily: "inherit" }}>
+                                {lang === "en" ? "⬇ Download" : "⬇ Télécharger"}
+                              </button>
+                            </div>
+                            <img src={s.receipt_photo} style={{ width: "100%", maxHeight: 160, objectFit: "contain", borderRadius: 8, border: "1px solid #E5E7EB" }} />
                           </div>
                         )}
                         {s.tracking_date && <p style={{ fontSize: 11, color: "#aaa", marginTop: 4 }}>{lang === "en" ? "Added" : "Ajouté"} {s.tracking_date}</p>}
