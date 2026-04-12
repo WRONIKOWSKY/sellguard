@@ -12,6 +12,7 @@ export default function Home() {
     { href: "/protection", icon: "🛡️", title: h.m2_title, desc: h.m2_desc, color: "#F0FDF4", border: "#BBF7D0", tag: h.m2_tag },
     { href: "/litige", icon: "⚖️", title: h.m3_title, desc: h.m3_desc, color: "#FFF7ED", border: "#FED7AA", tag: h.m3_tag },
     { href: "/calculateur", icon: "💰", title: h.m4_title, desc: h.m4_desc, color: "#F0FDF4", border: "#BBF7D0", tag: h.m4_tag },
+    { href: "/ventes", icon: "📊", title: h.m5_title, desc: h.m5_desc, color: "#EFF6FF", border: "#BFDBFE", tag: h.m5_tag },
   ];
 
   return (
