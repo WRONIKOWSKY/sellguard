@@ -333,7 +333,7 @@ export default function Home() {
         </div>
         <div style={{ textAlign: "center", marginTop: 50 }}>
           <p style={{ fontFamily: "var(--serif)", fontSize: 26, letterSpacing: "-0.02em", lineHeight: 1.3, maxWidth: 600, margin: "0 auto" }}>
-            Si l'acheteur ment,<br/><em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.35)" }}>tu gagnes.</em>
+            Si l'acheteur ment,<br/><em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.35)" }}>tu peux le prouver.</em>
           </p>
         </div>
         <div style={{ textAlign: "center", marginTop: 40 }}>
