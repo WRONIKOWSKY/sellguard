@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import { useLang } from "../contexts/LangContext";
@@ -210,33 +210,34 @@ export default function Protection() {
     setRecording(false); clearInterval(timerRef.current);
   }
 
-  async function downloadAll() {
-    if (!recordedBlob) return;
-    setProcessing(true);
+  const [certData, setCertData] = React.useState(null);
 
-    const certId = "SG-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+  async function downloadVideo() {
+    if (!recordedBlob) return;
+    const id = "SG-" + Math.random().toString(36).substr(2, 9).toUpperCase();
     const dateStr = recordDate || new Date().toLocaleString("fr-FR");
     const name = (articleName || "envoi").replace(/\s+/g, "_");
     const ext = recordedBlob.type.includes("mp4") ? "mp4" : "webm";
-    const videoSizeKB = Math.round(recordedBlob.size / 1024);
-
-    // Compute hash
     const hash = await computeHash(recordedBlob);
+    const videoSizeKB = Math.round(recordedBlob.size / 1024);
+    setCertData({ id, dateStr, hash, videoSizeKB });
+    const a = document.createElement("a");
+    a.href = recordedUrl; a.download = `SellGuard_${id}_${name}.${ext}`; a.click();
+  }
 
-    // Download video
-    const videoUrl = URL.createObjectURL(recordedBlob);
-    const va = document.createElement("a");
-    va.href = videoUrl; va.download = `SellGuard_${certId}_${name}.${ext}`; va.click();
-
-    // Generate and download PDF
-    setTimeout(async () => {
-      try {
-        const doc = await generatePDF(certId, hash, dateStr, videoSizeKB);
-        doc.save(`SellGuard_${certId}_Certificat.pdf`);
-      } catch(e) { console.error(e); }
-      setProcessing(false);
-      setCertified({ id: certId, article: articleName || "Article", date: dateStr, hash });
-    }, 500);
+  async function downloadPDF() {
+    if (!recordedBlob) return;
+    setProcessing(true);
+    const id = certData?.id || "SG-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+    const dateStr = certData?.dateStr || recordDate || new Date().toLocaleString("fr-FR");
+    const hash = certData?.hash || await computeHash(recordedBlob);
+    const videoSizeKB = certData?.videoSizeKB || Math.round(recordedBlob.size / 1024);
+    try {
+      const doc = await generatePDF(id, hash, dateStr, videoSizeKB);
+      doc.save(`SellGuard_${id}_Certificat.pdf`);
+    } catch(e) { console.error(e); }
+    setProcessing(false);
+    setCertified({ id, article: articleName || "Article", date: dateStr, hash });
   }
 
   function handleFiles(files) {
@@ -394,12 +395,15 @@ export default function Protection() {
                 }
               </div>
             ) : (
-              <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
-                <button onClick={downloadAll} disabled={processing} style={{ ...btn("#16A34A", "#fff", processing), flex: 2 }}>
-                  {processing ? (lang === "en" ? "Generating certificate..." : "Génération du certificat...") : (lang === "en" ? "⬇️ Download video + certificate" : "⬇️ Télécharger vidéo + certificat")}
+              <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 20 }}>
+                <button onClick={downloadVideo} disabled={processing} style={btn("#16A34A", "#fff", processing)}>
+                  {lang === "en" ? "⬇️ Download video" : "⬇️ Télécharger la vidéo"}
+                </button>
+                <button onClick={downloadPDF} disabled={processing} style={btn("#2563EB", "#fff", processing)}>
+                  {processing ? (lang === "en" ? "Generating..." : "Génération...") : (lang === "en" ? "📄 Download PDF certificate" : "📄 Télécharger le certificat PDF")}
                 </button>
                 <button onClick={() => { setRecordedBlob(null); setRecordedUrl(null); setElapsed(0); startCamera(); }}
-                  style={{ flex: 1, padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "1px solid #E5E7EB", background: "#fff", color: "#555", cursor: "pointer", fontFamily: "inherit" }}>{p.redo}</button>
+                  style={{ padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "1px solid #E5E7EB", background: "#fff", color: "#555", cursor: "pointer", fontFamily: "inherit" }}>{p.redo}</button>
               </div>
             )}
 
