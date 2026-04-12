@@ -21,23 +21,23 @@ export default function Calculateur() {
   var t = {
     title: lang === "en" ? "Price Calculator" : "Calculateur de Prix",
     subtitle: lang === "en" ? "Find the optimal selling price on each platform to hit your target margin." : "Trouve le prix de vente optimal sur chaque plateforme pour atteindre ta marge cible.",
-    buy_label: lang === "en" ? "Purchase price (\u20ac)" : "Prix d'achat (\u20ac)",
+    buy_label: lang === "en" ? "Purchase price (€)" : "Prix d'achat (€)",
     buy_ph: "Ex: 15",
-    costs_label: lang === "en" ? "Additional costs (\u20ac)" : "Frais suppl\u00e9mentaires (\u20ac)",
+    costs_label: lang === "en" ? "Additional costs (€)" : "Frais supplémentaires (€)",
     costs_hint: lang === "en" ? "cleaning, transport, packaging..." : "nettoyage, transport, emballage...",
     costs_ph: "Ex: 3",
     margin_label: lang === "en" ? "Target margin (%)" : "Marge cible (%)",
-    calc_btn: lang === "en" ? "Calculate \u2192" : "Calculer \u2192",
+    calc_btn: lang === "en" ? "Calculate →" : "Calculer →",
     min_price: lang === "en" ? "Min. price" : "Prix min.",
-    recommended: lang === "en" ? "Recommended" : "Recommand\u00e9",
+    recommended: lang === "en" ? "Recommended" : "Recommandé",
     your_margin: lang === "en" ? "Your margin" : "Ta marge",
     platform_fee: lang === "en" ? "Platform fees" : "Frais plateforme",
-    net_profit: lang === "en" ? "Net profit" : "B\u00e9n\u00e9fice net",
-    break_even: lang === "en" ? "Break-even" : "Seuil rentabilit\u00e9",
-    tip_title: lang === "en" ? "\ud83d\udca1 Tips" : "\ud83d\udca1 Conseils",
-    tip1: lang === "en" ? "Vinted is the only platform with zero seller fees \u2014 buyers pay the protection fee." : "Vinted est la seule plateforme sans commission vendeur \u2014 c'est l'acheteur qui paye la protection.",
-    tip2: lang === "en" ? "Price 10-15% higher on Vestiaire and Grailed \u2014 their buyers expect premium pricing." : "Prix 10-15% plus \u00e9lev\u00e9 sur Vestiaire et Grailed \u2014 leur audience accepte des prix premium.",
-    tip3: lang === "en" ? "On Vinted, include shipping in your price for better conversion." : "Sur Vinted, inclure les frais de port dans ton prix am\u00e9liore le taux de conversion.",
+    net_profit: lang === "en" ? "Net profit" : "Bénéfice net",
+    break_even: lang === "en" ? "Break-even" : "Seuil rentabilité",
+    tip_title: lang === "en" ? "💡 Tips" : "💡 Conseils",
+    tip1: lang === "en" ? "Vinted is the only platform with zero seller fees — buyers pay the protection fee." : "Vinted est la seule plateforme sans commission vendeur — c'est l'acheteur qui paye la protection.",
+    tip2: lang === "en" ? "Price 10-15% higher on Vestiaire and Grailed — their buyers expect premium pricing." : "Prix 10-15% plus élevé sur Vestiaire et Grailed — leur audience accepte des prix premium.",
+    tip3: lang === "en" ? "On Vinted, include shipping in your price for better conversion." : "Sur Vinted, inclure les frais de port dans ton prix améliore le taux de conversion.",
   };
 
   function calculate() {
@@ -73,10 +73,10 @@ export default function Calculateur() {
 
   return (
     <>
-      <Head><title>SellGuard \u2014 {t.title}</title></Head>
+      <Head><title>SellGuard — {t.title}</title></Head>
       <Layout>
         <div style={{ marginBottom: 28 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 800, color: "#111", marginBottom: 6 }}>{"\ud83d\udcb0"} {t.title}</h2>
+          <h2 style={{ fontSize: 24, fontWeight: 800, color: "#111", marginBottom: 6 }}>{"💰"} {t.title}</h2>
           <p style={{ fontSize: 14, color: "#666", lineHeight: 1.6 }}>{t.subtitle}</p>
         </div>
 
@@ -95,7 +95,7 @@ export default function Calculateur() {
 
           <div style={{ marginBottom: 20 }}>
             <label style={{ fontSize: 13, fontWeight: 600, color: "#444", display: "block", marginBottom: 10 }}>
-              {t.margin_label} \u2014 <span style={{ color: "#2563EB", fontWeight: 700 }}>{targetMargin}%</span>
+              {t.margin_label} — <span style={{ color: "#2563EB", fontWeight: 700 }}>{targetMargin}%</span>
             </label>
             <input type="range" min="10" max="500" value={targetMargin} onChange={function(e) { setTargetMargin(e.target.value); }}
               style={{ width: "100%", accentColor: "#111" }} />
@@ -114,8 +114,8 @@ export default function Calculateur() {
           <>
             <div style={{ background: "#F9FAFB", border: "1px solid #E5E7EB", borderRadius: 12, padding: "12px 16px", marginBottom: 16, display: "flex", gap: 20 }}>
               <div style={{ textAlign: "center" }}>
-                <p style={{ fontSize: 11, color: "#888", marginBottom: 2 }}>{lang === "en" ? "Total cost" : "Co\u00fbt total"}</p>
-                <p style={{ fontSize: 18, fontWeight: 800, color: "#111" }}>{results.totalCost}\u20ac</p>
+                <p style={{ fontSize: 11, color: "#888", marginBottom: 2 }}>{lang === "en" ? "Total cost" : "Coût total"}</p>
+                <p style={{ fontSize: 18, fontWeight: 800, color: "#111" }}>{results.totalCost}€</p>
               </div>
               <div style={{ width: 1, background: "#E5E7EB" }} />
               <div style={{ textAlign: "center" }}>
@@ -132,16 +132,16 @@ export default function Calculateur() {
                       {pl.name}
                     </span>
                     <div style={{ textAlign: "right" }}>
-                      <p style={{ fontSize: 22, fontWeight: 800, color: "#111" }}>{pl.recommended}\u20ac</p>
+                      <p style={{ fontSize: 22, fontWeight: 800, color: "#111" }}>{pl.recommended}€</p>
                       <p style={{ fontSize: 11, color: "#888" }}>{t.recommended}</p>
                     </div>
                   </div>
 
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
                     {[
-                      [t.net_profit, pl.netProfit + "\u20ac", parseFloat(pl.netProfit) >= 0 ? "#15803D" : "#DC2626"],
+                      [t.net_profit, pl.netProfit + "€", parseFloat(pl.netProfit) >= 0 ? "#15803D" : "#DC2626"],
                       [t.your_margin, pl.actualMargin + "%", parseFloat(pl.actualMargin) >= 20 ? "#15803D" : "#D97706"],
-                      [t.platform_fee, pl.platformFee + "\u20ac", "#888"],
+                      [t.platform_fee, pl.platformFee + "€", "#888"],
                     ].map(function(row) {
                       return (
                         <div key={row[0]} style={{ background: "#F9FAFB", borderRadius: 8, padding: "8px 10px", textAlign: "center" }}>
@@ -154,7 +154,7 @@ export default function Calculateur() {
 
                   <div style={{ marginTop: 10, padding: "6px 10px", background: "#F9FAFB", borderRadius: 8, display: "flex", justifyContent: "space-between" }}>
                     <span style={{ fontSize: 11, color: "#888" }}>{t.break_even}</span>
-                    <span style={{ fontSize: 11, fontWeight: 600, color: "#555" }}>{pl.breakEven}\u20ac</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "#555" }}>{pl.breakEven}€</span>
                   </div>
                 </div>
               );
@@ -165,7 +165,7 @@ export default function Calculateur() {
               {[t.tip1, t.tip2, t.tip3].map(function(tip, i) {
                 return (
                   <div key={i} style={{ display: "flex", gap: 8, marginBottom: i < 2 ? 8 : 0 }}>
-                    <span style={{ color: "#D97706", flexShrink: 0 }}>{"\u00b7"}</span>
+                    <span style={{ color: "#D97706", flexShrink: 0 }}>{"·"}</span>
                     <p style={{ fontSize: 12, color: "#555", lineHeight: 1.5 }}>{tip}</p>
                   </div>
                 );
