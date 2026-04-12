@@ -12,6 +12,7 @@ export default function Layout({ children }) {
     { href: "/litige", label: t.nav.litige, icon: "⚖️" },
     { href: "/calculateur", label: lang === "en" ? "Calculator" : "Calculateur", icon: "💰" },
     { href: "/ventes", label: lang === "en" ? "Sales" : "Ventes", icon: "📊" },
+    { href: "/prix", label: lang === "en" ? "Prices" : "Prix", icon: "📈" },
     { href: "/historique", label: lang === "en" ? "History" : "Historique", icon: "📋" },
   ];
 
