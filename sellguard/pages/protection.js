@@ -545,7 +545,17 @@ export default function Protection() {
                   <input ref={fileRef} type="file" accept="image/*" multiple style={{ display: "none" }} onChange={function(e) { handleFiles(e.target.files); }} />
                   {photos.length > 0 && (
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8, marginTop: 12 }}>
-                      {photos.map(function(ph, i) { return <img key={i} src={ph.url} style={{ width: "100%", height: 80, objectFit: "cover", borderRadius: 8, border: "1px solid #E5E7EB" }} />; })}
+                      {photos.map(function(ph, i) {
+                        return (
+                          <div key={i} style={{ position: "relative" }}>
+                            <img src={ph.url} style={{ width: "100%", height: 80, objectFit: "cover", borderRadius: 8, border: "1px solid #E5E7EB" }} />
+                            <button onClick={function() { setPhotos(function(prev) { return prev.filter(function(_, idx) { return idx !== i; }); }); }}
+                              style={{ position: "absolute", top: -6, right: -6, width: 22, height: 22, borderRadius: "50%", background: "#DC2626", color: "#fff", border: "2px solid #fff", fontSize: 12, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0, lineHeight: 1 }}>
+                              {"\u00d7"}
+                            </button>
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
