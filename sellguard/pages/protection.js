@@ -57,12 +57,11 @@ export default function Protection() {
   }
 
   async function generatePDF(certId, hash, dateStr, videoSizeKB) {
-    // Use jsPDF via CDN
+    const jsPDFModule = await import("jspdf");
+    const jsPDF = jsPDFModule.jsPDF || jsPDFModule.default?.jsPDF || jsPDFModule.default;
     return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
-      script.onload = () => {
-        const { jsPDF } = window.jspdf;
+      {
+        const _unused = null;
         const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
         const w = 210; const margin = 20;
 
@@ -149,7 +148,6 @@ export default function Protection() {
 
         resolve(doc);
       };
-      document.head.appendChild(script);
     });
   }
 
