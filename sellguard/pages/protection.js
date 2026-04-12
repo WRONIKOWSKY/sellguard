@@ -233,8 +233,16 @@ export default function Protection() {
     const hash = certData?.hash || await computeHash(recordedBlob);
     const videoSizeKB = certData?.videoSizeKB || Math.round(recordedBlob.size / 1024);
     try {
-      const doc = await generatePDF(id, hash, dateStr, videoSizeKB);
-      doc.save(`SellGuard_${id}_Certificat.pdf`);
+      const res = await fetch("/api/certificat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ certId: id, article: articleName, orderRef, dateStr, hash, videoSizeKB, deviceInfo: getDeviceInfo(), lang })
+      });
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = `SellGuard_${id}_Certificat.pdf`; a.click();
+      URL.revokeObjectURL(url);
     } catch(e) { console.error(e); }
     setProcessing(false);
     setCertified({ id, article: articleName || "Article", date: dateStr, hash });
