@@ -91,7 +91,7 @@ export default function Annonce() {
       if (!res.ok) throw new Error(data.error || "Erreur");
       setResult(data);
       setActiveTab(data.best_platform);
-      saveToHistory(data, condition);
+      saveToHistory(data, condition, lang);
     } catch (e) {
       setError(e.message);
     }
