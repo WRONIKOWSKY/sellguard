@@ -279,7 +279,7 @@ export default function Annonce() {
                   ))}</div>
                 </div>
 
-                <div style={{ background: "#FFFBEB", border: "1px solid #FDE68A", borderRadius: 14, padding: "14px 18px" }}>
+                <div style={{ background: "#FFFBEB", border: "1px solid #FDE68A", borderRadius: 14, padding: "14px 18px", marginBottom: 10 }}>
                   <p style={{ fontSize: 11, fontWeight: 700, color: "#92400E", letterSpacing: 0.5, marginBottom: 10 }}>{a.tips_l}</p>
                   {result.selling_tips?.map((tip, i) => (
                     <div key={i} style={{ display: "flex", gap: 10, marginBottom: i < result.selling_tips.length - 1 ? 8 : 0 }}>
@@ -288,6 +288,24 @@ export default function Annonce() {
                     </div>
                   ))}
                 </div>
+
+                {/* Buyer message */}
+                {(() => {
+                  const msg = lang === "en"
+                    ? "Thank you for your purchase! 🎉 Your parcel was carefully packed and filmed before shipping with SellGuard — timestamped video proof is kept in case of dispute. Enjoy your item! 📦"
+                    : "Merci pour ton achat ! 🎉 Ton colis a été soigneusement emballé et filmé avant envoi avec SellGuard — une preuve vidéo horodatée est conservée en cas de litige. Bonne réception ! 📦";
+                  return (
+                    <div style={{ background: "#F0FDF4", border: "1px solid #BBF7D0", borderRadius: 14, padding: "14px 18px" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+                        <p style={{ fontSize: 11, fontWeight: 700, color: "#15803D", letterSpacing: 0.5 }}>{lang === "en" ? "MESSAGE FOR BUYER" : "MESSAGE POUR L'ACHETEUR"}</p>
+                        <button onClick={() => copy("buyermsg", msg)} style={{ fontSize: 12, color: "#15803D", background: "#fff", border: "1px solid #BBF7D0", borderRadius: 6, padding: "4px 12px", cursor: "pointer", fontFamily: "inherit" }}>
+                          {copied["buyermsg"] ? (lang === "en" ? "Copied ✓" : "Copié ✓") : (lang === "en" ? "Copy" : "Copier")}
+                        </button>
+                      </div>
+                      <p style={{ fontSize: 13, color: "#166534", lineHeight: 1.7 }}>{msg}</p>
+                    </div>
+                  );
+                })()}
               </div>
             )}
           </>
