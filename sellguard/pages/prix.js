@@ -50,7 +50,7 @@ export default function Prix() {
   }
 
   var demandColor = { haute: "#16A34A", moyenne: "#D97706", basse: "#DC2626" };
-  var trendIcon = { hausse: "\u2197\uFE0F", stable: "\u2194\uFE0F", baisse: "\u2198\uFE0F" };
+  var trendIcon = { hausse: "↗", stable: "↔", baisse: "↘" };
 
   return (
     <>
