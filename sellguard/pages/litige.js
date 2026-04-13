@@ -55,11 +55,11 @@ export default function Litige() {
     } catch (e) {
       const msg = e.message || '';
       if (msg.includes('Failed to fetch') || msg.includes('NetworkError')) {
-        setError(lang === 'en' ? 'Connection error. Check your internet and try again.' : 'Erreur de connexion. Vérifie ta connexion internet et réessaie.');
+        setError('Erreur de connexion. Vérifie ta connexion internet et réessaie.');
       } else if (msg.includes('503') || msg.includes('overloaded')) {
-        setError(lang === 'en' ? 'Server is busy. Wait a few seconds and try again.' : 'Le serveur est occupé. Attends quelques secondes et réessaie.');
+        setError('Le serveur est occupé. Attends quelques secondes et réessaie.');
       } else {
-        setError(lang === 'en' ? 'An error occurred. Please try again.' : 'Une erreur est survenue. Réessaie.');
+        setError('Une erreur est survenue. Réessaie.');
       }
     }
     setLoading(false);
@@ -77,12 +77,12 @@ export default function Litige() {
   }
 
   const fraudColor = result?.fraud_score >= 7
-    ? { bg: "#FEF2F2", border: "#FECACA", text: "#DC2626", label: t.lang === "en" ? "Likely fraud" : "Fraude probable" }
+    ? { bg: "rgba(220,38,38,0.08)", border: "rgba(220,38,38,0.2)", text: "#DC2626", label: "Fraude probable" }
     : result?.fraud_score >= 4
-    ? { bg: "#FFFBEB", border: "#FDE68A", text: "#D97706", label: t.lang === "en" ? "Suspicious" : "Suspect" }
-    : { bg: "#F0FDF4", border: "#BBF7D0", text: "#15803D", label: t.lang === "en" ? "Seems legitimate" : "Semble légitime" };
+    ? { bg: "rgba(251,146,60,0.06)", border: "rgba(251,146,60,0.2)", text: "#D97706", label: "Suspect" }
+    : { bg: "rgba(34,197,94,0.06)", border: "rgba(34,197,94,0.2)", text: "#15803D", label: "Semble légitime" };
 
-  const inp = { width: "100%", padding: "10px 12px", fontSize: 14, background: "#fff", border: "1px solid #E5E7EB", borderRadius: 10, outline: "none", fontFamily: "inherit", color: "#111" };
+  const inp = { width: "100%", padding: "10px 12px", fontSize: 14, background: "#111", border: "0.5px solid rgba(255,255,255,0.14)", borderRadius: 10, outline: "none", fontFamily: "inherit", color: "#fff" };
 
   return (
     <>
@@ -91,97 +91,97 @@ export default function Litige() {
         {!result ? (
           <>
             <div style={{ marginBottom: 28 }}>
-              <h2 style={{ fontSize: 24, fontWeight: 800, color: "#111", marginBottom: 6 }}>⚖️ {l.title}</h2>
-              <p style={{ fontSize: 14, color: "#666", lineHeight: 1.6 }}>{l.subtitle}</p>
+              <h2 style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 6 }}>⚖️ {l.title}</h2>
+              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.42)", lineHeight: 1.6 }}>{l.subtitle}</p>
             </div>
 
             <div style={{ marginBottom: 16 }}>
-              <label style={{ fontSize: 13, fontWeight: 600, color: "#444", display: "block", marginBottom: 6 }}>{l.type_label}</label>
+              <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>{l.type_label}</label>
               <select value={type} onChange={e => setType(e.target.value)} style={inp}>
                 {l.types.map(t => <option key={t}>{t}</option>)}
               </select>
             </div>
 
             <div style={{ marginBottom: 16 }}>
-              <label style={{ fontSize: 13, fontWeight: 600, color: "#444", display: "block", marginBottom: 6 }}>{l.msg_label} *</label>
+              <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>{l.msg_label} *</label>
               <textarea value={buyerMessage} onChange={e => setBuyerMessage(e.target.value)} rows={4} placeholder={l.msg_ph}
                 style={{ ...inp, resize: "none", lineHeight: 1.6, padding: "10px 12px" }} />
             </div>
 
             <div style={{ marginBottom: 16 }}>
-              <label style={{ fontSize: 13, fontWeight: 600, color: "#444", display: "block", marginBottom: 6 }}>
+              <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>
                 {l.photos_label} <span style={{ fontWeight: 400, color: "#999" }}>({l.photos_hint})</span>
               </label>
               <div onClick={() => fileRef.current.click()} onDragOver={e => e.preventDefault()} onDrop={e => { e.preventDefault(); handleFiles(e.dataTransfer.files); }}
-                style={{ border: "2px dashed #D1D5DB", borderRadius: 14, padding: 16, cursor: "pointer", background: "#fff", textAlign: "center", minHeight: 70, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                style={{ border: "1.5px dashed rgba(255,255,255,0.14)", borderRadius: 14, padding: 16, cursor: "pointer", background: "#0A0A0A", textAlign: "center", minHeight: 70, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 {imagePreviews.length > 0
                   ? <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "center" }}>
                       {imagePreviews.map((src, i) => <img key={i} src={src} style={{ height: 70, borderRadius: 8, objectFit: "cover" }} />)}
                     </div>
-                  : <p style={{ fontSize: 13, color: "#888" }}>{l.photos_add}</p>}
+                  : <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)" }}>{l.photos_add}</p>}
               </div>
               <input ref={fileRef} type="file" accept="image/*" multiple style={{ display: "none" }} onChange={e => handleFiles(e.target.files)} />
             </div>
 
             <div style={{ marginBottom: 24 }}>
-              <label style={{ fontSize: 13, fontWeight: 600, color: "#444", display: "block", marginBottom: 6 }}>
+              <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>
                 {l.cert_label} <span style={{ fontWeight: 400, color: "#999" }}>({l.cert_hint})</span>
               </label>
               <input value={certRef} onChange={e => setCertRef(e.target.value)} placeholder={l.cert_ph} style={inp} />
             </div>
 
             <button onClick={analyze} disabled={loading || !buyerMessage.trim()}
-              style={{ width: "100%", padding: 14, fontSize: 15, fontWeight: 700, borderRadius: 12, border: "none", background: !buyerMessage.trim() ? "#E5E7EB" : "#111", color: !buyerMessage.trim() ? "#999" : "#fff", cursor: loading ? "default" : "pointer", fontFamily: "inherit" }}>
+              style={{ width: "100%", padding: 14, fontSize: 15, fontWeight: 700, borderRadius: 12, border: "none", background: !buyerMessage.trim() ? "rgba(255,255,255,0.06)" : "#fff", color: !buyerMessage.trim() ? "rgba(255,255,255,0.25)" : "#000", cursor: loading ? "default" : "pointer", fontFamily: "inherit" }}>
               {loading ? l.analyzing : l.analyze_btn}
             </button>
 
-            {error && <div style={{ marginTop: 12, padding: 12, background: "#FEF2F2", borderRadius: 10, fontSize: 13, color: "#DC2626" }}>{error}</div>}
+            {error && <div style={{ marginTop: 12, padding: 12, background: "rgba(220,38,38,0.08)", borderRadius: 10, fontSize: 13, color: "#DC2626" }}>{error}</div>}
           </>
         ) : (
           <>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
-              <h2 style={{ fontSize: 20, fontWeight: 800, color: "#111" }}>{l.title}</h2>
-              <button onClick={reset} style={{ fontSize: 13, color: "#666", background: "#F3F4F6", border: "none", borderRadius: 8, padding: "7px 16px", cursor: "pointer", fontFamily: "inherit" }}>{l.back}</button>
+              <h2 style={{ fontSize: 20, fontWeight: 800, color: "#fff" }}>{l.title}</h2>
+              <button onClick={reset} style={{ fontSize: 13, color: "rgba(255,255,255,0.42)", background: "rgba(255,255,255,0.06)", border: "none", borderRadius: 8, padding: "7px 16px", cursor: "pointer", fontFamily: "inherit" }}>{l.back}</button>
             </div>
 
             {result.fraud_score !== undefined && (
-              <div style={{ background: fraudColor.bg, border: `1px solid ${fraudColor.border}`, borderRadius: 14, padding: "16px 20px", marginBottom: 16 }}>
+              <div style={{ background: fraudColor.bg, border: `0.5px solid ${fraudColor.border}`, borderRadius: 14, padding: "16px 20px", marginBottom: 16 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
                   <p style={{ fontSize: 13, fontWeight: 700, color: fraudColor.text }}>
                     {result.fraud_score >= 7 ? "🚨" : result.fraud_score >= 4 ? "⚠️" : "✅"} {l.fraud_label} — {fraudColor.label}
                   </p>
                   <span style={{ fontSize: 20, fontWeight: 800, color: fraudColor.text }}>{result.fraud_score}/10</span>
                 </div>
-                <p style={{ fontSize: 13, color: "#555", lineHeight: 1.5 }}>{result.fraud_analysis}</p>
+                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.5 }}>{result.fraud_analysis}</p>
               </div>
             )}
 
-            <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: 14, padding: "16px 20px", marginBottom: 16 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: "#888", letterSpacing: 0.5, marginBottom: 8 }}>{l.verdict_l}</p>
-              <p style={{ fontSize: 14, color: "#111", lineHeight: 1.7 }}>{result.verdict}</p>
+            <div style={{ background: "#0A0A0A", border: "0.5px solid rgba(255,255,255,0.07)", borderRadius: 14, padding: "16px 20px", marginBottom: 16 }}>
+              <p style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.35)", letterSpacing: 0.5, marginBottom: 8 }}>{l.verdict_l}</p>
+              <p style={{ fontSize: 14, color: "#fff", lineHeight: 1.7 }}>{result.verdict}</p>
             </div>
 
-            <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: 14, padding: "16px 20px", marginBottom: 16 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: "#888", letterSpacing: 0.5, marginBottom: 12 }}>{l.args_l}</p>
+            <div style={{ background: "#0A0A0A", border: "0.5px solid rgba(255,255,255,0.07)", borderRadius: 14, padding: "16px 20px", marginBottom: 16 }}>
+              <p style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.35)", letterSpacing: 0.5, marginBottom: 12 }}>{l.args_l}</p>
               {result.arguments?.map((arg, i) => (
-                <div key={i} style={{ display: "flex", gap: 12, marginBottom: i < result.arguments.length - 1 ? 10 : 0, padding: "10px 14px", background: "#F9FAFB", borderRadius: 10 }}>
+                <div key={i} style={{ display: "flex", gap: 12, marginBottom: i < result.arguments.length - 1 ? 10 : 0, padding: "10px 14px", background: "rgba(255,255,255,0.03)", borderRadius: 10 }}>
                   <span style={{ fontSize: 16, flexShrink: 0 }}>🛡️</span>
-                  <p style={{ fontSize: 13, color: "#333", lineHeight: 1.5 }}>{arg}</p>
+                  <p style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", lineHeight: 1.5 }}>{arg}</p>
                 </div>
               ))}
             </div>
 
-            <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: 14, padding: "16px 20px", marginBottom: 16 }}>
+            <div style={{ background: "#0A0A0A", border: "0.5px solid rgba(255,255,255,0.07)", borderRadius: 14, padding: "16px 20px", marginBottom: 16 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-                <p style={{ fontSize: 11, fontWeight: 700, color: "#888", letterSpacing: 0.5 }}>{l.response_l}</p>
-                <button onClick={() => copy(result.response)} style={{ fontSize: 12, color: "#555", background: "#F3F4F6", border: "none", borderRadius: 6, padding: "4px 12px", cursor: "pointer", fontFamily: "inherit" }}>
+                <p style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.35)", letterSpacing: 0.5 }}>{l.response_l}</p>
+                <button onClick={() => copy(result.response)} style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", background: "rgba(255,255,255,0.06)", border: "none", borderRadius: 6, padding: "4px 12px", cursor: "pointer", fontFamily: "inherit" }}>
                   {copied ? l.copied : l.copy}
                 </button>
               </div>
-              <p style={{ fontSize: 13, color: "#111", lineHeight: 1.8, whiteSpace: "pre-wrap" }}>{result.response}</p>
+              <p style={{ fontSize: 13, color: "#fff", lineHeight: 1.8, whiteSpace: "pre-wrap" }}>{result.response}</p>
             </div>
 
-            <div style={{ background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 14, padding: "16px 20px" }}>
+            <div style={{ background: "rgba(99,102,241,0.08)", border: "0.5px solid rgba(99,102,241,0.2)", borderRadius: 14, padding: "16px 20px" }}>
               <p style={{ fontSize: 11, fontWeight: 700, color: "#1D4ED8", letterSpacing: 0.5, marginBottom: 10 }}>{l.steps_l}</p>
               {result.next_steps?.map((step, i) => (
                 <div key={i} style={{ display: "flex", gap: 10, marginBottom: i < result.next_steps.length - 1 ? 8 : 0 }}>
