@@ -47,16 +47,33 @@ export default function Annonce() {
   var _measures = useState({}), measures = _measures[0], setMeasures = _measures[1];
   var fileRef = useRef();
 
+  function compressImage(file, maxWidth, quality, callback) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var img = new Image();
+      img.onload = function() {
+        var canvas = document.createElement("canvas");
+        var w = img.width, h = img.height;
+        if (w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
+        canvas.width = w; canvas.height = h;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, w, h);
+        var dataUrl = canvas.toDataURL("image/jpeg", quality);
+        callback(dataUrl);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
   function handleFiles(fileList) {
     Array.from(fileList).forEach(function(file) {
       if (!file) return;
-      var reader = new FileReader();
-      reader.onload = function(e) {
+      compressImage(file, 1200, 0.75, function(dataUrl) {
         setImages(function(prev) {
-          return prev.concat([{ preview: e.target.result, base64: e.target.result.split(",")[1], mime: file.type || "image/jpeg", name: file.name }]);
+          return prev.concat([{ preview: dataUrl, base64: dataUrl.split(",")[1], mime: "image/jpeg", name: file.name }]);
         });
-      };
-      reader.readAsDataURL(file);
+      });
     });
   }
 
