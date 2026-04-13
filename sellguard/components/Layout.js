@@ -1,52 +1,82 @@
 import Link from "next/link";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useLang } from "../contexts/LangContext";
 
-export default function Layout({ children }) {
-  const router = useRouter();
-  const { lang, t, setLang } = useLang();
+var NAV_COLORS = {
+  "/annonce": "#818CF8",
+  "/protection": "#4ADE80",
+  "/litige": "#F472B6",
+  "/calculateur": "#FB923C",
+  "/ventes": "#38BDF8",
+  "/prix": "#FCD34D",
+};
 
-  const NAV = [
-    { href: "/annonce", label: t.nav.annonce, icon: "📦" },
-    { href: "/protection", label: t.nav.protection, icon: "🛡️" },
-    { href: "/litige", label: t.nav.litige, icon: "⚖️" },
-    { href: "/calculateur", label: t.nav.calculateur, icon: "🧮" },
-    { href: "/ventes", label: t.nav.ventes, icon: "📋" },
-    { href: "/prix", label: t.nav.prix, icon: "💰" },
+export default function Layout({ children }) {
+  var router = useRouter();
+  var ref = useLang(), lang = ref.lang, t = ref.t, setLang = ref.setLang;
+
+  var NAV = [
+    { href: "/annonce", label: t.nav.annonce },
+    { href: "/protection", label: t.nav.protection },
+    { href: "/litige", label: t.nav.litige },
+    { href: "/calculateur", label: t.nav.calculateur },
+    { href: "/ventes", label: t.nav.ventes },
+    { href: "/prix", label: t.nav.prix },
   ];
 
   return (
-    <div style={{ minHeight: "100vh", background: "#F7F7F5" }}>
-      <div style={{ background: "#fff", borderBottom: "1px solid #E8E8E4", position: "sticky", top: 0, zIndex: 100 }}>
-        <div style={{ maxWidth: 640, margin: "0 auto", padding: "0 20px", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Link href="/">
-            <span style={{ fontSize: 17, fontWeight: 700, color: "#111", letterSpacing: -0.3 }}>Sell<span style={{ color: "#2563EB" }}>Guard</span></span>
-          </Link>
-          <button
-            onClick={() => setLang(lang === "fr" ? "en" : "fr")}
-            style={{ fontSize: 12, fontWeight: 700, padding: "5px 12px", borderRadius: 20, border: "1px solid #E5E7EB", background: "#F9FAFB", color: "#555", cursor: "pointer", fontFamily: "inherit", letterSpacing: 0.5 }}>
-            {lang === "fr" ? "EN" : "FR"}
-          </button>
-        </div>
-        <div style={{ maxWidth: 640, margin: "0 auto", padding: "0 12px", display: "flex", gap: 2, overflowX: "auto", WebkitOverflowScrolling: "touch", msOverflowStyle: "none", scrollbarWidth: "none" }}>
-          {NAV.map(n => (
-            <Link key={n.href} href={n.href}>
-              <span style={{
-                fontSize: 12, fontWeight: 500, padding: "8px 10px", borderRadius: 8, whiteSpace: "nowrap",
-                background: router.pathname === n.href ? "#EFF6FF" : "transparent",
-                color: router.pathname === n.href ? "#2563EB" : "#555",
-                transition: "all 0.15s",
-                display: "inline-block"
-              }}>
-                {n.icon} {n.label}
+    <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+      </Head>
+      <div style={{ minHeight: "100vh", background: "#000", fontFamily: "'DM Sans', -apple-system, sans-serif" }}>
+        {/* NAV */}
+        <div style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(0,0,0,0.82)", borderBottom: "0.5px solid rgba(255,255,255,0.07)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }}>
+          <div style={{ maxWidth: 700, margin: "0 auto", padding: "0 20px", height: 54, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <Link href="/">
+              <span style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 18, color: "#fff", letterSpacing: "-0.01em", cursor: "pointer", display: "flex", alignItems: "center", gap: 10 }}>
+                <svg width="26" height="26" viewBox="0 0 30 30" fill="none">
+                  <circle cx="15" cy="15" r="14" stroke="#fff" strokeWidth="1.2"/>
+                  <circle cx="15" cy="15" r="10" stroke="#fff" strokeWidth="0.4" strokeDasharray="2.8 2.8"/>
+                  <text x="15" y="19.5" fontFamily="-apple-system,Helvetica Neue,sans-serif" fontSize="9" fontWeight="700" fill="#fff" textAnchor="middle" letterSpacing="-0.02em">SG</text>
+                </svg>
+                SellGuard
               </span>
             </Link>
-          ))}
+            <button
+              onClick={function() { setLang(lang === "fr" ? "en" : "fr"); }}
+              style={{ fontSize: 11, fontWeight: 600, padding: "5px 14px", borderRadius: 20, border: "0.5px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.6)", cursor: "pointer", fontFamily: "inherit", letterSpacing: 0.5 }}>
+              {lang === "fr" ? "EN" : "FR"}
+            </button>
+          </div>
+          <div style={{ maxWidth: 700, margin: "0 auto", padding: "0 12px 8px", display: "flex", gap: 2, overflowX: "auto", WebkitOverflowScrolling: "touch", msOverflowStyle: "none", scrollbarWidth: "none" }}>
+            {NAV.map(function(n) {
+              var active = router.pathname === n.href;
+              var color = NAV_COLORS[n.href] || "#fff";
+              return (
+                <Link key={n.href} href={n.href}>
+                  <span style={{
+                    fontSize: 12, fontWeight: active ? 600 : 400, padding: "7px 12px", borderRadius: 8, whiteSpace: "nowrap",
+                    background: active ? "rgba(255,255,255,0.08)" : "transparent",
+                    color: active ? color : "rgba(255,255,255,0.4)",
+                    transition: "all 0.15s", display: "inline-block", cursor: "pointer",
+                    borderBottom: active ? "2px solid " + color : "2px solid transparent"
+                  }}>
+                    {n.label}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+        {/* CONTENT */}
+        <div style={{ maxWidth: 700, margin: "0 auto", padding: "32px 20px" }}>
+          {children}
         </div>
       </div>
-      <div style={{ maxWidth: 640, margin: "0 auto", padding: "32px 20px" }}>
-        {children}
-      </div>
-    </div>
+    </>
   );
 }
