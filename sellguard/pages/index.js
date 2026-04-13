@@ -212,7 +212,7 @@ export default function Home() {
           <Link href="/annonce" className="btn-primary">Essayer gratuitement</Link>
           <button className="btn-ghost" onClick={function() { scrollTo("#how"); }}>Voir comment ça marche</button>
         </div>
-        <div className="hero-note">Vinted · Depop · Grailed · Vestiaire Collective</div>
+        <div className="hero-note">Vinted · Depop · Grailed · Vestiaire Collective · Etsy</div>
       </section>
 
       {/* VIDEO FRAME */}
@@ -266,7 +266,7 @@ export default function Home() {
       {/* TICKER */}
       <div className="ticker">
         <div className="ticker-inner">
-          {["Annonce IA", "Protection légale", "Anti-fraude", "Calcul de marges", "Suivi des ventes", "Prix du marché", "Vinted · Depop · Grailed", "Annonce IA", "Protection légale", "Anti-fraude", "Calcul de marges", "Suivi des ventes", "Prix du marché", "Vinted · Depop · Grailed"].map(function(t, i) {
+          {["Annonce IA", "Protection légale", "Anti-fraude", "Horodatage", "Preuve avant envoi", "Vinted · Depop · Grailed", "Annonce IA", "Protection légale", "Anti-fraude", "Horodatage", "Preuve avant envoi", "Vinted · Depop · Grailed"].map(function(t, i) {
             return <span key={i}><span className="ticker-item">{t}</span><span className="ticker-sep"> — </span></span>;
           })}
         </div>
@@ -346,7 +346,7 @@ export default function Home() {
       <section className="section" id="modules" style={{ paddingTop: 0 }}>
         <div className="section-eyebrow">Les modules</div>
         <h2 className="section-title">Ta protection complète.</h2>
-        <p className="section-sub" style={{ marginBottom: 40 }}>6 outils. Un seul objectif : protéger ton argent.</p>
+        <p className="section-sub" style={{ marginBottom: 40 }}>3 outils. Un seul objectif : protéger ton argent.</p>
         <div className="modules-grid">
           <Link href="/annonce" className="mod-card wide">
             <div>
@@ -371,18 +371,6 @@ export default function Home() {
             <div className="mod-desc">Photos truquées détectées par l'IA. Réponse de défense prête en 1 clic.</div>
             <div className="mod-pill" style={{ background: "var(--pink-bg)", color: "var(--pink)" }}>Anti-fraude →</div>
           </Link>
-          <Link href="/calculateur" className="mod-card">
-            <div className="mod-eyebrow" style={{ color: "var(--orange)" }}>Calculateur</div>
-            <div className="mod-title">Sais exactement combien tu gagnes.</div>
-            <div className="mod-desc">Commissions, frais, marge nette — par plateforme. Plus de mauvaises surprises.</div>
-            <div className="mod-pill" style={{ background: "var(--orange-bg)", color: "var(--orange)" }}>Calculer →</div>
-          </Link>
-          <Link href="/prix" className="mod-card">
-            <div className="mod-eyebrow" style={{ color: "var(--blue)" }}>Prix marché</div>
-            <div className="mod-title">Le bon prix, pas de perte.</div>
-            <div className="mod-desc">Compare les prix réels sur toutes les plateformes. Ne vends jamais en dessous du marché.</div>
-            <div className="mod-pill" style={{ background: "var(--blue-bg)", color: "var(--blue)" }}>Comparer →</div>
-          </Link>
         </div>
       </section>
 
@@ -390,7 +378,7 @@ export default function Home() {
       <div className="stats-band">
         <div className="stat-cell"><div className="stat-n">30s</div><div className="stat-l">Pour certifier un envoi</div></div>
         <div className="stat-cell"><div className="stat-n">0 €</div><div className="stat-l">Pendant la bêta</div></div>
-        <div className="stat-cell"><div className="stat-n">5</div><div className="stat-l">Plateformes protégées</div></div>
+        <div className="stat-cell"><div className="stat-n">3</div><div className="stat-l">Modules de protection</div></div>
       </div>
 
       {/* FINAL CTA */}
@@ -398,7 +386,7 @@ export default function Home() {
         <h2 className="final-title">Protège<br/><em>ton argent.</em></h2>
         <p className="final-sub">Gratuit pendant toute la phase bêta.<br/>Sans carte bleue. Sans engagement.</p>
         <Link href="/annonce" className="btn-primary" style={{ fontSize: 15, padding: "16px 48px" }}>Essayer gratuitement</Link>
-        <div className="final-note">Vinted · Depop · Grailed · Vestiaire Collective</div>
+        <div className="final-note">Vinted · Depop · Grailed · Vestiaire Collective · Etsy</div>
       </section>
 
       {/* FOOTER */}
