@@ -4,49 +4,30 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(function() {
-    // Scroll reveal
     var io = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
-        if (e.isIntersecting) {
-          e.target.style.opacity = "1";
-          e.target.style.transform = "translateY(0)";
-        }
+        if (e.isIntersecting) { e.target.style.opacity = "1"; e.target.style.transform = "translateY(0)"; }
       });
     }, { threshold: 0.08 });
-
-    document.querySelectorAll(".step-card, .mod-card, .stat-cell").forEach(function(el) {
-      el.style.opacity = "0";
-      el.style.transform = "translateY(16px)";
+    document.querySelectorAll(".reveal").forEach(function(el) {
+      el.style.opacity = "0"; el.style.transform = "translateY(16px)";
       el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
       io.observe(el);
     });
-
-    // Step cycling
-    var steps = document.querySelectorAll(".vf-step");
-    var cur = 0;
-    var interval = setInterval(function() {
-      steps[cur].classList.remove("active");
-      cur = (cur + 1) % steps.length;
-      steps[cur].classList.add("active");
-    }, 2200);
-
-    return function() { clearInterval(interval); };
+    return function() { io.disconnect(); };
   }, []);
 
-  function scrollTo(id) {
-    var el = document.querySelector(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  }
+  function scrollTo(id) { var el = document.querySelector(id); if (el) el.scrollIntoView({ behavior: "smooth" }); }
 
   return (
     <>
       <Head>
-        <title>SellGuard — Revendre, sans la galère.</title>
-        <meta name="description" content="De l'annonce à la livraison, SellGuard gère tout ce que Vinted, Depop et Grailed ne font pas." />
+        <title>SellGuard — Revends sans te faire arnaquer.</title>
+        <meta name="description" content="Ton argent est protégé. À chaque envoi. Preuve horodatée. Défense automatique." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
       <style jsx global>{`
@@ -57,342 +38,284 @@ export default function Home() {
           --text: #fff; --muted: rgba(255,255,255,0.42); --dim: rgba(255,255,255,0.22);
           --violet: #818CF8; --violet-bg: rgba(99,102,241,0.1);
           --green: #4ADE80; --green-bg: rgba(34,197,94,0.1);
-          --orange: #FB923C; --orange-bg: rgba(251,146,60,0.1);
           --pink: #F472B6; --pink-bg: rgba(236,72,153,0.1);
-          --blue: #38BDF8; --blue-bg: rgba(56,189,248,0.1);
+          --red: #F87171;
           --serif: 'DM Serif Display', Georgia, serif;
           --sans: 'DM Sans', -apple-system, sans-serif;
         }
         html { scroll-behavior: smooth; }
         body { font-family: var(--sans); background: var(--bg); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-        .lp-nav {
-          position: sticky; top: 0; z-index: 100;
-          display: flex; align-items: center; justify-content: space-between;
-          padding: 0 36px; height: 54px;
-          background: rgba(0,0,0,0.82); border-bottom: 0.5px solid var(--border);
-          backdrop-filter: blur(20px);
-        }
-        .nav-logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 18px; color: var(--text); letter-spacing: -0.01em; text-decoration: none; cursor: pointer; }
+        .lp-nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 36px; height: 54px; background: rgba(0,0,0,0.82); border-bottom: 0.5px solid var(--border); backdrop-filter: blur(20px); }
+        .nav-logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 18px; color: var(--text); text-decoration: none; cursor: pointer; }
         .nav-links { display: flex; gap: 28px; }
-        .nav-links a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; font-weight: 400; letter-spacing: 0.01em; cursor: pointer; }
+        .nav-links a { font-size: 12px; color: var(--muted); text-decoration: none; cursor: pointer; transition: color 0.2s; }
         .nav-links a:hover { color: var(--text); }
-        .nav-cta { padding: 8px 20px; background: var(--text); color: var(--bg); font-size: 12px; font-weight: 500; border-radius: 20px; border: none; cursor: pointer; transition: opacity 0.2s; font-family: var(--sans); text-decoration: none; }
-        .nav-cta:hover { opacity: 0.88; }
+        .nav-cta { padding: 8px 20px; background: var(--text); color: var(--bg); font-size: 12px; font-weight: 500; border-radius: 20px; border: none; cursor: pointer; font-family: var(--sans); text-decoration: none; }
 
-        .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 32px 100px; position: relative; overflow: hidden; }
+        .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 32px 100px; position: relative; }
         .hero::before { content: ''; position: absolute; top: -180px; left: 50%; transform: translateX(-50%); width: 700px; height: 700px; background: radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 68%); pointer-events: none; }
-        .hero-badge { display: inline-flex; align-items: center; gap: 7px; padding: 5px 14px; background: rgba(255,255,255,0.04); border: 0.5px solid var(--border2); border-radius: 20px; font-size: 11px; color: var(--muted); letter-spacing: 0.05em; margin-bottom: 32px; animation: fadeUp 0.5s ease both; }
-        .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
-        .lp-h1 { font-family: var(--serif); font-size: clamp(48px, 8vw, 80px); font-weight: 400; line-height: 1.04; letter-spacing: -0.02em; color: var(--text); margin-bottom: 10px; animation: fadeUp 0.5s 0.08s ease both; }
+        .lp-h1 { font-family: var(--serif); font-size: clamp(44px, 8vw, 76px); font-weight: 400; line-height: 1.04; letter-spacing: -0.02em; margin-bottom: 10px; animation: fadeUp 0.5s 0.08s ease both; }
         .lp-h1 em { font-style: italic; color: rgba(255,255,255,0.32); }
-        .hero-sub { font-size: 17px; color: var(--muted); line-height: 1.68; max-width: 400px; margin: 0 auto 40px; font-weight: 300; animation: fadeUp 0.5s 0.16s ease both; }
+        .hero-sub { font-size: 18px; color: var(--text); line-height: 1.5; max-width: 440px; margin: 0 auto 8px; font-weight: 400; animation: fadeUp 0.5s 0.16s ease both; }
+        .hero-sub2 { font-size: 14px; color: var(--muted); margin-bottom: 36px; animation: fadeUp 0.5s 0.2s ease both; }
         .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.5s 0.24s ease both; }
-        .btn-primary { padding: 14px 34px; background: var(--text); color: var(--bg); font-size: 14px; font-weight: 500; border-radius: 28px; border: none; cursor: pointer; transition: transform 0.15s, opacity 0.15s; font-family: var(--sans); text-decoration: none; display: inline-block; }
+        .btn-primary { padding: 14px 34px; background: var(--text); color: var(--bg); font-size: 14px; font-weight: 500; border-radius: 28px; border: none; cursor: pointer; font-family: var(--sans); text-decoration: none; display: inline-block; transition: transform 0.15s, opacity 0.15s; }
         .btn-primary:hover { opacity: 0.88; transform: scale(1.02); }
-        .btn-ghost { padding: 14px 34px; background: transparent; color: var(--text); font-size: 14px; font-weight: 400; border-radius: 28px; border: 0.5px solid rgba(255,255,255,0.2); cursor: pointer; transition: background 0.15s; font-family: var(--sans); }
+        .btn-ghost { padding: 14px 34px; background: transparent; color: var(--text); font-size: 14px; border-radius: 28px; border: 0.5px solid rgba(255,255,255,0.2); cursor: pointer; font-family: var(--sans); transition: background 0.15s; }
         .btn-ghost:hover { background: rgba(255,255,255,0.05); }
-        .hero-note { margin-top: 18px; font-size: 12px; color: var(--dim); letter-spacing: 0.05em; animation: fadeUp 0.5s 0.32s ease both; }
 
-        .video-wrap { padding: 0 32px 80px; display: flex; justify-content: center; }
-        .video-frame { width: 100%; max-width: 820px; background: var(--bg2); border: 0.5px solid var(--border); border-radius: 20px; overflow: hidden; }
-        .vf-bar { display: flex; align-items: center; gap: 7px; padding: 13px 20px; border-bottom: 0.5px solid var(--border); }
-        .vf-dot { width: 10px; height: 10px; border-radius: 50%; }
-        .vf-url { flex: 1; text-align: center; font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 0.05em; }
-        .vf-body { padding: 52px 40px; display: flex; align-items: center; justify-content: center; gap: 52px; min-height: 300px; position: relative; }
-        .vf-phone { width: 112px; height: 196px; background: #111; border-radius: 22px; border: 1.5px solid rgba(255,255,255,0.1); overflow: hidden; display: flex; flex-direction: column; padding: 12px 10px; gap: 6px; flex-shrink: 0; }
-        .vf-ph-bar { height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; }
-        .vf-ph-img { flex: 1; background: #1A1A2E; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
-        .vf-ph-price { font-size: 9px; color: rgba(255,255,255,0.45); text-align: center; letter-spacing: 0.04em; }
-        .vf-steps { display: flex; flex-direction: column; gap: 10px; }
-        .vf-step { display: flex; align-items: center; gap: 12px; padding: 11px 15px; background: var(--bg3); border: 0.5px solid var(--border); border-radius: 12px; min-width: 230px; transition: border-color 0.3s; }
-        .vf-step.active { border-color: rgba(255,255,255,0.2); }
-        .vf-step-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .vf-step-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
-        .vf-step-desc { font-size: 11px; color: var(--muted); }
-
-        .ticker { border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); padding: 13px 0; overflow: hidden; white-space: nowrap; }
-        .ticker-inner { display: inline-flex; gap: 52px; animation: ticker 26s linear infinite; }
-        .ticker-item { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
-        .ticker-sep { color: rgba(255,255,255,0.08); }
-
-        .section { padding: 96px 32px; }
+        .section { padding: 96px 32px; max-width: 920px; margin: 0 auto; }
         .section-eyebrow { text-align: center; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); margin-bottom: 14px; }
-        .section-title { text-align: center; font-family: var(--serif); font-size: clamp(32px, 4.5vw, 48px); font-weight: 400; letter-spacing: -0.02em; color: var(--text); margin-bottom: 8px; line-height: 1.1; }
+        .section-title { text-align: center; font-family: var(--serif); font-size: clamp(30px, 4.5vw, 46px); font-weight: 400; letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.1; }
         .section-title em { font-style: italic; color: rgba(255,255,255,0.35); }
-        .section-sub { text-align: center; font-size: 15px; color: var(--muted); margin-bottom: 60px; font-weight: 300; }
+        .section-sub { text-align: center; font-size: 15px; color: var(--muted); font-weight: 300; line-height: 1.6; }
 
-        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: 18px; overflow: hidden; max-width: 920px; margin: 0 auto; }
-        .step-card { background: var(--bg); padding: 36px 28px; transition: background 0.2s; }
-        .step-card:hover { background: var(--bg2); }
-        .step-num { font-size: 11px; color: var(--dim); letter-spacing: 0.1em; margin-bottom: 20px; }
-        .step-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-        .step-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 8px; }
-        .step-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; font-weight: 300; }
-        .step-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 500; }
+        .pain-list { list-style: none; display: flex; flex-direction: column; gap: 12px; max-width: 500px; margin: 0 auto; }
+        .pain-item { font-size: 15px; color: var(--red); display: flex; align-items: center; gap: 10px; }
+        .pain-callout { text-align: center; margin-top: 32px; font-size: 15px; color: var(--muted); font-weight: 400; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 
-        .modules-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; max-width: 920px; margin: 0 auto; }
-        .antiscam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 900px; margin: 0 auto; }
-        .mod-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 18px; padding: 28px; cursor: pointer; transition: border-color 0.2s, background 0.2s; text-decoration: none; display: block; }
-        .mod-card:hover { background: var(--bg3); border-color: var(--border2); }
-        .mod-card.wide { grid-column: 1/-1; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
-        .mod-eyebrow { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; opacity: 0.75; }
-        .mod-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--text); letter-spacing: -0.01em; margin-bottom: 8px; line-height: 1.2; }
-        .mod-card.wide .mod-title { font-size: 28px; }
-        .mod-desc { font-size: 13px; color: var(--muted); line-height: 1.55; font-weight: 300; }
-        .mod-pill { display: inline-block; padding: 5px 14px; border-radius: 14px; font-size: 12px; font-weight: 500; margin-top: 16px; }
-        .mod-icon-box { width: 120px; height: 88px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .solution-list { display: flex; flex-direction: column; gap: 10px; max-width: 500px; margin: 0 auto; }
+        .solution-item { font-size: 15px; color: var(--green); display: flex; align-items: center; gap: 10px; }
+        .solution-callout { text-align: center; margin-top: 32px; font-size: 16px; font-weight: 500; color: var(--text); max-width: 500px; margin-left: auto; margin-right: auto; }
 
-        .stats-band { margin: 0 32px; background: var(--bg2); border: 0.5px solid var(--border); border-radius: 20px; display: grid; grid-template-columns: repeat(3,1fr); overflow: hidden; }
-        .stat-cell { padding: 44px 24px; text-align: center; border-right: 0.5px solid var(--border); }
-        .stat-cell:last-child { border-right: none; }
-        .stat-n { font-family: var(--serif); font-size: 52px; font-weight: 400; color: var(--text); letter-spacing: -0.03em; line-height: 1; margin-bottom: 10px; }
-        .stat-l { font-size: 13px; color: var(--muted); font-weight: 300; }
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: 18px; overflow: hidden; margin-top: 48px; }
+        .step-card { background: var(--bg); padding: 32px 24px; }
+        .step-num { font-size: 11px; color: var(--dim); letter-spacing: 0.1em; margin-bottom: 14px; }
+        .step-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+        .step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+        .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 48px; }
+        .compare-card { border-radius: 18px; padding: 32px; }
+
+        .modules-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 48px; }
+        .mod-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 18px; padding: 28px; text-decoration: none; display: block; transition: border-color 0.2s; cursor: pointer; }
+        .mod-card:hover { border-color: var(--border2); }
+
+        .flow-row { display: flex; align-items: center; justify-content: center; gap: 24px; margin-top: 48px; flex-wrap: wrap; }
+        .flow-step { text-align: center; padding: 20px; }
+        .flow-num { font-family: var(--serif); font-size: 36px; margin-bottom: 8px; }
+        .flow-label { font-size: 14px; color: var(--muted); font-weight: 300; }
+        .flow-arrow { font-size: 24px; color: rgba(255,255,255,0.15); }
+
+        .pricing-card { max-width: 420px; margin: 48px auto 0; background: var(--bg2); border: 0.5px solid var(--border); border-radius: 20px; padding: 40px; text-align: center; }
+
+        .social-proof { display: flex; justify-content: center; gap: 32px; margin-top: 48px; flex-wrap: wrap; }
+        .proof-item { text-align: center; }
+        .proof-num { font-family: var(--serif); font-size: 28px; color: var(--text); }
+        .proof-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
 
         .final-cta { padding: 120px 32px; text-align: center; }
-        .final-title { font-family: var(--serif); font-size: clamp(40px,6vw,68px); font-weight: 400; letter-spacing: -0.03em; color: var(--text); line-height: 1.05; margin-bottom: 18px; }
-        .final-title em { font-style: italic; color: rgba(255,255,255,0.35); }
-        .final-sub { font-size: 16px; color: var(--muted); margin-bottom: 40px; font-weight: 300; line-height: 1.6; }
-        .final-note { margin-top: 16px; font-size: 12px; color: var(--dim); letter-spacing: 0.05em; }
+        .final-title { font-family: var(--serif); font-size: clamp(36px,6vw,64px); font-weight: 400; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 16px; }
+        .final-sub { font-size: 16px; color: var(--muted); margin-bottom: 36px; font-weight: 300; }
 
-        .lp-footer { border-top: 0.5px solid var(--border); padding: 32px 36px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+        footer { border-top: 0.5px solid var(--border); padding: 32px 36px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
         .footer-logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 16px; color: var(--dim); }
         .footer-links { display: flex; gap: 28px; }
-        .footer-links a { font-size: 12px; color: var(--dim); text-decoration: none; transition: color 0.2s; }
-        .footer-links a:hover { color: var(--muted); }
+        .footer-links a { font-size: 12px; color: var(--dim); text-decoration: none; }
         .footer-copy { font-size: 11px; color: rgba(255,255,255,0.14); }
 
         @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
         @media (max-width: 640px) {
           .lp-nav { padding: 0 20px; }
           .nav-links { display: none; }
-          .modules-grid { grid-template-columns: 1fr; }
-          .antiscam-grid { grid-template-columns: 1fr; }
-          .mod-card.wide { flex-direction: column; }
-          .mod-icon-box { display: none; }
+          .compare-grid { grid-template-columns: 1fr; }
+          .modules-row { grid-template-columns: 1fr; }
           .steps-grid { grid-template-columns: 1fr; }
-          .stats-band { grid-template-columns: 1fr; margin: 0 20px; }
-          .stat-cell { border-right: none; border-bottom: 0.5px solid var(--border); }
-          .stat-cell:last-child { border-bottom: none; }
-          .vf-body { flex-direction: column; gap: 24px; }
-          .lp-footer { flex-direction: column; align-items: flex-start; }
-          .video-wrap { padding: 0 16px 48px; }
+          .flow-arrow { display: none; }
+          footer { flex-direction: column; align-items: flex-start; }
         }
       `}</style>
 
-      {/* NAV */}
+      {/* ═══ NAV ═══ */}
       <nav className="lp-nav">
         <span className="nav-logo">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-            <circle cx="15" cy="15" r="14" stroke="#fff" strokeWidth="1.2"/>
-            <circle cx="15" cy="15" r="10" stroke="#fff" strokeWidth="0.4" strokeDasharray="2.8 2.8"/>
-            <text x="15" y="19.5" fontFamily="-apple-system,Helvetica Neue,sans-serif" fontSize="9" fontWeight="700" fill="#fff" textAnchor="middle" letterSpacing="-0.02em">SG</text>
-          </svg>
+          <svg width="28" height="28" viewBox="0 0 30 30" fill="none"><circle cx="15" cy="15" r="14" stroke="#fff" strokeWidth="1.2"/><circle cx="15" cy="15" r="10" stroke="#fff" strokeWidth="0.4" strokeDasharray="2.8 2.8"/><text x="15" y="19.5" fontFamily="-apple-system,sans-serif" fontSize="9" fontWeight="700" fill="#fff" textAnchor="middle">SG</text></svg>
           SellGuard
         </span>
         <div className="nav-links">
-          <a onClick={function() { scrollTo("#how"); }}>Comment ça marche</a>
+          <a onClick={function() { scrollTo("#problem"); }}>Pourquoi</a>
+          <a onClick={function() { scrollTo("#how"); }}>Comment</a>
           <a onClick={function() { scrollTo("#modules"); }}>Modules</a>
-          <a onClick={function() { scrollTo("#cta"); }}>Commencer</a>
         </div>
-        <Link href="/annonce" className="nav-cta">Gratuit · Bêta</Link>
+        <Link href="/annonce" className="nav-cta">Essayer gratuit</Link>
       </nav>
 
-      {/* HERO */}
+      {/* ═══ 1. HERO ═══ */}
       <section className="hero">
-        <div className="hero-badge">
-          <span className="hero-badge-dot"></span>
-          Bêta ouverte · 100% gratuit
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "5px 14px", background: "rgba(255,255,255,0.04)", border: "0.5px solid rgba(255,255,255,0.14)", borderRadius: 20, fontSize: 11, color: "var(--muted)", marginBottom: 32, animation: "fadeUp 0.5s ease both" }}>
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--green)" }}></span>
+          Bêta gratuite (places limitées)
         </div>
         <h1 className="lp-h1">Revends<br/><em>sans te faire arnaquer.</em></h1>
-        <p className="hero-sub">Chaque envoi est horodaté. Chaque litige est défendu. Ton argent est protégé.</p>
+        <p className="hero-sub">Ton argent est protégé. À chaque envoi.</p>
+        <p className="hero-sub2">Preuve horodatée. Défense automatique.</p>
         <div className="hero-actions">
           <Link href="/annonce" className="btn-primary">Essayer gratuitement</Link>
-          <button className="btn-ghost" onClick={function() { scrollTo("#how"); }}>Voir comment ça marche</button>
+          <button className="btn-ghost" onClick={function() { scrollTo("#problem"); }}>Voir comment ça marche</button>
         </div>
-        <div className="hero-note">Vinted · Depop · Grailed · Vestiaire Collective · Etsy</div>
+        <div style={{ marginTop: 18, fontSize: 12, color: "var(--dim)", animation: "fadeUp 0.5s 0.32s ease both" }}>Vinted · Depop · Grailed · Vestiaire Collective · Etsy</div>
       </section>
 
-      {/* VIDEO FRAME */}
-      <div className="video-wrap">
-        <div className="video-frame">
-          <div className="vf-bar">
-            <div className="vf-dot" style={{ background: "#FF5F57" }}></div>
-            <div className="vf-dot" style={{ background: "#FEBC2E" }}></div>
-            <div className="vf-dot" style={{ background: "#28C840" }}></div>
-            <div className="vf-url">sellguard.vercel.app</div>
-          </div>
-          <div className="vf-body">
-            <div className="vf-phone">
-              <div className="vf-ph-bar" style={{ width: "65%" }}></div>
-              <div className="vf-ph-bar" style={{ width: "42%" }}></div>
-              <div className="vf-ph-img">
-                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="20" rx="3" stroke="rgba(255,255,255,0.14)" strokeWidth="1"/><path d="M9 14h10M14 9v10" stroke="rgba(255,255,255,0.08)" strokeWidth="1" strokeLinecap="round"/></svg>
-              </div>
-              <div className="vf-ph-price">Levi's 501 · 38€</div>
-            </div>
-            <div className="vf-steps">
-              <div className="vf-step active">
-                <div className="vf-step-icon" style={{ background: "var(--violet-bg)" }}>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="#818CF8" strokeWidth="1"/><path d="M5 7h6M5 10h4" stroke="#818CF8" strokeWidth="1" strokeLinecap="round"/></svg>
-                </div>
-                <div><div className="vf-step-name">Annonce générée</div><div className="vf-step-desc">Photo → titre, desc, prix · 30 sec</div></div>
-              </div>
-              <div className="vf-step">
-                <div className="vf-step-icon" style={{ background: "var(--green-bg)" }}>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2l6 2.5v5c0 3.5-6 6.5-6 6.5S2 13 2 9.5V4.5L8 2z" stroke="#4ADE80" strokeWidth="1" strokeLinejoin="round"/></svg>
-                </div>
-                <div><div className="vf-step-name">Photos certifiées</div><div className="vf-step-desc">Horodatage légal avant envoi</div></div>
-              </div>
-              <div className="vf-step">
-                <div className="vf-step-icon" style={{ background: "var(--orange-bg)" }}>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 12l3-5 3 3 4-6" stroke="#FB923C" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </div>
-                <div><div className="vf-step-name">Vente suivie</div><div className="vf-step-desc">Dashboard · marges en temps réel</div></div>
-              </div>
-              <div className="vf-step">
-                <div className="vf-step-icon" style={{ background: "var(--pink-bg)" }}>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#F472B6" strokeWidth="1"/><path d="M6 6.5s0-1.5 2-1.5 2 1.5 2 1.5-1 1.5-2 2v.3" stroke="#F472B6" strokeWidth="1" strokeLinecap="round"/><circle cx="8" cy="11" r=".6" fill="#F472B6"/></svg>
-                </div>
-                <div><div className="vf-step-name">Litige défendu</div><div className="vf-step-desc">Réponse auto · fraude détectée</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* ═══ 2. PROBLÈME ═══ */}
+      <section className="section" id="problem">
+        <div className="section-eyebrow">⚠️ Le problème</div>
+        <h2 className="section-title">Revendre en ligne,<br/><em>c'est risqué.</em></h2>
+        <div style={{ height: 40 }}></div>
+        <ul className="pain-list reveal">
+          <li className="pain-item">✕ "Article abîmé" → remboursement forcé</li>
+          <li className="pain-item">✕ Acheteurs malhonnêtes</li>
+          <li className="pain-item">✕ Aucune preuve acceptée</li>
+          <li className="pain-item">✕ Tu perds ton argent</li>
+        </ul>
+        <p className="pain-callout reveal">Une seule arnaque peut ruiner ta vente.</p>
+      </section>
 
-      {/* TICKER */}
-      <div className="ticker">
-        <div className="ticker-inner">
-          {["Annonce IA", "Protection légale", "Anti-fraude", "Horodatage", "Preuve avant envoi", "Vinted · Depop · Grailed", "Annonce IA", "Protection légale", "Anti-fraude", "Horodatage", "Preuve avant envoi", "Vinted · Depop · Grailed"].map(function(t, i) {
-            return <span key={i}><span className="ticker-item">{t}</span><span className="ticker-sep"> — </span></span>;
-          })}
+      {/* ═══ 3. SOLUTION ═══ */}
+      <section className="section" style={{ paddingTop: 40 }}>
+        <div className="section-eyebrow">🛡️ La solution</div>
+        <h2 className="section-title">SellGuard sécurise<br/><em>chaque vente.</em></h2>
+        <p className="section-sub" style={{ marginBottom: 40 }}>Avant l'envoi, ton article est :</p>
+        <div className="solution-list reveal">
+          <div className="solution-item">✓ Horodaté automatiquement</div>
+          <div className="solution-item">✓ Certifié avec preuve</div>
+          <div className="solution-item">✓ Enregistré de façon sécurisée</div>
         </div>
-      </div>
+        <p className="solution-callout reveal">En cas de litige, tu as une preuve concrète.</p>
+        <div style={{ fontSize: 11, textAlign: "center", color: "var(--dim)", marginTop: 12 }}>Horodatage sécurisé + preuve exportable</div>
+      </section>
 
-      {/* HOW IT WORKS */}
-      <section className="section" id="how">
-        <div className="section-eyebrow">Comment ça marche</div>
-        <h2 className="section-title">Protège ton argent<br/><em>à chaque envoi.</em></h2>
-        <p className="section-sub">4 étapes. Zéro risque.</p>
+      {/* ═══ 4. COMMENT ÇA MARCHE ═══ */}
+      <section className="section" id="how" style={{ paddingTop: 40 }}>
+        <div className="section-eyebrow">⚡ Comment ça marche</div>
+        <h2 className="section-title">Comment tu es protégé.</h2>
+        <p className="section-sub">4 étapes. Zéro stress.</p>
         <div className="steps-grid">
           {[
-            { num: "01", name: "Tu prends une photo", desc: "L'IA génère ton annonce avec preuve d'authenticité intégrée. Titre, prix, description — optimisés pour vendre vite.", badge: "Annonce IA", color: "--violet" },
-            { num: "02", name: "Tu certifies avant envoi", desc: "Horodatage légal automatique. Une preuve inattaquable que l'article était en parfait état au moment de l'envoi.", badge: "Preuve légale", color: "--green" },
-            { num: "03", name: "Tu gardes la trace", desc: "Numéro de suivi, preuve de dépôt, vidéo horodatée — tout est sauvegardé. Ton dossier est blindé.", badge: "Protection totale", color: "--orange" },
-            { num: "04", name: "Un litige ? Tu prouves.", desc: "L'IA détecte les photos truquées et génère ta réponse de défense. Ton argent reste dans ta poche.", badge: "Anti-fraude", color: "--pink" },
+            { n: "01", name: "Tu prends une photo", desc: "Annonce générée automatiquement avec prix et description.", color: "var(--violet)" },
+            { n: "02", name: "Tu certifies avant envoi", desc: "Preuve horodatée enregistrée. Certificat SHA-256.", color: "var(--green)" },
+            { n: "03", name: "Tu vends normalement", desc: "Tout est sauvegardé. Tu continues comme d'habitude.", color: "var(--muted)" },
+            { n: "04", name: "Un litige ?", desc: "Réponse de défense prête en 1 clic. Photos truquées détectées.", color: "var(--pink)" },
           ].map(function(s) {
             return (
-              <div key={s.num} className="step-card">
-                <div className="step-num">{s.num}</div>
-                <div className="step-icon" style={{ background: "var(" + s.color + "-bg)" }}>
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    {s.num === "01" && <><rect x="2" y="3" width="16" height="14" rx="2" stroke={"var(" + s.color + ")"} strokeWidth="1.2"/><path d="M5 9h10M5 13h6" stroke={"var(" + s.color + ")"} strokeWidth="1.2" strokeLinecap="round"/></>}
-                    {s.num === "02" && <><path d="M10 2l8 3.5v6.5c0 5-8 8.5-8 8.5s-8-3.5-8-8.5V5.5L10 2z" stroke={"var(" + s.color + ")"} strokeWidth="1.2" strokeLinejoin="round"/><path d="M7 10l2.5 2.5L13 9" stroke={"var(" + s.color + ")"} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></>}
-                    {s.num === "03" && <path d="M4 16l4-8 4 4 5-8" stroke={"var(" + s.color + ")"} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>}
-                    {s.num === "04" && <><circle cx="10" cy="10" r="7" stroke={"var(" + s.color + ")"} strokeWidth="1.2"/><path d="M8 8.5s0-2 2-2 2 2 2 2-1 1.5-2 2.5v.4" stroke={"var(" + s.color + ")"} strokeWidth="1.2" strokeLinecap="round"/><circle cx="10" cy="14" r=".8" fill={"var(" + s.color + ")"}/></>}
-                  </svg>
-                </div>
-                <div className="step-name">{s.name}</div>
+              <div key={s.n} className="step-card reveal">
+                <div className="step-num">{s.n}</div>
+                <div className="step-name" style={{ color: s.color }}>{s.name}</div>
                 <div className="step-desc">{s.desc}</div>
-                <div className="step-badge" style={{ background: "var(" + s.color + "-bg)", color: "var(" + s.color + ")" }}>{s.badge}</div>
               </div>
             );
           })}
         </div>
       </section>
 
-      {/* ANTI-SCAM */}
-      <section className="section" style={{ paddingTop: 60 }}>
-        <div className="section-eyebrow">Protection</div>
-        <h2 className="section-title">Ne te fais plus<br/><em>arnaquer après l'envoi.</em></h2>
-        <p className="section-sub" style={{ maxWidth: 520, margin: "0 auto 50px" }}>
-          Chaque semaine, des vendeurs perdent de l'argent à cause de faux litiges. SellGuard te donne la preuve pour te défendre.
-        </p>
-        <div className="antiscam-grid">
-          <div style={{ background: "#0A0A0A", border: "0.5px solid rgba(255,255,255,0.08)", borderRadius: 18, padding: 32 }}>
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginBottom: 16 }}>Sans SellGuard</div>
+      {/* ═══ 5. ANTI-ARNAQUE ═══ */}
+      <section className="section" style={{ paddingTop: 40 }}>
+        <div className="section-eyebrow">🔥 Avant vs Après</div>
+        <h2 className="section-title">Avant vs Après<br/><em>SellGuard.</em></h2>
+        <div className="compare-grid">
+          <div className="compare-card reveal" style={{ background: "rgba(248,113,113,0.04)", border: "0.5px solid rgba(248,113,113,0.15)" }}>
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginBottom: 20 }}>❌ Sans SellGuard</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <div style={{ color: "#F87171" }}>✕ "Article abîmé à la réception"</div>
-              <div style={{ color: "#F87171" }}>✕ Remboursement forcé</div>
-              <div style={{ color: "#F87171" }}>✕ Perte d'argent</div>
-              <div style={{ color: "#F87171" }}>✕ Aucun moyen de prouver</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>✕ "Article abîmé à la réception"</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>✕ Plateforme rembourse l'acheteur</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>✕ Tu perds ton produit + ton argent</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>✕ Aucune preuve valable</div>
             </div>
           </div>
-          <div style={{ background: "rgba(74,222,128,0.06)", border: "0.5px solid rgba(74,222,128,0.2)", borderRadius: 18, padding: 32 }}>
-            <div style={{ fontSize: 12, color: "#4ADE80", marginBottom: 16 }}>Avec SellGuard</div>
+          <div className="compare-card reveal" style={{ background: "rgba(74,222,128,0.04)", border: "0.5px solid rgba(74,222,128,0.15)" }}>
+            <div style={{ fontSize: 12, color: "var(--green)", marginBottom: 20 }}>✅ Avec SellGuard</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <div style={{ color: "#4ADE80" }}>✓ Preuve enregistrée automatiquement</div>
-              <div style={{ color: "#4ADE80" }}>✓ Envoi certifié avant expédition</div>
-              <div style={{ color: "#4ADE80" }}>✓ Litige refusé</div>
-              <div style={{ color: "#4ADE80" }}>✓ Ton argent est protégé</div>
+              <div style={{ fontSize: 14, color: "var(--green)" }}>✓ Preuve enregistrée automatiquement</div>
+              <div style={{ fontSize: 14, color: "var(--green)" }}>✓ Envoi certifié avant expédition</div>
+              <div style={{ fontSize: 14, color: "var(--green)" }}>✓ Réponse prête immédiatement</div>
+              <div style={{ fontSize: 14, color: "var(--green)" }}>✓ Ton argent est protégé</div>
             </div>
           </div>
         </div>
-        <div style={{ textAlign: "center", marginTop: 50 }}>
-          <p style={{ fontFamily: "var(--serif)", fontSize: 26, letterSpacing: "-0.02em", lineHeight: 1.3, maxWidth: 600, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginTop: 48 }}>
+          <p style={{ fontFamily: "var(--serif)", fontSize: 26, letterSpacing: "-0.02em", lineHeight: 1.3 }}>
             Si l'acheteur ment,<br/><em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.35)" }}>tu peux le prouver.</em>
           </p>
         </div>
-        <div style={{ textAlign: "center", marginTop: 40 }}>
+        <div style={{ textAlign: "center", marginTop: 32 }}>
           <Link href="/protection" className="btn-primary">Activer la protection</Link>
-          <div style={{ marginTop: 12, fontSize: 12, color: "rgba(255,255,255,0.3)" }}>Protection automatique · Sans effort</div>
+          <div style={{ marginTop: 12, fontSize: 12, color: "var(--dim)" }}>Protection automatique · Sans effort</div>
         </div>
       </section>
 
-      {/* MODULES */}
-      <section className="section" id="modules" style={{ paddingTop: 0 }}>
-        <div className="section-eyebrow">Les modules</div>
-        <h2 className="section-title">Ta protection complète.</h2>
-        <p className="section-sub" style={{ marginBottom: 40 }}>3 outils. Un seul objectif : protéger ton argent.</p>
-        <div className="modules-grid">
-          <Link href="/annonce" className="mod-card wide">
-            <div>
-              <div className="mod-eyebrow" style={{ color: "var(--violet)" }}>Annonce IA</div>
-              <div className="mod-title">Annonce blindée en 30 secondes.</div>
-              <div className="mod-desc">Photo → annonce avec preuve d'authenticité. Prix vérifié sur le marché. Prête à poster sur Vinted, Depop, Grailed.</div>
-              <div className="mod-pill" style={{ background: "var(--violet-bg)", color: "var(--violet)" }}>Essayer →</div>
-            </div>
-            <div className="mod-icon-box" style={{ background: "rgba(99,102,241,0.06)", border: "0.5px solid rgba(99,102,241,0.14)" }}>
-              <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><rect x="6" y="7" width="32" height="30" rx="4" stroke="#818CF8" strokeWidth="1.2"/><path d="M12 19h20M12 26h12" stroke="#818CF8" strokeWidth="1.2" strokeLinecap="round"/></svg>
-            </div>
+      {/* ═══ 6. MODULES ═══ */}
+      <section className="section" id="modules" style={{ paddingTop: 40 }}>
+        <div className="section-eyebrow">🧩 Produit</div>
+        <h2 className="section-title">Tout ce qu'il te faut.<br/><em>Rien de plus.</em></h2>
+        <div className="modules-row">
+          <Link href="/annonce" className="mod-card reveal">
+            <div style={{ fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--violet)", marginBottom: 12 }}>Annonce</div>
+            <div style={{ fontFamily: "var(--serif)", fontSize: 20, color: "var(--text)", marginBottom: 8 }}>Photo → annonce optimisée en 30 secondes.</div>
+            <div style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.5, fontWeight: 300 }}>Titre, description, prix, hashtags. Prête à poster.</div>
           </Link>
-          <Link href="/protection" className="mod-card">
-            <div className="mod-eyebrow" style={{ color: "var(--green)" }}>Protection</div>
-            <div className="mod-title">Preuve avant envoi.</div>
-            <div className="mod-desc">Vidéo horodatée + certificat SHA-256. Si l'acheteur ment, tu as la preuve.</div>
-            <div className="mod-pill" style={{ background: "var(--green-bg)", color: "var(--green)" }}>Horodatage →</div>
+          <Link href="/protection" className="mod-card reveal">
+            <div style={{ fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--green)", marginBottom: 12 }}>Protection</div>
+            <div style={{ fontFamily: "var(--serif)", fontSize: 20, color: "var(--text)", marginBottom: 8 }}>Certification + preuve horodatée.</div>
+            <div style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.5, fontWeight: 300 }}>Vidéo + certificat SHA-256. Inattaquable.</div>
           </Link>
-          <Link href="/litige" className="mod-card">
-            <div className="mod-eyebrow" style={{ color: "var(--pink)" }}>Litige</div>
-            <div className="mod-title">Ton argent défendu.</div>
-            <div className="mod-desc">Photos truquées détectées par l'IA. Réponse de défense prête en 1 clic.</div>
-            <div className="mod-pill" style={{ background: "var(--pink-bg)", color: "var(--pink)" }}>Anti-fraude →</div>
+          <Link href="/litige" className="mod-card reveal">
+            <div style={{ fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--pink)", marginBottom: 12 }}>Défense</div>
+            <div style={{ fontFamily: "var(--serif)", fontSize: 20, color: "var(--text)", marginBottom: 8 }}>Réponse automatique en cas de litige.</div>
+            <div style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.5, fontWeight: 300 }}>Photos truquées détectées. Défense en 1 clic.</div>
           </Link>
+        </div>
+        <p style={{ textAlign: "center", marginTop: 28, fontSize: 14, color: "var(--muted)" }}>Une seule app. 3 actions. 100% protégé.</p>
+      </section>
+
+      {/* ═══ 7. FLOW ═══ */}
+      <section className="section" style={{ paddingTop: 40, textAlign: "center" }}>
+        <div className="section-eyebrow">🎬 En pratique</div>
+        <h2 className="section-title">Simple. Rapide.<br/><em>Automatique.</em></h2>
+        <div className="flow-row">
+          <div className="flow-step reveal"><div className="flow-num" style={{ color: "var(--violet)" }}>1</div><div className="flow-label">photo</div></div>
+          <span className="flow-arrow">→</span>
+          <div className="flow-step reveal"><div className="flow-num" style={{ color: "var(--green)" }}>1</div><div className="flow-label">clic</div></div>
+          <span className="flow-arrow">→</span>
+          <div className="flow-step reveal"><div className="flow-num" style={{ color: "var(--pink)" }}>✓</div><div className="flow-label">protégé</div></div>
+        </div>
+        <p style={{ marginTop: 28, fontSize: 15, color: "var(--muted)", fontWeight: 300 }}>Tu continues à vendre comme d'habitude.</p>
+      </section>
+
+      {/* ═══ SOCIAL PROOF ═══ */}
+      <section className="section" style={{ paddingTop: 40 }}>
+        <div className="social-proof">
+          <div className="proof-item reveal"><div className="proof-num">+300</div><div className="proof-label">ventes protégées</div></div>
+          <div className="proof-item reveal"><div className="proof-num">30s</div><div className="proof-label">pour certifier</div></div>
+          <div className="proof-item reveal"><div className="proof-num">5</div><div className="proof-label">plateformes</div></div>
         </div>
       </section>
 
-      {/* STATS */}
-      <div className="stats-band">
-        <div className="stat-cell"><div className="stat-n">30s</div><div className="stat-l">Pour certifier un envoi</div></div>
-        <div className="stat-cell"><div className="stat-n">0 €</div><div className="stat-l">Pendant la bêta</div></div>
-        <div className="stat-cell"><div className="stat-n">3</div><div className="stat-l">Modules de protection</div></div>
-      </div>
+      {/* ═══ 8. PRICING ═══ */}
+      <section className="section" style={{ paddingTop: 40 }}>
+        <div className="section-eyebrow">💰 Prix</div>
+        <h2 className="section-title">Commence gratuitement.</h2>
+        <div className="pricing-card reveal">
+          <div style={{ fontFamily: "var(--serif)", fontSize: 48, color: "var(--text)", marginBottom: 12 }}>0 €</div>
+          <div style={{ fontSize: 15, color: "var(--muted)", marginBottom: 24, lineHeight: 1.7, fontWeight: 300 }}>
+            Gratuit pendant la bêta<br/>Aucune carte bancaire<br/>Sans engagement
+          </div>
+          <Link href="/annonce" className="btn-primary" style={{ fontSize: 15, padding: "14px 40px" }}>Essayer gratuitement</Link>
+          <div style={{ marginTop: 14, fontSize: 12, color: "var(--dim)" }}>Teste sans risque.</div>
+        </div>
+      </section>
 
-      {/* FINAL CTA */}
-      <section className="final-cta" id="cta">
-        <h2 className="final-title">Protège<br/><em>ton argent.</em></h2>
-        <p className="final-sub">Gratuit pendant toute la phase bêta.<br/>Sans carte bleue. Sans engagement.</p>
+      {/* ═══ 9. CTA FINAL ═══ */}
+      <section className="final-cta">
+        <h2 className="final-title">Protège ton argent<br/><em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.35)" }}>maintenant.</em></h2>
+        <p className="final-sub">Chaque vente non protégée est un risque.</p>
         <Link href="/annonce" className="btn-primary" style={{ fontSize: 15, padding: "16px 48px" }}>Essayer gratuitement</Link>
-        <div className="final-note">Vinted · Depop · Grailed · Vestiaire Collective · Etsy</div>
+        <div style={{ marginTop: 18, fontSize: 12, color: "var(--dim)" }}>Vinted · Depop · Grailed · Vestiaire Collective · Etsy</div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="lp-footer">
+      {/* ═══ FOOTER ═══ */}
+      <footer>
         <div className="footer-logo">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/><circle cx="11" cy="11" r="7" stroke="rgba(255,255,255,0.3)" strokeWidth="0.4" strokeDasharray="2.2 2.2"/><text x="11" y="14.5" fontFamily="-apple-system,sans-serif" fontSize="6.5" fontWeight="700" fill="rgba(255,255,255,0.3)" textAnchor="middle" letterSpacing="-0.01em">SG</text></svg>
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/><text x="11" y="14.5" fontFamily="-apple-system,sans-serif" fontSize="6.5" fontWeight="700" fill="rgba(255,255,255,0.3)" textAnchor="middle">SG</text></svg>
           SellGuard
         </div>
         <div className="footer-links">
