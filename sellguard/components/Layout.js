@@ -7,9 +7,6 @@ var NAV_COLORS = {
   "/annonce": "#818CF8",
   "/protection": "#4ADE80",
   "/litige": "#F472B6",
-  "/calculateur": "#FB923C",
-  "/ventes": "#38BDF8",
-  "/prix": "#FCD34D",
 };
 
 export default function Layout({ children }) {
@@ -20,9 +17,6 @@ export default function Layout({ children }) {
     { href: "/annonce", label: t.nav.annonce },
     { href: "/protection", label: t.nav.protection },
     { href: "/litige", label: t.nav.litige },
-    { href: "/calculateur", label: t.nav.calculateur },
-    { href: "/ventes", label: t.nav.ventes },
-    { href: "/prix", label: t.nav.prix },
   ];
 
   return (
@@ -33,7 +27,6 @@ export default function Layout({ children }) {
         <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
       <div style={{ minHeight: "100vh", background: "#000", fontFamily: "'DM Sans', -apple-system, sans-serif" }}>
-        {/* NAV */}
         <div style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(0,0,0,0.82)", borderBottom: "0.5px solid rgba(255,255,255,0.07)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }}>
           <div style={{ maxWidth: 700, margin: "0 auto", padding: "0 20px", height: 54, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <Link href="/">
@@ -52,14 +45,14 @@ export default function Layout({ children }) {
               {lang === "fr" ? "EN" : "FR"}
             </button>
           </div>
-          <div style={{ maxWidth: 700, margin: "0 auto", padding: "0 12px 8px", display: "flex", gap: 2, overflowX: "auto", WebkitOverflowScrolling: "touch", msOverflowStyle: "none", scrollbarWidth: "none" }}>
+          <div style={{ maxWidth: 700, margin: "0 auto", padding: "0 12px 8px", display: "flex", gap: 4, justifyContent: "center" }}>
             {NAV.map(function(n) {
               var active = router.pathname === n.href;
               var color = NAV_COLORS[n.href] || "#fff";
               return (
                 <Link key={n.href} href={n.href}>
                   <span style={{
-                    fontSize: 12, fontWeight: active ? 600 : 400, padding: "7px 12px", borderRadius: 8, whiteSpace: "nowrap",
+                    fontSize: 13, fontWeight: active ? 600 : 400, padding: "8px 20px", borderRadius: 8, whiteSpace: "nowrap",
                     background: active ? "rgba(255,255,255,0.08)" : "transparent",
                     color: active ? color : "rgba(255,255,255,0.4)",
                     transition: "all 0.15s", display: "inline-block", cursor: "pointer",
@@ -72,7 +65,6 @@ export default function Layout({ children }) {
             })}
           </div>
         </div>
-        {/* CONTENT */}
         <div style={{ maxWidth: 700, margin: "0 auto", padding: "32px 20px" }}>
           {children}
         </div>
