@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 export var T = {
   fr: {
-    nav: { annonce: "Annonce", protection: "Protection", litige: "Litige", calculateur: "Calculateur", ventes: "Ventes", prix: "Prix" },
+    nav: { annonce: "Annonce", protection: "Protection", litige: "Litige" },
     home: {
       title: "La suite complète du revendeur professionnel",
       subtitle: "Annonces optimisées, protection légale avant envoi, et défense automatique contre les fraudes et litiges.",
@@ -10,9 +10,6 @@ export var T = {
       m1_title: "Générer une annonce", m1_desc: "Photo → titre, description, hashtags et prix optimisés pour Vinted, Depop, Grailed et plus.", m1_tag: "Gain de temps",
       m2_title: "Protéger mon envoi", m2_desc: "Certifie tes photos avant l’envoi avec horodatage numérique. Preuve légale inattaquable en cas de litige.", m2_tag: "Protection légale",
       m3_title: "Gérer un litige", m3_desc: "Analyse les photos de l’acheteur pour détecter une fraude IA. Génère ta réponse de défense automatiquement.", m3_tag: "Anti-fraude",
-      m4_title: "Calculateur", m4_desc: "Calcule tes frais, commissions et marges par plateforme pour fixer le bon prix de vente.", m4_tag: "Rentabilité",
-      m5_title: "Mes ventes", m5_desc: "Retrouve l’historique de toutes tes annonces générées et suis tes ventes.", m5_tag: "Suivi",
-      m6_title: "Comparer les prix", m6_desc: "Recherche les prix du marché pour un article sur toutes les plateformes en un clic.", m6_tag: "Prix marché",
     },
     annonce: {
       title: "Générer une annonce",
@@ -93,7 +90,7 @@ export var T = {
     },
   },
   en: {
-    nav: { annonce: "Listing", protection: "Protection", litige: "Dispute", calculateur: "Calculator", ventes: "Sales", prix: "Prices" },
+    nav: { annonce: "Listing", protection: "Protection", litige: "Dispute" },
     home: {
       title: "The complete suite for professional resellers",
       subtitle: "Optimized listings, legal protection before shipping, and automatic defense against fraud and disputes.",
@@ -101,9 +98,6 @@ export var T = {
       m1_title: "Generate a listing", m1_desc: "Photo → title, description, hashtags and optimized prices for Vinted, Depop, Grailed and more.", m1_tag: "Time saver",
       m2_title: "Protect my shipment", m2_desc: "Certify your photos before shipping with digital timestamping. Unassailable legal proof in case of dispute.", m2_tag: "Legal protection",
       m3_title: "Handle a dispute", m3_desc: "Analyze buyer photos to detect AI fraud. Automatically generates your defense response.", m3_tag: "Anti-fraud",
-      m4_title: "Calculator", m4_desc: "Calculate fees, commissions and margins per platform to set the right selling price.", m4_tag: "Profitability",
-      m5_title: "My sales", m5_desc: "Find the history of all your generated listings and track your sales.", m5_tag: "Tracking",
-      m6_title: "Compare prices", m6_desc: "Search real market prices for any item across all platforms in one click.", m6_tag: "Market prices",
     },
     annonce: {
       title: "Generate a listing",
