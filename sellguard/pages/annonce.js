@@ -338,6 +338,41 @@ export default function Annonce() {
                     </div>
                   );
                 })()}
+
+                {/* DEEP LINK — PUBLISH */}
+                {(function() {
+                  var fullText = result.title + "\n\n" + result.description + "\n\n" + (result.keywords || []).map(function(k) { return "#" + k; }).join(" ");
+                  var platforms = [
+                    { name: "Vinted", url: "https://www.vinted.fr/items/new", color: "#09B1BA", bg: "rgba(9,177,186,0.1)" },
+                    { name: "Depop", url: "https://www.depop.com/sell", color: "#FF0000", bg: "rgba(255,0,0,0.08)" },
+                    { name: "Grailed", url: "https://www.grailed.com/sell", color: "#fff", bg: "rgba(255,255,255,0.06)" },
+                    { name: "Vestiaire", url: "https://www.vestiairecollective.com/sell", color: "#ccc", bg: "rgba(255,255,255,0.05)" },
+                    { name: "Etsy", url: "https://www.etsy.com/your/shops/me/tools/listings/create", color: "#F1641E", bg: "rgba(241,100,30,0.08)" },
+                  ];
+                  function publishTo(pl) {
+                    navigator.clipboard.writeText(fullText).then(function() {
+                      setCopied(function(c) { var n = Object.assign({}, c); n["publish"] = pl.name; return n; });
+                      setTimeout(function() { setCopied(function(c) { var n = Object.assign({}, c); n["publish"] = false; return n; }); }, 2000);
+                      window.open(pl.url, "_blank");
+                    });
+                  }
+                  return (
+                    <div style={{ background: "rgba(255,255,255,0.03)", border: "0.5px solid rgba(255,255,255,0.07)", borderRadius: 14, padding: "14px 18px", marginTop: 14 }}>
+                      <p style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.35)", letterSpacing: 0.5, marginBottom: 12 }}>{lang === "en" ? "PUBLISH NOW" : "PUBLIER MAINTENANT"}</p>
+                      <p style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginBottom: 14, lineHeight: 1.5 }}>{lang === "en" ? "Your listing is copied to clipboard. Click a platform to open it and paste." : "Ton annonce est copiée. Clique sur une plateforme pour l'ouvrir et coller."}</p>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                        {platforms.map(function(pl) {
+                          return (
+                            <button key={pl.name} onClick={function() { publishTo(pl); }}
+                              style={{ fontSize: 12, fontWeight: 600, padding: "8px 16px", borderRadius: 20, border: "0.5px solid rgba(255,255,255,0.1)", background: pl.bg, color: pl.color, cursor: "pointer", fontFamily: "inherit", transition: "opacity 0.15s" }}>
+                              {copied["publish"] === pl.name ? (lang === "en" ? "Copied! Opening..." : "Copié ! Ouverture...") : (lang === "en" ? "Post on " : "Poster sur ") + pl.name + " →"}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })()}
               </div>
             )}
           </>
