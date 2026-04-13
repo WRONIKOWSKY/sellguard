@@ -69,71 +69,71 @@ export default function Calculateur() {
     setResults({ totalCost: totalCost.toFixed(2), platforms: res });
   }
 
-  var inp = { width: "100%", padding: "10px 12px", fontSize: 15, background: "#fff", border: "1px solid #E5E7EB", borderRadius: 10, outline: "none", fontFamily: "inherit", color: "#111", boxSizing: "border-box" };
+  var inp = { width: "100%", padding: "10px 12px", fontSize: 15, background: "#111", border: "0.5px solid rgba(255,255,255,0.14)", borderRadius: 10, outline: "none", fontFamily: "inherit", color: "#fff", boxSizing: "border-box" };
 
   return (
     <>
       <Head><title>SellGuard — {t.title}</title></Head>
       <Layout>
         <div style={{ marginBottom: 28 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 800, color: "#111", marginBottom: 6 }}>{"💰"} {t.title}</h2>
-          <p style={{ fontSize: 14, color: "#666", lineHeight: 1.6 }}>{t.subtitle}</p>
+          <h2 style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 6 }}>{"💰"} {t.title}</h2>
+          <p style={{ fontSize: 14, color: "rgba(255,255,255,0.42)", lineHeight: 1.6 }}>{t.subtitle}</p>
         </div>
 
-        <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: 16, padding: "20px 20px", marginBottom: 20 }}>
+        <div style={{ background: "#0A0A0A", border: "0.5px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "20px 20px", marginBottom: 20 }}>
           <div style={{ marginBottom: 16 }}>
-            <label style={{ fontSize: 13, fontWeight: 600, color: "#444", display: "block", marginBottom: 6 }}>{t.buy_label}</label>
+            <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>{t.buy_label}</label>
             <input type="number" value={buyPrice} onChange={function(e) { setBuyPrice(e.target.value); }} placeholder={t.buy_ph} style={inp} min="0" step="0.5" />
           </div>
 
           <div style={{ marginBottom: 16 }}>
-            <label style={{ fontSize: 13, fontWeight: 600, color: "#444", display: "block", marginBottom: 6 }}>
-              {t.costs_label} <span style={{ fontWeight: 400, color: "#999" }}>({t.costs_hint})</span>
+            <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>
+              {t.costs_label} <span style={{ fontWeight: 400, color: "rgba(255,255,255,0.25)" }}>({t.costs_hint})</span>
             </label>
             <input type="number" value={costs} onChange={function(e) { setCosts(e.target.value); }} placeholder={t.costs_ph} style={inp} min="0" step="0.5" />
           </div>
 
           <div style={{ marginBottom: 20 }}>
-            <label style={{ fontSize: 13, fontWeight: 600, color: "#444", display: "block", marginBottom: 10 }}>
+            <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 10 }}>
               {t.margin_label} — <span style={{ color: "#2563EB", fontWeight: 700 }}>{targetMargin}%</span>
             </label>
             <input type="range" min="10" max="500" value={targetMargin} onChange={function(e) { setTargetMargin(e.target.value); }}
-              style={{ width: "100%", accentColor: "#111" }} />
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "#aaa", marginTop: 4 }}>
+              style={{ width: "100%", accentColor: "#fff" }} />
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "rgba(255,255,255,0.28)", marginTop: 4 }}>
               <span>10%</span><span>100%</span><span>200%</span><span>300%</span><span>500%</span>
             </div>
           </div>
 
           <button onClick={calculate} disabled={!buyPrice}
-            style={{ width: "100%", padding: 14, fontSize: 15, fontWeight: 700, borderRadius: 12, border: "none", background: !buyPrice ? "#E5E7EB" : "#111", color: !buyPrice ? "#999" : "#fff", cursor: !buyPrice ? "default" : "pointer", fontFamily: "inherit" }}>
+            style={{ width: "100%", padding: 14, fontSize: 15, fontWeight: 700, borderRadius: 12, border: "none", background: !buyPrice ? "rgba(255,255,255,0.06)" : "#fff", color: !buyPrice ? "rgba(255,255,255,0.25)" : "#000", cursor: !buyPrice ? "default" : "pointer", fontFamily: "inherit" }}>
             {t.calc_btn}
           </button>
         </div>
 
         {results && (
           <>
-            <div style={{ background: "#F9FAFB", border: "1px solid #E5E7EB", borderRadius: 12, padding: "12px 16px", marginBottom: 16, display: "flex", gap: 20 }}>
+            <div style={{ background: "rgba(255,255,255,0.03)", border: "0.5px solid rgba(255,255,255,0.07)", borderRadius: 12, padding: "12px 16px", marginBottom: 16, display: "flex", gap: 20 }}>
               <div style={{ textAlign: "center" }}>
-                <p style={{ fontSize: 11, color: "#888", marginBottom: 2 }}>{lang === "en" ? "Total cost" : "Coût total"}</p>
-                <p style={{ fontSize: 18, fontWeight: 800, color: "#111" }}>{results.totalCost}€</p>
+                <p style={{ fontSize: 11, color: "rgba(255,255,255,0.35)", marginBottom: 2 }}>{lang === "en" ? "Total cost" : "Coût total"}</p>
+                <p style={{ fontSize: 18, fontWeight: 800, color: "#fff" }}>{results.totalCost}€</p>
               </div>
-              <div style={{ width: 1, background: "#E5E7EB" }} />
+              <div style={{ width: 1, background: "rgba(255,255,255,0.06)" }} />
               <div style={{ textAlign: "center" }}>
-                <p style={{ fontSize: 11, color: "#888", marginBottom: 2 }}>{lang === "en" ? "Target margin" : "Marge cible"}</p>
+                <p style={{ fontSize: 11, color: "rgba(255,255,255,0.35)", marginBottom: 2 }}>{lang === "en" ? "Target margin" : "Marge cible"}</p>
                 <p style={{ fontSize: 18, fontWeight: 800, color: "#2563EB" }}>{targetMargin}%</p>
               </div>
             </div>
 
             {results.platforms.map(function(pl) {
               return (
-                <div key={pl.name} style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: 14, padding: "16px 18px", marginBottom: 10 }}>
+                <div key={pl.name} style={{ background: "#0A0A0A", border: "0.5px solid rgba(255,255,255,0.07)", borderRadius: 14, padding: "16px 18px", marginBottom: 10 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
                     <span style={{ fontSize: 13, fontWeight: 700, padding: "3px 12px", borderRadius: 20, background: pl.bg, color: pl.color }}>
                       {pl.name}
                     </span>
                     <div style={{ textAlign: "right" }}>
-                      <p style={{ fontSize: 22, fontWeight: 800, color: "#111" }}>{pl.recommended}€</p>
-                      <p style={{ fontSize: 11, color: "#888" }}>{t.recommended}</p>
+                      <p style={{ fontSize: 22, fontWeight: 800, color: "#fff" }}>{pl.recommended}€</p>
+                      <p style={{ fontSize: 11, color: "rgba(255,255,255,0.35)" }}>{t.recommended}</p>
                     </div>
                   </div>
 
@@ -144,29 +144,29 @@ export default function Calculateur() {
                       [t.platform_fee, pl.platformFee + "€", "#888"],
                     ].map(function(row) {
                       return (
-                        <div key={row[0]} style={{ background: "#F9FAFB", borderRadius: 8, padding: "8px 10px", textAlign: "center" }}>
-                          <p style={{ fontSize: 10, color: "#888", marginBottom: 3 }}>{row[0]}</p>
+                        <div key={row[0]} style={{ background: "rgba(255,255,255,0.03)", borderRadius: 8, padding: "8px 10px", textAlign: "center" }}>
+                          <p style={{ fontSize: 10, color: "rgba(255,255,255,0.35)", marginBottom: 3 }}>{row[0]}</p>
                           <p style={{ fontSize: 14, fontWeight: 700, color: row[2] }}>{row[1]}</p>
                         </div>
                       );
                     })}
                   </div>
 
-                  <div style={{ marginTop: 10, padding: "6px 10px", background: "#F9FAFB", borderRadius: 8, display: "flex", justifyContent: "space-between" }}>
-                    <span style={{ fontSize: 11, color: "#888" }}>{t.break_even}</span>
-                    <span style={{ fontSize: 11, fontWeight: 600, color: "#555" }}>{pl.breakEven}€</span>
+                  <div style={{ marginTop: 10, padding: "6px 10px", background: "rgba(255,255,255,0.03)", borderRadius: 8, display: "flex", justifyContent: "space-between" }}>
+                    <span style={{ fontSize: 11, color: "rgba(255,255,255,0.35)" }}>{t.break_even}</span>
+                    <span style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.5)" }}>{pl.breakEven}€</span>
                   </div>
                 </div>
               );
             })}
 
-            <div style={{ background: "#FFFBEB", border: "1px solid #FDE68A", borderRadius: 14, padding: "14px 18px", marginTop: 6 }}>
+            <div style={{ background: "rgba(251,146,60,0.06)", border: "0.5px solid rgba(251,146,60,0.2)", borderRadius: 14, padding: "14px 18px", marginTop: 6 }}>
               <p style={{ fontSize: 12, fontWeight: 700, color: "#92400E", marginBottom: 10 }}>{t.tip_title}</p>
               {[t.tip1, t.tip2, t.tip3].map(function(tip, i) {
                 return (
                   <div key={i} style={{ display: "flex", gap: 8, marginBottom: i < 2 ? 8 : 0 }}>
                     <span style={{ color: "#D97706", flexShrink: 0 }}>{"·"}</span>
-                    <p style={{ fontSize: 12, color: "#555", lineHeight: 1.5 }}>{tip}</p>
+                    <p style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", lineHeight: 1.5 }}>{tip}</p>
                   </div>
                 );
               })}
