@@ -158,7 +158,7 @@ export default function Annonce() {
 
   return (
     <>
-      <Head><title>SellGuard — {a.title}</title></Head>
+      <Head><title>SellCov — {a.title}</title></Head>
       <Layout>
         {!result ? (
           <>
@@ -341,8 +341,8 @@ export default function Annonce() {
 
                 {(function() {
                   var msg = lang === "en"
-                    ? "Thank you for your purchase! 🎉 Your parcel was carefully packed and filmed before shipping with SellGuard — timestamped video proof is kept in case of dispute. Enjoy your item! 📦"
-                    : "Merci pour ton achat ! 🎉 Ton colis a été soigneusement emballé et filmé avant envoi avec SellGuard — une preuve vidéo horodatée est conservée en cas de litige. Bonne réception ! 📦";
+                    ? "Thank you for your purchase! 🎉 Your parcel was carefully packed and filmed before shipping with SellCov — timestamped video proof is kept in case of dispute. Enjoy your item! 📦"
+                    : "Merci pour ton achat ! 🎉 Ton colis a été soigneusement emballé et filmé avant envoi avec SellCov — une preuve vidéo horodatée est conservée en cas de litige. Bonne réception ! 📦";
                   return (
                     <div style={{ background: "rgba(34,197,94,0.06)", border: "0.5px solid rgba(34,197,94,0.2)", borderRadius: 14, padding: "14px 18px" }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
