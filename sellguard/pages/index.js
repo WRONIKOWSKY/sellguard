@@ -160,15 +160,14 @@ export default function Home() {
       {/* ═══ 2. PROBLÈME ═══ */}
       <section className="section" id="problem">
         <div className="section-eyebrow">⚠️ Le problème</div>
-        <h2 className="section-title">Revendre en ligne,<br/><em>c'est risqué.</em></h2>
+        <h2 className="section-title">Tu peux perdre ton argent<br/><em>sur une seule vente.</em></h2>
         <div style={{ height: 40 }}></div>
         <ul className="pain-list reveal">
-          <li className="pain-item">✕ "Article abîmé" → remboursement forcé</li>
-          <li className="pain-item">✕ Acheteurs malhonnêtes</li>
-          <li className="pain-item">✕ Aucune preuve acceptée</li>
-          <li className="pain-item">✕ Tu perds ton argent</li>
+          <li className="pain-item">✕ "Article abîmé" → tu rembourses</li>
+          <li className="pain-item">✕ L'acheteur ment → tu perds</li>
+          <li className="pain-item">✕ Aucune protection → aucun recours</li>
         </ul>
-        <p className="pain-callout reveal">Une seule arnaque peut ruiner ta vente.</p>
+        <p className="pain-callout reveal" style={{ fontWeight: 500, color: "var(--red)" }}>Tu prends 100% du risque.</p>
       </section>
 
       {/* ═══ 3. SOLUTION ═══ */}
