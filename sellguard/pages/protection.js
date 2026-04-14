@@ -176,20 +176,20 @@ export default function Protection() {
 
   async function downloadVideo() {
     if (!recordedBlob) return;
-    var id = "SG-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+    var id = "SC-" + Math.random().toString(36).substr(2, 9).toUpperCase();
     var dateStr = recordDate || new Date().toLocaleString("fr-FR");
     var name = (articleName || "envoi").replace(/[^a-zA-Z0-9]/g, "_");
     var ext = recordedBlob.type.includes("mp4") ? "mp4" : "webm";
     var hash = await computeHash(recordedBlob);
     var videoSizeKB = Math.round(recordedBlob.size / 1024);
     setCertData({ id: id, dateStr: dateStr, hash: hash, videoSizeKB: videoSizeKB });
-    await shareFile(recordedBlob, "SellGuard_" + id + "_" + name + "." + ext);
+    await shareFile(recordedBlob, "SellCov_" + id + "_" + name + "." + ext);
   }
 
   async function downloadPDF() {
     if (!certData && !recordedBlob) return;
     setProcessing(true);
-    var id = certData ? certData.id : "SG-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+    var id = certData ? certData.id : "SC-" + Math.random().toString(36).substr(2, 9).toUpperCase();
     var dateStr = certData ? certData.dateStr : recordDate || new Date().toLocaleString("fr-FR");
     var hash = certData ? certData.hash : await computeHash(recordedBlob);
     var videoSizeKB = certData ? certData.videoSizeKB : (recordedBlob ? Math.round(recordedBlob.size / 1024) : 0);
@@ -197,7 +197,7 @@ export default function Protection() {
       var params = new URLSearchParams({ certId: id, article: articleName || "", orderRef: orderRef || "", dateStr: dateStr, hash: hash, videoSizeKB: videoSizeKB, deviceInfo: getDeviceInfo(), lang: lang });
       var res = await fetch("/api/certificat?" + params.toString());
       var blob = await res.blob();
-      await shareFile(blob, "SellGuard_" + id + "_Certificat.pdf");
+      await shareFile(blob, "SellCov_" + id + "_Certificat.pdf");
       var certInfo = { id: id, article: articleName || "Article", date: dateStr, hash: hash, orderRef: orderRef || "" };
       setCertified(certInfo);
       addShipment({ id: id, article: articleName || "Article", date: dateStr, hash: hash, orderRef: orderRef || "", tracking_number: "", receipt_photo: "", tracking_date: "" });
@@ -211,7 +211,7 @@ export default function Protection() {
 
   function certifyPhotos() {
     if (!photos.length || !articleName.trim()) return;
-    var certInfo = { id: "SG-" + Math.random().toString(36).substr(2, 9).toUpperCase(), article: articleName, date: new Date().toLocaleString("fr-FR"), photos: photos };
+    var certInfo = { id: "SC-" + Math.random().toString(36).substr(2, 9).toUpperCase(), article: articleName, date: new Date().toLocaleString("fr-FR"), photos: photos };
     setCertified(certInfo);
     addShipment({ id: certInfo.id, article: articleName, date: certInfo.date, hash: "", orderRef: orderRef || "", tracking_number: "", receipt_photo: "", tracking_date: "" });
   }
@@ -248,7 +248,7 @@ export default function Protection() {
   // ── CERTIFIED VIEW ──
   if (certified) return (
     <>
-      <Head><title>SellGuard — {p.certified_title}</title></Head>
+      <Head><title>SellCov — {p.certified_title}</title></Head>
       <Layout>
         <div style={{ background: "rgba(34,197,94,0.06)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 16, padding: 24, marginBottom: 24, textAlign: "center" }}>
           <div style={{ fontSize: 40, marginBottom: 10 }}>{"✅"}</div>
@@ -262,8 +262,8 @@ export default function Protection() {
           </p>
           <p style={{ fontSize: 13, color: "#1D4ED8", lineHeight: 1.8, whiteSpace: "pre-line" }}>
             {lang === "en"
-              ? "• Video file (.mp4 / .webm)\n• SellGuard certificate PDF with SHA-256 hash\n\nKeep both files together. They form your complete proof."
-              : "• Fichier vidéo (.mp4 / .webm)\n• Certificat PDF SellGuard avec empreinte SHA-256\n\nConserve les deux fichiers ensemble. Ils constituent ta preuve complète."}
+              ? "• Video file (.mp4 / .webm)\n• SellCov certificate PDF with SHA-256 hash\n\nKeep both files together. They form your complete proof."
+              : "• Fichier vidéo (.mp4 / .webm)\n• Certificat PDF SellCov avec empreinte SHA-256\n\nConserve les deux fichiers ensemble. Ils constituent ta preuve complète."}
           </p>
         </div>
 
@@ -313,7 +313,7 @@ export default function Protection() {
   // ── MAIN VIEW ──
   return (
     <>
-      <Head><title>SellGuard — {p.title}</title></Head>
+      <Head><title>SellCov — {p.title}</title></Head>
       <Layout>
         <div style={{ marginBottom: 20 }}>
           <h2 style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 6 }}>{"🛡"} {p.title}</h2>
@@ -383,7 +383,7 @@ export default function Protection() {
                               <button onClick={function() {
                                 var a = document.createElement("a");
                                 a.href = s.receipt_photo;
-                                a.download = "SellGuard_" + s.id + "_receipt.jpg";
+                                a.download = "SellCov_" + s.id + "_receipt.jpg";
                                 document.body.appendChild(a); a.click(); document.body.removeChild(a);
                               }} style={{ fontSize: 11, fontWeight: 600, color: "#2563EB", background: "rgba(99,102,241,0.08)", border: "0.5px solid rgba(99,102,241,0.2)", borderRadius: 6, padding: "4px 10px", cursor: "pointer", fontFamily: "inherit" }}>
                                 {lang === "en" ? "⬇ Download" : "⬇ Télécharger"}
@@ -491,7 +491,7 @@ export default function Protection() {
 
                   {cameraOn && !recordedUrl && (
                     <div style={{ position: "absolute", bottom: 12, left: "50%", transform: "translateX(-50%)", background: "rgba(0,0,0,0.55)", borderRadius: 8, padding: "4px 12px", whiteSpace: "nowrap" }}>
-                      <span style={{ fontSize: 12, color: "#00FF88", fontFamily: "monospace", fontWeight: 700 }}>SellGuard · {timestamp}</span>
+                      <span style={{ fontSize: 12, color: "#00FF88", fontFamily: "monospace", fontWeight: 700 }}>SellCov · {timestamp}</span>
                     </div>
                   )}
 
