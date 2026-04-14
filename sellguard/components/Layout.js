@@ -34,9 +34,9 @@ export default function Layout({ children }) {
                 <svg width="26" height="26" viewBox="0 0 30 30" fill="none">
                   <circle cx="15" cy="15" r="14" stroke="#fff" strokeWidth="1.2"/>
                   <circle cx="15" cy="15" r="10" stroke="#fff" strokeWidth="0.4" strokeDasharray="2.8 2.8"/>
-                  <text x="15" y="19.5" fontFamily="-apple-system,Helvetica Neue,sans-serif" fontSize="9" fontWeight="700" fill="#fff" textAnchor="middle" letterSpacing="-0.02em">SG</text>
+                  <text x="15" y="19.5" fontFamily="-apple-system,Helvetica Neue,sans-serif" fontSize="9" fontWeight="700" fill="#fff" textAnchor="middle" letterSpacing="-0.02em">SC</text>
                 </svg>
-                SellGuard
+                SellCov
               </span>
             </Link>
             <button
