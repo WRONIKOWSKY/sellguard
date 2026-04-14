@@ -256,15 +256,6 @@ export default function Home() {
             <div style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.5, fontWeight: 300 }}>Photos truquées détectées. Défense en 1 clic.</div>
           </Link>
         </div>
-        <p style={{ textAlign: "center", marginTop: 28, fontSize: 14, color: "var(--muted)" }}>Une seule app. 3 actions. 100% protégé.</p>
-      </section>
-
-      {/* ═══ SOCIAL PROOF ═══ */}
-      <section className="section" style={{ paddingTop: 40 }}>
-        <div className="social-proof">
-          <div className="proof-item reveal"><div className="proof-num">30s</div><div className="proof-label">pour certifier</div></div>
-          <div className="proof-item reveal"><div className="proof-num">5</div><div className="proof-label">plateformes</div></div>
-        </div>
       </section>
 
       {/* ═══ 9. CTA FINAL ═══ */}
