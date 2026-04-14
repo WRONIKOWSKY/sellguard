@@ -162,8 +162,8 @@ export default function Home() {
         <h2 className="section-title">Tu peux perdre ton argent<br/><em>sur une seule vente.</em></h2>
         <div style={{ height: 40 }}></div>
         <ul className="pain-list reveal">
-          <li className="pain-item">✕ Un acheteur malhonnête → remboursement forcé</li>
-          <li className="pain-item">✕ Zéro preuve → zéro recours</li>
+          <li className="pain-item">Un acheteur malhonnête → remboursement forcé</li>
+          <li className="pain-item">Zéro preuve → zéro recours</li>
         </ul>
         <p className="pain-callout reveal" style={{ fontWeight: 500, color: "var(--red)" }}>Tu prends 100% du risque.</p>
       </section>
@@ -173,9 +173,9 @@ export default function Home() {
         <h2 className="section-title">Tu vends.<br/><em>On protège.</em></h2>
         <p className="section-sub" style={{ marginBottom: 40 }}>Avant l'envoi, ton article est :</p>
         <div className="solution-list reveal">
-          <div className="solution-item">✓ Horodaté automatiquement</div>
-          <div className="solution-item">✓ Certifié avec preuve</div>
-          <div className="solution-item">✓ Enregistré de façon sécurisée</div>
+          <div className="solution-item">Horodaté automatiquement</div>
+          <div className="solution-item">Certifié avec preuve</div>
+          <div className="solution-item">Enregistré de façon sécurisée</div>
         </div>
         <p className="solution-callout reveal">L'acheteur conteste ? Tu as la preuve.</p>
       </section>
@@ -207,21 +207,21 @@ export default function Home() {
         <h2 className="section-title">Avant vs Après<br/><em>SellCov.</em></h2>
         <div className="compare-grid">
           <div className="compare-card reveal" style={{ background: "rgba(248,113,113,0.04)", border: "0.5px solid rgba(248,113,113,0.15)" }}>
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginBottom: 20 }}>❌ Sans SellCov</div>
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginBottom: 20 }}>Sans SellCov</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <div style={{ fontSize: 14, color: "var(--red)" }}>✕ "Article abîmé à la réception"</div>
-              <div style={{ fontSize: 14, color: "var(--red)" }}>✕ Plateforme rembourse l'acheteur</div>
-              <div style={{ fontSize: 14, color: "var(--red)" }}>✕ Tu perds ton produit + ton argent</div>
-              <div style={{ fontSize: 14, color: "var(--red)" }}>✕ Aucune preuve valable</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>"Article abîmé à la réception"</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>Plateforme rembourse l'acheteur</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>Tu perds ton produit + ton argent</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>Aucune preuve valable</div>
             </div>
           </div>
           <div className="compare-card reveal" style={{ background: "rgba(74,222,128,0.04)", border: "0.5px solid rgba(74,222,128,0.15)" }}>
-            <div style={{ fontSize: 12, color: "var(--green)", marginBottom: 20 }}>✅ Avec SellCov</div>
+            <div style={{ fontSize: 12, color: "var(--green)", marginBottom: 20 }}>Avec SellCov</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <div style={{ fontSize: 14, color: "var(--green)" }}>✓ Preuve enregistrée automatiquement</div>
-              <div style={{ fontSize: 14, color: "var(--green)" }}>✓ Envoi certifié avant expédition</div>
-              <div style={{ fontSize: 14, color: "var(--green)" }}>✓ Réponse prête immédiatement</div>
-              <div style={{ fontSize: 14, color: "var(--green)" }}>✓ Ton argent est protégé</div>
+              <div style={{ fontSize: 14, color: "var(--green)" }}>Preuve enregistrée automatiquement</div>
+              <div style={{ fontSize: 14, color: "var(--green)" }}>Envoi certifié avant expédition</div>
+              <div style={{ fontSize: 14, color: "var(--green)" }}>Réponse prête immédiatement</div>
+              <div style={{ fontSize: 14, color: "var(--green)" }}>Ton argent est protégé</div>
             </div>
           </div>
         </div>
