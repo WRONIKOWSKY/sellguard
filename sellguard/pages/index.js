@@ -148,7 +148,7 @@ export default function Home() {
           Bêta gratuite (places limitées)
         </div>
         <h1 className="lp-h1">Revends<br/><em>sans te faire arnaquer.</em></h1>
-        <p className="hero-sub">Ton argent est protégé. À chaque envoi.</p>
+        <p className="hero-sub">On protège ton argent. À chaque envoi.</p>
         <p className="hero-sub2">Preuve horodatée. Défense automatique.</p>
         <div className="hero-actions">
           <Link href="/annonce" className="btn-primary">Essayer gratuitement</Link>
