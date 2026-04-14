@@ -162,9 +162,8 @@ export default function Home() {
         <h2 className="section-title">Tu peux perdre ton argent<br/><em>sur une seule vente.</em></h2>
         <div style={{ height: 40 }}></div>
         <ul className="pain-list reveal">
-          <li className="pain-item">✕ "Article abîmé" → tu rembourses</li>
-          <li className="pain-item">✕ L'acheteur ment → tu perds</li>
-          <li className="pain-item">✕ Aucune protection → aucun recours</li>
+          <li className="pain-item">✕ Un acheteur malhonnête → remboursement forcé</li>
+          <li className="pain-item">✕ Zéro preuve → zéro recours</li>
         </ul>
         <p className="pain-callout reveal" style={{ fontWeight: 500, color: "var(--red)" }}>Tu prends 100% du risque.</p>
       </section>
