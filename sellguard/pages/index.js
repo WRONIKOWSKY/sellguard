@@ -159,7 +159,6 @@ export default function Home() {
 
       {/* ═══ 2. PROBLÈME ═══ */}
       <section className="section" id="problem">
-        <div className="section-eyebrow">⚠️ Le problème</div>
         <h2 className="section-title">Tu peux perdre ton argent<br/><em>sur une seule vente.</em></h2>
         <div style={{ height: 40 }}></div>
         <ul className="pain-list reveal">
@@ -172,7 +171,6 @@ export default function Home() {
 
       {/* ═══ 3. SOLUTION ═══ */}
       <section className="section" style={{ paddingTop: 40 }}>
-        <div className="section-eyebrow">🛡️ La solution</div>
         <h2 className="section-title">Tu vends.<br/><em>On protège.</em></h2>
         <p className="section-sub" style={{ marginBottom: 40 }}>Avant l'envoi, ton article est :</p>
         <div className="solution-list reveal">
