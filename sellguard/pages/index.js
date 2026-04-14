@@ -233,7 +233,6 @@ export default function Home() {
         </div>
         <div style={{ textAlign: "center", marginTop: 32 }}>
           <Link href="/protection" className="btn-primary">Activer la protection</Link>
-          <div style={{ marginTop: 12, fontSize: 12, color: "var(--dim)" }}>Protection automatique · Sans effort</div>
         </div>
       </section>
 
@@ -260,23 +259,9 @@ export default function Home() {
         <p style={{ textAlign: "center", marginTop: 28, fontSize: 14, color: "var(--muted)" }}>Une seule app. 3 actions. 100% protégé.</p>
       </section>
 
-      {/* ═══ 7. FLOW ═══ */}
-      <section className="section" style={{ paddingTop: 40, textAlign: "center" }}>
-        <h2 className="section-title">Simple. Rapide.<br/><em>Automatique.</em></h2>
-        <div className="flow-row">
-          <div className="flow-step reveal"><div className="flow-num" style={{ color: "var(--violet)" }}>1</div><div className="flow-label">photo</div></div>
-          <span className="flow-arrow">→</span>
-          <div className="flow-step reveal"><div className="flow-num" style={{ color: "var(--green)" }}>1</div><div className="flow-label">clic</div></div>
-          <span className="flow-arrow">→</span>
-          <div className="flow-step reveal"><div className="flow-num" style={{ color: "var(--pink)" }}>✓</div><div className="flow-label">protégé</div></div>
-        </div>
-        <p style={{ marginTop: 28, fontSize: 15, color: "var(--muted)", fontWeight: 300 }}>Tu continues à vendre comme d'habitude.</p>
-      </section>
-
       {/* ═══ SOCIAL PROOF ═══ */}
       <section className="section" style={{ paddingTop: 40 }}>
         <div className="social-proof">
-          <div className="proof-item reveal"><div className="proof-num">+300</div><div className="proof-label">ventes protégées</div></div>
           <div className="proof-item reveal"><div className="proof-num">30s</div><div className="proof-label">pour certifier</div></div>
           <div className="proof-item reveal"><div className="proof-num">5</div><div className="proof-label">plateformes</div></div>
         </div>
