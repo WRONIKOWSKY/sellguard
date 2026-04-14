@@ -187,14 +187,14 @@ export default function Home() {
       {/* ═══ 4. COMMENT ÇA MARCHE ═══ */}
       <section className="section" id="how" style={{ paddingTop: 40 }}>
         <div className="section-eyebrow">⚡ Comment ça marche</div>
-        <h2 className="section-title">Comment tu es protégé.</h2>
-        <p className="section-sub">4 étapes. Zéro stress.</p>
+        <h2 className="section-title">4 étapes.<br/><em>Tu es couvert.</em></h2>
+        <p className="section-sub"></p>
         <div className="steps-grid">
           {[
-            { n: "01", name: "Tu prends une photo", desc: "Annonce générée automatiquement avec prix et description.", color: "var(--violet)" },
-            { n: "02", name: "Tu certifies avant envoi", desc: "Preuve horodatée enregistrée. Certificat SHA-256.", color: "var(--green)" },
-            { n: "03", name: "Tu vends normalement", desc: "Tout est sauvegardé. Tu continues comme d'habitude.", color: "var(--muted)" },
-            { n: "04", name: "Un litige ?", desc: "Réponse de défense prête en 1 clic. Photos truquées détectées.", color: "var(--pink)" },
+            { n: "01", name: "Tu prends une photo", desc: "Annonce générée. Prix, description, hashtags.", color: "var(--violet)" },
+            { n: "02", name: "Tu certifies avant envoi", desc: "Preuve horodatée. Impossible à contester.", color: "var(--green)" },
+            { n: "03", name: "Tu expédies", desc: "Suivi + preuve de dépôt sauvegardés.", color: "var(--muted)" },
+            { n: "04", name: "Un litige ?", desc: "Défense générée en 1 clic.", color: "var(--pink)" },
           ].map(function(s) {
             return (
               <div key={s.n} className="step-card reveal">
