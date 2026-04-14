@@ -179,12 +179,10 @@ export default function Home() {
           <div className="solution-item">✓ Enregistré de façon sécurisée</div>
         </div>
         <p className="solution-callout reveal">L'acheteur conteste ? Tu as la preuve.</p>
-        <div style={{ fontSize: 11, textAlign: "center", color: "var(--dim)", marginTop: 12 }}>Horodatage sécurisé + preuve exportable</div>
       </section>
 
       {/* ═══ 4. COMMENT ÇA MARCHE ═══ */}
       <section className="section" id="how" style={{ paddingTop: 40 }}>
-        <div className="section-eyebrow">⚡ Comment ça marche</div>
         <h2 className="section-title">4 étapes.<br/><em>Tu es couvert.</em></h2>
         <p className="section-sub"></p>
         <div className="steps-grid">
@@ -207,7 +205,6 @@ export default function Home() {
 
       {/* ═══ 5. ANTI-ARNAQUE ═══ */}
       <section className="section" style={{ paddingTop: 40 }}>
-        <div className="section-eyebrow">🔥 Avant vs Après</div>
         <h2 className="section-title">Avant vs Après<br/><em>SellCov.</em></h2>
         <div className="compare-grid">
           <div className="compare-card reveal" style={{ background: "rgba(248,113,113,0.04)", border: "0.5px solid rgba(248,113,113,0.15)" }}>
@@ -242,7 +239,6 @@ export default function Home() {
 
       {/* ═══ 6. MODULES ═══ */}
       <section className="section" id="modules" style={{ paddingTop: 40 }}>
-        <div className="section-eyebrow">🧩 Produit</div>
         <h2 className="section-title">Tout ce qu'il te faut.<br/><em>Rien de plus.</em></h2>
         <div className="modules-row">
           <Link href="/annonce" className="mod-card reveal">
@@ -266,7 +262,6 @@ export default function Home() {
 
       {/* ═══ 7. FLOW ═══ */}
       <section className="section" style={{ paddingTop: 40, textAlign: "center" }}>
-        <div className="section-eyebrow">🎬 En pratique</div>
         <h2 className="section-title">Simple. Rapide.<br/><em>Automatique.</em></h2>
         <div className="flow-row">
           <div className="flow-step reveal"><div className="flow-num" style={{ color: "var(--violet)" }}>1</div><div className="flow-label">photo</div></div>
@@ -284,20 +279,6 @@ export default function Home() {
           <div className="proof-item reveal"><div className="proof-num">+300</div><div className="proof-label">ventes protégées</div></div>
           <div className="proof-item reveal"><div className="proof-num">30s</div><div className="proof-label">pour certifier</div></div>
           <div className="proof-item reveal"><div className="proof-num">5</div><div className="proof-label">plateformes</div></div>
-        </div>
-      </section>
-
-      {/* ═══ 8. PRICING ═══ */}
-      <section className="section" style={{ paddingTop: 40 }}>
-        <div className="section-eyebrow">💰 Prix</div>
-        <h2 className="section-title">Commence gratuitement.</h2>
-        <div className="pricing-card reveal">
-          <div style={{ fontFamily: "var(--serif)", fontSize: 48, color: "var(--text)", marginBottom: 12 }}>0 €</div>
-          <div style={{ fontSize: 15, color: "var(--muted)", marginBottom: 24, lineHeight: 1.7, fontWeight: 300 }}>
-            Gratuit pendant la bêta<br/>Aucune carte bancaire<br/>Sans engagement
-          </div>
-          <Link href="/annonce" className="btn-primary" style={{ fontSize: 15, padding: "14px 40px" }}>Essayer gratuitement</Link>
-          <div style={{ marginTop: 14, fontSize: 12, color: "var(--dim)" }}>Teste sans risque.</div>
         </div>
       </section>
 
