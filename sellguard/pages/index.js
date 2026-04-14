@@ -136,7 +136,7 @@ export default function Home() {
         <div className="nav-links">
           <a onClick={function() { scrollTo("#problem"); }}>Pourquoi</a>
           <a onClick={function() { scrollTo("#how"); }}>Comment</a>
-          <a onClick={function() { scrollTo("#modules"); }}>Modules</a>
+          
         </div>
         <Link href="/annonce" className="nav-cta">Essayer gratuit</Link>
       </nav>
@@ -233,28 +233,6 @@ export default function Home() {
         </div>
         <div style={{ textAlign: "center", marginTop: 32 }}>
           <Link href="/protection" className="btn-primary">Activer la protection</Link>
-        </div>
-      </section>
-
-      {/* ═══ 6. MODULES ═══ */}
-      <section className="section" id="modules" style={{ paddingTop: 40 }}>
-        <h2 className="section-title">Tout ce qu'il te faut.<br/><em>Rien de plus.</em></h2>
-        <div className="modules-row">
-          <Link href="/annonce" className="mod-card reveal">
-            <div style={{ fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--violet)", marginBottom: 12 }}>Annonce</div>
-            <div style={{ fontFamily: "var(--serif)", fontSize: 20, color: "var(--text)", marginBottom: 8 }}>Photo → annonce optimisée en 30 secondes.</div>
-            <div style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.5, fontWeight: 300 }}>Titre, description, prix, hashtags. Prête à poster.</div>
-          </Link>
-          <Link href="/protection" className="mod-card reveal">
-            <div style={{ fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--green)", marginBottom: 12 }}>Protection</div>
-            <div style={{ fontFamily: "var(--serif)", fontSize: 20, color: "var(--text)", marginBottom: 8 }}>Certification + preuve horodatée.</div>
-            <div style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.5, fontWeight: 300 }}>Vidéo + certificat SHA-256. Inattaquable.</div>
-          </Link>
-          <Link href="/litige" className="mod-card reveal">
-            <div style={{ fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--pink)", marginBottom: 12 }}>Défense</div>
-            <div style={{ fontFamily: "var(--serif)", fontSize: 20, color: "var(--text)", marginBottom: 8 }}>Réponse automatique en cas de litige.</div>
-            <div style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.5, fontWeight: 300 }}>Photos truquées détectées. Défense en 1 clic.</div>
-          </Link>
         </div>
       </section>
 
