@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>SellGuard — Revends sans te faire arnaquer.</title>
+        <title>SellCov — Revends sans te faire arnaquer.</title>
         <meta name="description" content="Ton argent est protégé. À chaque envoi. Preuve horodatée. Défense automatique." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -130,8 +130,8 @@ export default function Home() {
       {/* ═══ NAV ═══ */}
       <nav className="lp-nav">
         <span className="nav-logo">
-          <svg width="28" height="28" viewBox="0 0 30 30" fill="none"><circle cx="15" cy="15" r="14" stroke="#fff" strokeWidth="1.2"/><circle cx="15" cy="15" r="10" stroke="#fff" strokeWidth="0.4" strokeDasharray="2.8 2.8"/><text x="15" y="19.5" fontFamily="-apple-system,sans-serif" fontSize="9" fontWeight="700" fill="#fff" textAnchor="middle">SG</text></svg>
-          SellGuard
+          <svg width="28" height="28" viewBox="0 0 30 30" fill="none"><circle cx="15" cy="15" r="14" stroke="#fff" strokeWidth="1.2"/><circle cx="15" cy="15" r="10" stroke="#fff" strokeWidth="0.4" strokeDasharray="2.8 2.8"/><text x="15" y="19.5" fontFamily="-apple-system,sans-serif" fontSize="9" fontWeight="700" fill="#fff" textAnchor="middle">SC</text></svg>
+          SellCov
         </span>
         <div className="nav-links">
           <a onClick={function() { scrollTo("#problem"); }}>Pourquoi</a>
@@ -210,10 +210,10 @@ export default function Home() {
       {/* ═══ 5. ANTI-ARNAQUE ═══ */}
       <section className="section" style={{ paddingTop: 40 }}>
         <div className="section-eyebrow">🔥 Avant vs Après</div>
-        <h2 className="section-title">Avant vs Après<br/><em>SellGuard.</em></h2>
+        <h2 className="section-title">Avant vs Après<br/><em>SellCov.</em></h2>
         <div className="compare-grid">
           <div className="compare-card reveal" style={{ background: "rgba(248,113,113,0.04)", border: "0.5px solid rgba(248,113,113,0.15)" }}>
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginBottom: 20 }}>❌ Sans SellGuard</div>
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginBottom: 20 }}>❌ Sans SellCov</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div style={{ fontSize: 14, color: "var(--red)" }}>✕ "Article abîmé à la réception"</div>
               <div style={{ fontSize: 14, color: "var(--red)" }}>✕ Plateforme rembourse l'acheteur</div>
@@ -222,7 +222,7 @@ export default function Home() {
             </div>
           </div>
           <div className="compare-card reveal" style={{ background: "rgba(74,222,128,0.04)", border: "0.5px solid rgba(74,222,128,0.15)" }}>
-            <div style={{ fontSize: 12, color: "var(--green)", marginBottom: 20 }}>✅ Avec SellGuard</div>
+            <div style={{ fontSize: 12, color: "var(--green)", marginBottom: 20 }}>✅ Avec SellCov</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div style={{ fontSize: 14, color: "var(--green)" }}>✓ Preuve enregistrée automatiquement</div>
               <div style={{ fontSize: 14, color: "var(--green)" }}>✓ Envoi certifié avant expédition</div>
@@ -314,8 +314,8 @@ export default function Home() {
       {/* ═══ FOOTER ═══ */}
       <footer>
         <div className="footer-logo">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/><text x="11" y="14.5" fontFamily="-apple-system,sans-serif" fontSize="6.5" fontWeight="700" fill="rgba(255,255,255,0.3)" textAnchor="middle">SG</text></svg>
-          SellGuard
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/><text x="11" y="14.5" fontFamily="-apple-system,sans-serif" fontSize="6.5" fontWeight="700" fill="rgba(255,255,255,0.3)" textAnchor="middle">SC</text></svg>
+          SellCov
         </div>
         <div className="footer-links">
           <a href="#">FAQ</a>
@@ -323,7 +323,7 @@ export default function Home() {
           <a href="#">Instagram</a>
           <a href="#">TikTok</a>
         </div>
-        <div className="footer-copy">© 2026 SellGuard</div>
+        <div className="footer-copy">© 2026 SellCov</div>
       </footer>
     </>
   );
