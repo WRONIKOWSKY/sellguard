@@ -173,14 +173,14 @@ export default function Home() {
       {/* ═══ 3. SOLUTION ═══ */}
       <section className="section" style={{ paddingTop: 40 }}>
         <div className="section-eyebrow">🛡️ La solution</div>
-        <h2 className="section-title">SellGuard sécurise<br/><em>chaque vente.</em></h2>
+        <h2 className="section-title">Tu vends.<br/><em>On protège.</em></h2>
         <p className="section-sub" style={{ marginBottom: 40 }}>Avant l'envoi, ton article est :</p>
         <div className="solution-list reveal">
           <div className="solution-item">✓ Horodaté automatiquement</div>
           <div className="solution-item">✓ Certifié avec preuve</div>
           <div className="solution-item">✓ Enregistré de façon sécurisée</div>
         </div>
-        <p className="solution-callout reveal">En cas de litige, tu as une preuve concrète.</p>
+        <p className="solution-callout reveal">L'acheteur conteste ? Tu as la preuve.</p>
         <div style={{ fontSize: 11, textAlign: "center", color: "var(--dim)", marginTop: 12 }}>Horodatage sécurisé + preuve exportable</div>
       </section>
 
