@@ -245,20 +245,18 @@ export default function Protection() {
     { name: "Etsy", color: "#F1641E", bg: "rgba(241,100,30,0.08)", score: "★★★★", tip: lang === "en" ? "Resolution center → 'Submit evidence' → upload both files." : "Centre de résolution → 'Submit evidence' → upload les deux fichiers." },
   ];
 
-  // ── CERTIFIED VIEW ──
   if (certified) return (
     <>
       <Head><title>SellCov — {p.certified_title}</title></Head>
       <Layout>
         <div style={{ background: "rgba(34,197,94,0.06)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 16, padding: 24, marginBottom: 24, textAlign: "center" }}>
-          <div style={{ fontSize: 40, marginBottom: 10 }}>""</div>
           <h3 style={{ fontSize: 20, fontWeight: 800, color: "#15803D", marginBottom: 6 }}>{p.certified_title}</h3>
           <p style={{ fontSize: 14, color: "#166534", lineHeight: 1.6 }}>{p.certified_sub}</p>
         </div>
 
         <div style={{ background: "rgba(99,102,241,0.08)", border: "0.5px solid rgba(99,102,241,0.2)", borderRadius: 14, padding: "14px 18px", marginBottom: 16 }}>
           <p style={{ fontSize: 13, color: "#1D4ED8", lineHeight: 1.6, fontWeight: 600, marginBottom: 6 }}>
-            {lang === "en" ? "📄 2 files downloaded:" : "📄 2 fichiers téléchargés :"}
+            {lang === "en" ? "2 files downloaded:" : "2 fichiers téléchargés :"}
           </p>
           <p style={{ fontSize: 13, color: "#1D4ED8", lineHeight: 1.8, whiteSpace: "pre-line" }}>
             {lang === "en"
@@ -271,8 +269,8 @@ export default function Protection() {
           {[
             [lang === "en" ? "Number" : "Numéro", certified.id],
             [lang === "en" ? "Item" : "Article", certified.article],
-            ["Date & heure", certified.date],
-            ["SHA-256", certified.hash ? certified.hash.substring(0, 16) + "..." : "—"],
+            ["Date", certified.date],
+            ["SHA-256", certified.hash ? certified.hash.substring(0, 16) + "..." : ""],
           ].map(function(row) {
             return (
               <div key={row[0]} style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderBottom: "0.5px solid rgba(255,255,255,0.05)" }}>
@@ -295,7 +293,7 @@ export default function Protection() {
           <p style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.35)", letterSpacing: 0.5, marginBottom: 14 }}>{p.guide_title}</p>
           {PLATFORM_GUIDE.map(function(pl, i) {
             return (
-              <div key={pl.name} style={{ padding: "10px 0", borderBottom: i < PLATFORM_GUIDE.length - 1 ? "1px solid #F9FAFB" : "none" }}>
+              <div key={pl.name} style={{ padding: "10px 0", borderBottom: i < PLATFORM_GUIDE.length - 1 ? "0.5px solid rgba(255,255,255,0.05)" : "none" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
                   <span style={{ fontSize: 12, fontWeight: 700, padding: "2px 10px", borderRadius: 20, background: pl.bg, color: pl.color }}>{pl.name}</span>
                   <span style={{ fontSize: 11, color: "rgba(255,255,255,0.28)" }}>{pl.score}</span>
@@ -305,25 +303,23 @@ export default function Protection() {
             );
           })}
         </div>
-        <button onClick={reset} style={btnStyle("#111", "#fff", false)}>{p.new_btn}</button>
+        <button onClick={reset} style={btnStyle("#fff", "#000", false)}>{p.new_btn}</button>
       </Layout>
     </>
   );
 
-  // ── MAIN VIEW ──
   return (
     <>
       <Head><title>SellCov — {p.title}</title></Head>
       <Layout>
         <div style={{ marginBottom: 20 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 6 }}>{"🛡"} {p.title}</h2>
+          <h2 style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 6 }}>{p.title}</h2>
           <p style={{ fontSize: 14, color: "rgba(255,255,255,0.42)", lineHeight: 1.6 }}>{p.subtitle}</p>
         </div>
 
-        {/* ── TOP TABS: Certify / My shipments ── */}
-        <div style={{ display: "flex", gap: 6, marginBottom: 24, background: "rgba(255,255,255,0.06)", borderRadius: 12, padding: 4 }}>
+        <div style={{ display: "flex", gap: 6, marginBottom: 24, background: "rgba(255,255,255,0.04)", borderRadius: 12, padding: 4 }}>
           {[
-            ["certify", lang === "en" ? "🛡 Certify" : "🛡 Certifier"],
+            ["certify", lang === "en" ? "Certify" : "Certifier"],
             ["shipments", lang === "en" ? "My shipments" : "Mes envois"]
           ].map(function(item) {
             var hasCount = item[0] === "shipments" && shipments.length > 0;
@@ -338,12 +334,10 @@ export default function Protection() {
           })}
         </div>
 
-        {/* ── TAB: MY SHIPMENTS ── */}
         {tab === "shipments" && (
           <div>
             {shipments.length === 0 ? (
               <div style={{ textAlign: "center", padding: "40px 20px", color: "rgba(255,255,255,0.35)" }}>
-                <div style={{ fontSize: 40, marginBottom: 12 }}>""</div>
                 <p style={{ fontSize: 15, fontWeight: 600, marginBottom: 6 }}>{lang === "en" ? "No shipments yet" : "Aucun envoi certifié"}</p>
                 <p style={{ fontSize: 13 }}>{lang === "en" ? "Certify a shipment to see it here." : "Certifie un envoi pour le voir ici."}</p>
               </div>
@@ -358,7 +352,7 @@ export default function Protection() {
                         <p style={{ fontSize: 15, fontWeight: 700, color: "#fff", marginBottom: 2 }}>{s.article}</p>
                         <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)" }}>{s.date}</p>
                       </div>
-                      <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 20, background: hasTracking ? "#F0FDF4" : "#FFF7ED", color: hasTracking ? "#16A34A" : "#D97706" }}>
+                      <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 20, background: hasTracking ? "rgba(34,197,94,0.1)" : "rgba(251,146,60,0.1)", color: hasTracking ? "#16A34A" : "#D97706" }}>
                         {hasTracking ? (lang === "en" ? "Complete" : "Complet") : (lang === "en" ? "No tracking" : "Sans suivi")}
                       </span>
                     </div>
@@ -379,14 +373,14 @@ export default function Protection() {
                         {s.receipt_photo && (
                           <div style={{ marginTop: 6 }}>
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                              <span style={{ fontSize: 12, color: "rgba(255,255,255,0.42)" }}>{lang === "en" ? "Deposit receipt" : "Preuve de dépôt"} ""</span>
+                              <span style={{ fontSize: 12, color: "rgba(255,255,255,0.42)" }}>{lang === "en" ? "Deposit receipt" : "Preuve de dépôt"}</span>
                               <button onClick={function() {
                                 var a = document.createElement("a");
                                 a.href = s.receipt_photo;
                                 a.download = "SellCov_" + s.id + "_receipt.jpg";
                                 document.body.appendChild(a); a.click(); document.body.removeChild(a);
-                              }} style={{ fontSize: 11, fontWeight: 600, color: "#2563EB", background: "rgba(99,102,241,0.08)", border: "0.5px solid rgba(99,102,241,0.2)", borderRadius: 6, padding: "4px 10px", cursor: "pointer", fontFamily: "inherit" }}>
-                                {lang === "en" ? "⬇ Download" : "⬇ Télécharger"}
+                              }} style={{ fontSize: 11, fontWeight: 600, color: "#818CF8", background: "rgba(99,102,241,0.08)", border: "0.5px solid rgba(99,102,241,0.2)", borderRadius: 6, padding: "4px 10px", cursor: "pointer", fontFamily: "inherit" }}>
+                                {lang === "en" ? "Download" : "Télécharger"}
                               </button>
                             </div>
                             <img src={s.receipt_photo} style={{ width: "100%", maxHeight: 160, objectFit: "contain", borderRadius: 8, border: "0.5px solid rgba(255,255,255,0.07)" }} />
@@ -401,18 +395,11 @@ export default function Protection() {
                         <label style={{ fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>
                           {lang === "en" ? "Tracking number" : "Numéro de suivi"}
                         </label>
-                        <input
-                          value={trackingNum}
-                          onChange={function(e) { setTrackingNum(e.target.value); }}
-                          placeholder={lang === "en" ? "Ex: 8R12345678901" : "Ex: 8R12345678901"}
-                          style={Object.assign({}, inp, { marginBottom: 12 })}
-                        />
-
+                        <input value={trackingNum} onChange={function(e) { setTrackingNum(e.target.value); }} placeholder="Ex: 8R12345678901" style={Object.assign({}, inp, { marginBottom: 12 })} />
                         <label style={{ fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>
                           {lang === "en" ? "Deposit receipt photo" : "Photo preuve de dépôt"} <span style={{ fontWeight: 400, color: "rgba(255,255,255,0.25)" }}>({p.optional})</span>
                         </label>
-                        <div
-                          onClick={function() { receiptRef.current && receiptRef.current.click(); }}
+                        <div onClick={function() { receiptRef.current && receiptRef.current.click(); }}
                           style={{ border: "1.5px dashed rgba(255,255,255,0.14)", borderRadius: 10, padding: 14, cursor: "pointer", background: "#0A0A0A", textAlign: "center", marginBottom: 12 }}>
                           {receiptPhoto
                             ? <img src={receiptPhoto} style={{ maxWidth: "100%", maxHeight: 120, borderRadius: 8 }} />
@@ -420,16 +407,12 @@ export default function Protection() {
                           }
                         </div>
                         <input ref={receiptRef} type="file" accept="image/*" style={{ display: "none" }} onChange={handleReceiptPhoto} />
-
                         <div style={{ display: "flex", gap: 8 }}>
-                          <button
-                            onClick={function() { updateShipment(s.id, trackingNum, receiptPhoto); }}
-                            disabled={!trackingNum.trim() && !receiptPhoto}
+                          <button onClick={function() { updateShipment(s.id, trackingNum, receiptPhoto); }} disabled={!trackingNum.trim() && !receiptPhoto}
                             style={Object.assign({}, btnStyle("#16A34A", "#fff", !trackingNum.trim() && !receiptPhoto), { flex: 2 })}>
                             {lang === "en" ? "Save" : "Enregistrer"}
                           </button>
-                          <button
-                            onClick={function() { setEditingId(null); setTrackingNum(""); setReceiptPhoto(null); }}
+                          <button onClick={function() { setEditingId(null); setTrackingNum(""); setReceiptPhoto(null); }}
                             style={{ flex: 1, padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "0.5px solid rgba(255,255,255,0.07)", background: "#0A0A0A", color: "rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "inherit" }}>
                             {lang === "en" ? "Cancel" : "Annuler"}
                           </button>
@@ -439,17 +422,13 @@ export default function Protection() {
 
                     {!isEditing && (
                       <div style={{ display: "flex", gap: 8 }}>
-                        <button
-                          onClick={function() { setEditingId(s.id); setTrackingNum(s.tracking_number || ""); setReceiptPhoto(s.receipt_photo || null); }}
-                          style={{ flex: 1, padding: "10px 14px", fontSize: 13, fontWeight: 600, borderRadius: 10, border: "0.5px solid rgba(255,255,255,0.07)", background: "#0A0A0A", color: hasTracking ? "#555" : "#2563EB", cursor: "pointer", fontFamily: "inherit" }}>
-                          {hasTracking
-                            ? (lang === "en" ? "Edit tracking" : "Modifier le suivi")
-                            : (lang === "en" ? "+ Add tracking" : "+ Ajouter le suivi")}
+                        <button onClick={function() { setEditingId(s.id); setTrackingNum(s.tracking_number || ""); setReceiptPhoto(s.receipt_photo || null); }}
+                          style={{ flex: 1, padding: "10px 14px", fontSize: 13, fontWeight: 600, borderRadius: 10, border: "0.5px solid rgba(255,255,255,0.07)", background: "#0A0A0A", color: hasTracking ? "rgba(255,255,255,0.5)" : "#818CF8", cursor: "pointer", fontFamily: "inherit" }}>
+                          {hasTracking ? (lang === "en" ? "Edit tracking" : "Modifier le suivi") : (lang === "en" ? "+ Add tracking" : "+ Ajouter le suivi")}
                         </button>
-                        <button
-                          onClick={function() { if (confirm(lang === "en" ? "Delete this shipment?" : "Supprimer cet envoi ?")) deleteShipment(s.id); }}
+                        <button onClick={function() { if (confirm(lang === "en" ? "Delete this shipment?" : "Supprimer cet envoi ?")) deleteShipment(s.id); }}
                           style={{ padding: "10px 14px", fontSize: 13, fontWeight: 600, borderRadius: 10, border: "0.5px solid rgba(220,38,38,0.2)", background: "rgba(220,38,38,0.08)", color: "#DC2626", cursor: "pointer", fontFamily: "inherit" }}>
-                          {"🗑"}
+                          ×
                         </button>
                       </div>
                     )}
@@ -460,14 +439,13 @@ export default function Protection() {
           </div>
         )}
 
-        {/* ── TAB: CERTIFY ── */}
         {tab === "certify" && (
           <>
             <div style={{ display: "flex", gap: 8, marginBottom: 24 }}>
               {[["video", p.video_tab, p.recommended], ["photos", p.photo_tab, ""]].map(function(item) {
                 return (
                   <button key={item[0]} onClick={function() { setMode(item[0]); if (item[0] === "photos") stopCamera(); }}
-                    style={{ flex: 1, padding: "10px 14px", fontSize: 13, fontWeight: 600, borderRadius: 10, border: mode === item[0] ? "2px solid #111" : "1px solid #E5E7EB", background: mode === item[0] ? "#fff" : "rgba(255,255,255,0.05)", color: mode === item[0] ? "#000" : "rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "inherit" }}>
+                    style={{ flex: 1, padding: "10px 14px", fontSize: 13, fontWeight: 600, borderRadius: 10, border: mode === item[0] ? "1.5px solid rgba(255,255,255,0.5)" : "0.5px solid rgba(255,255,255,0.1)", background: mode === item[0] ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.05)", color: mode === item[0] ? "#fff" : "rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "inherit" }}>
                     {item[1]} {item[2] ? React.createElement("span", { style: { fontSize: 10, marginLeft: 4, padding: "2px 6px", background: "#16A34A", color: "#fff", borderRadius: 10 } }, item[2]) : null}
                   </button>
                 );
@@ -488,24 +466,19 @@ export default function Protection() {
               <>
                 <div style={{ marginBottom: 16, borderRadius: 14, overflow: "hidden", background: "#111", position: "relative", minHeight: 220 }}>
                   <video ref={videoRef} muted playsInline style={{ width: "100%", display: cameraOn && !recordedUrl ? "block" : "none", maxHeight: 340, objectFit: "cover" }} />
-
                   {cameraOn && !recordedUrl && (
                     <div style={{ position: "absolute", bottom: 12, left: "50%", transform: "translateX(-50%)", background: "rgba(0,0,0,0.55)", borderRadius: 8, padding: "4px 12px", whiteSpace: "nowrap" }}>
                       <span style={{ fontSize: 12, color: "#00FF88", fontFamily: "monospace", fontWeight: 700 }}>SellCov · {timestamp}</span>
                     </div>
                   )}
-
                   {recordedUrl && <video src={recordedUrl} controls playsInline style={{ width: "100%", maxHeight: 340 }} />}
-
                   {!cameraOn && !recordedUrl && (
                     <div style={{ minHeight: 220, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10 }}>
-                      <div style={{ fontSize: 40 }}>""</div>
                       <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)", textAlign: "center", padding: "0 20px" }}>
                         {lang === "en" ? "Video + SHA-256 certificate generated automatically" : "Vidéo + certificat SHA-256 générés automatiquement"}
                       </p>
                     </div>
                   )}
-
                   {recording && (
                     <div style={{ position: "absolute", top: 10, left: 10, background: "rgba(0,0,0,0.7)", borderRadius: 20, padding: "4px 12px", display: "flex", alignItems: "center", gap: 8 }}>
                       <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#FF3B30" }} />
@@ -519,13 +492,13 @@ export default function Protection() {
                 {!recordedUrl ? (
                   <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
                     {!cameraOn
-                      ? <button onClick={startCamera} disabled={!articleName.trim()} style={btnStyle("#111", "#fff", !articleName.trim())}>{p.activate}</button>
+                      ? <button onClick={startCamera} disabled={!articleName.trim()} style={btnStyle("#fff", "#000", !articleName.trim())}>{p.activate}</button>
                       : !recording
                         ? <>
                             <button onClick={startRecording} style={Object.assign({}, btnStyle("#DC2626", "#fff", false), { flex: 2 })}>{p.start}</button>
                             <button onClick={stopCamera} style={{ flex: 1, padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "0.5px solid rgba(255,255,255,0.07)", background: "#0A0A0A", color: "rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "inherit" }}>{p.cancel}</button>
                           </>
-                        : <button onClick={stopRecording} style={btnStyle("#111", "#fff", false)}>{p.stop} {fmt(elapsed)}</button>
+                        : <button onClick={stopRecording} style={btnStyle("#fff", "#000", false)}>{p.stop} {fmt(elapsed)}</button>
                     }
                   </div>
                 ) : (
@@ -534,7 +507,7 @@ export default function Protection() {
                       {lang === "en" ? "Download video" : "Télécharger la vidéo"}
                     </button>
                     <button onClick={downloadPDF} disabled={processing} style={btnStyle("#2563EB", "#fff", processing)}>
-                      {processing ? (lang === "en" ? "Generating..." : "Génération...") : (lang === "en" ? "📄 Download PDF certificate" : "📄 Télécharger le certificat PDF")}
+                      {processing ? (lang === "en" ? "Generating..." : "Génération...") : (lang === "en" ? "Download PDF certificate" : "Télécharger le certificat PDF")}
                     </button>
                     <button onClick={function() { setRecordedBlob(null); setRecordedUrl(null); setElapsed(0); startCamera(); }}
                       style={{ padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "0.5px solid rgba(255,255,255,0.07)", background: "#0A0A0A", color: "rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "inherit" }}>{p.redo}</button>
@@ -561,8 +534,8 @@ export default function Protection() {
                           <div key={i} style={{ position: "relative" }}>
                             <img src={ph.url} style={{ width: "100%", height: 80, objectFit: "cover", borderRadius: 8, border: "0.5px solid rgba(255,255,255,0.07)" }} />
                             <button onClick={function() { setPhotos(function(prev) { return prev.filter(function(_, idx) { return idx !== i; }); }); }}
-                              style={{ position: "absolute", top: -6, right: -6, width: 22, height: 22, borderRadius: "50%", background: "#DC2626", color: "#fff", border: "2px solid #fff", fontSize: 12, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0, lineHeight: 1 }}>
-                              {"×"}
+                              style={{ position: "absolute", top: -6, right: -6, width: 22, height: 22, borderRadius: "50%", background: "#DC2626", color: "#fff", border: "2px solid #111", fontSize: 12, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0, lineHeight: 1 }}>
+                              ×
                             </button>
                           </div>
                         );
@@ -570,8 +543,8 @@ export default function Protection() {
                     </div>
                   )}
                 </div>
-                <button onClick={certifyPhotos} disabled={!photos.length || !articleName.trim()} style={btnStyle("#111", "#fff", !photos.length || !articleName.trim())}>
-                  {lang === "en" ? "Generate certificate →" : "Générer le certificat →"}
+                <button onClick={certifyPhotos} disabled={!photos.length || !articleName.trim()} style={btnStyle("#fff", "#000", !photos.length || !articleName.trim())}>
+                  {lang === "en" ? "Generate certificate" : "Générer le certificat"}
                 </button>
               </>
             )}
