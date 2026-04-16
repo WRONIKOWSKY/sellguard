@@ -175,7 +175,7 @@ export default function Annonce() {
                 style={{ border: "1.5px dashed rgba(255,255,255,0.14)", borderRadius: 16, padding: images.length > 0 ? 12 : 28, cursor: "pointer", background: "#0A0A0A", textAlign: "center", minHeight: images.length > 0 ? "auto" : 130, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
                 {images.length === 0 ? (
                   <div>
-                    <div style={{ fontSize: 36, marginBottom: 10 }}>"+"</div>
+                    <div style={{ width: 48, height: 48, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.3)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px", fontSize: 24, color: "rgba(255,255,255,0.5)" }}>+</div>
                     <p style={{ fontSize: 14, color: "rgba(255,255,255,0.35)" }}>{a.photo_hint}</p>
                     <p style={{ fontSize: 12, color: "rgba(255,255,255,0.28)", marginTop: 4 }}>{a.photo_sub}</p>
                   </div>
@@ -348,7 +348,7 @@ export default function Annonce() {
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
                         <p style={{ fontSize: 11, fontWeight: 700, color: "#15803D", letterSpacing: 0.5 }}>{tx({fr:"MESSAGE POUR L'ACHETEUR", en:"MESSAGE FOR BUYER", es:"MENSAJE PARA EL COMPRADOR", it:"MESSAGGIO PER L'ACQUIRENTE"})}</p>
                         <button onClick={function() { copy("buyermsg", msg); }} style={{ fontSize: 12, color: "#15803D", background: "#0A0A0A", border: "0.5px solid rgba(34,197,94,0.2)", borderRadius: 6, padding: "4px 12px", cursor: "pointer", fontFamily: "inherit" }}>
-                          {copied["buyermsg"] ? tx({fr:"Copié ✓", en:"Copied ✓", es:"Copiado ✓", it:"Copiato ✓"}) : tx({fr:"Copier", en:"Copy", es:"Copiar", it:"Copia"})}
+                          {copied["buyermsg"] ? (tx({fr:"Copié ✓", en:"Copied ✓", es:"Copiado ✓", it:"Copiato ✓"}) : tx({fr:"Copier", en:"Copy", es:"Copiar", it:"Copia"})}
                         </button>
                       </div>
                       <p style={{ fontSize: 13, color: "#166534", lineHeight: 1.7 }}>{msg}</p>
@@ -382,7 +382,7 @@ export default function Annonce() {
                           return (
                             <button key={pl.name} onClick={function() { publishTo(pl); }}
                               style={{ fontSize: 12, fontWeight: 600, padding: "8px 16px", borderRadius: 20, border: "0.5px solid rgba(255,255,255,0.1)", background: pl.bg, color: pl.color, cursor: "pointer", fontFamily: "inherit", transition: "opacity 0.15s" }}>
-                              {copied["publish"] === pl.name ? (tx({fr:"Copié ! Ouverture...", en:"Copied! Opening...", es:"Copiado! Abriendo...", it:"Copiato! Apertura..."})) : (tx({fr:"Poster sur ", en:"Post on ", es:"Publicar en ", it:"Pubblica su "})) + pl.name + " →"}
+                              {copied["publish"] === pl.name ? (tx({fr:"Copié ! Ouverture...", en:"Copied! Opening...", es:"Copiado! Abriendo...", it:"Copiato! Apertura..."})) : (tx({fr:"Poster sur ", en:"Post on ", es:"Publicar en ", it:"Pubblica su "})) + pl.name}
                             </button>
                           );
                         })}
