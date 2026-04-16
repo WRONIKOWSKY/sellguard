@@ -35,7 +35,7 @@ export default function Annonce() {
   var a = t.annonce;
   var MEASURE_FIELDS = lang === "en" ? MEASURE_FIELDS_EN : MEASURE_FIELDS_FR;
 
-  var _condition = useState(a.conditions[2]), condition = _condition[0], setCondition = _condition[1];
+  var _condition = useState(""), condition = _condition[0], setCondition = _condition[1];
   var _extra = useState(""), extra = _extra[0], setExtra = _extra[1];
   var _images = useState([]), images = _images[0], setImages = _images[1];
   var _loading = useState(false), loading = _loading[0], setLoading = _loading[1];
@@ -163,8 +163,8 @@ export default function Annonce() {
         {!result ? (
           <>
             <div style={{ marginBottom: 28 }}>
-              <h2 style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 6 }}>{"📦"} {a.title}</h2>
-              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.42)" }}>{a.subtitle}</p>
+              <h2 style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 6 }}>{a.title}</h2>
+              
             </div>
 
             {/* MULTI-PHOTO UPLOAD */}
@@ -174,7 +174,7 @@ export default function Annonce() {
                 style={{ border: "1.5px dashed rgba(255,255,255,0.14)", borderRadius: 16, padding: images.length > 0 ? 12 : 28, cursor: "pointer", background: "#0A0A0A", textAlign: "center", minHeight: images.length > 0 ? "auto" : 130, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
                 {images.length === 0 ? (
                   <div>
-                    <div style={{ fontSize: 36, marginBottom: 10 }}>{"📷"}</div>
+                    <div style={{ fontSize: 36, marginBottom: 10 }}>"+"</div>
                     <p style={{ fontSize: 14, color: "rgba(255,255,255,0.35)" }}>{a.photo_hint}</p>
                     <p style={{ fontSize: 12, color: "rgba(255,255,255,0.28)", marginTop: 4 }}>{a.photo_sub}</p>
                   </div>
@@ -204,6 +204,7 @@ export default function Annonce() {
             <div style={{ marginBottom: 16 }}>
               <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>{a.condition_label}</label>
               <select value={condition} onChange={function(e) { setCondition(e.target.value); }} style={inp}>
+                <option value="">{lang === "en" ? "Select condition" : "Sélectionner l'état"}</option>
                 {a.conditions.map(function(c) { return <option key={c}>{c}</option>; })}
               </select>
             </div>
@@ -214,7 +215,7 @@ export default function Annonce() {
             </div>
 
             <div style={{ marginBottom: 16, background: "rgba(99,102,241,0.05)", border: "0.5px solid rgba(99,102,241,0.15)", borderRadius: 14, padding: "14px 16px" }}>
-              <label style={{ fontSize: 13, fontWeight: 600, color: "#1D4ED8", display: "block", marginBottom: 10 }}>{"📏"} {a.measures_label} <span style={{ fontWeight: 400, color: "#64748B" }}>({a.measures_hint})</span></label>
+              <label style={{ fontSize: 13, fontWeight: 600, color: "#fff", display: "block", marginBottom: 10 }}>{a.measures_label} <span style={{ fontWeight: 400, color: "rgba(255,255,255,0.35)" }}>({a.measures_hint})</span></label>
               <select value={measureCategory} onChange={function(e) { setMeasureCategory(e.target.value); setMeasures({}); }} style={Object.assign({}, inp, { background: "#0A0A0A", marginBottom: measureCategory ? 12 : 0 })}>
                 <option value="">{a.measures_ph}</option>
                 {Object.keys(MEASURE_FIELDS).map(function(cat) { return <option key={cat}>{cat}</option>; })}
@@ -274,7 +275,7 @@ export default function Annonce() {
 
             {buildMeasuresText() && (
               <div style={{ background: "rgba(99,102,241,0.08)", border: "0.5px solid rgba(99,102,241,0.2)", borderRadius: 12, padding: "10px 14px", marginBottom: 16, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <p style={{ fontSize: 13, color: "#1D4ED8", margin: 0 }}>{"📏"} {buildMeasuresText()}</p>
+                <p style={{ fontSize: 13, color: "#1D4ED8", margin: 0 }}>{""} {buildMeasuresText()}</p>
                 <button onClick={function() { copy("measures", buildMeasuresText()); }} style={{ fontSize: 11, color: "#1D4ED8", background: "transparent", border: "0.5px solid rgba(99,102,241,0.2)", borderRadius: 6, padding: "3px 10px", cursor: "pointer", fontFamily: "inherit", flexShrink: 0, marginLeft: 10 }}>
                   {copied["measures"] ? a.copied : a.copy}
                 </button>
@@ -341,8 +342,8 @@ export default function Annonce() {
 
                 {(function() {
                   var msg = lang === "en"
-                    ? "Thank you for your purchase! 🎉 Your parcel was carefully packed and filmed before shipping with SellCov — timestamped video proof is kept in case of dispute. Enjoy your item! 📦"
-                    : "Merci pour ton achat ! 🎉 Ton colis a été soigneusement emballé et filmé avant envoi avec SellCov — une preuve vidéo horodatée est conservée en cas de litige. Bonne réception ! 📦";
+                    ? "Thank you for your purchase! Your parcel was carefully packed and filmed before shipping with SellCov — timestamped video proof is kept in case of dispute. Enjoy your item!"
+                    : "Merci pour ton achat ! Ton colis a été soigneusement emballé et filmé avant envoi avec SellCov — une preuve vidéo horodatée est conservée en cas de litige. Bonne réception !";
                   return (
                     <div style={{ background: "rgba(34,197,94,0.06)", border: "0.5px solid rgba(34,197,94,0.2)", borderRadius: 14, padding: "14px 18px" }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
