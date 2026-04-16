@@ -248,7 +248,7 @@ export default function Protection() {
   // ── CERTIFIED VIEW ──
   if (certified) return (
     <>
-      <Head><title>SellCov {p.certified_title}</title></Head>
+      <Head><title>SellCov — {p.certified_title}</title></Head>
       <Layout>
         <div style={{ background: "rgba(34,197,94,0.06)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 16, padding: 24, marginBottom: 24, textAlign: "center" }}>
           <div style={{ fontSize: 40, marginBottom: 10 }}>""</div>
@@ -286,8 +286,8 @@ export default function Protection() {
         <div style={{ background: "rgba(251,146,60,0.06)", border: "0.5px solid rgba(251,146,60,0.2)", borderRadius: 14, padding: "14px 18px", marginBottom: 16 }}>
           <p style={{ fontSize: 13, color: "#92400E", lineHeight: 1.6 }}>
             {lang === "en"
-              ? "📦 You can add your tracking number and deposit receipt later from the \"My shipments\" tab."
-              : "📦 Tu pourras ajouter ton numéro de suivi et ta preuve de dépôt plus tard depuis l'onglet \"Mes envois\"."}
+              ? "You can add your tracking number and deposit receipt later from the \"My shipments\" tab."
+              : "Tu pourras ajouter ton numéro de suivi et ta preuve de dépôt plus tard depuis l'onglet \"Mes envois\"."}
           </p>
         </div>
 
@@ -295,7 +295,7 @@ export default function Protection() {
           <p style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.35)", letterSpacing: 0.5, marginBottom: 14 }}>{p.guide_title}</p>
           {PLATFORM_GUIDE.map(function(pl, i) {
             return (
-              <div key={pl.name} style={{ padding: "10px 0", borderBottom: i < PLATFORM_GUIDE.length 1 ? "1px solid #F9FAFB" : "none" }}>
+              <div key={pl.name} style={{ padding: "10px 0", borderBottom: i < PLATFORM_GUIDE.length - 1 ? "1px solid #F9FAFB" : "none" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
                   <span style={{ fontSize: 12, fontWeight: 700, padding: "2px 10px", borderRadius: 20, background: pl.bg, color: pl.color }}>{pl.name}</span>
                   <span style={{ fontSize: 11, color: "rgba(255,255,255,0.28)" }}>{pl.score}</span>
@@ -313,7 +313,7 @@ export default function Protection() {
   // ── MAIN VIEW ──
   return (
     <>
-      <Head><title>SellCov {p.title}</title></Head>
+      <Head><title>SellCov — {p.title}</title></Head>
       <Layout>
         <div style={{ marginBottom: 20 }}>
           <h2 style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 6 }}>{"🛡"} {p.title}</h2>
@@ -324,7 +324,7 @@ export default function Protection() {
         <div style={{ display: "flex", gap: 6, marginBottom: 24, background: "rgba(255,255,255,0.06)", borderRadius: 12, padding: 4 }}>
           {[
             ["certify", lang === "en" ? "🛡 Certify" : "🛡 Certifier"],
-            ["shipments", lang === "en" ? "📦 My shipments" : "📦 Mes envois"]
+            ["shipments", lang === "en" ? "My shipments" : "Mes envois"]
           ].map(function(item) {
             var hasCount = item[0] === "shipments" && shipments.length > 0;
             return (
@@ -343,7 +343,7 @@ export default function Protection() {
           <div>
             {shipments.length === 0 ? (
               <div style={{ textAlign: "center", padding: "40px 20px", color: "rgba(255,255,255,0.35)" }}>
-                <div style={{ fontSize: 40, marginBottom: 12 }}>{"📦"}</div>
+                <div style={{ fontSize: 40, marginBottom: 12 }}>""</div>
                 <p style={{ fontSize: 15, fontWeight: 600, marginBottom: 6 }}>{lang === "en" ? "No shipments yet" : "Aucun envoi certifié"}</p>
                 <p style={{ fontSize: 13 }}>{lang === "en" ? "Certify a shipment to see it here." : "Certifie un envoi pour le voir ici."}</p>
               </div>
