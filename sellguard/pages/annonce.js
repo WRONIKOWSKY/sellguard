@@ -348,7 +348,7 @@ export default function Annonce() {
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
                         <p style={{ fontSize: 11, fontWeight: 700, color: "#15803D", letterSpacing: 0.5 }}>{tx({fr:"MESSAGE POUR L'ACHETEUR", en:"MESSAGE FOR BUYER", es:"MENSAJE PARA EL COMPRADOR", it:"MESSAGGIO PER L'ACQUIRENTE"})}</p>
                         <button onClick={function() { copy("buyermsg", msg); }} style={{ fontSize: 12, color: "#15803D", background: "#0A0A0A", border: "0.5px solid rgba(34,197,94,0.2)", borderRadius: 6, padding: "4px 12px", cursor: "pointer", fontFamily: "inherit" }}>
-                          {copied["buyermsg"] ? (tx({fr:"Copié ✓", en:"Copied ✓", es:"Copiado ✓", it:"Copiato ✓"}) : tx({fr:"Copier", en:"Copy", es:"Copiar", it:"Copia"})}
+                          {copied["buyermsg"] ? tx({fr:"Copié ✓", en:"Copied ✓", es:"Copiado ✓", it:"Copiato ✓"}) : tx({fr:"Copier", en:"Copy", es:"Copiar", it:"Copia"})}
                         </button>
                       </div>
                       <p style={{ fontSize: 13, color: "#166534", lineHeight: 1.7 }}>{msg}</p>
