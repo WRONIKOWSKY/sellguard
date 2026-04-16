@@ -4,10 +4,10 @@ import Layout from "../components/Layout";
 import { useLang } from "../contexts/LangContext";
 
 export default function Litige() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const l = t.litige;
 
-  const [type, setType] = useState(l.types[0]);
+  const [type, setType] = useState("");
   const [buyerMessage, setBuyerMessage] = useState("");
   const [certRef, setCertRef] = useState("");
   const [images, setImages] = useState([]);
@@ -86,18 +86,19 @@ export default function Litige() {
 
   return (
     <>
-      <Head><title>SellGuard — {l.title}</title></Head>
+      <Head><title>SellCov — {l.title}</title></Head>
       <Layout>
         {!result ? (
           <>
             <div style={{ marginBottom: 28 }}>
-              <h2 style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 6 }}>⚖️ {l.title}</h2>
+              <h2 style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 6 }}>{l.title}</h2>
               <p style={{ fontSize: 14, color: "rgba(255,255,255,0.42)", lineHeight: 1.6 }}>{l.subtitle}</p>
             </div>
 
             <div style={{ marginBottom: 16 }}>
               <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>{l.type_label}</label>
               <select value={type} onChange={e => setType(e.target.value)} style={inp}>
+                <option value="">{lang === "en" ? "Select type" : lang === "es" ? "Seleccionar tipo" : lang === "it" ? "Seleziona tipo" : "Sélectionner le type"}</option>
                 {l.types.map(t => <option key={t}>{t}</option>)}
               </select>
             </div>
@@ -148,7 +149,7 @@ export default function Litige() {
               <div style={{ background: fraudColor.bg, border: `0.5px solid ${fraudColor.border}`, borderRadius: 14, padding: "16px 20px", marginBottom: 16 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
                   <p style={{ fontSize: 13, fontWeight: 700, color: fraudColor.text }}>
-                    {result.fraud_score >= 7 ? "🚨" : result.fraud_score >= 4 ? "⚠️" : "✅"} {l.fraud_label} — {fraudColor.label}
+                    {l.fraud_label} {fraudColor.label}
                   </p>
                   <span style={{ fontSize: 20, fontWeight: 800, color: fraudColor.text }}>{result.fraud_score}/10</span>
                 </div>
@@ -165,7 +166,7 @@ export default function Litige() {
               <p style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.35)", letterSpacing: 0.5, marginBottom: 12 }}>{l.args_l}</p>
               {result.arguments?.map((arg, i) => (
                 <div key={i} style={{ display: "flex", gap: 12, marginBottom: i < result.arguments.length - 1 ? 10 : 0, padding: "10px 14px", background: "rgba(255,255,255,0.03)", borderRadius: 10 }}>
-                  <span style={{ fontSize: 16, flexShrink: 0 }}>🛡️</span>
+                  <span style={{ fontSize: 16, flexShrink: 0 }}></span>
                   <p style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", lineHeight: 1.5 }}>{arg}</p>
                 </div>
               ))}
