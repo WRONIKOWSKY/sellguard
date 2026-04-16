@@ -247,7 +247,7 @@ export default function Protection() {
 
   if (certified) return (
     <>
-      <Head><title>SellCov — {p.certified_title}</title></Head>
+      <Head><title>SellCov {p.certified_title}</title></Head>
       <Layout>
         <div style={{ background: "rgba(34,197,94,0.06)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 16, padding: 24, marginBottom: 24, textAlign: "center" }}>
           <h3 style={{ fontSize: 20, fontWeight: 800, color: "#15803D", marginBottom: 6 }}>{p.certified_title}</h3>
@@ -306,7 +306,7 @@ export default function Protection() {
 
   return (
     <>
-      <Head><title>SellCov — {p.title}</title></Head>
+      <Head><title>SellCov {p.title}</title></Head>
       <Layout>
         <div style={{ marginBottom: 20 }}>
           <h2 style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 6 }}>{p.title}</h2>
