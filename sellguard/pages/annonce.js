@@ -33,7 +33,8 @@ var MEASURE_FIELDS_EN = {
 export default function Annonce() {
   var ref = useLang(), lang = ref.lang, t = ref.t;
   var a = t.annonce;
-  var MEASURE_FIELDS = lang === "en" ? MEASURE_FIELDS_EN : MEASURE_FIELDS_FR;
+  function tx(obj) { return obj[lang] || obj.en || obj.fr; }
+  var MEASURE_FIELDS = (lang === "en" || lang === "es" || lang === "it") ? MEASURE_FIELDS_EN : MEASURE_FIELDS_FR;
 
   var _condition = useState(""), condition = _condition[0], setCondition = _condition[1];
   var _extra = useState(""), extra = _extra[0], setExtra = _extra[1];
@@ -90,7 +91,7 @@ export default function Annonce() {
     var fields = MEASURE_FIELDS[measureCategory] || [];
     var filled = fields.filter(function(f) { return measures[f]; });
     if (!filled.length) return "";
-    var prefix = lang === "en" ? "Measurements: " : "Mesures : ";
+    var prefix = tx({fr:"Mesures : ", en:"Measurements: ", es:"Medidas: ", it:"Misure: "});
     return prefix + filled.map(function(f) { return f.replace(" (cm)", "").replace(" EU", "").replace(" (EU)", "") + " " + measures[f] + (f.toLowerCase().includes("eu") || f.toLowerCase().includes("size") ? "" : "cm"); }).join(", ");
   }
 
@@ -114,7 +115,7 @@ export default function Annonce() {
       setActiveTab(data.best_platform);
       saveToHistory(data, condition, lang);
       var cat = (data.item_category || "").toLowerCase();
-      var fields = lang === "en" ? MEASURE_FIELDS_EN : MEASURE_FIELDS_FR;
+      var fields = (lang === "en" || lang === "es" || lang === "it") ? MEASURE_FIELDS_EN : MEASURE_FIELDS_FR;
       var autoMatch = Object.keys(fields).find(function(k) {
         var kl = k.toLowerCase();
         if (cat.includes("vest") || cat.includes("jacket") || cat.includes("manteau") || cat.includes("coat")) return kl.includes("vest") || kl.includes("jack") || kl.includes("mant");
@@ -129,13 +130,13 @@ export default function Annonce() {
     } catch (e) {
       var msg = e.message || "";
       if (msg.includes("Failed to fetch") || msg.includes("NetworkError")) {
-        setError(lang === "en" ? "Connection error. Check your internet and try again." : "Erreur de connexion. Vérifie ta connexion internet et réessaie.");
+        setError(tx({fr:"Erreur de connexion. Vérifie ta connexion internet et réessaie.", en:"Connection error. Check your internet and try again.", es:"Error de conexión. Verifica tu conexión e inténtalo de nuevo.", it:"Errore di connessione. Controlla la connessione e riprova."}));
       } else if (msg.includes("503") || msg.includes("overloaded")) {
-        setError(lang === "en" ? "Server is busy. Wait a few seconds and try again." : "Le serveur est occupé. Attends quelques secondes et réessaie.");
+        setError(tx({fr:"Le serveur est occupé. Attends quelques secondes et réessaie.", en:"Server is busy. Wait a few seconds and try again.", es:"El servidor está ocupado. Espera unos segundos e inténtalo de nuevo.", it:"Il server è occupato. Attendi qualche secondo e riprova."}));
       } else if (msg.includes("413") || msg.includes("too large")) {
-        setError(lang === "en" ? "Photo is too large. Try with a lighter image." : "La photo est trop grande. Essaie avec une image plus légère.");
+        setError(tx({fr:"La photo est trop grande. Essaie avec une image plus légère.", en:"Photo is too large. Try with a lighter image.", es:"La foto es demasiado grande. Intenta con una imagen más ligera.", it:"La foto è troppo grande. Prova con un'immagine più leggera."}));
       } else {
-        setError(lang === "en" ? "An error occurred. Please try again." : "Une erreur est survenue. Réessaie ou contacte le support.");
+        setError(tx({fr:"Une erreur est survenue. Réessaie ou contacte le support.", en:"An error occurred. Please try again.", es:"Ha ocurrido un error. Inténtalo de nuevo.", it:"Si è verificato un errore. Riprova."}));
       }
     }
     setLoading(false);
@@ -204,7 +205,7 @@ export default function Annonce() {
             <div style={{ marginBottom: 16 }}>
               <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>{a.condition_label}</label>
               <select value={condition} onChange={function(e) { setCondition(e.target.value); }} style={inp}>
-                <option value="">{lang === "en" ? "Select condition" : "Sélectionner l'état"}</option>
+                <option value="">{tx({fr:"Sélectionner l'état", en:"Select condition", es:"Seleccionar estado", it:"Seleziona condizione"})}</option>
                 {a.conditions.map(function(c) { return <option key={c}>{c}</option>; })}
               </select>
             </div>
@@ -257,9 +258,9 @@ export default function Annonce() {
                 <button onClick={function() {
                   var text = result.title + "\n\n" + result.description + "\n\n" + (buildMeasuresText() ? buildMeasuresText() + "\n\n" : "") + (result.keywords || []).map(function(k) { return "#" + k; }).join(" ");
                   if (navigator.share) { navigator.share({ title: result.item_name, text: text }); }
-                  else { navigator.clipboard.writeText(text); alert(lang === "en" ? "Listing copied!" : "Annonce copiée !"); }
+                  else { navigator.clipboard.writeText(text); alert(tx({fr:"Annonce copiée !", en:"Listing copied!", es:"Anuncio copiado!", it:"Annuncio copiato!"})); }
                 }} style={{ fontSize: 13, color: "#2563EB", background: "rgba(99,102,241,0.08)", border: "none", borderRadius: 8, padding: "7px 14px", cursor: "pointer", fontFamily: "inherit" }}>
-                  {lang === "en" ? "Share" : "Partager"}
+                  {tx({fr:"Partager", en:"Share", es:"Compartir", it:"Condividi"})}
                 </button>
                 <button onClick={reset} style={{ fontSize: 13, color: "rgba(255,255,255,0.42)", background: "rgba(255,255,255,0.06)", border: "none", borderRadius: 8, padding: "7px 16px", cursor: "pointer", fontFamily: "inherit" }}>{a.back}</button>
               </div>
@@ -341,15 +342,13 @@ export default function Annonce() {
                 </div>
 
                 {(function() {
-                  var msg = lang === "en"
-                    ? "Thank you for your purchase! Your parcel was carefully packed and filmed before shipping with SellCov — timestamped video proof is kept in case of dispute. Enjoy your item!"
-                    : "Merci pour ton achat ! Ton colis a été soigneusement emballé et filmé avant envoi avec SellCov — une preuve vidéo horodatée est conservée en cas de litige. Bonne réception !";
+                  var msg = tx({fr:"Merci pour ton achat ! Ton colis a été soigneusement emballé et filmé avant envoi avec SellCov — une preuve vidéo horodatée est conservée en cas de litige. Bonne réception !", en:"Thank you for your purchase! Your parcel was carefully packed and filmed before shipping with SellCov — timestamped video proof is kept in case of dispute. Enjoy your item!", es:"Gracias por tu compra! Tu paquete fue cuidadosamente empaquetado y filmado antes del envío con SellCov — se conserva una prueba de vídeo con marca temporal en caso de disputa. Disfruta tu artículo!", it:"Grazie per il tuo acquisto! Il tuo pacco è stato accuratamente imballato e filmato prima della spedizione con SellCov — una prova video con timestamp viene conservata in caso di controversia. Buona ricezione!"});
                   return (
                     <div style={{ background: "rgba(34,197,94,0.06)", border: "0.5px solid rgba(34,197,94,0.2)", borderRadius: 14, padding: "14px 18px" }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-                        <p style={{ fontSize: 11, fontWeight: 700, color: "#15803D", letterSpacing: 0.5 }}>{lang === "en" ? "MESSAGE FOR BUYER" : "MESSAGE POUR L'ACHETEUR"}</p>
+                        <p style={{ fontSize: 11, fontWeight: 700, color: "#15803D", letterSpacing: 0.5 }}>{tx({fr:"MESSAGE POUR L'ACHETEUR", en:"MESSAGE FOR BUYER", es:"MENSAJE PARA EL COMPRADOR", it:"MESSAGGIO PER L'ACQUIRENTE"})}</p>
                         <button onClick={function() { copy("buyermsg", msg); }} style={{ fontSize: 12, color: "#15803D", background: "#0A0A0A", border: "0.5px solid rgba(34,197,94,0.2)", borderRadius: 6, padding: "4px 12px", cursor: "pointer", fontFamily: "inherit" }}>
-                          {copied["buyermsg"] ? (lang === "en" ? "Copied ✓" : "Copié ✓") : (lang === "en" ? "Copy" : "Copier")}
+                          {copied["buyermsg"] ? (tx({fr:"Copié ✓", en:"Copied ✓", es:"Copiado ✓", it:"Copiato ✓"}) : tx({fr:"Copier", en:"Copy", es:"Copiar", it:"Copia"})}
                         </button>
                       </div>
                       <p style={{ fontSize: 13, color: "#166534", lineHeight: 1.7 }}>{msg}</p>
@@ -376,14 +375,14 @@ export default function Annonce() {
                   }
                   return (
                     <div style={{ background: "rgba(255,255,255,0.03)", border: "0.5px solid rgba(255,255,255,0.07)", borderRadius: 14, padding: "14px 18px", marginTop: 14 }}>
-                      <p style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.35)", letterSpacing: 0.5, marginBottom: 12 }}>{lang === "en" ? "PUBLISH NOW" : "PUBLIER MAINTENANT"}</p>
-                      <p style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginBottom: 14, lineHeight: 1.5 }}>{lang === "en" ? "Your listing is copied to clipboard. Click a platform to open it and paste." : "Ton annonce est copiée. Clique sur une plateforme pour l'ouvrir et coller."}</p>
+                      <p style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.35)", letterSpacing: 0.5, marginBottom: 12 }}>{tx({fr:"PUBLIER MAINTENANT", en:"PUBLISH NOW", es:"PUBLICAR AHORA", it:"PUBBLICA ORA"})}</p>
+                      <p style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginBottom: 14, lineHeight: 1.5 }}>{tx({fr:"Ton annonce est copiée. Clique sur une plateforme pour l'ouvrir et coller.", en:"Your listing is copied to clipboard. Click a platform to open it and paste.", es:"Tu anuncio está copiado. Haz clic en una plataforma para abrirla y pegar.", it:"Il tuo annuncio è copiato. Clicca su una piattaforma per aprirla e incollare."})}</p>
                       <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                         {platforms.map(function(pl) {
                           return (
                             <button key={pl.name} onClick={function() { publishTo(pl); }}
                               style={{ fontSize: 12, fontWeight: 600, padding: "8px 16px", borderRadius: 20, border: "0.5px solid rgba(255,255,255,0.1)", background: pl.bg, color: pl.color, cursor: "pointer", fontFamily: "inherit", transition: "opacity 0.15s" }}>
-                              {copied["publish"] === pl.name ? (lang === "en" ? "Copied! Opening..." : "Copié ! Ouverture...") : (lang === "en" ? "Post on " : "Poster sur ") + pl.name + " →"}
+                              {copied["publish"] === pl.name ? (tx({fr:"Copié ! Ouverture...", en:"Copied! Opening...", es:"Copiado! Abriendo...", it:"Copiato! Apertura..."})) : (tx({fr:"Poster sur ", en:"Post on ", es:"Publicar en ", it:"Pubblica su "})) + pl.name + " →"}
                             </button>
                           );
                         })}
