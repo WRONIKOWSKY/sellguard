@@ -72,8 +72,8 @@ export default function Home() {
         .section-sub { text-align: center; font-size: 15px; color: var(--muted); font-weight: 300; line-height: 1.6; }
 
         .pain-list { list-style: none; display: flex; flex-direction: column; gap: 12px; max-width: 500px; margin: 0 auto; }
-        .pain-item { font-size: 15px; color: var(--red); display: flex; align-items: center; gap: 10px; }
-        .pain-callout { text-align: center; margin-top: 32px; font-size: 15px; color: var(--muted); font-weight: 400; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+        .pain-item { font-size: 15px; color: var(--red); display: flex; align-items: center; gap: 10px; text-align: left; }
+        .pain-callout { text-align: left; margin-top: 32px; font-size: 15px; color: var(--muted); font-weight: 400; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 
         .solution-list { display: flex; flex-direction: column; gap: 10px; max-width: 500px; margin: 0 auto; }
         .solution-item { font-size: 15px; color: var(--green); display: flex; align-items: center; gap: 10px; }
@@ -162,8 +162,8 @@ export default function Home() {
         <h2 className="section-title">Tu peux perdre ton argent<br/><em>sur une seule vente.</em></h2>
         <div style={{ height: 40 }}></div>
         <ul className="pain-list reveal">
-          <li className="pain-item">Un acheteur malhonnête → remboursement forcé</li>
-          <li className="pain-item">Zéro preuve → zéro recours</li>
+          <li className="pain-item">Un acheteur malhonnête, remboursement forcé</li>
+          <li className="pain-item">Zéro preuve, zéro recours</li>
         </ul>
         <p className="pain-callout reveal" style={{ fontWeight: 500, color: "var(--red)" }}>Tu prends 100% du risque.</p>
       </section>
@@ -171,11 +171,11 @@ export default function Home() {
       {/* ═══ 3. SOLUTION ═══ */}
       <section className="section" style={{ paddingTop: 40 }}>
         <h2 className="section-title">Tu vends.<br/><em>On protège.</em></h2>
-        <p className="section-sub" style={{ marginBottom: 40 }}>Avant l'envoi, ton article est :</p>
+        <p className="section-sub" style={{ marginBottom: 40 }}>Chaque vente est sécurisée.</p>
         <div className="solution-list reveal">
-          <div className="solution-item">Horodaté automatiquement</div>
-          <div className="solution-item">Certifié avec preuve</div>
-          <div className="solution-item">Enregistré de façon sécurisée</div>
+          <div className="solution-item">Horodatage automatique avant envoi</div>
+          <div className="solution-item">Certification avec preuve légale</div>
+          <div className="solution-item">Sauvegarde sécurisée de chaque envoi</div>
         </div>
         <p className="solution-callout reveal">L'acheteur conteste ? Tu as la preuve.</p>
       </section>
@@ -187,8 +187,8 @@ export default function Home() {
         <div className="steps-grid">
           {[
             { n: "01", name: "Tu prends une photo", desc: "Annonce générée. Prix, description, hashtags.", color: "var(--violet)" },
-            { n: "02", name: "Tu certifies avant envoi", desc: "Preuve horodatée. Impossible à contester.", color: "var(--green)" },
-            { n: "03", name: "Tu expédies", desc: "Suivi + preuve de dépôt sauvegardés.", color: "var(--muted)" },
+            { n: "02", name: "Tu certifies avant envoi", desc: "Preuve horodatée enregistrée.", color: "var(--green)" },
+            { n: "03", name: "Tu expédies", desc: "Suivi et preuve de dépôt sauvegardés.", color: "#fff" },
             { n: "04", name: "Un litige ?", desc: "Défense générée en 1 clic.", color: "var(--pink)" },
           ].map(function(s) {
             return (
@@ -207,11 +207,11 @@ export default function Home() {
         <h2 className="section-title">Avant vs Après<br/><em>SellCov.</em></h2>
         <div className="compare-grid">
           <div className="compare-card reveal" style={{ background: "rgba(248,113,113,0.04)", border: "0.5px solid rgba(248,113,113,0.15)" }}>
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginBottom: 20 }}>Sans SellCov</div>
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginBottom: 20 }}>Avant SellCov</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <div style={{ fontSize: 14, color: "var(--red)" }}>"Article abîmé à la réception"</div>
-              <div style={{ fontSize: 14, color: "var(--red)" }}>Plateforme rembourse l'acheteur</div>
-              <div style={{ fontSize: 14, color: "var(--red)" }}>Tu perds ton produit + ton argent</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>Article abîmé à la réception</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>La plateforme rembourse l'acheteur</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>Tu perds ton produit et ton argent</div>
               <div style={{ fontSize: 14, color: "var(--red)" }}>Aucune preuve valable</div>
             </div>
           </div>
@@ -220,7 +220,7 @@ export default function Home() {
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div style={{ fontSize: 14, color: "var(--green)" }}>Preuve enregistrée automatiquement</div>
               <div style={{ fontSize: 14, color: "var(--green)" }}>Envoi certifié avant expédition</div>
-              <div style={{ fontSize: 14, color: "var(--green)" }}>Réponse prête immédiatement</div>
+              <div style={{ fontSize: 14, color: "var(--green)" }}>Réponse de défense générée</div>
               <div style={{ fontSize: 14, color: "var(--green)" }}>Ton argent est protégé</div>
             </div>
           </div>
@@ -250,10 +250,14 @@ export default function Home() {
           SellCov
         </div>
         <div className="footer-links">
-          <a href="#">FAQ</a>
-          <a href="#">Contact</a>
+          <a href="mailto:hello@sellcov.com">FAQ</a>
+          <a href="mailto:hello@sellcov.com">Contact</a>
           <a href="#">Instagram</a>
           <a href="#">TikTok</a>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <input id="newsletter" type="email" placeholder="Ton email" style={{ padding: "7px 14px", fontSize: 12, background: "rgba(255,255,255,0.05)", border: "0.5px solid rgba(255,255,255,0.14)", borderRadius: 8, color: "#fff", fontFamily: "var(--sans)", outline: "none", width: 180 }} />
+          <button onClick={function() { var em = document.getElementById("newsletter"); if (em.value) { window.location.href = "mailto:hello@sellcov.com?subject=Newsletter SellCov&body=Inscris-moi : " + em.value; em.value = ""; } }} style={{ padding: "7px 14px", fontSize: 11, fontWeight: 600, background: "rgba(255,255,255,0.08)", border: "0.5px solid rgba(255,255,255,0.14)", borderRadius: 8, color: "rgba(255,255,255,0.6)", cursor: "pointer", fontFamily: "var(--sans)" }}>Newsletter</button>
         </div>
         <div className="footer-copy">© 2026 SellCov</div>
       </footer>
