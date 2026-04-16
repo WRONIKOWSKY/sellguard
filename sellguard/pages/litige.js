@@ -86,7 +86,7 @@ export default function Litige() {
 
   return (
     <>
-      <Head><title>SellCov — {l.title}</title></Head>
+      <Head><title>SellCov {l.title}</title></Head>
       <Layout>
         {!result ? (
           <>
@@ -104,7 +104,7 @@ export default function Litige() {
             </div>
 
             <div style={{ marginBottom: 16 }}>
-              <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>{l.msg_label} *</label>
+              <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>{l.msg_label}</label>
               <textarea value={buyerMessage} onChange={e => setBuyerMessage(e.target.value)} rows={4} placeholder={l.msg_ph}
                 style={{ ...inp, resize: "none", lineHeight: 1.6, padding: "10px 12px" }} />
             </div>
