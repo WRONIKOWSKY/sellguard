@@ -248,10 +248,10 @@ export default function Protection() {
   // ── CERTIFIED VIEW ──
   if (certified) return (
     <>
-      <Head><title>SellCov — {p.certified_title}</title></Head>
+      <Head><title>SellCov {p.certified_title}</title></Head>
       <Layout>
         <div style={{ background: "rgba(34,197,94,0.06)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 16, padding: 24, marginBottom: 24, textAlign: "center" }}>
-          <div style={{ fontSize: 40, marginBottom: 10 }}>{"✅"}</div>
+          <div style={{ fontSize: 40, marginBottom: 10 }}>""</div>
           <h3 style={{ fontSize: 20, fontWeight: 800, color: "#15803D", marginBottom: 6 }}>{p.certified_title}</h3>
           <p style={{ fontSize: 14, color: "#166534", lineHeight: 1.6 }}>{p.certified_sub}</p>
         </div>
@@ -295,7 +295,7 @@ export default function Protection() {
           <p style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.35)", letterSpacing: 0.5, marginBottom: 14 }}>{p.guide_title}</p>
           {PLATFORM_GUIDE.map(function(pl, i) {
             return (
-              <div key={pl.name} style={{ padding: "10px 0", borderBottom: i < PLATFORM_GUIDE.length - 1 ? "1px solid #F9FAFB" : "none" }}>
+              <div key={pl.name} style={{ padding: "10px 0", borderBottom: i < PLATFORM_GUIDE.length 1 ? "1px solid #F9FAFB" : "none" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
                   <span style={{ fontSize: 12, fontWeight: 700, padding: "2px 10px", borderRadius: 20, background: pl.bg, color: pl.color }}>{pl.name}</span>
                   <span style={{ fontSize: 11, color: "rgba(255,255,255,0.28)" }}>{pl.score}</span>
@@ -313,7 +313,7 @@ export default function Protection() {
   // ── MAIN VIEW ──
   return (
     <>
-      <Head><title>SellCov — {p.title}</title></Head>
+      <Head><title>SellCov {p.title}</title></Head>
       <Layout>
         <div style={{ marginBottom: 20 }}>
           <h2 style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 6 }}>{"🛡"} {p.title}</h2>
@@ -379,7 +379,7 @@ export default function Protection() {
                         {s.receipt_photo && (
                           <div style={{ marginTop: 6 }}>
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                              <span style={{ fontSize: 12, color: "rgba(255,255,255,0.42)" }}>{lang === "en" ? "Deposit receipt" : "Preuve de dépôt"} {"✅"}</span>
+                              <span style={{ fontSize: 12, color: "rgba(255,255,255,0.42)" }}>{lang === "en" ? "Deposit receipt" : "Preuve de dépôt"} ""</span>
                               <button onClick={function() {
                                 var a = document.createElement("a");
                                 a.href = s.receipt_photo;
@@ -499,7 +499,7 @@ export default function Protection() {
 
                   {!cameraOn && !recordedUrl && (
                     <div style={{ minHeight: 220, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10 }}>
-                      <div style={{ fontSize: 40 }}>{"🎥"}</div>
+                      <div style={{ fontSize: 40 }}>""</div>
                       <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)", textAlign: "center", padding: "0 20px" }}>
                         {lang === "en" ? "Video + SHA-256 certificate generated automatically" : "Vidéo + certificat SHA-256 générés automatiquement"}
                       </p>
@@ -525,13 +525,13 @@ export default function Protection() {
                             <button onClick={startRecording} style={Object.assign({}, btnStyle("#DC2626", "#fff", false), { flex: 2 })}>{p.start}</button>
                             <button onClick={stopCamera} style={{ flex: 1, padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "0.5px solid rgba(255,255,255,0.07)", background: "#0A0A0A", color: "rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "inherit" }}>{p.cancel}</button>
                           </>
-                        : <button onClick={stopRecording} style={btnStyle("#111", "#fff", false)}>{p.stop} — {fmt(elapsed)}</button>
+                        : <button onClick={stopRecording} style={btnStyle("#111", "#fff", false)}>{p.stop} {fmt(elapsed)}</button>
                     }
                   </div>
                 ) : (
                   <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 20 }}>
                     <button onClick={downloadVideo} disabled={processing} style={btnStyle("#16A34A", "#fff", processing)}>
-                      {lang === "en" ? "⬇️ Download video" : "⬇️ Télécharger la vidéo"}
+                      {lang === "en" ? "Download video" : "Télécharger la vidéo"}
                     </button>
                     <button onClick={downloadPDF} disabled={processing} style={btnStyle("#2563EB", "#fff", processing)}>
                       {processing ? (lang === "en" ? "Generating..." : "Génération...") : (lang === "en" ? "📄 Download PDF certificate" : "📄 Télécharger le certificat PDF")}
