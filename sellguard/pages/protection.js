@@ -14,6 +14,8 @@ export default function Protection() {
   var ref = useLang(), t = ref.t, lang = ref.lang;
   var p = t.protection;
 
+  function tx(obj) { return obj[lang] || obj.en || obj.fr; }
+
   var _tab = useState("certify"), tab = _tab[0], setTab = _tab[1];
   var _mode = useState("video"), mode = _mode[0], setMode = _mode[1];
   var _articleName = useState(""), articleName = _articleName[0], setArticleName = _articleName[1];
@@ -106,9 +108,7 @@ export default function Protection() {
       if (videoRef.current) { videoRef.current.srcObject = stream; videoRef.current.play(); }
       setCameraOn(true);
     } catch (e) {
-      setCameraError(lang === "en"
-        ? "Cannot access camera. Please allow access in your browser settings."
-        : "Impossible d'accéder à la caméra. Autorise l'accès dans les paramètres de ton navigateur.");
+      setCameraError(tx({fr:"Impossible d'accéder à la caméra. Autorise l'accès dans les paramètres de ton navigateur.", en:"Cannot access camera. Please allow access in your browser settings.", es:"No se puede acceder a la cámara. Permite el acceso en la configuración de tu navegador.", it:"Impossibile accedere alla fotocamera. Consenti l'accesso nelle impostazioni del browser."}));
     }
   }
 
@@ -146,7 +146,7 @@ export default function Protection() {
       setRecording(true); setElapsed(0);
       timerRef.current = setInterval(function() { setElapsed(function(e) { return e + 1; }); }, 1000);
     } catch(e) {
-      setCameraError(lang === "en" ? "Recording not supported on this browser." : "Enregistrement non supporté sur ce navigateur.");
+      setCameraError(tx({fr:"Enregistrement non supporté sur ce navigateur.", en:"Recording not supported on this browser.", es:"Grabación no soportada en este navegador.", it:"Registrazione non supportata su questo browser."}));
     }
   }
 
@@ -238,11 +238,11 @@ export default function Protection() {
   var btnStyle = function(bg, col, dis) { return { width: "100%", padding: 14, fontSize: 15, fontWeight: 700, borderRadius: 12, border: "none", background: dis ? "rgba(255,255,255,0.06)" : bg, color: dis ? "rgba(255,255,255,0.25)" : col, cursor: dis ? "default" : "pointer", fontFamily: "inherit" }; };
 
   var PLATFORM_GUIDE = [
-    { name: "Vinted", color: "#09B1BA", bg: "rgba(9,177,186,0.1)", score: "★★★☆", tip: lang === "en" ? "Dispute → 'Add proof' → upload video + PDF certificate." : "Litige → 'Ajouter des preuves' → upload la vidéo + le certificat PDF." },
-    { name: "Depop", color: "#FF0000", bg: "rgba(255,0,0,0.08)", score: "★★★☆", tip: lang === "en" ? "Dispute → 'Provide evidence' → attach both files." : "Litige → 'Provide evidence' → joint les deux fichiers." },
-    { name: "Grailed", color: "#fff", bg: "rgba(255,255,255,0.06)", score: "★★★☆", tip: lang === "en" ? "Open support ticket, attach video + certificate PDF." : "Ouvre un ticket support, joint la vidéo + le certificat PDF." },
-    { name: "Vestiaire Collective", color: "#ccc", bg: "rgba(255,255,255,0.05)", score: "★★★☆", tip: lang === "en" ? "Contact customer service with both files attached." : "Contacte leur service client avec les deux fichiers en pièce jointe." },
-    { name: "Etsy", color: "#F1641E", bg: "rgba(241,100,30,0.08)", score: "★★★★", tip: lang === "en" ? "Resolution center → 'Submit evidence' → upload both files." : "Centre de résolution → 'Submit evidence' → upload les deux fichiers." },
+    { name: "Vinted", color: "#09B1BA", bg: "rgba(9,177,186,0.1)", score: "★★★☆", tip: tx({fr:"Litige → 'Ajouter des preuves' → upload la vidéo + le certificat PDF.", en:"Dispute → 'Add proof' → upload video + PDF certificate.", es:"Disputa → 'Añadir pruebas' → sube el vídeo + certificado PDF.", it:"Controversia → 'Aggiungi prove' → carica video + certificato PDF."}) },
+    { name: "Depop", color: "#FF0000", bg: "rgba(255,0,0,0.08)", score: "★★★☆", tip: tx({fr:"Litige → 'Provide evidence' → joint les deux fichiers.", en:"Dispute → 'Provide evidence' → attach both files.", es:"Disputa → 'Provide evidence' → adjunta ambos archivos.", it:"Controversia → 'Provide evidence' → allega entrambi i file."}) },
+    { name: "Grailed", color: "#fff", bg: "rgba(255,255,255,0.06)", score: "★★★☆", tip: tx({fr:"Ouvre un ticket support, joint la vidéo + le certificat PDF.", en:"Open support ticket, attach video + certificate PDF.", es:"Abre un ticket de soporte, adjunta vídeo + certificado PDF.", it:"Apri un ticket di supporto, allega video + certificato PDF."}) },
+    { name: "Vestiaire Collective", color: "#ccc", bg: "rgba(255,255,255,0.05)", score: "★★★☆", tip: tx({fr:"Contacte leur service client avec les deux fichiers en pièce jointe.", en:"Contact customer service with both files attached.", es:"Contacta con atención al cliente con ambos archivos adjuntos.", it:"Contatta il servizio clienti con entrambi i file allegati."}) },
+    { name: "Etsy", color: "#F1641E", bg: "rgba(241,100,30,0.08)", score: "★★★★", tip: tx({fr:"Centre de résolution → 'Submit evidence' → upload les deux fichiers.", en:"Resolution center → 'Submit evidence' → upload both files.", es:"Centro de resolución → 'Submit evidence' → sube ambos archivos.", it:"Centro risoluzione → 'Submit evidence' → carica entrambi i file."}) },
   ];
 
   if (certified) return (
@@ -256,19 +256,17 @@ export default function Protection() {
 
         <div style={{ background: "rgba(99,102,241,0.08)", border: "0.5px solid rgba(99,102,241,0.2)", borderRadius: 14, padding: "14px 18px", marginBottom: 16 }}>
           <p style={{ fontSize: 13, color: "#1D4ED8", lineHeight: 1.6, fontWeight: 600, marginBottom: 6 }}>
-            {lang === "en" ? "2 files downloaded:" : "2 fichiers téléchargés :"}
+            {tx({fr:"2 fichiers téléchargés :", en:"2 files downloaded:", es:"2 archivos descargados:", it:"2 file scaricati:"})}
           </p>
           <p style={{ fontSize: 13, color: "#1D4ED8", lineHeight: 1.8, whiteSpace: "pre-line" }}>
-            {lang === "en"
-              ? "• Video file (.mp4 / .webm)\n• SellCov certificate PDF with SHA-256 hash\n\nKeep both files together. They form your complete proof."
-              : "• Fichier vidéo (.mp4 / .webm)\n• Certificat PDF SellCov avec empreinte SHA-256\n\nConserve les deux fichiers ensemble. Ils constituent ta preuve complète."}
+            {tx({fr:"• Fichier vidéo (.mp4 / .webm)\n• Certificat PDF SellCov avec empreinte SHA-256\n\nConserve les deux fichiers ensemble. Ils constituent ta preuve complète.", en:"• Video file (.mp4 / .webm)\n• SellCov certificate PDF with SHA-256 hash\n\nKeep both files together. They form your complete proof.", es:"• Archivo de vídeo (.mp4 / .webm)\n• Certificado PDF SellCov con hash SHA-256\n\nConserva ambos archivos juntos. Constituyen tu prueba completa.", it:"• File video (.mp4 / .webm)\n• Certificato PDF SellCov con hash SHA-256\n\nConserva entrambi i file. Costituiscono la tua prova completa."})}
           </p>
         </div>
 
         <div style={{ background: "#0A0A0A", border: "0.5px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "20px 24px", marginBottom: 16 }}>
           {[
-            [lang === "en" ? "Number" : "Numéro", certified.id],
-            [lang === "en" ? "Item" : "Article", certified.article],
+            [tx({fr:"Numéro", en:"Number", es:"Número", it:"Numero"}), certified.id],
+            [tx({fr:"Article", en:"Item", es:"Artículo", it:"Articolo"}), certified.article],
             ["Date", certified.date],
             ["SHA-256", certified.hash ? certified.hash.substring(0, 16) + "..." : ""],
           ].map(function(row) {
@@ -283,9 +281,7 @@ export default function Protection() {
 
         <div style={{ background: "rgba(251,146,60,0.06)", border: "0.5px solid rgba(251,146,60,0.2)", borderRadius: 14, padding: "14px 18px", marginBottom: 16 }}>
           <p style={{ fontSize: 13, color: "#92400E", lineHeight: 1.6 }}>
-            {lang === "en"
-              ? "You can add your tracking number and deposit receipt later from the \"My shipments\" tab."
-              : "Tu pourras ajouter ton numéro de suivi et ta preuve de dépôt plus tard depuis l'onglet \"Mes envois\"."}
+            {tx({fr:"Tu pourras ajouter ton numéro de suivi et ta preuve de dépôt plus tard depuis l'onglet \"Mes envois\".", en:"You can add your tracking number and deposit receipt later from the \"My shipments\" tab.", es:"Puedes añadir tu número de seguimiento y recibo de depósito más tarde desde la pestaña \"Mis envíos\".", it:"Puoi aggiungere il numero di tracciamento e la ricevuta di deposito più tardi dalla scheda \"Le mie spedizioni\"."})}
           </p>
         </div>
 
@@ -319,8 +315,8 @@ export default function Protection() {
 
         <div style={{ display: "flex", gap: 6, marginBottom: 24, background: "rgba(255,255,255,0.04)", borderRadius: 12, padding: 4 }}>
           {[
-            ["certify", lang === "en" ? "Certify" : "Certifier"],
-            ["shipments", lang === "en" ? "My shipments" : "Mes envois"]
+            ["certify", tx({fr:"Certifier", en:"Certify", es:"Certificar", it:"Certifica"})],
+            ["shipments", tx({fr:"Mes envois", en:"My shipments", es:"Mis envíos", it:"Le mie spedizioni"})]
           ].map(function(item) {
             var hasCount = item[0] === "shipments" && shipments.length > 0;
             return (
@@ -338,8 +334,8 @@ export default function Protection() {
           <div>
             {shipments.length === 0 ? (
               <div style={{ textAlign: "center", padding: "40px 20px", color: "rgba(255,255,255,0.35)" }}>
-                <p style={{ fontSize: 15, fontWeight: 600, marginBottom: 6 }}>{lang === "en" ? "No shipments yet" : "Aucun envoi certifié"}</p>
-                <p style={{ fontSize: 13 }}>{lang === "en" ? "Certify a shipment to see it here." : "Certifie un envoi pour le voir ici."}</p>
+                <p style={{ fontSize: 15, fontWeight: 600, marginBottom: 6 }}>{tx({fr:"Aucun envoi certifié", en:"No shipments yet", es:"Ningún envío certificado", it:"Nessuna spedizione certificata"})}</p>
+                <p style={{ fontSize: 13 }}>{tx({fr:"Certifie un envoi pour le voir ici.", en:"Certify a shipment to see it here.", es:"Certifica un envío para verlo aquí.", it:"Certifica una spedizione per vederla qui."})}</p>
               </div>
             ) : (
               shipments.map(function(s) {
@@ -353,68 +349,68 @@ export default function Protection() {
                         <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)" }}>{s.date}</p>
                       </div>
                       <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 20, background: hasTracking ? "rgba(34,197,94,0.1)" : "rgba(251,146,60,0.1)", color: hasTracking ? "#16A34A" : "#D97706" }}>
-                        {hasTracking ? (lang === "en" ? "Complete" : "Complet") : (lang === "en" ? "No tracking" : "Sans suivi")}
+                        {hasTracking ? (tx({fr:"Complet", en:"Complete", es:"Completo", it:"Completo"})) : (tx({fr:"Sans suivi", en:"No tracking", es:"Sin seguimiento", it:"Senza tracciamento"}))}
                       </span>
                     </div>
 
                     <div style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginBottom: 8 }}>
                       <span style={{ fontFamily: "monospace", background: "rgba(255,255,255,0.06)", padding: "2px 8px", borderRadius: 6 }}>{s.id}</span>
-                      {s.orderRef ? <span style={{ marginLeft: 8 }}>{lang === "en" ? "Ref:" : "Réf:"} {s.orderRef}</span> : null}
+                      {s.orderRef ? <span style={{ marginLeft: 8 }}>{tx({fr:"Réf:", en:"Ref:", es:"Ref:", it:"Rif:"})} {s.orderRef}</span> : null}
                     </div>
 
                     {hasTracking && !isEditing && (
                       <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: 10, padding: "10px 14px", marginBottom: 8 }}>
                         {s.tracking_number && (
                           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: s.receipt_photo ? 6 : 0 }}>
-                            <span style={{ fontSize: 12, color: "rgba(255,255,255,0.42)" }}>{lang === "en" ? "Tracking" : "Suivi"}</span>
+                            <span style={{ fontSize: 12, color: "rgba(255,255,255,0.42)" }}>{tx({fr:"Suivi", en:"Tracking", es:"Seguimiento", it:"Tracciamento"})}</span>
                             <span style={{ fontSize: 12, fontWeight: 600, color: "#fff", fontFamily: "monospace" }}>{s.tracking_number}</span>
                           </div>
                         )}
                         {s.receipt_photo && (
                           <div style={{ marginTop: 6 }}>
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                              <span style={{ fontSize: 12, color: "rgba(255,255,255,0.42)" }}>{lang === "en" ? "Deposit receipt" : "Preuve de dépôt"}</span>
+                              <span style={{ fontSize: 12, color: "rgba(255,255,255,0.42)" }}>{tx({fr:"Preuve de dépôt", en:"Deposit receipt", es:"Recibo de depósito", it:"Ricevuta di deposito"})}</span>
                               <button onClick={function() {
                                 var a = document.createElement("a");
                                 a.href = s.receipt_photo;
                                 a.download = "SellCov_" + s.id + "_receipt.jpg";
                                 document.body.appendChild(a); a.click(); document.body.removeChild(a);
                               }} style={{ fontSize: 11, fontWeight: 600, color: "#818CF8", background: "rgba(99,102,241,0.08)", border: "0.5px solid rgba(99,102,241,0.2)", borderRadius: 6, padding: "4px 10px", cursor: "pointer", fontFamily: "inherit" }}>
-                                {lang === "en" ? "Download" : "Télécharger"}
+                                {tx({fr:"Télécharger", en:"Download", es:"Descargar", it:"Scarica"})}
                               </button>
                             </div>
                             <img src={s.receipt_photo} style={{ width: "100%", maxHeight: 160, objectFit: "contain", borderRadius: 8, border: "0.5px solid rgba(255,255,255,0.07)" }} />
                           </div>
                         )}
-                        {s.tracking_date && <p style={{ fontSize: 11, color: "rgba(255,255,255,0.28)", marginTop: 4 }}>{lang === "en" ? "Added" : "Ajouté"} {s.tracking_date}</p>}
+                        {s.tracking_date && <p style={{ fontSize: 11, color: "rgba(255,255,255,0.28)", marginTop: 4 }}>{tx({fr:"Ajouté", en:"Added", es:"Añadido", it:"Aggiunto"})} {s.tracking_date}</p>}
                       </div>
                     )}
 
                     {isEditing && (
                       <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: 12, padding: 14, marginBottom: 8 }}>
                         <label style={{ fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>
-                          {lang === "en" ? "Tracking number" : "Numéro de suivi"}
+                          {tx({fr:"Numéro de suivi", en:"Tracking number", es:"Número de seguimiento", it:"Numero di tracciamento"})}
                         </label>
                         <input value={trackingNum} onChange={function(e) { setTrackingNum(e.target.value); }} placeholder="Ex: 8R12345678901" style={Object.assign({}, inp, { marginBottom: 12 })} />
                         <label style={{ fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>
-                          {lang === "en" ? "Deposit receipt photo" : "Photo preuve de dépôt"} <span style={{ fontWeight: 400, color: "rgba(255,255,255,0.25)" }}>({p.optional})</span>
+                          {tx({fr:"Photo preuve de dépôt", en:"Deposit receipt photo", es:"Foto recibo de depósito", it:"Foto ricevuta di deposito"})} <span style={{ fontWeight: 400, color: "rgba(255,255,255,0.25)" }}>({p.optional})</span>
                         </label>
                         <div onClick={function() { receiptRef.current && receiptRef.current.click(); }}
                           style={{ border: "1.5px dashed rgba(255,255,255,0.14)", borderRadius: 10, padding: 14, cursor: "pointer", background: "#0A0A0A", textAlign: "center", marginBottom: 12 }}>
                           {receiptPhoto
                             ? <img src={receiptPhoto} style={{ maxWidth: "100%", maxHeight: 120, borderRadius: 8 }} />
-                            : <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)" }}>+ {lang === "en" ? "Add photo" : "Ajouter la photo"}</p>
+                            : <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)" }}>+ {tx({fr:"Ajouter la photo", en:"Add photo", es:"Añadir foto", it:"Aggiungi foto"})}</p>
                           }
                         </div>
                         <input ref={receiptRef} type="file" accept="image/*" style={{ display: "none" }} onChange={handleReceiptPhoto} />
                         <div style={{ display: "flex", gap: 8 }}>
                           <button onClick={function() { updateShipment(s.id, trackingNum, receiptPhoto); }} disabled={!trackingNum.trim() && !receiptPhoto}
                             style={Object.assign({}, btnStyle("#16A34A", "#fff", !trackingNum.trim() && !receiptPhoto), { flex: 2 })}>
-                            {lang === "en" ? "Save" : "Enregistrer"}
+                            {tx({fr:"Enregistrer", en:"Save", es:"Guardar", it:"Salva"})}
                           </button>
                           <button onClick={function() { setEditingId(null); setTrackingNum(""); setReceiptPhoto(null); }}
                             style={{ flex: 1, padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "0.5px solid rgba(255,255,255,0.07)", background: "#0A0A0A", color: "rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "inherit" }}>
-                            {lang === "en" ? "Cancel" : "Annuler"}
+                            {tx({fr:"Annuler", en:"Cancel", es:"Cancelar", it:"Annulla"})}
                           </button>
                         </div>
                       </div>
@@ -424,9 +420,9 @@ export default function Protection() {
                       <div style={{ display: "flex", gap: 8 }}>
                         <button onClick={function() { setEditingId(s.id); setTrackingNum(s.tracking_number || ""); setReceiptPhoto(s.receipt_photo || null); }}
                           style={{ flex: 1, padding: "10px 14px", fontSize: 13, fontWeight: 600, borderRadius: 10, border: "0.5px solid rgba(255,255,255,0.07)", background: "#0A0A0A", color: hasTracking ? "rgba(255,255,255,0.5)" : "#818CF8", cursor: "pointer", fontFamily: "inherit" }}>
-                          {hasTracking ? (lang === "en" ? "Edit tracking" : "Modifier le suivi") : (lang === "en" ? "+ Add tracking" : "+ Ajouter le suivi")}
+                          {hasTracking ? (tx({fr:"Modifier le suivi", en:"Edit tracking", es:"Editar seguimiento", it:"Modifica tracciamento"})) : (tx({fr:"+ Ajouter le suivi", en:"+ Add tracking", es:"+ Añadir seguimiento", it:"+ Aggiungi tracciamento"}))}
                         </button>
-                        <button onClick={function() { if (confirm(lang === "en" ? "Delete this shipment?" : "Supprimer cet envoi ?")) deleteShipment(s.id); }}
+                        <button onClick={function() { if (confirm(tx({fr:"Supprimer cet envoi ?", en:"Delete this shipment?", es:"¿Eliminar este envío?", it:"Eliminare questa spedizione?"}))) deleteShipment(s.id); }}
                           style={{ padding: "10px 14px", fontSize: 13, fontWeight: 600, borderRadius: 10, border: "0.5px solid rgba(220,38,38,0.2)", background: "rgba(220,38,38,0.08)", color: "#DC2626", cursor: "pointer", fontFamily: "inherit" }}>
                           ×
                         </button>
@@ -475,7 +471,7 @@ export default function Protection() {
                   {!cameraOn && !recordedUrl && (
                     <div style={{ minHeight: 220, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10 }}>
                       <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)", textAlign: "center", padding: "0 20px" }}>
-                        {lang === "en" ? "Video + SHA-256 certificate generated automatically" : "Vidéo + certificat SHA-256 générés automatiquement"}
+                        {tx({fr:"Vidéo + certificat SHA-256 générés automatiquement", en:"Video + SHA-256 certificate generated automatically", es:"Vídeo + certificado SHA-256 generados automáticamente", it:"Video + certificato SHA-256 generati automaticamente"})}
                       </p>
                     </div>
                   )}
@@ -504,10 +500,10 @@ export default function Protection() {
                 ) : (
                   <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 20 }}>
                     <button onClick={downloadVideo} disabled={processing} style={btnStyle("#16A34A", "#fff", processing)}>
-                      {lang === "en" ? "Download video" : "Télécharger la vidéo"}
+                      {tx({fr:"Télécharger la vidéo", en:"Download video", es:"Descargar vídeo", it:"Scarica video"})}
                     </button>
                     <button onClick={downloadPDF} disabled={processing} style={btnStyle("#2563EB", "#fff", processing)}>
-                      {processing ? (lang === "en" ? "Generating..." : "Génération...") : (lang === "en" ? "Download PDF certificate" : "Télécharger le certificat PDF")}
+                      {processing ? (tx({fr:"Génération...", en:"Generating...", es:"Generando...", it:"Generazione..."})) : (tx({fr:"Télécharger le certificat PDF", en:"Download PDF certificate", es:"Descargar certificado PDF", it:"Scarica certificato PDF"}))}
                     </button>
                     <button onClick={function() { setRecordedBlob(null); setRecordedUrl(null); setElapsed(0); startCamera(); }}
                       style={{ padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "0.5px solid rgba(255,255,255,0.07)", background: "#0A0A0A", color: "rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "inherit" }}>{p.redo}</button>
@@ -515,7 +511,7 @@ export default function Protection() {
                 )}
 
                 <div style={{ background: "rgba(251,146,60,0.06)", border: "0.5px solid rgba(251,146,60,0.2)", borderRadius: 14, padding: "14px 18px" }}>
-                  <p style={{ fontSize: 13, color: "#92400E", lineHeight: 1.6 }}><strong>{lang === "en" ? "Tip:" : "Conseil :"}</strong> {p.tips}</p>
+                  <p style={{ fontSize: 13, color: "#92400E", lineHeight: 1.6 }}><strong>{tx({fr:"Conseil :", en:"Tip:", es:"Consejo:", it:"Consiglio:"})}</strong> {p.tips}</p>
                 </div>
               </>
             )}
@@ -524,7 +520,7 @@ export default function Protection() {
               <>
                 <div style={{ marginBottom: 20 }}>
                   <div onClick={function() { fileRef.current.click(); }} style={{ border: "1.5px dashed rgba(255,255,255,0.14)", borderRadius: 14, padding: 20, cursor: "pointer", background: "#0A0A0A", textAlign: "center", minHeight: 80, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <p style={{ fontSize: 14, color: "rgba(255,255,255,0.35)" }}>+ {lang === "en" ? "Add photos" : "Ajouter des photos"}</p>
+                    <p style={{ fontSize: 14, color: "rgba(255,255,255,0.35)" }}>+ {tx({fr:"Ajouter des photos", en:"Add photos", es:"Añadir fotos", it:"Aggiungi foto"})}</p>
                   </div>
                   <input ref={fileRef} type="file" accept="image/*" multiple style={{ display: "none" }} onChange={function(e) { handleFiles(e.target.files); }} />
                   {photos.length > 0 && (
@@ -544,7 +540,7 @@ export default function Protection() {
                   )}
                 </div>
                 <button onClick={certifyPhotos} disabled={!photos.length || !articleName.trim()} style={btnStyle("#fff", "#000", !photos.length || !articleName.trim())}>
-                  {lang === "en" ? "Generate certificate" : "Générer le certificat"}
+                  {tx({fr:"Générer le certificat", en:"Generate certificate", es:"Generar certificado", it:"Genera certificato"})}
                 </button>
               </>
             )}
