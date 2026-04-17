@@ -73,7 +73,7 @@ export default function Home() {
 
         .pain-list { list-style: none; display: flex; flex-direction: column; gap: 4px; max-width: 500px; margin: 0 auto; }
         .pain-item { font-size: 15px; color: var(--red); display: flex; align-items: center; gap: 10px; text-align: left; }
-        .pain-callout { text-align: left; margin-top: 32px; font-size: 15px; color: var(--muted); font-weight: 400; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+        .pain-callout { text-align: left; margin-top: 4px; font-size: 15px; color: var(--muted); font-weight: 400; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 
         .solution-list { display: flex; flex-direction: column; gap: 10px; max-width: 500px; margin: 0 auto; }
         .solution-item { font-size: 15px; color: var(--green); display: flex; align-items: center; gap: 10px; }
@@ -138,10 +138,10 @@ export default function Home() {
           <a onClick={function() { scrollTo("#how"); }}>Comment</a>
           
         </div>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 6 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ display: "flex", gap: 2 }}>
             {["FR","EN","ES","IT"].map(function(l) {
-              return <button key={l} onClick={function() { window.__sellcovLang = l.toLowerCase(); }} style={{ fontSize: 10, fontWeight: 600, padding: "4px 8px", borderRadius: 6, border: "0.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "var(--sans)" }}>{l}</button>;
+              return <button key={l} onClick={function() { try { localStorage.setItem("sellcov_lang", l.toLowerCase()); } catch(e) {} }} style={{ fontSize: 10, fontWeight: 600, padding: "4px 8px", borderRadius: 6, border: "0.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "var(--sans)" }}>{l}</button>;
             })}
           </div>
           <Link href="/annonce" className="nav-cta">Essayer gratuit</Link>
@@ -214,7 +214,7 @@ export default function Home() {
         <h2 className="section-title">Avant vs Après<br/><em>SellCov.</em></h2>
         <div className="compare-grid">
           <div className="compare-card reveal" style={{ background: "rgba(248,113,113,0.04)", border: "0.5px solid rgba(248,113,113,0.15)" }}>
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginBottom: 20 }}>Sans SellCov</div>
+            <div style={{ fontSize: 12, color: "var(--red)", marginBottom: 20 }}>Sans SellCov</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div style={{ fontSize: 14, color: "var(--red)" }}>Réception contestée par l'acheteur</div>
               <div style={{ fontSize: 14, color: "var(--red)" }}>La plateforme rembourse l'acheteur</div>
