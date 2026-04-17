@@ -279,8 +279,8 @@ export default function Protection() {
           })}
         </div>
 
-        <div style={{ background: "rgba(251,146,60,0.06)", border: "0.5px solid rgba(251,146,60,0.2)", borderRadius: 14, padding: "14px 18px", marginBottom: 16 }}>
-          <p style={{ fontSize: 13, color: "#92400E", lineHeight: 1.6 }}>
+        <div style={{ background: "rgba(74,222,128,0.06)", border: "0.5px solid rgba(74,222,128,0.2)", borderRadius: 14, padding: "14px 18px", marginBottom: 16 }}>
+          <p style={{ fontSize: 13, color: "#16A34A", lineHeight: 1.6 }}>
             {tx({fr:"Tu pourras ajouter ton numéro de suivi et ta preuve de dépôt plus tard depuis l'onglet \"Mes envois\".", en:"You can add your tracking number and deposit receipt later from the \"My shipments\" tab.", es:"Puedes añadir tu número de seguimiento y recibo de depósito más tarde desde la pestaña \"Mis envíos\".", it:"Puoi aggiungere il numero di tracciamento e la ricevuta di deposito più tardi dalla scheda \"Le mie spedizioni\"."})}
           </p>
         </div>
@@ -510,8 +510,8 @@ export default function Protection() {
                   </div>
                 )}
 
-                <div style={{ background: "rgba(251,146,60,0.06)", border: "0.5px solid rgba(251,146,60,0.2)", borderRadius: 14, padding: "14px 18px" }}>
-                  <p style={{ fontSize: 13, color: "#92400E", lineHeight: 1.6 }}><strong>{tx({fr:"Conseil :", en:"Tip:", es:"Consejo:", it:"Consiglio:"})}</strong> {p.tips}</p>
+                <div style={{ background: "rgba(74,222,128,0.06)", border: "0.5px solid rgba(74,222,128,0.2)", borderRadius: 14, padding: "14px 18px" }}>
+                  <p style={{ fontSize: 13, color: "#16A34A", lineHeight: 1.6 }}><strong>{tx({fr:"Conseil :", en:"Tip:", es:"Consejo:", it:"Consiglio:"})}</strong> {p.tips}</p>
                 </div>
               </>
             )}
