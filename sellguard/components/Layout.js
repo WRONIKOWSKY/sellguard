@@ -39,7 +39,15 @@ export default function Layout({ children }) {
                 SellCov
               </span>
             </Link>
-            <select  value={lang}  onChange={function(e) { setLang(e.target.value); }}  style={{ fontSize: 11, fontWeight: 600, padding: "5px 14px", borderRadius: 20, border: "0.5px solid rgba(255,255,255,0.2)", background: "#000", color: "rgba(255,255,255,0.6)", cursor: "pointer", fontFamily: "inherit", letterSpacing: 0.5 }}>  <option value="fr">FR</option>  <option value="en">EN</option>  <option value="es">ES</option>  <option value="it">IT</option> </select>
+            <select
+              value={lang}
+              onChange={function(e) { setLang(e.target.value); }}
+              style={{ fontSize: 11, fontWeight: 600, padding: "5px 14px", borderRadius: 20, border: "0.5px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.6)", cursor: "pointer", fontFamily: "inherit" }}>
+              <option value="fr">FR</option>
+              <option value="en">EN</option>
+              <option value="es">ES</option>
+              <option value="it">IT</option>
+            </select>
           </div>
           <div style={{ maxWidth: 700, margin: "0 auto", padding: "0 12px 8px", display: "flex", gap: 4, justifyContent: "center" }}>
             {NAV.map(function(n) {
