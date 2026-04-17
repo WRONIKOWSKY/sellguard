@@ -471,12 +471,12 @@ export default function Protection() {
             </div>
 
             {mode === "video" && (
+              <>
               <div style={{ background: "rgba(74,222,128,0.06)", border: "0.5px solid rgba(74,222,128,0.2)", borderRadius: 12, padding: "12px 16px", marginBottom: 16 }}>
                 <p style={{ fontSize: 12, color: "#16A34A", lineHeight: 1.5 }}>
                   {tx({fr:"Emballe et scelle ton colis avant de lancer la vidéo.", en:"Pack and seal your parcel before starting the video.", es:"Empaqueta y sella tu paquete antes de grabar.", it:"Imballa e sigilla il pacco prima di registrare."})}
                 </p>
               </div>
-              <>
                 <div style={{ marginBottom: 16, borderRadius: 14, overflow: "hidden", background: "#111", position: "relative", minHeight: 220 }}>
                   <video ref={videoRef} muted playsInline style={{ width: "100%", display: cameraOn && !recordedUrl ? "block" : "none", maxHeight: 340, objectFit: "cover" }} />
                   {cameraOn && !recordedUrl && (
