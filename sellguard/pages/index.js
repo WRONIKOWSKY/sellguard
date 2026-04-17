@@ -170,17 +170,6 @@ export default function Home() {
                 <span style={{ padding: "9px 22px", background: "transparent", color: "rgba(255,255,255,0.4)", fontSize: 13, border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: 10 }}>{tx({fr:"En savoir plus", en:"Learn more", es:"Saber más", it:"Scopri di più"})}</span>
               </div>
             </div>
-            <div style={{ marginTop: "auto", background: "#111113", borderTop: "0.5px solid rgba(255,255,255,0.06)", padding: "18px 20px", margin: "0 16px 16px", borderRadius: 12 }}>
-              <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
-                {["Vinted", "Depop", "Grailed"].map(function(p) { return <span key={p} style={{ fontSize: 10, padding: "3px 10px", background: "rgba(129,140,248,0.1)", border: "0.5px solid rgba(129,140,248,0.18)", borderRadius: 6, color: "#818CF8", fontWeight: 500 }}>{p}</span>; })}
-              </div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: "#fff", marginBottom: 6 }}>Carhartt WIP Detroit Jacket — Taille S</div>
-              <div style={{ fontSize: 12, color: "rgba(255,255,255,0.32)", lineHeight: 1.55, marginBottom: 10 }}>Veste iconique Carhartt WIP, coupe droite, toile canvas 100% coton. État excellent, portée 2-3 fois.</div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span style={{ fontSize: 11, color: "rgba(255,255,255,0.2)" }}>#carhartt #detroit #workwear</span>
-                <span style={{ fontSize: 14, fontWeight: 700, color: "#818CF8" }}>85 €</span>
-              </div>
-            </div>
           </Link>
 
           {/* Card 2 — Protection */}
@@ -197,29 +186,11 @@ export default function Home() {
                 <span style={{ padding: "9px 22px", background: "transparent", color: "rgba(255,255,255,0.4)", fontSize: 13, border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: 10 }}>{tx({fr:"En savoir plus", en:"Learn more", es:"Saber más", it:"Scopri di più"})}</span>
               </div>
             </div>
-            <div style={{ marginTop: "auto", background: "rgba(0,0,0,0.3)", margin: "0 16px 16px", borderRadius: 12, border: "0.5px solid rgba(74,222,128,0.08)", padding: "16px 18px" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-                <span style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", fontFamily: "monospace" }}>SC-4F2A9B1C</span>
-                <span style={{ fontSize: 10, padding: "2px 10px", background: "rgba(74,222,128,0.1)", border: "0.5px solid rgba(74,222,128,0.18)", borderRadius: 6, color: "#4ADE80", fontWeight: 600 }}>{tx({fr:"Certifié", en:"Certified", es:"Certificado", it:"Certificato"})}</span>
-              </div>
-              {[
-                [tx({fr:"Article", en:"Item", es:"Artículo", it:"Articolo"}), "Carhartt Detroit Jacket S", false],
-                ["SHA-256", "A3F9C2…72E1B4", true],
-                [tx({fr:"Horodatage", en:"Timestamp", es:"Timestamp", it:"Timestamp"}), "17/04/2026 · 14:38:52", false],
-              ].map(function(r, i) {
-                return (
-                  <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "7px 0", borderTop: "0.5px solid rgba(255,255,255,0.04)" }}>
-                    <span style={{ fontSize: 11, color: "rgba(255,255,255,0.28)" }}>{r[0]}</span>
-                    <span style={{ fontSize: 11, color: r[2] ? "#4ADE80" : "rgba(255,255,255,0.55)", fontFamily: r[2] ? "monospace" : "inherit" }}>{r[1]}</span>
-                  </div>
-                );
-              })}
-            </div>
           </Link>
         </div>
 
         {/* Card 3 — Litige pleine largeur */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", background: "#0a060d", border: "0.5px solid rgba(244,114,182,0.1)", borderRadius: 20, overflow: "hidden", cursor: "pointer" }} onClick={function() { window.location.href = "/litige"; }}>
+        <div style={{ display: "block", background: "#0a060d", border: "0.5px solid rgba(244,114,182,0.1)", borderRadius: 20, overflow: "hidden", cursor: "pointer" }} onClick={function() { window.location.href = "/litige"; }}>
           <div style={{ padding: "44px 40px" }}>
             <div style={{ fontSize: 10, fontWeight: 600, color: "#F472B6", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>{tx({fr:"Litige", en:"Dispute", es:"Litigio", it:"Litigio"})}</div>
             <div style={{ fontFamily: "var(--serif)", fontSize: "clamp(24px, 2.5vw, 36px)", fontWeight: 400, color: "#fff", lineHeight: 1.08, letterSpacing: "-0.02em", marginBottom: 12 }}>
@@ -230,18 +201,6 @@ export default function Home() {
             <div style={{ display: "flex", gap: 8 }}>
               <span style={{ padding: "9px 22px", background: "#F472B6", color: "#fff", fontSize: 13, fontWeight: 600, borderRadius: 10 }}>{tx({fr:"Gérer un litige", en:"Handle dispute", es:"Gestionar litigio", it:"Gestisci litigio"})}</span>
               <span style={{ padding: "9px 22px", background: "transparent", color: "rgba(255,255,255,0.4)", fontSize: 13, border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: 10 }}>{tx({fr:"En savoir plus", en:"Learn more", es:"Saber más", it:"Scopri di più"})}</span>
-            </div>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", padding: "40px 40px", borderLeft: "0.5px solid rgba(244,114,182,0.06)" }}>
-            <div style={{ background: "rgba(0,0,0,0.35)", borderRadius: 14, padding: "18px 20px", border: "0.5px solid rgba(244,114,182,0.08)", width: "100%" }}>
-              <div style={{ fontSize: 10, fontWeight: 600, color: "rgba(255,255,255,0.25)", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 12 }}>{tx({fr:"Réponse générée", en:"Generated response", es:"Respuesta generada", it:"Risposta generata"})}</div>
-              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", lineHeight: 1.65, marginBottom: 14 }}>
-                {tx({fr:"Je transmets la vidéo horodatée (SC-4F2A9B1C) et le certificat SHA-256. L'état de l'article est conforme à l'annonce.", en:"I am sending the timestamped video (SC-4F2A9B1C) and SHA-256 certificate. Item condition matches the listing.", es:"Envío el vídeo con timestamp (SC-4F2A9B1C) y el certificado SHA-256.", it:"Invio il video con timestamp (SC-4F2A9B1C) e il certificato SHA-256."})}
-              </div>
-              <div style={{ display: "flex", gap: 8 }}>
-                <span style={{ fontSize: 10, padding: "3px 10px", background: "rgba(244,114,182,0.08)", border: "0.5px solid rgba(244,114,182,0.18)", borderRadius: 6, color: "#F472B6", fontWeight: 500 }}>SC-4F2A9B1C.pdf</span>
-                <span style={{ fontSize: 10, padding: "3px 10px", background: "rgba(244,114,182,0.08)", border: "0.5px solid rgba(244,114,182,0.18)", borderRadius: 6, color: "#F472B6", fontWeight: 500 }}>video.mp4</span>
-              </div>
             </div>
           </div>
         </div>
