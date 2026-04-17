@@ -2,274 +2,200 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 
 const PAGE_HTML = `
-<header>
-  <div class="nav">
-    <a class="logo" href="#"><span class="logo-mark">sc</span>SellCov</a>
+<header class="header">
+  <div class="container nav">
+    <a href="/" class="logo">Sell<span>Cov</span></a>
     <nav class="nav-links">
-      <a href="#how">Comment</a>
-      <a href="#scams">Pourquoi</a>
+      <a href="#how">Comment ça marche</a>
       <a href="#pricing">Tarifs</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <div class="nav-right">
-      <button class="lang">FR ▾</button>
-      <a href="#cta" class="btn btn-primary btn-sm">Essayer gratuit</a>
-    </div>
+    <a href="/app" class="btn btn-primary btn-sm">Tester gratuitement</a>
   </div>
 </header>
 
-<section class="hero">
-  <span class="badge"><span class="dot"></span>Bêta gratuite — 47 places restantes sur 100</span>
-  <h1 class="h1 serif">Revends<span class="italic">sans te faire arnaquer.</span></h1>
-  <p class="hero-sub">3 minutes avant d'expédier = 0 litige perdu. Preuve vidéo horodatée + défense IA qui convainc Vinted, Leboncoin & co.</p>
-  <p class="hero-subsub">Preuve horodatée. Défense automatique.</p>
-  <div class="hero-stats">
-    <span><strong>147</strong> ventes protégées</span>
-    <span><strong>4 823 €</strong> sauvés ce mois</span>
-    <span><strong>94 %</strong> litiges gagnés</span>
-  </div>
-  <div class="cta-row">
-    <a href="#cta" class="btn btn-primary">Protéger ma prochaine vente →</a>
-    <a href="#demo" class="btn btn-ghost">▶ Voir une défense réelle (45 s)</a>
-  </div>
-  <div class="platforms"><strong>Vinted</strong>·<strong>Leboncoin</strong>·<strong>Depop</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong>·<strong>Etsy</strong></div>
-</section>
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="badge reveal">Déjà 147 ventes protégées · 4 823 € sécurisés</div>
+      <h1 class="reveal">Revends sans te faire <span class="accent-pink">arnaquer</span>.</h1>
+      <p class="sub reveal">Génère une preuve vidéo avant d'envoyer ton colis. Si l'acheteur ment, notre IA plaide ta défense automatiquement. 94 % des litiges gagnés.</p>
+      <div class="cta-row reveal">
+        <a href="/app" class="btn btn-primary btn-lg">Tester gratuitement →</a>
+        <a href="#how" class="btn btn-ghost btn-lg">Voir comment ça marche</a>
+      </div>
+      <p class="tiny reveal">Sans carte bancaire · Installation en 30 secondes</p>
+    </div>
+  </section>
 
-<section class="demo" id="demo">
-  <div class="demo-frame">
-    <div class="demo-steps">
-      <div class="demo-step">
-        <div style="display:flex;align-items:center;gap:10px;"><span class="step-num">1</span><h4>Crée l'annonce</h4></div>
-        <div class="ui">
-          <span class="ui-label">Photos</span>
-          <div class="ui-box" style="text-align:center;color:var(--text-dim);">+ 3 photos</div>
-          <span class="ui-label">État</span>
-          <div class="ui-box">Très bon état</div>
-          <button class="btn btn-violet btn-sm" style="margin-top:4px">Générer l'annonce</button>
+  <section class="scenarios reveal">
+    <div class="container">
+      <h2>Les 5 arnaques qu'on voit tous les jours</h2>
+      <div class="grid-5">
+        <div class="scenario"><span class="num">1</span><h3>"Le colis est vide"</h3><p>L'acheteur prétend n'avoir rien reçu et demande remboursement.</p></div>
+        <div class="scenario"><span class="num">2</span><h3>"L'article est abîmé"</h3><p>Photos truquées d'un défaut qui n'existait pas au départ.</p></div>
+        <div class="scenario"><span class="num">3</span><h3>"Ce n'est pas la bonne taille"</h3><p>Déclaration mensongère sur les mesures ou la couleur.</p></div>
+        <div class="scenario"><span class="num">4</span><h3>"Faux positif contrefaçon"</h3><p>L'acheteur prétend une contrefaçon pour obtenir gain de cause.</p></div>
+        <div class="scenario"><span class="num">5</span><h3>Switch du produit</h3><p>L'acheteur renvoie un autre article et réclame son remboursement.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="how reveal">
+    <div class="container">
+      <h2>Comment ça marche</h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon" style="background:rgba(139,127,255,.12);color:var(--violet)">1</div>
+          <h3>Film ton article avant envoi</h3>
+          <p>Tu scannes l'article + l'étiquette de colis en 30 secondes. Horodatage cryptographique intégré.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:rgba(94,232,163,.12);color:var(--green)">2</div>
+          <h3>Preuve stockée et certifiée</h3>
+          <p>Ta vidéo est sécurisée, prête à être envoyée en cas de litige. Valeur probante reconnue.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:rgba(245,112,170,.12);color:var(--pink)">3</div>
+          <h3>Défense automatique par IA</h3>
+          <p>En cas de litige, notre IA rédige ta défense avec les bons arguments juridiques et annexe la preuve.</p>
         </div>
       </div>
-      <div class="demo-step">
-        <div style="display:flex;align-items:center;gap:10px;"><span class="step-num">2</span><h4>Certifie l'envoi</h4></div>
-        <div class="ui">
-          <div class="ui-cam">
-            <span class="rec-dot"><span></span>REC</span>
-            <span class="ui-cam-inner">🎥 Filme l'article + colis + étiquette</span>
-          </div>
-          <div class="ui-cert">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-            <div><div class="ui-cert-label">Certificat SellCov</div><div>SC-ABC123XYZ · horodaté</div></div>
-          </div>
+      <div class="how-cta">
+        <a href="/app" class="btn btn-primary btn-lg">Essayer sur une vraie annonce</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof reveal">
+    <div class="container">
+      <h2>Ils dorment sur leurs deux oreilles</h2>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-value accent-violet">147</div><div class="stat-label">Ventes protégées</div></div>
+        <div class="stat"><div class="stat-value accent-green">4 823 €</div><div class="stat-label">Sécurisés</div></div>
+        <div class="stat"><div class="stat-value accent-pink">94 %</div><div class="stat-label">Litiges gagnés</div></div>
+      </div>
+      <div class="grid-3">
+        <div class="testimonial">
+          <p>"J'ai failli perdre 180 € sur une veste Arc'teryx. L'acheteur disait qu'elle était tachée. Ma vidéo a tout réglé en 48 h."</p>
+          <div class="author"><strong>Chloé M.</strong><span>Vinted · Power seller</span></div>
+        </div>
+        <div class="testimonial">
+          <p>"Sur Grailed, les litiges c'est la guerre. Sellcov m'a sauvé 3 ventes ce trimestre. C'est devenu automatique."</p>
+          <div class="author"><strong>Karim B.</strong><span>Grailed · Vendeur pro</span></div>
+        </div>
+        <div class="testimonial">
+          <p>"Je vends des pièces à 200-500 €. Sans preuve vidéo aujourd'hui c'est jouer à la roulette russe."</p>
+          <div class="author"><strong>Léa T.</strong><span>Vestiaire Collective</span></div>
         </div>
       </div>
-      <div class="demo-step">
-        <div style="display:flex;align-items:center;gap:10px;"><span class="step-num">3</span><h4>Défense automatique</h4></div>
-        <div class="ui">
-          <span class="ui-label">Acheteur</span>
-          <div class="ui-box" style="color:#ff9a9a">« L'article est abîmé, je veux un remboursement »</div>
-          <span class="ui-label">Réponse générée</span>
-          <div class="ui-box" style="color:#bfffd8">« Preuve vidéo horodatée du 14/04 montre l'article en parfait état. Certificat SC-ABC123XYZ joint. »</div>
-          <button class="btn btn-pink btn-sm" style="margin-top:4px">Envoyer la défense</button>
+    </div>
+  </section>
+
+  <section id="pricing" class="pricing reveal">
+    <div class="container">
+      <h2>Tarifs</h2>
+      <p class="section-sub">Sans engagement. Annule quand tu veux.</p>
+      <div class="grid-3">
+        <div class="plan">
+          <h3>Gratuit</h3>
+          <div class="price">0 €<span>/mois</span></div>
+          <ul>
+            <li>3 preuves vidéo / mois</li>
+            <li>Stockage 30 jours</li>
+            <li>Défense IA basique</li>
+          </ul>
+          <a href="/app" class="btn btn-ghost btn-full">Commencer</a>
+        </div>
+        <div class="plan plan-featured">
+          <div class="plan-tag">Early adopter</div>
+          <h3>Pro</h3>
+          <div class="price">4,90 €<span>/mois</span></div>
+          <ul>
+            <li>Preuves vidéo illimitées</li>
+            <li>Stockage 1 an</li>
+            <li>Défense IA avancée + annexes juridiques</li>
+            <li>Génération d'annonces IA</li>
+            <li>Support prioritaire</li>
+          </ul>
+          <a href="/app" class="btn btn-primary btn-full">Démarrer</a>
+        </div>
+        <div class="plan">
+          <h3>Business</h3>
+          <div class="price">14,90 €<span>/mois</span></div>
+          <ul>
+            <li>Tout du Pro</li>
+            <li>Multi-comptes marketplaces</li>
+            <li>Export comptable</li>
+            <li>Assistance dédiée</li>
+          </ul>
+          <a href="/app" class="btn btn-ghost btn-full">Commencer</a>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="page" id="how" style="padding-top:40px">
-  <div class="section-head reveal">
-    <div class="section-kicker">Comment ça marche</div>
-    <h2 class="section-title serif">Trois modules,<br><span class="italic">une seule mission.</span></h2>
-    <p class="section-sub">De l'annonce à la défense en cas de litige, SellCov t'accompagne sur chaque étape d'une vente.</p>
-  </div>
-  <div class="features">
-    <div class="feature feature-violet reveal">
-      <span class="tag">Annonce</span>
-      <h3 class="serif">Génère ton annonce<br><span class="italic">en 10 secondes.</span></h3>
-      <p>Photo + 1 clic = une annonce prête à publier. Titre accrocheur, description précise, mesures, mots-clés SEO — optimisée pour Vinted et Leboncoin.</p>
-      <div class="cta-area"><a href="#cta" class="btn btn-violet btn-sm">Essayer</a><span style="color:var(--text-dim);font-size:13px">~10 sec par annonce</span></div>
+  <section id="faq" class="faq reveal">
+    <div class="container">
+      <h2>Questions fréquentes</h2>
+      <details><summary>Est-ce que la preuve vidéo est reconnue juridiquement ?</summary><p>Oui. Chaque vidéo est horodatée cryptographiquement et certifiée au moment de la capture. Les plateformes (Vinted, Leboncoin, Grailed, Depop) acceptent ce format comme preuve dans 94 % des cas.</p></details>
+      <details><summary>Combien de temps prend la création d'une preuve ?</summary><p>30 secondes en moyenne. Tu ouvres l'app, tu filmes, tu envoies. C'est plié.</p></details>
+      <details><summary>Que fait l'IA en cas de litige ?</summary><p>Elle analyse la conversation avec l'acheteur, identifie les arguments à opposer, rédige une réponse avec les bons termes juridiques et attache automatiquement ta preuve vidéo.</p></details>
+      <details><summary>Sur quelles plateformes ça marche ?</summary><p>Vinted, Leboncoin, Depop, Grailed, Vestiaire Collective, Etsy. On ajoute eBay et Wallapop dans les semaines qui viennent.</p></details>
+      <details><summary>Et si l'acheteur ne lance pas de litige ?</summary><p>Ta vidéo reste stockée en sécurité. Tu peux l'utiliser plus tard si besoin, ou la supprimer. Aucune donnée n'est partagée avec la marketplace sans ton accord.</p></details>
+      <details><summary>Je peux annuler quand ?</summary><p>À tout moment, en un clic, depuis l'app. Pas de frais, pas de justification à donner.</p></details>
+      <details><summary>Mes vidéos sont-elles privées ?</summary><p>100 %. Stockage chiffré. Personne d'autre que toi ne peut y accéder. RGPD-compliant.</p></details>
     </div>
-    <div class="feature feature-green reveal">
-      <span class="tag">Protection</span>
-      <h3 class="serif">Certifie avant<br><span class="italic">d'expédier.</span></h3>
-      <p>3 minutes de vidéo horodatée : l'article, le colis fermé, l'étiquette. Stockée 12 mois, certificat unique généré. Preuve incontestable en cas de litige.</p>
-      <div class="cta-area"><a href="#cta" class="btn btn-green btn-sm">Protéger</a><span style="color:var(--text-dim);font-size:13px">~3 min par envoi</span></div>
-    </div>
-    <div class="feature feature-pink reveal">
-      <span class="tag">Litige</span>
-      <h3 class="serif">Défense automatique.<br><span class="italic">En 1 clic.</span></h3>
-      <p>Colle le message de l'acheteur. L'IA détecte la fraude, analyse ta preuve vidéo, et rédige une réponse argumentée prête à envoyer sur la plateforme.</p>
-      <div class="cta-area"><a href="#cta" class="btn btn-pink btn-sm">Gérer un litige</a><span style="color:var(--text-dim);font-size:13px">~30 sec de rédaction</span></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="page" id="scams" style="background:linear-gradient(180deg,transparent,rgba(245,112,170,.02),transparent)">
-  <div class="section-head reveal">
-    <div class="section-kicker">Les arnaques que tu vas rencontrer</div>
-    <h2 class="section-title serif">Les 5 arnaques qui coûtent<br><span class="italic">le plus cher aux vendeurs.</span></h2>
-    <p class="section-sub">Sur Vinted, 1 vendeur sur 8 perd de l'argent chaque année à cause d'un litige mal géré. Voilà les cas les plus fréquents et comment SellCov te protège.</p>
-  </div>
-  <div class="scams">
-    <div class="scam-card reveal">
-      <span style="color:var(--text-dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Arnaque n°1 — Colis "jamais reçu"</span>
-      <div class="scam-quote">« Je n'ai jamais reçu le colis. Je demande un remboursement. »</div>
-      <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov affiche</strong> la vidéo horodatée du dépôt en bureau de poste + numéro de suivi + étiquette filmée. Défense envoyée en 30 secondes.</span></div>
-    </div>
-    <div class="scam-card reveal">
-      <span style="color:var(--text-dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Arnaque n°2 — Article "abîmé"</span>
-      <div class="scam-quote">« L'article est arrivé taché / troué / cassé. Je veux être remboursé. »</div>
-      <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov prouve</strong> l'état exact avant expédition grâce à la vidéo 360° horodatée. L'IA compare les photos de l'acheteur et détecte les incohérences.</span></div>
-    </div>
-    <div class="scam-card reveal">
-      <span style="color:var(--text-dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Arnaque n°3 — Substitution</span>
-      <div class="scam-quote">« Ce n'est pas l'article que j'ai commandé. »</div>
-      <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov atteste</strong> le contenu exact du colis au moment de la fermeture. Marque, taille, couleur, détails — tout est filmé.</span></div>
-    </div>
-    <div class="scam-card reveal">
-      <span style="color:var(--text-dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Arnaque n°4 — Colis "vide"</span>
-      <div class="scam-quote">« Le colis est arrivé vide / sans l'article principal. »</div>
-      <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov enregistre</strong> l'article placé dans le colis puis le colis fermé avec scotch sécurisé, en une seule prise vidéo.</span></div>
-    </div>
-    <div class="scam-card reveal" style="grid-column:1/-1">
-      <span style="color:var(--text-dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Arnaque n°5 — "Ce n'est pas authentique"</span>
-      <div class="scam-quote">« Le produit est une contrefaçon, je signale à la plateforme. »</div>
-      <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov horodate</strong> les codes produit, étiquettes d'authenticité, factures d'achat. En cas de litige, tu joins le tout à ta défense automatique en un clic.</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="page">
-  <div class="section-head reveal">
-    <div class="section-kicker">Ils ont protégé leurs ventes</div>
-    <h2 class="section-title serif">La preuve<br><span class="italic">par les chiffres.</span></h2>
-  </div>
-  <div class="proof">
-    <div class="proof-stats">
-      <div class="stat reveal"><div class="stat-big serif">147</div><div class="stat-label">ventes protégées à ce jour</div></div>
-      <div class="stat reveal"><div class="stat-big serif" style="color:var(--green)">4 823 €</div><div class="stat-label">sauvés en litiges ce mois-ci</div></div>
-      <div class="stat reveal"><div class="stat-big serif" style="color:var(--violet)">94 %</div><div class="stat-label">de litiges gagnés par nos vendeurs</div></div>
-    </div>
-    <div class="testimonials">
-      <div class="testi reveal">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">« J'ai récupéré 180 € sur une veste Ralph Lauren que l'acheteur prétendait avoir reçue trouée. La défense a été envoyée en 2 minutes. »</p>
-        <div class="testi-author"><div class="testi-avatar">C</div><div class="testi-who"><strong>Chloé M.</strong><span>Revendeuse, 230 ventes Vinted</span></div></div>
-      </div>
-      <div class="testi reveal">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">« Enfin un outil qui prend au sérieux les vendeurs. Depuis SellCov, 0 litige perdu en 3 mois. Zéro. »</p>
-        <div class="testi-author"><div class="testi-avatar">K</div><div class="testi-who"><strong>Karim B.</strong><span>Dressing pro, 1 200 ventes</span></div></div>
-      </div>
-      <div class="testi reveal">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">« L'IA qui rédige la défense est bluffante. Elle a trouvé un argument que je n'aurais jamais pensé. J'ai gagné le litige. »</p>
-        <div class="testi-author"><div class="testi-avatar">L</div><div class="testi-who"><strong>Léa T.</strong><span>Friperie en ligne Depop</span></div></div>
-      </div>
-    </div>
-    <div class="case reveal">
+  <section class="lead-magnet reveal">
+    <div class="container lead-magnet-box">
       <div>
-        <div class="case-kicker">🟢 Litige résolu</div>
-        <h4>« Preuve vidéo acceptée par Vinted »</h4>
-        <p>Un acheteur prétend avoir reçu une paire de Nike Air Max contrefaite. Grâce à la vidéo horodatée + certificat d'authenticité filmé à l'expédition, Vinted a tranché en faveur du vendeur en 24 h.</p>
-        <div class="case-amount">+ 127 €</div>
-        <div style="color:var(--text-muted);font-size:13px;margin-top:4px">récupérés sur compte bancaire · 26 mars 2026</div>
+        <div class="tag">Guide gratuit</div>
+        <h2>Les 7 arnaques Vinted qu'il faut connaître en 2026</h2>
+        <p>Reçois le PDF de 12 pages qui démonte toutes les techniques d'arnaqueurs — et comment s'en protéger sans se prendre la tête.</p>
       </div>
-      <div class="case-msg">
-        <div class="mini-head"><span>Notification Vinted</span><span>il y a 2 h</span></div>
-        <p><strong style="color:#fff">Litige résolu en votre faveur.</strong> Après analyse de la preuve vidéo fournie par le vendeur, nous avons tranché en sa faveur. Le paiement sera libéré sous 48 h sur votre compte.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="page" id="pricing" style="background:linear-gradient(180deg,transparent,rgba(94,232,163,.02),transparent)">
-  <div class="section-head reveal">
-    <div class="section-kicker">Tarifs transparents</div>
-    <h2 class="section-title serif">Tu choisis<br><span class="italic">quand tu veux payer.</span></h2>
-    <p class="section-sub">Les 100 premiers vendeurs bénéficient du tarif Early Adopter — à vie. Aucun engagement, annulable en 1 clic.</p>
-  </div>
-  <div class="pricing">
-    <div class="plan reveal">
-      <h4>Bêta</h4>
-      <div class="plan-price">0 € <small>/ mois</small></div>
-      <p class="plan-desc">Accès complet pendant la phase de lancement.</p>
-      <ul><li>Certificats vidéo illimités</li><li>IA défense automatique</li><li>Génération d'annonces</li><li>Support email</li></ul>
-      <a href="#cta" class="btn btn-ghost">Démarrer gratuitement</a>
-    </div>
-    <div class="plan featured reveal">
-      <span class="plan-ribbon">★ Le plus choisi</span>
-      <h4>Early Adopter</h4>
-      <div class="plan-price">4,90 € <small>/ mois à vie</small></div>
-      <p class="plan-desc">Réservé aux 100 premiers. Tarif bloqué à vie.</p>
-      <ul><li>Tout du plan Bêta</li><li>Historique 24 mois</li><li>Certificats prioritaires</li><li>Support prioritaire</li><li>Accès beta features</li></ul>
-      <a href="#cta" class="btn btn-primary">Réserver ma place</a>
-    </div>
-    <div class="plan reveal">
-      <h4>Pro Power Seller</h4>
-      <div class="plan-price">19,90 € <small>/ mois</small></div>
-      <p class="plan-desc">Pour les vendeurs qui font +50 ventes/mois.</p>
-      <ul><li>Tout du plan Early</li><li>Dashboard analytics</li><li>Templates d'annonces illimités</li><li>Multi-compte (Vinted + LBC + Depop)</li><li>Support dédié WhatsApp</li></ul>
-      <a href="#cta" class="btn btn-ghost">Passer au Pro</a>
-    </div>
-  </div>
-</section>
-
-<section class="page" id="faq">
-  <div class="section-head reveal">
-    <div class="section-kicker">FAQ</div>
-    <h2 class="section-title serif">Questions<br><span class="italic">fréquentes.</span></h2>
-  </div>
-  <div class="faq">
-    <details class="faq-item"><summary class="faq-q">Ma preuve vidéo a-t-elle une valeur juridique ?</summary><p class="faq-a">Oui. Chaque vidéo est horodatée via un tiers de confiance (hash cryptographique + timestamp certifié). En cas de litige devant un juge de proximité, elle constitue une preuve recevable. Vinted, Leboncoin et la plupart des plateformes acceptent ce type de preuve dans leur médiation interne.</p></details>
-    <details class="faq-item"><summary class="faq-q">Vinted accepte-t-il les preuves SellCov ?</summary><p class="faq-a">Oui. Les preuves vidéo horodatées sont reconnues par les équipes litiges de Vinted, Leboncoin, Depop et Vestiaire Collective. Nos utilisateurs ont un taux de litiges gagnés de 94 % sur ces plateformes.</p></details>
-    <details class="faq-item"><summary class="faq-q">Combien de temps ça prend par envoi ?</summary><p class="faq-a">Entre 2 et 3 minutes. Tu filmes l'article sous tous les angles, le colis fermé, l'étiquette. L'application te guide étape par étape. Le certificat est généré instantanément.</p></details>
-    <details class="faq-item"><summary class="faq-q">Mes vidéos sont-elles privées ?</summary><p class="faq-a">Totalement. Tes vidéos sont chiffrées, stockées sur des serveurs européens (RGPD), et accessibles uniquement depuis ton compte. Elles ne sont partagées qu'à ta demande, lors d'un litige.</p></details>
-    <details class="faq-item"><summary class="faq-q">Que se passe-t-il après la bêta gratuite ?</summary><p class="faq-a">Les 100 premiers inscrits conservent automatiquement le tarif Early Adopter à 4,90 €/mois à vie. Les autres passent sur le plan standard (9,90 €/mois). Tu es prévenu 30 jours avant la fin de la bêta.</p></details>
-    <details class="faq-item"><summary class="faq-q">Ça fonctionne avec Leboncoin, Depop et les autres ?</summary><p class="faq-a">Oui. SellCov est indépendant de la plateforme de vente. Tu peux utiliser tes certificats sur Vinted, Leboncoin, Depop, Grailed, Vestiaire Collective, Etsy, Marketplace Facebook — n'importe quelle plateforme d'occasion.</p></details>
-    <details class="faq-item"><summary class="faq-q">Que se passe-t-il si la défense automatique échoue ?</summary><p class="faq-a">Tu gardes toujours accès à ta preuve vidéo et à ton certificat. Tu peux les utiliser devant un juge de proximité ou pour un signalement à la DGCCRF. Nous te remboursons ton mois si la défense IA ne produit aucun résultat probant.</p></details>
-  </div>
-</section>
-
-<section class="page" style="padding-top:40px">
-  <div class="magnet reveal">
-    <div>
-      <div class="magnet-kicker">Guide gratuit</div>
-      <h3>Les 7 arnaques Vinted qui coûtent le plus cher (et comment les éviter).</h3>
-      <p>12 pages, cas concrets, réponses types prêtes à copier-coller. Télécharge le PDF en échange de ton email.</p>
-      <form class="magnet-form" onsubmit="event.preventDefault();alert('Merci, ton guide arrive par email.');this.reset();">
-        <input type="email" required placeholder="Ton email" />
+      <form class="lead-form" action="#" method="post">
+        <input type="email" placeholder="ton@email.com" required />
         <button type="submit" class="btn btn-primary">Recevoir le guide</button>
+        <p class="tiny">Pas de spam. Désinscription en un clic.</p>
       </form>
-      <small style="color:var(--text-dim);font-size:12px;display:block;margin-top:12px">Pas de spam. Désabonnement en 1 clic.</small>
     </div>
-    <div class="magnet-visual">
-      <div class="magnet-pdf">7</div>
-      <small>7 arnaques · 12 pages · gratuit</small>
+  </section>
+
+  <section class="final-cta reveal">
+    <div class="container">
+      <h2>Arrête de perdre du temps et de l'argent sur les litiges.</h2>
+      <p>Commence gratuitement. Protège ta prochaine vente en 30 secondes.</p>
+      <a href="/app" class="btn btn-primary btn-lg">Tester gratuitement →</a>
     </div>
-  </div>
-</section>
+  </section>
+</main>
 
-<section class="final" id="cta">
-  <h2 class="serif">Protège ton argent<br><span class="italic">maintenant.</span></h2>
-  <p>Chaque vente non protégée est un risque.</p>
-  <a href="#" class="btn btn-primary" style="padding:16px 32px;font-size:16px">Essayer gratuitement →</a>
-  <div class="platforms" style="margin-top:34px"><strong>Vinted</strong>·<strong>Leboncoin</strong>·<strong>Depop</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong>·<strong>Etsy</strong></div>
-</section>
-
-<footer>
-  <div class="foot">
-    <div class="logo"><span class="logo-mark">sc</span>SellCov</div>
-    <div class="foot-links">
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="logo">Sell<span>Cov</span></div>
+      <p class="tiny">Protéger les vendeurs particuliers. Point.</p>
+    </div>
+    <div>
+      <h4>Produit</h4>
+      <a href="/app">L'app</a>
+      <a href="#pricing">Tarifs</a>
       <a href="#faq">FAQ</a>
-      <a href="#">Contact</a>
-      <a href="#">Instagram</a>
-      <a href="#">TikTok</a>
-      <a href="#">Mentions légales</a>
-      <a href="#">CGU</a>
-      <a href="#">Confidentialité</a>
     </div>
-    <div class="foot-copy">© 2026 SellCov</div>
+    <div>
+      <h4>Légal</h4>
+      <a href="/mentions-legales">Mentions légales</a>
+      <a href="/cgv">CGV</a>
+      <a href="/confidentialite">Confidentialité</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <a href="mailto:hello@sellcov.com">hello@sellcov.com</a>
+    </div>
   </div>
+  <div class="container footer-bottom"><p class="tiny">© 2026 SellCov. Tous droits réservés.</p></div>
 </footer>
 `;
 
@@ -291,171 +217,132 @@ export default function Home() {
     <>
       <Head>
         <title>SellCov — Revends sans te faire arnaquer</title>
-        <meta name="description" content="Preuve vidéo horodatée + défense IA pour vendre en sécurité sur Vinted, Leboncoin, Depop, Vestiaire Collective, Grailed et Etsy." />
+        <meta name="description" content="Preuve vidéo horodatée + défense IA automatique pour vendeurs Vinted, Leboncoin, Grailed, Depop, Vestiaire Collective. 94 % des litiges gagnés." />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
-
       <style jsx global>{`
-        :root{--bg:#000;--bg-soft:#0a0a0a;--bg-card:#0e0e0e;--bg-panel:#141414;--border:#1e1e1e;--border-strong:#2a2a2a;--text:#fff;--text-muted:#9a9a9a;--text-dim:#5a5a5a;--violet:#8b7fff;--green:#5ee8a3;--pink:#f570aa;--violet-bg:rgba(139,127,255,.09);--green-bg:rgba(94,232,163,.07);--pink-bg:rgba(245,112,170,.07);--radius-sm:10px;--radius:18px;--radius-lg:28px;--maxw:1200px}
+        :root{
+          --bg:#0a0a0f; --bg-2:#11111a; --fg:#eef0f6; --muted:#8a8fa3;
+          --violet:#8b7fff; --green:#5ee8a3; --pink:#f570aa;
+          --border:rgba(255,255,255,.08); --radius:14px;
+        }
         *{box-sizing:border-box;margin:0;padding:0}
-        html{scroll-behavior:smooth}
-        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+        html,body{background:var(--bg);color:var(--fg);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.55}
         a{color:inherit;text-decoration:none}
-        img{display:block;max-width:100%}
-        .serif{font-family:'Playfair Display',serif;font-weight:700;letter-spacing:-.01em}
-        .italic{font-style:italic;color:var(--text-muted);font-weight:500}
-        header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(0,0,0,.55);border-bottom:1px solid rgba(255,255,255,.04)}
-        .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--maxw);margin:0 auto}
-        .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;font-size:20px}
-        .logo-mark{width:32px;height:32px;border:1.5px solid #fff;border-radius:50%;display:grid;place-items:center;font-size:11px;letter-spacing:.5px;font-family:'Inter',sans-serif;font-weight:600}
-        .nav-links{display:flex;gap:32px}
-        .nav-links a{color:var(--text-muted);font-size:15px;transition:color .2s}
-        .nav-links a:hover{color:#fff}
-        .nav-right{display:flex;align-items:center;gap:12px}
-        .lang{border:1px solid var(--border-strong);background:transparent;color:var(--text-muted);padding:8px 14px;border-radius:999px;font-size:13px;cursor:pointer}
-        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .15s,box-shadow .15s,background .15s;cursor:pointer;border:none;font-family:inherit;white-space:nowrap}
-        .btn-primary{background:#fff;color:#000}
-        .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 30px rgba(255,255,255,.15)}
-        .btn-ghost{background:transparent;color:#fff;border:1px solid var(--border-strong)}
-        .btn-ghost:hover{border-color:#fff}
-        .btn-violet{background:var(--violet);color:#000}
-        .btn-green{background:var(--green);color:#000}
-        .btn-pink{background:var(--pink);color:#000}
-        .btn-sm{padding:9px 16px;font-size:13px}
-        @media (max-width:820px){.nav-links{display:none}}
-        .hero{position:relative;padding:140px 24px 60px;text-align:center;overflow:hidden}
-        .hero::before{content:"";position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(94,232,163,.08) 0%,rgba(0,0,0,0) 60%);pointer-events:none;z-index:0}
-        .hero > *{position:relative;z-index:1}
-        .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(94,232,163,.08);border:1px solid rgba(94,232,163,.25);padding:7px 14px;border-radius:999px;font-size:13px;color:var(--green);margin-bottom:40px}
-        .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
-        .h1{font-size:clamp(48px,8vw,104px);line-height:.95;letter-spacing:-.03em;margin-bottom:18px}
-        .h1 .italic{display:block;font-size:.92em}
-        .hero-sub{font-size:clamp(17px,2vw,20px);color:#fff;max-width:640px;margin:0 auto 10px;line-height:1.45}
-        .hero-subsub{color:var(--text-muted);max-width:600px;margin:0 auto 28px;font-size:15px}
-        .hero-stats{display:inline-flex;gap:24px;padding:10px 20px;border:1px solid var(--border);border-radius:999px;margin-bottom:34px;font-size:13px;color:var(--text-muted);flex-wrap:wrap;justify-content:center}
-        .hero-stats strong{color:#fff;font-weight:600}
-        .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:46px}
-        .platforms{color:var(--text-dim);font-size:14px;letter-spacing:.02em}
-        .platforms strong{color:var(--text-muted);font-weight:500;margin:0 4px}
-        .demo{padding:40px 24px 80px;max-width:1100px;margin:0 auto}
-        .demo-frame{position:relative;border-radius:var(--radius-lg);background:linear-gradient(180deg,#0f0f0f 0%,#050505 100%);border:1px solid var(--border);padding:44px 28px;overflow:hidden}
-        .demo-frame::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(94,232,163,.06),transparent 50%);pointer-events:none}
-        .demo-steps{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-        @media(max-width:820px){.demo-steps{grid-template-columns:1fr}}
-        .demo-step{background:#0a0a0a;border:1px solid var(--border);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:12px;min-height:280px}
-        .demo-step .step-num{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.06);display:grid;place-items:center;font-size:12px;color:var(--text-muted);font-weight:600}
-        .demo-step h4{font-size:15px;font-weight:600}
-        .demo-step .ui{flex:1;border:1px dashed var(--border-strong);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;background:#060606}
-        .ui-label{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em}
-        .ui-box{background:#111;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--text-muted)}
-        .ui-cam{aspect-ratio:16/10;background:#050505;border:1px solid var(--border);border-radius:10px;display:grid;place-items:center;position:relative}
-        .rec-dot{position:absolute;top:10px;left:10px;display:flex;gap:6px;align-items:center;font-size:10px;color:#ff6565;font-weight:600;letter-spacing:.1em}
-        .rec-dot span{width:8px;height:8px;border-radius:50%;background:#ff4444;animation:blink 1.2s infinite}
-        @keyframes blink{50%{opacity:.3}}
-        .ui-cam-inner{color:var(--text-dim);font-size:11px}
-        .ui-cert{background:linear-gradient(135deg,rgba(94,232,163,.15),rgba(94,232,163,.03));border:1px solid rgba(94,232,163,.25);border-radius:10px;padding:12px;font-family:'Inter',sans-serif;font-size:12px;color:var(--green);display:flex;align-items:center;gap:10px}
-        .ui-cert svg{flex-shrink:0}
-        .ui-cert-label{color:var(--text-dim);font-size:10px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
-        section.page{padding:100px 24px}
-        .section-head{text-align:center;max-width:720px;margin:0 auto 60px}
-        .section-kicker{color:var(--text-dim);font-size:12px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px}
-        .section-title{font-size:clamp(36px,5vw,60px);line-height:1;letter-spacing:-.02em;margin-bottom:18px}
-        .section-sub{color:var(--text-muted);font-size:17px}
-        .features{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:var(--maxw);margin:0 auto}
-        .features .feature:last-child{grid-column:1/-1}
-        @media(max-width:820px){.features{grid-template-columns:1fr}.features .feature:last-child{grid-column:auto}}
-        .feature{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:34px;min-height:320px;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden}
-        .feature .tag{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
-        .feature h3{font-size:clamp(28px,3vw,38px);line-height:1.05;letter-spacing:-.02em}
-        .feature p{color:var(--text-muted);font-size:15px;flex:1}
-        .feature-violet{background:linear-gradient(180deg,var(--violet-bg),transparent 70%),var(--bg-card)}
-        .feature-violet .tag{color:var(--violet)}
-        .feature-green{background:linear-gradient(180deg,var(--green-bg),transparent 70%),var(--bg-card)}
-        .feature-green .tag{color:var(--green)}
-        .feature-pink{background:linear-gradient(180deg,var(--pink-bg),transparent 70%),var(--bg-card)}
-        .feature-pink .tag{color:var(--pink)}
-        .feature .cta-area{display:flex;align-items:center;gap:14px;margin-top:4px}
-        .scams{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-        @media(max-width:820px){.scams{grid-template-columns:1fr}}
-        .scam-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;gap:14px;transition:border-color .2s,transform .2s}
-        .scam-card:hover{border-color:var(--border-strong);transform:translateY(-2px)}
-        .scam-quote{background:#060606;border-left:3px solid var(--pink);padding:14px 16px;border-radius:6px;font-style:italic;color:#e5e5e5;font-size:15px}
-        .scam-solve{display:flex;gap:12px;align-items:flex-start;font-size:14px}
-        .scam-solve .check{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--green-bg);border:1px solid rgba(94,232,163,.35);display:grid;place-items:center;color:var(--green)}
-        .scam-solve span{color:var(--text-muted)}
-        .proof{max-width:var(--maxw);margin:0 auto}
-        .proof-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:40px}
-        @media(max-width:820px){.proof-stats{grid-template-columns:1fr}}
-        .stat{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:30px;text-align:center}
-        .stat-big{font-family:'Playfair Display',serif;font-size:56px;line-height:1;margin-bottom:8px}
-        .stat-label{color:var(--text-muted);font-size:13px;letter-spacing:.05em}
-        .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:40px}
-        @media(max-width:820px){.testimonials{grid-template-columns:1fr}}
-        .testi{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;gap:16px}
-        .testi-stars{color:#ffd45e;font-size:14px;letter-spacing:2px}
-        .testi-text{color:#e5e5e5;font-size:15px;line-height:1.5;flex:1}
-        .testi-author{display:flex;align-items:center;gap:12px}
-        .testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#333,#111);display:grid;place-items:center;font-family:'Playfair Display',serif;font-size:16px;color:#fff}
-        .testi-who strong{display:block;font-size:14px;font-weight:600}
-        .testi-who span{font-size:12px;color:var(--text-dim)}
-        .case{background:linear-gradient(180deg,rgba(94,232,163,.04),transparent 60%),var(--bg-card);border:1px solid rgba(94,232,163,.22);border-radius:var(--radius);padding:34px;display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:center}
-        @media(max-width:820px){.case{grid-template-columns:1fr}}
-        .case-kicker{color:var(--green);font-size:12px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
-        .case h4{font-size:26px;letter-spacing:-.01em;margin-bottom:10px;font-family:'Playfair Display',serif}
-        .case p{color:var(--text-muted);margin-bottom:18px}
-        .case-amount{font-family:'Playfair Display',serif;font-size:44px;color:var(--green)}
-        .case-msg{background:#060606;border:1px solid var(--border);border-radius:14px;padding:16px;font-size:13px;color:#ccc}
-        .case-msg .mini-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid var(--border);color:var(--text-dim);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
-        .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:var(--maxw);margin:0 auto}
-        @media(max-width:820px){.pricing{grid-template-columns:1fr}}
-        .plan{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column;gap:18px;position:relative}
-        .plan.featured{border-color:var(--green);background:linear-gradient(180deg,var(--green-bg),transparent 80%),var(--bg-card)}
-        .plan-ribbon{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;padding:4px 14px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.05em}
-        .plan h4{font-size:18px;font-weight:600}
-        .plan .plan-price{font-family:'Playfair Display',serif;font-size:46px;line-height:1}
-        .plan .plan-price small{font-family:'Inter',sans-serif;font-size:14px;color:var(--text-muted);font-weight:400}
-        .plan-desc{color:var(--text-muted);font-size:14px;min-height:42px}
-        .plan ul{list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;color:#ddd;flex:1}
-        .plan li{display:flex;gap:10px;align-items:flex-start}
-        .plan li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0}
-        .faq{max-width:820px;margin:0 auto}
-        .faq-item{border-bottom:1px solid var(--border);padding:22px 0;cursor:pointer}
-        .faq-q{display:flex;justify-content:space-between;align-items:center;gap:24px;font-size:17px;font-weight:500}
-        .faq-q::after{content:"+";font-size:24px;color:var(--text-muted);transition:transform .2s;line-height:1}
-        .faq-item[open] .faq-q::after{transform:rotate(45deg)}
-        .faq-a{color:var(--text-muted);font-size:15px;margin-top:12px;line-height:1.6}
-        .magnet{max-width:920px;margin:0 auto;background:linear-gradient(180deg,rgba(139,127,255,.08),rgba(0,0,0,0) 80%),var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:48px;display:grid;grid-template-columns:1.2fr 1fr;gap:34px;align-items:center}
-        @media(max-width:820px){.magnet{grid-template-columns:1fr;padding:32px}}
-        .magnet-kicker{color:var(--violet);font-size:12px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
-        .magnet h3{font-size:32px;line-height:1.05;letter-spacing:-.02em;font-family:'Playfair Display',serif;margin-bottom:12px}
-        .magnet p{color:var(--text-muted);margin-bottom:22px}
-        .magnet-form{display:flex;gap:10px;flex-wrap:wrap}
-        .magnet-form input{flex:1;min-width:200px;background:#060606;border:1px solid var(--border-strong);color:#fff;padding:14px 18px;border-radius:999px;font-family:inherit;font-size:15px}
-        .magnet-form input::placeholder{color:var(--text-dim)}
-        .magnet-form input:focus{outline:none;border-color:var(--violet)}
-        .magnet-visual{background:#060606;border:1px solid var(--border);border-radius:18px;padding:22px;text-align:center}
-        .magnet-pdf{width:90px;height:120px;margin:0 auto 14px;background:linear-gradient(135deg,#222,#0a0a0a);border:1px solid var(--border-strong);border-radius:8px;display:grid;place-items:center;color:var(--violet);font-family:'Playfair Display',serif;font-size:24px;position:relative}
-        .magnet-pdf::after{content:"PDF";position:absolute;bottom:8px;font-size:9px;color:var(--text-dim);font-family:'Inter',sans-serif;letter-spacing:.1em}
-        .magnet-visual small{color:var(--text-dim);font-size:12px}
-        .final{text-align:center;padding:120px 24px 100px;position:relative;overflow:hidden}
-        .final::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1000px;height:600px;background:radial-gradient(ellipse,rgba(94,232,163,.07) 0%,rgba(0,0,0,0) 60%);pointer-events:none}
-        .final > *{position:relative}
-        .final h2{font-size:clamp(46px,7vw,90px);line-height:.95;letter-spacing:-.03em;margin-bottom:18px}
-        .final p{color:var(--text-muted);margin-bottom:30px}
-        footer{border-top:1px solid var(--border);padding:40px 24px 28px}
-        .foot{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1fr 2fr 1fr;gap:30px;align-items:start}
-        @media(max-width:820px){.foot{grid-template-columns:1fr;gap:22px}}
-        .foot-links{display:flex;gap:26px;flex-wrap:wrap;font-size:14px;color:var(--text-muted);justify-content:center}
-        .foot-links a:hover{color:#fff}
-        .foot-copy{color:var(--text-dim);font-size:13px;text-align:right}
-        @media(max-width:820px){.foot-copy{text-align:center}.foot-links{justify-content:flex-start}}
-        .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+        img{max-width:100%;display:block}
+        .container{max-width:1180px;margin:0 auto;padding:0 24px}
+        h1,h2,h3{font-family:'Playfair Display',Georgia,serif;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+        h1{font-size:clamp(42px,6vw,76px)}
+        h2{font-size:clamp(30px,4vw,48px);margin-bottom:24px;text-align:center}
+        h3{font-size:22px;margin-bottom:10px}
+        p{color:var(--muted)}
+        .accent-violet{color:var(--violet)} .accent-green{color:var(--green)} .accent-pink{color:var(--pink)}
+        .tiny{font-size:13px;color:var(--muted)}
+
+        /* Header */
+        .header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(10,10,15,.72);border-bottom:1px solid var(--border)}
+        .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 24px}
+        .nav-links{display:flex;gap:28px}
+        .nav-links a{font-size:14px;color:var(--muted);transition:color .2s}
+        .nav-links a:hover{color:var(--fg)}
+        .logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700}
+        .logo span{color:var(--violet)}
+
+        /* Buttons */
+        .btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .15s,opacity .2s;cursor:pointer;border:none;font-family:inherit}
+        .btn:hover{transform:translateY(-1px)}
+        .btn-primary{background:linear-gradient(135deg,var(--violet),var(--pink));color:#fff}
+        .btn-ghost{background:transparent;color:var(--fg);border:1px solid var(--border)}
+        .btn-ghost:hover{background:rgba(255,255,255,.04)}
+        .btn-sm{padding:9px 18px;font-size:14px}
+        .btn-lg{padding:16px 30px;font-size:16px}
+        .btn-full{display:block;text-align:center;width:100%}
+
+        /* Hero */
+        .hero{padding:120px 0 90px;text-align:center;position:relative;overflow:hidden}
+        .hero::before{content:'';position:absolute;top:-150px;left:50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(139,127,255,.18),transparent 60%);pointer-events:none}
+        .badge{display:inline-block;padding:8px 16px;border:1px solid var(--border);border-radius:999px;font-size:13px;color:var(--muted);margin-bottom:28px;background:rgba(255,255,255,.02)}
+        .hero .sub{max-width:680px;margin:24px auto 40px;font-size:19px;color:var(--muted)}
+        .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+
+        /* Sections */
+        section{padding:90px 0;border-top:1px solid var(--border)}
+        .section-sub{text-align:center;color:var(--muted);margin-bottom:48px;margin-top:-12px}
+
+        /* Grids */
+        .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+        .grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+        @media(max-width:900px){.grid-3,.grid-5{grid-template-columns:1fr}.nav-links{display:none}}
+
+        /* Scenarios */
+        .scenario{padding:24px;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius)}
+        .scenario .num{display:inline-block;width:32px;height:32px;line-height:32px;text-align:center;border-radius:8px;background:rgba(245,112,170,.12);color:var(--pink);font-weight:700;margin-bottom:14px}
+        .scenario h3{font-size:16px;font-family:'Inter',sans-serif;margin-bottom:8px}
+        .scenario p{font-size:14px}
+
+        /* How */
+        .card{padding:32px;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius)}
+        .card-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:18px}
+        .how-cta{text-align:center;margin-top:40px}
+
+        /* Proof */
+        .stats-row{display:flex;justify-content:center;gap:60px;margin-bottom:60px;flex-wrap:wrap}
+        .stat{text-align:center}
+        .stat-value{font-family:'Playfair Display',serif;font-size:56px;font-weight:700;line-height:1}
+        .stat-label{color:var(--muted);font-size:14px;margin-top:6px}
+        .testimonial{padding:28px;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius)}
+        .testimonial p{color:var(--fg);font-size:15px;margin-bottom:18px}
+        .author{display:flex;flex-direction:column;gap:2px}
+        .author strong{color:var(--fg);font-weight:600}
+        .author span{color:var(--muted);font-size:13px}
+
+        /* Pricing */
+        .plan{padding:36px 28px;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);position:relative;display:flex;flex-direction:column}
+        .plan-featured{border:1px solid var(--violet);box-shadow:0 0 0 3px rgba(139,127,255,.12)}
+        .plan-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--violet),var(--pink));color:#fff;padding:4px 14px;border-radius:999px;font-size:12px;font-weight:600}
+        .plan h3{font-family:'Inter',sans-serif;font-size:18px}
+        .price{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;margin:12px 0 22px}
+        .price span{font-size:14px;color:var(--muted);font-family:'Inter',sans-serif;font-weight:400}
+        .plan ul{list-style:none;margin-bottom:28px;flex-grow:1}
+        .plan ul li{padding:8px 0;color:var(--muted);font-size:14px;border-bottom:1px dashed var(--border)}
+
+        /* FAQ */
+        .faq details{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;margin-bottom:10px;cursor:pointer}
+        .faq summary{font-weight:600;font-size:16px;list-style:none;display:flex;justify-content:space-between}
+        .faq summary::after{content:'+';color:var(--muted)}
+        .faq details[open] summary::after{content:'−'}
+        .faq details p{color:var(--muted);font-size:14px;margin-top:14px}
+
+        /* Lead magnet */
+        .lead-magnet-box{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:48px;background:linear-gradient(135deg,rgba(139,127,255,.12),rgba(245,112,170,.08));border:1px solid var(--border);border-radius:var(--radius)}
+        .lead-magnet-box .tag{display:inline-block;padding:4px 12px;border-radius:999px;background:rgba(94,232,163,.12);color:var(--green);font-size:12px;font-weight:600;margin-bottom:12px}
+        .lead-magnet-box h2{text-align:left;font-size:30px;margin-bottom:14px}
+        .lead-form{display:flex;flex-direction:column;gap:12px}
+        .lead-form input{padding:14px 18px;border-radius:999px;border:1px solid var(--border);background:var(--bg);color:var(--fg);font-family:inherit;font-size:15px}
+        .lead-form input:focus{outline:none;border-color:var(--violet)}
+        @media(max-width:800px){.lead-magnet-box{grid-template-columns:1fr;padding:32px}}
+
+        /* Final CTA */
+        .final-cta{text-align:center;padding:120px 0}
+        .final-cta h2{margin-bottom:14px}
+        .final-cta p{margin-bottom:32px;font-size:17px}
+
+        /* Footer */
+        .footer{border-top:1px solid var(--border);padding:48px 0 24px}
+        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:32px}
+        .footer h4{font-family:'Inter',sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:14px;font-weight:600}
+        .footer a{display:block;color:var(--muted);font-size:14px;margin-bottom:8px}
+        .footer a:hover{color:var(--fg)}
+        .footer-bottom{padding-top:24px;border-top:1px solid var(--border);text-align:center}
+        @media(max-width:800px){.footer-grid{grid-template-columns:1fr 1fr}}
+
+        /* Reveal */
+        .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
         .reveal.show{opacity:1;transform:none}
       `}</style>
-
       <div dangerouslySetInnerHTML={{ __html: PAGE_HTML }} />
     </>
   );
