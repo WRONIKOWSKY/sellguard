@@ -71,9 +71,9 @@ export default function Home() {
         .section-title em { font-style: italic; color: rgba(255,255,255,0.35); }
         .section-sub { text-align: center; font-size: 15px; color: var(--muted); font-weight: 300; line-height: 1.6; }
 
-        .pain-list { list-style: none; display: flex; flex-direction: column; gap: 4px; max-width: 500px; margin: 0 auto; }
+        .pain-list { list-style: none; display: flex; flex-direction: column; gap: 10px; max-width: 500px; margin: 0 auto; }
         .pain-item { font-size: 15px; color: var(--red); display: flex; align-items: center; gap: 10px; text-align: left; }
-        .pain-callout { text-align: left; margin-top: 4px; font-size: 15px; color: var(--muted); font-weight: 400; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+        .pain-callout { text-align: left; margin-top: 16px; font-size: 15px; color: var(--muted); font-weight: 400; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 
         .solution-list { display: flex; flex-direction: column; gap: 10px; max-width: 500px; margin: 0 auto; }
         .solution-item { font-size: 15px; color: var(--green); display: flex; align-items: center; gap: 10px; }
@@ -138,12 +138,13 @@ export default function Home() {
           <a onClick={function() { scrollTo("#how"); }}>Comment</a>
           
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ display: "flex", gap: 2 }}>
-            {["FR","EN","ES","IT"].map(function(l) {
-              return <button key={l} onClick={function() { try { localStorage.setItem("sellcov_lang", l.toLowerCase()); } catch(e) {} }} style={{ fontSize: 10, fontWeight: 600, padding: "4px 8px", borderRadius: 6, border: "0.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "var(--sans)" }}>{l}</button>;
-            })}
-          </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <select onChange={function(e) { try { localStorage.setItem("sellcov_lang", e.target.value); } catch(ex) {} }} defaultValue="fr" style={{ fontSize: 11, fontWeight: 600, padding: "5px 14px", borderRadius: 20, border: "0.5px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.6)", cursor: "pointer", fontFamily: "var(--sans)" }}>
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+            <option value="es">ES</option>
+            <option value="it">IT</option>
+          </select>
           <Link href="/annonce" className="nav-cta">Essayer gratuit</Link>
         </div>
       </nav>
