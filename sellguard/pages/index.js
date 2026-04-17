@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useLang } from "../contexts/LangContext";
 
 export default function Home() {
   useEffect(function() {
@@ -17,7 +18,7 @@ export default function Home() {
     return function() { io.disconnect(); };
   }, []);
 
-  var _lang = useState(function() { try { return localStorage.getItem("sellcov_lang") || "fr"; } catch(e) { return "fr"; } }), lang = _lang[0], setLang = _lang[1];
+  var ref = useLang(), lang = ref.lang, setLang = ref.setLang;
   function tx(o) { return o[lang] || o.en || o.fr; }
 
   function scrollTo(id) { var el = document.querySelector(id); if (el) el.scrollIntoView({ behavior: "smooth" }); }
@@ -142,7 +143,7 @@ export default function Home() {
           
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <select value={lang} onChange={function(e) { setLang(e.target.value); try { localStorage.setItem("sellcov_lang", e.target.value); } catch(ex) {} }} style={{ fontSize: 11, fontWeight: 600, padding: "5px 14px", borderRadius: 20, border: "0.5px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.6)", cursor: "pointer", fontFamily: "var(--sans)" }}>
+          <select value={lang} onChange={function(e) { setLang(e.target.value); }} style={{ fontSize: 11, fontWeight: 600, padding: "5px 14px", borderRadius: 20, border: "0.5px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.6)", cursor: "pointer", fontFamily: "var(--sans)" }}>
             <option value="fr">FR</option>
             <option value="en">EN</option>
             <option value="es">ES</option>
