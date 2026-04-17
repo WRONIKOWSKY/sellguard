@@ -449,7 +449,7 @@ export default function Protection() {
             </div>
 
             <div style={{ marginBottom: 16 }}>
-              <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>{p.article_label} *</label>
+              <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", display: "block", marginBottom: 6 }}>{p.article_label}</label>
               <input value={articleName} onChange={function(e) { setArticleName(e.target.value); }} placeholder={p.article_ph} style={inp} />
             </div>
 
