@@ -154,59 +154,63 @@ export default function Home() {
 
       {/* ═══ MODULES APPLE-STYLE ═══ */}
       <section style={{ padding: "80px 24px", maxWidth: 1100, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 10, alignItems: "stretch" }}>
 
           {/* Card 1 — Annonce */}
-          <Link href="/annonce" style={{ textDecoration: "none", display: "block", background: "#0e0e0e", border: "0.5px solid rgba(255,255,255,0.08)", borderRadius: 24, padding: "52px 48px 0", overflow: "hidden", minHeight: 420, position: "relative", cursor: "pointer" }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "var(--violet)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 14 }}>{tx({fr:"Annonce", en:"Listing", es:"Anuncio", it:"Annuncio"})}</div>
-            <div style={{ fontFamily: "var(--serif)", fontSize: "clamp(26px, 2.8vw, 38px)", fontWeight: 400, color: "#fff", lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: 10 }}>
-              {tx({fr:"Génère ton annonce", en:"Generate your listing", es:"Genera tu anuncio", it:"Genera il tuo annuncio"})}<br/>
-              <em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.3)" }}>{tx({fr:"en 10 secondes.", en:"in 10 seconds.", es:"en 10 segundos.", it:"in 10 secondi."})}</em>
-            </div>
-            <p style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", marginBottom: 28, fontWeight: 300, maxWidth: 280 }}>{tx({fr:"Photo → titre, description, prix optimisés pour Vinted, Depop, Grailed.", en:"Photo → title, description, optimized price for Vinted, Depop, Grailed.", es:"Foto → título, descripción, precio optimizado.", it:"Foto → titolo, descrizione, prezzo ottimizzato."})}</p>
-            <div style={{ display: "flex", gap: 10, marginBottom: 40 }}>
-              <span style={{ padding: "8px 20px", background: "#818CF8", color: "#fff", fontSize: 13, fontWeight: 600, borderRadius: 20 }}>{tx({fr:"Essayer", en:"Try it", es:"Probar", it:"Prova"})}</span>
-              <span style={{ padding: "8px 20px", background: "transparent", color: "rgba(255,255,255,0.5)", fontSize: 13, border: "0.5px solid rgba(255,255,255,0.12)", borderRadius: 20 }}>{tx({fr:"En savoir plus", en:"Learn more", es:"Saber más", it:"Scopri di più"})}</span>
-            </div>
-            <div style={{ background: "#161618", borderRadius: "14px 14px 0 0", border: "0.5px solid rgba(255,255,255,0.07)", borderBottom: "none", padding: "14px 16px", marginLeft: -48, marginRight: -48 }}>
-              <div style={{ display: "flex", gap: 8, marginBottom: 10 }}>
-                {["Vinted", "Depop", "Grailed"].map(function(p) { return <span key={p} style={{ fontSize: 10, padding: "3px 10px", background: "rgba(129,140,248,0.12)", border: "0.5px solid rgba(129,140,248,0.2)", borderRadius: 20, color: "#818CF8", fontWeight: 500 }}>{p}</span>; })}
+          <Link href="/annonce" style={{ textDecoration: "none", display: "flex", flexDirection: "column", background: "#0d0d0f", border: "0.5px solid rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden", cursor: "pointer" }}>
+            <div style={{ padding: "44px 40px 32px" }}>
+              <div style={{ fontSize: 10, fontWeight: 600, color: "#818CF8", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>{tx({fr:"Annonce", en:"Listing", es:"Anuncio", it:"Annuncio"})}</div>
+              <div style={{ fontFamily: "var(--serif)", fontSize: "clamp(24px, 2.5vw, 36px)", fontWeight: 400, color: "#fff", lineHeight: 1.08, letterSpacing: "-0.02em", marginBottom: 12 }}>
+                {tx({fr:"Génère ton annonce", en:"Generate your listing", es:"Genera tu anuncio", it:"Genera il tuo annuncio"})}<br/>
+                <em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.25)" }}>{tx({fr:"en 10 secondes.", en:"in 10 seconds.", es:"en 10 segundos.", it:"in 10 secondi."})}</em>
               </div>
-              <div style={{ fontSize: 13, fontWeight: 600, color: "#fff", marginBottom: 4 }}>Carhartt WIP Detroit Jacket — Taille S</div>
-              <div style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", lineHeight: 1.5 }}>Veste iconique Carhartt WIP, coupe droite, toile canvas 100% coton. État excellent, portée 2-3 fois.</div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 10 }}>
-                <span style={{ fontSize: 12, color: "rgba(255,255,255,0.25)" }}>#carhartt #detroit #workwear</span>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.38)", marginBottom: 28, fontWeight: 300, lineHeight: 1.6 }}>{tx({fr:"Photo → titre, description, prix optimisés pour Vinted, Depop, Grailed.", en:"Photo → title, description, optimized price for Vinted, Depop, Grailed.", es:"Foto → título, descripción, precio optimizado.", it:"Foto → titolo, descrizione, prezzo ottimizzato."})}</p>
+              <div style={{ display: "flex", gap: 8 }}>
+                <span style={{ padding: "9px 22px", background: "#818CF8", color: "#fff", fontSize: 13, fontWeight: 600, borderRadius: 10 }}>{tx({fr:"Essayer", en:"Try it", es:"Probar", it:"Prova"})}</span>
+                <span style={{ padding: "9px 22px", background: "transparent", color: "rgba(255,255,255,0.4)", fontSize: 13, border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: 10 }}>{tx({fr:"En savoir plus", en:"Learn more", es:"Saber más", it:"Scopri di più"})}</span>
+              </div>
+            </div>
+            <div style={{ marginTop: "auto", background: "#111113", borderTop: "0.5px solid rgba(255,255,255,0.06)", padding: "18px 20px", margin: "0 16px 16px", borderRadius: 12 }}>
+              <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
+                {["Vinted", "Depop", "Grailed"].map(function(p) { return <span key={p} style={{ fontSize: 10, padding: "3px 10px", background: "rgba(129,140,248,0.1)", border: "0.5px solid rgba(129,140,248,0.18)", borderRadius: 6, color: "#818CF8", fontWeight: 500 }}>{p}</span>; })}
+              </div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: "#fff", marginBottom: 6 }}>Carhartt WIP Detroit Jacket — Taille S</div>
+              <div style={{ fontSize: 12, color: "rgba(255,255,255,0.32)", lineHeight: 1.55, marginBottom: 10 }}>Veste iconique Carhartt WIP, coupe droite, toile canvas 100% coton. État excellent, portée 2-3 fois.</div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontSize: 11, color: "rgba(255,255,255,0.2)" }}>#carhartt #detroit #workwear</span>
                 <span style={{ fontSize: 14, fontWeight: 700, color: "#818CF8" }}>85 €</span>
               </div>
             </div>
           </Link>
 
           {/* Card 2 — Protection */}
-          <Link href="/protection" style={{ textDecoration: "none", display: "block", background: "#061210", border: "0.5px solid rgba(74,222,128,0.12)", borderRadius: 24, padding: "52px 48px 0", overflow: "hidden", minHeight: 420, position: "relative", cursor: "pointer" }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "var(--green)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 14 }}>{tx({fr:"Protection", en:"Protection", es:"Protección", it:"Protezione"})}</div>
-            <div style={{ fontFamily: "var(--serif)", fontSize: "clamp(26px, 2.8vw, 38px)", fontWeight: 400, color: "#fff", lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: 10 }}>
-              {tx({fr:"Certifie avant", en:"Certify before", es:"Certifica antes", it:"Certifica prima"})}<br/>
-              <em style={{ fontStyle: "italic", color: "rgba(74,222,128,0.4)" }}>{tx({fr:"d'expédier.", en:"shipping.", es:"de enviar.", it:"di spedire."})}</em>
+          <Link href="/protection" style={{ textDecoration: "none", display: "flex", flexDirection: "column", background: "#060f0c", border: "0.5px solid rgba(74,222,128,0.1)", borderRadius: 20, overflow: "hidden", cursor: "pointer" }}>
+            <div style={{ padding: "44px 40px 32px" }}>
+              <div style={{ fontSize: 10, fontWeight: 600, color: "#4ADE80", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>{tx({fr:"Protection", en:"Protection", es:"Protección", it:"Protezione"})}</div>
+              <div style={{ fontFamily: "var(--serif)", fontSize: "clamp(24px, 2.5vw, 36px)", fontWeight: 400, color: "#fff", lineHeight: 1.08, letterSpacing: "-0.02em", marginBottom: 12 }}>
+                {tx({fr:"Certifie avant", en:"Certify before", es:"Certifica antes", it:"Certifica prima"})}<br/>
+                <em style={{ fontStyle: "italic", color: "rgba(74,222,128,0.35)" }}>{tx({fr:"d'expédier.", en:"shipping.", es:"de enviar.", it:"di spedire."})}</em>
+              </div>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.38)", marginBottom: 28, fontWeight: 300, lineHeight: 1.6 }}>{tx({fr:"Vidéo horodatée + certificat SHA-256. Preuve légale inattaquable en cas de litige.", en:"Timestamped video + SHA-256 certificate. Unassailable legal proof.", es:"Vídeo con timestamp + certificado SHA-256.", it:"Video con timestamp + certificato SHA-256."})}</p>
+              <div style={{ display: "flex", gap: 8 }}>
+                <span style={{ padding: "9px 22px", background: "#4ADE80", color: "#000", fontSize: 13, fontWeight: 600, borderRadius: 10 }}>{tx({fr:"Protéger", en:"Protect", es:"Proteger", it:"Proteggi"})}</span>
+                <span style={{ padding: "9px 22px", background: "transparent", color: "rgba(255,255,255,0.4)", fontSize: 13, border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: 10 }}>{tx({fr:"En savoir plus", en:"Learn more", es:"Saber más", it:"Scopri di più"})}</span>
+              </div>
             </div>
-            <p style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", marginBottom: 28, fontWeight: 300, maxWidth: 280 }}>{tx({fr:"Vidéo horodatée + certificat SHA-256. Preuve légale inattaquable en cas de litige.", en:"Timestamped video + SHA-256 certificate. Unassailable legal proof.", es:"Vídeo con timestamp + certificado SHA-256.", it:"Video con timestamp + certificato SHA-256."})}</p>
-            <div style={{ display: "flex", gap: 10, marginBottom: 40 }}>
-              <span style={{ padding: "8px 20px", background: "#4ADE80", color: "#000", fontSize: 13, fontWeight: 600, borderRadius: 20 }}>{tx({fr:"Protéger", en:"Protect", es:"Proteger", it:"Proteggi"})}</span>
-              <span style={{ padding: "8px 20px", background: "transparent", color: "rgba(255,255,255,0.5)", fontSize: 13, border: "0.5px solid rgba(255,255,255,0.12)", borderRadius: 20 }}>{tx({fr:"En savoir plus", en:"Learn more", es:"Saber más", it:"Scopri di più"})}</span>
-            </div>
-            <div style={{ background: "rgba(0,0,0,0.4)", borderRadius: "14px 14px 0 0", border: "0.5px solid rgba(74,222,128,0.1)", borderBottom: "none", padding: "14px 16px", marginLeft: -48, marginRight: -48 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-                <span style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.5)" }}>SC-4F2A9B1C</span>
-                <span style={{ fontSize: 10, padding: "2px 10px", background: "rgba(74,222,128,0.12)", border: "0.5px solid rgba(74,222,128,0.2)", borderRadius: 10, color: "#4ADE80" }}>{tx({fr:"Certifié", en:"Certified", es:"Certificado", it:"Certificato"})}</span>
+            <div style={{ marginTop: "auto", background: "rgba(0,0,0,0.3)", margin: "0 16px 16px", borderRadius: 12, border: "0.5px solid rgba(74,222,128,0.08)", padding: "16px 18px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                <span style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", fontFamily: "monospace" }}>SC-4F2A9B1C</span>
+                <span style={{ fontSize: 10, padding: "2px 10px", background: "rgba(74,222,128,0.1)", border: "0.5px solid rgba(74,222,128,0.18)", borderRadius: 6, color: "#4ADE80", fontWeight: 600 }}>{tx({fr:"Certifié", en:"Certified", es:"Certificado", it:"Certificato"})}</span>
               </div>
               {[
-                [tx({fr:"Article", en:"Item", es:"Artículo", it:"Articolo"}), "Carhartt Detroit Jacket S"],
-                ["SHA-256", "A3F9C2…72E1B4"],
-                [tx({fr:"Horodatage", en:"Timestamp", es:"Timestamp", it:"Timestamp"}), "17/04/2026 · 14:38:52"],
+                [tx({fr:"Article", en:"Item", es:"Artículo", it:"Articolo"}), "Carhartt Detroit Jacket S", false],
+                ["SHA-256", "A3F9C2…72E1B4", true],
+                [tx({fr:"Horodatage", en:"Timestamp", es:"Timestamp", it:"Timestamp"}), "17/04/2026 · 14:38:52", false],
               ].map(function(r, i) {
                 return (
-                  <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "6px 0", borderTop: "0.5px solid rgba(255,255,255,0.05)" }}>
-                    <span style={{ fontSize: 11, color: "rgba(255,255,255,0.3)" }}>{r[0]}</span>
-                    <span style={{ fontSize: 11, color: r[0] === "SHA-256" ? "#4ADE80" : "rgba(255,255,255,0.6)", fontFamily: r[0] === "SHA-256" ? "monospace" : "inherit" }}>{r[1]}</span>
+                  <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "7px 0", borderTop: "0.5px solid rgba(255,255,255,0.04)" }}>
+                    <span style={{ fontSize: 11, color: "rgba(255,255,255,0.28)" }}>{r[0]}</span>
+                    <span style={{ fontSize: 11, color: r[2] ? "#4ADE80" : "rgba(255,255,255,0.55)", fontFamily: r[2] ? "monospace" : "inherit" }}>{r[1]}</span>
                   </div>
                 );
               })}
@@ -215,33 +219,34 @@ export default function Home() {
         </div>
 
         {/* Card 3 — Litige pleine largeur */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, background: "#0a060e", border: "0.5px solid rgba(244,114,182,0.1)", borderRadius: 24, overflow: "hidden", cursor: "pointer" }} onClick={function() { window.location.href = "/litige"; }}>
-          <div style={{ padding: "52px 48px" }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "var(--pink)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 14 }}>{tx({fr:"Litige", en:"Dispute", es:"Litigio", it:"Litigio"})}</div>
-            <div style={{ fontFamily: "var(--serif)", fontSize: "clamp(26px, 2.8vw, 38px)", fontWeight: 400, color: "#fff", lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: 10 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", background: "#0a060d", border: "0.5px solid rgba(244,114,182,0.1)", borderRadius: 20, overflow: "hidden", cursor: "pointer" }} onClick={function() { window.location.href = "/litige"; }}>
+          <div style={{ padding: "44px 40px" }}>
+            <div style={{ fontSize: 10, fontWeight: 600, color: "#F472B6", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>{tx({fr:"Litige", en:"Dispute", es:"Litigio", it:"Litigio"})}</div>
+            <div style={{ fontFamily: "var(--serif)", fontSize: "clamp(24px, 2.5vw, 36px)", fontWeight: 400, color: "#fff", lineHeight: 1.08, letterSpacing: "-0.02em", marginBottom: 12 }}>
               {tx({fr:"Défense automatique.", en:"Automatic defense.", es:"Defensa automática.", it:"Difesa automatica."})}<br/>
-              <em style={{ fontStyle: "italic", color: "rgba(244,114,182,0.4)" }}>{tx({fr:"En 1 clic.", en:"In 1 click.", es:"En 1 clic.", it:"In 1 clic."})}</em>
+              <em style={{ fontStyle: "italic", color: "rgba(244,114,182,0.35)" }}>{tx({fr:"En 1 clic.", en:"In 1 click.", es:"En 1 clic.", it:"In 1 clic."})}</em>
             </div>
-            <p style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", marginBottom: 28, fontWeight: 300, maxWidth: 340 }}>{tx({fr:"L'IA analyse les photos, détecte la fraude et génère ta réponse de défense.", en:"AI analyzes photos, detects fraud and generates your defense response.", es:"La IA analiza las fotos, detecta el fraude y genera tu respuesta.", it:"L'IA analizza le foto, rileva la frode e genera la tua risposta."})}</p>
-            <div style={{ display: "flex", gap: 10 }}>
-              <span style={{ padding: "8px 20px", background: "#F472B6", color: "#fff", fontSize: 13, fontWeight: 600, borderRadius: 20 }}>{tx({fr:"Gérer un litige", en:"Handle dispute", es:"Gestionar litigio", it:"Gestisci litigio"})}</span>
-              <span style={{ padding: "8px 20px", background: "transparent", color: "rgba(255,255,255,0.5)", fontSize: 13, border: "0.5px solid rgba(255,255,255,0.12)", borderRadius: 20 }}>{tx({fr:"En savoir plus", en:"Learn more", es:"Saber más", it:"Scopri di più"})}</span>
+            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.38)", marginBottom: 28, fontWeight: 300, lineHeight: 1.6, maxWidth: 320 }}>{tx({fr:"L'IA analyse les photos, détecte la fraude et génère ta réponse de défense.", en:"AI analyzes photos, detects fraud and generates your defense response.", es:"La IA analiza las fotos y genera tu respuesta.", it:"L'IA analizza le foto e genera la tua risposta."})}</p>
+            <div style={{ display: "flex", gap: 8 }}>
+              <span style={{ padding: "9px 22px", background: "#F472B6", color: "#fff", fontSize: 13, fontWeight: 600, borderRadius: 10 }}>{tx({fr:"Gérer un litige", en:"Handle dispute", es:"Gestionar litigio", it:"Gestisci litigio"})}</span>
+              <span style={{ padding: "9px 22px", background: "transparent", color: "rgba(255,255,255,0.4)", fontSize: 13, border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: 10 }}>{tx({fr:"En savoir plus", en:"Learn more", es:"Saber más", it:"Scopri di più"})}</span>
             </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "40px 48px", borderLeft: "0.5px solid rgba(244,114,182,0.08)" }}>
-            <div style={{ background: "rgba(0,0,0,0.4)", borderRadius: 14, padding: "18px 20px", border: "0.5px solid rgba(244,114,182,0.1)" }}>
-              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", marginBottom: 10 }}>{tx({fr:"Réponse générée", en:"Generated response", es:"Respuesta generada", it:"Risposta generata"})}</div>
-              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.65)", lineHeight: 1.65 }}>
-                {tx({fr:"Je transmets la vidéo horodatée (SC-4F2A9B1C) et le certificat SHA-256. L'état de l'article est conforme à l'annonce.", en:"I am sending the timestamped video (SC-4F2A9B1C) and SHA-256 certificate. Item condition matches the listing.", es:"Envío el vídeo con timestamp (SC-4F2A9B1C) y el certificado SHA-256. El estado corresponde al anuncio.", it:"Invio il video con timestamp (SC-4F2A9B1C) e il certificato SHA-256. Lo stato corrisponde all'annuncio."})}
+          <div style={{ display: "flex", alignItems: "center", padding: "40px 40px", borderLeft: "0.5px solid rgba(244,114,182,0.06)" }}>
+            <div style={{ background: "rgba(0,0,0,0.35)", borderRadius: 14, padding: "18px 20px", border: "0.5px solid rgba(244,114,182,0.08)", width: "100%" }}>
+              <div style={{ fontSize: 10, fontWeight: 600, color: "rgba(255,255,255,0.25)", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 12 }}>{tx({fr:"Réponse générée", en:"Generated response", es:"Respuesta generada", it:"Risposta generata"})}</div>
+              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", lineHeight: 1.65, marginBottom: 14 }}>
+                {tx({fr:"Je transmets la vidéo horodatée (SC-4F2A9B1C) et le certificat SHA-256. L'état de l'article est conforme à l'annonce.", en:"I am sending the timestamped video (SC-4F2A9B1C) and SHA-256 certificate. Item condition matches the listing.", es:"Envío el vídeo con timestamp (SC-4F2A9B1C) y el certificado SHA-256.", it:"Invio il video con timestamp (SC-4F2A9B1C) e il certificato SHA-256."})}
               </div>
-              <div style={{ marginTop: 12, display: "flex", gap: 8 }}>
-                <span style={{ fontSize: 10, padding: "2px 10px", background: "rgba(244,114,182,0.1)", border: "0.5px solid rgba(244,114,182,0.2)", borderRadius: 10, color: "#F472B6" }}>SC-4F2A9B1C.pdf</span>
-                <span style={{ fontSize: 10, padding: "2px 10px", background: "rgba(244,114,182,0.1)", border: "0.5px solid rgba(244,114,182,0.2)", borderRadius: 10, color: "#F472B6" }}>video.mp4</span>
+              <div style={{ display: "flex", gap: 8 }}>
+                <span style={{ fontSize: 10, padding: "3px 10px", background: "rgba(244,114,182,0.08)", border: "0.5px solid rgba(244,114,182,0.18)", borderRadius: 6, color: "#F472B6", fontWeight: 500 }}>SC-4F2A9B1C.pdf</span>
+                <span style={{ fontSize: 10, padding: "3px 10px", background: "rgba(244,114,182,0.08)", border: "0.5px solid rgba(244,114,182,0.18)", borderRadius: 6, color: "#F472B6", fontWeight: 500 }}>video.mp4</span>
               </div>
             </div>
           </div>
         </div>
       </section>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
       {/* ═══ CTA FINAL ═══ */}
       <section className="final-cta">
         <h2 className="final-title">{tx({fr:"Protège ton argent", en:"Protect your money", es:"Protege tu dinero", it:"Proteggi i tuoi soldi"})}<br/><em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.35)" }}>{tx({fr:"maintenant.", en:"now.", es:"ahora.", it:"adesso."})}</em></h2>
