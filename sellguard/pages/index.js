@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>SellCov — Revends sans te faire arnaquer.</title>
+        <title>SellCov</title>
         <meta name="description" content="Ton argent est protégé. À chaque envoi. Preuve horodatée. Défense automatique." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -156,7 +156,7 @@ export default function Home() {
       <section className="hero">
         <div style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "5px 14px", background: "rgba(255,255,255,0.04)", border: "0.5px solid rgba(255,255,255,0.14)", borderRadius: 20, fontSize: 11, color: "var(--muted)", marginBottom: 32, animation: "fadeUp 0.5s ease both" }}>
           <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--green)" }}></span>
-          Bêta gratuite (places limitées)
+          {tx({fr:"Bêta gratuite (places limitées)", en:"Free beta (limited spots)", es:"Beta gratuita (plazas limitadas)", it:"Beta gratuita (posti limitati)"})}
         </div>
         <h1 className="lp-h1">{tx({fr:"Revends", en:"Resell", es:"Revende", it:"Rivendi"})}<br/><em>{tx({fr:"sans te faire arnaquer.", en:"without getting scammed.", es:"sin que te estafen.", it:"senza farti truffare."})}</em></h1>
         <p className="hero-sub">{tx({fr:"On protège ton argent. À chaque envoi.", en:"We protect your money. Every shipment.", es:"Protegemos tu dinero. En cada envío.", it:"Proteggiamo i tuoi soldi. Ad ogni spedizione."})}</p>
@@ -188,7 +188,7 @@ export default function Home() {
           <div className="solution-item">{tx({fr:"Certification avec preuve légale", en:"Certification with legal proof", es:"Certificación con prueba legal", it:"Certificazione con prova legale"})}</div>
           <div className="solution-item">{tx({fr:"Sauvegarde sécurisée de chaque envoi", en:"Secure backup of every shipment", es:"Respaldo seguro de cada envío", it:"Backup sicuro di ogni spedizione"})}</div>
         </div>
-        <p className="solution-callout reveal">L'acheteur conteste ? Tu as la preuve.</p>
+        <p className="solution-callout reveal">{tx({fr:"L'acheteur conteste ? Tu as la preuve.", en:"Buyer disputes? You have the proof.", es:"¿El comprador contesta? Tienes la prueba.", it:"L'acquirente contesta? Hai la prova."})}</p>
       </section>
 
       {/* ═══ 4. COMMENT ÇA MARCHE ═══ */}
@@ -267,8 +267,8 @@ export default function Home() {
           <a href="#">TikTok</a>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <input id="newsletter" type="email" placeholder="Ton email" style={{ padding: "7px 14px", fontSize: 12, background: "rgba(255,255,255,0.05)", border: "0.5px solid rgba(255,255,255,0.14)", borderRadius: 8, color: "#fff", fontFamily: "var(--sans)", outline: "none", width: 180 }} />
-          <button onClick={function() { var em = document.getElementById("newsletter"); if (em.value) { window.location.href = "mailto:hello@sellcov.com?subject=Newsletter SellCov&body=Inscris-moi : " + em.value; em.value = ""; } }} style={{ padding: "7px 14px", fontSize: 11, fontWeight: 600, background: "rgba(255,255,255,0.08)", border: "0.5px solid rgba(255,255,255,0.14)", borderRadius: 8, color: "rgba(255,255,255,0.6)", cursor: "pointer", fontFamily: "var(--sans)" }}>Newsletter</button>
+          <input id="newsletter" type="email" placeholder={tx({fr:"Ton email", en:"Your email", es:"Tu email", it:"La tua email"})} style={{ padding: "7px 14px", fontSize: 12, background: "rgba(255,255,255,0.05)", border: "0.5px solid rgba(255,255,255,0.14)", borderRadius: 8, color: "#fff", fontFamily: "var(--sans)", outline: "none", width: 180 }} />
+          <button onClick={function() { var em = document.getElementById("newsletter"); if (em.value) { window.location.href = "mailto:hello@sellcov.com?subject=Newsletter SellCov&body=" + tx({fr:"Inscris-moi : ", en:"Sign me up: ", es:"Suscríbeme: ", it:"Iscrivimi: "}) + em.value; em.value = ""; } }} style={{ padding: "7px 14px", fontSize: 11, fontWeight: 600, background: "rgba(255,255,255,0.08)", border: "0.5px solid rgba(255,255,255,0.14)", borderRadius: 8, color: "rgba(255,255,255,0.6)", cursor: "pointer", fontFamily: "var(--sans)" }}>{tx({fr:"Newsletter", en:"Newsletter", es:"Newsletter", it:"Newsletter"})}</button>
         </div>
         <div className="footer-copy">© 2026 SellCov</div>
       </footer>
