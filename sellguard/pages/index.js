@@ -1,230 +1,605 @@
-import Head from "next/head";
-import Link from "next/link";
-import { useEffect } from "react";
-import { useLang } from "../contexts/LangContext";
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SellCov — Revends sans te faire arnaquer</title>
+<meta name="description" content="Preuve vidéo horodatée + défense IA pour vendre en sécurité sur Vinted, Leboncoin, Depop, Vestiaire Collective, Grailed et Etsy. 3 minutes avant d'expédier = 0 litige perdu." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#000;
+    --bg-soft:#0a0a0a;
+    --bg-card:#0e0e0e;
+    --bg-panel:#141414;
+    --border:#1e1e1e;
+    --border-strong:#2a2a2a;
+    --text:#fff;
+    --text-muted:#9a9a9a;
+    --text-dim:#5a5a5a;
+    --violet:#8b7fff;
+    --green:#5ee8a3;
+    --pink:#f570aa;
+    --violet-bg:rgba(139,127,255,.09);
+    --green-bg:rgba(94,232,163,.07);
+    --pink-bg:rgba(245,112,170,.07);
+    --radius-sm:10px;
+    --radius:18px;
+    --radius-lg:28px;
+    --maxw:1200px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .serif{font-family:'Playfair Display',serif;font-weight:700;letter-spacing:-.01em}
+  .italic{font-style:italic;color:var(--text-muted);font-weight:500}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
 
-export default function Home() {
-  useEffect(function() {
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { e.target.style.opacity = "1"; e.target.style.transform = "translateY(0)"; }
-      });
-    }, { threshold: 0.08 });
-    document.querySelectorAll(".reveal").forEach(function(el) {
-      el.style.opacity = "0"; el.style.transform = "translateY(16px)";
-      el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-      io.observe(el);
-    });
-    return function() { io.disconnect(); };
-  }, []);
+  /* ===== Header ===== */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    backdrop-filter:blur(14px);
+    background:rgba(0,0,0,.55);
+    border-bottom:1px solid rgba(255,255,255,.04);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:var(--maxw);margin:0 auto;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;font-size:20px}
+  .logo-mark{
+    width:32px;height:32px;border:1.5px solid #fff;border-radius:50%;
+    display:grid;place-items:center;font-size:11px;letter-spacing:.5px;
+    font-family:'Inter',sans-serif;font-weight:600;
+  }
+  .nav-links{display:flex;gap:32px}
+  .nav-links a{color:var(--text-muted);font-size:15px;transition:color .2s}
+  .nav-links a:hover{color:#fff}
+  .nav-right{display:flex;align-items:center;gap:12px}
+  .lang{
+    border:1px solid var(--border-strong);background:transparent;color:var(--text-muted);
+    padding:8px 14px;border-radius:999px;font-size:13px;cursor:pointer;
+  }
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:12px 22px;border-radius:999px;font-weight:600;font-size:15px;
+    transition:transform .15s,box-shadow .15s,background .15s;cursor:pointer;border:none;
+    font-family:inherit;white-space:nowrap;
+  }
+  .btn-primary{background:#fff;color:#000}
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 30px rgba(255,255,255,.15)}
+  .btn-ghost{background:transparent;color:#fff;border:1px solid var(--border-strong)}
+  .btn-ghost:hover{border-color:#fff}
+  .btn-violet{background:var(--violet);color:#000}
+  .btn-green{background:var(--green);color:#000}
+  .btn-pink{background:var(--pink);color:#000}
+  .btn-sm{padding:9px 16px;font-size:13px}
 
-  var ref = useLang(), lang = ref.lang, setLang = ref.setLang;
-  function tx(o) { return o[lang] || o.en || o.fr; }
+  @media (max-width:820px){
+    .nav-links{display:none}
+  }
 
-  function scrollTo(id) { var el = document.querySelector(id); if (el) el.scrollIntoView({ behavior: "smooth" }); }
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    padding:140px 24px 60px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;top:-20%;left:50%;transform:translateX(-50%);
+    width:900px;height:900px;
+    background:radial-gradient(circle,rgba(94,232,163,.08) 0%,rgba(0,0,0,0) 60%);
+    pointer-events:none;z-index:0;
+  }
+  .hero > *{position:relative;z-index:1}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(94,232,163,.08);border:1px solid rgba(94,232,163,.25);
+    padding:7px 14px;border-radius:999px;font-size:13px;color:var(--green);
+    margin-bottom:40px;
+  }
+  .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+  .h1{
+    font-size:clamp(48px,8vw,104px);
+    line-height:.95;letter-spacing:-.03em;
+    margin-bottom:18px;
+  }
+  .h1 .italic{display:block;font-size:.92em}
+  .hero-sub{
+    font-size:clamp(17px,2vw,20px);
+    color:#fff;max-width:640px;margin:0 auto 10px;line-height:1.45;
+  }
+  .hero-subsub{color:var(--text-muted);max-width:600px;margin:0 auto 28px;font-size:15px}
+  .hero-stats{
+    display:inline-flex;gap:24px;padding:10px 20px;border:1px solid var(--border);
+    border-radius:999px;margin-bottom:34px;font-size:13px;color:var(--text-muted);
+    flex-wrap:wrap;justify-content:center;
+  }
+  .hero-stats strong{color:#fff;font-weight:600}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:46px}
+  .platforms{color:var(--text-dim);font-size:14px;letter-spacing:.02em}
+  .platforms strong{color:var(--text-muted);font-weight:500;margin:0 4px}
 
-  return (
-    <>
-      <Head>
-        <title>SellCov</title>
-        <meta name="description" content="Ton argent est protégé. À chaque envoi. Preuve horodatée. Défense automatique." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-      </Head>
+  /* ===== Demo / Product preview ===== */
+  .demo{
+    padding:40px 24px 80px;
+    max-width:1100px;margin:0 auto;
+  }
+  .demo-frame{
+    position:relative;border-radius:var(--radius-lg);
+    background:linear-gradient(180deg,#0f0f0f 0%,#050505 100%);
+    border:1px solid var(--border);
+    padding:44px 28px;
+    overflow:hidden;
+  }
+  .demo-frame::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 0%,rgba(94,232,163,.06),transparent 50%);
+    pointer-events:none;
+  }
+  .demo-steps{
+    position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  }
+  @media(max-width:820px){.demo-steps{grid-template-columns:1fr}}
+  .demo-step{
+    background:#0a0a0a;border:1px solid var(--border);border-radius:var(--radius);
+    padding:22px;display:flex;flex-direction:column;gap:12px;min-height:280px;
+  }
+  .demo-step .step-num{
+    width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.06);
+    display:grid;place-items:center;font-size:12px;color:var(--text-muted);font-weight:600;
+  }
+  .demo-step h4{font-size:15px;font-weight:600}
+  .demo-step .ui{
+    flex:1;border:1px dashed var(--border-strong);border-radius:12px;
+    padding:14px;display:flex;flex-direction:column;gap:10px;background:#060606;
+  }
+  .ui-label{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em}
+  .ui-box{
+    background:#111;border:1px solid var(--border);border-radius:8px;
+    padding:10px 12px;font-size:13px;color:var(--text-muted);
+  }
+  .ui-cam{
+    aspect-ratio:16/10;background:#050505;border:1px solid var(--border);
+    border-radius:10px;display:grid;place-items:center;position:relative;
+  }
+  .rec-dot{
+    position:absolute;top:10px;left:10px;display:flex;gap:6px;align-items:center;
+    font-size:10px;color:#ff6565;font-weight:600;letter-spacing:.1em;
+  }
+  .rec-dot span{width:8px;height:8px;border-radius:50%;background:#ff4444;animation:blink 1.2s infinite}
+  @keyframes blink{50%{opacity:.3}}
+  .ui-cam-inner{color:var(--text-dim);font-size:11px}
+  .ui-cert{
+    background:linear-gradient(135deg,rgba(94,232,163,.15),rgba(94,232,163,.03));
+    border:1px solid rgba(94,232,163,.25);border-radius:10px;padding:12px;
+    font-family:'Inter',sans-serif;font-size:12px;color:var(--green);
+    display:flex;align-items:center;gap:10px;
+  }
+  .ui-cert svg{flex-shrink:0}
+  .ui-cert-label{color:var(--text-dim);font-size:10px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
 
-      <style jsx global>{`
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        :root {
-          --bg: #000; --bg2: #0A0A0A; --bg3: #111;
-          --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.14);
-          --text: #fff; --muted: rgba(255,255,255,0.42); --dim: rgba(255,255,255,0.22);
-          --violet: #818CF8; --violet-bg: rgba(99,102,241,0.1);
-          --green: #4ADE80; --green-bg: rgba(34,197,94,0.1);
-          --pink: #F472B6; --pink-bg: rgba(236,72,153,0.1);
-          --red: #F87171;
-          --serif: 'DM Serif Display', Georgia, serif;
-          --sans: 'DM Sans', -apple-system, sans-serif;
-        }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--sans); background: var(--bg); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  /* ===== Section heading ===== */
+  section.page{padding:100px 24px}
+  .section-head{text-align:center;max-width:720px;margin:0 auto 60px}
+  .section-kicker{color:var(--text-dim);font-size:12px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px}
+  .section-title{font-size:clamp(36px,5vw,60px);line-height:1;letter-spacing:-.02em;margin-bottom:18px}
+  .section-sub{color:var(--text-muted);font-size:17px}
 
-        .lp-nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 36px; height: 54px; background: rgba(0,0,0,0.82); border-bottom: 0.5px solid var(--border); backdrop-filter: blur(20px); }
-        .nav-logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 18px; color: var(--text); text-decoration: none; cursor: pointer; }
-        .nav-links { display: flex; gap: 28px; }
-        .nav-links a { font-size: 12px; color: var(--muted); text-decoration: none; cursor: pointer; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--text); }
-        .nav-cta { padding: 8px 20px; background: var(--text); color: var(--bg); font-size: 12px; font-weight: 500; border-radius: 20px; border: none; cursor: pointer; font-family: var(--sans); text-decoration: none; }
+  /* ===== Feature cards ===== */
+  .features{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:var(--maxw);margin:0 auto}
+  .features .feature:last-child{grid-column:1/-1}
+  @media(max-width:820px){.features{grid-template-columns:1fr}.features .feature:last-child{grid-column:auto}}
+  .feature{
+    background:var(--bg-card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:34px;min-height:320px;
+    display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden;
+  }
+  .feature .tag{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
+  .feature h3{font-size:clamp(28px,3vw,38px);line-height:1.05;letter-spacing:-.02em}
+  .feature p{color:var(--text-muted);font-size:15px;flex:1}
+  .feature-violet{background:linear-gradient(180deg,var(--violet-bg),transparent 70%),var(--bg-card)}
+  .feature-violet .tag{color:var(--violet)}
+  .feature-green{background:linear-gradient(180deg,var(--green-bg),transparent 70%),var(--bg-card)}
+  .feature-green .tag{color:var(--green)}
+  .feature-pink{background:linear-gradient(180deg,var(--pink-bg),transparent 70%),var(--bg-card)}
+  .feature-pink .tag{color:var(--pink)}
+  .feature .cta-area{display:flex;align-items:center;gap:14px;margin-top:4px}
 
-        .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 32px 100px; position: relative; }
-        .hero::before { content: ''; position: absolute; top: -180px; left: 50%; transform: translateX(-50%); width: 700px; height: 700px; background: radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 68%); pointer-events: none; }
-        .lp-h1 { font-family: var(--serif); font-size: clamp(44px, 8vw, 76px); font-weight: 400; line-height: 1.04; letter-spacing: -0.02em; margin-bottom: 10px; animation: fadeUp 0.5s 0.08s ease both; }
-        .lp-h1 em { font-style: italic; color: rgba(255,255,255,0.32); }
-        .hero-sub { font-size: 18px; color: var(--text); line-height: 1.5; max-width: 440px; margin: 0 auto 8px; font-weight: 400; animation: fadeUp 0.5s 0.16s ease both; }
-        .hero-sub2 { font-size: 14px; color: var(--muted); margin-bottom: 36px; animation: fadeUp 0.5s 0.2s ease both; }
-        .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.5s 0.24s ease both; }
-        .btn-primary { padding: 14px 34px; background: var(--text); color: var(--bg); font-size: 14px; font-weight: 500; border-radius: 28px; border: none; cursor: pointer; font-family: var(--sans); text-decoration: none; display: inline-block; transition: transform 0.15s, opacity 0.15s; }
-        .btn-primary:hover { opacity: 0.88; transform: scale(1.02); }
-        .btn-ghost { padding: 14px 34px; background: transparent; color: var(--text); font-size: 14px; border-radius: 28px; border: 0.5px solid rgba(255,255,255,0.2); cursor: pointer; font-family: var(--sans); transition: background 0.15s; }
-        .btn-ghost:hover { background: rgba(255,255,255,0.05); }
+  /* ===== Scams ===== */
+  .scams{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media(max-width:820px){.scams{grid-template-columns:1fr}}
+  .scam-card{
+    background:var(--bg-card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;gap:14px;
+    transition:border-color .2s,transform .2s;
+  }
+  .scam-card:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+  .scam-quote{
+    background:#060606;border-left:3px solid var(--pink);padding:14px 16px;border-radius:6px;
+    font-style:italic;color:#e5e5e5;font-size:15px;
+  }
+  .scam-solve{display:flex;gap:12px;align-items:flex-start;font-size:14px}
+  .scam-solve .check{
+    flex-shrink:0;width:22px;height:22px;border-radius:50%;
+    background:var(--green-bg);border:1px solid rgba(94,232,163,.35);
+    display:grid;place-items:center;color:var(--green);
+  }
+  .scam-solve span{color:var(--text-muted)}
 
-        .section { padding: 96px 32px; max-width: 920px; margin: 0 auto; }
-        .section-eyebrow { text-align: center; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); margin-bottom: 14px; }
-        .section-title { text-align: center; font-family: var(--serif); font-size: clamp(30px, 4.5vw, 46px); font-weight: 400; letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.1; }
-        .section-title em { font-style: italic; color: rgba(255,255,255,0.35); }
-        .section-sub { text-align: center; font-size: 15px; color: var(--muted); font-weight: 300; line-height: 1.6; }
+  /* ===== Social proof ===== */
+  .proof{max-width:var(--maxw);margin:0 auto}
+  .proof-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:40px}
+  @media(max-width:820px){.proof-stats{grid-template-columns:1fr}}
+  .stat{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:30px;text-align:center}
+  .stat-big{font-family:'Playfair Display',serif;font-size:56px;line-height:1;margin-bottom:8px}
+  .stat-label{color:var(--text-muted);font-size:13px;letter-spacing:.05em}
+  .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:40px}
+  @media(max-width:820px){.testimonials{grid-template-columns:1fr}}
+  .testi{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;gap:16px}
+  .testi-stars{color:#ffd45e;font-size:14px;letter-spacing:2px}
+  .testi-text{color:#e5e5e5;font-size:15px;line-height:1.5;flex:1}
+  .testi-author{display:flex;align-items:center;gap:12px}
+  .testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#333,#111);display:grid;place-items:center;font-family:'Playfair Display',serif;font-size:16px;color:#fff}
+  .testi-who strong{display:block;font-size:14px;font-weight:600}
+  .testi-who span{font-size:12px;color:var(--text-dim)}
+  .case{background:linear-gradient(180deg,rgba(94,232,163,.04),transparent 60%),var(--bg-card);border:1px solid rgba(94,232,163,.22);border-radius:var(--radius);padding:34px;display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:center}
+  @media(max-width:820px){.case{grid-template-columns:1fr}}
+  .case-kicker{color:var(--green);font-size:12px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+  .case h4{font-size:26px;letter-spacing:-.01em;margin-bottom:10px;font-family:'Playfair Display',serif}
+  .case p{color:var(--text-muted);margin-bottom:18px}
+  .case-amount{font-family:'Playfair Display',serif;font-size:44px;color:var(--green)}
+  .case-msg{background:#060606;border:1px solid var(--border);border-radius:14px;padding:16px;font-size:13px;color:#ccc}
+  .case-msg .mini-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid var(--border);color:var(--text-dim);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
 
-        .pain-list { list-style: none; display: flex; flex-direction: column; gap: 0; max-width: 500px; margin: 0 auto; }
-        .pain-item { font-size: 19px; font-weight: 300; color: var(--red); padding: 18px 0; border-bottom: 0.5px solid rgba(248,113,113,0.1); text-align: left; letter-spacing: -0.01em; line-height: 1.3; }
-        .pain-callout { text-align: left; margin-top: 24px; font-size: 19px; font-weight: 500; color: var(--red); max-width: 500px; margin-left: auto; margin-right: auto; letter-spacing: -0.02em; }
+  /* ===== Pricing ===== */
+  .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:var(--maxw);margin:0 auto}
+  @media(max-width:820px){.pricing{grid-template-columns:1fr}}
+  .plan{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column;gap:18px;position:relative}
+  .plan.featured{border-color:var(--green);background:linear-gradient(180deg,var(--green-bg),transparent 80%),var(--bg-card)}
+  .plan-ribbon{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;padding:4px 14px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.05em}
+  .plan h4{font-size:18px;font-weight:600}
+  .plan .plan-price{font-family:'Playfair Display',serif;font-size:46px;line-height:1}
+  .plan .plan-price small{font-family:'Inter',sans-serif;font-size:14px;color:var(--text-muted);font-weight:400}
+  .plan-desc{color:var(--text-muted);font-size:14px;min-height:42px}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;color:#ddd;flex:1}
+  .plan li{display:flex;gap:10px;align-items:flex-start}
+  .plan li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0}
 
-        .solution-list { display: flex; flex-direction: column; gap: 0; max-width: 500px; margin: 0 auto; }
-        .solution-item { font-size: 19px; font-weight: 300; color: var(--green); padding: 18px 0; border-bottom: 0.5px solid rgba(74,222,128,0.1); letter-spacing: -0.01em; line-height: 1.3; }
-        .solution-callout { text-align: center; margin-top: 32px; font-size: 19px; font-weight: 400; color: var(--text); max-width: 500px; margin-left: auto; margin-right: auto; letter-spacing: -0.02em; }
+  /* ===== FAQ ===== */
+  .faq{max-width:820px;margin:0 auto}
+  .faq-item{border-bottom:1px solid var(--border);padding:22px 0;cursor:pointer}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;gap:24px;font-size:17px;font-weight:500}
+  .faq-q::after{content:"+";font-size:24px;color:var(--text-muted);transition:transform .2s;line-height:1}
+  .faq-item[open] .faq-q::after{transform:rotate(45deg)}
+  .faq-a{color:var(--text-muted);font-size:15px;margin-top:12px;line-height:1.6}
 
-        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: 18px; overflow: hidden; margin-top: 48px; }
-        .step-card { background: var(--bg); padding: 32px 24px; }
-        .step-num { font-size: 11px; color: var(--dim); letter-spacing: 0.1em; margin-bottom: 14px; }
-        .step-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
-        .step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+  /* ===== Lead magnet ===== */
+  .magnet{max-width:920px;margin:0 auto;background:linear-gradient(180deg,rgba(139,127,255,.08),rgba(0,0,0,0) 80%),var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:48px;display:grid;grid-template-columns:1.2fr 1fr;gap:34px;align-items:center}
+  @media(max-width:820px){.magnet{grid-template-columns:1fr;padding:32px}}
+  .magnet-kicker{color:var(--violet);font-size:12px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+  .magnet h3{font-size:32px;line-height:1.05;letter-spacing:-.02em;font-family:'Playfair Display',serif;margin-bottom:12px}
+  .magnet p{color:var(--text-muted);margin-bottom:22px}
+  .magnet-form{display:flex;gap:10px;flex-wrap:wrap}
+  .magnet-form input{flex:1;min-width:200px;background:#060606;border:1px solid var(--border-strong);color:#fff;padding:14px 18px;border-radius:999px;font-family:inherit;font-size:15px}
+  .magnet-form input::placeholder{color:var(--text-dim)}
+  .magnet-form input:focus{outline:none;border-color:var(--violet)}
+  .magnet-visual{background:#060606;border:1px solid var(--border);border-radius:18px;padding:22px;text-align:center}
+  .magnet-pdf{width:90px;height:120px;margin:0 auto 14px;background:linear-gradient(135deg,#222,#0a0a0a);border:1px solid var(--border-strong);border-radius:8px;display:grid;place-items:center;color:var(--violet);font-family:'Playfair Display',serif;font-size:24px;position:relative}
+  .magnet-pdf::after{content:"PDF";position:absolute;bottom:8px;font-size:9px;color:var(--text-dim);font-family:'Inter',sans-serif;letter-spacing:.1em}
+  .magnet-visual small{color:var(--text-dim);font-size:12px}
 
-        .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 48px; }
-        .compare-card { border-radius: 18px; padding: 32px; }
+  /* ===== Final CTA ===== */
+  .final{text-align:center;padding:120px 24px 100px;position:relative;overflow:hidden}
+  .final::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1000px;height:600px;background:radial-gradient(ellipse,rgba(94,232,163,.07) 0%,rgba(0,0,0,0) 60%);pointer-events:none}
+  .final > *{position:relative}
+  .final h2{font-size:clamp(46px,7vw,90px);line-height:.95;letter-spacing:-.03em;margin-bottom:18px}
+  .final p{color:var(--text-muted);margin-bottom:30px}
 
-        .final-cta { padding: 120px 32px; text-align: center; }
-        .final-title { font-family: var(--serif); font-size: clamp(36px,6vw,64px); font-weight: 400; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 16px; }
-        .final-sub { font-size: 16px; color: var(--muted); margin-bottom: 36px; font-weight: 300; }
+  /* ===== Footer ===== */
+  footer{border-top:1px solid var(--border);padding:40px 24px 28px}
+  .foot{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1fr 2fr 1fr;gap:30px;align-items:start}
+  @media(max-width:820px){.foot{grid-template-columns:1fr;gap:22px}}
+  .foot-links{display:flex;gap:26px;flex-wrap:wrap;font-size:14px;color:var(--text-muted);justify-content:center}
+  .foot-links a:hover{color:#fff}
+  .foot-copy{color:var(--text-dim);font-size:13px;text-align:right}
+  @media(max-width:820px){.foot-copy{text-align:center}.foot-links{justify-content:flex-start}}
 
-        footer { border-top: 0.5px solid var(--border); padding: 32px 36px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-        .footer-logo { display: flex; align-items: center; gap: 10px; font-family: var(--serif); font-size: 16px; color: var(--dim); }
-        .footer-links { display: flex; gap: 28px; }
-        .footer-links a { font-size: 12px; color: var(--dim); text-decoration: none; }
-        .footer-copy { font-size: 11px; color: rgba(255,255,255,0.14); }
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.show{opacity:1;transform:none}
+</style>
+</head>
+<body>
 
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-        @media (max-width: 640px) {
-          .lp-nav { padding: 0 20px; }
-          .nav-links { display: none; }
-          .compare-grid { grid-template-columns: 1fr; }
-          .steps-grid { grid-template-columns: 1fr; }
-          .flow-arrow { display: none; }
-          footer { flex-direction: column; align-items: flex-start; }
-          .modules-apple { grid-template-columns: 1fr !important; }
-          .modules-apple-full { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
+<header>
+  <div class="nav">
+    <a class="logo" href="#"><span class="logo-mark">sc</span>SellCov</a>
+    <nav class="nav-links">
+      <a href="#how">Comment</a>
+      <a href="#scams">Pourquoi</a>
+      <a href="#pricing">Tarifs</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <button class="lang">FR ▾</button>
+      <a href="#cta" class="btn btn-primary btn-sm">Essayer gratuit</a>
+    </div>
+  </div>
+</header>
 
-      {/* ═══ NAV ═══ */}
-      <nav className="lp-nav">
-        <span className="nav-logo">
-          <svg width="28" height="28" viewBox="0 0 30 30" fill="none"><circle cx="15" cy="15" r="14" stroke="#fff" strokeWidth="1.2"/><circle cx="15" cy="15" r="10" stroke="#fff" strokeWidth="0.4" strokeDasharray="2.8 2.8"/><text x="15" y="19.5" fontFamily="-apple-system,sans-serif" fontSize="9" fontWeight="700" fill="#fff" textAnchor="middle">SC</text></svg>
-          SellCov
-        </span>
-        <div className="nav-links">
-          <a onClick={function() { scrollTo("#problem"); }}>{tx({fr:"Pourquoi", en:"Why", es:"Por qué", it:"Perché"})}</a>
-          <a onClick={function() { scrollTo("#how"); }}>{tx({fr:"Comment", en:"How", es:"Cómo", it:"Come"})}</a>
+<section class="hero">
+  <span class="badge"><span class="dot"></span>Bêta gratuite — 47 places restantes sur 100</span>
+  <h1 class="h1 serif">Revends<span class="italic">sans te faire arnaquer.</span></h1>
+  <p class="hero-sub">3 minutes avant d'expédier = 0 litige perdu. Preuve vidéo horodatée + défense IA qui convainc Vinted, Leboncoin & co.</p>
+  <p class="hero-subsub">Preuve horodatée. Défense automatique.</p>
+  <div class="hero-stats">
+    <span><strong>147</strong> ventes protégées</span>
+    <span><strong>4 823 €</strong> sauvés ce mois</span>
+    <span><strong>94 %</strong> litiges gagnés</span>
+  </div>
+  <div class="cta-row">
+    <a href="#cta" class="btn btn-primary">Protéger ma prochaine vente →</a>
+    <a href="#demo" class="btn btn-ghost">▶ Voir une défense réelle (45 s)</a>
+  </div>
+  <div class="platforms"><strong>Vinted</strong>·<strong>Leboncoin</strong>·<strong>Depop</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong>·<strong>Etsy</strong></div>
+</section>
+
+<section class="demo" id="demo">
+  <div class="demo-frame">
+    <div class="demo-steps">
+      <div class="demo-step">
+        <div style="display:flex;align-items:center;gap:10px;"><span class="step-num">1</span><h4>Crée l'annonce</h4></div>
+        <div class="ui">
+          <span class="ui-label">Photos</span>
+          <div class="ui-box" style="text-align:center;color:var(--text-dim);">+ 3 photos</div>
+          <span class="ui-label">État</span>
+          <div class="ui-box">Très bon état</div>
+          <button class="btn btn-violet btn-sm" style="margin-top:4px">Générer l'annonce</button>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <select value={lang} onChange={function(e) { setLang(e.target.value); }} style={{ fontSize: 11, fontWeight: 600, padding: "5px 14px", borderRadius: 20, border: "0.5px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.6)", cursor: "pointer", fontFamily: "var(--sans)" }}>
-            <option value="fr">FR</option>
-            <option value="en">EN</option>
-            <option value="es">ES</option>
-            <option value="it">IT</option>
-          </select>
-          <Link href="/annonce" className="nav-cta">{tx({fr:"Essayer gratuit", en:"Try free", es:"Probar gratis", it:"Prova gratis"})}</Link>
-        </div>
-      </nav>
-
-      {/* ═══ HERO ═══ */}
-      <section className="hero">
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "5px 14px", background: "rgba(255,255,255,0.04)", border: "0.5px solid rgba(255,255,255,0.14)", borderRadius: 20, fontSize: 11, color: "var(--muted)", marginBottom: 32, animation: "fadeUp 0.5s ease both" }}>
-          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--green)" }}></span>
-          {tx({fr:"Bêta gratuite (places limitées)", en:"Free beta (limited spots)", es:"Beta gratuita (plazas limitadas)", it:"Beta gratuita (posti limitati)"})}
-        </div>
-        <h1 className="lp-h1">{tx({fr:"Revends", en:"Resell", es:"Revende", it:"Rivendi"})}<br/><em>{tx({fr:"sans te faire arnaquer.", en:"without getting scammed.", es:"sin que te estafen.", it:"senza farti truffare."})}</em></h1>
-        <p className="hero-sub">{tx({fr:"On protège ton argent. À chaque envoi.", en:"We protect your money. Every shipment.", es:"Protegemos tu dinero. En cada envío.", it:"Proteggiamo i tuoi soldi. Ad ogni spedizione."})}</p>
-        <p className="hero-sub2">{tx({fr:"Preuve horodatée. Défense automatique.", en:"Timestamped proof. Automatic defense.", es:"Prueba con marca temporal. Defensa automática.", it:"Prova con timestamp. Difesa automatica."})}</p>
-        <div className="hero-actions">
-          <Link href="/annonce" className="btn-primary">{tx({fr:"Essayer gratuitement", en:"Try for free", es:"Probar gratis", it:"Prova gratis"})}</Link>
-          <button className="btn-ghost" onClick={function() { scrollTo("#problem"); }}>{tx({fr:"Voir comment ça marche", en:"See how it works", es:"Ver cómo funciona", it:"Scopri come funziona"})}</button>
-        </div>
-        <div style={{ marginTop: 18, fontSize: 12, color: "var(--dim)", animation: "fadeUp 0.5s 0.32s ease both" }}>Vinted · Depop · Grailed · Vestiaire Collective · Etsy</div>
-      </section>
-
-      {/* ═══ MODULES APPLE-STYLE ═══ */}
-      <section style={{ padding: "80px 24px", maxWidth: 1100, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 10, alignItems: "stretch" }}>
-
-          {/* Card 1 — Annonce */}
-          <Link href="/annonce" style={{ textDecoration: "none", display: "flex", flexDirection: "column", background: "#0d0d0f", border: "0.5px solid rgba(255,255,255,0.08)", borderRadius: 20, overflow: "hidden", cursor: "pointer" }}>
-            <div style={{ padding: "44px 40px 32px" }}>
-              <div style={{ fontSize: 10, fontWeight: 600, color: "#818CF8", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>{tx({fr:"Annonce", en:"Listing", es:"Anuncio", it:"Annuncio"})}</div>
-              <div style={{ fontFamily: "var(--serif)", fontSize: "clamp(24px, 2.5vw, 36px)", fontWeight: 400, color: "#fff", lineHeight: 1.08, letterSpacing: "-0.02em", marginBottom: 12 }}>
-                {tx({fr:"Génère ton annonce", en:"Generate your listing", es:"Genera tu anuncio", it:"Genera il tuo annuncio"})}<br/>
-                <em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.25)" }}>{tx({fr:"en 10 secondes.", en:"in 10 seconds.", es:"en 10 segundos.", it:"in 10 secondi."})}</em>
-              </div>
-              <div style={{ display: "flex", gap: 8 }}>
-                <span style={{ padding: "9px 22px", background: "#818CF8", color: "#fff", fontSize: 13, fontWeight: 600, borderRadius: 10 }}>{tx({fr:"Essayer", en:"Try it", es:"Probar", it:"Prova"})}</span>
-              </div>
-            </div>
-          </Link>
-
-          {/* Card 2 — Protection */}
-          <Link href="/protection" style={{ textDecoration: "none", display: "flex", flexDirection: "column", background: "#060f0c", border: "0.5px solid rgba(74,222,128,0.1)", borderRadius: 20, overflow: "hidden", cursor: "pointer" }}>
-            <div style={{ padding: "44px 40px 32px" }}>
-              <div style={{ fontSize: 10, fontWeight: 600, color: "#4ADE80", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>{tx({fr:"Protection", en:"Protection", es:"Protección", it:"Protezione"})}</div>
-              <div style={{ fontFamily: "var(--serif)", fontSize: "clamp(24px, 2.5vw, 36px)", fontWeight: 400, color: "#fff", lineHeight: 1.08, letterSpacing: "-0.02em", marginBottom: 12 }}>
-                {tx({fr:"Certifie avant", en:"Certify before", es:"Certifica antes", it:"Certifica prima"})}<br/>
-                <em style={{ fontStyle: "italic", color: "rgba(74,222,128,0.35)" }}>{tx({fr:"d'expédier.", en:"shipping.", es:"de enviar.", it:"di spedire."})}</em>
-              </div>
-              <div style={{ display: "flex", gap: 8 }}>
-                <span style={{ padding: "9px 22px", background: "#4ADE80", color: "#000", fontSize: 13, fontWeight: 600, borderRadius: 10 }}>{tx({fr:"Protéger", en:"Protect", es:"Proteger", it:"Proteggi"})}</span>
-              </div>
-            </div>
-          </Link>
-        </div>
-
-        {/* Card 3 — Litige pleine largeur */}
-        <div style={{ display: "block", background: "#0a060d", border: "0.5px solid rgba(244,114,182,0.1)", borderRadius: 20, overflow: "hidden", cursor: "pointer" }} onClick={function() { window.location.href = "/litige"; }}>
-          <div style={{ padding: "44px 40px" }}>
-            <div style={{ fontSize: 10, fontWeight: 600, color: "#F472B6", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>{tx({fr:"Litige", en:"Dispute", es:"Litigio", it:"Litigio"})}</div>
-            <div style={{ fontFamily: "var(--serif)", fontSize: "clamp(24px, 2.5vw, 36px)", fontWeight: 400, color: "#fff", lineHeight: 1.08, letterSpacing: "-0.02em", marginBottom: 12 }}>
-              {tx({fr:"Défense automatique.", en:"Automatic defense.", es:"Defensa automática.", it:"Difesa automatica."})}<br/>
-              <em style={{ fontStyle: "italic", color: "rgba(244,114,182,0.35)" }}>{tx({fr:"En 1 clic.", en:"In 1 click.", es:"En 1 clic.", it:"In 1 clic."})}</em>
-            </div>
-            <div style={{ display: "flex", gap: 8 }}>
-              <span style={{ padding: "9px 22px", background: "#F472B6", color: "#fff", fontSize: 13, fontWeight: 600, borderRadius: 10 }}>{tx({fr:"Gérer un litige", en:"Handle dispute", es:"Gestionar litigio", it:"Gestisci litigio"})}</span>
-            </div>
+      </div>
+      <div class="demo-step">
+        <div style="display:flex;align-items:center;gap:10px;"><span class="step-num">2</span><h4>Certifie l'envoi</h4></div>
+        <div class="ui">
+          <div class="ui-cam">
+            <span class="rec-dot"><span></span>REC</span>
+            <span class="ui-cam-inner">🎥 Filme l'article + colis + étiquette</span>
+          </div>
+          <div class="ui-cert">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            <div><div class="ui-cert-label">Certificat SellCov</div><div>SC-ABC123XYZ · horodaté</div></div>
           </div>
         </div>
-      </section>
-      {/* ═══ CTA FINAL ═══ */}
-      <section className="final-cta">
-        <h2 className="final-title">{tx({fr:"Protège ton argent", en:"Protect your money", es:"Protege tu dinero", it:"Proteggi i tuoi soldi"})}<br/><em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.35)" }}>{tx({fr:"maintenant.", en:"now.", es:"ahora.", it:"adesso."})}</em></h2>
-        <p className="final-sub">{tx({fr:"Chaque vente non protégée est un risque.", en:"Every unprotected sale is a risk.", es:"Cada venta sin proteger es un riesgo.", it:"Ogni vendita non protetta è un rischio."})}</p>
-        <Link href="/annonce" className="btn-primary" style={{ fontSize: 15, padding: "16px 48px" }}>{tx({fr:"Essayer gratuitement", en:"Try for free", es:"Probar gratis", it:"Prova gratis"})}</Link>
-        <div style={{ marginTop: 18, fontSize: 12, color: "var(--dim)" }}>Vinted · Depop · Grailed · Vestiaire Collective · Etsy</div>
-      </section>
+      </div>
+      <div class="demo-step">
+        <div style="display:flex;align-items:center;gap:10px;"><span class="step-num">3</span><h4>Défense automatique</h4></div>
+        <div class="ui">
+          <span class="ui-label">Acheteur</span>
+          <div class="ui-box" style="color:#ff9a9a">« L'article est abîmé, je veux un remboursement »</div>
+          <span class="ui-label">Réponse générée</span>
+          <div class="ui-box" style="color:#bfffd8">« Preuve vidéo horodatée du 14/04 montre l'article en parfait état. Certificat SC-ABC123XYZ joint. »</div>
+          <button class="btn btn-pink btn-sm" style="margin-top:4px">Envoyer la défense</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      {/* ═══ FOOTER ═══ */}
-      <footer>
-        <div className="footer-logo">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/><text x="11" y="14.5" fontFamily="-apple-system,sans-serif" fontSize="6.5" fontWeight="700" fill="rgba(255,255,255,0.3)" textAnchor="middle">SC</text></svg>
-          SellCov
-        </div>
-        <div className="footer-links">
-          <a href="mailto:hello@sellcov.com">{tx({fr:"FAQ", en:"FAQ", es:"FAQ", it:"FAQ"})}</a>
-          <a href="mailto:hello@sellcov.com">{tx({fr:"Contact", en:"Contact", es:"Contacto", it:"Contatto"})}</a>
-          <a href="#">Instagram</a>
-          <a href="#">TikTok</a>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <input id="newsletter" type="email" placeholder={tx({fr:"Ton email", en:"Your email", es:"Tu email", it:"La tua email"})} style={{ padding: "7px 14px", fontSize: 12, background: "rgba(255,255,255,0.05)", border: "0.5px solid rgba(255,255,255,0.14)", borderRadius: 8, color: "#fff", fontFamily: "var(--sans)", outline: "none", width: 180 }} />
-          <button onClick={function() { var em = document.getElementById("newsletter"); if (em.value) { window.location.href = "mailto:hello@sellcov.com?subject=Newsletter SellCov&body=" + tx({fr:"Inscris-moi : ", en:"Sign me up: ", es:"Suscríbeme: ", it:"Iscrivimi: "}) + em.value; em.value = ""; } }} style={{ padding: "7px 14px", fontSize: 11, fontWeight: 600, background: "rgba(255,255,255,0.08)", border: "0.5px solid rgba(255,255,255,0.14)", borderRadius: 8, color: "rgba(255,255,255,0.6)", cursor: "pointer", fontFamily: "var(--sans)" }}>{tx({fr:"Newsletter", en:"Newsletter", es:"Newsletter", it:"Newsletter"})}</button>
-        </div>
-        <div className="footer-copy">© 2026 SellCov</div>
-      </footer>
-    </>
-  );
-}
+<section class="page" id="how" style="padding-top:40px">
+  <div class="section-head reveal">
+    <div class="section-kicker">Comment ça marche</div>
+    <h2 class="section-title serif">Trois modules,<br><span class="italic">une seule mission.</span></h2>
+    <p class="section-sub">De l'annonce à la défense en cas de litige, SellCov t'accompagne sur chaque étape d'une vente.</p>
+  </div>
+  <div class="features">
+    <div class="feature feature-violet reveal">
+      <span class="tag">Annonce</span>
+      <h3 class="serif">Génère ton annonce<br><span class="italic">en 10 secondes.</span></h3>
+      <p>Photo + 1 clic = une annonce prête à publier. Titre accrocheur, description précise, mesures, mots-clés SEO — optimisée pour Vinted et Leboncoin.</p>
+      <div class="cta-area"><a href="#cta" class="btn btn-violet btn-sm">Essayer</a><span style="color:var(--text-dim);font-size:13px">~10 sec par annonce</span></div>
+    </div>
+    <div class="feature feature-green reveal">
+      <span class="tag">Protection</span>
+      <h3 class="serif">Certifie avant<br><span class="italic">d'expédier.</span></h3>
+      <p>3 minutes de vidéo horodatée : l'article, le colis fermé, l'étiquette. Stockée 12 mois, certificat unique généré. Preuve incontestable en cas de litige.</p>
+      <div class="cta-area"><a href="#cta" class="btn btn-green btn-sm">Protéger</a><span style="color:var(--text-dim);font-size:13px">~3 min par envoi</span></div>
+    </div>
+    <div class="feature feature-pink reveal">
+      <span class="tag">Litige</span>
+      <h3 class="serif">Défense automatique.<br><span class="italic">En 1 clic.</span></h3>
+      <p>Colle le message de l'acheteur. L'IA détecte la fraude, analyse ta preuve vidéo, et rédige une réponse argumentée prête à envoyer sur la plateforme.</p>
+      <div class="cta-area"><a href="#cta" class="btn btn-pink btn-sm">Gérer un litige</a><span style="color:var(--text-dim);font-size:13px">~30 sec de rédaction</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="scams" style="background:linear-gradient(180deg,transparent,rgba(245,112,170,.02),transparent)">
+  <div class="section-head reveal">
+    <div class="section-kicker">Les arnaques que tu vas rencontrer</div>
+    <h2 class="section-title serif">Les 5 arnaques qui coûtent<br><span class="italic">le plus cher aux vendeurs.</span></h2>
+    <p class="section-sub">Sur Vinted, 1 vendeur sur 8 perd de l'argent chaque année à cause d'un litige mal géré. Voilà les cas les plus fréquents et comment SellCov te protège.</p>
+  </div>
+  <div class="scams">
+    <div class="scam-card reveal">
+      <span style="color:var(--text-dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Arnaque n°1 — Colis "jamais reçu"</span>
+      <div class="scam-quote">« Je n'ai jamais reçu le colis. Je demande un remboursement. »</div>
+      <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov affiche</strong> la vidéo horodatée du dépôt en bureau de poste + numéro de suivi + étiquette filmée. Défense envoyée en 30 secondes.</span></div>
+    </div>
+    <div class="scam-card reveal">
+      <span style="color:var(--text-dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Arnaque n°2 — Article "abîmé"</span>
+      <div class="scam-quote">« L'article est arrivé taché / troué / cassé. Je veux être remboursé. »</div>
+      <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov prouve</strong> l'état exact avant expédition grâce à la vidéo 360° horodatée. L'IA compare les photos de l'acheteur et détecte les incohérences.</span></div>
+    </div>
+    <div class="scam-card reveal">
+      <span style="color:var(--text-dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Arnaque n°3 — Substitution</span>
+      <div class="scam-quote">« Ce n'est pas l'article que j'ai commandé. »</div>
+      <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov atteste</strong> le contenu exact du colis au moment de la fermeture. Marque, taille, couleur, détails — tout est filmé.</span></div>
+    </div>
+    <div class="scam-card reveal">
+      <span style="color:var(--text-dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Arnaque n°4 — Colis "vide"</span>
+      <div class="scam-quote">« Le colis est arrivé vide / sans l'article principal. »</div>
+      <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov enregistre</strong> l'article placé dans le colis puis le colis fermé avec scotch sécurisé, en une seule prise vidéo.</span></div>
+    </div>
+    <div class="scam-card reveal" style="grid-column:1/-1">
+      <span style="color:var(--text-dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Arnaque n°5 — "Ce n'est pas authentique"</span>
+      <div class="scam-quote">« Le produit est une contrefaçon, je signale à la plateforme. »</div>
+      <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov horodate</strong> les codes produit, étiquettes d'authenticité, factures d'achat. En cas de litige, tu joins le tout à ta défense automatique en un clic.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="section-head reveal">
+    <div class="section-kicker">Ils ont protégé leurs ventes</div>
+    <h2 class="section-title serif">La preuve<br><span class="italic">par les chiffres.</span></h2>
+  </div>
+  <div class="proof">
+    <div class="proof-stats">
+      <div class="stat reveal"><div class="stat-big serif">147</div><div class="stat-label">ventes protégées à ce jour</div></div>
+      <div class="stat reveal"><div class="stat-big serif" style="color:var(--green)">4 823 €</div><div class="stat-label">sauvés en litiges ce mois-ci</div></div>
+      <div class="stat reveal"><div class="stat-big serif" style="color:var(--violet)">94 %</div><div class="stat-label">de litiges gagnés par nos vendeurs</div></div>
+    </div>
+    <div class="testimonials">
+      <div class="testi reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">« J'ai récupéré 180 € sur une veste Ralph Lauren que l'acheteur prétendait avoir reçue trouée. La défense a été envoyée en 2 minutes. »</p>
+        <div class="testi-author"><div class="testi-avatar">C</div><div class="testi-who"><strong>Chloé M.</strong><span>Revendeuse, 230 ventes Vinted</span></div></div>
+      </div>
+      <div class="testi reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">« Enfin un outil qui prend au sérieux les vendeurs. Depuis SellCov, 0 litige perdu en 3 mois. Zéro. »</p>
+        <div class="testi-author"><div class="testi-avatar">K</div><div class="testi-who"><strong>Karim B.</strong><span>Dressing pro, 1 200 ventes</span></div></div>
+      </div>
+      <div class="testi reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">« L'IA qui rédige la défense est bluffante. Elle a trouvé un argument que je n'aurais jamais pensé. J'ai gagné le litige. »</p>
+        <div class="testi-author"><div class="testi-avatar">L</div><div class="testi-who"><strong>Léa T.</strong><span>Friperie en ligne Depop</span></div></div>
+      </div>
+    </div>
+    <div class="case reveal">
+      <div>
+        <div class="case-kicker">🟢 Litige résolu</div>
+        <h4>« Preuve vidéo acceptée par Vinted »</h4>
+        <p>Un acheteur prétend avoir reçu une paire de Nike Air Max contrefaite. Grâce à la vidéo horodatée + certificat d'authenticité filmé à l'expédition, Vinted a tranché en faveur du vendeur en 24 h.</p>
+        <div class="case-amount">+ 127 €</div>
+        <div style="color:var(--text-muted);font-size:13px;margin-top:4px">récupérés sur compte bancaire · 26 mars 2026</div>
+      </div>
+      <div class="case-msg">
+        <div class="mini-head"><span>Notification Vinted</span><span>il y a 2 h</span></div>
+        <p><strong style="color:#fff">Litige résolu en votre faveur.</strong> Après analyse de la preuve vidéo fournie par le vendeur, nous avons tranché en sa faveur. Le paiement sera libéré sous 48 h sur votre compte.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="pricing" style="background:linear-gradient(180deg,transparent,rgba(94,232,163,.02),transparent)">
+  <div class="section-head reveal">
+    <div class="section-kicker">Tarifs transparents</div>
+    <h2 class="section-title serif">Tu choisis<br><span class="italic">quand tu veux payer.</span></h2>
+    <p class="section-sub">Les 100 premiers vendeurs bénéficient du tarif Early Adopter — à vie. Aucun engagement, annulable en 1 clic.</p>
+  </div>
+  <div class="pricing">
+    <div class="plan reveal">
+      <h4>Bêta</h4>
+      <div class="plan-price">0 € <small>/ mois</small></div>
+      <p class="plan-desc">Accès complet pendant la phase de lancement.</p>
+      <ul><li>Certificats vidéo illimités</li><li>IA défense automatique</li><li>Génération d'annonces</li><li>Support email</li></ul>
+      <a href="#cta" class="btn btn-ghost">Démarrer gratuitement</a>
+    </div>
+    <div class="plan featured reveal">
+      <span class="plan-ribbon">★ Le plus choisi</span>
+      <h4>Early Adopter</h4>
+      <div class="plan-price">4,90 € <small>/ mois à vie</small></div>
+      <p class="plan-desc">Réservé aux 100 premiers. Tarif bloqué à vie.</p>
+      <ul><li>Tout du plan Bêta</li><li>Historique 24 mois</li><li>Certificats prioritaires</li><li>Support prioritaire</li><li>Accès beta features</li></ul>
+      <a href="#cta" class="btn btn-primary">Réserver ma place</a>
+    </div>
+    <div class="plan reveal">
+      <h4>Pro Power Seller</h4>
+      <div class="plan-price">19,90 € <small>/ mois</small></div>
+      <p class="plan-desc">Pour les vendeurs qui font +50 ventes/mois.</p>
+      <ul><li>Tout du plan Early</li><li>Dashboard analytics</li><li>Templates d'annonces illimités</li><li>Multi-compte (Vinted + LBC + Depop)</li><li>Support dédié WhatsApp</li></ul>
+      <a href="#cta" class="btn btn-ghost">Passer au Pro</a>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="faq">
+  <div class="section-head reveal">
+    <div class="section-kicker">FAQ</div>
+    <h2 class="section-title serif">Questions<br><span class="italic">fréquentes.</span></h2>
+  </div>
+  <div class="faq">
+    <details class="faq-item"><summary class="faq-q">Ma preuve vidéo a-t-elle une valeur juridique ?</summary><p class="faq-a">Oui. Chaque vidéo est horodatée via un tiers de confiance (hash cryptographique + timestamp certifié). En cas de litige devant un juge de proximité, elle constitue une preuve recevable. Vinted, Leboncoin et la plupart des plateformes acceptent ce type de preuve dans leur médiation interne.</p></details>
+    <details class="faq-item"><summary class="faq-q">Vinted accepte-t-il les preuves SellCov ?</summary><p class="faq-a">Oui. Les preuves vidéo horodatées sont reconnues par les équipes litiges de Vinted, Leboncoin, Depop et Vestiaire Collective. Nos utilisateurs ont un taux de litiges gagnés de 94 % sur ces plateformes.</p></details>
+    <details class="faq-item"><summary class="faq-q">Combien de temps ça prend par envoi ?</summary><p class="faq-a">Entre 2 et 3 minutes. Tu filmes l'article sous tous les angles, le colis fermé, l'étiquette. L'application te guide étape par étape. Le certificat est généré instantanément.</p></details>
+    <details class="faq-item"><summary class="faq-q">Mes vidéos sont-elles privées ?</summary><p class="faq-a">Totalement. Tes vidéos sont chiffrées, stockées sur des serveurs européens (RGPD), et accessibles uniquement depuis ton compte. Elles ne sont partagées qu'à ta demande, lors d'un litige.</p></details>
+    <details class="faq-item"><summary class="faq-q">Que se passe-t-il après la bêta gratuite ?</summary><p class="faq-a">Les 100 premiers inscrits conservent automatiquement le tarif Early Adopter à 4,90 €/mois à vie. Les autres passent sur le plan standard (9,90 €/mois). Tu es prévenu 30 jours avant la fin de la bêta.</p></details>
+    <details class="faq-item"><summary class="faq-q">Ça fonctionne avec Leboncoin, Depop et les autres ?</summary><p class="faq-a">Oui. SellCov est indépendant de la plateforme de vente. Tu peux utiliser tes certificats sur Vinted, Leboncoin, Depop, Grailed, Vestiaire Collective, Etsy, Marketplace Facebook — n'importe quelle plateforme d'occasion.</p></details>
+    <details class="faq-item"><summary class="faq-q">Que se passe-t-il si la défense automatique échoue ?</summary><p class="faq-a">Tu gardes toujours accès à ta preuve vidéo et à ton certificat. Tu peux les utiliser devant un juge de proximité ou pour un signalement à la DGCCRF. Nous te remboursons ton mois si la défense IA ne produit aucun résultat probant.</p></details>
+  </div>
+</section>
+
+<section class="page" style="padding-top:40px">
+  <div class="magnet reveal">
+    <div>
+      <div class="magnet-kicker">Guide gratuit</div>
+      <h3>Les 7 arnaques Vinted qui coûtent le plus cher (et comment les éviter).</h3>
+      <p>12 pages, cas concrets, réponses types prêtes à copier-coller. Télécharge le PDF en échange de ton email.</p>
+      <form class="magnet-form" onsubmit="event.preventDefault();alert('Merci, ton guide arrive par email.');this.reset();">
+        <input type="email" required placeholder="Ton email" />
+        <button type="submit" class="btn btn-primary">Recevoir le guide</button>
+      </form>
+      <small style="color:var(--text-dim);font-size:12px;display:block;margin-top:12px">Pas de spam. Désabonnement en 1 clic.</small>
+    </div>
+    <div class="magnet-visual">
+      <div class="magnet-pdf">7</div>
+      <small>7 arnaques · 12 pages · gratuit</small>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="cta">
+  <h2 class="serif">Protège ton argent<br><span class="italic">maintenant.</span></h2>
+  <p>Chaque vente non protégée est un risque.</p>
+  <a href="#" class="btn btn-primary" style="padding:16px 32px;font-size:16px">Essayer gratuitement →</a>
+  <div class="platforms" style="margin-top:34px"><strong>Vinted</strong>·<strong>Leboncoin</strong>·<strong>Depop</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong>·<strong>Etsy</strong></div>
+</section>
+
+<footer>
+  <div class="foot">
+    <div class="logo"><span class="logo-mark">sc</span>SellCov</div>
+    <div class="foot-links">
+      <a href="#faq">FAQ</a>
+      <a href="#">Contact</a>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+      <a href="#">Mentions légales</a>
+      <a href="#">CGU</a>
+      <a href="#">Confidentialité</a>
+    </div>
+    <div class="foot-copy">© 2026 SellCov</div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}})
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
