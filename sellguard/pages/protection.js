@@ -16,6 +16,18 @@ export default function Protection() {
 
   function tx(obj) { return obj[lang] || obj.en || obj.fr; }
 
+  var GUIDE_STEPS = [
+    { time: 0, dur: 10, label: tx({fr:"Filme l'article", en:"Film the item", es:"Filma el artículo", it:"Filma l'articolo"}), icon: "1" },
+    { time: 10, dur: 10, label: tx({fr:"Filme le colis fermé", en:"Film the sealed parcel", es:"Filma el paquete cerrado", it:"Filma il pacco chiuso"}), icon: "2" },
+    { time: 20, dur: 10, label: tx({fr:"Filme l'étiquette d'envoi", en:"Film the shipping label", es:"Filma la etiqueta de envío", it:"Filma l'etichetta di spedizione"}), icon: "3" },
+  ];
+  function getCurrentStep(secs) {
+    for (var i = GUIDE_STEPS.length - 1; i >= 0; i--) {
+      if (secs >= GUIDE_STEPS[i].time) return i;
+    }
+    return 0;
+  }
+
   var _tab = useState("certify"), tab = _tab[0], setTab = _tab[1];
   var _mode = useState("video"), mode = _mode[0], setMode = _mode[1];
   var _articleName = useState(""), articleName = _articleName[0], setArticleName = _articleName[1];
@@ -459,6 +471,11 @@ export default function Protection() {
             </div>
 
             {mode === "video" && (
+              <div style={{ background: "rgba(74,222,128,0.06)", border: "0.5px solid rgba(74,222,128,0.2)", borderRadius: 12, padding: "12px 16px", marginBottom: 16 }}>
+                <p style={{ fontSize: 12, color: "#16A34A", lineHeight: 1.5 }}>
+                  {tx({fr:"Emballe et scelle ton colis avant de lancer la vidéo.", en:"Pack and seal your parcel before starting the video.", es:"Empaqueta y sella tu paquete antes de grabar.", it:"Imballa e sigilla il pacco prima di registrare."})}
+                </p>
+              </div>
               <>
                 <div style={{ marginBottom: 16, borderRadius: 14, overflow: "hidden", background: "#111", position: "relative", minHeight: 220 }}>
                   <video ref={videoRef} muted playsInline style={{ width: "100%", display: cameraOn && !recordedUrl ? "block" : "none", maxHeight: 340, objectFit: "cover" }} />
@@ -469,18 +486,48 @@ export default function Protection() {
                   )}
                   {recordedUrl && <video src={recordedUrl} controls playsInline style={{ width: "100%", maxHeight: 340 }} />}
                   {!cameraOn && !recordedUrl && (
-                    <div style={{ minHeight: 220, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10 }}>
-                      <p style={{ fontSize: 13, color: "rgba(255,255,255,0.35)", textAlign: "center", padding: "0 20px" }}>
-                        {tx({fr:"Vidéo + certificat SHA-256 générés automatiquement", en:"Video + SHA-256 certificate generated automatically", es:"Vídeo + certificado SHA-256 generados automáticamente", it:"Video + certificato SHA-256 generati automaticamente"})}
-                      </p>
+                    <div style={{ minHeight: 220, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "20px" }}>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 14, width: "100%" }}>
+                        {GUIDE_STEPS.map(function(s, i) {
+                          return (
+                            <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                              <div style={{ width: 28, height: 28, borderRadius: "50%", border: "1.5px solid rgba(74,222,128,0.3)", color: "rgba(74,222,128,0.5)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, flexShrink: 0 }}>{s.icon}</div>
+                              <span style={{ fontSize: 13, color: "rgba(255,255,255,0.4)" }}>{s.label}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   )}
-                  {recording && (
-                    <div style={{ position: "absolute", top: 10, left: 10, background: "rgba(0,0,0,0.7)", borderRadius: 20, padding: "4px 12px", display: "flex", alignItems: "center", gap: 8 }}>
-                      <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#FF3B30" }} />
-                      <span style={{ fontSize: 13, fontWeight: 700, color: "#fff", fontFamily: "monospace" }}>{fmt(elapsed)}</span>
-                    </div>
-                  )}
+                  {recording && (function() {
+                    var step = getCurrentStep(elapsed);
+                    var gs = GUIDE_STEPS[step];
+                    var stepProgress = Math.min(((elapsed - gs.time) / gs.dur) * 100, 100);
+                    return (
+                      <>
+                        {/* Step progress bar */}
+                        <div style={{ position: "absolute", top: 0, left: 0, right: 0, display: "flex", gap: 3, padding: "8px 10px" }}>
+                          {GUIDE_STEPS.map(function(s, i) {
+                            return (
+                              <div key={i} style={{ flex: 1, height: 3, borderRadius: 2, background: "rgba(255,255,255,0.15)", overflow: "hidden" }}>
+                                <div style={{ height: "100%", borderRadius: 2, background: i < step ? "#4ADE80" : i === step ? "#4ADE80" : "transparent", width: i < step ? "100%" : i === step ? stepProgress + "%" : "0%", transition: "width 0.3s" }} />
+                              </div>
+                            );
+                          })}
+                        </div>
+                        {/* Current step instruction */}
+                        <div style={{ position: "absolute", top: 20, left: "50%", transform: "translateX(-50%)", background: "rgba(0,0,0,0.75)", borderRadius: 12, padding: "8px 18px", display: "flex", alignItems: "center", gap: 10, backdropFilter: "blur(8px)" }}>
+                          <div style={{ width: 26, height: 26, borderRadius: "50%", background: "#4ADE80", color: "#000", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 800 }}>{gs.icon}</div>
+                          <span style={{ fontSize: 13, fontWeight: 600, color: "#fff" }}>{gs.label}</span>
+                        </div>
+                        {/* Timer + red dot */}
+                        <div style={{ position: "absolute", top: 60, left: 10, background: "rgba(0,0,0,0.7)", borderRadius: 20, padding: "4px 12px", display: "flex", alignItems: "center", gap: 8 }}>
+                          <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#FF3B30", animation: "pulse 1s infinite" }} />
+                          <span style={{ fontSize: 13, fontWeight: 700, color: "#fff", fontFamily: "monospace" }}>{fmt(elapsed)}</span>
+                        </div>
+                      </>
+                    );
+                  })()}
                 </div>
 
                 {cameraError && <div style={{ marginBottom: 14, padding: 12, background: "rgba(220,38,38,0.08)", borderRadius: 10, fontSize: 13, color: "#DC2626" }}>{cameraError}</div>}
@@ -510,9 +557,7 @@ export default function Protection() {
                   </div>
                 )}
 
-                <div style={{ background: "rgba(74,222,128,0.06)", border: "0.5px solid rgba(74,222,128,0.2)", borderRadius: 14, padding: "14px 18px" }}>
-                  <p style={{ fontSize: 13, color: "#16A34A", lineHeight: 1.6 }}><strong>{tx({fr:"Conseil :", en:"Tip:", es:"Consejo:", it:"Consiglio:"})}</strong> {p.tips}</p>
-                </div>
+
               </>
             )}
 
