@@ -472,11 +472,6 @@ export default function Protection() {
 
             {mode === "video" && (
               <>
-              <div style={{ background: "rgba(74,222,128,0.06)", border: "0.5px solid rgba(74,222,128,0.2)", borderRadius: 12, padding: "12px 16px", marginBottom: 16 }}>
-                <p style={{ fontSize: 12, color: "#16A34A", lineHeight: 1.5 }}>
-                  {tx({fr:"Emballe et scelle ton colis avant de lancer la vidéo.", en:"Pack and seal your parcel before starting the video.", es:"Empaqueta y sella tu paquete antes de grabar.", it:"Imballa e sigilla il pacco prima di registrare."})}
-                </p>
-              </div>
                 <div style={{ marginBottom: 16, borderRadius: 14, overflow: "hidden", background: "#111", position: "relative", minHeight: 220 }}>
                   <video ref={videoRef} muted playsInline style={{ width: "100%", display: cameraOn && !recordedUrl ? "block" : "none", maxHeight: 340, objectFit: "cover" }} />
                   {cameraOn && !recordedUrl && (
@@ -505,7 +500,6 @@ export default function Protection() {
                     var stepProgress = Math.min(((elapsed - gs.time) / gs.dur) * 100, 100);
                     return (
                       <>
-                        {/* Step progress bar */}
                         <div style={{ position: "absolute", top: 0, left: 0, right: 0, display: "flex", gap: 3, padding: "8px 10px" }}>
                           {GUIDE_STEPS.map(function(s, i) {
                             return (
@@ -515,12 +509,10 @@ export default function Protection() {
                             );
                           })}
                         </div>
-                        {/* Current step instruction */}
                         <div style={{ position: "absolute", top: 20, left: "50%", transform: "translateX(-50%)", background: "rgba(0,0,0,0.75)", borderRadius: 12, padding: "8px 18px", display: "flex", alignItems: "center", gap: 10, backdropFilter: "blur(8px)" }}>
                           <div style={{ width: 26, height: 26, borderRadius: "50%", background: "#4ADE80", color: "#000", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 800 }}>{gs.icon}</div>
                           <span style={{ fontSize: 13, fontWeight: 600, color: "#fff" }}>{gs.label}</span>
                         </div>
-                        {/* Timer + red dot */}
                         <div style={{ position: "absolute", top: 60, left: 10, background: "rgba(0,0,0,0.7)", borderRadius: 20, padding: "4px 12px", display: "flex", alignItems: "center", gap: 8 }}>
                           <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#FF3B30", animation: "pulse 1s infinite" }} />
                           <span style={{ fontSize: 13, fontWeight: 700, color: "#fff", fontFamily: "monospace" }}>{fmt(elapsed)}</span>
@@ -556,8 +548,6 @@ export default function Protection() {
                       style={{ padding: 14, fontSize: 14, fontWeight: 600, borderRadius: 12, border: "0.5px solid rgba(255,255,255,0.07)", background: "#0A0A0A", color: "rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "inherit" }}>{p.redo}</button>
                   </div>
                 )}
-
-
               </>
             )}
 
