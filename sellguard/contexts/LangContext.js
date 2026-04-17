@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 export var T = {
   fr: {
@@ -45,9 +45,9 @@ export var T = {
       article_label: "Nom de l’article", article_ph: "Ex: Single Stitch Tee - Taille S", article_ph_photo: "Ex: Levi's 501 - W30 L32",
       ref_label: "Référence commande", ref_ph: "Ex: Vinted #4829301", optional: "optionnel",
       activate: "Activer la caméra",
-      start: "⏺ Démarrer l’enregistrement", stop: "Stop",
+      start: "Démarrer l’enregistrement", stop: "Stop",
       download: "Télécharger la preuve vidéo", redo: "Refaire", cancel: "Annuler",
-      tips: "Filme l’article, l’étiquette, puis le colis scellé avec le bon de livraison visible. 30 secondes suffisent.",
+      tips: "Emballe et scelle ton colis avant de lancer la vidéo. Puis filme l’article, le colis fermé et l’étiquette. 30 secondes suffisent.",
       certified_title: "Envoi certifié", certified_sub: "Ta preuve vidéo horodatée a été téléchargée. Conserve ce fichier précieusement.",
       guide_title: "COMMENT UTILISER CETTE PREUVE PAR PLATEFORME", new_btn: "Protéger un autre envoi",
     },
@@ -315,7 +315,9 @@ export var T = {
 var LangContext = createContext({ lang: "fr", t: T.fr, setLang: function() {} });
 
 export function LangProvider({ children }) {
-  var ref = useState(function() { try { return localStorage.getItem("sellcov_lang") || "fr"; } catch(e) { return "fr"; } }), lang = ref[0], setLang0 = ref[1];
+  var ref = useState("fr"), lang = ref[0], setLang0 = ref[1];
+  var _mounted = useState(false), mounted = _mounted[0], setMounted = _mounted[1];
+  useEffect(function() { try { var saved = localStorage.getItem("sellcov_lang"); if (saved && T[saved]) setLang0(saved); } catch(e) {} setMounted(true); }, []);
   function setLang(l) { setLang0(l); try { localStorage.setItem("sellcov_lang", l); } catch(e) {} }
   return <LangContext.Provider value={{ lang: lang, t: T[lang] || T.fr, setLang: setLang }}>{children}</LangContext.Provider>;
 }
