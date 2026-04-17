@@ -164,10 +164,8 @@ export default function Home() {
                 {tx({fr:"Génère ton annonce", en:"Generate your listing", es:"Genera tu anuncio", it:"Genera il tuo annuncio"})}<br/>
                 <em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.25)" }}>{tx({fr:"en 10 secondes.", en:"in 10 seconds.", es:"en 10 segundos.", it:"in 10 secondi."})}</em>
               </div>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.38)", marginBottom: 28, fontWeight: 300, lineHeight: 1.6 }}>{tx({fr:"Photo → titre, description, prix optimisés pour Vinted, Depop, Grailed.", en:"Photo → title, description, optimized price for Vinted, Depop, Grailed.", es:"Foto → título, descripción, precio optimizado.", it:"Foto → titolo, descrizione, prezzo ottimizzato."})}</p>
               <div style={{ display: "flex", gap: 8 }}>
                 <span style={{ padding: "9px 22px", background: "#818CF8", color: "#fff", fontSize: 13, fontWeight: 600, borderRadius: 10 }}>{tx({fr:"Essayer", en:"Try it", es:"Probar", it:"Prova"})}</span>
-                <span style={{ padding: "9px 22px", background: "transparent", color: "rgba(255,255,255,0.4)", fontSize: 13, border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: 10 }}>{tx({fr:"En savoir plus", en:"Learn more", es:"Saber más", it:"Scopri di più"})}</span>
               </div>
             </div>
           </Link>
@@ -180,10 +178,8 @@ export default function Home() {
                 {tx({fr:"Certifie avant", en:"Certify before", es:"Certifica antes", it:"Certifica prima"})}<br/>
                 <em style={{ fontStyle: "italic", color: "rgba(74,222,128,0.35)" }}>{tx({fr:"d'expédier.", en:"shipping.", es:"de enviar.", it:"di spedire."})}</em>
               </div>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.38)", marginBottom: 28, fontWeight: 300, lineHeight: 1.6 }}>{tx({fr:"Vidéo horodatée + certificat SHA-256. Preuve légale inattaquable en cas de litige.", en:"Timestamped video + SHA-256 certificate. Unassailable legal proof.", es:"Vídeo con timestamp + certificado SHA-256.", it:"Video con timestamp + certificato SHA-256."})}</p>
               <div style={{ display: "flex", gap: 8 }}>
                 <span style={{ padding: "9px 22px", background: "#4ADE80", color: "#000", fontSize: 13, fontWeight: 600, borderRadius: 10 }}>{tx({fr:"Protéger", en:"Protect", es:"Proteger", it:"Proteggi"})}</span>
-                <span style={{ padding: "9px 22px", background: "transparent", color: "rgba(255,255,255,0.4)", fontSize: 13, border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: 10 }}>{tx({fr:"En savoir plus", en:"Learn more", es:"Saber más", it:"Scopri di più"})}</span>
               </div>
             </div>
           </Link>
@@ -197,10 +193,8 @@ export default function Home() {
               {tx({fr:"Défense automatique.", en:"Automatic defense.", es:"Defensa automática.", it:"Difesa automatica."})}<br/>
               <em style={{ fontStyle: "italic", color: "rgba(244,114,182,0.35)" }}>{tx({fr:"En 1 clic.", en:"In 1 click.", es:"En 1 clic.", it:"In 1 clic."})}</em>
             </div>
-            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.38)", marginBottom: 28, fontWeight: 300, lineHeight: 1.6, maxWidth: 320 }}>{tx({fr:"L'IA analyse les photos, détecte la fraude et génère ta réponse de défense.", en:"AI analyzes photos, detects fraud and generates your defense response.", es:"La IA analiza las fotos y genera tu respuesta.", it:"L'IA analizza le foto e genera la tua risposta."})}</p>
             <div style={{ display: "flex", gap: 8 }}>
               <span style={{ padding: "9px 22px", background: "#F472B6", color: "#fff", fontSize: 13, fontWeight: 600, borderRadius: 10 }}>{tx({fr:"Gérer un litige", en:"Handle dispute", es:"Gestionar litigio", it:"Gestisci litigio"})}</span>
-              <span style={{ padding: "9px 22px", background: "transparent", color: "rgba(255,255,255,0.4)", fontSize: 13, border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: 10 }}>{tx({fr:"En savoir plus", en:"Learn more", es:"Saber más", it:"Scopri di più"})}</span>
             </div>
           </div>
         </div>
