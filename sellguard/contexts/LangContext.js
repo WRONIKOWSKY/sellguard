@@ -42,7 +42,7 @@ export var T = {
       title: "Protéger mon envoi",
       subtitle: "Enregistre une vidéo horodatée. Preuve solide en cas de litige.",
       video_tab: "Vidéo", photo_tab: "Photos", recommended: "Recommandé",
-      article_label: "Nom de l’article", article_ph: "Ex: Levi’s Trucker Jacket Type 2 - Taille M",
+      article_label: "Nom de l’article", article_ph: "Ex: Single Stitch Tee - Taille S", article_ph_photo: "Ex: Levi's 501 - W30 L32",
       ref_label: "Référence commande", ref_ph: "Ex: Vinted #4829301", optional: "optionnel",
       activate: "Activer la caméra",
       start: "⏺ Démarrer l’enregistrement", stop: "Stop",
@@ -127,7 +127,7 @@ export var T = {
       title: "Protect my shipment",
       subtitle: "Record a timestamped video. Solid proof in case of a dispute.",
       video_tab: "Video", photo_tab: "Photos", recommended: "Recommended",
-      article_label: "Item name", article_ph: "Ex: Single Stitch Tee - Size S",
+      article_label: "Item name", article_ph: "Ex: Single Stitch Tee - Size S", article_ph_photo: "Ex: Levi's 501 - W30 L32",
       ref_label: "Order reference", ref_ph: "Ex: Vinted #4829301", optional: "optional",
       activate: "Activate camera",
       start: "Start recording", stop: "Stop",
@@ -212,7 +212,7 @@ export var T = {
       title: "Proteger mi envío",
       subtitle: "Graba un vídeo con marca temporal, prueba sólida en caso de litigio.",
       video_tab: "Vídeo", photo_tab: "Fotos", recommended: "Recomendado",
-      article_label: "Nombre del artículo", article_ph: "Ej: Single Stitch Tee - Talla S",
+      article_label: "Nombre del artículo", article_ph: "Ej: Single Stitch Tee - Talla S", article_ph_photo: "Ej: Levi's 501 - W30 L32",
       ref_label: "Referencia del pedido", ref_ph: "Ej: Vinted #4829301", optional: "opcional",
       activate: "Activar cámara",
       start: "Iniciar grabación", stop: "Parar",
@@ -280,7 +280,7 @@ export var T = {
       title: "Proteggi la spedizione",
       subtitle: "Registra un video con timestamp, prova solida in caso di controversia.",
       video_tab: "Video", photo_tab: "Foto", recommended: "Consigliato",
-      article_label: "Nome dell'articolo", article_ph: "Es: Single Stitch Tee - Taglia S",
+      article_label: "Nome dell'articolo", article_ph: "Es: Single Stitch Tee - Taglia S", article_ph_photo: "Es: Levi's 501 - W30 L32",
       ref_label: "Riferimento ordine", ref_ph: "Es: Vinted #4829301", optional: "opzionale",
       activate: "Attiva fotocamera",
       start: "Avvia registrazione", stop: "Stop",
@@ -315,8 +315,9 @@ export var T = {
 var LangContext = createContext({ lang: "fr", t: T.fr, setLang: function() {} });
 
 export function LangProvider({ children }) {
-  var ref = useState("fr"), lang = ref[0], setLang = ref[1];
-  return <LangContext.Provider value={{ lang: lang, t: T[lang], setLang: setLang }}>{children}</LangContext.Provider>;
+  var ref = useState(function() { try { return localStorage.getItem("sellcov_lang") || "fr"; } catch(e) { return "fr"; } }), lang = ref[0], setLang0 = ref[1];
+  function setLang(l) { setLang0(l); try { localStorage.setItem("sellcov_lang", l); } catch(e) {} }
+  return <LangContext.Provider value={{ lang: lang, t: T[lang] || T.fr, setLang: setLang }}>{children}</LangContext.Provider>;
 }
 
 export function useLang() {
