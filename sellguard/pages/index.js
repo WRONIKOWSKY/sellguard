@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   useEffect(function() {
@@ -16,6 +16,9 @@ export default function Home() {
     });
     return function() { io.disconnect(); };
   }, []);
+
+  var _lang = useState(function() { try { return localStorage.getItem("sellcov_lang") || "fr"; } catch(e) { return "fr"; } }), lang = _lang[0], setLang = _lang[1];
+  function tx(o) { return o[lang] || o.en || o.fr; }
 
   function scrollTo(id) { var el = document.querySelector(id); if (el) el.scrollIntoView({ behavior: "smooth" }); }
 
@@ -73,7 +76,7 @@ export default function Home() {
 
         .pain-list { list-style: none; display: flex; flex-direction: column; gap: 10px; max-width: 500px; margin: 0 auto; }
         .pain-item { font-size: 15px; color: var(--red); display: flex; align-items: center; gap: 10px; text-align: left; }
-        .pain-callout { text-align: left; margin-top: 16px; font-size: 15px; color: var(--muted); font-weight: 400; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+        .pain-callout { text-align: left; margin-top: 10px; font-size: 15px; color: var(--muted); font-weight: 400; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 
         .solution-list { display: flex; flex-direction: column; gap: 10px; max-width: 500px; margin: 0 auto; }
         .solution-item { font-size: 15px; color: var(--green); display: flex; align-items: center; gap: 10px; }
@@ -134,18 +137,18 @@ export default function Home() {
           SellCov
         </span>
         <div className="nav-links">
-          <a onClick={function() { scrollTo("#problem"); }}>Pourquoi</a>
-          <a onClick={function() { scrollTo("#how"); }}>Comment</a>
+          <a onClick={function() { scrollTo("#problem"); }}>{tx({fr:"Pourquoi", en:"Why", es:"Por qué", it:"Perché"})}</a>
+          <a onClick={function() { scrollTo("#how"); }}>{tx({fr:"Comment", en:"How", es:"Cómo", it:"Come"})}</a>
           
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <select onChange={function(e) { try { localStorage.setItem("sellcov_lang", e.target.value); } catch(ex) {} }} defaultValue="fr" style={{ fontSize: 11, fontWeight: 600, padding: "5px 14px", borderRadius: 20, border: "0.5px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.6)", cursor: "pointer", fontFamily: "var(--sans)" }}>
+          <select value={lang} onChange={function(e) { setLang(e.target.value); try { localStorage.setItem("sellcov_lang", e.target.value); } catch(ex) {} }} style={{ fontSize: 11, fontWeight: 600, padding: "5px 14px", borderRadius: 20, border: "0.5px solid rgba(255,255,255,0.2)", background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.6)", cursor: "pointer", fontFamily: "var(--sans)" }}>
             <option value="fr">FR</option>
             <option value="en">EN</option>
             <option value="es">ES</option>
             <option value="it">IT</option>
           </select>
-          <Link href="/annonce" className="nav-cta">Essayer gratuit</Link>
+          <Link href="/annonce" className="nav-cta">{tx({fr:"Essayer gratuit", en:"Try free", es:"Probar gratis", it:"Prova gratis"})}</Link>
         </div>
       </nav>
 
@@ -155,49 +158,49 @@ export default function Home() {
           <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--green)" }}></span>
           Bêta gratuite (places limitées)
         </div>
-        <h1 className="lp-h1">Revends<br/><em>sans te faire arnaquer.</em></h1>
-        <p className="hero-sub">On protège ton argent. À chaque envoi.</p>
-        <p className="hero-sub2">Preuve horodatée. Défense automatique.</p>
+        <h1 className="lp-h1">{tx({fr:"Revends", en:"Resell", es:"Revende", it:"Rivendi"})}<br/><em>{tx({fr:"sans te faire arnaquer.", en:"without getting scammed.", es:"sin que te estafen.", it:"senza farti truffare."})}</em></h1>
+        <p className="hero-sub">{tx({fr:"On protège ton argent. À chaque envoi.", en:"We protect your money. Every shipment.", es:"Protegemos tu dinero. En cada envío.", it:"Proteggiamo i tuoi soldi. Ad ogni spedizione."})}</p>
+        <p className="hero-sub2">{tx({fr:"Preuve horodatée. Défense automatique.", en:"Timestamped proof. Automatic defense.", es:"Prueba con marca temporal. Defensa automática.", it:"Prova con timestamp. Difesa automatica."})}</p>
         <div className="hero-actions">
-          <Link href="/annonce" className="btn-primary">Essayer gratuitement</Link>
-          <button className="btn-ghost" onClick={function() { scrollTo("#problem"); }}>Voir comment ça marche</button>
+          <Link href="/annonce" className="btn-primary">{tx({fr:"Essayer gratuitement", en:"Try for free", es:"Probar gratis", it:"Prova gratis"})}</Link>
+          <button className="btn-ghost" onClick={function() { scrollTo("#problem"); }}>{tx({fr:"Voir comment ça marche", en:"See how it works", es:"Ver cómo funciona", it:"Scopri come funziona"})}</button>
         </div>
         <div style={{ marginTop: 18, fontSize: 12, color: "var(--dim)", animation: "fadeUp 0.5s 0.32s ease both" }}>Vinted · Depop · Grailed · Vestiaire Collective · Etsy</div>
       </section>
 
       {/* ═══ 2. PROBLÈME ═══ */}
       <section className="section" id="problem">
-        <h2 className="section-title">Tu peux perdre ton argent<br/><em>sur une seule vente.</em></h2>
+        <h2 className="section-title">{tx({fr:"Tu peux perdre ton argent", en:"You can lose your money", es:"Puedes perder tu dinero", it:"Puoi perdere i tuoi soldi"})}<br/><em>{tx({fr:"sur une seule vente.", en:"on a single sale.", es:"en una sola venta.", it:"su una singola vendita."})}</em></h2>
         <div style={{ height: 40 }}></div>
         <ul className="pain-list reveal">
-          <li className="pain-item">Un acheteur malhonnête, remboursement forcé</li>
-          <li className="pain-item">Zéro preuve, zéro recours</li>
+          <li className="pain-item">{tx({fr:"Un acheteur malhonnête, remboursement forcé", en:"A dishonest buyer, forced refund", es:"Un comprador deshonesto, reembolso forzado", it:"Un acquirente disonesto, rimborso forzato"})}</li>
+          <li className="pain-item">{tx({fr:"Zéro preuve, zéro recours", en:"Zero proof, zero recourse", es:"Cero prueba, cero recurso", it:"Zero prove, zero ricorso"})}</li>
         </ul>
-        <p className="pain-callout reveal" style={{ fontWeight: 500, color: "var(--red)" }}>Tu prends 100% du risque.</p>
+        <p className="pain-callout reveal" style={{ fontWeight: 500, color: "var(--red)" }}>{tx({fr:"Tu prends 100% du risque.", en:"You take 100% of the risk.", es:"Asumes el 100% del riesgo.", it:"Ti prendi il 100% del rischio."})}</p>
       </section>
 
       {/* ═══ 3. SOLUTION ═══ */}
       <section className="section" style={{ paddingTop: 40 }}>
-        <h2 className="section-title">Tu vends.<br/><em>On protège.</em></h2>
-        <p className="section-sub" style={{ marginBottom: 40 }}>Chaque vente est sécurisée.</p>
+        <h2 className="section-title">{tx({fr:"Tu vends.", en:"You sell.", es:"Vendes.", it:"Vendi."})}<br/><em>{tx({fr:"On protège.", en:"We protect.", es:"Protegemos.", it:"Proteggiamo."})}</em></h2>
+        <p className="section-sub" style={{ marginBottom: 40 }}>{tx({fr:"Chaque vente est sécurisée.", en:"Every sale is secured.", es:"Cada venta está asegurada.", it:"Ogni vendita è protetta."})}</p>
         <div className="solution-list reveal">
-          <div className="solution-item">Horodatage automatique avant envoi</div>
-          <div className="solution-item">Certification avec preuve légale</div>
-          <div className="solution-item">Sauvegarde sécurisée de chaque envoi</div>
+          <div className="solution-item">{tx({fr:"Horodatage automatique avant envoi", en:"Automatic timestamping before shipping", es:"Marca temporal automática antes del envío", it:"Timestamp automatico prima della spedizione"})}</div>
+          <div className="solution-item">{tx({fr:"Certification avec preuve légale", en:"Certification with legal proof", es:"Certificación con prueba legal", it:"Certificazione con prova legale"})}</div>
+          <div className="solution-item">{tx({fr:"Sauvegarde sécurisée de chaque envoi", en:"Secure backup of every shipment", es:"Respaldo seguro de cada envío", it:"Backup sicuro di ogni spedizione"})}</div>
         </div>
         <p className="solution-callout reveal">L'acheteur conteste ? Tu as la preuve.</p>
       </section>
 
       {/* ═══ 4. COMMENT ÇA MARCHE ═══ */}
       <section className="section" id="how" style={{ paddingTop: 40 }}>
-        <h2 className="section-title">4 étapes.<br/><em>Tu es couvert.</em></h2>
+        <h2 className="section-title">{tx({fr:"4 étapes.", en:"4 steps.", es:"4 pasos.", it:"4 passaggi."})}<br/><em>{tx({fr:"Tu es couvert.", en:"You're covered.", es:"Estás cubierto.", it:"Sei coperto."})}</em></h2>
         <p className="section-sub"></p>
         <div className="steps-grid">
           {[
-            { n: "01", name: "Tu prends une photo", desc: "Annonce générée. Prix, description, hashtags.", color: "var(--violet)" },
-            { n: "02", name: "Tu certifies avant envoi", desc: "Preuve horodatée enregistrée.", color: "var(--green)" },
-            { n: "03", name: "Tu expédies", desc: "Suivi et preuve de dépôt sauvegardés.", color: "#fff" },
-            { n: "04", name: "Un litige ?", desc: "Défense générée en 1 clic.", color: "var(--pink)" },
+            { n: "01", name: tx({fr:"Tu prends une photo", en:"Take a photo", es:"Tomas una foto", it:"Scatti una foto"}), desc: tx({fr:"Annonce générée. Prix, description, hashtags.", en:"Listing generated. Price, description, hashtags.", es:"Anuncio generado. Precio, descripción, hashtags.", it:"Annuncio generato. Prezzo, descrizione, hashtag."}), color: "var(--violet)" },
+            { n: "02", name: tx({fr:"Tu certifies avant envoi", en:"Certify before shipping", es:"Certificas antes del envío", it:"Certifichi prima della spedizione"}), desc: tx({fr:"Preuve horodatée enregistrée.", en:"Timestamped proof recorded.", es:"Prueba con marca temporal registrada.", it:"Prova con timestamp registrata."}), color: "var(--green)" },
+            { n: "03", name: tx({fr:"Tu expédies", en:"You ship", es:"Envías", it:"Spedisci"}), desc: tx({fr:"Suivi et preuve de dépôt sauvegardés.", en:"Tracking and deposit proof saved.", es:"Seguimiento y prueba de depósito guardados.", it:"Tracciamento e prova di deposito salvati."}), color: "#fff" },
+            { n: "04", name: tx({fr:"Un litige ?", en:"A dispute?", es:"¿Un litigio?", it:"Una controversia?"}), desc: tx({fr:"Défense générée en 1 clic.", en:"Defense generated in 1 click.", es:"Defensa generada en 1 clic.", it:"Difesa generata in 1 clic."}), color: "var(--pink)" },
           ].map(function(s) {
             return (
               <div key={s.n} className="step-card reveal">
@@ -212,42 +215,42 @@ export default function Home() {
 
       {/* ═══ 5. ANTI-ARNAQUE ═══ */}
       <section className="section" style={{ paddingTop: 40 }}>
-        <h2 className="section-title">Avant vs Après<br/><em>SellCov.</em></h2>
+        <h2 className="section-title">{tx({fr:"Avant vs Après", en:"Before vs After", es:"Antes vs Después", it:"Prima vs Dopo"})}<br/><em>SellCov.</em></h2>
         <div className="compare-grid">
           <div className="compare-card reveal" style={{ background: "rgba(248,113,113,0.04)", border: "0.5px solid rgba(248,113,113,0.15)" }}>
-            <div style={{ fontSize: 12, color: "var(--red)", marginBottom: 20 }}>Sans SellCov</div>
+            <div style={{ fontSize: 12, color: "var(--red)", marginBottom: 20 }}>{tx({fr:"Sans SellCov", en:"Without SellCov", es:"Sin SellCov", it:"Senza SellCov"})}</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <div style={{ fontSize: 14, color: "var(--red)" }}>Réception contestée par l'acheteur</div>
-              <div style={{ fontSize: 14, color: "var(--red)" }}>La plateforme rembourse l'acheteur</div>
-              <div style={{ fontSize: 14, color: "var(--red)" }}>Tu perds ton produit et ton argent</div>
-              <div style={{ fontSize: 14, color: "var(--red)" }}>Aucune preuve valable</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>{tx({fr:"Réception contestée par l'acheteur", en:"Delivery contested by buyer", es:"Recepción contestada por el comprador", it:"Ricezione contestata dall'acquirente"})}</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>{tx({fr:"La plateforme rembourse l'acheteur", en:"Platform refunds the buyer", es:"La plataforma reembolsa al comprador", it:"La piattaforma rimborsa l'acquirente"})}</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>{tx({fr:"Tu perds ton produit et ton argent", en:"You lose your product and your money", es:"Pierdes tu producto y tu dinero", it:"Perdi il tuo prodotto e i tuoi soldi"})}</div>
+              <div style={{ fontSize: 14, color: "var(--red)" }}>{tx({fr:"Aucune preuve valable", en:"No valid proof", es:"Ninguna prueba válida", it:"Nessuna prova valida"})}</div>
             </div>
           </div>
           <div className="compare-card reveal" style={{ background: "rgba(74,222,128,0.04)", border: "0.5px solid rgba(74,222,128,0.15)" }}>
-            <div style={{ fontSize: 12, color: "var(--green)", marginBottom: 20 }}>Avec SellCov</div>
+            <div style={{ fontSize: 12, color: "var(--green)", marginBottom: 20 }}>{tx({fr:"Avec SellCov", en:"With SellCov", es:"Con SellCov", it:"Con SellCov"})}</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <div style={{ fontSize: 14, color: "var(--green)" }}>Preuve enregistrée automatiquement</div>
-              <div style={{ fontSize: 14, color: "var(--green)" }}>Envoi certifié avant expédition</div>
-              <div style={{ fontSize: 14, color: "var(--green)" }}>Réponse de défense générée</div>
-              <div style={{ fontSize: 14, color: "var(--green)" }}>Ton argent est protégé</div>
+              <div style={{ fontSize: 14, color: "var(--green)" }}>{tx({fr:"Preuve enregistrée automatiquement", en:"Proof recorded automatically", es:"Prueba registrada automáticamente", it:"Prova registrata automaticamente"})}</div>
+              <div style={{ fontSize: 14, color: "var(--green)" }}>{tx({fr:"Envoi certifié avant expédition", en:"Shipment certified before sending", es:"Envío certificado antes de la expedición", it:"Spedizione certificata prima dell'invio"})}</div>
+              <div style={{ fontSize: 14, color: "var(--green)" }}>{tx({fr:"Réponse de défense générée", en:"Defense response generated", es:"Respuesta de defensa generada", it:"Risposta di difesa generata"})}</div>
+              <div style={{ fontSize: 14, color: "var(--green)" }}>{tx({fr:"Ton argent est protégé", en:"Your money is protected", es:"Tu dinero está protegido", it:"I tuoi soldi sono protetti"})}</div>
             </div>
           </div>
         </div>
         <div style={{ textAlign: "center", marginTop: 48 }}>
           <p style={{ fontFamily: "var(--serif)", fontSize: 26, letterSpacing: "-0.02em", lineHeight: 1.3 }}>
-            Si l'acheteur ment,<br/><em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.35)" }}>tu peux le prouver.</em>
+            {tx({fr:"Si l'acheteur ment,", en:"If the buyer lies,", es:"Si el comprador miente,", it:"Se l'acquirente mente,"})}<br/><em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.35)" }}>{tx({fr:"tu peux le prouver.", en:"you can prove it.", es:"puedes probarlo.", it:"puoi dimostrarlo."})}</em>
           </p>
         </div>
         <div style={{ textAlign: "center", marginTop: 32 }}>
-          <Link href="/protection" className="btn-primary">Activer la protection</Link>
+          <Link href="/protection" className="btn-primary">{tx({fr:"Activer la protection", en:"Activate protection", es:"Activar la protección", it:"Attiva la protezione"})}</Link>
         </div>
       </section>
 
       {/* ═══ 9. CTA FINAL ═══ */}
       <section className="final-cta">
-        <h2 className="final-title">Protège ton argent<br/><em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.35)" }}>maintenant.</em></h2>
-        <p className="final-sub">Chaque vente non protégée est un risque.</p>
-        <Link href="/annonce" className="btn-primary" style={{ fontSize: 15, padding: "16px 48px" }}>Essayer gratuitement</Link>
+        <h2 className="final-title">{tx({fr:"Protège ton argent", en:"Protect your money", es:"Protege tu dinero", it:"Proteggi i tuoi soldi"})}<br/><em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.35)" }}>{tx({fr:"maintenant.", en:"now.", es:"ahora.", it:"adesso."})}</em></h2>
+        <p className="final-sub">{tx({fr:"Chaque vente non protégée est un risque.", en:"Every unprotected sale is a risk.", es:"Cada venta sin proteger es un riesgo.", it:"Ogni vendita non protetta è un rischio."})}</p>
+        <Link href="/annonce" className="btn-primary" style={{ fontSize: 15, padding: "16px 48px" }}>{tx({fr:"Essayer gratuitement", en:"Try for free", es:"Probar gratis", it:"Prova gratis"})}</Link>
         <div style={{ marginTop: 18, fontSize: 12, color: "var(--dim)" }}>Vinted · Depop · Grailed · Vestiaire Collective · Etsy</div>
       </section>
 
@@ -258,8 +261,8 @@ export default function Home() {
           SellCov
         </div>
         <div className="footer-links">
-          <a href="mailto:hello@sellcov.com">FAQ</a>
-          <a href="mailto:hello@sellcov.com">Contact</a>
+          <a href="mailto:hello@sellcov.com">{tx({fr:"FAQ", en:"FAQ", es:"FAQ", it:"FAQ"})}</a>
+          <a href="mailto:hello@sellcov.com">{tx({fr:"Contact", en:"Contact", es:"Contacto", it:"Contatto"})}</a>
           <a href="#">Instagram</a>
           <a href="#">TikTok</a>
         </div>
