@@ -18,7 +18,7 @@ const PAGE_HTML = `
 </header>
 
 <section class="hero">
-  <span class="badge"><span class="dot"></span>Bêta gratuite — 47 places restantes sur 100</span>
+  <span class="badge"><span class="dot"></span>Bêta ouverte · Accès gratuit</span>
   <h1 class="h1 serif">Revends<span class="italic">sans te faire arnaquer.</span></h1>
   <p class="hero-sub">Une preuve solide avant l'envoi. Un dossier complet en cas de litige.</p>
   <p class="hero-subsub">Preuve horodatée. Défense automatique.</p>
@@ -135,8 +135,8 @@ const PAGE_HTML = `
 
 <section class="page">
   <div class="section-head reveal">
-    <div class="section-kicker">Ils ont protégé leurs ventes</div>
-    <h2 class="section-title serif">La preuve<br><span class="italic">par les chiffres.</span></h2>
+    <div class="section-kicker">Les garanties techniques</div>
+    <h2 class="section-title serif">Ce qui tient<br><span class="italic">en cas de litige.</span></h2>
   </div>
   <div class="proof">
     <div class="proof-stats">
@@ -144,36 +144,7 @@ const PAGE_HTML = `
       <div class="stat reveal"><div class="stat-big serif" style="color:var(--green)">SHA-256</div><div class="stat-label">norme cryptographique certifiée</div></div>
       <div class="stat reveal"><div class="stat-big serif" style="color:var(--violet)">12 mois</div><div class="stat-label">d'archivage sécurisé en France</div></div>
     </div>
-    <div class="testimonials">
-      <div class="testi reveal">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">« J'ai récupéré 180 € sur une veste Ralph Lauren que l'acheteur prétendait avoir reçue trouée. La défense a été envoyée en 2 minutes. »</p>
-        <div class="testi-author"><div class="testi-avatar">C</div><div class="testi-who"><strong>Chloé M.</strong><span>Revendeuse, 230 ventes Vinted</span></div></div>
-      </div>
-      <div class="testi reveal">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">« Enfin un outil qui prend au sérieux les vendeurs. Depuis SellCov, 0 litige perdu en 3 mois. Zéro. »</p>
-        <div class="testi-author"><div class="testi-avatar">K</div><div class="testi-who"><strong>Karim B.</strong><span>Dressing pro, 1 200 ventes</span></div></div>
-      </div>
-      <div class="testi reveal">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">« L'IA qui rédige la défense est bluffante. Elle a trouvé un argument que je n'aurais jamais pensé. J'ai gagné le litige. »</p>
-        <div class="testi-author"><div class="testi-avatar">L</div><div class="testi-who"><strong>Léa T.</strong><span>Friperie en ligne Depop</span></div></div>
-      </div>
-    </div>
-    <div class="case reveal">
-      <div>
-        <div class="case-kicker">🟢 Litige résolu</div>
-        <h4>« Preuve vidéo acceptée par Vinted »</h4>
-        <p>Un acheteur prétend avoir reçu une paire de Nike Air Max contrefaite. Grâce à la vidéo horodatée + certificat d'authenticité filmé à l'expédition, Vinted a tranché en faveur du vendeur en 24 h.</p>
-        <div class="case-amount">+ 127 €</div>
-        <div style="color:var(--text-muted);font-size:13px;margin-top:4px">récupérés sur compte bancaire · 26 mars 2026</div>
-      </div>
-      <div class="case-msg">
-        <div class="mini-head"><span>Notification Vinted</span><span>il y a 2 h</span></div>
-        <p><strong style="color:#fff">Litige résolu en votre faveur.</strong> Après analyse de la preuve vidéo fournie par le vendeur, nous avons tranché en sa faveur. Le paiement sera libéré sous 48 h sur votre compte.</p>
-      </div>
-    </div>
+    
   </div>
 </section>
 
