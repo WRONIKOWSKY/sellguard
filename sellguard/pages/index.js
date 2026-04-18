@@ -25,7 +25,6 @@ const PAGE_HTML = `
   <div class="hero-stats"><span><strong>Bêta ouverte</strong></span><span><strong>Preuves certifiées</strong></span><span><strong>Données chiffrées en France</strong></span></div>
   <div class="cta-row">
     <a href="/protection" class="btn btn-primary">Protéger ma prochaine vente</a>
-    
   </div>
   <div class="platforms"><strong>Vinted</strong>·<strong>Leboncoin</strong>·<strong>Depop</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong>·<strong>Etsy</strong></div>
 </section>
@@ -144,7 +143,6 @@ const PAGE_HTML = `
       <div class="stat reveal"><div class="stat-big serif" style="color:var(--green)">SHA-256</div><div class="stat-label">norme cryptographique certifiée</div></div>
       <div class="stat reveal"><div class="stat-big serif" style="color:var(--violet)">12 mois</div><div class="stat-label">d'archivage sécurisé en France</div></div>
     </div>
-    
   </div>
 </section>
 
@@ -186,11 +184,11 @@ const PAGE_HTML = `
     <h2 class="section-title serif">Questions<br><span class="italic">fréquentes.</span></h2>
   </div>
   <div class="faq">
-    <details class="faq-item"><summary class="faq-q">Ma preuve vidéo a-t-elle une valeur juridique ?</summary><p class="faq-a">Oui. Chaque vidéo est horodatée via un tiers de confiance (hash cryptographique + timestamp certifié). En cas de litige devant un juge de proximité, elle constitue une preuve recevable. Vinted, Leboncoin et la plupart des plateformes acceptent ce type de preuve dans leur médiation interne.</p></details>
-    <details class="faq-item"><summary class="faq-q">Vinted accepte-t-il les preuves SellCov ?</summary><p class="faq-a">Oui. Les preuves vidéo horodatées sont reconnues par les équipes litiges de Vinted, Leboncoin, Depop et Vestiaire Collective. Nos utilisateurs ont un taux de litiges gagnés de 94 % sur ces plateformes.</p></details>
+    <details class="faq-item"><summary class="faq-q">Ma preuve vidéo a-t-elle une valeur juridique ?</summary><p class="faq-a">Oui. Chaque vidéo est horodatée via un hash cryptographique SHA-256 généré au moment de l'enregistrement. En cas de litige devant un juge de proximité, elle constitue un élément de preuve recevable. La plupart des plateformes (Vinted, Leboncoin, Depop) acceptent les preuves vidéo dans leur processus de médiation interne.</p></details>
+    <details class="faq-item"><summary class="faq-q">Est-ce que ça fonctionne vraiment avec Vinted et Leboncoin ?</summary><p class="faq-a">Oui. SellCov est indépendant de la plateforme — tu génères une preuve vidéo horodatée que tu peux soumettre directement au service client de n'importe quelle marketplace. Vinted, Leboncoin, Depop et Vestiaire Collective acceptent tous les preuves vidéo dans leur processus de résolution de litiges.</p></details>
     <details class="faq-item"><summary class="faq-q">Combien de temps ça prend par envoi ?</summary><p class="faq-a">Entre 2 et 3 minutes. Tu filmes l'article sous tous les angles, le colis fermé, l'étiquette. L'application te guide étape par étape. Le certificat est généré instantanément.</p></details>
     <details class="faq-item"><summary class="faq-q">Mes vidéos sont-elles privées ?</summary><p class="faq-a">Totalement. Tes vidéos sont chiffrées, stockées sur des serveurs européens (RGPD), et accessibles uniquement depuis ton compte. Elles ne sont partagées qu'à ta demande, lors d'un litige.</p></details>
-    <details class="faq-item"><summary class="faq-q">Que se passe-t-il après la bêta gratuite ?</summary><p class="faq-a">Les 100 premiers inscrits conservent automatiquement le tarif Early Adopter à 4,90 €/mois à vie. Les autres passent sur le plan standard (9,90 €/mois). Tu es prévenu 30 jours avant la fin de la bêta.</p></details>
+    <details class="faq-item"><summary class="faq-q">Que se passe-t-il après la bêta gratuite ?</summary><p class="faq-a">Les 100 premiers inscrits conservent automatiquement le tarif Early Adopter à 4,90 €/mois à vie. Tu seras prévenu 30 jours avant la fin de la bêta pour choisir ton plan. Aucun engagement, annulable en 1 clic.</p></details>
     <details class="faq-item"><summary class="faq-q">Ça fonctionne avec Leboncoin, Depop et les autres ?</summary><p class="faq-a">Oui. SellCov est indépendant de la plateforme de vente. Tu peux utiliser tes certificats sur Vinted, Leboncoin, Depop, Grailed, Vestiaire Collective, Etsy, Marketplace Facebook — n'importe quelle plateforme d'occasion.</p></details>
     <details class="faq-item"><summary class="faq-q">Que se passe-t-il si la défense automatique échoue ?</summary><p class="faq-a">Tu gardes toujours accès à ta preuve vidéo et à ton certificat. Tu peux les utiliser devant un juge de proximité ou pour un signalement à la DGCCRF. Nous te remboursons ton mois si la défense IA ne produit aucun résultat probant.</p></details>
   </div>
@@ -200,8 +198,8 @@ const PAGE_HTML = `
   <div class="magnet reveal">
     <div>
       <div class="magnet-kicker">Guide gratuit</div>
-      <h3>Les 7 arnaques Vinted qui coûtent le plus cher (et comment les éviter).</h3>
-      <p>12 pages, cas concrets, réponses types prêtes à copier-coller. Télécharge le PDF en échange de ton email.</p>
+      <h3>Les 5 arnaques Vinted qui coûtent le plus cher (et comment les éviter).</h3>
+      <p>Cas concrets, réponses types prêtes à copier-coller. Télécharge le PDF en échange de ton email.</p>
       <form class="magnet-form" onsubmit="event.preventDefault();alert('Merci, ton guide arrive par email.');this.reset();">
         <input type="email" required placeholder="Ton email" />
         <button type="submit" class="btn btn-primary">Recevoir le guide</button>
@@ -209,8 +207,8 @@ const PAGE_HTML = `
       <small style="color:var(--text-dim);font-size:12px;display:block;margin-top:12px">Pas de spam. Désabonnement en 1 clic.</small>
     </div>
     <div class="magnet-visual">
-      <div class="magnet-pdf">7</div>
-      <small>7 arnaques · 12 pages · gratuit</small>
+      <div class="magnet-pdf">5</div>
+      <small>5 arnaques · guide gratuit</small>
     </div>
   </div>
 </section>
@@ -218,7 +216,7 @@ const PAGE_HTML = `
 <section class="final" id="cta">
   <h2 class="serif">Protège ton argent<br><span class="italic">maintenant.</span></h2>
   <p>Chaque vente non protégée est un risque.</p>
-  <a href="#" class="btn btn-primary" style="padding:16px 32px;font-size:16px">Essayer gratuitement →</a>
+  <a href="/protection" class="btn btn-primary" style="padding:16px 32px;font-size:16px">Essayer gratuitement →</a>
   <div class="platforms" style="margin-top:34px"><strong>Vinted</strong>·<strong>Leboncoin</strong>·<strong>Depop</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong>·<strong>Etsy</strong></div>
 </section>
 
@@ -358,23 +356,6 @@ export default function Home() {
         .stat{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:30px;text-align:center}
         .stat-big{font-family:'Playfair Display',serif;font-size:56px;line-height:1;margin-bottom:8px}
         .stat-label{color:var(--text-muted);font-size:13px;letter-spacing:.05em}
-        .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:40px}
-        @media(max-width:820px){.testimonials{grid-template-columns:1fr}}
-        .testi{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;gap:16px}
-        .testi-stars{color:#ffd45e;font-size:14px;letter-spacing:2px}
-        .testi-text{color:#e5e5e5;font-size:15px;line-height:1.5;flex:1}
-        .testi-author{display:flex;align-items:center;gap:12px}
-        .testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#333,#111);display:grid;place-items:center;font-family:'Playfair Display',serif;font-size:16px;color:#fff}
-        .testi-who strong{display:block;font-size:14px;font-weight:600}
-        .testi-who span{font-size:12px;color:var(--text-dim)}
-        .case{background:linear-gradient(180deg,rgba(94,232,163,.04),transparent 60%),var(--bg-card);border:1px solid rgba(94,232,163,.22);border-radius:var(--radius);padding:34px;display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:center}
-        @media(max-width:820px){.case{grid-template-columns:1fr}}
-        .case-kicker{color:var(--green);font-size:12px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
-        .case h4{font-size:26px;letter-spacing:-.01em;margin-bottom:10px;font-family:'Playfair Display',serif}
-        .case p{color:var(--text-muted);margin-bottom:18px}
-        .case-amount{font-family:'Playfair Display',serif;font-size:44px;color:var(--green)}
-        .case-msg{background:#060606;border:1px solid var(--border);border-radius:14px;padding:16px;font-size:13px;color:#ccc}
-        .case-msg .mini-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid var(--border);color:var(--text-dim);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
         .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:var(--maxw);margin:0 auto}
         @media(max-width:820px){.pricing{grid-template-columns:1fr}}
         .plan{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column;gap:18px;position:relative}
