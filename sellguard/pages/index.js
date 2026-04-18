@@ -12,7 +12,7 @@ const PAGE_HTML = `
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-right">
-              <a href="/protection" class="btn btn-primary btn-sm">Essayer gratuit</a>
+      <a href="/protection" class="btn btn-primary btn-sm">Essayer gratuit</a>
     </div>
   </div>
 </header>
@@ -20,16 +20,12 @@ const PAGE_HTML = `
 <section class="hero">
   <span class="badge"><span class="dot"></span>Bêta gratuite — 47 places restantes sur 100</span>
   <h1 class="h1 serif">Revends<span class="italic">sans te faire arnaquer.</span></h1>
-  <p class="hero-sub">3 minutes avant d'expédier = 0 litige perdu. Preuve vidéo horodatée + défense IA qui convainc Vinted, Leboncoin & co.</p>
+  <p class="hero-sub">Une preuve solide avant l'envoi. Un dossier complet en cas de litige.</p>
   <p class="hero-subsub">Preuve horodatée. Défense automatique.</p>
-  <div class="hero-stats">
-    <span><strong>147</strong> ventes protégées</span>
-    <span><strong>4 823 €</strong> sauvés ce mois</span>
-    <span><strong>94 %</strong> litiges gagnés</span>
-  </div>
+  <div class="hero-stats"><span><strong>Bêta ouverte</strong></span><span><strong>Preuves certifiées</strong></span><span><strong>Données chiffrées en France</strong></span></div>
   <div class="cta-row">
-    <a href="/protection" class="btn btn-primary">Protéger ma prochaine vente →</a>
-    <a href="/litige" class="btn btn-ghost">▶ Voir une défense réelle (45 s)</a>
+    <a href="/protection" class="btn btn-primary">Protéger ma prochaine vente</a>
+    
   </div>
   <div class="platforms"><strong>Vinted</strong>·<strong>Leboncoin</strong>·<strong>Depop</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong>·<strong>Etsy</strong></div>
 </section>
@@ -84,19 +80,19 @@ const PAGE_HTML = `
     <div class="feature feature-violet reveal">
       <span class="tag">Annonce</span>
       <h3 class="serif">Génère ton annonce<br><span class="italic">en 10 secondes.</span></h3>
-      <p>Photo + 1 clic = une annonce prête à publier. Titre accrocheur, description précise, mesures, mots-clés SEO — optimisée pour Vinted et Leboncoin.</p>
+      <p>Photographiez l'article, recevez une annonce rédigée et prête à publier.</p>
       <div class="cta-area"><a href="/annonce" class="btn btn-violet btn-sm">Essayer</a><span style="color:var(--text-dim);font-size:13px">~10 sec par annonce</span></div>
     </div>
     <div class="feature feature-green reveal">
       <span class="tag">Protection</span>
       <h3 class="serif">Certifie avant<br><span class="italic">d'expédier.</span></h3>
-      <p>3 minutes de vidéo horodatée : l'article, le colis fermé, l'étiquette. Stockée 12 mois, certificat unique généré. Preuve incontestable en cas de litige.</p>
+      <p>Trois minutes de vidéo horodatée couvrant l'article, le colis fermé et l'étiquette d'expédition. Chaque capture reçoit un certificat cryptographique unique et reste archivée pendant douze mois. Une preuve recevable en cas de litige.</p>
       <div class="cta-area"><a href="/protection" class="btn btn-green btn-sm">Protéger</a><span style="color:var(--text-dim);font-size:13px">~3 min par envoi</span></div>
     </div>
     <div class="feature feature-pink reveal">
       <span class="tag">Litige</span>
       <h3 class="serif">Défense automatique.<br><span class="italic">En 1 clic.</span></h3>
-      <p>Colle le message de l'acheteur. L'IA détecte la fraude, analyse ta preuve vidéo, et rédige une réponse argumentée prête à envoyer sur la plateforme.</p>
+      <p>Dossier de défense généré automatiquement, prêt à transmettre au service litiges.</p>
       <div class="cta-area"><a href="/litige" class="btn btn-pink btn-sm">Gérer un litige</a><span style="color:var(--text-dim);font-size:13px">~30 sec de rédaction</span></div>
     </div>
   </div>
@@ -106,7 +102,7 @@ const PAGE_HTML = `
   <div class="section-head reveal">
     <div class="section-kicker">Les arnaques que tu vas rencontrer</div>
     <h2 class="section-title serif">Les 5 arnaques qui coûtent<br><span class="italic">le plus cher aux vendeurs.</span></h2>
-    <p class="section-sub">Sur Vinted, 1 vendeur sur 8 perd de l'argent chaque année à cause d'un litige mal géré. Voilà les cas les plus fréquents et comment SellCov te protège.</p>
+    <p class="section-sub">Chaque année, de nombreux vendeurs particuliers perdent de l'argent à cause de litiges mal gérés. Voici les scénarios les plus fréquents et la façon dont SellCov vous protège.</p>
   </div>
   <div class="scams">
     <div class="scam-card reveal">
@@ -144,9 +140,9 @@ const PAGE_HTML = `
   </div>
   <div class="proof">
     <div class="proof-stats">
-      <div class="stat reveal"><div class="stat-big serif">147</div><div class="stat-label">ventes protégées à ce jour</div></div>
-      <div class="stat reveal"><div class="stat-big serif" style="color:var(--green)">4 823 €</div><div class="stat-label">sauvés en litiges ce mois-ci</div></div>
-      <div class="stat reveal"><div class="stat-big serif" style="color:var(--violet)">94 %</div><div class="stat-label">de litiges gagnés par nos vendeurs</div></div>
+      <div class="stat reveal"><div class="stat-big serif">3 min</div><div class="stat-label">par vente sécurisée</div></div>
+      <div class="stat reveal"><div class="stat-big serif" style="color:var(--green)">SHA-256</div><div class="stat-label">norme cryptographique certifiée</div></div>
+      <div class="stat reveal"><div class="stat-big serif" style="color:var(--violet)">12 mois</div><div class="stat-label">d'archivage sécurisé en France</div></div>
     </div>
     <div class="testimonials">
       <div class="testi reveal">
@@ -251,7 +247,7 @@ const PAGE_HTML = `
 <section class="final" id="cta">
   <h2 class="serif">Protège ton argent<br><span class="italic">maintenant.</span></h2>
   <p>Chaque vente non protégée est un risque.</p>
-  <a href="/protection" class="btn btn-primary" style="padding:16px 32px;font-size:16px">Essayer gratuitement →</a>
+  <a href="#" class="btn btn-primary" style="padding:16px 32px;font-size:16px">Essayer gratuitement →</a>
   <div class="platforms" style="margin-top:34px"><strong>Vinted</strong>·<strong>Leboncoin</strong>·<strong>Depop</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong>·<strong>Etsy</strong></div>
 </section>
 
