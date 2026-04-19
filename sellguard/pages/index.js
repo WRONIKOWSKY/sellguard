@@ -12,6 +12,12 @@ const PAGE_HTML = `
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-right">
+      <select class="lang-select" onchange="if(this.value) window.location.href=this.value">
+        <option value="" selected>🌐 FR</option>
+        <option value="?lang=en">🇬🇧 EN</option>
+        <option value="?lang=es">🇪🇸 ES</option>
+        <option value="?lang=de">🇩🇪 DE</option>
+      </select>
       <a href="/protection" class="btn btn-primary btn-sm">Essayer gratuit</a>
     </div>
   </div>
@@ -85,7 +91,7 @@ const PAGE_HTML = `
     <div class="feature feature-green reveal">
       <span class="tag">Protection</span>
       <h3 class="serif">Certifie avant<br><span class="italic">d'expédier.</span></h3>
-      <p>Trois minutes de vidéo horodatée couvrant l'article, le colis fermé et l'étiquette d'expédition. Chaque capture reçoit un certificat cryptographique unique et reste archivée pendant douze mois. Une preuve recevable en cas de litige.</p>
+      <p>Trois minutes de vidéo horodatée couvrant l'article, le colis fermé et l'étiquette d'expédition. Chaque capture reçoit un certificat cryptographique unique, archivé pendant 12 mois. Une preuve recevable en cas de litige.</p>
       <div class="cta-area"><a href="/protection" class="btn btn-green btn-sm">Protéger</a><span style="color:var(--text-dim);font-size:13px">~3 min par envoi</span></div>
     </div>
     <div class="feature feature-pink reveal">
@@ -107,21 +113,21 @@ const PAGE_HTML = `
     <div class="scam-card reveal">
       <span style="color:var(--text-dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Arnaque n°1 — Colis "jamais reçu"</span>
       <div class="scam-quote">« Je n'ai jamais reçu le colis. Je demande un remboursement. »</div>
-      <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov affiche</strong> la vidéo horodatée du dépôt en bureau de poste + numéro de suivi + étiquette filmée. Défense envoyée en 30 secondes.</span></div>
+      <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov affiche</strong> la vidéo horodatée du dépôt en bureau de poste, le numéro de suivi et l'étiquette filmée. Défense envoyée en 30 secondes.</span></div>
     </div>
     <div class="scam-card reveal">
       <span style="color:var(--text-dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Arnaque n°2 — Article "abîmé"</span>
-      <div class="scam-quote">« L'article est arrivé taché / troué / cassé. Je veux être remboursé. »</div>
+      <div class="scam-quote">« L'article est arrivé troué. Je veux être remboursé. »</div>
       <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov prouve</strong> l'état exact avant expédition grâce à la vidéo 360° horodatée. L'IA compare les photos de l'acheteur et détecte les incohérences.</span></div>
     </div>
     <div class="scam-card reveal">
       <span style="color:var(--text-dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Arnaque n°3 — Substitution</span>
       <div class="scam-quote">« Ce n'est pas l'article que j'ai commandé. »</div>
-      <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov atteste</strong> le contenu exact du colis au moment de la fermeture. Marque, taille, couleur, détails — tout est filmé.</span></div>
+      <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov atteste</strong> le contenu exact du colis au moment de la fermeture. Marque, taille, couleur, détails, tout est filmé.</span></div>
     </div>
     <div class="scam-card reveal">
       <span style="color:var(--text-dim);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Arnaque n°4 — Colis "vide"</span>
-      <div class="scam-quote">« Le colis est arrivé vide / sans l'article principal. »</div>
+      <div class="scam-quote">« Le colis est arrivé vide sans l'article principal. »</div>
       <div class="scam-solve"><span class="check">✓</span><span><strong style="color:#fff">SellCov enregistre</strong> l'article placé dans le colis puis le colis fermé avec scotch sécurisé, en une seule prise vidéo.</span></div>
     </div>
     <div class="scam-card reveal" style="grid-column:1/-1">
@@ -148,32 +154,49 @@ const PAGE_HTML = `
 
 <section class="page" id="pricing" style="background:linear-gradient(180deg,transparent,rgba(94,232,163,.02),transparent)">
   <div class="section-head reveal">
-    <div class="section-kicker">Tarifs transparents</div>
-    <h2 class="section-title serif">Tu choisis<br><span class="italic">quand tu veux payer.</span></h2>
-    <p class="section-sub">Les 100 premiers vendeurs bénéficient du tarif Early Adopter — à vie. Aucun engagement, annulable en 1 clic.</p>
+    <div class="section-kicker">Nos offres</div>
+    <h2 class="section-title serif">Simple,<br><span class="italic">sans surprise.</span></h2>
+    <p class="section-sub">Les 50 premiers vendeurs bénéficient du tarif Early Adopter. Tarif bloqué 1 an. Aucun engagement, annulable en 1 clic.</p>
   </div>
   <div class="pricing">
     <div class="plan reveal">
       <h4>Bêta</h4>
       <div class="plan-price">0 € <small>/ mois</small></div>
       <p class="plan-desc">Accès complet pendant la phase de lancement.</p>
-      <ul><li>Certificats vidéo illimités</li><li>IA défense automatique</li><li>Génération d'annonces</li><li>Support email</li></ul>
-      <a href="/protection" class="btn btn-ghost">Démarrer gratuitement</a>
+      <ul>
+        <li>Certificats vidéo illimités</li>
+        <li>IA défense automatique</li>
+        <li>Génération d'annonces</li>
+        <li>Support email</li>
+      </ul>
+      <a href="/compte" class="btn btn-ghost">Démarrer gratuitement</a>
     </div>
     <div class="plan featured reveal">
-      <span class="plan-ribbon">★ Le plus choisi</span>
+      <span class="plan-ribbon">★ Recommandé</span>
       <h4>Early Adopter</h4>
-      <div class="plan-price">4,90 € <small>/ mois à vie</small></div>
-      <p class="plan-desc">Réservé aux 100 premiers. Tarif bloqué à vie.</p>
-      <ul><li>Tout du plan Bêta</li><li>Historique 24 mois</li><li>Certificats prioritaires</li><li>Support prioritaire</li><li>Accès beta features</li></ul>
-      <a href="/protection" class="btn btn-primary">Réserver ma place</a>
+      <div class="plan-price">4,90 € <small>/ mois</small></div>
+      <p class="plan-desc">Réservé aux 50 premiers. Tarif garanti 1 an.</p>
+      <ul>
+        <li>Tout du plan Bêta</li>
+        <li>Historique 12 mois</li>
+        <li>Certificats prioritaires</li>
+        <li>Réponse email sous 24h</li>
+        <li>Accès aux nouvelles fonctionnalités en avant-première</li>
+      </ul>
+      <a href="/compte" class="btn btn-primary" id="early-adopter-btn">Réserver ma place</a>
+      <p class="plan-spots" id="spots-left" style="font-size:12px;color:var(--green);margin-top:8px;text-align:center"></p>
     </div>
     <div class="plan reveal">
       <h4>Pro Power Seller</h4>
       <div class="plan-price">19,90 € <small>/ mois</small></div>
       <p class="plan-desc">Pour les vendeurs qui font +50 ventes/mois.</p>
-      <ul><li>Tout du plan Early</li><li>Dashboard analytics</li><li>Templates d'annonces illimités</li><li>Multi-compte (Vinted + LBC + Depop)</li><li>Support dédié WhatsApp</li></ul>
-      <a href="/protection" class="btn btn-ghost">Passer au Pro</a>
+      <ul>
+        <li>Tout du plan Early Adopter</li>
+        <li>Tableau de bord : ventes certifiées, litiges, économies réalisées</li>
+        <li>Gestion unifiée Vinted, Leboncoin et Depop depuis un seul compte</li>
+        <li>Ligne WhatsApp dédiée avec réponse sous 4h</li>
+      </ul>
+      <a href="/compte" class="btn btn-ghost">Passer au Pro</a>
     </div>
   </div>
 </section>
@@ -185,12 +208,12 @@ const PAGE_HTML = `
   </div>
   <div class="faq">
     <details class="faq-item"><summary class="faq-q">Ma preuve vidéo a-t-elle une valeur juridique ?</summary><p class="faq-a">Oui. Chaque vidéo est horodatée via un hash cryptographique SHA-256 généré au moment de l'enregistrement. En cas de litige devant un juge de proximité, elle constitue un élément de preuve recevable. La plupart des plateformes (Vinted, Leboncoin, Depop) acceptent les preuves vidéo dans leur processus de médiation interne.</p></details>
-    <details class="faq-item"><summary class="faq-q">Est-ce que ça fonctionne vraiment avec Vinted et Leboncoin ?</summary><p class="faq-a">Oui. SellCov est indépendant de la plateforme — tu génères une preuve vidéo horodatée que tu peux soumettre directement au service client de n'importe quelle marketplace. Vinted, Leboncoin, Depop et Vestiaire Collective acceptent tous les preuves vidéo dans leur processus de résolution de litiges.</p></details>
+    <details class="faq-item"><summary class="faq-q">Est-ce que ça fonctionne vraiment avec Vinted et Leboncoin ?</summary><p class="faq-a">Oui. SellCov est indépendant de la plateforme. Tu génères une preuve vidéo horodatée que tu peux soumettre directement au service client de n'importe quelle marketplace. Vinted, Leboncoin, Depop et Vestiaire Collective acceptent tous les preuves vidéo dans leur processus de résolution de litiges.</p></details>
     <details class="faq-item"><summary class="faq-q">Combien de temps ça prend par envoi ?</summary><p class="faq-a">Entre 2 et 3 minutes. Tu filmes l'article sous tous les angles, le colis fermé, l'étiquette. L'application te guide étape par étape. Le certificat est généré instantanément.</p></details>
     <details class="faq-item"><summary class="faq-q">Mes vidéos sont-elles privées ?</summary><p class="faq-a">Totalement. Tes vidéos sont chiffrées, stockées sur des serveurs européens (RGPD), et accessibles uniquement depuis ton compte. Elles ne sont partagées qu'à ta demande, lors d'un litige.</p></details>
-    <details class="faq-item"><summary class="faq-q">Que se passe-t-il après la bêta gratuite ?</summary><p class="faq-a">Les 100 premiers inscrits conservent automatiquement le tarif Early Adopter à 4,90 €/mois à vie. Tu seras prévenu 30 jours avant la fin de la bêta pour choisir ton plan. Aucun engagement, annulable en 1 clic.</p></details>
-    <details class="faq-item"><summary class="faq-q">Ça fonctionne avec Leboncoin, Depop et les autres ?</summary><p class="faq-a">Oui. SellCov est indépendant de la plateforme de vente. Tu peux utiliser tes certificats sur Vinted, Leboncoin, Depop, Grailed, Vestiaire Collective, Etsy, Marketplace Facebook — n'importe quelle plateforme d'occasion.</p></details>
-    <details class="faq-item"><summary class="faq-q">Que se passe-t-il si la défense automatique échoue ?</summary><p class="faq-a">Tu gardes toujours accès à ta preuve vidéo et à ton certificat. Tu peux les utiliser devant un juge de proximité ou pour un signalement à la DGCCRF. Nous te remboursons ton mois si la défense IA ne produit aucun résultat probant.</p></details>
+    <details class="faq-item"><summary class="faq-q">Que se passe-t-il après la bêta gratuite ?</summary><p class="faq-a">Les 50 premiers inscrits conservent automatiquement le tarif Early Adopter à 4,90 €/mois, garanti pendant 1 an. Tu seras prévenu 30 jours avant la fin de la bêta pour choisir ton plan. Aucun engagement, annulable en 1 clic.</p></details>
+    <details class="faq-item"><summary class="faq-q">Ça fonctionne avec Leboncoin, Depop et les autres ?</summary><p class="faq-a">Oui. SellCov est indépendant de la plateforme de vente. Tu peux utiliser tes certificats sur Vinted, Leboncoin, Depop, Grailed, Vestiaire Collective, Etsy, Marketplace Facebook, n'importe quelle plateforme d'occasion.</p></details>
+    <details class="faq-item"><summary class="faq-q">Que se passe-t-il si la défense automatique échoue ?</summary><p class="faq-a">SellCov te fournit une preuve vidéo horodatée, certifiée SHA-256, archivée et recevable en médiation. Cette preuve est solide et reconnue. Elle maximise tes chances, mais comme toute preuve, elle ne garantit pas un résultat favorable à 100% — la décision finale appartient à la plateforme ou au tribunal.</p></details>
   </div>
 </section>
 
@@ -199,11 +222,12 @@ const PAGE_HTML = `
     <div>
       <div class="magnet-kicker">Guide gratuit</div>
       <h3>Les 5 arnaques Vinted qui coûtent le plus cher (et comment les éviter).</h3>
-      <p>Cas concrets, réponses types prêtes à copier-coller. Télécharge le PDF en échange de ton email.</p>
-      <form class="magnet-form" onsubmit="event.preventDefault();alert('Merci, ton guide arrive par email.');this.reset();">
-        <input type="email" required placeholder="Ton email" />
-        <button type="submit" class="btn btn-primary">Recevoir le guide</button>
+      <p>Cas concrets, réponses types prêtes à copier-coller. Reçois le guide gratuitement par email.</p>
+      <form class="magnet-form" id="lead-form" onsubmit="submitLeadForm(event)">
+        <input type="email" id="lead-email" required placeholder="Ton email" />
+        <button type="submit" class="btn btn-primary" id="lead-btn">Recevoir le guide</button>
       </form>
+      <p id="lead-msg" style="color:var(--green);font-size:13px;margin-top:10px;display:none">Guide envoyé ! Vérifie ta boîte mail.</p>
       <small style="color:var(--text-dim);font-size:12px;display:block;margin-top:12px">Pas de spam. Désabonnement en 1 clic.</small>
     </div>
     <div class="magnet-visual">
@@ -228,13 +252,54 @@ const PAGE_HTML = `
       <a href="#">Contact</a>
       <a href="#">Instagram</a>
       <a href="#">TikTok</a>
-      <a href="#">Mentions légales</a>
-      <a href="#">CGU</a>
-      <a href="#">Confidentialité</a>
+      <a href="/legal">Mentions légales</a>
+      <a href="/cgu">CGU</a>
+      <a href="/confidentialite">Confidentialité</a>
     </div>
     <div class="foot-copy">© 2026 SellCov</div>
   </div>
 </footer>
+
+<script>
+// Compteur Early Adopter
+async function checkSpots() {
+  try {
+    const res = await fetch('/api/early-adopter-count');
+    const data = await res.json();
+    const remaining = 50 - (data.count || 0);
+    const el = document.getElementById('spots-left');
+    const btn = document.getElementById('early-adopter-btn');
+    if (el) {
+      if (remaining <= 0) {
+        el.textContent = 'Complet — toutes les places sont prises.';
+        el.style.color = 'var(--pink)';
+        if (btn) { btn.textContent = 'Complet'; btn.style.opacity = '0.5'; btn.style.pointerEvents = 'none'; }
+      } else {
+        el.textContent = remaining + ' place' + (remaining > 1 ? 's' : '') + ' restante' + (remaining > 1 ? 's' : '');
+      }
+    }
+  } catch(e) {}
+}
+checkSpots();
+
+// Lead magnet
+async function submitLeadForm(e) {
+  e.preventDefault();
+  const email = document.getElementById('lead-email').value;
+  const btn = document.getElementById('lead-btn');
+  const msg = document.getElementById('lead-msg');
+  btn.textContent = 'Envoi...';
+  btn.disabled = true;
+  try {
+    await fetch('/api/send-guide', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({email}) });
+    msg.style.display = 'block';
+    document.getElementById('lead-form').reset();
+  } catch(e) {
+    btn.textContent = 'Recevoir le guide';
+    btn.disabled = false;
+  }
+}
+</script>
 `;
 
 export default function Home() {
@@ -279,7 +344,8 @@ export default function Home() {
         .nav-links a{color:var(--text-muted);font-size:15px;transition:color .2s}
         .nav-links a:hover{color:#fff}
         .nav-right{display:flex;align-items:center;gap:12px}
-        .lang{border:1px solid var(--border-strong);background:transparent;color:var(--text-muted);padding:8px 14px;border-radius:999px;font-size:13px;cursor:pointer}
+        .lang-select{background:transparent;border:1px solid var(--border-strong);color:var(--text-muted);padding:8px 12px;border-radius:999px;font-size:13px;cursor:pointer;font-family:inherit;appearance:none;-webkit-appearance:none}
+        .lang-select:focus{outline:none;border-color:var(--green)}
         .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .15s,box-shadow .15s,background .15s;cursor:pointer;border:none;font-family:inherit;white-space:nowrap}
         .btn-primary{background:#fff;color:#000}
         .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 30px rgba(255,255,255,.15)}
