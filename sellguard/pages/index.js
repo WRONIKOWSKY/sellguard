@@ -40,14 +40,19 @@ const PAGE_HTML = `
 </section>
 
 <section class="demo" id="demo">
-  <div class="video-wrap">
-    <iframe
-      src="https://player.vimeo.com/video/1184594647?autoplay=1&loop=1&muted=1&background=1&autopause=0&dnt=1"
-      frameborder="0"
-      allow="autoplay; fullscreen; picture-in-picture"
-      allowfullscreen
-      title="SellCov">
-    </iframe>
+  <div class="phone-wrap">
+    <div class="phone-frame">
+      <div class="phone-island"></div>
+      <div class="phone-screen">
+        <iframe
+          src="https://player.vimeo.com/video/1184594647?autoplay=1&loop=1&muted=1&background=1&autopause=0&dnt=1"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          title="SellCov">
+        </iframe>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -507,9 +512,19 @@ export default function Home() {
         .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:46px}
         .platforms{color:var(--text-dim);font-size:14px;letter-spacing:.02em}
         .platforms strong{color:var(--text-muted);font-weight:500;margin:0 4px}
-        .demo{padding:40px 24px 80px;max-width:1100px;margin:0 auto}
-        .video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius-lg);background:#000;border:1px solid var(--border);box-shadow:0 30px 80px rgba(0,0,0,.5)}
-        .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+        .demo{padding:40px 24px 80px;max-width:1100px;margin:0 auto;display:flex;justify-content:center}
+        .phone-wrap{position:relative;width:100%;display:flex;justify-content:center;padding:20px 0 40px}
+        .phone-wrap::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;max-width:100%;background:radial-gradient(ellipse,rgba(94,232,163,.08) 0%,rgba(0,0,0,0) 70%);pointer-events:none;z-index:0}
+        .phone-frame{position:relative;width:100%;max-width:640px;aspect-ratio:19.5/9;background:linear-gradient(145deg,#1f1f1f 0%,#0a0a0a 100%);border-radius:48px;padding:10px;box-shadow:0 0 0 2px #2e2e2e,0 0 0 3px #0a0a0a,0 40px 90px rgba(0,0,0,.7),0 10px 30px rgba(0,0,0,.5),inset 0 0 2px rgba(255,255,255,.12);z-index:1}
+        .phone-frame::before{content:"";position:absolute;top:-3px;left:15%;right:15%;height:3px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);border-radius:2px;pointer-events:none}
+        .phone-screen{position:relative;width:100%;height:100%;background:#000;border-radius:40px;overflow:hidden}
+        .phone-screen iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+        .phone-island{position:absolute;left:22px;top:50%;transform:translateY(-50%);width:22px;height:90px;background:#000;border-radius:14px;z-index:3;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
+        @media(max-width:820px){
+          .phone-frame{border-radius:32px;padding:7px}
+          .phone-screen{border-radius:26px}
+          .phone-island{left:14px;width:16px;height:64px;border-radius:10px}
+        }
         section.page{padding:100px 24px}
         .section-head{text-align:center;max-width:1100px;margin:0 auto 60px}
         .section-kicker{color:var(--text-dim);font-size:12px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px}
