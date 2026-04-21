@@ -43,6 +43,14 @@ const PAGE_HTML = `
   <div class="phone-stage">
     <div class="phone-halo"></div>
     <div class="phone-body">
+      <div class="phone-edge-top">
+        <div class="phone-btn-action"></div>
+        <div class="phone-btn-volup"></div>
+        <div class="phone-btn-voldown"></div>
+      </div>
+      <div class="phone-edge-bottom">
+        <div class="phone-btn-power"></div>
+      </div>
       <div class="phone-screen">
         <div class="phone-island-v">
           <span class="phone-island-dot"></span>
@@ -516,22 +524,34 @@ export default function Home() {
         .platforms{color:var(--text-dim);font-size:14px;letter-spacing:.02em}
         .platforms strong{color:var(--text-muted);font-weight:500;margin:0 4px}
         .demo{padding:60px 24px 100px;max-width:1100px;margin:0 auto;display:flex;justify-content:center}
-        .phone-stage{position:relative;width:100%;max-width:780px;display:flex;justify-content:center;align-items:center}
+        .phone-stage{position:relative;width:100%;max-width:820px;display:flex;justify-content:center;align-items:center}
         .phone-halo{position:absolute;inset:-80px;background:radial-gradient(ellipse at 50% 50%,rgba(94,232,163,.10) 0%,rgba(139,127,255,.04) 35%,rgba(0,0,0,0) 70%);filter:blur(50px);pointer-events:none;z-index:0}
-        .phone-halo::after{content:"";position:absolute;bottom:-30px;left:10%;right:10%;height:50px;background:radial-gradient(ellipse,rgba(0,0,0,.8) 0%,rgba(0,0,0,0) 70%);filter:blur(35px)}
-        .phone-body{position:relative;width:100%;aspect-ratio:1.82/1;background:linear-gradient(160deg,#2b2b2e 0%,#1a1a1c 40%,#0c0c0d 70%,#1a1a1c 100%);border-radius:62px;padding:18px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.04),inset 0 2px 2px rgba(255,255,255,.05),inset 0 -2px 3px rgba(0,0,0,.6),0 60px 120px rgba(0,0,0,.75),0 25px 50px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.8);z-index:1}
-        .phone-body::before{content:"";position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.18) 50%,transparent 100%);pointer-events:none;z-index:3}
-        .phone-body::after{content:"";position:absolute;inset:0;border-radius:62px;background:linear-gradient(175deg,rgba(255,255,255,.05) 0%,transparent 18%,transparent 82%,rgba(255,255,255,.02) 100%);pointer-events:none;z-index:3}
-        .phone-screen{position:relative;width:100%;height:100%;background:#000;border-radius:52px;overflow:hidden;isolation:isolate}
+        .phone-halo::after{content:"";position:absolute;bottom:-30px;left:10%;right:10%;height:60px;background:radial-gradient(ellipse,rgba(0,0,0,.85) 0%,rgba(0,0,0,0) 70%);filter:blur(40px)}
+        .phone-body{position:relative;width:100%;aspect-ratio:2.165/1;background:linear-gradient(170deg,#4a4a52 0%,#2d2d34 15%,#1a1a1f 35%,#0f0f13 50%,#1a1a1f 65%,#2d2d34 85%,#4a4a52 100%);border-radius:58px;padding:8px 14px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),inset 0 2px 2px rgba(255,255,255,.12),inset 0 -2px 3px rgba(0,0,0,.7),inset 4px 0 4px rgba(255,255,255,.04),inset -4px 0 4px rgba(255,255,255,.04),0 60px 120px rgba(0,0,0,.75),0 25px 50px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.9);z-index:1}
+        .phone-body::before{content:"";position:absolute;top:1px;left:10%;right:10%;height:1.5px;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.35) 50%,transparent 100%);pointer-events:none;z-index:5;border-radius:2px}
+        .phone-body::after{content:"";position:absolute;bottom:1px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.12) 50%,transparent 100%);pointer-events:none;z-index:5}
+        .phone-edge-top{position:absolute;top:-3px;left:12%;right:12%;height:5px;display:flex;gap:14px;align-items:flex-start;justify-content:flex-start;padding-left:60px;pointer-events:none;z-index:6}
+        .phone-edge-bottom{position:absolute;bottom:-3px;left:12%;right:12%;height:5px;display:flex;align-items:flex-start;justify-content:flex-end;padding-right:80px;pointer-events:none;z-index:6}
+        .phone-btn-action{width:22px;height:5px;background:linear-gradient(180deg,#4a4a52 0%,#2d2d34 60%,#1a1a1f 100%);border-radius:2px 2px 0 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 -1px 2px rgba(0,0,0,.4)}
+        .phone-btn-volup{width:46px;height:5px;background:linear-gradient(180deg,#4a4a52 0%,#2d2d34 60%,#1a1a1f 100%);border-radius:2px 2px 0 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 -1px 2px rgba(0,0,0,.4)}
+        .phone-btn-voldown{width:46px;height:5px;background:linear-gradient(180deg,#4a4a52 0%,#2d2d34 60%,#1a1a1f 100%);border-radius:2px 2px 0 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 -1px 2px rgba(0,0,0,.4)}
+        .phone-btn-power{width:70px;height:5px;background:linear-gradient(0deg,#4a4a52 0%,#2d2d34 60%,#1a1a1f 100%);border-radius:0 0 2px 2px;box-shadow:inset 0 -1px 0 rgba(255,255,255,.12),0 1px 2px rgba(0,0,0,.4)}
+        .phone-screen{position:relative;width:100%;height:100%;background:#000;border-radius:50px;overflow:hidden;isolation:isolate;box-shadow:inset 0 0 0 2px #000,inset 0 0 8px rgba(0,0,0,.9)}
         .phone-screen iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;z-index:1}
-        .phone-island-v{position:absolute;left:22px;top:50%;transform:translateY(-50%);width:22px;height:92px;background:#000;border-radius:12px;z-index:4;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center}
+        .phone-island-v{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:22px;height:92px;background:#000;border-radius:12px;z-index:4;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 0 4px rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center}
         .phone-island-dot{width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3a4a7a 0%,#0f1628 50%,#000 80%);box-shadow:inset 0 0 2px rgba(80,110,180,.5),0 0 2px rgba(0,0,0,.6)}
         @media(max-width:820px){
-          .phone-body{border-radius:38px;padding:12px}
-          .phone-screen{border-radius:32px}
-          .phone-island-v{left:14px;width:16px;height:64px;border-radius:9px}
+          .phone-body{border-radius:36px;padding:5px 9px}
+          .phone-screen{border-radius:30px}
+          .phone-island-v{left:11px;width:15px;height:62px;border-radius:9px}
           .phone-island-dot{width:6px;height:6px}
           .demo{padding:40px 16px 70px}
+          .phone-edge-top,.phone-edge-bottom{height:3px;top:-2px;bottom:-2px}
+          .phone-btn-action{width:14px;height:3px}
+          .phone-btn-volup,.phone-btn-voldown{width:30px;height:3px}
+          .phone-btn-power{width:46px;height:3px}
+          .phone-edge-top{gap:9px;padding-left:40px}
+          .phone-edge-bottom{padding-right:55px}
         }
         section.page{padding:100px 24px}
         .section-head{text-align:center;max-width:1100px;margin:0 auto 60px}
