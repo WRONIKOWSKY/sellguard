@@ -40,16 +40,21 @@ const PAGE_HTML = `
 </section>
 
 <section class="demo" id="demo">
-  <div class="video-stage">
-    <div class="video-halo"></div>
-    <div class="video-frame">
-      <iframe
-        src="https://player.vimeo.com/video/1184594647?autoplay=1&loop=1&muted=1&background=1&autopause=0&dnt=1"
-        frameborder="0"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowfullscreen
-        title="SellCov">
-      </iframe>
+  <div class="phone-stage">
+    <div class="phone-halo"></div>
+    <div class="phone-body">
+      <div class="phone-screen">
+        <div class="phone-island-v">
+          <span class="phone-island-dot"></span>
+        </div>
+        <iframe
+          src="https://player.vimeo.com/video/1184594647?autoplay=1&loop=1&muted=1&background=1&autopause=0&dnt=1"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          title="SellCov">
+        </iframe>
+      </div>
     </div>
   </div>
 </section>
@@ -511,16 +516,21 @@ export default function Home() {
         .platforms{color:var(--text-dim);font-size:14px;letter-spacing:.02em}
         .platforms strong{color:var(--text-muted);font-weight:500;margin:0 4px}
         .demo{padding:60px 24px 100px;max-width:1100px;margin:0 auto;display:flex;justify-content:center}
-        .video-stage{position:relative;width:100%;max-width:900px;display:flex;justify-content:center;align-items:center}
-        .video-halo{position:absolute;inset:-60px;background:radial-gradient(ellipse at 50% 40%,rgba(94,232,163,.12) 0%,rgba(139,127,255,.06) 30%,rgba(0,0,0,0) 65%);filter:blur(40px);pointer-events:none;z-index:0}
-        .video-halo::after{content:"";position:absolute;bottom:-20px;left:15%;right:15%;height:40px;background:radial-gradient(ellipse,rgba(0,0,0,.7) 0%,rgba(0,0,0,0) 70%);filter:blur(30px)}
-        .video-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:20px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.06),0 0 0 2px rgba(0,0,0,.9),0 40px 80px rgba(0,0,0,.6),0 20px 40px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.03);z-index:1;isolation:isolate}
-        .video-frame::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.12) 50%,transparent 100%);z-index:3;pointer-events:none}
-        .video-frame::after{content:"";position:absolute;inset:0;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.03) 0%,transparent 20%,transparent 80%,rgba(0,0,0,.1) 100%);pointer-events:none;z-index:2}
-        .video-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;z-index:1}
+        .phone-stage{position:relative;width:100%;max-width:780px;display:flex;justify-content:center;align-items:center}
+        .phone-halo{position:absolute;inset:-80px;background:radial-gradient(ellipse at 50% 50%,rgba(94,232,163,.10) 0%,rgba(139,127,255,.04) 35%,rgba(0,0,0,0) 70%);filter:blur(50px);pointer-events:none;z-index:0}
+        .phone-halo::after{content:"";position:absolute;bottom:-30px;left:10%;right:10%;height:50px;background:radial-gradient(ellipse,rgba(0,0,0,.8) 0%,rgba(0,0,0,0) 70%);filter:blur(35px)}
+        .phone-body{position:relative;width:100%;aspect-ratio:1.82/1;background:linear-gradient(160deg,#2b2b2e 0%,#1a1a1c 40%,#0c0c0d 70%,#1a1a1c 100%);border-radius:62px;padding:10px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.04),inset 0 2px 2px rgba(255,255,255,.05),inset 0 -2px 3px rgba(0,0,0,.6),0 60px 120px rgba(0,0,0,.75),0 25px 50px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.8);z-index:1}
+        .phone-body::before{content:"";position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.18) 50%,transparent 100%);pointer-events:none;z-index:3}
+        .phone-body::after{content:"";position:absolute;inset:0;border-radius:62px;background:linear-gradient(175deg,rgba(255,255,255,.05) 0%,transparent 18%,transparent 82%,rgba(255,255,255,.02) 100%);pointer-events:none;z-index:3}
+        .phone-screen{position:relative;width:100%;height:100%;background:#000;border-radius:52px;overflow:hidden;isolation:isolate}
+        .phone-screen iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;z-index:1}
+        .phone-island-v{position:absolute;left:22px;top:50%;transform:translateY(-50%);width:22px;height:92px;background:#000;border-radius:12px;z-index:4;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center}
+        .phone-island-dot{width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3a4a7a 0%,#0f1628 50%,#000 80%);box-shadow:inset 0 0 2px rgba(80,110,180,.5),0 0 2px rgba(0,0,0,.6)}
         @media(max-width:820px){
-          .video-frame{border-radius:14px}
-          .video-frame::after{border-radius:14px}
+          .phone-body{border-radius:38px;padding:7px}
+          .phone-screen{border-radius:32px}
+          .phone-island-v{left:14px;width:16px;height:64px;border-radius:9px}
+          .phone-island-dot{width:6px;height:6px}
           .demo{padding:40px 16px 70px}
         }
         section.page{padding:100px 24px}
