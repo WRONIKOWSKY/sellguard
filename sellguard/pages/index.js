@@ -40,26 +40,16 @@ const PAGE_HTML = `
 </section>
 
 <section class="demo" id="demo">
-  <div class="phone-wrap">
-    <div class="phone-frame">
-      <div class="phone-btn phone-btn-mute"></div>
-      <div class="phone-btn phone-btn-volup"></div>
-      <div class="phone-btn phone-btn-voldown"></div>
-      <div class="phone-btn phone-btn-power"></div>
-      <div class="phone-island">
-        <span class="phone-island-cam"></span>
-        <span class="phone-island-sensor"></span>
-      </div>
-      <div class="phone-screen">
-        <div class="phone-glare"></div>
-        <iframe
-          src="https://player.vimeo.com/video/1184594647?autoplay=1&loop=1&muted=1&background=1&autopause=0&dnt=1"
-          frameborder="0"
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowfullscreen
-          title="SellCov">
-        </iframe>
-      </div>
+  <div class="video-stage">
+    <div class="video-halo"></div>
+    <div class="video-frame">
+      <iframe
+        src="https://player.vimeo.com/video/1184594647?autoplay=1&loop=1&muted=1&background=1&autopause=0&dnt=1"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        title="SellCov">
+      </iframe>
     </div>
   </div>
 </section>
@@ -520,37 +510,18 @@ export default function Home() {
         .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:46px}
         .platforms{color:var(--text-dim);font-size:14px;letter-spacing:.02em}
         .platforms strong{color:var(--text-muted);font-weight:500;margin:0 4px}
-        .demo{padding:40px 24px 80px;max-width:1100px;margin:0 auto;display:flex;justify-content:center}
-        .phone-wrap{position:relative;width:100%;display:flex;justify-content:center;padding:30px 0 60px}
-        .phone-wrap::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:550px;max-width:100%;background:radial-gradient(ellipse,rgba(94,232,163,.08) 0%,rgba(0,0,0,0) 70%);pointer-events:none;z-index:0;filter:blur(20px)}
-        .phone-wrap::after{content:"";position:absolute;bottom:10px;left:50%;transform:translateX(-50%);width:70%;height:40px;background:radial-gradient(ellipse,rgba(0,0,0,.6) 0%,rgba(0,0,0,0) 70%);filter:blur(20px);z-index:0}
-        .phone-frame{position:relative;width:100%;max-width:680px;aspect-ratio:19.5/9;background:linear-gradient(135deg,#2a2a2e 0%,#1a1a1d 25%,#0e0e10 50%,#1a1a1d 75%,#2a2a2e 100%);border-radius:52px;padding:11px;box-shadow:0 0 0 1.5px #3a3a3e,0 0 0 2.5px #0a0a0a,0 0 0 4px #2a2a2e,inset 0 2px 1px rgba(255,255,255,.08),inset 0 -2px 1px rgba(0,0,0,.5),0 50px 100px rgba(0,0,0,.7),0 20px 40px rgba(0,0,0,.5);z-index:1}
-        .phone-frame::before{content:"";position:absolute;top:-2px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.25) 50%,transparent 100%);border-radius:1px;pointer-events:none;z-index:2}
-        .phone-frame::after{content:"";position:absolute;inset:0;border-radius:52px;background:linear-gradient(180deg,rgba(255,255,255,.04) 0%,transparent 30%,transparent 70%,rgba(255,255,255,.02) 100%);pointer-events:none;z-index:2}
-        .phone-screen{position:relative;width:100%;height:100%;background:#000;border-radius:42px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #0a0a0a,inset 0 0 20px rgba(0,0,0,.5)}
-        .phone-screen iframe{position:absolute;top:50%;left:50%;width:122%;height:122%;transform:translate(-50%,-50%);border:0}
-        .phone-glare{position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(165deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,.02) 40%,transparent 100%);pointer-events:none;z-index:3;border-radius:42px 42px 0 0}
-        .phone-island{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:38px;height:126px;background:#000;border-radius:19px;z-index:4;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 0 8px rgba(0,0,0,.9);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:14px 0}
-        .phone-island-cam{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3a5bbf 0%,#1a2045 40%,#000 75%);box-shadow:inset 0 0 3px rgba(100,130,230,.6),inset 0 0 0 1px rgba(0,0,0,.9),0 0 4px rgba(0,0,0,.6);position:relative}
-        .phone-island-cam::after{content:"";position:absolute;top:20%;left:25%;width:25%;height:25%;border-radius:50%;background:rgba(255,255,255,.35);filter:blur(.5px)}
-        .phone-island-sensor{width:7px;height:7px;border-radius:50%;background:radial-gradient(circle,#0a0a0a 30%,#000 70%);box-shadow:inset 0 0 2px rgba(60,60,80,.4)}
-        .phone-btn{position:absolute;background:linear-gradient(180deg,#2d2d30 0%,#1c1c1e 50%,#2d2d30 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 1px 2px rgba(0,0,0,.6)}
-        .phone-btn-mute{top:-4px;left:10%;width:30px;height:4px;border-radius:2px 2px 0 0}
-        .phone-btn-volup{top:-4px;left:calc(10% + 42px);width:48px;height:4px;border-radius:2px 2px 0 0}
-        .phone-btn-voldown{top:-4px;left:calc(10% + 102px);width:48px;height:4px;border-radius:2px 2px 0 0}
-        .phone-btn-power{bottom:-4px;right:18%;width:72px;height:4px;border-radius:0 0 2px 2px}
+        .demo{padding:60px 24px 100px;max-width:1100px;margin:0 auto;display:flex;justify-content:center}
+        .video-stage{position:relative;width:100%;max-width:900px;display:flex;justify-content:center;align-items:center}
+        .video-halo{position:absolute;inset:-60px;background:radial-gradient(ellipse at 50% 40%,rgba(94,232,163,.12) 0%,rgba(139,127,255,.06) 30%,rgba(0,0,0,0) 65%);filter:blur(40px);pointer-events:none;z-index:0}
+        .video-halo::after{content:"";position:absolute;bottom:-20px;left:15%;right:15%;height:40px;background:radial-gradient(ellipse,rgba(0,0,0,.7) 0%,rgba(0,0,0,0) 70%);filter:blur(30px)}
+        .video-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:20px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.06),0 0 0 2px rgba(0,0,0,.9),0 40px 80px rgba(0,0,0,.6),0 20px 40px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.03);z-index:1;isolation:isolate}
+        .video-frame::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.12) 50%,transparent 100%);z-index:3;pointer-events:none}
+        .video-frame::after{content:"";position:absolute;inset:0;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.03) 0%,transparent 20%,transparent 80%,rgba(0,0,0,.1) 100%);pointer-events:none;z-index:2}
+        .video-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;z-index:1}
         @media(max-width:820px){
-          .phone-frame{border-radius:36px;padding:8px}
-          .phone-screen{border-radius:28px}
-          .phone-glare{border-radius:28px 28px 0 0}
-          .phone-island{left:12px;width:26px;height:84px;border-radius:13px;padding:9px 0}
-          .phone-island-cam{width:10px;height:10px}
-          .phone-island-sensor{width:5px;height:5px}
-          .phone-btn-mute{width:20px;height:3px}
-          .phone-btn-volup,.phone-btn-voldown{width:34px;height:3px}
-          .phone-btn-volup{left:calc(10% + 28px)}
-          .phone-btn-voldown{left:calc(10% + 70px)}
-          .phone-btn-power{width:50px;height:3px}
+          .video-frame{border-radius:14px}
+          .video-frame::after{border-radius:14px}
+          .demo{padding:40px 16px 70px}
         }
         section.page{padding:100px 24px}
         .section-head{text-align:center;max-width:1100px;margin:0 auto 60px}
