@@ -16,7 +16,7 @@ const PAGE_HTML = `
         <option value="fr">🇫🇷 FR</option>
         <option value="en">🇬🇧 EN</option>
         <option value="es">🇪🇸 ES</option>
-        <option value="de">🇩🇪 DE</option>
+        <option value="it">🇮🇹 IT</option>
       </select>
       <a href="/protection" class="btn btn-primary btn-sm" data-i18n="nav_cta">Essayer gratuit</a>
     </div>
@@ -70,7 +70,7 @@ const PAGE_HTML = `
 <section class="page" id="how" style="padding-top:40px">
   <div class="section-head reveal">
     <div class="section-kicker" data-i18n="how_kicker">Comment ça marche</div>
-    <h2 class="section-title serif"><span data-i18n="how_t1">Trois modules,</span><br><span class="italic" data-i18n="how_t2">une seule mission.</span></h2>
+    <h2 class="section-title serif"><span data-i18n="how_t1">Trois étapes,</span><br><span class="italic" data-i18n="how_t2">une seule mission.</span></h2>
     <p class="section-sub nowrap" data-i18n="how_sub">De l'annonce à la défense en cas de litige, SellCov t'accompagne sur chaque étape d'une vente.</p>
   </div>
   <div class="features">
@@ -261,7 +261,7 @@ const I18N = {
     hero_subsub:"Preuve horodatée. Défense automatique.",
     stat1:"Bêta ouverte",stat2:"Preuves certifiées",stat3:"Données chiffrées en France",
     hero_cta:"Protéger ma prochaine vente",
-    how_kicker:"Comment ça marche",how_t1:"Trois modules,",how_t2:"une seule mission.",
+    how_kicker:"Comment ça marche",how_t1:"Trois étapes,",how_t2:"une seule mission.",
     how_sub:"De l'annonce à la défense en cas de litige, SellCov t'accompagne sur chaque étape d'une vente.",
     f1_tag:"Annonce",f1_h1:"Génère ton annonce",f1_h2:"en 10 secondes.",f1_p:"Photographiez l'article, recevez une annonce rédigée et prête à publier.",f1_btn:"Essayer",f1_time:"~10 sec par annonce",
     f2_tag:"Protection",f2_h1:"Certifie avant",f2_h2:"d'expédier.",f2_p:"Trois minutes de vidéo horodatée couvrant l'article, le colis fermé et l'étiquette d'expédition. Chaque capture reçoit un certificat cryptographique unique, archivé pendant 3 mois. Une preuve recevable en cas de litige.",f2_btn:"Protéger",f2_time:"~3 min par envoi",
@@ -295,7 +295,7 @@ const I18N = {
     badge:"Open Beta · Free access",hero_h1_1:"Sell",hero_h1_2:"without getting scammed.",
     hero_sub:"Solid proof before shipping. Full case file for any dispute.",hero_subsub:"Timestamped proof. Automatic defence.",
     stat1:"Open Beta",stat2:"Certified proofs",stat3:"Data encrypted in France",hero_cta:"Protect my next sale",
-    how_kicker:"How it works",how_t1:"Three modules,",how_t2:"one mission.",how_sub:"From listing to dispute defence, SellCov covers every step of your sale.",
+    how_kicker:"How it works",how_t1:"Three steps,",how_t2:"one mission.",how_sub:"From listing to dispute defence, SellCov covers every step of your sale.",
     f1_tag:"Listing",f1_h1:"Generate your listing",f1_h2:"in 10 seconds.",f1_p:"Photograph the item, receive a written listing ready to publish.",f1_btn:"Try it",f1_time:"~10 sec per listing",
     f2_tag:"Protection",f2_h1:"Certify before",f2_h2:"shipping.",f2_p:"Three minutes of timestamped video covering the item, the sealed parcel and the shipping label. Each recording gets a unique cryptographic certificate, archived for 3 months. Admissible proof for any dispute.",f2_btn:"Protect",f2_time:"~3 min per shipment",
     f3_tag:"Dispute",f3_h1:"Automatic defence.",f3_h2:"In 1 click.",f3_p:"Defence file auto-generated, ready to send to the platform's dispute team.",f3_btn:"Handle dispute",f3_time:"~30 sec to write",
@@ -328,7 +328,7 @@ const I18N = {
     badge:"Beta abierta · Acceso gratuito",hero_h1_1:"Vende",hero_h1_2:"sin que te estafen.",
     hero_sub:"Prueba sólida antes del envío. Expediente completo en caso de litigio.",hero_subsub:"Prueba con marca de tiempo. Defensa automática.",
     stat1:"Beta abierta",stat2:"Pruebas certificadas",stat3:"Datos cifrados en Francia",hero_cta:"Proteger mi próxima venta",
-    how_kicker:"Cómo funciona",how_t1:"Tres módulos,",how_t2:"una sola misión.",how_sub:"Del anuncio a la defensa en caso de litigio, SellCov te acompaña en cada etapa.",
+    how_kicker:"Cómo funciona",how_t1:"Tres pasos,",how_t2:"una sola misión.",how_sub:"Del anuncio a la defensa en caso de litigio, SellCov te acompaña en cada etapa.",
     f1_tag:"Anuncio",f1_h1:"Genera tu anuncio",f1_h2:"en 10 segundos.",f1_p:"Fotografía el artículo, recibe un anuncio redactado listo para publicar.",f1_btn:"Probar",f1_time:"~10 seg por anuncio",
     f2_tag:"Protección",f2_h1:"Certifica antes",f2_h2:"de enviar.",f2_p:"Tres minutos de video con marca de tiempo del artículo, paquete cerrado y etiqueta. Certificado criptográfico único, archivado 3 meses.",f2_btn:"Proteger",f2_time:"~3 min por envío",
     f3_tag:"Litigio",f3_h1:"Defensa automática.",f3_h2:"Con 1 clic.",f3_p:"Expediente de defensa generado automáticamente, listo para enviar al servicio de litigios.",f3_btn:"Gestionar litigio",f3_time:"~30 seg de redacción",
@@ -356,38 +356,38 @@ const I18N = {
     fin_t1:"Protege tu dinero",fin_t2:"ahora.",fin_sub:"Cada venta sin protección es un riesgo.",fin_cta:"Probar gratis →",
     ft_contact:"Contacto",ft_legal:"Aviso legal",ft_cgu:"T&C",ft_priv:"Privacidad"
   },
-  de:{
-    nav_how:"Wie es funktioniert",nav_why:"Warum",nav_pricing:"Preise",nav_faq:"FAQ",nav_cta:"Kostenlos testen",
-    badge:"Offene Beta · Kostenloser Zugang",hero_h1_1:"Verkaufe",hero_h1_2:"ohne betrogen zu werden.",
-    hero_sub:"Solider Beweis vor dem Versand. Vollständige Akte bei Streitigkeiten.",hero_subsub:"Zeitgestempelter Beweis. Automatische Verteidigung.",
-    stat1:"Offene Beta",stat2:"Zertifizierte Beweise",stat3:"Daten verschlüsselt in Frankreich",hero_cta:"Meinen nächsten Verkauf schützen",
-    how_kicker:"Wie es funktioniert",how_t1:"Drei Module,",how_t2:"eine einzige Mission.",how_sub:"Von der Anzeige bis zur Streitverteidigung begleitet SellCov jeden Schritt.",
-    f1_tag:"Anzeige",f1_h1:"Erstelle deine Anzeige",f1_h2:"in 10 Sekunden.",f1_p:"Fotografiere den Artikel, erhalte eine fertige Anzeige zum Veröffentlichen.",f1_btn:"Ausprobieren",f1_time:"~10 Sek. pro Anzeige",
-    f2_tag:"Schutz",f2_h1:"Zertifiziere vor",f2_h2:"dem Versand.",f2_p:"Drei Minuten zeitgestempeltes Video des Artikels, versiegelten Pakets und Versandetiketts. Kryptographisches Zertifikat, 3 Monate archiviert.",f2_btn:"Schützen",f2_time:"~3 Min. pro Versand",
-    f3_tag:"Streit",f3_h1:"Automatische Verteidigung.",f3_h2:"Mit 1 Klick.",f3_p:"Automatisch generierte Verteidigungsakte, bereit zum Weiterleiten.",f3_btn:"Streit bearbeiten",f3_time:"~30 Sek. zum Schreiben",
-    sc_kicker:"Betrugsmaschen die du antreffen wirst",sc_t1:"Die 5 teuersten Betrugsmaschen",sc_t2:"für Verkäufer.",sc_sub:"Jedes Jahr verlieren viele Privatverkäufer Geld durch schlecht verwaltete Streitigkeiten.",
-    s1_title:"Betrug Nr.1 · Paket \"nie erhalten\"",s1_quote:"\"Ich habe das Paket nie erhalten. Ich fordere eine Rückerstattung.\"",s1_solve:"<strong style='color:#fff'>SellCov zeigt</strong> das zeitgestempelte Video der Paketabgabe, die Sendungsnummer und das gefilmte Etikett.",
-    s2_title:"Betrug Nr.2 · Artikel \"beschädigt\"",s2_quote:"\"Der Artikel kam mit einem Loch an. Ich möchte eine Rückerstattung.\"",s2_solve:"<strong style='color:#fff'>SellCov beweist</strong> den genauen Zustand vor dem Versand per 360°-Video.",
-    s3_title:"Betrug Nr.3 · Substitution",s3_quote:"\"Das ist nicht der Artikel, den ich bestellt habe.\"",s3_solve:"<strong style='color:#fff'>SellCov bestätigt</strong> den genauen Inhalt des Pakets beim Versiegeln.",
-    s4_title:"Betrug Nr.4 · Leeres Paket",s4_quote:"\"Das Paket kam leer ohne den Hauptartikel an.\"",s4_solve:"<strong style='color:#fff'>SellCov zeichnet</strong> das Einlegen und Versiegeln in einer Videoaufnahme auf.",
-    s5_title:"Betrug Nr.5 · \"Es ist nicht authentisch\"",s5_quote:"\"Das Produkt ist eine Fälschung, ich melde es der Plattform.\"",s5_solve:"<strong style='color:#fff'>SellCov stempelt</strong> Produktcodes, Echtheitsetiketten und Kaufbelege zeitlich.",
-    pr_kicker:"Technische Garantien",pr_t1:"Was standhält",pr_t2:"bei einem Streit.",pr_s1:"pro gesichertem Verkauf",pr_s2:"zertifizierter kryptographischer Standard",pr_s3:"sichere Archivierung in Frankreich",
-    pl_kicker:"Unsere Pläne",pl_t1:"Einfach,",pl_t2:"keine Überraschungen.",pl_sub:"Die ersten 50 Verkäufer erhalten den Early Adopter Tarif. Preis 1 Jahr gesperrt. Keine Bindung.",
-    per_mo:"/ Monat",
-    p1_name:"Beta",p1_desc:"Vollständiger Zugang während der Startphase.",p1_f1:"Unbegrenzte Videozertifikate",p1_f2:"KI automatische Verteidigung",p1_f3:"Anzeigengenerierung",p1_f4:"E-Mail-Support",p1_btn:"Kostenlos starten",
-    p2_ribbon:"★ Empfohlen",p2_name:"Early Adopter",p2_desc:"Nur für die ersten 50. Tarif 1 Jahr garantiert.",p2_f1:"Alles aus Beta",p2_f2:"3 Monate Verlauf",p2_f3:"Prioritätszertifikate",p2_f4:"E-Mail-Antwort innerhalb 24h",p2_f5:"Frühzeitiger Zugang zu neuen Funktionen",p2_btn:"Platz reservieren",
-    p3_name:"Pro Power Seller",p3_desc:"Für Verkäufer mit 50+ Verkäufen/Monat.",p3_f1:"Alles aus Early Adopter",p3_f2:"Dashboard: zertifizierte Verkäufe, Streitigkeiten, Ersparnisse",p3_f3:"Einheitliche Verwaltung Ihrer Verkaufsplattformen",p3_btn:"Zu Pro wechseln",
-    fq_kicker:"FAQ",fq_t1:"Häufig gestellte",fq_t2:"Fragen.",
-    q1:"Hat mein Videobeweis rechtlichen Wert?",a1:"Ja. Jedes Video wird via SHA-256-Hash zeitgestempelt. Es gilt als zulässiger Beweis in Mediationsverfahren.",
-    q2:"Funktioniert es wirklich mit Vinted und Leboncoin?",a2:"Ja. SellCov ist plattformunabhängig. Du generierst einen zeitgestempelten Videobeweis für jeden Marktplatz.",
-    q3:"Wie lange dauert es pro Versand?",a3:"2 bis 3 Minuten. Du filmst den Artikel, das versiegelte Paket, das Etikett. Die App führt dich Schritt für Schritt.",
-    q4:"Sind meine Videos privat?",a4:"Vollständig. Verschlüsselt, auf europäischen Servern (DSGVO) gespeichert, nur von deinem Konto zugänglich.",
-    q5:"Was passiert nach der kostenlosen Beta?",a5:"Die ersten 50 Anmeldungen behalten den Early Adopter Tarif bei 4,90 €/Monat, 1 Jahr garantiert.",
-    q6:"Funktioniert es mit Leboncoin, Depop und anderen?",a6:"Ja. SellCov funktioniert auf Vinted, Leboncoin, Depop, Grailed, Vestiaire Collective, Etsy, Facebook Marketplace.",
-    q7:"Was passiert wenn die automatische Verteidigung scheitert?",a7:"SellCov liefert einen soliden, zertifizierten Beweis. Er maximiert deine Chancen, garantiert aber kein 100% positives Ergebnis. Die endgültige Entscheidung trifft die Plattform oder das Gericht.",
-    mg_kicker:"Kostenloser Leitfaden",mg_title:"Die 5 teuersten Vinted-Betrügereien (und wie man sie vermeidet).",mg_desc:"Echte Fälle, kopierfertige Antwortvorlagen. Erhalte den Leitfaden kostenlos per E-Mail.",mg_btn:"Leitfaden erhalten",mg_ok:"Leitfaden gesendet! Überprüfe dein Postfach.",mg_legal:"Kein Spam. Abmelden mit 1 Klick.",mg_visual:"5 Betrügereien · kostenlos",mg_ph:"Deine E-Mail",
-    fin_t1:"Schütze dein Geld",fin_t2:"jetzt.",fin_sub:"Jeder ungeschützte Verkauf ist ein Risiko.",fin_cta:"Kostenlos testen →",
-    ft_contact:"Kontakt",ft_legal:"Impressum",ft_cgu:"AGB",ft_priv:"Datenschutz"
+  it:{
+    nav_how:"Come funziona",nav_why:"Perché",nav_pricing:"Prezzi",nav_faq:"FAQ",nav_cta:"Prova gratis",
+    badge:"Beta aperta · Accesso gratuito",hero_h1_1:"Rivendi",hero_h1_2:"senza farti truffare.",
+    hero_sub:"Prova solida prima della spedizione. Dossier completo in caso di controversia.",hero_subsub:"Prova con timestamp. Difesa automatica.",
+    stat1:"Beta aperta",stat2:"Prove certificate",stat3:"Dati crittografati in Francia",hero_cta:"Proteggi la mia prossima vendita",
+    how_kicker:"Come funziona",how_t1:"Tre passi,",how_t2:"una sola missione.",how_sub:"Dall'annuncio alla difesa in caso di controversia, SellCov ti accompagna in ogni fase della vendita.",
+    f1_tag:"Annuncio",f1_h1:"Genera il tuo annuncio",f1_h2:"in 10 secondi.",f1_p:"Fotografa l'articolo, ricevi un annuncio pronto da pubblicare.",f1_btn:"Provare",f1_time:"~10 sec per annuncio",
+    f2_tag:"Protezione",f2_h1:"Certifica prima",f2_h2:"di spedire.",f2_p:"Tre minuti di video con timestamp che copre l'articolo, il pacco chiuso e l'etichetta di spedizione. Ogni registrazione riceve un certificato crittografico unico, archiviato per 3 mesi. Una prova ammissibile in caso di controversia.",f2_btn:"Proteggere",f2_time:"~3 min per spedizione",
+    f3_tag:"Controversia",f3_h1:"Difesa automatica.",f3_h2:"In 1 clic.",f3_p:"Dossier di difesa generato automaticamente, pronto da inviare al servizio controversie.",f3_btn:"Gestire una controversia",f3_time:"~30 sec di redazione",
+    sc_kicker:"Le truffe che incontrerai",sc_t1:"Le 5 truffe che costano",sc_t2:"di più ai venditori.",sc_sub:"Ogni anno, molti venditori privati perdono denaro a causa di controversie mal gestite. Ecco gli scenari più frequenti e come SellCov ti protegge.",
+    s1_title:"Truffa n°1 · Pacco \"mai ricevuto\"",s1_quote:"\"Non ho mai ricevuto il pacco. Chiedo il rimborso.\"",s1_solve:"<strong style='color:#fff'>SellCov mostra</strong> il video con timestamp del deposito in ufficio postale, il numero di tracciamento e l'etichetta filmata. Difesa inviata in 30 secondi.",
+    s2_title:"Truffa n°2 · Articolo \"danneggiato\"",s2_quote:"\"L'articolo è arrivato forato. Voglio essere rimborsato.\"",s2_solve:"<strong style='color:#fff'>SellCov prova</strong> lo stato esatto prima della spedizione grazie al video 360° con timestamp. L'IA confronta le foto dell'acquirente e rileva incongruenze.",
+    s3_title:"Truffa n°3 · Sostituzione",s3_quote:"\"Questo non è l'articolo che ho ordinato.\"",s3_solve:"<strong style='color:#fff'>SellCov attesta</strong> il contenuto esatto del pacco al momento della chiusura. Marca, taglia, colore, dettagli, tutto è filmato.",
+    s4_title:"Truffa n°4 · Pacco \"vuoto\"",s4_quote:"\"Il pacco è arrivato vuoto senza l'articolo principale.\"",s4_solve:"<strong style='color:#fff'>SellCov registra</strong> l'articolo posizionato nel pacco e il pacco sigillato con nastro sicuro, in un'unica ripresa video.",
+    s5_title:"Truffa n°5 · \"Non è autentico\"",s5_quote:"\"Il prodotto è una contraffazione, lo segnalo alla piattaforma.\"",s5_solve:"<strong style='color:#fff'>SellCov marca temporalmente</strong> i codici prodotto, etichette di autenticità, fatture d'acquisto. In caso di controversia, alleghi tutto alla tua difesa in un clic.",
+    pr_kicker:"Le garanzie tecniche",pr_t1:"Ciò che regge",pr_t2:"in una controversia.",pr_s1:"per vendita sicura",pr_s2:"standard crittografico certificato",pr_s3:"archiviazione sicura in Francia",
+    pl_kicker:"Le nostre offerte",pl_t1:"Semplice,",pl_t2:"senza sorprese.",pl_sub:"I primi 50 venditori beneficiano della tariffa Early Adopter. Prezzo bloccato per 1 anno. Nessun impegno, annullabile in 1 clic.",
+    per_mo:"/ mese",
+    p1_name:"Beta",p1_desc:"Accesso completo durante la fase di lancio.",p1_f1:"Certificati video illimitati",p1_f2:"IA difesa automatica",p1_f3:"Generazione di annunci",p1_f4:"Supporto email",p1_btn:"Inizia gratis",
+    p2_ribbon:"★ Consigliato",p2_name:"Early Adopter",p2_desc:"Riservato ai primi 50. Tariffa garantita 1 anno.",p2_f1:"Tutto del piano Beta",p2_f2:"Storico 3 mesi",p2_f3:"Certificati prioritari",p2_f4:"Risposta email entro 24h",p2_f5:"Accesso anticipato alle nuove funzionalità",p2_btn:"Prenota il mio posto",
+    p3_name:"Pro Power Seller",p3_desc:"Per venditori con +50 vendite/mese.",p3_f1:"Tutto del piano Early Adopter",p3_f2:"Dashboard: vendite certificate, controversie, risparmi",p3_f3:"Gestione unificata sulle tue piattaforme di vendita online",p3_btn:"Passa a Pro",
+    fq_kicker:"FAQ",fq_t1:"Domande",fq_t2:"frequenti.",
+    q1:"La mia prova video ha valore giuridico?",a1:"Sì. Ogni video è marcato temporalmente tramite hash crittografico SHA-256. Costituisce un elemento di prova ammissibile. La maggior parte delle piattaforme accetta prove video nella loro mediazione interna.",
+    q2:"Funziona davvero con Vinted e Leboncoin?",a2:"Sì. SellCov è indipendente dalla piattaforma. Generi una prova video con timestamp sottomissibile su qualsiasi marketplace.",
+    q3:"Quanto tempo richiede per spedizione?",a3:"Tra 2 e 3 minuti. Filmi l'articolo, il pacco chiuso, l'etichetta. L'app ti guida passo passo.",
+    q4:"I miei video sono privati?",a4:"Totalmente. I tuoi video sono crittografati, archiviati su server europei (GDPR), accessibili solo dal tuo account.",
+    q5:"Cosa succede dopo la beta gratuita?",a5:"I primi 50 iscritti conservano la tariffa Early Adopter a 4,90 €/mese, garantita 1 anno. Sarai avvisato 30 giorni prima della fine della beta.",
+    q6:"Funziona con Leboncoin, Depop e altri?",a6:"Sì. SellCov funziona su Vinted, Leboncoin, Depop, Grailed, Vestiaire Collective, Etsy, Facebook Marketplace, tutte le piattaforme di seconda mano.",
+    q7:"Cosa succede se la difesa automatica fallisce?",a7:"SellCov ti fornisce una prova video con timestamp, certificata SHA-256, ammissibile in mediazione. Questa prova è solida e riconosciuta. Massimizza le tue possibilità, ma non garantisce un risultato favorevole al 100%. La decisione finale spetta alla piattaforma o al tribunale.",
+    mg_kicker:"Guida gratuita",mg_title:"Le 5 truffe Vinted che costano di più (e come evitarle).",mg_desc:"Casi concreti, risposte tipo pronte da copiare. Ricevi la guida gratis via email.",mg_btn:"Ricevi la guida",mg_ok:"Guida inviata! Controlla la tua casella.",mg_legal:"Niente spam. Cancellazione con 1 clic.",mg_visual:"5 truffe · guida gratuita",mg_ph:"La tua email",
+    fin_t1:"Proteggi il tuo denaro",fin_t2:"ora.",fin_sub:"Ogni vendita non protetta è un rischio.",fin_cta:"Prova gratis →",
+    ft_contact:"Contatto",ft_legal:"Note legali",ft_cgu:"Termini e condizioni",ft_priv:"Privacy"
   }
 };
 
