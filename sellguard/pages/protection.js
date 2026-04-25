@@ -1,92 +1,73 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 
 export default function Protection() {
   const [isRecording, setIsRecording] = useState(false)
+  const [videoURL, setVideoURL] = useState(null)
+  const videoRef = useRef(null)
+  const mediaRecorderRef = useRef(null)
+  const chunks = useRef([])
+
+  const startCamera = async () => {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+    videoRef.current.srcObject = stream
+
+    const mediaRecorder = new MediaRecorder(stream)
+    mediaRecorderRef.current = mediaRecorder
+
+    mediaRecorder.ondataavailable = (e) => {
+      chunks.current.push(e.data)
+    }
+
+    mediaRecorder.onstop = () => {
+      const blob = new Blob(chunks.current, { type: "video/webm" })
+      const url = URL.createObjectURL(blob)
+      setVideoURL(url)
+      chunks.current = []
+    }
+
+    mediaRecorder.start()
+    setIsRecording(true)
+  }
+
+  const stopRecording = () => {
+    mediaRecorderRef.current.stop()
+    setIsRecording(false)
+  }
 
   return (
     <div style={{ minHeight: "100vh", background: "#000", color: "#fff", padding: "40px 20px" }}>
       <div style={{ maxWidth: "500px", margin: "0 auto" }}>
 
-        <h1 style={{ fontSize: "28px", marginBottom: "8px" }}>
-          Certifier mon envoi
-        </h1>
-
-        <p style={{ color: "#888", marginBottom: "30px" }}>
-          Enregistrez une preuve vidéo horodatée, recevable en cas de litige.
+        <h1>Certifier mon envoi</h1>
+        <p style={{ color: "#888" }}>
+          Enregistrez une preuve vidéo horodatée.
         </p>
 
-        <input
-          placeholder="Nom de l’article"
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "10px",
-            background: "#111",
-            border: "1px solid #222",
-            borderRadius: "10px",
-            color: "#fff"
-          }}
+        {/* VIDEO PREVIEW */}
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          style={{ width: "100%", borderRadius: "12px", marginTop: "20px" }}
         />
 
-        <input
-          placeholder="Référence commande (optionnel)"
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "20px",
-            background: "#111",
-            border: "1px solid #222",
-            borderRadius: "10px",
-            color: "#fff"
-          }}
-        />
-
-        <div style={{
-          background: "#0A0A0A",
-          border: "1px solid #222",
-          borderRadius: "16px",
-          padding: "20px",
-          marginBottom: "20px"
-        }}>
-          <p style={{ color: "#777", marginBottom: "10px" }}>
-            Étapes de certification
-          </p>
-
-          <p>1. Montre l’article</p>
-          <p>2. Filme l’emballage</p>
-          <p>3. Filme l’étiquette</p>
-
-          <p style={{ fontSize: "12px", color: "#666", marginTop: "10px" }}>
-            Durée recommandée : 20–40 secondes
-          </p>
-        </div>
-
-        <button
-          onClick={() => setIsRecording(true)}
-          style={{
-            width: "100%",
-            padding: "14px",
-            background: "#fff",
-            color: "#000",
-            borderRadius: "10px",
-            fontWeight: "bold",
-            cursor: "pointer"
-          }}
-        >
-          Commencer la certification
-        </button>
-
-        {isRecording && (
-          <p style={{ color: "#00ff88", marginTop: "10px" }}>
-            ● Enregistrement en cours
-          </p>
+        {!isRecording ? (
+          <button onClick={startCamera} style={{ marginTop: "20px", padding: "12px", width: "100%" }}>
+            Démarrer la caméra
+          </button>
+        ) : (
+          <button onClick={stopRecording} style={{ marginTop: "20px", padding: "12px", width: "100%", background: "red", color: "#fff" }}>
+            Stop & sauvegarder
+          </button>
         )}
 
-        <div style={{ display: "flex", gap: "10px", marginTop: "20px", fontSize: "12px", color: "#777" }}>
-          <span>Sécurisé</span>
-          <span>Horodaté</span>
-          <span>Vérifiable</span>
-        </div>
+        {/* VIDEO RESULT */}
+        {videoURL && (
+          <div style={{ marginTop: "20px" }}>
+            <p>Vidéo enregistrée :</p>
+            <video src={videoURL} controls style={{ width: "100%", borderRadius: "12px" }} />
+          </div>
+        )}
 
       </div>
     </div>
