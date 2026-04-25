@@ -65,6 +65,7 @@ const PAGE_HTML = `
       </div>
     </div>
   </div>
+  <p class="demo-tagline" data-i18n="demo_tagline">L'action complète prend moins de 2 minutes.</p>
 </section>
 
 <section class="page" id="how" style="padding-top:40px">
@@ -77,19 +78,19 @@ const PAGE_HTML = `
     <div class="feature feature-violet reveal">
       <span class="tag" data-i18n="f1_tag">Annonce</span>
       <h3 class="serif"><span data-i18n="f1_h1">Génère ton annonce</span><br><span class="italic" data-i18n="f1_h2">en 10 secondes.</span></h3>
-      <p data-i18n="f1_p">Photographiez l'article, recevez une annonce rédigée et prête à publier.</p>
+      <p data-i18n="f1_p">Photographie l'article, reçois une annonce rédigée et prête à publier.</p>
       <div class="cta-area"><a href="/annonce" class="btn btn-violet btn-sm" data-i18n="f1_btn">Essayer</a><span style="color:var(--text-dim);font-size:13px" data-i18n="f1_time">~10 sec par annonce</span></div>
     </div>
     <div class="feature feature-green reveal">
       <span class="tag" data-i18n="f2_tag">Protection</span>
       <h3 class="serif"><span data-i18n="f2_h1">Certifie avant</span><br><span class="italic" data-i18n="f2_h2">d'expédier.</span></h3>
-      <p data-i18n="f2_p">Trois minutes de vidéo horodatée couvrant l'article, le colis fermé et l'étiquette d'expédition. Chaque capture reçoit un certificat cryptographique unique, archivé pendant 3 mois. Une preuve recevable en cas de litige.</p>
-      <div class="cta-area"><a href="/protection" class="btn btn-green btn-sm" data-i18n="f2_btn">Protéger</a><span style="color:var(--text-dim);font-size:13px" data-i18n="f2_time">~3 min par envoi</span></div>
+      <p data-i18n="f2_p">Créer une preuve utilisable en cas de litige.</p>
+      <div class="cta-area"><a href="/protection" class="btn btn-green btn-sm" data-i18n="f2_btn">Protéger</a><span style="color:var(--text-dim);font-size:13px" data-i18n="f2_time">~1 min 30 par envoi</span></div>
     </div>
     <div class="feature feature-pink reveal">
       <span class="tag" data-i18n="f3_tag">Litige</span>
-      <h3 class="serif"><span data-i18n="f3_h1">Défense automatique.</span><br><span class="italic" data-i18n="f3_h2">En 1 clic.</span></h3>
-      <p data-i18n="f3_p">Dossier de défense généré automatiquement, prêt à transmettre au service litiges.</p>
+      <h3 class="serif"><span data-i18n="f3_h1">Défense automatique</span><br><span class="italic" data-i18n="f3_h2">en 1 clic.</span></h3>
+      <p data-i18n="f3_p">Un dossier de défense prêt à envoyer.</p>
       <div class="cta-area"><a href="/litige" class="btn btn-pink btn-sm" data-i18n="f3_btn">Gérer un litige</a><span style="color:var(--text-dim);font-size:13px" data-i18n="f3_time">~30 sec de rédaction</span></div>
     </div>
   </div>
@@ -98,12 +99,12 @@ const PAGE_HTML = `
 <section class="page" id="scams" style="background:linear-gradient(180deg,transparent,rgba(245,112,170,.02),transparent)">
   <div class="section-head reveal">
     <div class="section-kicker" data-i18n="sc_kicker">Les arnaques que tu vas rencontrer</div>
-    <h2 class="section-title serif"><span data-i18n="sc_t1">Les 5 arnaques qui coûtent</span><br><span class="italic" data-i18n="sc_t2">le plus cher aux vendeurs.</span></h2>
-    <p class="section-sub" data-i18n="sc_sub">Chaque année, de nombreux vendeurs particuliers perdent de l'argent à cause de litiges mal gérés. Voici les scénarios les plus fréquents et la façon dont SellCov vous protège.</p>
+    <h2 class="section-title serif"><span data-i18n="sc_t1">Les arnaques qui coûtent</span><br><span class="italic" data-i18n="sc_t2">le plus cher aux vendeurs.</span></h2>
+    <p class="section-sub" data-i18n="sc_sub">Voici les arnaques les plus fréquentes — et comment SellCov te protège.</p>
   </div>
   <div class="scams">
     <div class="scam-card reveal">
-      <span class="scam-label" data-i18n="s1_title">Arnaque n°1 · Colis "jamais reçu"</span>
+      <span class="scam-label" data-i18n="s1_title">Colis "jamais reçu"</span>
       <div class="scam-quote" data-i18n="s1_quote">« Je n'ai jamais reçu le colis. Je demande un remboursement. »</div>
       <div class="scam-solve"><span class="check">✓</span><span data-i18n="s1_solve"><strong style="color:#fff">SellCov affiche</strong> la vidéo horodatée du dépôt en bureau de poste, le numéro de suivi et l'étiquette filmée. Défense envoyée en 30 secondes.</span></div>
     </div>
@@ -117,13 +118,8 @@ const PAGE_HTML = `
       <div class="scam-quote" data-i18n="s3_quote">« Ce n'est pas l'article que j'ai commandé. »</div>
       <div class="scam-solve"><span class="check">✓</span><span data-i18n="s3_solve"><strong style="color:#fff">SellCov atteste</strong> le contenu exact du colis au moment de la fermeture. Marque, taille, couleur, détails, tout est filmé.</span></div>
     </div>
-    <div class="scam-card reveal">
-      <span class="scam-label" data-i18n="s4_title">Arnaque n°4 · Colis "vide"</span>
-      <div class="scam-quote" data-i18n="s4_quote">« Le colis est arrivé vide sans l'article principal. »</div>
-      <div class="scam-solve"><span class="check">✓</span><span data-i18n="s4_solve"><strong style="color:#fff">SellCov enregistre</strong> l'article placé dans le colis puis le colis fermé avec scotch sécurisé, en une seule prise vidéo.</span></div>
-    </div>
     <div class="scam-card reveal" style="grid-column:1/-1">
-      <span class="scam-label" data-i18n="s5_title">Arnaque n°5 · "Ce n'est pas authentique"</span>
+      <span class="scam-label" data-i18n="s5_title">"Ce n'est pas authentique"</span>
       <div class="scam-quote" data-i18n="s5_quote">« Le produit est une contrefaçon, je signale à la plateforme. »</div>
       <div class="scam-solve"><span class="check">✓</span><span data-i18n="s5_solve"><strong style="color:#fff">SellCov horodate</strong> les codes produit, étiquettes d'authenticité, factures d'achat. En cas de litige, tu joins le tout à ta défense automatique en un clic.</span></div>
     </div>
@@ -137,7 +133,7 @@ const PAGE_HTML = `
   </div>
   <div class="proof">
     <div class="proof-stats">
-      <div class="stat reveal"><div class="stat-big serif">3 min</div><div class="stat-label" data-i18n="pr_s1">par vente sécurisée</div></div>
+      <div class="stat reveal"><div class="stat-big serif">1 min 30</div><div class="stat-label" data-i18n="pr_s1">par vente sécurisée</div></div>
       <div class="stat reveal"><div class="stat-big serif" style="color:var(--green)">SHA-256</div><div class="stat-label" data-i18n="pr_s2">norme cryptographique certifiée</div></div>
       <div class="stat reveal"><div class="stat-big serif" style="color:var(--violet)">3 mois</div><div class="stat-label" data-i18n="pr_s3">d'archivage sécurisé en France</div></div>
     </div>
@@ -261,17 +257,17 @@ const I18N = {
     hero_subsub:"Preuve horodatée. Défense automatique.",
     stat1:"Bêta ouverte",stat2:"Preuves certifiées",stat3:"Données chiffrées en France",
     hero_cta:"Protéger ma prochaine vente",
+    demo_tagline:"L'action complète prend moins de 2 minutes.",
     how_kicker:"Comment ça marche",how_t1:"Trois étapes,",how_t2:"une seule mission.",
     how_sub:"De l'annonce à la défense en cas de litige, SellCov t'accompagne sur chaque étape d'une vente.",
-    f1_tag:"Annonce",f1_h1:"Génère ton annonce",f1_h2:"en 10 secondes.",f1_p:"Photographiez l'article, recevez une annonce rédigée et prête à publier.",f1_btn:"Essayer",f1_time:"~10 sec par annonce",
-    f2_tag:"Protection",f2_h1:"Certifie avant",f2_h2:"d'expédier.",f2_p:"Trois minutes de vidéo horodatée couvrant l'article, le colis fermé et l'étiquette d'expédition. Chaque capture reçoit un certificat cryptographique unique, archivé pendant 3 mois. Une preuve recevable en cas de litige.",f2_btn:"Protéger",f2_time:"~3 min par envoi",
-    f3_tag:"Litige",f3_h1:"Défense automatique.",f3_h2:"En 1 clic.",f3_p:"Dossier de défense généré automatiquement, prêt à transmettre au service litiges.",f3_btn:"Gérer un litige",f3_time:"~30 sec de rédaction",
-    sc_kicker:"Les arnaques que tu vas rencontrer",sc_t1:"Les 5 arnaques qui coûtent",sc_t2:"le plus cher aux vendeurs.",sc_sub:"Chaque année, de nombreux vendeurs particuliers perdent de l'argent à cause de litiges mal gérés. Voici les scénarios les plus fréquents et la façon dont SellCov vous protège.",
-    s1_title:"Arnaque n°1 · Colis \"jamais reçu\"",s1_quote:"« Je n'ai jamais reçu le colis. Je demande un remboursement. »",s1_solve:"<strong style='color:#fff'>SellCov affiche</strong> la vidéo horodatée du dépôt en bureau de poste, le numéro de suivi et l'étiquette filmée. Défense envoyée en 30 secondes.",
+    f1_tag:"Annonce",f1_h1:"Génère ton annonce",f1_h2:"en 10 secondes.",f1_p:"Photographie l'article, reçois une annonce rédigée et prête à publier.",f1_btn:"Essayer",f1_time:"~10 sec par annonce",
+    f2_tag:"Protection",f2_h1:"Certifie avant",f2_h2:"d'expédier.",f2_p:"Créer une preuve utilisable en cas de litige.",f2_btn:"Protéger",f2_time:"~1 min 30 par envoi",
+    f3_tag:"Litige",f3_h1:"Défense automatique",f3_h2:"en 1 clic.",f3_p:"Un dossier de défense prêt à envoyer.",f3_btn:"Gérer un litige",f3_time:"~30 sec de rédaction",
+    sc_kicker:"Les arnaques que tu vas rencontrer",sc_t1:"Les arnaques qui coûtent",sc_t2:"le plus cher aux vendeurs.",sc_sub:"Voici les arnaques les plus fréquentes — et comment SellCov te protège.",
+    s1_title:"Colis \"jamais reçu\"",s1_quote:"« Je n'ai jamais reçu le colis. Je demande un remboursement. »",s1_solve:"<strong style='color:#fff'>SellCov affiche</strong> la vidéo horodatée du dépôt en bureau de poste, le numéro de suivi et l'étiquette filmée. Défense envoyée en 30 secondes.",
     s2_title:"Arnaque n°2 · Article \"abîmé\"",s2_quote:"« L'article est arrivé troué. Je veux être remboursé. »",s2_solve:"<strong style='color:#fff'>SellCov prouve</strong> l'état exact avant expédition grâce à la vidéo 360° horodatée. L'IA compare les photos de l'acheteur et détecte les incohérences.",
     s3_title:"Arnaque n°3 · Substitution",s3_quote:"« Ce n'est pas l'article que j'ai commandé. »",s3_solve:"<strong style='color:#fff'>SellCov atteste</strong> le contenu exact du colis au moment de la fermeture. Marque, taille, couleur, détails, tout est filmé.",
-    s4_title:"Arnaque n°4 · Colis \"vide\"",s4_quote:"« Le colis est arrivé vide sans l'article principal. »",s4_solve:"<strong style='color:#fff'>SellCov enregistre</strong> l'article placé dans le colis puis le colis fermé avec scotch sécurisé, en une seule prise vidéo.",
-    s5_title:"Arnaque n°5 · \"Ce n'est pas authentique\"",s5_quote:"« Le produit est une contrefaçon, je signale à la plateforme. »",s5_solve:"<strong style='color:#fff'>SellCov horodate</strong> les codes produit, étiquettes d'authenticité, factures d'achat. En cas de litige, tu joins le tout à ta défense en un clic.",
+    s5_title:"\"Ce n'est pas authentique\"",s5_quote:"« Le produit est une contrefaçon, je signale à la plateforme. »",s5_solve:"<strong style='color:#fff'>SellCov horodate</strong> les codes produit, étiquettes d'authenticité, factures d'achat. En cas de litige, tu joins le tout à ta défense en un clic.",
     pr_kicker:"Les garanties techniques",pr_t1:"Ce qui tient",pr_t2:"en cas de litige.",pr_s1:"par vente sécurisée",pr_s2:"norme cryptographique certifiée",pr_s3:"d'archivage sécurisé en France",
     pl_kicker:"Nos offres",pl_t1:"Simple,",pl_t2:"sans surprise.",pl_sub:"Les 50 premiers vendeurs bénéficient du tarif Early Adopter. Tarif bloqué 1 an. Aucun engagement, annulable en 1 clic.",
     per_mo:"/ mois",
@@ -295,16 +291,16 @@ const I18N = {
     badge:"Open Beta · Free access",hero_h1_1:"Sell",hero_h1_2:"without getting scammed.",
     hero_sub:"Solid proof before shipping. Full case file for any dispute.",hero_subsub:"Timestamped proof. Automatic defence.",
     stat1:"Open Beta",stat2:"Certified proofs",stat3:"Data encrypted in France",hero_cta:"Protect my next sale",
+    demo_tagline:"The whole process takes less than 2 minutes.",
     how_kicker:"How it works",how_t1:"Three steps,",how_t2:"one mission.",how_sub:"From listing to dispute defence, SellCov covers every step of your sale.",
-    f1_tag:"Listing",f1_h1:"Generate your listing",f1_h2:"in 10 seconds.",f1_p:"Photograph the item, receive a written listing ready to publish.",f1_btn:"Try it",f1_time:"~10 sec per listing",
-    f2_tag:"Protection",f2_h1:"Certify before",f2_h2:"shipping.",f2_p:"Three minutes of timestamped video covering the item, the sealed parcel and the shipping label. Each recording gets a unique cryptographic certificate, archived for 3 months. Admissible proof for any dispute.",f2_btn:"Protect",f2_time:"~3 min per shipment",
-    f3_tag:"Dispute",f3_h1:"Automatic defence.",f3_h2:"In 1 click.",f3_p:"Defence file auto-generated, ready to send to the platform's dispute team.",f3_btn:"Handle dispute",f3_time:"~30 sec to write",
-    sc_kicker:"Scams you will encounter",sc_t1:"The 5 scams that cost",sc_t2:"sellers the most.",sc_sub:"Every year, many private sellers lose money due to poorly handled disputes. Here are the most common scenarios and how SellCov protects you.",
-    s1_title:"Scam #1 · Parcel \"never received\"",s1_quote:"\"I never received the parcel. I'm requesting a refund.\"",s1_solve:"<strong style='color:#fff'>SellCov shows</strong> the timestamped video of drop-off at the post office, the tracking number and the filmed label. Defence sent in 30 seconds.",
+    f1_tag:"Listing",f1_h1:"Generate your listing",f1_h2:"in 10 seconds.",f1_p:"Photograph the item, get a written listing ready to publish.",f1_btn:"Try it",f1_time:"~10 sec per listing",
+    f2_tag:"Protection",f2_h1:"Certify before",f2_h2:"shipping.",f2_p:"Create proof that holds up in any dispute.",f2_btn:"Protect",f2_time:"~1 min 30 per shipment",
+    f3_tag:"Dispute",f3_h1:"Automatic defence",f3_h2:"in 1 click.",f3_p:"A defence file ready to send.",f3_btn:"Handle dispute",f3_time:"~30 sec to write",
+    sc_kicker:"Scams you will encounter",sc_t1:"The scams that cost",sc_t2:"sellers the most.",sc_sub:"Here are the most common scams — and how SellCov protects you.",
+    s1_title:"Parcel \"never received\"",s1_quote:"\"I never received the parcel. I'm requesting a refund.\"",s1_solve:"<strong style='color:#fff'>SellCov shows</strong> the timestamped video of drop-off at the post office, the tracking number and the filmed label. Defence sent in 30 seconds.",
     s2_title:"Scam #2 · Item \"damaged\"",s2_quote:"\"The item arrived with a hole. I want a refund.\"",s2_solve:"<strong style='color:#fff'>SellCov proves</strong> the exact condition before shipping via 360° timestamped video. AI compares the buyer's photos and detects inconsistencies.",
     s3_title:"Scam #3 · Substitution",s3_quote:"\"This is not the item I ordered.\"",s3_solve:"<strong style='color:#fff'>SellCov certifies</strong> the exact contents of the parcel at the time of sealing. Brand, size, colour, details, all filmed.",
-    s4_title:"Scam #4 · Empty parcel",s4_quote:"\"The parcel arrived empty without the main item.\"",s4_solve:"<strong style='color:#fff'>SellCov records</strong> the item being placed in the parcel and the parcel sealed with security tape, in one continuous video.",
-    s5_title:"Scam #5 · \"It's not authentic\"",s5_quote:"\"The product is a fake, I'm reporting it to the platform.\"",s5_solve:"<strong style='color:#fff'>SellCov timestamps</strong> product codes, authenticity labels, purchase receipts. Attach everything to your auto-generated defence in one click.",
+    s5_title:"\"It's not authentic\"",s5_quote:"\"The product is a fake, I'm reporting it to the platform.\"",s5_solve:"<strong style='color:#fff'>SellCov timestamps</strong> product codes, authenticity labels, purchase receipts. Attach everything to your auto-generated defence in one click.",
     pr_kicker:"Technical guarantees",pr_t1:"What holds up",pr_t2:"in a dispute.",pr_s1:"per secured sale",pr_s2:"certified cryptographic standard",pr_s3:"secure archiving in France",
     pl_kicker:"Our plans",pl_t1:"Simple,",pl_t2:"no surprises.",pl_sub:"The first 50 sellers get the Early Adopter rate. Price locked for 1 year. No commitment, cancel anytime.",
     per_mo:"/ month",
@@ -328,16 +324,16 @@ const I18N = {
     badge:"Beta abierta · Acceso gratuito",hero_h1_1:"Vende",hero_h1_2:"sin que te estafen.",
     hero_sub:"Prueba sólida antes del envío. Expediente completo en caso de litigio.",hero_subsub:"Prueba con marca de tiempo. Defensa automática.",
     stat1:"Beta abierta",stat2:"Pruebas certificadas",stat3:"Datos cifrados en Francia",hero_cta:"Proteger mi próxima venta",
+    demo_tagline:"Todo el proceso dura menos de 2 minutos.",
     how_kicker:"Cómo funciona",how_t1:"Tres pasos,",how_t2:"una sola misión.",how_sub:"Del anuncio a la defensa en caso de litigio, SellCov te acompaña en cada etapa.",
     f1_tag:"Anuncio",f1_h1:"Genera tu anuncio",f1_h2:"en 10 segundos.",f1_p:"Fotografía el artículo, recibe un anuncio redactado listo para publicar.",f1_btn:"Probar",f1_time:"~10 seg por anuncio",
-    f2_tag:"Protección",f2_h1:"Certifica antes",f2_h2:"de enviar.",f2_p:"Tres minutos de video con marca de tiempo del artículo, paquete cerrado y etiqueta. Certificado criptográfico único, archivado 3 meses.",f2_btn:"Proteger",f2_time:"~3 min por envío",
-    f3_tag:"Litigio",f3_h1:"Defensa automática.",f3_h2:"Con 1 clic.",f3_p:"Expediente de defensa generado automáticamente, listo para enviar al servicio de litigios.",f3_btn:"Gestionar litigio",f3_time:"~30 seg de redacción",
-    sc_kicker:"Las estafas que vas a encontrar",sc_t1:"Las 5 estafas que más cuestan",sc_t2:"a los vendedores.",sc_sub:"Cada año, muchos vendedores particulares pierden dinero por litigios mal gestionados. Aquí los escenarios más frecuentes y cómo SellCov te protege.",
-    s1_title:"Estafa n°1 · Paquete \"nunca recibido\"",s1_quote:"\"Nunca recibí el paquete. Solicito un reembolso.\"",s1_solve:"<strong style='color:#fff'>SellCov muestra</strong> el video del depósito en correos, el número de seguimiento y la etiqueta filmada.",
+    f2_tag:"Protección",f2_h1:"Certifica antes",f2_h2:"de enviar.",f2_p:"Crea una prueba utilizable en caso de litigio.",f2_btn:"Proteger",f2_time:"~1 min 30 por envío",
+    f3_tag:"Litigio",f3_h1:"Defensa automática",f3_h2:"con 1 clic.",f3_p:"Un expediente de defensa listo para enviar.",f3_btn:"Gestionar litigio",f3_time:"~30 seg de redacción",
+    sc_kicker:"Las estafas que vas a encontrar",sc_t1:"Las estafas que más cuestan",sc_t2:"a los vendedores.",sc_sub:"Aquí están las estafas más frecuentes — y cómo SellCov te protege.",
+    s1_title:"Paquete \"nunca recibido\"",s1_quote:"\"Nunca recibí el paquete. Solicito un reembolso.\"",s1_solve:"<strong style='color:#fff'>SellCov muestra</strong> el video del depósito en correos, el número de seguimiento y la etiqueta filmada.",
     s2_title:"Estafa n°2 · Artículo \"dañado\"",s2_quote:"\"El artículo llegó con un agujero. Quiero un reembolso.\"",s2_solve:"<strong style='color:#fff'>SellCov prueba</strong> el estado exacto antes del envío mediante video 360° con marca de tiempo.",
     s3_title:"Estafa n°3 · Sustitución",s3_quote:"\"Esto no es el artículo que pedí.\"",s3_solve:"<strong style='color:#fff'>SellCov certifica</strong> el contenido exacto del paquete en el momento del cierre.",
-    s4_title:"Estafa n°4 · Paquete \"vacío\"",s4_quote:"\"El paquete llegó vacío sin el artículo principal.\"",s4_solve:"<strong style='color:#fff'>SellCov graba</strong> el artículo siendo colocado y el paquete sellado en una sola toma.",
-    s5_title:"Estafa n°5 · \"No es auténtico\"",s5_quote:"\"El producto es una falsificación, lo denuncio a la plataforma.\"",s5_solve:"<strong style='color:#fff'>SellCov marca</strong> los códigos de producto, etiquetas de autenticidad y facturas de compra.",
+    s5_title:"\"No es auténtico\"",s5_quote:"\"El producto es una falsificación, lo denuncio a la plataforma.\"",s5_solve:"<strong style='color:#fff'>SellCov marca</strong> los códigos de producto, etiquetas de autenticidad y facturas de compra.",
     pr_kicker:"Garantías técnicas",pr_t1:"Lo que resiste",pr_t2:"en un litigio.",pr_s1:"por venta asegurada",pr_s2:"norma criptográfica certificada",pr_s3:"archivo seguro en Francia",
     pl_kicker:"Nuestros planes",pl_t1:"Simple,",pl_t2:"sin sorpresas.",pl_sub:"Los primeros 50 vendedores se benefician de la tarifa Early Adopter. Precio bloqueado 1 año. Sin compromiso.",
     per_mo:"/ mes",
@@ -361,16 +357,16 @@ const I18N = {
     badge:"Beta aperta · Accesso gratuito",hero_h1_1:"Rivendi",hero_h1_2:"senza farti truffare.",
     hero_sub:"Prova solida prima della spedizione. Dossier completo in caso di controversia.",hero_subsub:"Prova con timestamp. Difesa automatica.",
     stat1:"Beta aperta",stat2:"Prove certificate",stat3:"Dati crittografati in Francia",hero_cta:"Proteggi la mia prossima vendita",
+    demo_tagline:"L'intera operazione richiede meno di 2 minuti.",
     how_kicker:"Come funziona",how_t1:"Tre passi,",how_t2:"una sola missione.",how_sub:"Dall'annuncio alla difesa in caso di controversia, SellCov ti accompagna in ogni fase della vendita.",
     f1_tag:"Annuncio",f1_h1:"Genera il tuo annuncio",f1_h2:"in 10 secondi.",f1_p:"Fotografa l'articolo, ricevi un annuncio pronto da pubblicare.",f1_btn:"Provare",f1_time:"~10 sec per annuncio",
-    f2_tag:"Protezione",f2_h1:"Certifica prima",f2_h2:"di spedire.",f2_p:"Tre minuti di video con timestamp che copre l'articolo, il pacco chiuso e l'etichetta di spedizione. Ogni registrazione riceve un certificato crittografico unico, archiviato per 3 mesi. Una prova ammissibile in caso di controversia.",f2_btn:"Proteggere",f2_time:"~3 min per spedizione",
-    f3_tag:"Controversia",f3_h1:"Difesa automatica.",f3_h2:"In 1 clic.",f3_p:"Dossier di difesa generato automaticamente, pronto da inviare al servizio controversie.",f3_btn:"Gestire una controversia",f3_time:"~30 sec di redazione",
-    sc_kicker:"Le truffe che incontrerai",sc_t1:"Le 5 truffe che costano",sc_t2:"di più ai venditori.",sc_sub:"Ogni anno, molti venditori privati perdono denaro a causa di controversie mal gestite. Ecco gli scenari più frequenti e come SellCov ti protegge.",
-    s1_title:"Truffa n°1 · Pacco \"mai ricevuto\"",s1_quote:"\"Non ho mai ricevuto il pacco. Chiedo il rimborso.\"",s1_solve:"<strong style='color:#fff'>SellCov mostra</strong> il video con timestamp del deposito in ufficio postale, il numero di tracciamento e l'etichetta filmata. Difesa inviata in 30 secondi.",
+    f2_tag:"Protezione",f2_h1:"Certifica prima",f2_h2:"di spedire.",f2_p:"Crea una prova utilizzabile in caso di controversia.",f2_btn:"Proteggere",f2_time:"~1 min 30 per spedizione",
+    f3_tag:"Controversia",f3_h1:"Difesa automatica",f3_h2:"in 1 clic.",f3_p:"Un dossier di difesa pronto da inviare.",f3_btn:"Gestire una controversia",f3_time:"~30 sec di redazione",
+    sc_kicker:"Le truffe che incontrerai",sc_t1:"Le truffe che costano",sc_t2:"di più ai venditori.",sc_sub:"Ecco le truffe più frequenti — e come SellCov ti protegge.",
+    s1_title:"Pacco \"mai ricevuto\"",s1_quote:"\"Non ho mai ricevuto il pacco. Chiedo il rimborso.\"",s1_solve:"<strong style='color:#fff'>SellCov mostra</strong> il video con timestamp del deposito in ufficio postale, il numero di tracciamento e l'etichetta filmata. Difesa inviata in 30 secondi.",
     s2_title:"Truffa n°2 · Articolo \"danneggiato\"",s2_quote:"\"L'articolo è arrivato forato. Voglio essere rimborsato.\"",s2_solve:"<strong style='color:#fff'>SellCov prova</strong> lo stato esatto prima della spedizione grazie al video 360° con timestamp. L'IA confronta le foto dell'acquirente e rileva incongruenze.",
     s3_title:"Truffa n°3 · Sostituzione",s3_quote:"\"Questo non è l'articolo che ho ordinato.\"",s3_solve:"<strong style='color:#fff'>SellCov attesta</strong> il contenuto esatto del pacco al momento della chiusura. Marca, taglia, colore, dettagli, tutto è filmato.",
-    s4_title:"Truffa n°4 · Pacco \"vuoto\"",s4_quote:"\"Il pacco è arrivato vuoto senza l'articolo principale.\"",s4_solve:"<strong style='color:#fff'>SellCov registra</strong> l'articolo posizionato nel pacco e il pacco sigillato con nastro sicuro, in un'unica ripresa video.",
-    s5_title:"Truffa n°5 · \"Non è autentico\"",s5_quote:"\"Il prodotto è una contraffazione, lo segnalo alla piattaforma.\"",s5_solve:"<strong style='color:#fff'>SellCov marca temporalmente</strong> i codici prodotto, etichette di autenticità, fatture d'acquisto. In caso di controversia, alleghi tutto alla tua difesa in un clic.",
+    s5_title:"\"Non è autentico\"",s5_quote:"\"Il prodotto è una contraffazione, lo segnalo alla piattaforma.\"",s5_solve:"<strong style='color:#fff'>SellCov marca temporalmente</strong> i codici prodotto, etichette di autenticità, fatture d'acquisto. In caso di controversia, alleghi tutto alla tua difesa in un clic.",
     pr_kicker:"Le garanzie tecniche",pr_t1:"Ciò che regge",pr_t2:"in una controversia.",pr_s1:"per vendita sicura",pr_s2:"standard crittografico certificato",pr_s3:"archiviazione sicura in Francia",
     pl_kicker:"Le nostre offerte",pl_t1:"Semplice,",pl_t2:"senza sorprese.",pl_sub:"I primi 50 venditori beneficiano della tariffa Early Adopter. Prezzo bloccato per 1 anno. Nessun impegno, annullabile in 1 clic.",
     per_mo:"/ mese",
@@ -393,7 +389,6 @@ const I18N = {
 
 export default function Home() {
   useEffect(() => {
-    // Intersection observer for reveal animations
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
@@ -401,7 +396,6 @@ export default function Home() {
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-    // Translation engine
     function setLang(lang) {
       const t = I18N[lang];
       if (!t) return;
@@ -419,7 +413,6 @@ export default function Home() {
     }
     window.setLang = setLang;
 
-    // Lead magnet form
     window.submitLeadForm = async function(e) {
       e.preventDefault();
       const email = document.getElementById('lead-email').value;
@@ -442,7 +435,6 @@ export default function Home() {
       }
     };
 
-    // Early Adopter counter
     async function checkSpots() {
       try {
         const res = await fetch('/api/early-adopter-count');
@@ -462,7 +454,6 @@ export default function Home() {
     }
     checkSpots();
 
-    // Init language
     const saved = localStorage.getItem('sellcov_lang') || 'fr';
     setLang(saved);
 
@@ -523,7 +514,8 @@ export default function Home() {
         .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:46px}
         .platforms{color:var(--text-dim);font-size:14px;letter-spacing:.02em}
         .platforms strong{color:var(--text-muted);font-weight:500;margin:0 4px}
-        .demo{padding:60px 24px 100px;max-width:1100px;margin:0 auto;display:flex;justify-content:center}
+        .demo{padding:60px 24px 100px;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:48px}
+        .demo-tagline{color:var(--text-muted);font-size:17px;text-align:center;font-family:'Playfair Display',serif;font-style:italic;letter-spacing:-.01em;margin:0}
         .phone-stage{position:relative;width:100%;max-width:820px;display:flex;justify-content:center;align-items:center}
         .phone-halo{position:absolute;inset:-80px;background:radial-gradient(ellipse at 50% 50%,rgba(94,232,163,.10) 0%,rgba(139,127,255,.04) 35%,rgba(0,0,0,0) 70%);filter:blur(50px);pointer-events:none;z-index:0}
         .phone-halo::after{content:"";position:absolute;bottom:-30px;left:10%;right:10%;height:60px;background:radial-gradient(ellipse,rgba(0,0,0,.85) 0%,rgba(0,0,0,0) 70%);filter:blur(40px)}
@@ -545,7 +537,8 @@ export default function Home() {
           .phone-screen{border-radius:30px}
           .phone-island-v{left:11px;width:15px;height:62px;border-radius:9px}
           .phone-island-dot{width:6px;height:6px}
-          .demo{padding:40px 16px 70px}
+          .demo{padding:40px 16px 70px;gap:32px}
+          .demo-tagline{font-size:15px}
           .phone-edge-top,.phone-edge-bottom{height:3px;top:-2px;bottom:-2px}
           .phone-btn-action{width:14px;height:3px}
           .phone-btn-volup,.phone-btn-voldown{width:30px;height:3px}
