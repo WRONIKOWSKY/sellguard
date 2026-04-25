@@ -17,20 +17,17 @@ export default async function handler(req, res) {
     const file = files.video[0]
     const fileBuffer = fs.readFileSync(file.filepath)
 
-    // HASH SHA256
     const hash = crypto
       .createHash("sha256")
       .update(fileBuffer)
       .digest("hex")
 
-    // TIMESTAMP SERVEUR
     const timestamp = new Date().toISOString()
 
     res.status(200).json({
       success: true,
       hash,
       timestamp,
-      filename: file.originalFilename,
     })
   })
 }
