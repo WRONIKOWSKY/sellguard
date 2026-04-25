@@ -11,7 +11,7 @@ export default function Protection() {
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "environment" }, // iPhone back camera
+        video: { facingMode: "environment" },
         audio: true
       })
 
@@ -24,10 +24,33 @@ export default function Protection() {
         chunks.current.push(e.data)
       }
 
-      mediaRecorder.onstop = () => {
+      mediaRecorder.onstop = async () => {
         const blob = new Blob(chunks.current, { type: "video/webm" })
         const url = URL.createObjectURL(blob)
         setVideoURL(url)
+
+        try {
+          const formData = new FormData()
+          formData.append("video", blob, "proof.webm")
+
+          const res = await fetch("/api/upload", {
+            method: "POST",
+            body: formData,
+          })
+
+          const data = await res.json()
+
+          alert(
+            "Preuve créée ✅\n\nHash: " +
+            data.hash +
+            "\nDate: " +
+            data.timestamp
+          )
+
+        } catch (error) {
+          alert("Erreur upload")
+        }
+
         chunks.current = []
       }
 
@@ -62,7 +85,6 @@ export default function Protection() {
           Enregistrez une preuve vidéo horodatée.
         </p>
 
-        {/* CARD CAMERA */}
         <div style={{
           marginTop: "24px",
           background: "#111",
@@ -94,8 +116,7 @@ export default function Protection() {
                 border: "none",
                 background: "#fff",
                 color: "#000",
-                fontWeight: "500",
-                cursor: "pointer"
+                fontWeight: "500"
               }}
             >
               Démarrer la caméra
@@ -111,8 +132,7 @@ export default function Protection() {
                 border: "none",
                 background: "#FF3B30",
                 color: "#fff",
-                fontWeight: "500",
-                cursor: "pointer"
+                fontWeight: "500"
               }}
             >
               Stop & sauvegarder
@@ -120,7 +140,6 @@ export default function Protection() {
           )}
         </div>
 
-        {/* VIDEO RESULT */}
         {videoURL && (
           <div style={{
             marginTop: "24px",
