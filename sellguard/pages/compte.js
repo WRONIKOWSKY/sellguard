@@ -1,27 +1,38 @@
-import Link from "next/link";
+import Head from "next/head";
+import Layout from "../components/Layout";
+import { useState, useEffect } from "react";
+import { getSupabase } from "../lib/supabaseClient";
 
-const NAV_COLORS = {
-  "/annonce": "#818CF8",
-  "/protection": "#4ADE80",
-  "/compte": "#FACC15",
-};
+export default function Compte() {
+  const [envois, setEnvois] = useState([]);
 
-export default function Layout({ children }) {
+  useEffect(() => {
+    const fetchData = async () => {
+      const sb = getSupabase();
+      const { data, error } = await sb
+        .from("envois")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (!error) setEnvois(data);
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <div style={{ fontFamily: "sans-serif" }}>
-      <nav style={{ display: "flex", gap: 20, padding: 20 }}>
-        <Link href="/annonce" style={{ color: NAV_COLORS["/annonce"] }}>
-          Annonce
-        </Link>
-        <Link href="/protection" style={{ color: NAV_COLORS["/protection"] }}>
-          Protection
-        </Link>
-        <Link href="/compte" style={{ color: NAV_COLORS["/compte"] }}>
-          Compte
-        </Link>
-      </nav>
+    <Layout>
+      <Head>
+        <title>Compte</title>
+      </Head>
 
-      <main style={{ padding: 20 }}>{children}</main>
-    </div>
+      <h1>Mes envois</h1>
+
+      <ul>
+        {envois.map((e) => (
+          <li key={e.id}>{e.id}</li>
+        ))}
+      </ul>
+    </Layout>
   );
 }
