@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useLang } from '../contexts/LangContext';
 import { saveToHistory } from './historique';
+import { getSupabase } from '../lib/supabaseClient';
 
 const PLATFORM_STYLE = {
   'Vinted':               { bg: 'rgba(9,177,186,0.12)',  color: '#2fd4dd', font: "'Georgia', serif",                weight: 700, transform: 'none',      spacing: '0px' },
@@ -106,12 +107,24 @@ export default function Annonce() {
     const imageMime = images.length > 0 ? images[0].mime : 'image/jpeg';
 
     try {
+      const sb = getSupabase();
+      const sessRes = await sb.auth.getSession();
+      const session = sessRes?.data?.session;
+      if (!session) {
+        setError('Tu dois être connecté pour générer une annonce. Va sur /compte.');
+        setLoading(false);
+        return;
+      }
       const res = await fetch('/api/analyze', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + session.access_token
+        },
         body: JSON.stringify({ imageBase64, imageMime, condition, extra: fullExtra, lang })
       });
       const data = await res.json();
+      if (res.status === 429) throw new Error('Quota journalier atteint (10 analyses / jour). Reset à minuit UTC.');
       if (!res.ok) throw new Error(data.error || 'Erreur');
       setResult(data);
       setActiveTab(data.best_platform);

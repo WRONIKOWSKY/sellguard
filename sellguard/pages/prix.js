@@ -2,6 +2,7 @@ import { useState } from "react";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import { useLang } from "../contexts/LangContext";
+import { getSupabase } from "../lib/supabaseClient";
 
 const PLATFORM_COLORS = {
   "Vinted": { bg: "rgba(9,177,186,0.1)", text: "#2E7D32" },
@@ -24,23 +25,37 @@ export default function Prix() {
   var _s4 = useState(null), result = _s4[0], setResult = _s4[1];
   var _s5 = useState(""), error = _s5[0], setError = _s5[1];
 
-  function search() {
+  async function search() {
     if (!item.trim() || loading) return;
     setLoading(true);
     setError("");
     setResult(null);
-    fetch("/api/prix", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ item: item, condition: cond, lang: lang })
-    })
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        if (data.error) throw new Error(data.error);
-        setResult(data);
-      })
-      .catch(function(e) { setError(e.message); })
-      .finally(function() { setLoading(false); });
+    try {
+      var sb = getSupabase();
+      var sessRes = await sb.auth.getSession();
+      var session = sessRes && sessRes.data && sessRes.data.session;
+      if (!session) {
+        setError("Tu dois être connecté pour comparer les prix. Va sur /compte.");
+        setLoading(false);
+        return;
+      }
+      var r = await fetch("/api/prix", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + session.access_token
+        },
+        body: JSON.stringify({ item: item, condition: cond, lang: lang })
+      });
+      var data = await r.json();
+      if (r.status === 429) throw new Error("Quota journalier atteint (10 recherches / jour). Reset à minuit UTC.");
+      if (data.error) throw new Error(data.error);
+      setResult(data);
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   function reset() {

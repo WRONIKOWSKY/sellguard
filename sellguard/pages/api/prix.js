@@ -1,4 +1,6 @@
-export default async function handler(req, res) {
+import { withAuth } from "../../lib/withAuth";
+
+async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
   var body = req.body;
   var item = body.item;
@@ -36,3 +38,5 @@ export default async function handler(req, res) {
     res.status(500).json({ error: e.message });
   }
 }
+
+export default withAuth(handler, { endpoint: "prix", dailyLimit: 10 });

@@ -1,4 +1,6 @@
-export default async function handler(req, res) {
+import { withAuth } from "../../lib/withAuth";
+
+async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
   const { type, buyerMessage, certRef, images } = req.body;
 
@@ -52,3 +54,5 @@ fraud_score : 0-3 légitime, 4-6 suspect, 7-10 fraude probable. Sois précis et 
     res.status(500).json({ error: e.message });
   }
 }
+
+export default withAuth(handler, { endpoint: "litige", dailyLimit: 10 });
