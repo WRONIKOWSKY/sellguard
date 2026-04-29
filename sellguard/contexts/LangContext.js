@@ -80,14 +80,6 @@ export var T = {
       clear: "Effacer l’historique", clear_confirm: "Supprimer tout l’historique ?",
       date: "Date", platform: "Plateforme", price: "Prix",
     },
-    prix: {
-      title: "Comparer les prix", subtitle: "Entre un article et découvre son prix réel sur chaque plateforme.",
-      item_label: "Nom de l’article", item_ph: "Ex: Nike Air Force 1 White - Taille 42",
-      condition_label: "État",
-      conditions: ["Neuf avec étiquettes", "Neuf sans étiquettes", "Très bon état", "Bon état", "État correct"],
-      search_btn: "Rechercher les prix", searching: "Recherche en cours...",
-      range: "Fourchette de prix", avg: "Prix moyen", tip: "Conseil", back: "Nouvelle recherche",
-    },
   },
   en: {
     nav: { annonce: "Listing", protection: "Protection", litige: "Dispute" },
@@ -165,14 +157,6 @@ export var T = {
       clear: "Clear history", clear_confirm: "Delete all history?",
       date: "Date", platform: "Platform", price: "Price",
     },
-    prix: {
-      title: "Compare prices", subtitle: "Enter an item and discover its real price on each platform.",
-      item_label: "Item name", item_ph: "Ex: Nike Air Force 1 White - Size 9",
-      condition_label: "Condition",
-      conditions: ["New with tags", "New without tags", "Very good condition", "Good condition", "Fair condition"],
-      search_btn: "Search prices", searching: "Searching...",
-      range: "Price range", avg: "Average price", tip: "Tip", back: "New search",
-    },
   },
   es: {
     nav: { annonce: "Anuncio", protection: "Protección", litige: "Litigio" },
@@ -240,7 +224,6 @@ export var T = {
       calculate_btn: "Calcular", commission: "Comisión", net: "Ingreso neto", profit: "Beneficio", margin: "Margen", reset: "Nuevo cálculo",
     },
     ventes: { title: "Mis ventas", subtitle: "Historial de todos tus anuncios.", empty: "Ningún anuncio generado.", empty_sub: "Usa el módulo Anuncio.", clear: "Borrar historial", clear_confirm: "¿Borrar todo?", date: "Fecha", platform: "Plataforma", price: "Precio" },
-    prix: { title: "Comparar precios", subtitle: "Introduce un artículo y descubre su precio real.", item_label: "Nombre del artículo", item_ph: "Ej: Nike Air Force 1 White - Talla 42", condition_label: "Estado", conditions: ["Nuevo con etiquetas", "Nuevo sin etiquetas", "Muy buen estado", "Buen estado", "Estado aceptable"], search_btn: "Buscar precios", searching: "Buscando...", range: "Rango de precios", avg: "Precio medio", tip: "Consejo", back: "Nueva búsqueda" },
   },
   it: {
     nav: { annonce: "Annuncio", protection: "Protezione", litige: "Controversia" },
@@ -308,7 +291,6 @@ export var T = {
       calculate_btn: "Calcola", commission: "Commissione", net: "Entrata netta", profit: "Profitto", margin: "Margine", reset: "Nuovo calcolo",
     },
     ventes: { title: "Le mie vendite", subtitle: "Storico di tutti i tuoi annunci.", empty: "Nessun annuncio generato.", empty_sub: "Usa il modulo Annuncio.", clear: "Cancella storico", clear_confirm: "Cancellare tutto?", date: "Data", platform: "Piattaforma", price: "Prezzo" },
-    prix: { title: "Confronta prezzi", subtitle: "Inserisci un articolo e scopri il suo prezzo reale.", item_label: "Nome dell'articolo", item_ph: "Es: Nike Air Force 1 White - Taglia 42", condition_label: "Stato", conditions: ["Nuovo con etichette", "Nuovo senza etichette", "Ottime condizioni", "Buone condizioni", "Condizioni accettabili"], search_btn: "Cerca prezzi", searching: "Ricerca...", range: "Fascia di prezzo", avg: "Prezzo medio", tip: "Consiglio", back: "Nuova ricerca" },
   }
 };
 
