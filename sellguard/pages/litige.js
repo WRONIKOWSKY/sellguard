@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useLang } from '../contexts/LangContext';
+import { getSupabase } from '../lib/supabaseClient';
 
 export default function Litige() {
   const { t, lang } = useLang();
@@ -44,17 +45,31 @@ export default function Litige() {
     setResult(null);
 
     try {
+      const sb = getSupabase();
+      const sessRes = await sb.auth.getSession();
+      const session = sessRes?.data?.session;
+      if (!session) {
+        setError('Tu dois être connecté pour gérer un litige. Va sur /compte.');
+        setLoading(false);
+        return;
+      }
       const res = await fetch('/api/litige', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + session.access_token
+        },
         body: JSON.stringify({ type, buyerMessage, certRef, images })
       });
       const data = await res.json();
+      if (res.status === 429) throw new Error('Quota journalier atteint (10 litiges / jour). Reset à minuit UTC.');
       if (!res.ok) throw new Error(data.error || 'Erreur');
       setResult(data);
     } catch (e) {
       const msg = e.message || '';
-      if (msg.includes('Failed to fetch') || msg.includes('NetworkError')) {
+      if (msg.includes('Quota')) {
+        setError(msg);
+      } else if (msg.includes('Failed to fetch') || msg.includes('NetworkError')) {
         setError('Erreur de connexion. Vérifie ta connexion internet et réessaie.');
       } else if (msg.includes('503') || msg.includes('overloaded')) {
         setError('Le serveur est occupé. Attends quelques secondes et réessaie.');
