@@ -44,7 +44,7 @@ fraud_score : 0-3 légitime, 4-6 suspect, 7-10 fraude probable. Sois précis et 
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
-      body: JSON.stringify({ model: "claude-opus-4-5", max_tokens: 1500, messages: [{ role: "user", content }] })
+      body: JSON.stringify({ model: "claude-opus-4-7", max_tokens: 1500, messages: [{ role: "user", content }] })
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.error?.message || "Erreur API");
