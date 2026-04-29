@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useLang } from '../contexts/LangContext';
 import { getSupabase } from '../lib/supabaseClient';
+import { compressImage } from '../lib/imageUtils';
 
 export default function Litige() {
   const { t, lang } = useLang();
@@ -20,21 +21,12 @@ export default function Litige() {
   const fileRef = useRef();
 
   function handleFiles(files) {
-    const newPreviews = [];
-    const newImages = [];
-    let loaded = 0;
     Array.from(files).forEach(file => {
-      const reader = new FileReader();
-      reader.onload = e => {
-        newPreviews.push(e.target.result);
-        newImages.push({ base64: e.target.result.split(',')[1], mime: file.type });
-        loaded++;
-        if (loaded === files.length) {
-          setImagePreviews(p => [...p, ...newPreviews]);
-          setImages(i => [...i, ...newImages]);
-        }
-      };
-      reader.readAsDataURL(file);
+      if (!file) return;
+      compressImage(file, 1200, 0.75, (dataUrl) => {
+        setImagePreviews(p => [...p, dataUrl]);
+        setImages(i => [...i, { base64: dataUrl.split(',')[1], mime: 'image/jpeg' }]);
+      });
     });
   }
 

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useLang } from '../contexts/LangContext';
 import { saveToHistory } from './historique';
 import { getSupabase } from '../lib/supabaseClient';
+import { compressImage } from '../lib/imageUtils';
 
 const PLATFORM_STYLE = {
   'Vinted':               { bg: 'rgba(9,177,186,0.12)',  color: '#2fd4dd', font: "'Georgia', serif",                weight: 700, transform: 'none',      spacing: '0px' },
@@ -48,25 +49,6 @@ export default function Annonce() {
   const [measureCategory, setMeasureCategory] = useState('');
   const [measures, setMeasures] = useState({});
   const fileRef = useRef();
-
-  function compressImage(file, maxWidth, quality, callback) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        let w = img.width, h = img.height;
-        if (w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
-        canvas.width = w; canvas.height = h;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, w, h);
-        const dataUrl = canvas.toDataURL('image/jpeg', quality);
-        callback(dataUrl);
-      };
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
 
   function handleFiles(fileList) {
     Array.from(fileList).forEach((file) => {
