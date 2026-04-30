@@ -55,7 +55,7 @@ export default function Verify() {
           <div style={{ maxWidth: 600, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <Link href="/">
               <span style={{ cursor: "pointer", display: "inline-flex", alignItems: "center" }}>
-                <img src="/logo.png" alt="SellCov" style={{ height: 54, width: "auto" }} />
+                <img src="/logo.png" alt="SellCov" style={{ height: 72, width: "auto" }} />
               </span>
             </Link>
             <span style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", letterSpacing: "0.04em" }}>VÉRIFICATION</span>

@@ -189,7 +189,7 @@ export default function Protection() {
           <div style={{ maxWidth: 600, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <Link href="/">
               <span style={{ cursor: "pointer", display: "inline-flex", alignItems: "center" }}>
-                <img src="/logo.png" alt="SellCov" style={{ height: 54, width: "auto" }} />
+                <img src="/logo.png" alt="SellCov" style={{ height: 72, width: "auto" }} />
               </span>
             </Link>
             <Link href="/">
