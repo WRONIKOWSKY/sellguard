@@ -178,10 +178,6 @@ export default function Litige() {
         .step-item:last-child{margin-bottom:0}
         .step-num{font-size:13px;font-weight:700;color:var(--violet);flex-shrink:0}
         .step-text{font-size:13px;color:#cdc8ff;line-height:1.6}
-        footer{border-top:1px solid var(--border);padding:30px 24px 24px}
-        .foot{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--text-dim)}
-        .foot-links{display:flex;gap:22px;flex-wrap:wrap;color:var(--text-muted)}
-        .foot-links a:hover{color:#fff}
         @media(max-width:560px){
           main{padding:120px 16px 60px}
           .card,.fraud-card,.steps-card{padding:18px 20px}
@@ -338,17 +334,6 @@ export default function Litige() {
           )}
         </div>
       </main>
-
-      <footer>
-        <div className="foot">
-          <div>© 2026 SellCov</div>
-          <div className="foot-links">
-            <Link href="/cgu">CGU</Link>
-            <Link href="/confidentialite">Confidentialité</Link>
-            <a href="mailto:hello@sellcov.com">Contact</a>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }

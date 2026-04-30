@@ -151,10 +151,6 @@ export default function Compte() {
         .envoi-meta{font-size:11px;color:var(--text-dim)}
         .envoi-id{font-size:10px;color:var(--text-dim);font-family:'SFMono-Regular',Menlo,monospace;flex-shrink:0}
         .loading{text-align:center;color:var(--text-muted);padding:40px 28px;font-size:14px}
-        footer{border-top:1px solid var(--border);padding:30px 24px 24px}
-        .foot{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--text-dim)}
-        .foot-links{display:flex;gap:22px;flex-wrap:wrap;color:var(--text-muted)}
-        .foot-links a:hover{color:#fff}
         @media(max-width:560px){
           .stats-row{grid-template-columns:1fr}
           .card{padding:28px 24px}
@@ -294,17 +290,6 @@ export default function Compte() {
 
         </div>
       </main>
-
-      <footer>
-        <div className="foot">
-          <div>© 2026 SellCov</div>
-          <div className="foot-links">
-            <Link href="/cgu">CGU</Link>
-            <Link href="/confidentialite">Confidentialité</Link>
-            <a href="mailto:hello@sellcov.com">Contact</a>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }

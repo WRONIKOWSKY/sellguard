@@ -318,10 +318,6 @@ export default function Annonce() {
         .publish-btns{display:flex;flex-wrap:wrap;gap:8px}
         .btn-publish{font-size:12px;font-weight:600;padding:9px 16px;border-radius:999px;border:1px solid var(--border-strong);cursor:pointer;font-family:inherit;transition:transform .15s,opacity .15s}
         .btn-publish:hover{transform:translateY(-1px);opacity:.9}
-        footer{border-top:1px solid var(--border);padding:30px 24px 24px}
-        .foot{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--text-dim)}
-        .foot-links{display:flex;gap:22px;flex-wrap:wrap;color:var(--text-muted)}
-        .foot-links a:hover{color:#fff}
         @media(max-width:560px){
           main{padding:120px 16px 60px}
           .result-head{flex-direction:column;align-items:stretch}
@@ -622,17 +618,6 @@ export default function Annonce() {
           )}
         </div>
       </main>
-
-      <footer>
-        <div className="foot">
-          <div>© 2026 SellCov</div>
-          <div className="foot-links">
-            <Link href="/cgu">CGU</Link>
-            <Link href="/confidentialite">Confidentialité</Link>
-            <a href="mailto:hello@sellcov.com">Contact</a>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }

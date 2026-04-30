@@ -164,10 +164,6 @@ export default function Historique() {
         .tip-item:last-child{margin-bottom:0}
         .tip-bullet{color:#f9a95c;flex-shrink:0}
         .tip-text{font-size:13px;color:var(--text-muted);line-height:1.55}
-        footer{border-top:1px solid var(--border);padding:30px 24px 24px}
-        .foot{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--text-dim)}
-        .foot-links{display:flex;gap:22px;flex-wrap:wrap;color:var(--text-muted)}
-        .foot-links a:hover{color:#fff}
         @media(max-width:560px){
           main{padding:120px 16px 60px}
           .page-head,.detail-head{flex-direction:column;align-items:stretch}
@@ -262,17 +258,6 @@ export default function Historique() {
             </button>
           </div>
         </main>
-
-        <footer>
-          <div className="foot">
-            <div>© 2026 SellCov</div>
-            <div className="foot-links">
-              <Link href="/cgu">CGU</Link>
-              <Link href="/confidentialite">Confidentialité</Link>
-              <a href="mailto:hello@sellcov.com">Contact</a>
-            </div>
-          </div>
-        </footer>
       </>
     );
   }
@@ -347,17 +332,6 @@ export default function Historique() {
           )}
         </div>
       </main>
-
-      <footer>
-        <div className="foot">
-          <div>© 2026 SellCov</div>
-          <div className="foot-links">
-            <Link href="/cgu">CGU</Link>
-            <Link href="/confidentialite">Confidentialité</Link>
-            <a href="mailto:hello@sellcov.com">Contact</a>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }
