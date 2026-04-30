@@ -79,6 +79,10 @@ async function handler(req, res) {
   }
 
   // 5. Insert DB
+  //    On passe explicitement created_at = timestamp pour que la valeur stockée
+  //    matche EXACTEMENT la valeur qu'on a signée. Sinon Postgres remplirait
+  //    avec now() qui peut différer de quelques ms du timestamp Node, et la
+  //    signature ne pourrait plus être vérifiée.
   const { error: dbErr } = await supa.from("certificats").insert({
     user_id: userId,
     cert_id: certId,
@@ -92,6 +96,7 @@ async function handler(req, res) {
     tsa_token: signature, // phase MVP : HMAC. Phase v1.1 : RFC 3161 token.
     tsa_provider: "sellcov-hmac-v1",
     device_info: deviceInfo || null,
+    created_at: timestamp,
   });
   if (dbErr) {
     console.error("[upload] DB insert error:", dbErr);
