@@ -61,7 +61,7 @@ export default function Layout({ children }) {
               maxWidth: 700,
               margin: "0 auto",
               padding: "0 20px",
-              height: 54,
+              height: 70,
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
@@ -79,7 +79,7 @@ export default function Layout({ children }) {
                   src="/logo.png"
                   alt="SellCov"
                   style={{
-                    height: 32,
+                    height: 54,
                     width: "auto",
                     display: "block",
                   }}

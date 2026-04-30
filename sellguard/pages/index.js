@@ -352,7 +352,7 @@ export default function Home() {
         header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(0,0,0,.55);border-bottom:1px solid rgba(255,255,255,.04)}
         .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--maxw);margin:0 auto}
         .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-        .logo-img{height:36px;width:auto;display:block}
+        .logo-img{height:54px;width:auto;display:block}
         .nav-links{display:flex;gap:32px}
         .nav-links a{color:var(--text-muted);font-size:15px;transition:color .2s}
         .nav-links a:hover{color:#fff}
