@@ -37,8 +37,12 @@ export default async function handler(req, res) {
   }
 
   // 2. Re-vérifier la signature HMAC : prouve que le cert n'a pas été altéré en DB
-  //    après création (ex: si quelqu'un avait accès direct à la DB et changeait le hash)
-  const signatureValid = verifyHmac(cert.video_hash, cert.created_at, cert.tsa_token);
+  //    après création (ex: si quelqu'un avait accès direct à la DB et changeait le hash).
+  //    Note : Postgres TIMESTAMPTZ retourne le timestamp avec offset explicite (+00:00)
+  //    alors que Node.toISOString() retourne avec Z. On normalise via Date pour
+  //    que le format matche celui qui a été signé à l'upload.
+  const signedTimestamp = new Date(cert.created_at).toISOString();
+  const signatureValid = verifyHmac(cert.video_hash, signedTimestamp, cert.tsa_token);
 
   // 3. Générer signed URL pour la vidéo (valide 1h)
   let videoUrl = null;
