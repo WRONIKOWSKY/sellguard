@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 const PAGE_HTML = `
 <header>
   <div class="nav">
-    <a class="logo" href="/"><span class="logo-mark">sc</span>SellCov</a>
+    <a class="logo" href="/"><img src="/logo.png" alt="SellCov" class="logo-img" /></a>
     <nav class="nav-links">
       <a href="#how" data-i18n="nav_how">Comment</a>
       <a href="#scams" data-i18n="nav_why">Pourquoi</a>
@@ -184,7 +184,7 @@ const PAGE_HTML = `
 
 <footer>
   <div class="foot">
-    <div class="logo"><span class="logo-mark">sc</span>SellCov</div>
+    <div class="logo"><img src="/logo.png" alt="SellCov" class="logo-img" /></div>
     <div class="foot-links">
       <a href="/faq" data-i18n="ft_faq">Questions fréquentes</a>
       <a href="mailto:hello@sellcov.com" data-i18n="ft_contact">Contact</a>
@@ -351,8 +351,8 @@ export default function Home() {
         .italic{font-style:italic;color:var(--text-muted);font-weight:500}
         header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(0,0,0,.55);border-bottom:1px solid rgba(255,255,255,.04)}
         .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--maxw);margin:0 auto}
-        .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;font-size:20px}
-        .logo-mark{width:32px;height:32px;border:1.5px solid #fff;border-radius:50%;display:grid;place-items:center;font-size:11px;letter-spacing:.5px;font-family:'Inter',sans-serif;font-weight:600}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+        .logo-img{height:36px;width:auto;display:block}
         .nav-links{display:flex;gap:32px}
         .nav-links a{color:var(--text-muted);font-size:15px;transition:color .2s}
         .nav-links a:hover{color:#fff}

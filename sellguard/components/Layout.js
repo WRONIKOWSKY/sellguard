@@ -70,46 +70,20 @@ export default function Layout({ children }) {
             <Link href="/">
               <span
                 style={{
-                  fontFamily: "'DM Serif Display', Georgia, serif",
-                  fontSize: 18,
-                  color: "#fff",
-                  letterSpacing: "-0.01em",
                   cursor: "pointer",
-                  display: "flex",
+                  display: "inline-flex",
                   alignItems: "center",
-                  gap: 10,
                 }}
               >
-                <svg width="26" height="26" viewBox="0 0 30 30" fill="none">
-                  <circle
-                    cx="15"
-                    cy="15"
-                    r="14"
-                    stroke="#fff"
-                    strokeWidth="1.2"
-                  />
-                  <circle
-                    cx="15"
-                    cy="15"
-                    r="10"
-                    stroke="#fff"
-                    strokeWidth="0.4"
-                    strokeDasharray="2.8 2.8"
-                  />
-                  <text
-                    x="15"
-                    y="19.5"
-                    fontFamily="-apple-system,Helvetica Neue,sans-serif"
-                    fontSize="9"
-                    fontWeight="700"
-                    fill="#fff"
-                    textAnchor="middle"
-                    letterSpacing="-0.02em"
-                  >
-                    SC
-                  </text>
-                </svg>
-                SellCov
+                <img
+                  src="/logo.png"
+                  alt="SellCov"
+                  style={{
+                    height: 32,
+                    width: "auto",
+                    display: "block",
+                  }}
+                />
               </span>
             </Link>
             <select
