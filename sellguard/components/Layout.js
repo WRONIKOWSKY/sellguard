@@ -79,7 +79,7 @@ export default function Layout({ children }) {
                   src="/logo.png"
                   alt="SellCov"
                   style={{
-                    height: 48,
+                    height: 72,
                     width: "auto",
                     display: "block",
                   }}
