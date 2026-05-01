@@ -185,8 +185,8 @@ export default function Protection() {
       </Head>
       <div style={{ minHeight: "100vh", background: "#000", color: "#fff", fontFamily: "'DM Sans', sans-serif" }}>
         {/* Header */}
-        <div style={{ borderBottom: "0.5px solid rgba(255,255,255,0.07)", padding: "14px 20px" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div style={{ borderBottom: "0.5px solid rgba(255,255,255,0.07)" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto", padding: "14px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", boxSizing: "border-box" }}>
             <Link href="/">
               <span style={{ cursor: "pointer", display: "inline-flex", alignItems: "center" }}>
                 <img src="/logo.png" alt="SellCov" style={{ height: 72, width: "auto" }} />
