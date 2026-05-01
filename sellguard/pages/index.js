@@ -123,6 +123,11 @@ const PAGE_HTML = `
       <div class="scam-solve"><span class="check">✓</span><span data-i18n="s3_solve">SellCov atteste le contenu exact du colis au moment de la fermeture.</span></div>
     </div>
   </div>
+  <div class="scams-dots" id="scams-dots">
+    <span class="scams-dot active"></span>
+    <span class="scams-dot"></span>
+    <span class="scams-dot"></span>
+  </div>
 </section>
 
 <section class="page" id="pricing" style="background:linear-gradient(180deg,transparent,rgba(94,232,163,.02),transparent)">
@@ -326,7 +331,31 @@ export default function Home() {
     const saved = localStorage.getItem('sellcov_lang') || 'fr';
     setLang(saved);
 
-    return () => io.disconnect();
+    // Carousel dots tracking pour la section "Arnaques" (mobile)
+    const scamsContainer = document.querySelector('.scams');
+    function updateScamsDots() {
+      if (!scamsContainer) return;
+      const dots = document.querySelectorAll('#scams-dots .scams-dot');
+      if (!dots.length) return;
+      const cards = scamsContainer.querySelectorAll('.scam-card');
+      const containerCenter = scamsContainer.scrollLeft + scamsContainer.clientWidth / 2;
+      let closestIdx = 0, closestDist = Infinity;
+      cards.forEach((c, i) => {
+        const cardCenter = c.offsetLeft + c.clientWidth / 2;
+        const dist = Math.abs(containerCenter - cardCenter);
+        if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle('active', i === closestIdx));
+    }
+    if (scamsContainer) {
+      scamsContainer.addEventListener('scroll', updateScamsDots, { passive: true });
+      updateScamsDots();
+    }
+
+    return () => {
+      io.disconnect();
+      if (scamsContainer) scamsContainer.removeEventListener('scroll', updateScamsDots);
+    };
   }, []);
 
   return (
@@ -384,7 +413,7 @@ export default function Home() {
         .platforms{color:var(--text-dim);font-size:14px;letter-spacing:.02em}
         .platforms strong{color:var(--text-muted);font-weight:500;margin:0 4px}
         .demo{padding:60px 24px 100px;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:48px}
-        .demo-tagline{color:var(--text-muted);font-size:17px;text-align:center;font-family:'Playfair Display',serif;font-style:italic;letter-spacing:-.01em;margin:0}
+        .demo-tagline{color:rgba(255,255,255,0.92);font-size:18px;text-align:center;font-family:'Playfair Display',serif;font-style:italic;letter-spacing:-.01em;margin:0}
         .phone-stage{position:relative;width:100%;max-width:820px;display:flex;justify-content:center;align-items:center}
         .phone-halo{position:absolute;inset:-80px;background:radial-gradient(ellipse at 50% 50%,rgba(94,232,163,.10) 0%,rgba(139,127,255,.04) 35%,rgba(0,0,0,0) 70%);filter:blur(50px);pointer-events:none;z-index:0}
         .phone-halo::after{content:"";position:absolute;bottom:-30px;left:10%;right:10%;height:60px;background:radial-gradient(ellipse,rgba(0,0,0,.85) 0%,rgba(0,0,0,0) 70%);filter:blur(40px)}
@@ -422,7 +451,8 @@ export default function Home() {
         .section-sub{color:var(--text-muted);font-size:17px;max-width:900px;margin-left:auto;margin-right:auto}
         .section-sub.nowrap{white-space:nowrap}
         .features{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:var(--maxw);margin:0 auto}
-        .features .feature:first-child{grid-column:1/-1}
+        .features .feature:first-child{grid-column:1/-1;align-items:center;text-align:center}
+        .features .feature:first-child .cta-area{justify-content:center}
         @media(max-width:900px){.section-sub.nowrap{white-space:normal}.hero-sub{white-space:normal}}
         .feature{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:34px;min-height:320px;display:flex;flex-direction:column;gap:16px;overflow:hidden}
         .feature .tag{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
@@ -439,6 +469,7 @@ export default function Home() {
         .scams.scams-3{grid-template-columns:repeat(3,1fr)}
         @media(max-width:900px){.scams,.scams.scams-3{grid-template-columns:1fr}}
         .scam-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;gap:14px;transition:border-color .2s,transform .2s;position:relative}
+        .scams-dots{display:none}
         .scam-card:hover{border-color:var(--border-strong);transform:translateY(-2px)}
         .scam-number{color:var(--pink);font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:600;margin-bottom:-6px}
         .scam-label{color:#fff;font-size:18px;font-weight:600;font-family:'Playfair Display',serif}
@@ -488,23 +519,25 @@ export default function Home() {
           .scams,.scams.scams-3{
             grid-template-columns:none;
             display:flex;
-            gap:12px;
+            gap:14px;
             overflow-x:auto;
             scroll-snap-type:x mandatory;
             -webkit-overflow-scrolling:touch;
             scrollbar-width:none;
-            padding:0 20px 8px;
+            padding:0 7.5vw 8px;
             margin:0 -20px;
-            scroll-padding-left:20px;
           }
           .scams::-webkit-scrollbar{display:none}
           .scam-card{
-            flex:0 0 85%;
-            scroll-snap-align:start;
+            flex:0 0 85vw;
+            scroll-snap-align:center;
             scroll-snap-stop:always;
             padding:22px 20px;
             gap:14px;
           }
+          .scams-dots{display:flex;justify-content:center;gap:8px;margin-top:18px}
+          .scams-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background .25s,width .25s;display:block}
+          .scams-dot.active{background:var(--pink);width:22px;border-radius:6px}
           .plan{padding:22px;gap:14px;max-width:380px;margin:0 auto;width:100%}
           .plan-price{font-size:38px}
           .hero{padding:110px 20px 40px}
