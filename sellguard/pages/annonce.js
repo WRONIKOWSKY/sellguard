@@ -319,50 +319,41 @@ export default function Annonce() {
         .btn-publish{font-size:12px;font-weight:600;padding:9px 16px;border-radius:999px;border:1px solid var(--border-strong);cursor:pointer;font-family:inherit;transition:transform .15s,opacity .15s}
         .btn-publish:hover{transform:translateY(-1px);opacity:.9}
 
-        /* Refonte résultat /annonce — hero recommended card */
-        .reco-card{border:1px solid var(--border-strong);border-radius:20px;padding:24px;margin-bottom:24px;display:flex;flex-direction:column;gap:16px}
-        .reco-badge{display:inline-block;align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--green);background:rgba(94,232,163,.1);border:1px solid rgba(94,232,163,.3);padding:6px 12px;border-radius:999px}
-        .reco-platform{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
-        .reco-platform-name{font-size:24px}
-        .reco-meta{display:flex;flex-direction:column;gap:2px;text-align:right}
-        .reco-price{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#fff;line-height:1}
-        .reco-score{font-size:11px;color:var(--text-dim)}
-        .reco-reason{font-size:14px;color:var(--text-muted);line-height:1.55;font-style:italic;border-left:2px solid var(--border-strong);padding-left:12px;margin:4px 0 8px}
-        .reco-section{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
-        .reco-section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
-        .reco-section-label{font-size:11px;font-weight:700;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase}
-        .reco-copy{font-size:12px;font-weight:600;padding:5px 12px;background:rgba(255,255,255,.06);color:#fff;border:1px solid var(--border-strong);border-radius:999px;cursor:pointer;font-family:inherit;transition:background .15s,border-color .15s}
-        .reco-copy:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3)}
-        .reco-section-content{font-size:14px;color:#fff;line-height:1.6}
-        .reco-desc{color:#e5e5e5;font-size:13px}
-        .reco-buyer{color:#bfffd8;font-size:13px;font-style:italic}
-        .reco-tags{display:flex;flex-wrap:wrap;gap:6px}
-        .reco-tag{display:inline-block;font-size:12px;padding:5px 11px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:999px;color:var(--text-muted)}
-        .reco-tips{background:rgba(251,146,60,.06);border:1px solid rgba(251,146,60,.2);border-radius:12px;padding:14px 16px}
-        .reco-tips-label{font-size:13px;font-weight:600;color:#f9a95c;margin-bottom:10px}
-        .reco-tip{display:flex;gap:10px;font-size:13px;color:var(--text-muted);line-height:1.5;margin-bottom:6px}
-        .reco-tip:last-child{margin-bottom:0}
-        .reco-tip-dot{color:#f9a95c;flex-shrink:0}
-        .reco-cta{font-size:16px;font-weight:700;padding:16px 24px;border-radius:14px;border:none;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .15s,opacity .15s;margin-top:6px}
-        .reco-cta:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(255,255,255,.12);opacity:.95}
-
-        /* Voir aussi : autres plateformes recommandées */
-        .alt-section{margin-bottom:20px}
-        .alt-section-label{font-size:11px;font-weight:700;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
-        .alt-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-        .alt-card{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;cursor:pointer;font-family:inherit;transition:border-color .15s,transform .15s;text-align:left;position:relative}
-        .alt-card:hover{border-color:var(--border-strong);transform:translateY(-2px)}
-        .alt-card-name{font-size:15px}
-        .alt-card-meta{font-size:12px;color:var(--text-muted)}
-        .alt-card-arrow{position:absolute;top:14px;right:16px;color:var(--text-dim);font-size:14px}
-        @media(max-width:560px){.alt-cards{grid-template-columns:1fr}}
-
-        /* Fallback : autres plateformes */
-        .fallback-section{margin-top:8px;padding-top:18px;border-top:1px solid var(--border)}
-        .fallback-label{font-size:11px;font-weight:700;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
-        .fallback-btns{display:flex;gap:8px;flex-wrap:wrap}
-        .fallback-btn{font-size:13px;font-weight:600;padding:8px 16px;background:transparent;border:1px solid var(--border-strong);border-radius:999px;cursor:pointer;font-family:inherit;transition:background .15s,opacity .15s}
-        .fallback-btn:hover{background:rgba(255,255,255,.04);opacity:.9}
+        .reco-card{border:1px solid var(--border-strong) !important;border-radius:20px !important;padding:24px !important;margin-bottom:24px !important;display:flex !important;flex-direction:column !important;gap:16px !important}
+        .reco-badge{display:inline-block !important;align-self:flex-start !important;font-size:11px !important;font-weight:700 !important;letter-spacing:.12em !important;color:var(--green) !important;background:rgba(94,232,163,.1) !important;border:1px solid rgba(94,232,163,.3) !important;padding:6px 12px !important;border-radius:999px !important}
+        .reco-platform{display:flex !important;justify-content:space-between !important;align-items:flex-start !important;gap:16px !important;flex-wrap:wrap !important}
+        .reco-platform-name{font-size:24px !important}
+        .reco-meta{display:flex !important;flex-direction:column !important;gap:2px !important;text-align:right !important}
+        .reco-price{font-family:'Playfair Display',serif !important;font-size:26px !important;font-weight:700 !important;color:#fff !important;line-height:1 !important}
+        .reco-score{font-size:11px !important;color:var(--text-dim) !important}
+        .reco-reason{font-size:14px !important;color:var(--text-muted) !important;line-height:1.55 !important;font-style:italic !important;border-left:2px solid var(--border-strong) !important;padding-left:12px !important;margin:4px 0 8px !important}
+        .reco-section{background:rgba(255,255,255,.03) !important;border:1px solid var(--border-strong) !important;border-radius:12px !important;padding:14px 16px !important}
+        .reco-section-head{display:flex !important;justify-content:space-between !important;align-items:center !important;gap:12px !important;margin-bottom:10px !important}
+        .reco-section-label{font-size:11px !important;font-weight:700 !important;color:var(--text-dim) !important;letter-spacing:.12em !important;text-transform:uppercase !important}
+        .reco-copy{font-size:12px !important;font-weight:600 !important;padding:5px 12px !important;background:rgba(255,255,255,.08) !important;color:#fff !important;border:1px solid var(--border-strong) !important;border-radius:999px !important;cursor:pointer !important;font-family:inherit !important}
+        .reco-copy:hover{background:rgba(255,255,255,.14) !important}
+        .reco-section-content{font-size:14px !important;color:#fff !important;line-height:1.6 !important}
+        .reco-desc{color:#e5e5e5 !important;font-size:13px !important}
+        .reco-buyer{color:#bfffd8 !important;font-size:13px !important;font-style:italic !important}
+        .reco-tags{display:flex !important;flex-wrap:wrap !important;gap:6px !important}
+        .reco-tag{display:inline-block !important;font-size:12px !important;padding:5px 11px !important;background:rgba(255,255,255,.06) !important;border:1px solid var(--border) !important;border-radius:999px !important;color:var(--text-muted) !important}
+        .reco-tips{background:rgba(251,146,60,.06) !important;border:1px solid rgba(251,146,60,.2) !important;border-radius:12px !important;padding:14px 16px !important}
+        .reco-tips-label{font-size:13px !important;font-weight:600 !important;color:#f9a95c !important;margin-bottom:10px !important}
+        .reco-tip{display:flex !important;gap:10px !important;font-size:13px !important;color:var(--text-muted) !important;line-height:1.5 !important;margin-bottom:6px !important}
+        .reco-tip-dot{color:#f9a95c !important;flex-shrink:0 !important}
+        .reco-cta{font-size:16px !important;font-weight:700 !important;padding:16px 24px !important;border-radius:14px !important;border:none !important;cursor:pointer !important;font-family:inherit !important;margin-top:6px !important;width:100% !important}
+        .alt-section{margin-bottom:20px !important}
+        .alt-section-label{font-size:11px !important;font-weight:700 !important;color:var(--text-dim) !important;letter-spacing:.12em !important;text-transform:uppercase !important;margin-bottom:10px !important}
+        .alt-cards{display:grid !important;grid-template-columns:1fr 1fr !important;gap:10px !important}
+        .alt-card{display:flex !important;flex-direction:column !important;align-items:flex-start !important;gap:6px !important;background:var(--bg-card) !important;border:1px solid var(--border-strong) !important;border-radius:12px !important;padding:14px 16px !important;cursor:pointer !important;font-family:inherit !important;text-align:left !important;position:relative !important}
+        .alt-card-name{font-size:15px !important}
+        .alt-card-meta{font-size:12px !important;color:var(--text-muted) !important}
+        .alt-card-arrow{position:absolute !important;top:14px !important;right:16px !important;color:var(--text-dim) !important;font-size:14px !important}
+        @media(max-width:560px){.alt-cards{grid-template-columns:1fr !important}}
+        .fallback-section{margin-top:18px !important;padding-top:18px !important;border-top:1px solid var(--border) !important}
+        .fallback-label{font-size:11px !important;font-weight:700 !important;color:var(--text-dim) !important;letter-spacing:.12em !important;text-transform:uppercase !important;margin-bottom:10px !important}
+        .fallback-btns{display:flex !important;gap:8px !important;flex-wrap:wrap !important}
+        .fallback-btn{font-size:13px !important;font-weight:600 !important;padding:8px 16px !important;background:transparent !important;border:1px solid var(--border-strong) !important;border-radius:999px !important;cursor:pointer !important;font-family:inherit !important}
         @media(max-width:560px){
           main{padding:120px 16px 60px}
           .result-head{flex-direction:column;align-items:stretch}
