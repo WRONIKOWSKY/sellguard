@@ -76,17 +76,17 @@ const PAGE_HTML = `
     <p class="section-sub nowrap" data-i18n="how_sub">De l'annonce à la défense en cas de litige, SellCov t'accompagne sur chaque étape d'une vente.</p>
   </div>
   <div class="features">
-    <div class="feature feature-violet reveal">
-      <span class="tag" data-i18n="f1_tag">Annonce</span>
-      <h3 class="serif"><span data-i18n="f1_h1">Génère ton annonce</span><br><span class="italic" data-i18n="f1_h2">en 10 secondes.</span></h3>
-      <p data-i18n="f1_p">Photographie l'article, reçois une annonce rédigée et prête à publier.</p>
-      <div class="cta-area"><a href="/annonce" class="btn btn-violet btn-sm" data-i18n="f1_btn">Essayer</a><span style="color:var(--text-dim);font-size:13px" data-i18n="f1_time">~10 sec par annonce</span></div>
-    </div>
     <div class="feature feature-green reveal">
       <span class="tag" data-i18n="f2_tag">Protection</span>
       <h3 class="serif"><span data-i18n="f2_h1">Certifie avant</span><br><span class="italic" data-i18n="f2_h2">d'expédier.</span></h3>
       <p data-i18n="f2_p">Créer une preuve utilisable en cas de litige.</p>
       <div class="cta-area"><a href="/protection" class="btn btn-green btn-sm" data-i18n="f2_btn">Protéger</a><span style="color:var(--text-dim);font-size:13px" data-i18n="f2_time">~1 min 30 par envoi</span></div>
+    </div>
+    <div class="feature feature-violet reveal">
+      <span class="tag" data-i18n="f1_tag">Annonce</span>
+      <h3 class="serif"><span data-i18n="f1_h1">Génère ton annonce</span><br><span class="italic" data-i18n="f1_h2">en 10 secondes.</span></h3>
+      <p data-i18n="f1_p">Photographie l'article, reçois une annonce rédigée et prête à publier.</p>
+      <div class="cta-area"><a href="/annonce" class="btn btn-violet btn-sm" data-i18n="f1_btn">Essayer</a><span style="color:var(--text-dim);font-size:13px" data-i18n="f1_time">~10 sec par annonce</span></div>
     </div>
     <div class="feature feature-pink reveal">
       <span class="tag" data-i18n="f3_tag">Litige</span>
@@ -422,7 +422,7 @@ export default function Home() {
         .section-sub{color:var(--text-muted);font-size:17px;max-width:900px;margin-left:auto;margin-right:auto}
         .section-sub.nowrap{white-space:nowrap}
         .features{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:var(--maxw);margin:0 auto}
-        .features .feature:last-child{grid-column:1/-1}
+        .features .feature:first-child{grid-column:1/-1}
         @media(max-width:900px){.section-sub.nowrap{white-space:normal}.hero-sub{white-space:normal}}
         .feature{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:34px;min-height:320px;display:flex;flex-direction:column;gap:16px;overflow:hidden}
         .feature .tag{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
@@ -483,8 +483,8 @@ export default function Home() {
           .feature .tag{font-size:10px}
           .feature .cta-area{flex-direction:column;align-items:flex-start;gap:6px}
           .feature .cta-area>span{font-size:11px}
-          .features .feature:last-child h3{font-size:24px}
-          .features .feature:last-child p{font-size:14px}
+          .features .feature:first-child h3{font-size:24px}
+          .features .feature:first-child p{font-size:14px}
           .scams,.scams.scams-3{
             grid-template-columns:none;
             display:flex;
@@ -502,10 +502,10 @@ export default function Home() {
             flex:0 0 85%;
             scroll-snap-align:start;
             scroll-snap-stop:always;
-            padding:18px;
-            gap:10px;
+            padding:22px 20px;
+            gap:14px;
           }
-          .plan{padding:22px;gap:14px}
+          .plan{padding:22px;gap:14px;max-width:380px;margin:0 auto;width:100%}
           .plan-price{font-size:38px}
           .hero{padding:110px 20px 40px}
           .final{padding:80px 20px 60px}
