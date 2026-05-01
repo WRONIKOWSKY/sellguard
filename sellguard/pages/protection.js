@@ -1,8 +1,26 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useLang } from "../contexts/LangContext";
 import { getSupabase } from "../lib/supabaseClient";
+
+// Sélectionne le meilleur mimeType supporté par le navigateur.
+// iOS Safari ne supporte que mp4 ; Chrome/Firefox préfèrent webm.
+function pickMimeType() {
+  if (typeof MediaRecorder === "undefined") return null;
+  const candidates = [
+    "video/mp4",
+    "video/webm;codecs=vp9,opus",
+    "video/webm;codecs=vp8,opus",
+    "video/webm",
+  ];
+  for (const t of candidates) {
+    try {
+      if (MediaRecorder.isTypeSupported(t)) return t;
+    } catch (_) {}
+  }
+  return null; // navigateur choisit
+}
 
 const CARRIERS = [
   { id: "colissimo", label: "Colissimo (La Poste)" },
@@ -45,6 +63,15 @@ export default function Protection() {
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
   const streamRef = useRef(null);
+  const recordedMimeRef = useRef(null);
+
+  // Attache le stream à l'élément <video> APRÈS qu'il soit rendu
+  // (sinon videoRef.current est null au moment du startCamera et on a écran noir)
+  useEffect(() => {
+    if (step === "recording" && streamRef.current && videoRef.current) {
+      videoRef.current.srcObject = streamRef.current;
+    }
+  }, [step]);
 
   function reset() {
     if (streamRef.current) {
@@ -66,23 +93,36 @@ export default function Protection() {
       return;
     }
     setError(null);
+
+    // Vérifs préalables : APIs disponibles ?
+    if (typeof navigator === "undefined" || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      setError("Ton navigateur ne supporte pas la caméra. Essaie Safari ou Chrome récent.");
+      return;
+    }
+    if (typeof MediaRecorder === "undefined") {
+      setError("Ton navigateur ne supporte pas l'enregistrement vidéo. Mets à jour iOS / Safari.");
+      return;
+    }
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: "environment" },
         audio: true,
       });
       streamRef.current = stream;
-      if (videoRef.current) videoRef.current.srcObject = stream;
-      setStep("recording");
+      setStep("recording"); // déclenche le useEffect qui attache srcObject
 
-      const mr = new MediaRecorder(stream);
+      const mimeType = pickMimeType();
+      const mr = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
+      recordedMimeRef.current = mr.mimeType || mimeType || "video/webm";
       mediaRecorderRef.current = mr;
       chunksRef.current = [];
       mr.ondataavailable = (e) => {
         if (e.data && e.data.size > 0) chunksRef.current.push(e.data);
       };
       mr.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: "video/webm" });
+        const type = recordedMimeRef.current || "video/webm";
+        const blob = new Blob(chunksRef.current, { type });
         setVideoBlob(blob);
         setVideoUrl(URL.createObjectURL(blob));
         if (streamRef.current) {
@@ -93,7 +133,22 @@ export default function Protection() {
       };
       mr.start();
     } catch (e) {
-      setError("Erreur caméra : " + (e.message || e));
+      // Messages d'erreur explicites en français selon le type d'erreur DOMException
+      let msg;
+      if (e && (e.name === "NotAllowedError" || e.name === "PermissionDeniedError")) {
+        msg = "Permission caméra refusée. Sur iPhone : tape sur l'icône à gauche de la barre d'adresse → Réglages du site → Caméra → Autoriser. Puis recharge la page.";
+      } else if (e && e.name === "NotFoundError") {
+        msg = "Aucune caméra trouvée sur cet appareil.";
+      } else if (e && e.name === "NotReadableError") {
+        msg = "La caméra est déjà utilisée par une autre app. Ferme les autres apps caméra puis réessaie.";
+      } else if (e && e.name === "OverconstrainedError") {
+        msg = "Cette caméra ne supporte pas la résolution demandée.";
+      } else if (e && e.name === "SecurityError") {
+        msg = "Caméra bloquée pour raisons de sécurité (page non sécurisée ?). Vérifie que l'URL commence bien par https://.";
+      } else {
+        msg = "Erreur caméra : " + ((e && (e.message || e.name)) || "inconnue");
+      }
+      setError(msg);
       setStep("form");
     }
   }
