@@ -423,7 +423,7 @@ export default function Home() {
         .section-sub.nowrap{white-space:nowrap}
         .features{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:var(--maxw);margin:0 auto}
         .features .feature:last-child{grid-column:1/-1}
-        @media(max-width:900px){.features{grid-template-columns:1fr}.features .feature:last-child{grid-column:auto}.section-sub.nowrap{white-space:normal}.hero-sub{white-space:normal}}
+        @media(max-width:900px){.section-sub.nowrap{white-space:normal}.hero-sub{white-space:normal}}
         .feature{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:34px;min-height:320px;display:flex;flex-direction:column;gap:16px;overflow:hidden}
         .feature .tag{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
         .feature h3{font-size:clamp(28px,3vw,38px);line-height:1.05;letter-spacing:-.02em}
@@ -476,16 +476,39 @@ export default function Home() {
           html,body{overflow-x:hidden;max-width:100vw}
           section.page{padding:60px 20px}
           .section-head{margin-bottom:32px}
-          .feature{padding:22px;min-height:auto;gap:12px;border-radius:14px}
-          .feature h3{font-size:26px}
-          .feature p{font-size:14px}
-          .scam-card{padding:18px;gap:10px}
+          .features{gap:10px}
+          .feature{padding:16px;min-height:auto;gap:8px;border-radius:14px}
+          .feature h3{font-size:18px;line-height:1.1}
+          .feature p{font-size:12px;line-height:1.45}
+          .feature .tag{font-size:10px}
+          .feature .cta-area{flex-direction:column;align-items:flex-start;gap:6px}
+          .feature .cta-area>span{font-size:11px}
+          .features .feature:last-child h3{font-size:24px}
+          .features .feature:last-child p{font-size:14px}
+          .scams,.scams.scams-3{
+            grid-template-columns:none;
+            display:flex;
+            gap:12px;
+            overflow-x:auto;
+            scroll-snap-type:x mandatory;
+            -webkit-overflow-scrolling:touch;
+            scrollbar-width:none;
+            padding:0 20px 8px;
+            margin:0 -20px;
+            scroll-padding-left:20px;
+          }
+          .scams::-webkit-scrollbar{display:none}
+          .scam-card{
+            flex:0 0 85%;
+            scroll-snap-align:start;
+            scroll-snap-stop:always;
+            padding:18px;
+            gap:10px;
+          }
           .plan{padding:22px;gap:14px}
           .plan-price{font-size:38px}
           .hero{padding:110px 20px 40px}
           .final{padding:80px 20px 60px}
-          .features{gap:12px}
-          .scams,.scams.scams-3{gap:12px}
           .pricing{gap:14px}
         }
       `}</style>
