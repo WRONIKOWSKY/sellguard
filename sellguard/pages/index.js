@@ -192,8 +192,8 @@ const PAGE_HTML = `
     <div class="foot-links">
       <a href="/faq" data-i18n="ft_faq">FAQ</a>
       <a href="mailto:hello@sellcov.com" data-i18n="ft_contact">Contact</a>
-      <a href="#" aria-label="Instagram (à venir)">Instagram</a>
-      <a href="#" aria-label="TikTok (à venir)">TikTok</a>
+      <a href="https://www.instagram.com/sellcov" target="_blank" rel="noopener noreferrer" aria-label="Instagram SellCov">Instagram</a>
+      <a href="https://www.tiktok.com/@sellcov.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok SellCov">TikTok</a>
       <a href="/cgu" data-i18n="ft_legal">Mentions légales</a>
       <a href="/cgu" data-i18n="ft_cgu">CGU</a>
       <a href="/confidentialite" data-i18n="ft_priv">Confidentialité</a>
