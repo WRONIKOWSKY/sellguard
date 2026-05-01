@@ -182,7 +182,7 @@ const PAGE_HTML = `
 <section class="final" id="cta">
   <h2 class="serif"><span data-i18n="fin_t1">Protège ton argent</span><br><span class="italic" data-i18n="fin_t2">maintenant.</span></h2>
   <p data-i18n="fin_sub">Génère une vidéo certifiée infalsifiable.</p>
-  <a href="/protection" class="btn btn-primary" style="padding:16px 32px;font-size:16px" data-i18n="fin_cta">Essayer →</a>
+  <a href="/protection" class="btn btn-primary" style="padding:16px 32px;font-size:16px" data-i18n="fin_cta">Essayer</a>
   <div class="platforms" style="margin-top:34px"><strong>Vinted</strong>·<strong>Leboncoin</strong>·<strong>Depop</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong>·<strong>Etsy</strong></div>
 </section>
 
@@ -190,7 +190,7 @@ const PAGE_HTML = `
   <div class="foot">
     <div class="logo"><img src="/logo.png" alt="SellCov" class="logo-img" /></div>
     <div class="foot-links">
-      <a href="/faq" data-i18n="ft_faq">Questions fréquentes</a>
+      <a href="/faq" data-i18n="ft_faq">FAQ</a>
       <a href="mailto:hello@sellcov.com" data-i18n="ft_contact">Contact</a>
       <a href="#" aria-label="Instagram (à venir)">Instagram</a>
       <a href="#" aria-label="TikTok (à venir)">TikTok</a>
@@ -227,8 +227,8 @@ const I18N = {
     p1_name:"One Shot",p1_unit:"/ certificat",p1_desc:"Pour les vendeurs occasionnels.",p1_f1:"1 certificat vidéo",p1_f2:"IA défense automatique",p1_f3:"Génération d'annonce",p1_f4:"Support email",p1_btn:"Acheter un certificat",
     p2_ribbon:"★ Recommandé",p2_name:"Pro Seller",p2_desc:"Pour les vendeurs faisant plus de 20 ventes/mois.",p2_f1:"50 certificats vidéo",p2_f2:"IA défense automatique",p2_f3:"Génération d'annonce",p2_f4:"Support email prioritaire",p2_f5:"Guide des arnaques à éviter",p2_f6:"Accès aux nouvelles fonctionnalités en avant-première",p2_btn:"Passer au Pro",
     p3_name:"Eco",p3_desc:"Pour les vendeurs réguliers.",p3_f1:"10 certificats vidéo",p3_f2:"IA défense automatique",p3_f3:"Génération d'annonce",p3_f4:"Support email",p3_f5:"Guide des arnaques à éviter",p3_btn:"Passer à Eco",
-    fin_t1:"Protège ton argent",fin_t2:"maintenant.",fin_sub:"Génère une vidéo certifiée infalsifiable.",fin_cta:"Essayer →",
-    ft_faq:"Questions fréquentes",ft_contact:"Contact",ft_legal:"Mentions légales",ft_cgu:"CGU",ft_priv:"Confidentialité"
+    fin_t1:"Protège ton argent",fin_t2:"maintenant.",fin_sub:"Génère une vidéo certifiée infalsifiable.",fin_cta:"Essayer",
+    ft_faq:"FAQ",ft_contact:"Contact",ft_legal:"Mentions légales",ft_cgu:"CGU",ft_priv:"Confidentialité"
   },
   en:{
     nav_how:"How",nav_why:"Why",nav_pricing:"Pricing",nav_faq:"FAQ",nav_cta:"Try it",
@@ -250,8 +250,8 @@ const I18N = {
     p1_name:"One Shot",p1_unit:"/ certificate",p1_desc:"For occasional sellers.",p1_f1:"1 video certificate",p1_f2:"AI automatic defence",p1_f3:"Listing generation",p1_f4:"Email support",p1_btn:"Buy one certificate",
     p2_ribbon:"★ Recommended",p2_name:"Pro Seller",p2_desc:"For sellers with more than 20 sales/month.",p2_f1:"50 video certificates",p2_f2:"AI automatic defence",p2_f3:"Listing generation",p2_f4:"Priority email support",p2_f5:"Guide to avoiding scams",p2_f6:"Early access to new features",p2_btn:"Go Pro",
     p3_name:"Eco",p3_desc:"For regular sellers.",p3_f1:"10 video certificates",p3_f2:"AI automatic defence",p3_f3:"Listing generation",p3_f4:"Email support",p3_f5:"Guide to avoiding scams",p3_btn:"Go Eco",
-    fin_t1:"Protect your money",fin_t2:"now.",fin_sub:"Generate a tamper-proof certified video.",fin_cta:"Try it →",
-    ft_faq:"Frequently asked questions",ft_contact:"Contact",ft_legal:"Legal notice",ft_cgu:"T&Cs",ft_priv:"Privacy"
+    fin_t1:"Protect your money",fin_t2:"now.",fin_sub:"Generate a tamper-proof certified video.",fin_cta:"Try it",
+    ft_faq:"FAQ",ft_contact:"Contact",ft_legal:"Legal notice",ft_cgu:"T&Cs",ft_priv:"Privacy"
   },
   es:{
     nav_how:"Cómo",nav_why:"Por qué",nav_pricing:"Precios",nav_faq:"FAQ",nav_cta:"Probar",
@@ -273,8 +273,8 @@ const I18N = {
     p1_name:"One Shot",p1_unit:"/ certificado",p1_desc:"Para vendedores ocasionales.",p1_f1:"1 certificado de video",p1_f2:"IA defensa automática",p1_f3:"Generación de anuncio",p1_f4:"Soporte email",p1_btn:"Comprar un certificado",
     p2_ribbon:"★ Recomendado",p2_name:"Pro Seller",p2_desc:"Para vendedores con más de 20 ventas/mes.",p2_f1:"50 certificados de video",p2_f2:"IA defensa automática",p2_f3:"Generación de anuncio",p2_f4:"Soporte email prioritario",p2_f5:"Guía de estafas a evitar",p2_f6:"Acceso anticipado a nuevas funciones",p2_btn:"Pasar a Pro",
     p3_name:"Eco",p3_desc:"Para vendedores regulares.",p3_f1:"10 certificados de video",p3_f2:"IA defensa automática",p3_f3:"Generación de anuncio",p3_f4:"Soporte email",p3_f5:"Guía de estafas a evitar",p3_btn:"Pasar a Eco",
-    fin_t1:"Protege tu dinero",fin_t2:"ahora.",fin_sub:"Genera un video certificado infalsificable.",fin_cta:"Probar →",
-    ft_faq:"Preguntas frecuentes",ft_contact:"Contacto",ft_legal:"Aviso legal",ft_cgu:"T&C",ft_priv:"Privacidad"
+    fin_t1:"Protege tu dinero",fin_t2:"ahora.",fin_sub:"Genera un video certificado infalsificable.",fin_cta:"Probar",
+    ft_faq:"FAQ",ft_contact:"Contacto",ft_legal:"Aviso legal",ft_cgu:"T&C",ft_priv:"Privacidad"
   },
   it:{
     nav_how:"Come",nav_why:"Perché",nav_pricing:"Prezzi",nav_faq:"FAQ",nav_cta:"Prova",
@@ -296,8 +296,8 @@ const I18N = {
     p1_name:"One Shot",p1_unit:"/ certificato",p1_desc:"Per i venditori occasionali.",p1_f1:"1 certificato video",p1_f2:"IA difesa automatica",p1_f3:"Generazione di annuncio",p1_f4:"Supporto email",p1_btn:"Acquista un certificato",
     p2_ribbon:"★ Consigliato",p2_name:"Pro Seller",p2_desc:"Per i venditori con più di 20 vendite/mese.",p2_f1:"50 certificati video",p2_f2:"IA difesa automatica",p2_f3:"Generazione di annuncio",p2_f4:"Supporto email prioritario",p2_f5:"Guida alle truffe da evitare",p2_f6:"Accesso anticipato alle nuove funzionalità",p2_btn:"Passa a Pro",
     p3_name:"Eco",p3_desc:"Per i venditori regolari.",p3_f1:"10 certificati video",p3_f2:"IA difesa automatica",p3_f3:"Generazione di annuncio",p3_f4:"Supporto email",p3_f5:"Guida alle truffe da evitare",p3_btn:"Passa a Eco",
-    fin_t1:"Proteggi il tuo denaro",fin_t2:"ora.",fin_sub:"Genera un video certificato infalsificabile.",fin_cta:"Prova →",
-    ft_faq:"Domande frequenti",ft_contact:"Contatto",ft_legal:"Note legali",ft_cgu:"Termini e condizioni",ft_priv:"Privacy"
+    fin_t1:"Proteggi il tuo denaro",fin_t2:"ora.",fin_sub:"Genera un video certificato infalsificabile.",fin_cta:"Prova",
+    ft_faq:"FAQ",ft_contact:"Contatto",ft_legal:"Note legali",ft_cgu:"Termini e condizioni",ft_priv:"Privacy"
   }
 };
 
@@ -450,7 +450,7 @@ export default function Home() {
         .section-sub{color:var(--text-muted);font-size:17px;max-width:900px;margin-left:auto;margin-right:auto}
         .section-sub.nowrap{white-space:nowrap}
         .features{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:var(--maxw);margin:0 auto}
-        .features .feature:first-child{grid-column:1/-1;align-items:center;text-align:center}
+        .features .feature:first-child{grid-column:1/-1;text-align:center}
         .features .feature:first-child .cta-area{justify-content:center}
         @media(min-width:561px){.features .feature:first-child{max-width:calc((100% - 18px) / 2);margin:0 auto}}
         @media(max-width:900px){.section-sub.nowrap{white-space:normal}.hero-sub{white-space:normal}}
@@ -521,11 +521,14 @@ export default function Home() {
             display:flex;
             gap:14px;
             overflow-x:auto;
+            overflow-y:hidden;
             scroll-snap-type:x mandatory;
             -webkit-overflow-scrolling:touch;
             scrollbar-width:none;
             padding:0 7.5vw 8px;
             margin:0 -20px;
+            touch-action:pan-x;
+            overscroll-behavior-x:contain;
           }
           .scams::-webkit-scrollbar{display:none}
           .scam-card{
