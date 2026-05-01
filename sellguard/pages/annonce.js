@@ -318,6 +318,51 @@ export default function Annonce() {
         .publish-btns{display:flex;flex-wrap:wrap;gap:8px}
         .btn-publish{font-size:12px;font-weight:600;padding:9px 16px;border-radius:999px;border:1px solid var(--border-strong);cursor:pointer;font-family:inherit;transition:transform .15s,opacity .15s}
         .btn-publish:hover{transform:translateY(-1px);opacity:.9}
+
+        /* Refonte résultat /annonce — hero recommended card */
+        .reco-card{border:1px solid var(--border-strong);border-radius:20px;padding:24px;margin-bottom:24px;display:flex;flex-direction:column;gap:16px}
+        .reco-badge{display:inline-block;align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--green);background:rgba(94,232,163,.1);border:1px solid rgba(94,232,163,.3);padding:6px 12px;border-radius:999px}
+        .reco-platform{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+        .reco-platform-name{font-size:24px}
+        .reco-meta{display:flex;flex-direction:column;gap:2px;text-align:right}
+        .reco-price{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#fff;line-height:1}
+        .reco-score{font-size:11px;color:var(--text-dim)}
+        .reco-reason{font-size:14px;color:var(--text-muted);line-height:1.55;font-style:italic;border-left:2px solid var(--border-strong);padding-left:12px;margin:4px 0 8px}
+        .reco-section{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+        .reco-section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+        .reco-section-label{font-size:11px;font-weight:700;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase}
+        .reco-copy{font-size:12px;font-weight:600;padding:5px 12px;background:rgba(255,255,255,.06);color:#fff;border:1px solid var(--border-strong);border-radius:999px;cursor:pointer;font-family:inherit;transition:background .15s,border-color .15s}
+        .reco-copy:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3)}
+        .reco-section-content{font-size:14px;color:#fff;line-height:1.6}
+        .reco-desc{color:#e5e5e5;font-size:13px}
+        .reco-buyer{color:#bfffd8;font-size:13px;font-style:italic}
+        .reco-tags{display:flex;flex-wrap:wrap;gap:6px}
+        .reco-tag{display:inline-block;font-size:12px;padding:5px 11px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:999px;color:var(--text-muted)}
+        .reco-tips{background:rgba(251,146,60,.06);border:1px solid rgba(251,146,60,.2);border-radius:12px;padding:14px 16px}
+        .reco-tips-label{font-size:13px;font-weight:600;color:#f9a95c;margin-bottom:10px}
+        .reco-tip{display:flex;gap:10px;font-size:13px;color:var(--text-muted);line-height:1.5;margin-bottom:6px}
+        .reco-tip:last-child{margin-bottom:0}
+        .reco-tip-dot{color:#f9a95c;flex-shrink:0}
+        .reco-cta{font-size:16px;font-weight:700;padding:16px 24px;border-radius:14px;border:none;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .15s,opacity .15s;margin-top:6px}
+        .reco-cta:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(255,255,255,.12);opacity:.95}
+
+        /* Voir aussi : autres plateformes recommandées */
+        .alt-section{margin-bottom:20px}
+        .alt-section-label{font-size:11px;font-weight:700;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+        .alt-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+        .alt-card{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;cursor:pointer;font-family:inherit;transition:border-color .15s,transform .15s;text-align:left;position:relative}
+        .alt-card:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+        .alt-card-name{font-size:15px}
+        .alt-card-meta{font-size:12px;color:var(--text-muted)}
+        .alt-card-arrow{position:absolute;top:14px;right:16px;color:var(--text-dim);font-size:14px}
+        @media(max-width:560px){.alt-cards{grid-template-columns:1fr}}
+
+        /* Fallback : autres plateformes */
+        .fallback-section{margin-top:8px;padding-top:18px;border-top:1px solid var(--border)}
+        .fallback-label{font-size:11px;font-weight:700;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+        .fallback-btns{display:flex;gap:8px;flex-wrap:wrap}
+        .fallback-btn{font-size:13px;font-weight:600;padding:8px 16px;background:transparent;border:1px solid var(--border-strong);border-radius:999px;cursor:pointer;font-family:inherit;transition:background .15s,opacity .15s}
+        .fallback-btn:hover{background:rgba(255,255,255,.04);opacity:.9}
         @media(max-width:560px){
           main{padding:120px 16px 60px}
           .result-head{flex-direction:column;align-items:stretch}
@@ -460,6 +505,7 @@ export default function Annonce() {
             </>
           ) : (
             <>
+              {/* Header : nom article + actions */}
               <div className="result-head">
                 <div>
                   <h2 className="result-title serif">{result.item_name}</h2>
@@ -468,19 +514,6 @@ export default function Annonce() {
                 <div className="result-actions">
                   <button className="btn-share" onClick={shareListing}>{shareLabel}</button>
                   <button className="btn-ghost" onClick={reset}>{a.back}</button>
-                </div>
-              </div>
-
-              <div className="ai-card">
-                <div className="ai-card-icon">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10"/>
-                    <circle cx="12" cy="12" r="3"/>
-                  </svg>
-                </div>
-                <div>
-                  <p className="ai-card-title">{a.ai_title}</p>
-                  <p className="ai-card-text">{a.ai_text}</p>
                 </div>
               </div>
 
@@ -493,127 +526,175 @@ export default function Annonce() {
                 </div>
               )}
 
-              <div className="tabs-row">
-                {(result.platforms || []).map((p) => {
-                  const ps = PLATFORM_STYLE[p.name] || {};
-                  const isActive = activeTab === p.name;
-                  return (
-                    <button
-                      key={p.name}
-                      className={'tab' + (isActive ? ' active' : '')}
-                      onClick={() => setActiveTab(p.name)}
-                      style={{
-                        fontWeight: ps.weight || 600,
-                        color: isActive ? '#fff' : (ps.color || 'var(--text-muted)'),
-                        fontFamily: ps.font || 'inherit',
-                        letterSpacing: ps.spacing || '0px',
-                        textTransform: ps.transform || 'none',
-                      }}
+              {activePlatform && (() => {
+                const ps = PLATFORM_STYLE[activePlatform.name] || {};
+                const isRecommended = activePlatform.name === result.best_platform;
+                const matchName = activePlatform.name === 'Vestiaire Collective' ? 'Vestiaire' : activePlatform.name;
+                const publishUrl = (publishPlatforms.find((p) => p.name === matchName) || {}).url;
+                const otherRecommended = (result.platforms || []).filter((p) => p.name !== activePlatform.name);
+                const recommendedNames = (result.platforms || []).map((p) => p.name);
+                const otherFallback = publishPlatforms.filter((pl) => {
+                  const n = pl.name === 'Vestiaire' ? 'Vestiaire Collective' : pl.name;
+                  return !recommendedNames.includes(n);
+                });
+
+                return (
+                  <>
+                    {/* Hero card : plateforme recommandée + tout le contenu */}
+                    <div
+                      className="reco-card"
+                      style={{ background: ps.bg ? `linear-gradient(180deg, ${ps.bg}, transparent 40%), var(--bg-card)` : 'var(--bg-card)' }}
                     >
-                      {p.name === result.best_platform ? '⭐ ' : ''}{p.name} · {p.price_min}-{p.price_max}€
-                    </button>
-                  );
-                })}
-              </div>
+                      {isRecommended && (
+                        <div className="reco-badge">⭐ {tx({fr:'RECOMMANDÉ POUR CE PRODUIT', en:'RECOMMENDED FOR THIS PRODUCT', es:'RECOMENDADO PARA ESTE PRODUCTO', it:'CONSIGLIATO PER QUESTO PRODOTTO'})}</div>
+                      )}
 
-              {activePlatform && (
-                <div>
-                  <div
-                    className="plat-card"
-                    style={{ background: (PLATFORM_STYLE[activePlatform.name] || {}).bg || 'var(--bg-card)' }}
-                  >
-                    <div className="plat-head">
-                      <span
-                        className="plat-chip"
-                        style={{
-                          color: (PLATFORM_STYLE[activePlatform.name] || {}).color || '#fff',
-                          fontWeight: (PLATFORM_STYLE[activePlatform.name] || {}).weight || 600,
-                          fontFamily: (PLATFORM_STYLE[activePlatform.name] || {}).font || 'inherit',
-                          letterSpacing: (PLATFORM_STYLE[activePlatform.name] || {}).spacing || '0px',
-                          textTransform: (PLATFORM_STYLE[activePlatform.name] || {}).transform || 'none',
-                        }}
-                      >{activePlatform.name}</span>
-                      <div>
-                        <p className="plat-price">{activePlatform.price_min}–{activePlatform.price_max}€</p>
-                        <p className="plat-score">Score {activePlatform.score}/10 · {result.time_to_sell}</p>
+                      <div className="reco-platform">
+                        <span
+                          className="reco-platform-name"
+                          style={{
+                            color: ps.color || '#fff',
+                            fontWeight: ps.weight || 700,
+                            fontFamily: ps.font || 'inherit',
+                            letterSpacing: ps.spacing || '0px',
+                            textTransform: ps.transform || 'none',
+                          }}
+                        >{activePlatform.name}</span>
+                        <div className="reco-meta">
+                          <span className="reco-price">{activePlatform.price_min}–{activePlatform.price_max}€</span>
+                          <span className="reco-score">Score {activePlatform.score}/10 · {result.time_to_sell}</span>
+                        </div>
                       </div>
-                    </div>
-                    <p className="plat-reason">{activePlatform.reason}</p>
-                  </div>
 
-                  <div className="card">
-                    <div className="card-head">
-                      <span className="card-label">{a.title_l}</span>
-                      <button className="btn-copy" onClick={() => copy('title', result.title)}>
-                        {copied['title'] ? a.copied : a.copy}
-                      </button>
-                    </div>
-                    <p className="card-title-text">{result.title}</p>
-                  </div>
+                      <p className="reco-reason">{activePlatform.reason}</p>
 
-                  <div className="card">
-                    <div className="card-head">
-                      <span className="card-label">{a.desc_l}</span>
-                      <button className="btn-copy" onClick={() => copy('desc', result.description)}>
-                        {copied['desc'] ? a.copied : a.copy}
-                      </button>
-                    </div>
-                    <p className="card-desc-text">{result.description}</p>
-                  </div>
-
-                  <div className="card">
-                    <p className="card-label" style={{ marginBottom: 12 }}>{a.kw_l}</p>
-                    <div>
-                      {(result.keywords || []).map((k) => (
-                        <span key={k} className="kw-tag">#{k}</span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="tips-card">
-                    <p className="tips-label">{a.tips_l}</p>
-                    {(result.selling_tips || []).map((tip, i) => (
-                      <div key={i} className="tip-item">
-                        <span className="tip-bullet">·</span>
-                        <p className="tip-text">{tip}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="buyer-card">
-                    <div className="buyer-head">
-                      <p className="buyer-label">{buyerMsgHeader}</p>
-                      <button className="btn-buyer-copy" onClick={() => copy('buyermsg', buyerMsg)}>
-                        {copied['buyermsg'] ? copiedBtnLabel : copyBtnLabel}
-                      </button>
-                    </div>
-                    <p className="buyer-text">{buyerMsg}</p>
-                  </div>
-
-                  <div className="publish-card">
-                    <p className="publish-label">{publishHeader}</p>
-                    <p className="publish-desc">{publishDesc}</p>
-                    <div className="publish-btns">
-                      {publishPlatforms.map((pl) => {
-                        const ps = PLATFORM_STYLE[pl.name === 'Vestiaire' ? 'Vestiaire Collective' : pl.name] || {};
-                        return (
-                          <button
-                            key={pl.name}
-                            className="btn-publish"
-                            onClick={() => publishTo(pl)}
-                            style={{
-                              background: ps.bg || 'rgba(255,255,255,0.06)',
-                              color: ps.color || '#fff',
-                            }}
-                          >
-                            {copied['publish'] === pl.name ? publishOpeningLabel : (postOnLabel + pl.name)}
+                      {/* Section : Titre */}
+                      <div className="reco-section">
+                        <div className="reco-section-head">
+                          <span className="reco-section-label">{a.title_l}</span>
+                          <button className="reco-copy" onClick={() => copy('title', result.title)}>
+                            {copied['title'] ? '✓ ' + a.copied : '⧉ ' + a.copy}
                           </button>
-                        );
-                      })}
+                        </div>
+                        <p className="reco-section-content">{result.title}</p>
+                      </div>
+
+                      {/* Section : Description */}
+                      <div className="reco-section">
+                        <div className="reco-section-head">
+                          <span className="reco-section-label">{a.desc_l}</span>
+                          <button className="reco-copy" onClick={() => copy('desc', result.description)}>
+                            {copied['desc'] ? '✓ ' + a.copied : '⧉ ' + a.copy}
+                          </button>
+                        </div>
+                        <p className="reco-section-content reco-desc">{result.description}</p>
+                      </div>
+
+                      {/* Section : Hashtags */}
+                      <div className="reco-section">
+                        <div className="reco-section-head">
+                          <span className="reco-section-label">{a.kw_l}</span>
+                          <button className="reco-copy" onClick={() => copy('kw', (result.keywords || []).map((k) => '#' + k).join(' '))}>
+                            {copied['kw'] ? '✓ ' + a.copied : '⧉ ' + a.copy}
+                          </button>
+                        </div>
+                        <div className="reco-tags">
+                          {(result.keywords || []).map((k) => (
+                            <span key={k} className="reco-tag">#{k}</span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Section : Message acheteur */}
+                      <div className="reco-section">
+                        <div className="reco-section-head">
+                          <span className="reco-section-label">{buyerMsgHeader}</span>
+                          <button className="reco-copy" onClick={() => copy('buyermsg', buyerMsg)}>
+                            {copied['buyermsg'] ? '✓ ' + copiedBtnLabel : '⧉ ' + copyBtnLabel}
+                          </button>
+                        </div>
+                        <p className="reco-section-content reco-buyer">{buyerMsg}</p>
+                      </div>
+
+                      {/* Conseils */}
+                      {(result.selling_tips || []).length > 0 && (
+                        <div className="reco-tips">
+                          <p className="reco-tips-label">💡 {tx({fr:'Conseils pour ', en:'Tips for ', es:'Consejos para ', it:'Consigli per '}) + activePlatform.name}</p>
+                          {(result.selling_tips || []).map((tip, i) => (
+                            <div key={i} className="reco-tip"><span className="reco-tip-dot">·</span><span>{tip}</span></div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Big CTA principal */}
+                      {publishUrl && (
+                        <button
+                          className="reco-cta"
+                          onClick={() => publishTo({ name: matchName, url: publishUrl })}
+                          style={{
+                            background: ps.color || '#fff',
+                            color: ps.name === 'Grailed' ? '#000' : '#000',
+                          }}
+                        >
+                          {copied['publish'] === matchName
+                            ? publishOpeningLabel
+                            : `🚀 ${postOnLabel}${activePlatform.name} →`}
+                        </button>
+                      )}
                     </div>
-                  </div>
-                </div>
-              )}
+
+                    {/* Voir aussi : autres plateformes recommandées */}
+                    {otherRecommended.length > 0 && (
+                      <div className="alt-section">
+                        <p className="alt-section-label">{tx({fr:'VOIR AUSSI', en:'SEE ALSO', es:'VER TAMBIÉN', it:'VEDI ANCHE'})}</p>
+                        <div className="alt-cards">
+                          {otherRecommended.map((p) => {
+                            const aps = PLATFORM_STYLE[p.name] || {};
+                            return (
+                              <button key={p.name} className="alt-card" onClick={() => setActiveTab(p.name)}>
+                                <span
+                                  className="alt-card-name"
+                                  style={{
+                                    color: aps.color || '#fff',
+                                    fontWeight: aps.weight || 700,
+                                    fontFamily: aps.font || 'inherit',
+                                    letterSpacing: aps.spacing || '0px',
+                                    textTransform: aps.transform || 'none',
+                                  }}
+                                >{p.name}</span>
+                                <span className="alt-card-meta">{p.price_min}–{p.price_max}€ · Score {p.score}/10</span>
+                                <span className="alt-card-arrow">→</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Fallback : autres plateformes pas recommandées */}
+                    {otherFallback.length > 0 && (
+                      <div className="fallback-section">
+                        <p className="fallback-label">{tx({fr:'PUBLIER SUR UNE AUTRE PLATEFORME', en:'POST ON ANOTHER PLATFORM', es:'PUBLICAR EN OTRA PLATAFORMA', it:'PUBBLICA SU UN\'ALTRA PIATTAFORMA'})}</p>
+                        <div className="fallback-btns">
+                          {otherFallback.map((pl) => {
+                            const fps = PLATFORM_STYLE[pl.name === 'Vestiaire' ? 'Vestiaire Collective' : pl.name] || {};
+                            return (
+                              <button
+                                key={pl.name}
+                                className="fallback-btn"
+                                onClick={() => publishTo(pl)}
+                                style={{ borderColor: fps.color || 'var(--border-strong)', color: fps.color || '#fff' }}
+                              >
+                                {copied['publish'] === pl.name ? publishOpeningLabel : pl.name}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </>
+                );
+              })()}
             </>
           )}
         </div>
