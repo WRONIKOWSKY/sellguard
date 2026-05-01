@@ -25,7 +25,7 @@ const PAGE_HTML = `
 </header>
 
 <section class="hero">
-  <span class="badge"><span class="dot"></span><span data-i18n="badge">Lancement · Tarifs Early Adopter</span></span>
+  <span class="badge"><span class="dot"></span><span data-i18n="badge">Lancement</span></span>
   <h1 class="h1 serif"><span data-i18n="hero_h1_1">Revends</span><span class="italic" data-i18n="hero_h1_2">sans te faire arnaquer.</span></h1>
   <p class="hero-sub" data-i18n="hero_sub">Une preuve solide avant l'envoi. Un dossier complet en cas de litige.</p>
   <p class="hero-subsub" data-i18n="hero_subsub">Preuve horodatée. Défense automatique.</p>
@@ -129,7 +129,7 @@ const PAGE_HTML = `
   <div class="section-head reveal">
     <div class="section-kicker" data-i18n="pl_kicker">Nos offres</div>
     <h2 class="section-title serif"><span data-i18n="pl_t1">Simple,</span><br><span class="italic" data-i18n="pl_t2">sans surprise.</span></h2>
-    <p class="section-sub" data-i18n="pl_sub">Tarifs Early Adopter bloqués 1 an. Aucun engagement, annulable en 1 clic.</p>
+    <p class="section-sub" data-i18n="pl_sub">Aucun engagement, annulable en 1 clic.</p>
   </div>
   <div class="pricing">
     <div class="plan reveal">
@@ -202,7 +202,7 @@ const PAGE_HTML = `
 const I18N = {
   fr:{
     nav_how:"Comment",nav_why:"Pourquoi",nav_pricing:"Tarifs",nav_faq:"FAQ",nav_cta:"Essayer",
-    badge:"Lancement · Tarifs Early Adopter",
+    badge:"Lancement",
     hero_h1_1:"Revends",hero_h1_2:"sans te faire arnaquer.",
     hero_sub:"Une preuve solide avant l'envoi. Un dossier complet en cas de litige.",
     hero_subsub:"Preuve horodatée. Défense automatique.",
@@ -218,7 +218,7 @@ const I18N = {
     s1_title:"Colis « jamais reçu »",s1_quote:"« Je n'ai jamais reçu le colis. Je demande un remboursement. »",s1_solve:"SellCov fournit la vidéo horodatée du dépôt et l'étiquette filmée.",
     s2_title:"Article « abîmé »",s2_quote:"« L'article est arrivé troué. Je veux être remboursé. »",s2_solve:"SellCov prouve l'état exact avant expédition grâce à la vidéo 360° horodatée.",
     s3_title:"Substitution",s3_quote:"« Ce n'est pas l'article que j'ai commandé. »",s3_solve:"SellCov atteste le contenu exact du colis au moment de la fermeture.",
-    pl_kicker:"Nos offres",pl_t1:"Simple,",pl_t2:"sans surprise.",pl_sub:"Tarifs Early Adopter bloqués 1 an. Aucun engagement, annulable en 1 clic.",
+    pl_kicker:"Nos offres",pl_t1:"Simple,",pl_t2:"sans surprise.",pl_sub:"Aucun engagement, annulable en 1 clic.",
     per_mo:"/ mois",
     p1_name:"One Shot",p1_unit:"/ certificat",p1_desc:"Pour les vendeurs occasionnels.",p1_f1:"1 certificat vidéo",p1_f2:"IA défense automatique",p1_f3:"Génération d'annonce",p1_f4:"Support email",p1_btn:"Acheter un certificat",
     p2_ribbon:"★ Recommandé",p2_name:"Pro Seller",p2_desc:"Pour les vendeurs faisant plus de 20 ventes/mois.",p2_f1:"50 certificats vidéo",p2_f2:"IA défense automatique",p2_f3:"Génération d'annonce",p2_f4:"Support email prioritaire",p2_f5:"Guide des arnaques à éviter",p2_f6:"Accès aux nouvelles fonctionnalités en avant-première",p2_btn:"Passer au Pro",
@@ -228,7 +228,7 @@ const I18N = {
   },
   en:{
     nav_how:"How",nav_why:"Why",nav_pricing:"Pricing",nav_faq:"FAQ",nav_cta:"Try it",
-    badge:"Launch · Early Adopter pricing",
+    badge:"Launch",
     hero_h1_1:"Sell",hero_h1_2:"without getting scammed.",
     hero_sub:"Solid proof before shipping. Full case file for any dispute.",hero_subsub:"Timestamped proof. Automatic defence.",
     stat1:"Certified proofs",stat2:"Data encrypted in France",stat3:"Cancel in 1 click",hero_cta:"Protect my next sale",
@@ -241,7 +241,7 @@ const I18N = {
     s1_title:"Parcel \"never received\"",s1_quote:"\"I never received the parcel. I'm requesting a refund.\"",s1_solve:"SellCov provides the timestamped video of drop-off and the filmed label.",
     s2_title:"Item \"damaged\"",s2_quote:"\"The item arrived with a hole. I want a refund.\"",s2_solve:"SellCov proves the exact condition before shipping with a 360° timestamped video.",
     s3_title:"Substitution",s3_quote:"\"This is not the item I ordered.\"",s3_solve:"SellCov certifies the exact contents of the parcel at the time of sealing.",
-    pl_kicker:"Our plans",pl_t1:"Simple,",pl_t2:"no surprises.",pl_sub:"Early Adopter pricing locked for 1 year. No commitment, cancel anytime.",
+    pl_kicker:"Our plans",pl_t1:"Simple,",pl_t2:"no surprises.",pl_sub:"No commitment, cancel anytime.",
     per_mo:"/ month",
     p1_name:"One Shot",p1_unit:"/ certificate",p1_desc:"For occasional sellers.",p1_f1:"1 video certificate",p1_f2:"AI automatic defence",p1_f3:"Listing generation",p1_f4:"Email support",p1_btn:"Buy one certificate",
     p2_ribbon:"★ Recommended",p2_name:"Pro Seller",p2_desc:"For sellers with more than 20 sales/month.",p2_f1:"50 video certificates",p2_f2:"AI automatic defence",p2_f3:"Listing generation",p2_f4:"Priority email support",p2_f5:"Guide to avoiding scams",p2_f6:"Early access to new features",p2_btn:"Go Pro",
@@ -251,7 +251,7 @@ const I18N = {
   },
   es:{
     nav_how:"Cómo",nav_why:"Por qué",nav_pricing:"Precios",nav_faq:"FAQ",nav_cta:"Probar",
-    badge:"Lanzamiento · Tarifas Early Adopter",
+    badge:"Lanzamiento",
     hero_h1_1:"Vende",hero_h1_2:"sin que te estafen.",
     hero_sub:"Prueba sólida antes del envío. Expediente completo en caso de litigio.",hero_subsub:"Prueba con marca de tiempo. Defensa automática.",
     stat1:"Pruebas certificadas",stat2:"Datos cifrados en Francia",stat3:"Cancelable con 1 clic",hero_cta:"Proteger mi próxima venta",
@@ -264,7 +264,7 @@ const I18N = {
     s1_title:"Paquete «nunca recibido»",s1_quote:"«Nunca recibí el paquete. Solicito un reembolso.»",s1_solve:"SellCov proporciona el video con marca de tiempo del depósito y la etiqueta filmada.",
     s2_title:"Artículo «dañado»",s2_quote:"«El artículo llegó con un agujero. Quiero un reembolso.»",s2_solve:"SellCov prueba el estado exacto antes del envío con un video 360° con marca de tiempo.",
     s3_title:"Sustitución",s3_quote:"«Esto no es el artículo que pedí.»",s3_solve:"SellCov certifica el contenido exacto del paquete en el momento del cierre.",
-    pl_kicker:"Nuestros planes",pl_t1:"Simple,",pl_t2:"sin sorpresas.",pl_sub:"Tarifas Early Adopter bloqueadas 1 año. Sin compromiso, cancelable con 1 clic.",
+    pl_kicker:"Nuestros planes",pl_t1:"Simple,",pl_t2:"sin sorpresas.",pl_sub:"Sin compromiso, cancelable con 1 clic.",
     per_mo:"/ mes",
     p1_name:"One Shot",p1_unit:"/ certificado",p1_desc:"Para vendedores ocasionales.",p1_f1:"1 certificado de video",p1_f2:"IA defensa automática",p1_f3:"Generación de anuncio",p1_f4:"Soporte email",p1_btn:"Comprar un certificado",
     p2_ribbon:"★ Recomendado",p2_name:"Pro Seller",p2_desc:"Para vendedores con más de 20 ventas/mes.",p2_f1:"50 certificados de video",p2_f2:"IA defensa automática",p2_f3:"Generación de anuncio",p2_f4:"Soporte email prioritario",p2_f5:"Guía de estafas a evitar",p2_f6:"Acceso anticipado a nuevas funciones",p2_btn:"Pasar a Pro",
@@ -274,7 +274,7 @@ const I18N = {
   },
   it:{
     nav_how:"Come",nav_why:"Perché",nav_pricing:"Prezzi",nav_faq:"FAQ",nav_cta:"Prova",
-    badge:"Lancio · Tariffe Early Adopter",
+    badge:"Lancio",
     hero_h1_1:"Rivendi",hero_h1_2:"senza farti truffare.",
     hero_sub:"Prova solida prima della spedizione. Dossier completo in caso di controversia.",hero_subsub:"Prova con timestamp. Difesa automatica.",
     stat1:"Prove certificate",stat2:"Dati crittografati in Francia",stat3:"Annullabile in 1 clic",hero_cta:"Proteggi la mia prossima vendita",
@@ -287,7 +287,7 @@ const I18N = {
     s1_title:"Pacco «mai ricevuto»",s1_quote:"«Non ho mai ricevuto il pacco. Chiedo il rimborso.»",s1_solve:"SellCov fornisce il video con timestamp del deposito e l'etichetta filmata.",
     s2_title:"Articolo «danneggiato»",s2_quote:"«L'articolo è arrivato forato. Voglio essere rimborsato.»",s2_solve:"SellCov prova lo stato esatto prima della spedizione con un video 360° con timestamp.",
     s3_title:"Sostituzione",s3_quote:"«Questo non è l'articolo che ho ordinato.»",s3_solve:"SellCov attesta il contenuto esatto del pacco al momento della chiusura.",
-    pl_kicker:"Le nostre offerte",pl_t1:"Semplice,",pl_t2:"senza sorprese.",pl_sub:"Tariffe Early Adopter bloccate per 1 anno. Nessun impegno, annullabile in 1 clic.",
+    pl_kicker:"Le nostre offerte",pl_t1:"Semplice,",pl_t2:"senza sorprese.",pl_sub:"Nessun impegno, annullabile in 1 clic.",
     per_mo:"/ mese",
     p1_name:"One Shot",p1_unit:"/ certificato",p1_desc:"Per i venditori occasionali.",p1_f1:"1 certificato video",p1_f2:"IA difesa automatica",p1_f3:"Generazione di annuncio",p1_f4:"Supporto email",p1_btn:"Acquista un certificato",
     p2_ribbon:"★ Consigliato",p2_name:"Pro Seller",p2_desc:"Per i venditori con più di 20 vendite/mese.",p2_f1:"50 certificati video",p2_f2:"IA difesa automatica",p2_f3:"Generazione di annuncio",p2_f4:"Supporto email prioritario",p2_f5:"Guida alle truffe da evitare",p2_f6:"Accesso anticipato alle nuove funzionalità",p2_btn:"Passa a Pro",
@@ -472,6 +472,22 @@ export default function Home() {
         @media(max-width:820px){.foot-copy{text-align:center}.foot-links{justify-content:flex-start}}
         .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
         .reveal.show{opacity:1;transform:none}
+        @media(max-width:560px){
+          html,body{overflow-x:hidden;max-width:100vw}
+          section.page{padding:60px 20px}
+          .section-head{margin-bottom:32px}
+          .feature{padding:22px;min-height:auto;gap:12px;border-radius:14px}
+          .feature h3{font-size:26px}
+          .feature p{font-size:14px}
+          .scam-card{padding:18px;gap:10px}
+          .plan{padding:22px;gap:14px}
+          .plan-price{font-size:38px}
+          .hero{padding:110px 20px 40px}
+          .final{padding:80px 20px 60px}
+          .features{gap:12px}
+          .scams,.scams.scams-3{gap:12px}
+          .pricing{gap:14px}
+        }
       `}</style>
 
       <div dangerouslySetInnerHTML={{ __html: PAGE_HTML }} />
