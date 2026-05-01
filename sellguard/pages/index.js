@@ -10,7 +10,6 @@ const PAGE_HTML = `
       <a href="#how" data-i18n="nav_how">Comment</a>
       <a href="#scams" data-i18n="nav_why">Pourquoi</a>
       <a href="#pricing" data-i18n="nav_pricing">Tarifs</a>
-      <a href="/faq" data-i18n="nav_faq">FAQ</a>
     </nav>
     <div class="nav-right">
       <select class="lang-select" id="lang-select" onchange="window.setLang(this.value)">
@@ -453,6 +452,7 @@ export default function Home() {
         .features{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:var(--maxw);margin:0 auto}
         .features .feature:first-child{grid-column:1/-1;align-items:center;text-align:center}
         .features .feature:first-child .cta-area{justify-content:center}
+        @media(min-width:561px){.features .feature:first-child{max-width:calc((100% - 18px) / 2);margin:0 auto}}
         @media(max-width:900px){.section-sub.nowrap{white-space:normal}.hero-sub{white-space:normal}}
         .feature{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:34px;min-height:320px;display:flex;flex-direction:column;gap:16px;overflow:hidden}
         .feature .tag{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
