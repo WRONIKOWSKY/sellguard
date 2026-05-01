@@ -533,17 +533,25 @@ export default function Annonce() {
                   <>
                     {/* Hero card : plateforme recommandée + tout le contenu */}
                     <div
-                      className="reco-card"
-                      style={{ background: ps.bg ? `linear-gradient(180deg, ${ps.bg}, transparent 40%), var(--bg-card)` : 'var(--bg-card)' }}
+                      style={{
+                        background: ps.bg ? `linear-gradient(180deg, ${ps.bg}, transparent 40%), #0e0e0e` : '#0e0e0e',
+                        border: '1px solid #2a2a2a',
+                        borderRadius: 20,
+                        padding: 24,
+                        marginBottom: 24,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 16,
+                      }}
                     >
                       {isRecommended && (
-                        <div className="reco-badge">⭐ {tx({fr:'RECOMMANDÉ POUR CE PRODUIT', en:'RECOMMENDED FOR THIS PRODUCT', es:'RECOMENDADO PARA ESTE PRODUCTO', it:'CONSIGLIATO PER QUESTO PRODOTTO'})}</div>
+                        <div style={{ display:'inline-block', alignSelf:'flex-start', fontSize:11, fontWeight:700, letterSpacing:'.12em', color:'#5ee8a3', background:'rgba(94,232,163,.1)', border:'1px solid rgba(94,232,163,.3)', padding:'6px 12px', borderRadius:999 }}>⭐ {tx({fr:'RECOMMANDÉ POUR CE PRODUIT', en:'RECOMMENDED FOR THIS PRODUCT', es:'RECOMENDADO PARA ESTE PRODUCTO', it:'CONSIGLIATO PER QUESTO PRODOTTO'})}</div>
                       )}
 
-                      <div className="reco-platform">
+                      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', gap:16, flexWrap:'wrap' }}>
                         <span
-                          className="reco-platform-name"
                           style={{
+                            fontSize:24,
                             color: ps.color || '#fff',
                             fontWeight: ps.weight || 700,
                             fontFamily: ps.font || 'inherit',
@@ -551,68 +559,68 @@ export default function Annonce() {
                             textTransform: ps.transform || 'none',
                           }}
                         >{activePlatform.name}</span>
-                        <div className="reco-meta">
-                          <span className="reco-price">{activePlatform.price_min}–{activePlatform.price_max}€</span>
-                          <span className="reco-score">Score {activePlatform.score}/10 · {result.time_to_sell}</span>
+                        <div style={{ display:'flex', flexDirection:'column', gap:2, textAlign:'right' }}>
+                          <span style={{ fontFamily:"'Playfair Display',serif", fontSize:26, fontWeight:700, color:'#fff', lineHeight:1 }}>{activePlatform.price_min}–{activePlatform.price_max}€</span>
+                          <span style={{ fontSize:11, color:'#5a5a5a' }}>Score {activePlatform.score}/10 · {result.time_to_sell}</span>
                         </div>
                       </div>
 
-                      <p className="reco-reason">{activePlatform.reason}</p>
+                      <p style={{ fontSize:14, color:'#9a9a9a', lineHeight:1.55, fontStyle:'italic', borderLeft:'2px solid #2a2a2a', paddingLeft:12, margin:'4px 0 8px' }}>{activePlatform.reason}</p>
 
                       {/* Section : Titre */}
-                      <div className="reco-section">
-                        <div className="reco-section-head">
-                          <span className="reco-section-label">{a.title_l}</span>
-                          <button className="reco-copy" onClick={() => copy('title', result.title)}>
+                      <div style={{ background:'rgba(255,255,255,.03)', border:'1px solid #2a2a2a', borderRadius:12, padding:'14px 16px' }}>
+                        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:12, marginBottom:10 }}>
+                          <span style={{ fontSize:11, fontWeight:700, color:'#5a5a5a', letterSpacing:'.12em', textTransform:'uppercase' }}>{a.title_l}</span>
+                          <button onClick={() => copy('title', result.title)} style={{ fontSize:12, fontWeight:600, padding:'5px 12px', background:'rgba(255,255,255,.08)', color:'#fff', border:'1px solid #2a2a2a', borderRadius:999, cursor:'pointer', fontFamily:'inherit' }}>
                             {copied['title'] ? '✓ ' + a.copied : '⧉ ' + a.copy}
                           </button>
                         </div>
-                        <p className="reco-section-content">{result.title}</p>
+                        <p style={{ fontSize:15, color:'#fff', lineHeight:1.6, fontWeight:600 }}>{result.title}</p>
                       </div>
 
                       {/* Section : Description */}
-                      <div className="reco-section">
-                        <div className="reco-section-head">
-                          <span className="reco-section-label">{a.desc_l}</span>
-                          <button className="reco-copy" onClick={() => copy('desc', result.description)}>
+                      <div style={{ background:'rgba(255,255,255,.03)', border:'1px solid #2a2a2a', borderRadius:12, padding:'14px 16px' }}>
+                        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:12, marginBottom:10 }}>
+                          <span style={{ fontSize:11, fontWeight:700, color:'#5a5a5a', letterSpacing:'.12em', textTransform:'uppercase' }}>{a.desc_l}</span>
+                          <button onClick={() => copy('desc', result.description)} style={{ fontSize:12, fontWeight:600, padding:'5px 12px', background:'rgba(255,255,255,.08)', color:'#fff', border:'1px solid #2a2a2a', borderRadius:999, cursor:'pointer', fontFamily:'inherit' }}>
                             {copied['desc'] ? '✓ ' + a.copied : '⧉ ' + a.copy}
                           </button>
                         </div>
-                        <p className="reco-section-content reco-desc">{result.description}</p>
+                        <p style={{ fontSize:13, color:'#e5e5e5', lineHeight:1.6 }}>{result.description}</p>
                       </div>
 
                       {/* Section : Hashtags */}
-                      <div className="reco-section">
-                        <div className="reco-section-head">
-                          <span className="reco-section-label">{a.kw_l}</span>
-                          <button className="reco-copy" onClick={() => copy('kw', (result.keywords || []).map((k) => '#' + k).join(' '))}>
+                      <div style={{ background:'rgba(255,255,255,.03)', border:'1px solid #2a2a2a', borderRadius:12, padding:'14px 16px' }}>
+                        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:12, marginBottom:10 }}>
+                          <span style={{ fontSize:11, fontWeight:700, color:'#5a5a5a', letterSpacing:'.12em', textTransform:'uppercase' }}>{a.kw_l}</span>
+                          <button onClick={() => copy('kw', (result.keywords || []).map((k) => '#' + k).join(' '))} style={{ fontSize:12, fontWeight:600, padding:'5px 12px', background:'rgba(255,255,255,.08)', color:'#fff', border:'1px solid #2a2a2a', borderRadius:999, cursor:'pointer', fontFamily:'inherit' }}>
                             {copied['kw'] ? '✓ ' + a.copied : '⧉ ' + a.copy}
                           </button>
                         </div>
-                        <div className="reco-tags">
+                        <div style={{ display:'flex', flexWrap:'wrap', gap:6 }}>
                           {(result.keywords || []).map((k) => (
-                            <span key={k} className="reco-tag">#{k}</span>
+                            <span key={k} style={{ display:'inline-block', fontSize:12, padding:'5px 11px', background:'rgba(255,255,255,.06)', border:'1px solid #1e1e1e', borderRadius:999, color:'#9a9a9a' }}>#{k}</span>
                           ))}
                         </div>
                       </div>
 
                       {/* Section : Message acheteur */}
-                      <div className="reco-section">
-                        <div className="reco-section-head">
-                          <span className="reco-section-label">{buyerMsgHeader}</span>
-                          <button className="reco-copy" onClick={() => copy('buyermsg', buyerMsg)}>
+                      <div style={{ background:'rgba(94,232,163,.05)', border:'1px solid rgba(94,232,163,.25)', borderRadius:12, padding:'14px 16px' }}>
+                        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:12, marginBottom:10 }}>
+                          <span style={{ fontSize:11, fontWeight:700, color:'#5ee8a3', letterSpacing:'.12em', textTransform:'uppercase' }}>{buyerMsgHeader}</span>
+                          <button onClick={() => copy('buyermsg', buyerMsg)} style={{ fontSize:12, fontWeight:600, padding:'5px 12px', background:'rgba(94,232,163,.1)', color:'#5ee8a3', border:'1px solid rgba(94,232,163,.3)', borderRadius:999, cursor:'pointer', fontFamily:'inherit' }}>
                             {copied['buyermsg'] ? '✓ ' + copiedBtnLabel : '⧉ ' + copyBtnLabel}
                           </button>
                         </div>
-                        <p className="reco-section-content reco-buyer">{buyerMsg}</p>
+                        <p style={{ fontSize:13, color:'#bfffd8', lineHeight:1.6, fontStyle:'italic' }}>{buyerMsg}</p>
                       </div>
 
                       {/* Conseils */}
                       {(result.selling_tips || []).length > 0 && (
-                        <div className="reco-tips">
-                          <p className="reco-tips-label">💡 {tx({fr:'Conseils pour ', en:'Tips for ', es:'Consejos para ', it:'Consigli per '}) + activePlatform.name}</p>
+                        <div style={{ background:'rgba(251,146,60,.06)', border:'1px solid rgba(251,146,60,.2)', borderRadius:12, padding:'14px 16px' }}>
+                          <p style={{ fontSize:13, fontWeight:600, color:'#f9a95c', marginBottom:10 }}>💡 {tx({fr:'Conseils pour ', en:'Tips for ', es:'Consejos para ', it:'Consigli per '}) + activePlatform.name}</p>
                           {(result.selling_tips || []).map((tip, i) => (
-                            <div key={i} className="reco-tip"><span className="reco-tip-dot">·</span><span>{tip}</span></div>
+                            <div key={i} style={{ display:'flex', gap:10, fontSize:13, color:'#9a9a9a', lineHeight:1.5, marginBottom:6 }}><span style={{ color:'#f9a95c', flexShrink:0 }}>·</span><span>{tip}</span></div>
                           ))}
                         </div>
                       )}
@@ -620,11 +628,11 @@ export default function Annonce() {
                       {/* Big CTA principal */}
                       {publishUrl && (
                         <button
-                          className="reco-cta"
                           onClick={() => publishTo({ name: matchName, url: publishUrl })}
                           style={{
+                            fontSize:16, fontWeight:700, padding:'16px 24px', borderRadius:14, border:'none', cursor:'pointer', fontFamily:'inherit', marginTop:6, width:'100%',
                             background: ps.color || '#fff',
-                            color: ps.name === 'Grailed' ? '#000' : '#000',
+                            color: '#000',
                           }}
                         >
                           {copied['publish'] === matchName
@@ -636,16 +644,16 @@ export default function Annonce() {
 
                     {/* Voir aussi : autres plateformes recommandées */}
                     {otherRecommended.length > 0 && (
-                      <div className="alt-section">
-                        <p className="alt-section-label">{tx({fr:'VOIR AUSSI', en:'SEE ALSO', es:'VER TAMBIÉN', it:'VEDI ANCHE'})}</p>
-                        <div className="alt-cards">
+                      <div style={{ marginBottom:20 }}>
+                        <p style={{ fontSize:11, fontWeight:700, color:'#5a5a5a', letterSpacing:'.12em', textTransform:'uppercase', marginBottom:10 }}>{tx({fr:'VOIR AUSSI', en:'SEE ALSO', es:'VER TAMBIÉN', it:'VEDI ANCHE'})}</p>
+                        <div style={{ display:'grid', gridTemplateColumns: otherRecommended.length > 1 ? '1fr 1fr' : '1fr', gap:10 }}>
                           {otherRecommended.map((p) => {
                             const aps = PLATFORM_STYLE[p.name] || {};
                             return (
-                              <button key={p.name} className="alt-card" onClick={() => setActiveTab(p.name)}>
+                              <button key={p.name} onClick={() => setActiveTab(p.name)} style={{ display:'flex', flexDirection:'column', alignItems:'flex-start', gap:6, background:'#0e0e0e', border:'1px solid #2a2a2a', borderRadius:12, padding:'14px 16px', cursor:'pointer', fontFamily:'inherit', textAlign:'left', position:'relative' }}>
                                 <span
-                                  className="alt-card-name"
                                   style={{
+                                    fontSize:15,
                                     color: aps.color || '#fff',
                                     fontWeight: aps.weight || 700,
                                     fontFamily: aps.font || 'inherit',
@@ -653,8 +661,8 @@ export default function Annonce() {
                                     textTransform: aps.transform || 'none',
                                   }}
                                 >{p.name}</span>
-                                <span className="alt-card-meta">{p.price_min}–{p.price_max}€ · Score {p.score}/10</span>
-                                <span className="alt-card-arrow">→</span>
+                                <span style={{ fontSize:12, color:'#9a9a9a' }}>{p.price_min}–{p.price_max}€ · Score {p.score}/10</span>
+                                <span style={{ position:'absolute', top:14, right:16, color:'#5a5a5a', fontSize:14 }}>→</span>
                               </button>
                             );
                           })}
@@ -664,17 +672,16 @@ export default function Annonce() {
 
                     {/* Fallback : autres plateformes pas recommandées */}
                     {otherFallback.length > 0 && (
-                      <div className="fallback-section">
-                        <p className="fallback-label">{tx({fr:'PUBLIER SUR UNE AUTRE PLATEFORME', en:'POST ON ANOTHER PLATFORM', es:'PUBLICAR EN OTRA PLATAFORMA', it:'PUBBLICA SU UN\'ALTRA PIATTAFORMA'})}</p>
-                        <div className="fallback-btns">
+                      <div style={{ marginTop:18, paddingTop:18, borderTop:'1px solid #1e1e1e' }}>
+                        <p style={{ fontSize:11, fontWeight:700, color:'#5a5a5a', letterSpacing:'.12em', textTransform:'uppercase', marginBottom:10 }}>{tx({fr:'PUBLIER SUR UNE AUTRE PLATEFORME', en:'POST ON ANOTHER PLATFORM', es:'PUBLICAR EN OTRA PLATAFORMA', it:'PUBBLICA SU UN\'ALTRA PIATTAFORMA'})}</p>
+                        <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
                           {otherFallback.map((pl) => {
                             const fps = PLATFORM_STYLE[pl.name === 'Vestiaire' ? 'Vestiaire Collective' : pl.name] || {};
                             return (
                               <button
                                 key={pl.name}
-                                className="fallback-btn"
                                 onClick={() => publishTo(pl)}
-                                style={{ borderColor: fps.color || 'var(--border-strong)', color: fps.color || '#fff' }}
+                                style={{ fontSize:13, fontWeight:600, padding:'8px 16px', background:'transparent', border:'1px solid ' + (fps.color || '#2a2a2a'), color: fps.color || '#fff', borderRadius:999, cursor:'pointer', fontFamily:'inherit' }}
                               >
                                 {copied['publish'] === pl.name ? publishOpeningLabel : pl.name}
                               </button>
