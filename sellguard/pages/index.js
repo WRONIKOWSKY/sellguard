@@ -363,6 +363,23 @@ export default function Home() {
         <title>SellCov — Revends sans te faire arnaquer</title>
         <meta name="description" content="Preuve vidéo horodatée + défense IA pour vendre en sécurité sur Vinted, Leboncoin, Depop, Vestiaire Collective, Grailed et Etsy." />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        {/* Open Graph (iMessage / WhatsApp / Slack / Discord / Facebook link previews) */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.sellcov.com" />
+        <meta property="og:title" content="SellCov — Revends sans te faire arnaquer" />
+        <meta property="og:description" content="Preuve vidéo horodatée + défense IA pour vendre en sécurité sur Vinted, Leboncoin, Depop, Vestiaire Collective, Grailed et Etsy." />
+        <meta property="og:image" content="https://www.sellcov.com/logo.png" />
+        <meta property="og:image:alt" content="SellCov — hérisson protecteur" />
+        <meta property="og:site_name" content="SellCov" />
+        <meta property="og:locale" content="fr_FR" />
+        {/* Twitter / X card */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="SellCov — Revends sans te faire arnaquer" />
+        <meta name="twitter:description" content="Preuve vidéo horodatée + défense IA pour vendre en sécurité sur les marketplaces." />
+        <meta name="twitter:image" content="https://www.sellcov.com/logo.png" />
+        {/* Favicon iOS / Android */}
+        <link rel="icon" type="image/png" href="/logo.png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
