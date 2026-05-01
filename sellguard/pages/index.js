@@ -450,10 +450,10 @@ export default function Home() {
         .section-sub{color:var(--text-muted);font-size:17px;max-width:900px;margin-left:auto;margin-right:auto}
         .section-sub.nowrap{white-space:nowrap}
         .features{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:var(--maxw);margin:0 auto}
-        .features .feature:first-child{grid-column:1/-1;text-align:center}
+        .features .feature:first-child{grid-column:1/-1}
         @media(min-width:561px){.features .feature:first-child{width:calc(50% - 9px);max-width:none;justify-self:center}}
         @media(max-width:900px){.section-sub.nowrap{white-space:normal}.hero-sub{white-space:normal}}
-        .feature{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:34px;min-height:320px;display:flex;flex-direction:column;gap:16px;overflow:hidden}
+        .feature{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:34px;min-height:320px;display:flex;flex-direction:column;gap:16px;overflow:hidden;text-align:center}
         .feature .tag{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
         .feature h3{font-size:clamp(28px,3vw,38px);line-height:1.05;letter-spacing:-.02em}
         .feature p{color:var(--text-muted);font-size:15px;flex:1}
