@@ -352,7 +352,7 @@ export default function Protection() {
 
           {step === "review" && (
             <>
-              <p style={{ fontSize: 13, color: "#888", marginBottom: 12 }}>Aperçu — vérifie avant de certifier :</p>
+              <p style={{ fontSize: 13, color: "#888", marginBottom: 12 }}>Vérifie ton aperçu avant de certifier :</p>
               {videoUrl && <video src={videoUrl} controls style={{ width: "100%", borderRadius: 12, background: "#000" }} />}
               <div style={{ marginTop: 20 }}>
                 <button onClick={uploadCert} style={btnPrimary}>
@@ -420,7 +420,7 @@ export default function Protection() {
               <p style={{ fontSize: 11, color: "#666", marginTop: 20, lineHeight: 1.5 }}>
                 Hash SHA-256 : <span style={{ fontFamily: "monospace" }}>{cert.hash.substring(0, 32)}…</span>
                 <br />
-                Horodatage : {new Date(cert.timestamp).toLocaleString(lang === "en" ? "en-US" : "fr-FR")}
+                Horodatage : {new Date(cert.timestamp).toLocaleString(lang === "en" ? "en-US" : "fr-FR", { dateStyle: "long", timeStyle: "medium" })}
               </p>
             </div>
           )}
