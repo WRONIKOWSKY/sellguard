@@ -371,7 +371,7 @@ export default function Annonce() {
           <Link href="/" className="logo">
             <img src="/logo.png" alt="SellCov" className="logo-img" />
           </Link>
-          <Link href="/" className="nav-back">← Retour</Link>
+          <Link href="/" className="nav-back">Retour</Link>
         </div>
       </header>
 
@@ -387,32 +387,44 @@ export default function Annonce() {
               <div className="field">
                 <label className="field-label">{a.photo_label}</label>
                 <div
-                  className={'dropzone ' + (images.length > 0 ? 'dropzone-filled' : 'dropzone-empty')}
+                  style={{
+                    border: '1.5px dashed #2a2a2a',
+                    borderRadius: 14,
+                    cursor: 'pointer',
+                    background: '#060606',
+                    padding: images.length > 0 ? 12 : '40px 24px',
+                    textAlign: 'center',
+                    minHeight: images.length > 0 ? 'auto' : 160,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
                   onClick={() => fileRef.current.click()}
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={(e) => { e.preventDefault(); handleFiles(e.dataTransfer.files); }}
                 >
                   {images.length === 0 ? (
                     <>
-                      <div className="dropzone-plus">+</div>
-                      <p className="dropzone-hint">{a.photo_hint}</p>
-                      <p className="dropzone-sub">{a.photo_sub}</p>
+                      <div style={{ width: 56, height: 56, borderRadius: '50%', border: '2px solid rgba(255,255,255,.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 14, fontSize: 28, color: '#9a9a9a' }}>+</div>
+                      <p style={{ fontSize: 15, color: '#fff', fontWeight: 500, marginBottom: 4 }}>{a.photo_hint}</p>
+                      <p style={{ fontSize: 13, color: '#9a9a9a' }}>{a.photo_sub}</p>
                     </>
                   ) : (
                     <>
-                      <div className="img-grid">
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, width: '100%' }}>
                         {images.map((img, i) => (
-                          <div key={i} className={'img-wrap' + (i === 0 ? ' primary' : '')}>
-                            <img src={img.preview} alt="" />
+                          <div key={i} style={{ position: 'relative' }}>
+                            <img src={img.preview} alt="" style={{ width: '100%', height: 80, objectFit: 'cover', borderRadius: 8, border: i === 0 ? '2px solid #8b7fff' : '1px solid #1e1e1e', display: 'block' }} />
                             <button
-                              className="img-remove"
                               onClick={(e) => { e.stopPropagation(); removeImage(i); }}
                               aria-label="Retirer"
+                              style={{ position: 'absolute', top: -6, right: -6, width: 22, height: 22, borderRadius: '50%', background: '#f570aa', color: '#000', border: '2px solid #000', fontSize: 12, fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, lineHeight: 1 }}
                             >×</button>
                           </div>
                         ))}
                       </div>
-                      <p className="img-more">+ {addMorePhotos}</p>
+                      <p style={{ fontSize: 12, color: '#9a9a9a', marginTop: 10 }}>+ {addMorePhotos}</p>
                     </>
                   )}
                 </div>

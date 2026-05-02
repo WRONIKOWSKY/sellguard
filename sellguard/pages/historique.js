@@ -73,7 +73,7 @@ export default function Historique() {
   const empty_sub = lang === 'en' ? 'Generate your first listing in the Listing tab.' : lang === 'es' ? 'Genera tu primer anuncio en la pestaña Anuncio.' : lang === 'it' ? "Genera il tuo primo annuncio nella scheda Annuncio." : "Génère ta première annonce dans l'onglet Annonce.";
   const clear_btn = lang === 'en' ? 'Clear all' : lang === 'es' ? 'Borrar todo' : lang === 'it' ? 'Cancella tutto' : 'Tout effacer';
   const delete_btn = lang === 'en' ? 'Delete' : lang === 'es' ? 'Eliminar' : lang === 'it' ? 'Elimina' : 'Supprimer';
-  const back_btn = lang === 'en' ? '← Back' : lang === 'es' ? '← Volver' : lang === 'it' ? '← Indietro' : '← Retour';
+  const back_btn = lang === 'en' ? 'Back' : lang === 'es' ? 'Volver' : lang === 'it' ? 'Indietro' : 'Retour';
   const copy_btn = lang === 'en' ? 'Copy' : lang === 'es' ? 'Copiar' : lang === 'it' ? 'Copia' : 'Copier';
   const copied_btn = lang === 'en' ? 'Copied ✓' : lang === 'es' ? 'Copiado ✓' : lang === 'it' ? 'Copiato ✓' : 'Copié ✓';
   const title_l = lang === 'en' ? 'TITLE' : lang === 'es' ? 'TÍTULO' : lang === 'it' ? 'TITOLO' : 'TITRE';
@@ -177,7 +177,7 @@ export default function Historique() {
           <Link href="/" className="logo">
             <span className="logo-mark">sc</span>SellCov
           </Link>
-          <Link href="/" className="nav-back">← Retour</Link>
+          <Link href="/" className="nav-back">Retour</Link>
         </div>
       </header>
     </>
