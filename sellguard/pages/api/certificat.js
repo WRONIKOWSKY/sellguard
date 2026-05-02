@@ -44,6 +44,7 @@ export default async function handler(req, res) {
   const isEn = lang === "en";
   const t = {
     title: isEn ? "Video Proof Certificate" : "Certificat de Preuve Vidéo",
+    certLabel: isEn ? "Certificate: " : "Certificat : ",
     f1: isEn ? "Item" : "Article",
     f2: isEn ? "Order ref." : "Réf. commande",
     f3: isEn ? "Tracking" : "Suivi colis",
@@ -55,7 +56,7 @@ export default async function handler(req, res) {
     infoTitle: isEn ? "How to use this certificate" : "Comment utiliser ce certificat",
     infoText1: isEn
       ? "Submit this PDF + video as proof of shipment condition."
-      : "Soumettez ce PDF + vidéo comme preuve de l'état de l'envoi.",
+      : "Soumets ce PDF + vidéo comme preuve de l'état de l'envoi.",
     infoText2: isEn
       ? "Verify authenticity at sellcov.com/verify/" + certId
       : "Vérifie l'authenticité sur sellcov.com/verify/" + certId,
@@ -63,8 +64,10 @@ export default async function handler(req, res) {
   };
 
   // Build PDF brut (syntax PDF 1.4 minimal, pas de dep externe)
+  // Sanitize : on ne retire PAS les accents (Latin-1 OK), juste les chars hors range Latin-1
+  // et les chars qui cassent la syntaxe PDF : ( ) \
   const sanitize = (v, max = 60) =>
-    (v || "—").toString().replace(/[^\x20-\x7E]/g, "").replace(/[()\\]/g, "").substring(0, max);
+    (v || "—").toString().replace(/[^\x20-\xFF]/g, "").replace(/[()\\]/g, "").substring(0, max);
 
   const sizeKB = cert.video_size_bytes ? Math.round(cert.video_size_bytes / 1024) : "—";
   const dateStr = new Date(cert.created_at).toLocaleString(isEn ? "en-US" : "fr-FR", {
@@ -95,7 +98,7 @@ export default async function handler(req, res) {
   objects.push({
     id: 3,
     content:
-      "3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> /F3 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>\nendobj",
+      "3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >> /F3 << /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >> >> >> >>\nendobj",
   });
 
   let pdfContent = "%PDF-1.4\n";
@@ -135,7 +138,7 @@ function buildStream({ certId, fields, t }) {
   lines.push("1 w");
   lines.push("40 720 515 30 re B");
   lines.push("0.082 0.502 0.239 rg");
-  lines.push("BT /F2 11 Tf 50 731 Td (Certificate: " + certId + ") Tj ET");
+  lines.push("BT /F2 11 Tf 50 731 Td (" + t.certLabel + certId + ") Tj ET");
 
   // Fields
   let y = 700;
