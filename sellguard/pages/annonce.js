@@ -394,10 +394,8 @@ export default function Annonce() {
                 >
                   {images.length === 0 ? (
                     <>
-                      <button type="button" className="dropzone-cta" onClick={(e) => { e.stopPropagation(); fileRef.current.click(); }}>
-                        <span className="dropzone-cta-icon">+</span>
-                        <span>{a.photo_hint}</span>
-                      </button>
+                      <div className="dropzone-plus">+</div>
+                      <p className="dropzone-hint">{a.photo_hint}</p>
                       <p className="dropzone-sub">{a.photo_sub}</p>
                     </>
                   ) : (
@@ -537,7 +535,7 @@ export default function Annonce() {
                     {/* Hero card : plateforme recommandée + tout le contenu */}
                     <div
                       style={{
-                        background: ps.bg ? `linear-gradient(180deg, ${ps.bg}, transparent 40%), #0e0e0e` : '#0e0e0e',
+                        background: '#0e0e0e',
                         border: '1px solid #2a2a2a',
                         borderRadius: 20,
                         padding: 24,
@@ -548,7 +546,7 @@ export default function Annonce() {
                       }}
                     >
                       {isRecommended && (
-                        <div style={{ display:'inline-block', alignSelf:'flex-start', fontSize:11, fontWeight:700, letterSpacing:'.12em', color:'#5ee8a3', background:'rgba(94,232,163,.1)', border:'1px solid rgba(94,232,163,.3)', padding:'6px 12px', borderRadius:999 }}>⭐ {tx({fr:'RECOMMANDÉ POUR CE PRODUIT', en:'RECOMMENDED FOR THIS PRODUCT', es:'RECOMENDADO PARA ESTE PRODUCTO', it:'CONSIGLIATO PER QUESTO PRODOTTO'})}</div>
+                        <div style={{ display:'inline-block', alignSelf:'flex-start', fontSize:11, fontWeight:700, letterSpacing:'.12em', color:'#5ee8a3', background:'rgba(94,232,163,.08)', border:'1px solid rgba(94,232,163,.25)', padding:'6px 12px', borderRadius:999 }}>{tx({fr:'RECOMMANDÉ POUR CE PRODUIT', en:'RECOMMENDED FOR THIS PRODUCT', es:'RECOMENDADO PARA ESTE PRODUCTO', it:'CONSIGLIATO PER QUESTO PRODOTTO'})}</div>
                       )}
 
                       <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', gap:16, flexWrap:'wrap' }}>
@@ -608,22 +606,22 @@ export default function Annonce() {
                       </div>
 
                       {/* Section : Message acheteur */}
-                      <div style={{ background:'rgba(94,232,163,.05)', border:'1px solid rgba(94,232,163,.25)', borderRadius:12, padding:'14px 16px' }}>
+                      <div style={{ background:'rgba(255,255,255,.03)', border:'1px solid #2a2a2a', borderRadius:12, padding:'14px 16px' }}>
                         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:12, marginBottom:10 }}>
-                          <span style={{ fontSize:11, fontWeight:700, color:'#5ee8a3', letterSpacing:'.12em', textTransform:'uppercase' }}>{buyerMsgHeader}</span>
-                          <button onClick={() => copy('buyermsg', buyerMsg)} style={{ fontSize:12, fontWeight:600, padding:'5px 12px', background:'rgba(94,232,163,.1)', color:'#5ee8a3', border:'1px solid rgba(94,232,163,.3)', borderRadius:999, cursor:'pointer', fontFamily:'inherit' }}>
+                          <span style={{ fontSize:11, fontWeight:700, color:'#5a5a5a', letterSpacing:'.12em', textTransform:'uppercase' }}>{buyerMsgHeader}</span>
+                          <button onClick={() => copy('buyermsg', buyerMsg)} style={{ fontSize:12, fontWeight:600, padding:'5px 12px', background:'rgba(255,255,255,.08)', color:'#fff', border:'1px solid #2a2a2a', borderRadius:999, cursor:'pointer', fontFamily:'inherit' }}>
                             {copied['buyermsg'] ? '✓ ' + copiedBtnLabel : '⧉ ' + copyBtnLabel}
                           </button>
                         </div>
-                        <p style={{ fontSize:13, color:'#bfffd8', lineHeight:1.6, fontStyle:'italic' }}>{buyerMsg}</p>
+                        <p style={{ fontSize:13, color:'#e5e5e5', lineHeight:1.6, fontStyle:'italic' }}>{buyerMsg}</p>
                       </div>
 
                       {/* Conseils */}
                       {(result.selling_tips || []).length > 0 && (
-                        <div style={{ background:'rgba(251,146,60,.06)', border:'1px solid rgba(251,146,60,.2)', borderRadius:12, padding:'14px 16px' }}>
-                          <p style={{ fontSize:13, fontWeight:600, color:'#f9a95c', marginBottom:10 }}>{tx({fr:'Conseils pour ', en:'Tips for ', es:'Consejos para ', it:'Consigli per '}) + activePlatform.name}</p>
+                        <div style={{ background:'rgba(255,255,255,.03)', border:'1px solid #2a2a2a', borderRadius:12, padding:'14px 16px' }}>
+                          <p style={{ fontSize:11, fontWeight:700, color:'#5a5a5a', letterSpacing:'.12em', textTransform:'uppercase', marginBottom:10 }}>{tx({fr:'Conseils pour ', en:'Tips for ', es:'Consejos para ', it:'Consigli per '}) + activePlatform.name}</p>
                           {(result.selling_tips || []).map((tip, i) => (
-                            <div key={i} style={{ display:'flex', gap:10, fontSize:13, color:'#9a9a9a', lineHeight:1.5, marginBottom:6 }}><span style={{ color:'#f9a95c', flexShrink:0 }}>·</span><span>{tip}</span></div>
+                            <div key={i} style={{ display:'flex', gap:10, fontSize:13, color:'#9a9a9a', lineHeight:1.5, marginBottom:6 }}><span style={{ color:'#5a5a5a', flexShrink:0 }}>·</span><span>{tip}</span></div>
                           ))}
                         </div>
                       )}
