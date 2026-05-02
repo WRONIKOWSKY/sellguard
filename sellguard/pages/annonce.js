@@ -154,7 +154,7 @@ export default function Annonce() {
 
   const activePlatform = result && result.platforms ? result.platforms.find((p) => p.name === activeTab) : null;
 
-  const selectCondPh = tx({fr:"Sélectionner l'état", en:'Select condition', es:'Seleccionar estado', it:'Seleziona condizione'});
+  const selectCondPh = tx({fr:"Sélectionne l'état", en:'Select condition', es:'Seleccionar estado', it:'Seleziona condizione'});
   const addMorePhotos = lang === 'en' ? 'Add more photos' : lang === 'es' ? 'Añadir más fotos' : lang === 'it' ? 'Aggiungi altre foto' : "Ajouter d'autres photos";
   const shareLabel = tx({fr:'Partager', en:'Share', es:'Compartir', it:'Condividi'});
   const copiedAlert = tx({fr:'Annonce copiée !', en:'Listing copied!', es:'¡Anuncio copiado!', it:'Annuncio copiato!'});

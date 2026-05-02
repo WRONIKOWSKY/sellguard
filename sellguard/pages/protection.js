@@ -295,7 +295,7 @@ export default function Protection() {
                 onChange={(e) => setTrackingCarrier(e.target.value)}
                 style={inputStyle}
               >
-                <option value="" style={{ background: "#000" }}>Sélectionner un transporteur</option>
+                <option value="" style={{ background: "#000" }}>Sélectionne un transporteur</option>
                 {CARRIERS.map((c) => (
                   <option key={c.id} value={c.id} style={{ background: "#000" }}>
                     {c.label}
@@ -317,16 +317,17 @@ export default function Protection() {
                 <p style={{ fontSize: 11, fontWeight: 700, color: "#5a5a5a", letterSpacing: ".12em", textTransform: "uppercase", marginBottom: 10 }}>Comment filmer ton envoi</p>
                 <div style={{ display: "flex", gap: 10, marginBottom: 8, fontSize: 13, color: "#bbb", lineHeight: 1.5 }}>
                   <span style={{ color: "#5ee8a3", fontWeight: 700, flexShrink: 0 }}>1.</span>
-                  <span>Emballe et scelle ton colis avant de filmer.</span>
+                  <span>Filme l'article dans tous ses détails (état, défauts, marque, étiquette).</span>
                 </div>
                 <div style={{ display: "flex", gap: 10, marginBottom: 8, fontSize: 13, color: "#bbb", lineHeight: 1.5 }}>
                   <span style={{ color: "#5ee8a3", fontWeight: 700, flexShrink: 0 }}>2.</span>
-                  <span>Filme l'article, puis le colis fermé, puis l'étiquette.</span>
+                  <span>Continue en filmant la fermeture complète du colis et la pose de l'étiquette d'envoi.</span>
                 </div>
-                <div style={{ display: "flex", gap: 10, fontSize: 13, color: "#bbb", lineHeight: 1.5 }}>
+                <div style={{ display: "flex", gap: 10, marginBottom: 8, fontSize: 13, color: "#fff", lineHeight: 1.5 }}>
                   <span style={{ color: "#5ee8a3", fontWeight: 700, flexShrink: 0 }}>3.</span>
-                  <span>30 secondes suffisent.</span>
+                  <span><strong style={{ color: "#fff", fontWeight: 600 }}>Le tout en une seule prise, sans couper la vidéo.</strong></span>
                 </div>
+                <p style={{ fontSize: 12, color: "#5a5a5a", marginTop: 10, fontStyle: "italic" }}>L'action complète prend moins de 2 minutes.</p>
               </div>
 
               <button onClick={startCamera} style={btnPrimary}>
