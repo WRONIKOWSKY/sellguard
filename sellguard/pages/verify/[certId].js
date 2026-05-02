@@ -168,6 +168,14 @@ export default function Verify() {
                 Signature : {cert.signature_provider} · La vidéo originale est conservée chiffrée par SellCov.
                 URL de téléchargement valide 1h.
               </p>
+
+              <div style={{ marginTop: 32, paddingTop: 20, borderTop: "1px solid rgba(255,255,255,0.06)", textAlign: "center" }}>
+                <Link href="/">
+                  <span style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 6 }}>
+                    Découvrir SellCov <span style={{ fontSize: 14 }}>→</span>
+                  </span>
+                </Link>
+              </div>
             </>
           )}
         </div>
