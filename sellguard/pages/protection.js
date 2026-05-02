@@ -53,7 +53,7 @@ export default function Protection() {
   const [article, setArticle] = useState("");
   const [orderRef, setOrderRef] = useState("");
   const [trackingNumber, setTrackingNumber] = useState("");
-  const [trackingCarrier, setTrackingCarrier] = useState("colissimo");
+  const [trackingCarrier, setTrackingCarrier] = useState("");
   const [videoBlob, setVideoBlob] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
   const [error, setError] = useState(null);
@@ -248,7 +248,7 @@ export default function Protection() {
               </span>
             </Link>
             <Link href="/">
-              <span style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", cursor: "pointer" }}>← Retour</span>
+              <span style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", cursor: "pointer" }}>Retour</span>
             </Link>
           </div>
         </div>
@@ -295,6 +295,7 @@ export default function Protection() {
                 onChange={(e) => setTrackingCarrier(e.target.value)}
                 style={inputStyle}
               >
+                <option value="" style={{ background: "#000" }}>Sélectionner un transporteur</option>
                 {CARRIERS.map((c) => (
                   <option key={c.id} value={c.id} style={{ background: "#000" }}>
                     {c.label}
@@ -312,9 +313,21 @@ export default function Protection() {
                 maxLength={100}
               />
 
-              <p style={{ fontSize: 12, color: "#666", margin: "16px 0", lineHeight: 1.5 }}>
-                Conseil : emballe et scelle ton colis avant la vidéo. Filme l'article, le colis fermé puis l'étiquette. 30 secondes suffisent.
-              </p>
+              <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid #1e1e1e", borderRadius: 12, padding: "14px 16px", margin: "16px 0" }}>
+                <p style={{ fontSize: 11, fontWeight: 700, color: "#5a5a5a", letterSpacing: ".12em", textTransform: "uppercase", marginBottom: 10 }}>Comment filmer ton envoi</p>
+                <div style={{ display: "flex", gap: 10, marginBottom: 8, fontSize: 13, color: "#bbb", lineHeight: 1.5 }}>
+                  <span style={{ color: "#5ee8a3", fontWeight: 700, flexShrink: 0 }}>1.</span>
+                  <span>Emballe et scelle ton colis avant de filmer.</span>
+                </div>
+                <div style={{ display: "flex", gap: 10, marginBottom: 8, fontSize: 13, color: "#bbb", lineHeight: 1.5 }}>
+                  <span style={{ color: "#5ee8a3", fontWeight: 700, flexShrink: 0 }}>2.</span>
+                  <span>Filme l'article, puis le colis fermé, puis l'étiquette.</span>
+                </div>
+                <div style={{ display: "flex", gap: 10, fontSize: 13, color: "#bbb", lineHeight: 1.5 }}>
+                  <span style={{ color: "#5ee8a3", fontWeight: 700, flexShrink: 0 }}>3.</span>
+                  <span>30 secondes suffisent.</span>
+                </div>
+              </div>
 
               <button onClick={startCamera} style={btnPrimary}>
                 Démarrer l'enregistrement

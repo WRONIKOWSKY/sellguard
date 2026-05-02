@@ -191,7 +191,7 @@ export default function Litige() {
           <Link href="/" className="logo">
             <img src="/logo.png" alt="SellCov" className="logo-img" />
           </Link>
-          <Link href="/" className="nav-back">← Retour</Link>
+          <Link href="/" className="nav-back">Retour</Link>
         </div>
       </header>
 
