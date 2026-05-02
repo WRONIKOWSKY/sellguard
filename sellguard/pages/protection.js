@@ -58,6 +58,7 @@ export default function Protection() {
   const [videoUrl, setVideoUrl] = useState(null);
   const [error, setError] = useState(null);
   const [cert, setCert] = useState(null); // { cert_id, hash, timestamp, signature }
+  const [copiedShare, setCopiedShare] = useState(null);
 
   const videoRef = useRef(null);
   const mediaRecorderRef = useRef(null);
@@ -424,6 +425,40 @@ export default function Protection() {
                 <button onClick={reset} style={btnSecondary}>
                   Certifier un autre envoi
                 </button>
+              </div>
+
+              {/* Partage social — moteur de croissance */}
+              <div style={{ marginTop: 24, paddingTop: 20, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                <p style={{ fontSize: 12, fontWeight: 600, color: "#888", letterSpacing: ".08em", textTransform: "uppercase", marginBottom: 12 }}>Partage ton expérience</p>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  <button
+                    onClick={() => {
+                      const url = typeof window !== "undefined" ? `${window.location.origin}/verify/${cert.cert_id}` : "";
+                      navigator.clipboard.writeText(url);
+                      setCopiedShare("link");
+                      setTimeout(() => setCopiedShare(null), 1500);
+                    }}
+                    style={{ flex: 1, minWidth: 110, padding: "10px 14px", fontSize: 13, fontWeight: 500, borderRadius: 999, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.04)", color: "#fff", cursor: "pointer", fontFamily: "inherit" }}
+                  >
+                    {copiedShare === "link" ? "✓ Copié" : "Copier le lien"}
+                  </button>
+                  <a
+                    href={typeof window !== "undefined" ? `https://twitter.com/intent/tweet?text=${encodeURIComponent("Je viens de certifier ma vente avec SellCov. Preuve vidéo horodatée + signature cryptographique. Plus jamais d'arnaque sur Vinted.")}&url=${encodeURIComponent(`${window.location.origin}/verify/${cert.cert_id}`)}` : "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ flex: 1, minWidth: 110, padding: "10px 14px", fontSize: 13, fontWeight: 500, borderRadius: 999, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.04)", color: "#fff", textDecoration: "none", textAlign: "center", boxSizing: "border-box", fontFamily: "inherit" }}
+                  >
+                    Partager sur X
+                  </a>
+                  <a
+                    href={typeof window !== "undefined" ? `https://wa.me/?text=${encodeURIComponent(`Je viens de certifier ma vente avec SellCov ✓ ${window.location.origin}/verify/${cert.cert_id}`)}` : "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ flex: 1, minWidth: 110, padding: "10px 14px", fontSize: 13, fontWeight: 500, borderRadius: 999, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.04)", color: "#fff", textDecoration: "none", textAlign: "center", boxSizing: "border-box", fontFamily: "inherit" }}
+                  >
+                    WhatsApp
+                  </a>
+                </div>
               </div>
 
               <p style={{ fontSize: 11, color: "#666", marginTop: 20, lineHeight: 1.5 }}>
