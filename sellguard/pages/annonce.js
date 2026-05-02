@@ -160,10 +160,10 @@ export default function Annonce() {
   const copiedAlert = tx({fr:'Annonce copiée !', en:'Listing copied!', es:'¡Anuncio copiado!', it:'Annuncio copiato!'});
   const buyerMsgHeader = tx({fr:"MESSAGE POUR L'ACHETEUR", en:'MESSAGE FOR BUYER', es:'MENSAJE PARA EL COMPRADOR', it:"MESSAGGIO PER L'ACQUIRENTE"});
   const buyerMsg = tx({
-    fr: "Merci pour ton achat ! Ton colis a été soigneusement emballé et filmé avant envoi avec SellCov — une preuve vidéo horodatée est conservée en cas de litige. Bonne réception !",
-    en: "Thank you for your purchase! Your parcel was carefully packed and filmed before shipping with SellCov — timestamped video proof is kept in case of dispute. Enjoy your item!",
-    es: "¡Gracias por tu compra! Tu paquete fue cuidadosamente empaquetado y filmado antes del envío con SellCov — se conserva una prueba de vídeo con marca temporal en caso de disputa. ¡Disfruta tu artículo!",
-    it: "Grazie per il tuo acquisto! Il tuo pacco è stato accuratamente imballato e filmato prima della spedizione con SellCov — una prova video con timestamp viene conservata in caso di controversia. Buona ricezione!"
+    fr: "Merci pour ton achat ! Ton colis a été soigneusement emballé et filmé avant envoi avec SellCov. Une preuve vidéo horodatée est conservée en cas de litige. Bonne réception !",
+    en: "Thank you for your purchase! Your parcel was carefully packed and filmed before shipping with SellCov. A timestamped video proof is kept in case of dispute. Enjoy your item!",
+    es: "¡Gracias por tu compra! Tu paquete fue cuidadosamente empaquetado y filmado antes del envío con SellCov. Se conserva una prueba de vídeo con marca temporal en caso de disputa. ¡Disfruta tu artículo!",
+    it: "Grazie per il tuo acquisto! Il tuo pacco è stato accuratamente imballato e filmato prima della spedizione con SellCov. Una prova video con timestamp viene conservata in caso di controversia. Buona ricezione!"
   });
   const copyBtnLabel = tx({fr:'Copier', en:'Copy', es:'Copiar', it:'Copia'});
   const copiedBtnLabel = tx({fr:'Copié ✓', en:'Copied ✓', es:'Copiado ✓', it:'Copiato ✓'});
@@ -253,11 +253,13 @@ export default function Annonce() {
         .textarea{resize:none;line-height:1.6}
         .input-sm{padding:10px 14px;font-size:14px}
         .dropzone{border:1.5px dashed var(--border-strong);border-radius:14px;cursor:pointer;background:#060606;transition:border-color .15s}
+        .dropzone:hover{border-color:var(--text-muted)}
         .dropzone:hover{border-color:var(--green)}
-        .dropzone-empty{padding:28px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px}
-        .dropzone-plus{width:48px;height:48px;border-radius:50%;border:2px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:24px;color:var(--text-muted)}
-        .dropzone-hint{font-size:14px;color:var(--text-muted)}
-        .dropzone-sub{font-size:12px;color:var(--text-dim);margin-top:4px}
+        .dropzone-empty{padding:60px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px}
+        .dropzone-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;border-radius:12px;border:1.5px solid var(--violet);background:transparent;color:var(--violet);font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:background .15s}
+        .dropzone-cta:hover{background:var(--violet-bg)}
+        .dropzone-cta-icon{font-size:20px;line-height:1}
+        .dropzone-sub{font-size:13px;color:var(--text-dim);margin-top:14px}
         .dropzone-filled{padding:12px}
         .img-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%}
         .img-wrap{position:relative}
@@ -392,8 +394,10 @@ export default function Annonce() {
                 >
                   {images.length === 0 ? (
                     <>
-                      <div className="dropzone-plus">+</div>
-                      <p className="dropzone-hint">{a.photo_hint}</p>
+                      <button type="button" className="dropzone-cta" onClick={(e) => { e.stopPropagation(); fileRef.current.click(); }}>
+                        <span className="dropzone-cta-icon">+</span>
+                        <span>{a.photo_hint}</span>
+                      </button>
                       <p className="dropzone-sub">{a.photo_sub}</p>
                     </>
                   ) : (
@@ -402,7 +406,6 @@ export default function Annonce() {
                         {images.map((img, i) => (
                           <div key={i} className={'img-wrap' + (i === 0 ? ' primary' : '')}>
                             <img src={img.preview} alt="" />
-                            {i === 0 && <span className="img-badge">IA</span>}
                             <button
                               className="img-remove"
                               onClick={(e) => { e.stopPropagation(); removeImage(i); }}
@@ -618,7 +621,7 @@ export default function Annonce() {
                       {/* Conseils */}
                       {(result.selling_tips || []).length > 0 && (
                         <div style={{ background:'rgba(251,146,60,.06)', border:'1px solid rgba(251,146,60,.2)', borderRadius:12, padding:'14px 16px' }}>
-                          <p style={{ fontSize:13, fontWeight:600, color:'#f9a95c', marginBottom:10 }}>💡 {tx({fr:'Conseils pour ', en:'Tips for ', es:'Consejos para ', it:'Consigli per '}) + activePlatform.name}</p>
+                          <p style={{ fontSize:13, fontWeight:600, color:'#f9a95c', marginBottom:10 }}>{tx({fr:'Conseils pour ', en:'Tips for ', es:'Consejos para ', it:'Consigli per '}) + activePlatform.name}</p>
                           {(result.selling_tips || []).map((tip, i) => (
                             <div key={i} style={{ display:'flex', gap:10, fontSize:13, color:'#9a9a9a', lineHeight:1.5, marginBottom:6 }}><span style={{ color:'#f9a95c', flexShrink:0 }}>·</span><span>{tip}</span></div>
                           ))}
@@ -637,7 +640,7 @@ export default function Annonce() {
                         >
                           {copied['publish'] === matchName
                             ? publishOpeningLabel
-                            : `🚀 ${postOnLabel}${activePlatform.name} →`}
+                            : `${postOnLabel}${activePlatform.name}`}
                         </button>
                       )}
                     </div>
@@ -662,7 +665,6 @@ export default function Annonce() {
                                   }}
                                 >{p.name}</span>
                                 <span style={{ fontSize:12, color:'#9a9a9a' }}>{p.price_min}–{p.price_max}€ · Score {p.score}/10</span>
-                                <span style={{ position:'absolute', top:14, right:16, color:'#5a5a5a', fontSize:14 }}>→</span>
                               </button>
                             );
                           })}
