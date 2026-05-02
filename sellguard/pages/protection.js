@@ -121,10 +121,18 @@ export default function Protection() {
         if (e.data && e.data.size > 0) chunksRef.current.push(e.data);
       };
       mr.onstop = () => {
-        const type = recordedMimeRef.current || "video/webm";
-        const blob = new Blob(chunksRef.current, { type });
-        setVideoBlob(blob);
-        setVideoUrl(URL.createObjectURL(blob));
+        // Strip codecs string (ex: "video/mp4;codecs=avc1.42E01F,mp4a.40.2" → "video/mp4")
+        // iOS Safari rejette certaines combinaisons de MIME complexes pour Blob/FormData.
+        const rawType = recordedMimeRef.current || "video/webm";
+        const cleanType = rawType.split(";")[0].trim() || "video/webm";
+        recordedMimeRef.current = cleanType;
+        try {
+          const blob = new Blob(chunksRef.current, { type: cleanType });
+          setVideoBlob(blob);
+          setVideoUrl(URL.createObjectURL(blob));
+        } catch (err) {
+          setError("Erreur création vidéo : " + (err.message || err.name || "inconnue"));
+        }
         if (streamRef.current) {
           streamRef.current.getTracks().forEach((track) => track.stop());
           streamRef.current = null;
@@ -175,7 +183,8 @@ export default function Protection() {
       }
 
       const formData = new FormData();
-      formData.append("video", videoBlob, "proof.webm");
+      const ext = (recordedMimeRef.current || "").includes("mp4") ? "mp4" : "webm";
+      formData.append("video", videoBlob, `proof.${ext}`);
       formData.append("article", article);
       formData.append("order_ref", orderRef);
       formData.append("tracking_number", trackingNumber);
