@@ -95,7 +95,7 @@ export default function Litige() {
     ? (lang === 'en' ? 'Suspicious' : lang === 'es' ? 'Sospechoso' : lang === 'it' ? 'Sospetto' : 'Suspect')
     : (lang === 'en' ? 'Seems legitimate' : lang === 'es' ? 'Parece legítimo' : lang === 'it' ? 'Sembra legittimo' : 'Semble légitime');
 
-  const selectPlaceholder = lang === 'en' ? 'Select type' : lang === 'es' ? 'Seleccionar tipo' : lang === 'it' ? 'Seleziona tipo' : 'Sélectionner le type';
+  const selectPlaceholder = lang === 'en' ? 'Select type' : lang === 'es' ? 'Seleccionar tipo' : lang === 'it' ? 'Seleziona tipo' : 'Sélectionne le type';
 
   return (
     <>
