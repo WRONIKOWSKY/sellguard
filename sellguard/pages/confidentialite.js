@@ -42,8 +42,8 @@ export default function Confidentialite() {
         <div style={{color:'var(--text-muted)',fontSize:'15px',lineHeight:'1.85'}}>
 
           <Section title="Article 1. Identité du responsable de traitement">
-            <p>Le service SellCov (ci-après « le Service ») est édité et exploité par SellCov, dont le siège social est situé en France.</p>
-            <p>Pour toute question relative au traitement de tes données personnelles, tu peux contacter SellCov à l'adresse <a href="mailto:hello@sellcov.com">hello@sellcov.com</a>.</p>
+            <p>Le service SellCov (ci-après « le Service ») est édité à titre personnel dans le cadre d'un projet en bêta privée, en cours de structuration juridique. Aucune transaction commerciale n'est effectuée à ce jour.</p>
+            <p>Pour toute question relative au traitement de tes données personnelles, tu peux écrire à <a href="mailto:hello@sellcov.com">hello@sellcov.com</a>.</p>
           </Section>
 
           <Section title="Article 2. Données personnelles collectées">
