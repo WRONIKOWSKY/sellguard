@@ -145,8 +145,8 @@ export default function FAQ() {
         .serif{font-family:'Playfair Display',serif;font-weight:700;letter-spacing:-.01em}
         header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(0,0,0,.55);border-bottom:1px solid rgba(255,255,255,.04)}
         .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1200px;margin:0 auto}
-        .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;font-size:20px}
-        .logo-mark{width:32px;height:32px;border:1.5px solid #fff;border-radius:50%;display:grid;place-items:center;font-size:11px;font-family:'Inter',sans-serif;font-weight:600}
+        .logo{display:flex;align-items:center;gap:10px}
+        .logo-img{height:54px;width:auto;display:block}
         .lang-select{background:transparent;border:1px solid #2a2a2a;color:var(--text-muted);padding:7px 12px;border-radius:999px;font-size:13px;cursor:pointer;font-family:inherit}
         .faq-page{max-width:var(--maxw);margin:0 auto;padding:140px 24px 100px}
         .faq-back{display:inline-block;color:var(--text-muted);font-size:14px;margin-bottom:30px;transition:color .2s}
@@ -164,7 +164,7 @@ export default function FAQ() {
 
       <header>
         <div className="nav">
-          <Link href="/"><span className="logo"><span className="logo-mark">sc</span>SellCov</span></Link>
+          <Link href="/"><span className="logo"><img src="/logo.png" alt="SellCov" className="logo-img" /></span></Link>
           <select className="lang-select" id="faq-lang" onChange={(e) => typeof window !== 'undefined' && window.changeFaqLang(e.target.value)}>
             <option value="fr">🇫🇷 FR</option>
             <option value="en">🇬🇧 EN</option>

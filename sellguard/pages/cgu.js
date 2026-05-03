@@ -25,8 +25,7 @@ export default function CGU() {
 
         <div style={{marginBottom:'48px',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
           <Link href="/" style={{display:'flex',alignItems:'center',gap:'10px',color:'#fff',textDecoration:'none'}}>
-            <span style={{width:'32px',height:'32px',border:'1.5px solid #fff',borderRadius:'50%',display:'grid',placeItems:'center',fontSize:'11px',fontWeight:'600'}}>sc</span>
-            <span style={{fontFamily:'Playfair Display,serif',fontWeight:'700',fontSize:'18px'}}>SellCov</span>
+            <img src="/logo.png" alt="SellCov" style={{height:'54px',width:'auto',display:'block'}} />
           </Link>
           <Link href="/" style={{fontSize:'14px',color:'var(--text-muted)'}}>← Retour</Link>
         </div>
@@ -129,8 +128,6 @@ export default function CGU() {
 
         <div style={{marginTop:'60px',paddingTop:'24px',borderTop:'0.5px solid var(--border)',display:'flex',gap:'24px',flexWrap:'wrap',fontSize:'13px',color:'var(--text-dim)'}}>
           <span>© 2026 SellCov</span>
-          <Link href="/legal" style={{color:'var(--text-dim)'}}>Mentions légales</Link>
-          <Link href="/confidentialite" style={{color:'var(--text-dim)'}}>Confidentialité</Link>
           <Link href="/" style={{color:'var(--text-dim)'}}>Accueil</Link>
         </div>
       </div>

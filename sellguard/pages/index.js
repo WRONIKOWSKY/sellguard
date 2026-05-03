@@ -24,7 +24,6 @@ const PAGE_HTML = `
 </header>
 
 <section class="hero">
-  <span class="badge"><span class="dot"></span><span data-i18n="badge">Lancement</span></span>
   <h1 class="h1 serif"><span data-i18n="hero_h1_1">Revends</span><span class="italic" data-i18n="hero_h1_2">sans te faire arnaquer.</span></h1>
   <p class="hero-sub" data-i18n="hero_sub">Une preuve solide avant l'envoi. Un dossier complet en cas de litige.</p>
   <p class="hero-subsub" data-i18n="hero_subsub">Preuve horodatée. Défense automatique.</p>
@@ -143,9 +142,9 @@ const PAGE_HTML = `
     </div>
     <div class="scam-card reveal">
       <span class="scam-number">Arnaque 3</span>
-      <span class="scam-label" data-i18n="s3_title">Substitution</span>
-      <div class="scam-quote" data-i18n="s3_quote">« Ce n'est pas l'article que j'ai commandé. »</div>
-      <div class="scam-solve"><span class="check">✓</span><span data-i18n="s3_solve">SellCov atteste le contenu exact du colis au moment de la fermeture.</span></div>
+      <span class="scam-label" data-i18n="s3_title">Réclamation tardive</span>
+      <div class="scam-quote" data-i18n="s3_quote">« L'article a un défaut. » (3 semaines après réception)</div>
+      <div class="scam-solve"><span class="check">✓</span><span data-i18n="s3_solve">SellCov horodate l'état exact à l'envoi. Toute usure post-réception est exclue.</span></div>
     </div>
   </div>
   <div class="scams-dots" id="scams-dots">
@@ -194,8 +193,8 @@ const PAGE_HTML = `
       <p class="plan-desc" data-i18n="p3_desc">Pour les pros (plus de 15 ventes/mois).</p>
       <ul>
         <li data-i18n="p3_f1">60 certificats vidéo / mois</li>
-        <li data-i18n="p3_f2">Garantie SellCov : 50€ remboursés si tu perds un litige avec un certif validé</li>
-        <li data-i18n="p3_f3">IA défense automatique</li>
+        <li data-i18n="p3_f2">IA défense automatique</li>
+        <li data-i18n="p3_f3">Génération d'annonce illimitée</li>
         <li data-i18n="p3_f4">Support prioritaire 24h</li>
         <li data-i18n="p3_f5">Accès aux nouvelles fonctionnalités en avant-première</li>
       </ul>
@@ -221,7 +220,6 @@ const PAGE_HTML = `
       <a href="https://www.tiktok.com/@sellcov.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok SellCov">TikTok</a>
       <a href="/cgu" data-i18n="ft_legal">Mentions légales</a>
       <a href="/cgu" data-i18n="ft_cgu">CGU</a>
-      <a href="/confidentialite" data-i18n="ft_priv">Confidentialité</a>
     </div>
     <div class="foot-copy">© 2026 SellCov</div>
   </div>
@@ -243,20 +241,20 @@ const I18N = {
     f1_tag:"Annonce",f1_h1:"Génère ton annonce",f1_h2:"en 10 secondes.",f1_p:"Photographie l'article, reçois une annonce rédigée et prête à publier.",f1_btn:"Essayer",f1_time:"~10 sec par annonce",
     f2_tag:"Protection",f2_h1:"Certifie avant",f2_h2:"d'expédier.",f2_p:"Créer une preuve utilisable en cas de litige.",f2_btn:"Protéger",f2_time:"~1 min 30 par envoi",
     f3_tag:"Litige",f3_h1:"Défense automatique",f3_h2:"en 1 clic.",f3_p:"Un dossier de défense prêt à envoyer.",f3_btn:"Gérer un litige",f3_time:"~30 sec de rédaction",
-    lg_kicker:"Recevabilité juridique",lg_t1:"Tes preuves,",lg_t2:"opposables en cas de litige.",lg_sub:"Chaque certificat SellCov est conçu pour avoir valeur de preuve dans tes échanges avec acheteurs et marketplaces.",
+    lg_kicker:"Recevabilité juridique",lg_t1:"Tes preuves,",lg_t2:"opposables en cas de litige.",lg_sub:"Construit pour résister aux contestations dans tes litiges.",
     lg_c1_t:"Article 1366 du Code civil",lg_c1_p:"L'écrit électronique a la même force probante que l'écrit papier dès lors que l'auteur est identifiable et l'intégrité garantie. Nos certificats cochent ces deux critères.",
     lg_c2_t:"Intégrité cryptographique",lg_c2_p:"Empreinte SHA-256 + signature HMAC sur chaque vidéo. Toute modification de la preuve est instantanément détectable et le certificat devient invalide.",
     lg_c3_t:"Recevable comme moyen de preuve",lg_c3_p:"Article 1358 du Code civil : la preuve peut être apportée par tout moyen. Argument utilisable dans tes litiges Vinted, Depop, Leboncoin et procédures civiles.",
-    lg_note:"Ces preuves peuvent être contestées comme tout moyen de preuve. SellCov ne se substitue pas à un avocat.",
-    sc_kicker:"Les arnaques que tu vas rencontrer",sc_t1:"Les arnaques qui coûtent",sc_t2:"le plus cher aux vendeurs.",sc_sub:"Voici les arnaques les plus fréquentes et comment SellCov te protège.",
+    lg_note:"Comme toute preuve, un certificat peut être contesté. SellCov ne remplace pas un avocat.",
+    sc_kicker:"Cas concrets",sc_t1:"Les arnaques qui coûtent",sc_t2:"le plus cher aux vendeurs.",sc_sub:"Trois cas typiques. Trois réponses SellCov.",
     s1_title:"Colis « jamais reçu »",s1_quote:"« Je n'ai jamais reçu le colis. Je demande un remboursement. »",s1_solve:"SellCov fournit la vidéo horodatée du dépôt et l'étiquette filmée.",
     s2_title:"Article « abîmé »",s2_quote:"« L'article est arrivé troué. Je veux être remboursé. »",s2_solve:"SellCov prouve l'état exact avant expédition grâce à la vidéo 360° horodatée.",
-    s3_title:"Substitution",s3_quote:"« Ce n'est pas l'article que j'ai commandé. »",s3_solve:"SellCov atteste le contenu exact du colis au moment de la fermeture.",
+    s3_title:"Réclamation tardive",s3_quote:"« L'article a un défaut. » (3 semaines après réception)",s3_solve:"SellCov horodate l'état exact à l'envoi. Toute usure post-réception est exclue.",
     pl_kicker:"Nos offres",pl_t1:"Simple,",pl_t2:"sans surprise.",pl_sub:"Aucun engagement, annulable en 1 clic.",
     per_mo:"/ mois",
     p1_name:"Découverte",p1_unit:"/ mois",p1_desc:"Pour tester sans engagement.",p1_f1:"1 certificat vidéo / mois",p1_f2:"IA défense automatique",p1_f3:"Génération d'annonce",p1_f4:"Support email",p1_btn:"Commencer gratuitement",
     p2_ribbon:"★ Recommandé",p2_name:"Vendeur",p2_desc:"Pour les vendeurs réguliers (5 à 15 ventes/mois).",p2_f1:"15 certificats vidéo / mois",p2_f2:"IA défense automatique",p2_f3:"Génération d'annonce",p2_f4:"Support email prioritaire",p2_f5:"Guide des arnaques à éviter",p2_btn:"Choisir Vendeur",
-    p3_name:"Pro",p3_desc:"Pour les pros (plus de 15 ventes/mois).",p3_f1:"60 certificats vidéo / mois",p3_f2:"Garantie SellCov : 50€ remboursés si tu perds un litige avec un certif validé",p3_f3:"IA défense automatique",p3_f4:"Support prioritaire 24h",p3_f5:"Accès aux nouvelles fonctionnalités en avant-première",p3_btn:"Choisir Pro",
+    p3_name:"Pro",p3_desc:"Pour les pros (plus de 15 ventes/mois).",p3_f1:"60 certificats vidéo / mois",p3_f2:"IA défense automatique",p3_f3:"Génération d'annonce illimitée",p3_f4:"Support prioritaire 24h",p3_f5:"Accès aux nouvelles fonctionnalités en avant-première",p3_btn:"Choisir Pro",
     fin_t1:"Protège ton argent",fin_t2:"maintenant.",fin_sub:"Génère une vidéo certifiée infalsifiable.",fin_cta:"Essayer",
     ft_faq:"FAQ",ft_contact:"Contact",ft_legal:"Mentions légales",ft_cgu:"CGU",ft_priv:"Confidentialité"
   },
@@ -271,20 +269,20 @@ const I18N = {
     f1_tag:"Listing",f1_h1:"Generate your listing",f1_h2:"in 10 seconds.",f1_p:"Photograph the item, get a written listing ready to publish.",f1_btn:"Try it",f1_time:"~10 sec per listing",
     f2_tag:"Protection",f2_h1:"Certify before",f2_h2:"shipping.",f2_p:"Create proof that holds up in any dispute.",f2_btn:"Protect",f2_time:"~1 min 30 per shipment",
     f3_tag:"Dispute",f3_h1:"Automatic defence",f3_h2:"in 1 click.",f3_p:"A defence file ready to send.",f3_btn:"Handle dispute",f3_time:"~30 sec to write",
-    lg_kicker:"Legal admissibility",lg_t1:"Your proofs,",lg_t2:"admissible in any dispute.",lg_sub:"Each SellCov certificate is built to hold up as evidence in your interactions with buyers and marketplaces.",
+    lg_kicker:"Legal admissibility",lg_t1:"Your proofs,",lg_t2:"admissible in any dispute.",lg_sub:"Built to withstand challenges in your disputes.",
     lg_c1_t:"Article 1366 French Civil Code",lg_c1_p:"Electronic writing has the same evidentiary force as paper, provided the author is identifiable and integrity guaranteed. Our certificates meet both criteria.",
     lg_c2_t:"Cryptographic integrity",lg_c2_p:"SHA-256 fingerprint + HMAC signature on every video. Any tampering is instantly detectable and the certificate becomes invalid.",
     lg_c3_t:"Admissible as evidence",lg_c3_p:"Article 1358 French Civil Code: evidence may be adduced by any means. Usable in your Vinted, Depop, eBay disputes and civil proceedings.",
-    lg_note:"This evidence may be challenged like any means of proof. SellCov is not a substitute for a lawyer.",
-    sc_kicker:"Scams you will encounter",sc_t1:"The scams that cost",sc_t2:"sellers the most.",sc_sub:"Here are the most common scams and how SellCov protects you.",
+    lg_note:"Like any evidence, a certificate can be challenged. SellCov does not replace a lawyer.",
+    sc_kicker:"Real cases",sc_t1:"The scams that cost",sc_t2:"sellers the most.",sc_sub:"Three typical cases. Three SellCov answers.",
     s1_title:"Parcel \"never received\"",s1_quote:"\"I never received the parcel. I'm requesting a refund.\"",s1_solve:"SellCov provides the timestamped video of drop-off and the filmed label.",
     s2_title:"Item \"damaged\"",s2_quote:"\"The item arrived with a hole. I want a refund.\"",s2_solve:"SellCov proves the exact condition before shipping with a 360° timestamped video.",
-    s3_title:"Substitution",s3_quote:"\"This is not the item I ordered.\"",s3_solve:"SellCov certifies the exact contents of the parcel at the time of sealing.",
+    s3_title:"Late claim",s3_quote:"\"The item is defective.\" (3 weeks after delivery)",s3_solve:"SellCov timestamps exact condition at shipping. Post-delivery wear is excluded.",
     pl_kicker:"Our plans",pl_t1:"Simple,",pl_t2:"no surprises.",pl_sub:"No commitment, cancel anytime.",
     per_mo:"/ month",
     p1_name:"Discovery",p1_unit:"/ month",p1_desc:"Try without commitment.",p1_f1:"1 video certificate / month",p1_f2:"AI automatic defence",p1_f3:"Listing generation",p1_f4:"Email support",p1_btn:"Start for free",
     p2_ribbon:"★ Recommended",p2_name:"Seller",p2_desc:"For regular sellers (5 to 15 sales/month).",p2_f1:"15 video certificates / month",p2_f2:"AI automatic defence",p2_f3:"Listing generation",p2_f4:"Priority email support",p2_f5:"Guide to avoiding scams",p2_btn:"Choose Seller",
-    p3_name:"Pro",p3_desc:"For pros (more than 15 sales/month).",p3_f1:"60 video certificates / month",p3_f2:"SellCov Guarantee: €50 refunded if you lose a dispute with a validated cert",p3_f3:"AI automatic defence",p3_f4:"24h priority support",p3_f5:"Early access to new features",p3_btn:"Choose Pro",
+    p3_name:"Pro",p3_desc:"For pros (more than 15 sales/month).",p3_f1:"60 video certificates / month",p3_f2:"AI automatic defence",p3_f3:"Unlimited listing generation",p3_f4:"24h priority support",p3_f5:"Early access to new features",p3_btn:"Choose Pro",
     fin_t1:"Protect your money",fin_t2:"now.",fin_sub:"Generate a tamper-proof certified video.",fin_cta:"Try it",
     ft_faq:"FAQ",ft_contact:"Contact",ft_legal:"Legal notice",ft_cgu:"T&Cs",ft_priv:"Privacy"
   },
@@ -299,20 +297,20 @@ const I18N = {
     f1_tag:"Anuncio",f1_h1:"Genera tu anuncio",f1_h2:"en 10 segundos.",f1_p:"Fotografía el artículo, recibe un anuncio redactado listo para publicar.",f1_btn:"Probar",f1_time:"~10 seg por anuncio",
     f2_tag:"Protección",f2_h1:"Certifica antes",f2_h2:"de enviar.",f2_p:"Crea una prueba utilizable en caso de litigio.",f2_btn:"Proteger",f2_time:"~1 min 30 por envío",
     f3_tag:"Litigio",f3_h1:"Defensa automática",f3_h2:"con 1 clic.",f3_p:"Un expediente de defensa listo para enviar.",f3_btn:"Gestionar litigio",f3_time:"~30 seg de redacción",
-    lg_kicker:"Admisibilidad legal",lg_t1:"Tus pruebas,",lg_t2:"oponibles en caso de litigio.",lg_sub:"Cada certificado SellCov está diseñado para tener valor probatorio en tus relaciones con compradores y plataformas.",
+    lg_kicker:"Admisibilidad legal",lg_t1:"Tus pruebas,",lg_t2:"oponibles en caso de litigio.",lg_sub:"Construido para resistir impugnaciones en tus litigios.",
     lg_c1_t:"Artículo 1366 Código Civil francés",lg_c1_p:"El escrito electrónico tiene la misma fuerza probatoria que el papel, siempre que el autor sea identificable y se garantice la integridad. Nuestros certificados cumplen ambos criterios.",
     lg_c2_t:"Integridad criptográfica",lg_c2_p:"Huella SHA-256 + firma HMAC en cada vídeo. Toda modificación es detectable al instante y el certificado queda inválido.",
     lg_c3_t:"Admisible como prueba",lg_c3_p:"Artículo 1358 Código Civil francés: la prueba puede aportarse por cualquier medio. Argumento utilizable en tus litigios Vinted, Depop y procedimientos civiles.",
-    lg_note:"Estas pruebas pueden ser impugnadas como cualquier medio de prueba. SellCov no sustituye a un abogado.",
-    sc_kicker:"Las estafas que vas a encontrar",sc_t1:"Las estafas que más cuestan",sc_t2:"a los vendedores.",sc_sub:"Aquí están las estafas más frecuentes y cómo SellCov te protege.",
+    lg_note:"Como toda prueba, un certificado puede ser impugnado. SellCov no reemplaza a un abogado.",
+    sc_kicker:"Casos reales",sc_t1:"Las estafas que más cuestan",sc_t2:"a los vendedores.",sc_sub:"Tres casos típicos. Tres respuestas SellCov.",
     s1_title:"Paquete «nunca recibido»",s1_quote:"«Nunca recibí el paquete. Solicito un reembolso.»",s1_solve:"SellCov proporciona el video con marca de tiempo del depósito y la etiqueta filmada.",
     s2_title:"Artículo «dañado»",s2_quote:"«El artículo llegó con un agujero. Quiero un reembolso.»",s2_solve:"SellCov prueba el estado exacto antes del envío con un video 360° con marca de tiempo.",
-    s3_title:"Sustitución",s3_quote:"«Esto no es el artículo que pedí.»",s3_solve:"SellCov certifica el contenido exacto del paquete en el momento del cierre.",
+    s3_title:"Reclamación tardía",s3_quote:"«El artículo tiene un defecto.» (3 semanas después de la recepción)",s3_solve:"SellCov fecha el estado exacto al envío. Cualquier desgaste posterior queda excluido.",
     pl_kicker:"Nuestros planes",pl_t1:"Simple,",pl_t2:"sin sorpresas.",pl_sub:"Sin compromiso, cancelable con 1 clic.",
     per_mo:"/ mes",
     p1_name:"Descubierta",p1_unit:"/ mes",p1_desc:"Probar sin compromiso.",p1_f1:"1 certificado de video / mes",p1_f2:"IA defensa automática",p1_f3:"Generación de anuncio",p1_f4:"Soporte email",p1_btn:"Empezar gratis",
     p2_ribbon:"★ Recomendado",p2_name:"Vendedor",p2_desc:"Para vendedores regulares (5 a 15 ventas/mes).",p2_f1:"15 certificados de video / mes",p2_f2:"IA defensa automática",p2_f3:"Generación de anuncio",p2_f4:"Soporte email prioritario",p2_f5:"Guía de estafas a evitar",p2_btn:"Elegir Vendedor",
-    p3_name:"Pro",p3_desc:"Para pros (más de 15 ventas/mes).",p3_f1:"60 certificados de video / mes",p3_f2:"Garantía SellCov: 50€ reembolsados si pierdes un litigio con un certif validado",p3_f3:"IA defensa automática",p3_f4:"Soporte prioritario 24h",p3_f5:"Acceso anticipado a nuevas funciones",p3_btn:"Elegir Pro",
+    p3_name:"Pro",p3_desc:"Para pros (más de 15 ventas/mes).",p3_f1:"60 certificados de video / mes",p3_f2:"IA defensa automática",p3_f3:"Generación de anuncio ilimitada",p3_f4:"Soporte prioritario 24h",p3_f5:"Acceso anticipado a nuevas funciones",p3_btn:"Elegir Pro",
     fin_t1:"Protege tu dinero",fin_t2:"ahora.",fin_sub:"Genera un video certificado infalsificable.",fin_cta:"Probar",
     ft_faq:"FAQ",ft_contact:"Contacto",ft_legal:"Aviso legal",ft_cgu:"T&C",ft_priv:"Privacidad"
   },
@@ -327,20 +325,20 @@ const I18N = {
     f1_tag:"Annuncio",f1_h1:"Genera il tuo annuncio",f1_h2:"in 10 secondi.",f1_p:"Fotografa l'articolo, ricevi un annuncio pronto da pubblicare.",f1_btn:"Provare",f1_time:"~10 sec per annuncio",
     f2_tag:"Protezione",f2_h1:"Certifica prima",f2_h2:"di spedire.",f2_p:"Crea una prova utilizzabile in caso di controversia.",f2_btn:"Proteggere",f2_time:"~1 min 30 per spedizione",
     f3_tag:"Controversia",f3_h1:"Difesa automatica",f3_h2:"in 1 clic.",f3_p:"Un dossier di difesa pronto da inviare.",f3_btn:"Gestire una controversia",f3_time:"~30 sec di redazione",
-    lg_kicker:"Ammissibilità legale",lg_t1:"Le tue prove,",lg_t2:"opponibili in caso di controversia.",lg_sub:"Ogni certificato SellCov è progettato per avere valore probatorio nei tuoi rapporti con acquirenti e marketplace.",
+    lg_kicker:"Ammissibilità legale",lg_t1:"Le tue prove,",lg_t2:"opponibili in caso di controversia.",lg_sub:"Costruito per resistere alle contestazioni nelle tue controversie.",
     lg_c1_t:"Articolo 1366 Codice civile francese",lg_c1_p:"Lo scritto elettronico ha la stessa forza probatoria della carta, purché l'autore sia identificabile e l'integrità garantita. I nostri certificati soddisfano entrambi i criteri.",
     lg_c2_t:"Integrità crittografica",lg_c2_p:"Impronta SHA-256 + firma HMAC su ogni video. Qualsiasi modifica è rilevabile istantaneamente e il certificato diventa invalido.",
     lg_c3_t:"Ammissibile come prova",lg_c3_p:"Articolo 1358 Codice civile francese: la prova può essere fornita con qualsiasi mezzo. Argomento utilizzabile nelle tue controversie Vinted, Depop e procedure civili.",
-    lg_note:"Queste prove possono essere contestate come qualsiasi mezzo di prova. SellCov non sostituisce un avvocato.",
-    sc_kicker:"Le truffe che incontrerai",sc_t1:"Le truffe che costano",sc_t2:"di più ai venditori.",sc_sub:"Ecco le truffe più frequenti e come SellCov ti protegge.",
+    lg_note:"Come ogni prova, un certificato può essere contestato. SellCov non sostituisce un avvocato.",
+    sc_kicker:"Casi reali",sc_t1:"Le truffe che costano",sc_t2:"di più ai venditori.",sc_sub:"Tre casi tipici. Tre risposte SellCov.",
     s1_title:"Pacco «mai ricevuto»",s1_quote:"«Non ho mai ricevuto il pacco. Chiedo il rimborso.»",s1_solve:"SellCov fornisce il video con timestamp del deposito e l'etichetta filmata.",
     s2_title:"Articolo «danneggiato»",s2_quote:"«L'articolo è arrivato forato. Voglio essere rimborsato.»",s2_solve:"SellCov prova lo stato esatto prima della spedizione con un video 360° con timestamp.",
-    s3_title:"Sostituzione",s3_quote:"«Questo non è l'articolo che ho ordinato.»",s3_solve:"SellCov attesta il contenuto esatto del pacco al momento della chiusura.",
+    s3_title:"Reclamo tardivo",s3_quote:"«L'articolo ha un difetto.» (3 settimane dopo la ricezione)",s3_solve:"SellCov fissa lo stato esatto alla spedizione. Ogni usura post-ricezione è esclusa.",
     pl_kicker:"Le nostre offerte",pl_t1:"Semplice,",pl_t2:"senza sorprese.",pl_sub:"Nessun impegno, annullabile in 1 clic.",
     per_mo:"/ mese",
     p1_name:"Scoperta",p1_unit:"/ mese",p1_desc:"Prova senza impegno.",p1_f1:"1 certificato video / mese",p1_f2:"IA difesa automatica",p1_f3:"Generazione di annuncio",p1_f4:"Supporto email",p1_btn:"Inizia gratis",
     p2_ribbon:"★ Consigliato",p2_name:"Venditore",p2_desc:"Per venditori regolari (5 a 15 vendite/mese).",p2_f1:"15 certificati video / mese",p2_f2:"IA difesa automatica",p2_f3:"Generazione di annuncio",p2_f4:"Supporto email prioritario",p2_f5:"Guida alle truffe da evitare",p2_btn:"Scegli Venditore",
-    p3_name:"Pro",p3_desc:"Per i pro (più di 15 vendite/mese).",p3_f1:"60 certificati video / mese",p3_f2:"Garanzia SellCov: 50€ rimborsati se perdi una controversia con un certif validato",p3_f3:"IA difesa automatica",p3_f4:"Supporto prioritario 24h",p3_f5:"Accesso anticipato alle nuove funzionalità",p3_btn:"Scegli Pro",
+    p3_name:"Pro",p3_desc:"Per i pro (più di 15 vendite/mese).",p3_f1:"60 certificati video / mese",p3_f2:"IA difesa automatica",p3_f3:"Generazione annuncio illimitata",p3_f4:"Supporto prioritario 24h",p3_f5:"Accesso anticipato alle nuove funzionalità",p3_btn:"Scegli Pro",
     fin_t1:"Proteggi il tuo denaro",fin_t2:"ora.",fin_sub:"Genera un video certificato infalsificabile.",fin_cta:"Prova",
     ft_faq:"FAQ",ft_contact:"Contatto",ft_legal:"Note legali",ft_cgu:"Termini e condizioni",ft_priv:"Privacy"
   }
@@ -471,8 +469,8 @@ export default function Home() {
         .hero-stats{display:inline-flex;gap:24px;padding:10px 20px;border:1px solid var(--border);border-radius:999px;margin-bottom:34px;font-size:13px;color:var(--text-muted);flex-wrap:wrap;justify-content:center}
         .hero-stats strong{color:#fff;font-weight:600}
         .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:46px}
-        .platforms{color:var(--text-dim);font-size:14px;letter-spacing:.02em}
-        .platforms strong{color:var(--text-muted);font-weight:500;margin:0 4px}
+        .platforms{color:var(--text-dim);font-size:12px;letter-spacing:.04em;opacity:.6}
+        .platforms strong{color:var(--text-dim);font-weight:400;margin:0 4px}
         .demo{padding:60px 24px 100px;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:48px}
         .demo-tagline{color:rgba(255,255,255,0.92);font-size:18px;text-align:center;font-family:'Playfair Display',serif;font-style:italic;letter-spacing:-.01em;margin:0}
         .phone-stage{position:relative;width:100%;max-width:820px;display:flex;justify-content:center;align-items:center}
