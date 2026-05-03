@@ -220,6 +220,7 @@ const PAGE_HTML = `
       <a href="https://www.tiktok.com/@sellcov.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok SellCov">TikTok</a>
       <a href="/cgu" data-i18n="ft_legal">Mentions légales</a>
       <a href="/cgu" data-i18n="ft_cgu">CGU</a>
+      <a href="/confidentialite" data-i18n="ft_priv">Confidentialité</a>
     </div>
     <div class="foot-copy">© 2026 SellCov</div>
   </div>
