@@ -79,9 +79,10 @@ export default function CGU() {
 
           <Section title="Article 7. Tarifs et conditions financières">
             <p>Pendant la phase bêta du Service, un accès gratuit est proposé à l'ensemble des utilisateurs inscrits. Cette offre comprend un accès aux fonctionnalités décrites à l'article 4 sans limitation de volume. La durée de la phase bêta est indéterminée ; SellCov se réserve le droit d'y mettre fin avec un préavis de trente (30) jours adressé aux utilisateurs par email.</p>
-            <p>Le plan Early Adopter est proposé aux cinquante (50) premiers utilisateurs souscrivant un abonnement payant, au tarif de 4,90 euros hors taxes par mois. Ce tarif est garanti pendant une durée d'un (1) an à compter de la date de souscription. À l'issue de cette période, l'utilisateur sera informé des nouvelles conditions tarifaires dans un délai minimum de trente (30) jours avant leur entrée en vigueur.</p>
-            <p>Le plan Pro Power Seller est proposé au tarif de 19,90 euros hors taxes par mois, sans engagement de durée, résiliable à tout moment selon les modalités prévues à l'article 9.</p>
-            <p>Les paiements sont traités par un prestataire de paiement tiers. SellCov ne conserve aucune donnée bancaire de ses utilisateurs. En cas de défaut de paiement, l'accès aux fonctionnalités payantes est suspendu jusqu'à régularisation.</p>
+            <p>Le plan Découverte est proposé gratuitement et donne accès à trois (3) certificats vidéo par mois ainsi qu'aux fonctionnalités d'analyse et de défense automatique.</p>
+            <p>Le plan Vendeur est proposé au tarif de 14,90 euros hors taxes par mois et donne accès à trente (30) certificats vidéo par mois ainsi qu'aux fonctionnalités complètes du Service.</p>
+            <p>Le plan Pro est proposé au tarif de 29,90 euros hors taxes par mois et donne accès à un nombre illimité de certificats vidéo par mois, ainsi qu'aux fonctionnalités avancées (génération d'annonce illimitée, support prioritaire 24h, accès anticipé aux nouvelles fonctionnalités).</p>
+            <p>Tous les plans payants sont proposés sans engagement de durée et sont résiliables à tout moment selon les modalités prévues à l'article 9. Les paiements sont traités par un prestataire de paiement tiers. SellCov ne conserve aucune donnée bancaire de ses utilisateurs. En cas de défaut de paiement, l'accès aux fonctionnalités payantes est suspendu jusqu'à régularisation.</p>
           </Section>
 
           <Section title="Article 8. Disponibilité du Service">

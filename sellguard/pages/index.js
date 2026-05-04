@@ -166,7 +166,7 @@ const PAGE_HTML = `
       <div class="plan-price">0 € <small data-i18n="p1_unit">/ mois</small></div>
       <p class="plan-desc" data-i18n="p1_desc">Pour tester sans engagement.</p>
       <ul>
-        <li data-i18n="p1_f1">1 certificat vidéo / mois</li>
+        <li data-i18n="p1_f1">3 certificats vidéo / mois</li>
         <li data-i18n="p1_f2">IA défense automatique</li>
         <li data-i18n="p1_f3">Génération d'annonce</li>
         <li data-i18n="p1_f4">Support email</li>
@@ -176,10 +176,10 @@ const PAGE_HTML = `
     <div class="plan featured reveal">
       <span class="plan-ribbon" data-i18n="p2_ribbon">★ Recommandé</span>
       <h4 data-i18n="p2_name">Vendeur</h4>
-      <div class="plan-price">4,90 € <small data-i18n="per_mo">/ mois</small></div>
-      <p class="plan-desc" data-i18n="p2_desc">Pour les vendeurs réguliers (5 à 15 ventes/mois).</p>
+      <div class="plan-price">14,90 € <small data-i18n="per_mo">/ mois</small></div>
+      <p class="plan-desc" data-i18n="p2_desc">Pour les vendeurs réguliers (5 à 50 ventes/mois).</p>
       <ul>
-        <li data-i18n="p2_f1">15 certificats vidéo / mois</li>
+        <li data-i18n="p2_f1">30 certificats vidéo / mois</li>
         <li data-i18n="p2_f2">IA défense automatique</li>
         <li data-i18n="p2_f3">Génération d'annonce</li>
         <li data-i18n="p2_f4">Support email prioritaire</li>
@@ -189,10 +189,10 @@ const PAGE_HTML = `
     </div>
     <div class="plan reveal">
       <h4 data-i18n="p3_name">Pro</h4>
-      <div class="plan-price">14,90 € <small data-i18n="per_mo">/ mois</small></div>
-      <p class="plan-desc" data-i18n="p3_desc">Pour les pros (plus de 15 ventes/mois).</p>
+      <div class="plan-price">29,90 € <small data-i18n="per_mo">/ mois</small></div>
+      <p class="plan-desc" data-i18n="p3_desc">Pour les pros et revendeurs (plus de 50 ventes/mois ou produits à forte valeur).</p>
       <ul>
-        <li data-i18n="p3_f1">60 certificats vidéo / mois</li>
+        <li data-i18n="p3_f1">Certificats vidéo illimités</li>
         <li data-i18n="p3_f2">IA défense automatique</li>
         <li data-i18n="p3_f3">Génération d'annonce illimitée</li>
         <li data-i18n="p3_f4">Support prioritaire 24h</li>
@@ -218,7 +218,7 @@ const PAGE_HTML = `
       <a href="mailto:hello@sellcov.com" data-i18n="ft_contact">Contact</a>
       <a href="https://www.instagram.com/sellcov" target="_blank" rel="noopener noreferrer" aria-label="Instagram SellCov">Instagram</a>
       <a href="https://www.tiktok.com/@sellcov.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok SellCov">TikTok</a>
-      <a href="/cgu" data-i18n="ft_legal">Mentions légales</a>
+      <a href="/mentions-legales" data-i18n="ft_legal">Mentions légales</a>
       <a href="/cgu" data-i18n="ft_cgu">CGU</a>
       <a href="/confidentialite" data-i18n="ft_priv">Confidentialité</a>
     </div>
@@ -253,9 +253,9 @@ const I18N = {
     s3_title:"Réclamation tardive",s3_quote:"« L'article a un défaut. » (3 semaines après réception)",s3_solve:"SellCov horodate l'état exact à l'envoi. Toute usure post-réception est exclue.",
     pl_kicker:"Nos offres",pl_t1:"Simple,",pl_t2:"sans surprise.",pl_sub:"Aucun engagement, annulable en 1 clic.",
     per_mo:"/ mois",
-    p1_name:"Découverte",p1_unit:"/ mois",p1_desc:"Pour tester sans engagement.",p1_f1:"1 certificat vidéo / mois",p1_f2:"IA défense automatique",p1_f3:"Génération d'annonce",p1_f4:"Support email",p1_btn:"Commencer gratuitement",
-    p2_ribbon:"★ Recommandé",p2_name:"Vendeur",p2_desc:"Pour les vendeurs réguliers (5 à 15 ventes/mois).",p2_f1:"15 certificats vidéo / mois",p2_f2:"IA défense automatique",p2_f3:"Génération d'annonce",p2_f4:"Support email prioritaire",p2_f5:"Guide des arnaques à éviter",p2_btn:"Choisir Vendeur",
-    p3_name:"Pro",p3_desc:"Pour les pros (plus de 15 ventes/mois).",p3_f1:"60 certificats vidéo / mois",p3_f2:"IA défense automatique",p3_f3:"Génération d'annonce illimitée",p3_f4:"Support prioritaire 24h",p3_f5:"Accès aux nouvelles fonctionnalités en avant-première",p3_btn:"Choisir Pro",
+    p1_name:"Découverte",p1_unit:"/ mois",p1_desc:"Pour tester sans engagement.",p1_f1:"3 certificats vidéo / mois",p1_f2:"IA défense automatique",p1_f3:"Génération d'annonce",p1_f4:"Support email",p1_btn:"Commencer gratuitement",
+    p2_ribbon:"★ Recommandé",p2_name:"Vendeur",p2_desc:"Pour les vendeurs réguliers (5 à 50 ventes/mois).",p2_f1:"30 certificats vidéo / mois",p2_f2:"IA défense automatique",p2_f3:"Génération d'annonce",p2_f4:"Support email prioritaire",p2_f5:"Guide des arnaques à éviter",p2_btn:"Choisir Vendeur",
+    p3_name:"Pro",p3_desc:"Pour les pros et revendeurs (plus de 50 ventes/mois ou produits à forte valeur).",p3_f1:"Certificats vidéo illimités",p3_f2:"IA défense automatique",p3_f3:"Génération d'annonce illimitée",p3_f4:"Support prioritaire 24h",p3_f5:"Accès aux nouvelles fonctionnalités en avant-première",p3_btn:"Choisir Pro",
     fin_t1:"Protège ton argent",fin_t2:"maintenant.",fin_sub:"Génère une vidéo certifiée infalsifiable.",fin_cta:"Essayer",
     ft_faq:"FAQ",ft_contact:"Contact",ft_legal:"Mentions légales",ft_cgu:"CGU",ft_priv:"Confidentialité"
   },
@@ -281,9 +281,9 @@ const I18N = {
     s3_title:"Late claim",s3_quote:"\"The item is defective.\" (3 weeks after delivery)",s3_solve:"SellCov timestamps exact condition at shipping. Post-delivery wear is excluded.",
     pl_kicker:"Our plans",pl_t1:"Simple,",pl_t2:"no surprises.",pl_sub:"No commitment, cancel anytime.",
     per_mo:"/ month",
-    p1_name:"Discovery",p1_unit:"/ month",p1_desc:"Try without commitment.",p1_f1:"1 video certificate / month",p1_f2:"AI automatic defence",p1_f3:"Listing generation",p1_f4:"Email support",p1_btn:"Start for free",
-    p2_ribbon:"★ Recommended",p2_name:"Seller",p2_desc:"For regular sellers (5 to 15 sales/month).",p2_f1:"15 video certificates / month",p2_f2:"AI automatic defence",p2_f3:"Listing generation",p2_f4:"Priority email support",p2_f5:"Guide to avoiding scams",p2_btn:"Choose Seller",
-    p3_name:"Pro",p3_desc:"For pros (more than 15 sales/month).",p3_f1:"60 video certificates / month",p3_f2:"AI automatic defence",p3_f3:"Unlimited listing generation",p3_f4:"24h priority support",p3_f5:"Early access to new features",p3_btn:"Choose Pro",
+    p1_name:"Discovery",p1_unit:"/ month",p1_desc:"Try without commitment.",p1_f1:"3 video certificates / month",p1_f2:"AI automatic defence",p1_f3:"Listing generation",p1_f4:"Email support",p1_btn:"Start for free",
+    p2_ribbon:"★ Recommended",p2_name:"Seller",p2_desc:"For regular sellers (5 to 50 sales/month).",p2_f1:"30 video certificates / month",p2_f2:"AI automatic defence",p2_f3:"Listing generation",p2_f4:"Priority email support",p2_f5:"Guide to avoiding scams",p2_btn:"Choose Seller",
+    p3_name:"Pro",p3_desc:"For pros and resellers (50+ sales/month or high-value items).",p3_f1:"Unlimited video certificates",p3_f2:"AI automatic defence",p3_f3:"Unlimited listing generation",p3_f4:"24h priority support",p3_f5:"Early access to new features",p3_btn:"Choose Pro",
     fin_t1:"Protect your money",fin_t2:"now.",fin_sub:"Generate a tamper-proof certified video.",fin_cta:"Try it",
     ft_faq:"FAQ",ft_contact:"Contact",ft_legal:"Legal notice",ft_cgu:"T&Cs",ft_priv:"Privacy"
   },
@@ -309,9 +309,9 @@ const I18N = {
     s3_title:"Reclamación tardía",s3_quote:"«El artículo tiene un defecto.» (3 semanas después de la recepción)",s3_solve:"SellCov fecha el estado exacto al envío. Cualquier desgaste posterior queda excluido.",
     pl_kicker:"Nuestros planes",pl_t1:"Simple,",pl_t2:"sin sorpresas.",pl_sub:"Sin compromiso, cancelable con 1 clic.",
     per_mo:"/ mes",
-    p1_name:"Descubierta",p1_unit:"/ mes",p1_desc:"Probar sin compromiso.",p1_f1:"1 certificado de video / mes",p1_f2:"IA defensa automática",p1_f3:"Generación de anuncio",p1_f4:"Soporte email",p1_btn:"Empezar gratis",
-    p2_ribbon:"★ Recomendado",p2_name:"Vendedor",p2_desc:"Para vendedores regulares (5 a 15 ventas/mes).",p2_f1:"15 certificados de video / mes",p2_f2:"IA defensa automática",p2_f3:"Generación de anuncio",p2_f4:"Soporte email prioritario",p2_f5:"Guía de estafas a evitar",p2_btn:"Elegir Vendedor",
-    p3_name:"Pro",p3_desc:"Para pros (más de 15 ventas/mes).",p3_f1:"60 certificados de video / mes",p3_f2:"IA defensa automática",p3_f3:"Generación de anuncio ilimitada",p3_f4:"Soporte prioritario 24h",p3_f5:"Acceso anticipado a nuevas funciones",p3_btn:"Elegir Pro",
+    p1_name:"Descubierta",p1_unit:"/ mes",p1_desc:"Probar sin compromiso.",p1_f1:"3 certificados de video / mes",p1_f2:"IA defensa automática",p1_f3:"Generación de anuncio",p1_f4:"Soporte email",p1_btn:"Empezar gratis",
+    p2_ribbon:"★ Recomendado",p2_name:"Vendedor",p2_desc:"Para vendedores regulares (5 a 50 ventas/mes).",p2_f1:"30 certificados de video / mes",p2_f2:"IA defensa automática",p2_f3:"Generación de anuncio",p2_f4:"Soporte email prioritario",p2_f5:"Guía de estafas a evitar",p2_btn:"Elegir Vendedor",
+    p3_name:"Pro",p3_desc:"Para pros y revendedores (más de 50 ventas/mes o productos de alto valor).",p3_f1:"Certificados de video ilimitados",p3_f2:"IA defensa automática",p3_f3:"Generación de anuncio ilimitada",p3_f4:"Soporte prioritario 24h",p3_f5:"Acceso anticipado a nuevas funciones",p3_btn:"Elegir Pro",
     fin_t1:"Protege tu dinero",fin_t2:"ahora.",fin_sub:"Genera un video certificado infalsificable.",fin_cta:"Probar",
     ft_faq:"FAQ",ft_contact:"Contacto",ft_legal:"Aviso legal",ft_cgu:"T&C",ft_priv:"Privacidad"
   },
@@ -337,9 +337,9 @@ const I18N = {
     s3_title:"Reclamo tardivo",s3_quote:"«L'articolo ha un difetto.» (3 settimane dopo la ricezione)",s3_solve:"SellCov fissa lo stato esatto alla spedizione. Ogni usura post-ricezione è esclusa.",
     pl_kicker:"Le nostre offerte",pl_t1:"Semplice,",pl_t2:"senza sorprese.",pl_sub:"Nessun impegno, annullabile in 1 clic.",
     per_mo:"/ mese",
-    p1_name:"Scoperta",p1_unit:"/ mese",p1_desc:"Prova senza impegno.",p1_f1:"1 certificato video / mese",p1_f2:"IA difesa automatica",p1_f3:"Generazione di annuncio",p1_f4:"Supporto email",p1_btn:"Inizia gratis",
-    p2_ribbon:"★ Consigliato",p2_name:"Venditore",p2_desc:"Per venditori regolari (5 a 15 vendite/mese).",p2_f1:"15 certificati video / mese",p2_f2:"IA difesa automatica",p2_f3:"Generazione di annuncio",p2_f4:"Supporto email prioritario",p2_f5:"Guida alle truffe da evitare",p2_btn:"Scegli Venditore",
-    p3_name:"Pro",p3_desc:"Per i pro (più di 15 vendite/mese).",p3_f1:"60 certificati video / mese",p3_f2:"IA difesa automatica",p3_f3:"Generazione annuncio illimitata",p3_f4:"Supporto prioritario 24h",p3_f5:"Accesso anticipato alle nuove funzionalità",p3_btn:"Scegli Pro",
+    p1_name:"Scoperta",p1_unit:"/ mese",p1_desc:"Prova senza impegno.",p1_f1:"3 certificati video / mese",p1_f2:"IA difesa automatica",p1_f3:"Generazione di annuncio",p1_f4:"Supporto email",p1_btn:"Inizia gratis",
+    p2_ribbon:"★ Consigliato",p2_name:"Venditore",p2_desc:"Per venditori regolari (5 a 50 vendite/mese).",p2_f1:"30 certificati video / mese",p2_f2:"IA difesa automatica",p2_f3:"Generazione di annuncio",p2_f4:"Supporto email prioritario",p2_f5:"Guida alle truffe da evitare",p2_btn:"Scegli Venditore",
+    p3_name:"Pro",p3_desc:"Per pro e rivenditori (oltre 50 vendite/mese o prodotti di alto valore).",p3_f1:"Certificati video illimitati",p3_f2:"IA difesa automatica",p3_f3:"Generazione annuncio illimitata",p3_f4:"Supporto prioritario 24h",p3_f5:"Accesso anticipato alle nuove funzionalità",p3_btn:"Scegli Pro",
     fin_t1:"Proteggi il tuo denaro",fin_t2:"ora.",fin_sub:"Genera un video certificato infalsificabile.",fin_cta:"Prova",
     ft_faq:"FAQ",ft_contact:"Contatto",ft_legal:"Note legali",ft_cgu:"Termini e condizioni",ft_priv:"Privacy"
   }
