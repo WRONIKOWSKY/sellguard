@@ -18,7 +18,7 @@ const PAGE_HTML = `
         <option value="es">🇪🇸 ES</option>
         <option value="it">🇮🇹 IT</option>
       </select>
-      <a href="/protection" class="btn btn-primary btn-sm" data-i18n="nav_cta">Essayer</a>
+      <a href="/demo" class="btn btn-primary btn-sm" data-i18n="nav_cta">Essayer</a>
     </div>
   </div>
 </header>
@@ -33,7 +33,7 @@ const PAGE_HTML = `
     <span><strong data-i18n="stat3">Annulable en 1 clic</strong></span>
   </div>
   <div class="cta-row">
-    <a href="/protection" class="btn btn-primary" data-i18n="hero_cta">Protéger ma prochaine vente</a>
+    <a href="/demo" class="btn btn-primary" data-i18n="hero_cta">Voir la démo</a>
   </div>
   <div class="platforms"><strong>Vinted</strong>·<strong>Leboncoin</strong>·<strong>Depop</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong>·<strong>Etsy</strong></div>
 </section>
@@ -206,7 +206,7 @@ const PAGE_HTML = `
 <section class="final" id="cta">
   <h2 class="serif"><span data-i18n="fin_t1">Protège ton argent</span><br><span class="italic" data-i18n="fin_t2">maintenant.</span></h2>
   <p data-i18n="fin_sub">Génère une vidéo certifiée infalsifiable.</p>
-  <a href="/protection" class="btn btn-primary" style="padding:16px 32px;font-size:16px" data-i18n="fin_cta">Essayer</a>
+  <a href="/demo" class="btn btn-primary" style="padding:16px 32px;font-size:16px" data-i18n="fin_cta">Voir la démo</a>
   <div class="platforms" style="margin-top:34px"><strong>Vinted</strong>·<strong>Leboncoin</strong>·<strong>Depop</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong>·<strong>Etsy</strong></div>
 </section>
 
@@ -235,7 +235,7 @@ const I18N = {
     hero_sub:"Conçu pour les vendeurs Vinted. Marche aussi sur Depop, Leboncoin, Vestiaire et Grailed.",
     hero_subsub:"Preuve horodatée. Défense automatique.",
     stat1:"Preuves certifiées",stat2:"Données chiffrées en France",stat3:"Annulable en 1 clic",
-    hero_cta:"Protéger ma prochaine vente",
+    hero_cta:"Voir la démo",
     demo_tagline:"L'action complète prend moins de 2 minutes.",
     how_kicker:"Comment ça marche",how_t1:"Trois étapes,",how_t2:"une seule mission.",
     how_sub:"De l'annonce à la défense en cas de litige, SellCov t'accompagne sur chaque étape d'une vente.",
@@ -256,7 +256,7 @@ const I18N = {
     p1_name:"Découverte",p1_unit:"/ mois",p1_desc:"Pour tester sans engagement.",p1_f1:"3 certificats vidéo / mois",p1_f2:"IA défense automatique",p1_f3:"Génération d'annonce",p1_f4:"Support email",p1_btn:"Commencer gratuitement",
     p2_ribbon:"★ Recommandé",p2_name:"Vendeur",p2_desc:"Pour les vendeurs réguliers (5 à 50 ventes/mois).",p2_f1:"30 certificats vidéo / mois",p2_f2:"IA défense automatique",p2_f3:"Génération d'annonce",p2_f4:"Support email prioritaire",p2_f5:"Guide des arnaques à éviter",p2_btn:"Choisir Vendeur",
     p3_name:"Pro",p3_desc:"Pour les pros et revendeurs (plus de 50 ventes/mois ou produits à forte valeur).",p3_f1:"Certificats vidéo illimités",p3_f2:"IA défense automatique",p3_f3:"Génération d'annonce illimitée",p3_f4:"Support prioritaire 24h",p3_f5:"Accès aux nouvelles fonctionnalités en avant-première",p3_btn:"Choisir Pro",
-    fin_t1:"Protège ton argent",fin_t2:"maintenant.",fin_sub:"Génère une vidéo certifiée infalsifiable.",fin_cta:"Essayer",
+    fin_t1:"Protège ton argent",fin_t2:"maintenant.",fin_sub:"Génère une vidéo certifiée infalsifiable.",fin_cta:"Voir la démo",
     ft_faq:"FAQ",ft_contact:"Contact",ft_legal:"Mentions légales",ft_cgu:"CGU",ft_priv:"Confidentialité"
   },
   en:{
@@ -264,7 +264,7 @@ const I18N = {
     badge:"Launch",
     hero_h1_1:"Sell",hero_h1_2:"without getting scammed.",
     hero_sub:"Built for Vinted sellers. Works on Depop, eBay, Leboncoin and Grailed too.",hero_subsub:"Timestamped proof. Automatic defence.",
-    stat1:"Certified proofs",stat2:"Data encrypted in France",stat3:"Cancel in 1 click",hero_cta:"Protect my next sale",
+    stat1:"Certified proofs",stat2:"Data encrypted in France",stat3:"Cancel in 1 click",hero_cta:"See the demo",
     demo_tagline:"The whole process takes less than 2 minutes.",
     how_kicker:"How it works",how_t1:"Three steps,",how_t2:"one mission.",how_sub:"From listing to dispute defence, SellCov covers every step of your sale.",
     f1_tag:"Listing",f1_h1:"Generate your listing",f1_h2:"in 10 seconds.",f1_p:"Photograph the item, get a written listing ready to publish.",f1_btn:"Try it",f1_time:"~10 sec per listing",
@@ -284,7 +284,7 @@ const I18N = {
     p1_name:"Discovery",p1_unit:"/ month",p1_desc:"Try without commitment.",p1_f1:"3 video certificates / month",p1_f2:"AI automatic defence",p1_f3:"Listing generation",p1_f4:"Email support",p1_btn:"Start for free",
     p2_ribbon:"★ Recommended",p2_name:"Seller",p2_desc:"For regular sellers (5 to 50 sales/month).",p2_f1:"30 video certificates / month",p2_f2:"AI automatic defence",p2_f3:"Listing generation",p2_f4:"Priority email support",p2_f5:"Guide to avoiding scams",p2_btn:"Choose Seller",
     p3_name:"Pro",p3_desc:"For pros and resellers (50+ sales/month or high-value items).",p3_f1:"Unlimited video certificates",p3_f2:"AI automatic defence",p3_f3:"Unlimited listing generation",p3_f4:"24h priority support",p3_f5:"Early access to new features",p3_btn:"Choose Pro",
-    fin_t1:"Protect your money",fin_t2:"now.",fin_sub:"Generate a tamper-proof certified video.",fin_cta:"Try it",
+    fin_t1:"Protect your money",fin_t2:"now.",fin_sub:"Generate a tamper-proof certified video.",fin_cta:"See the demo",
     ft_faq:"FAQ",ft_contact:"Contact",ft_legal:"Legal notice",ft_cgu:"T&Cs",ft_priv:"Privacy"
   },
   es:{
@@ -292,7 +292,7 @@ const I18N = {
     badge:"Lanzamiento",
     hero_h1_1:"Vende",hero_h1_2:"sin que te estafen.",
     hero_sub:"Diseñado para vendedores Vinted. Funciona también en Depop, Wallapop y Vestiaire.",hero_subsub:"Prueba con marca de tiempo. Defensa automática.",
-    stat1:"Pruebas certificadas",stat2:"Datos cifrados en Francia",stat3:"Cancelable con 1 clic",hero_cta:"Proteger mi próxima venta",
+    stat1:"Pruebas certificadas",stat2:"Datos cifrados en Francia",stat3:"Cancelable con 1 clic",hero_cta:"Ver la demo",
     demo_tagline:"Todo el proceso dura menos de 2 minutos.",
     how_kicker:"Cómo funciona",how_t1:"Tres pasos,",how_t2:"una sola misión.",how_sub:"Del anuncio a la defensa en caso de litigio, SellCov te acompaña en cada etapa.",
     f1_tag:"Anuncio",f1_h1:"Genera tu anuncio",f1_h2:"en 10 segundos.",f1_p:"Fotografía el artículo, recibe un anuncio redactado listo para publicar.",f1_btn:"Probar",f1_time:"~10 seg por anuncio",
@@ -312,7 +312,7 @@ const I18N = {
     p1_name:"Descubierta",p1_unit:"/ mes",p1_desc:"Probar sin compromiso.",p1_f1:"3 certificados de video / mes",p1_f2:"IA defensa automática",p1_f3:"Generación de anuncio",p1_f4:"Soporte email",p1_btn:"Empezar gratis",
     p2_ribbon:"★ Recomendado",p2_name:"Vendedor",p2_desc:"Para vendedores regulares (5 a 50 ventas/mes).",p2_f1:"30 certificados de video / mes",p2_f2:"IA defensa automática",p2_f3:"Generación de anuncio",p2_f4:"Soporte email prioritario",p2_f5:"Guía de estafas a evitar",p2_btn:"Elegir Vendedor",
     p3_name:"Pro",p3_desc:"Para pros y revendedores (más de 50 ventas/mes o productos de alto valor).",p3_f1:"Certificados de video ilimitados",p3_f2:"IA defensa automática",p3_f3:"Generación de anuncio ilimitada",p3_f4:"Soporte prioritario 24h",p3_f5:"Acceso anticipado a nuevas funciones",p3_btn:"Elegir Pro",
-    fin_t1:"Protege tu dinero",fin_t2:"ahora.",fin_sub:"Genera un video certificado infalsificable.",fin_cta:"Probar",
+    fin_t1:"Protege tu dinero",fin_t2:"ahora.",fin_sub:"Genera un video certificado infalsificable.",fin_cta:"Ver la demo",
     ft_faq:"FAQ",ft_contact:"Contacto",ft_legal:"Aviso legal",ft_cgu:"T&C",ft_priv:"Privacidad"
   },
   it:{
@@ -320,7 +320,7 @@ const I18N = {
     badge:"Lancio",
     hero_h1_1:"Rivendi",hero_h1_2:"senza farti truffare.",
     hero_sub:"Pensato per i venditori Vinted. Funziona anche su Depop, Subito e Vestiaire.",hero_subsub:"Prova con timestamp. Difesa automatica.",
-    stat1:"Prove certificate",stat2:"Dati crittografati in Francia",stat3:"Annullabile in 1 clic",hero_cta:"Proteggi la mia prossima vendita",
+    stat1:"Prove certificate",stat2:"Dati crittografati in Francia",stat3:"Annullabile in 1 clic",hero_cta:"Vedi la demo",
     demo_tagline:"L'intera operazione richiede meno di 2 minuti.",
     how_kicker:"Come funziona",how_t1:"Tre passi,",how_t2:"una sola missione.",how_sub:"Dall'annuncio alla difesa in caso di controversia, SellCov ti accompagna in ogni fase della vendita.",
     f1_tag:"Annuncio",f1_h1:"Genera il tuo annuncio",f1_h2:"in 10 secondi.",f1_p:"Fotografa l'articolo, ricevi un annuncio pronto da pubblicare.",f1_btn:"Provare",f1_time:"~10 sec per annuncio",
@@ -340,7 +340,7 @@ const I18N = {
     p1_name:"Scoperta",p1_unit:"/ mese",p1_desc:"Prova senza impegno.",p1_f1:"3 certificati video / mese",p1_f2:"IA difesa automatica",p1_f3:"Generazione di annuncio",p1_f4:"Supporto email",p1_btn:"Inizia gratis",
     p2_ribbon:"★ Consigliato",p2_name:"Venditore",p2_desc:"Per venditori regolari (5 a 50 vendite/mese).",p2_f1:"30 certificati video / mese",p2_f2:"IA difesa automatica",p2_f3:"Generazione di annuncio",p2_f4:"Supporto email prioritario",p2_f5:"Guida alle truffe da evitare",p2_btn:"Scegli Venditore",
     p3_name:"Pro",p3_desc:"Per pro e rivenditori (oltre 50 vendite/mese o prodotti di alto valore).",p3_f1:"Certificati video illimitati",p3_f2:"IA difesa automatica",p3_f3:"Generazione annuncio illimitata",p3_f4:"Supporto prioritario 24h",p3_f5:"Accesso anticipato alle nuove funzionalità",p3_btn:"Scegli Pro",
-    fin_t1:"Proteggi il tuo denaro",fin_t2:"ora.",fin_sub:"Genera un video certificato infalsificabile.",fin_cta:"Prova",
+    fin_t1:"Proteggi il tuo denaro",fin_t2:"ora.",fin_sub:"Genera un video certificato infalsificabile.",fin_cta:"Vedi la demo",
     ft_faq:"FAQ",ft_contact:"Contatto",ft_legal:"Note legali",ft_cgu:"Termini e condizioni",ft_priv:"Privacy"
   }
 };
