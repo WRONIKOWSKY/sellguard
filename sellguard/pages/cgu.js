@@ -25,7 +25,7 @@ export default function CGU() {
 
         <div style={{marginBottom:'48px',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
           <Link href="/" style={{display:'flex',alignItems:'center',gap:'10px',color:'#fff',textDecoration:'none'}}>
-            <img src="/logo.png" alt="SellCov" style={{height:'54px',width:'auto',display:'block'}} />
+            <img src="/logo.png" alt="SellCov" style={{height:'72px',width:'auto',display:'block'}} />
           </Link>
           <Link href="/" style={{fontSize:'14px',color:'var(--text-muted)'}}>← Retour</Link>
         </div>
