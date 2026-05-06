@@ -146,14 +146,14 @@ export default function Litige() {
         .dropzone{border:1.5px dashed var(--border-strong);border-radius:14px;padding:20px;cursor:pointer;background:#060606;text-align:center;min-height:80px;display:flex;align-items:center;justify-content:center;transition:border-color .15s}
         .dropzone:hover{border-color:var(--green)}
         .dropzone-empty{font-size:13px;color:var(--text-dim)}
-        .dropzone-previews{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-        .dropzone-previews img{height:70px;border-radius:8px;object-fit:cover}
+        .dropzone-previews{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:100%}
+        .dropzone-previews img{width:90px;height:90px;max-width:90px;max-height:90px;border-radius:8px;object-fit:cover;display:block;flex-shrink:0}
         .error-box{margin-top:14px;padding:12px 16px;background:var(--pink-bg);border:1px solid rgba(245,112,170,.3);border-radius:12px;color:var(--pink);font-size:13px}
         .result-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;gap:16px;flex-wrap:wrap}
         .result-title{font-family:'Playfair Display',serif;font-size:28px;line-height:1;letter-spacing:-.02em}
-        .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;margin-bottom:14px}
-        .card-label{font-size:11px;font-weight:600;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
-        .card-body{font-size:14px;color:#fff;line-height:1.7}
+        .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;margin-bottom:18px}
+        .card-label{font-size:11px;font-weight:700;color:var(--green);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;display:block}
+        .card-body{font-size:14px;color:#fff;line-height:1.75}
         .card-body-muted{font-size:14px;color:var(--text-muted);line-height:1.7}
         .fraud-card{border-radius:var(--radius);padding:20px 24px;margin-bottom:14px;border:1px solid}
         .fraud-card.fraud-high{background:rgba(220,38,38,.08);border-color:rgba(220,38,38,.3)}
