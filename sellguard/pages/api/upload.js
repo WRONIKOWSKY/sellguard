@@ -4,6 +4,7 @@ import crypto from "crypto";
 import { withAuth } from "../../lib/withAuth";
 import { getSupabaseAdmin } from "../../lib/supabaseAdmin";
 import { generateCertId, signHmac } from "../../lib/certUtils";
+import { createOtsProof } from "../../lib/opentimestamps";
 
 export const config = {
   api: {
@@ -105,7 +106,26 @@ async function handler(req, res) {
     return res.status(500).json({ error: "Database error" });
   }
 
-  // 6. OK — on rend le cert au client
+  // 6. Ancrage OpenTimestamps Bitcoin (non-bloquant pour le client)
+  //    On lance l'appel en arrière-plan : si OpenTimestamps est down ou lent,
+  //    le client reçoit son cert_id sans attendre. Le proof est stocké dans la
+  //    table dès qu'il revient. À t=0 c'est un proof "pending Bitcoin" déjà
+  //    valide juridiquement. Une route /api/ots-upgrade upgrade plus tard
+  //    pour avoir l'attestation Bitcoin définitive.
+  createOtsProof(hash)
+    .then(async (otsProofBase64) => {
+      const { error } = await supa
+        .from("certificats")
+        .update({ ots_proof: otsProofBase64, ots_status: "pending_bitcoin" })
+        .eq("cert_id", certId);
+      if (error) console.error("[upload] OTS proof DB update error:", error);
+    })
+    .catch((e) => {
+      console.error("[upload] OTS stamp failed (non-fatal):", e.message);
+      // Le certificat reste valide via HMAC. Un cron pourra retry plus tard.
+    });
+
+  // 7. OK — on rend le cert au client immédiatement
   return res.status(201).json({
     cert_id: certId,
     hash,

@@ -102,6 +102,29 @@ export default function Verify() {
                 </div>
               )}
 
+              {/* Bandeau ancrage Bitcoin */}
+              {cert.ots_status === "bitcoin_confirmed" && (
+                <div style={{ padding: 18, borderRadius: 12, background: "rgba(247,147,26,0.08)", border: "1px solid rgba(247,147,26,0.3)", marginBottom: 20 }}>
+                  <p style={{ fontSize: 16, fontWeight: 600, color: "#F7931A", margin: 0 }}>✓ Ancré dans Bitcoin</p>
+                  <p style={{ fontSize: 12, color: "#888", margin: "6px 0 10px 0" }}>
+                    L'horodatage est inscrit dans la blockchain Bitcoin via OpenTimestamps. Vérifiable indépendamment, irréversible.
+                  </p>
+                  {cert.ots_proof_url && (
+                    <a href={cert.ots_proof_url} style={{ fontSize: 12, color: "#F7931A", textDecoration: "underline" }}>
+                      Télécharger la preuve .ots
+                    </a>
+                  )}
+                </div>
+              )}
+              {cert.ots_status === "pending_bitcoin" && (
+                <div style={{ padding: 18, borderRadius: 12, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", marginBottom: 20 }}>
+                  <p style={{ fontSize: 14, fontWeight: 600, color: "#fff", margin: 0 }}>Ancrage Bitcoin en cours</p>
+                  <p style={{ fontSize: 12, color: "#888", margin: "6px 0 0 0" }}>
+                    L'attestation de la blockchain Bitcoin sera disponible sous quelques heures (le temps qu'un bloc soit miné).
+                  </p>
+                </div>
+              )}
+
               {/* Métadonnées */}
               <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: 12, padding: 20, marginBottom: 16 }}>
                 <Field label="Référence certificat" value={cert.cert_id} mono large />

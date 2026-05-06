@@ -28,7 +28,7 @@ export default async function handler(req, res) {
   // 1. Lookup cert dans la DB (service_role bypass RLS)
   const { data: cert, error } = await supa
     .from("certificats")
-    .select("cert_id, article, order_ref, tracking_number, tracking_carrier, video_path, video_size_bytes, video_hash, tsa_token, tsa_provider, created_at")
+    .select("cert_id, article, order_ref, tracking_number, tracking_carrier, video_path, video_size_bytes, video_hash, tsa_token, tsa_provider, created_at, ots_status")
     .eq("cert_id", certId)
     .single();
 
@@ -71,5 +71,7 @@ export default async function handler(req, res) {
     signature_provider: cert.tsa_provider,
     signature_valid: signatureValid,
     video_url: videoUrl, // null si erreur, sinon URL signée valide 1h
+    ots_status: cert.ots_status || null, // null | "pending_bitcoin" | "bitcoin_confirmed"
+    ots_proof_url: cert.ots_status ? `/api/ots-proof/${cert.cert_id}` : null,
   });
 }
