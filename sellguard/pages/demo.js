@@ -37,7 +37,7 @@ export default function Demo() {
       <div style={{maxWidth:'var(--maxw)',margin:'0 auto',padding:'60px 24px 80px'}}>
 
         {/* Header */}
-        <div style={{marginBottom:'72px',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+        <div style={{marginBottom:'48px',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
           <Link href="/" style={{display:'flex',alignItems:'center'}}>
             <img src="/logo.png" alt="SellCov" style={{height:'54px',width:'auto',display:'block'}} />
           </Link>
@@ -61,10 +61,11 @@ export default function Demo() {
           subtitle="L'IA SellCov analyse ta photo, identifie l'article, scrute les marketplaces et te donne le titre, la description, le prix et la meilleure plateforme. En 10 secondes."
         >
           <div style={{marginBottom:'18px',borderRadius:'14px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',maxWidth:'380px'}}>
-            <img src="/demo-tshirt.jpg" alt="T-shirt vintage Warner Bros Looney Tunes" style={{width:'100%',height:'auto',display:'block'}} />
+            <img src="/demophoto-tshirt.jpg" alt="T-shirt Harley Davidson vintage Hanes Beefy single stitch" style={{width:'100%',height:'auto',display:'block'}} />
           </div>
           <DataCard>
-            <DataRow label="Titre généré" value="T-shirt vintage Warner Bros Looney Tunes Motor Speedway 90s single stitch taille M" />
+            <DataRow label="Titre généré" value="T-shirt Harley Davidson vintage Made in USA single stitch taille M" />
+            <DataRow label="Détails authentification" value="Hanes Beefy · Made in USA · Single stitch · Pre-shrunk" />
             <DataRow label="Plateformes recommandées" value={
               <span style={{display:'flex',gap:'8px',flexWrap:'wrap'}}>
                 <Pill text="Grailed 9/10" />
@@ -72,7 +73,7 @@ export default function Demo() {
                 <Pill text="Vinted 6/10" />
               </span>
             } />
-            <DataRow label="Prix conseillé" value={<span style={{fontFamily:'Playfair Display,serif',fontSize:'22px',fontWeight:700}}>85 à 130 €</span>} last />
+            <DataRow label="Prix conseillé" value={<span style={{fontFamily:'Playfair Display,serif',fontSize:'22px',fontWeight:700}}>120 à 180 €</span>} last />
           </DataCard>
         </Section>
 
@@ -82,6 +83,13 @@ export default function Demo() {
           title="Filme 90 secondes. SellCov scelle la preuve."
           subtitle="Vidéo horodatée et signature cryptographique. Recevable juridiquement (art. 1366 du Code civil). Page de vérification publique partageable à l'acheteur ou à la plateforme."
         >
+          <div style={{marginBottom:'18px',borderRadius:'14px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',maxWidth:'380px',position:'relative'}}>
+            <img src="/demovideo-tshirt.jpg" alt="Frame de la vidéo certifiée" style={{width:'100%',height:'auto',display:'block'}} />
+            <div style={{position:'absolute',bottom:'10px',left:'10px',padding:'5px 10px',borderRadius:'6px',background:'rgba(0,0,0,.7)',color:'#fff',fontSize:'11px',fontFamily:'JetBrains Mono,monospace',letterSpacing:'.08em',display:'flex',alignItems:'center',gap:'6px'}}>
+              <span style={{width:'7px',height:'7px',borderRadius:'50%',background:'var(--green)',display:'inline-block'}}></span>
+              REC · 00:42
+            </div>
+          </div>
           <DataCard>
             <DataRow label="Identifiant" value={<span className="mono">SC-7K2F9X-A3B</span>} />
             <DataRow label="Signature" value={<span style={{color:'var(--green)',fontWeight:600}}>Validée</span>} />
@@ -99,23 +107,23 @@ export default function Demo() {
             <div style={{padding:'18px 22px',borderBottom:'0.5px solid var(--border)'}}>
               <div style={{fontSize:'11px',color:'var(--text-dim)',letterSpacing:'.12em',textTransform:'uppercase',fontWeight:600,marginBottom:'8px'}}>Message de l'acheteur</div>
               <div style={{fontSize:'14px',color:'var(--text-muted)',fontStyle:'italic',lineHeight:'1.6'}}>
-                « Le sac n'est pas conforme à l'annonce, je n'ai jamais eu la pochette intérieure. »
+                « Le t-shirt a un trou à l'aisselle, il n'était pas mentionné dans l'annonce. Je veux un remboursement. »
               </div>
             </div>
 
             <div style={{padding:'18px 22px',borderBottom:'0.5px solid var(--border)'}}>
               <div style={{fontSize:'11px',color:'var(--text-dim)',letterSpacing:'.12em',textTransform:'uppercase',fontWeight:600,marginBottom:'10px'}}>Arguments de défense</div>
               <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
-                <ArgItem text="Le certificat vidéo SC-7K2F9X-A3B atteste de la pochette intérieure visible à 00:42." />
-                <ArgItem text="L'horodatage cryptographique du 05/05 14:23 prouve que l'envoi est antérieur à la réception." />
-                <ArgItem text="Le message ne mentionne aucun élément vérifiable post-réception." />
+                <ArgItem text="Le certificat vidéo SC-7K2F9X-A3B atteste de l'état complet du t-shirt à l'envoi, aisselles incluses, à 00:42." />
+                <ArgItem text="L'horodatage cryptographique du 05/05 14:23 prouve que l'envoi est antérieur à la réception et au défaut allégué." />
+                <ArgItem text="Le message ne mentionne aucun élément vérifiable post-réception (photo de l'acheteur, témoin, comparaison avec l'envoi)." />
               </div>
             </div>
 
             <div style={{padding:'18px 22px'}}>
               <div style={{fontSize:'11px',color:'var(--text-dim)',letterSpacing:'.12em',textTransform:'uppercase',fontWeight:600,marginBottom:'10px'}}>Réponse pré-rédigée</div>
               <div style={{fontSize:'14px',color:'#fff',lineHeight:'1.7'}}>
-                Bonjour, mon envoi est certifié par SellCov. La pochette intérieure est visible à 00:42 sur la vidéo horodatée. Je reste disponible pour échanger avec le service client si nécessaire.
+                Bonjour, mon envoi est certifié par SellCov. L'état complet du t-shirt à l'expédition, aisselles incluses, est visible à 00:42 sur la vidéo horodatée. Je reste disponible pour échanger avec le service client si nécessaire.
               </div>
             </div>
           </DataCard>
