@@ -60,16 +60,26 @@ export default function Demo() {
           title="Ta photo devient une annonce prête à publier."
           subtitle="L'IA SellCov analyse ta photo, identifie l'article, scrute les marketplaces et te donne le titre, la description, le prix et la meilleure plateforme. En 10 secondes."
         >
-          <div style={{marginBottom:'18px',borderRadius:'14px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',maxWidth:'380px'}}>
-            <img src="/demophoto-tshirt.jpg" alt="T-shirt Harley Davidson vintage Hanes Beefy single stitch" style={{width:'100%',height:'auto',display:'block'}} />
+          <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'12px',marginBottom:'18px',maxWidth:'750px'}}>
+            <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)'}}>
+              <img src="/demophoto-tshirt.jpg" alt="T-shirt Harley Davidson vue dos" style={{width:'100%',height:'auto',display:'block'}} />
+            </div>
+            <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)'}}>
+              <img src="/demophoto-tshirt2.jpg" alt="T-shirt Harley Davidson vue 2" style={{width:'100%',height:'auto',display:'block'}} />
+            </div>
+            <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)'}}>
+              <img src="/demophoto-tshirt3.jpg" alt="T-shirt Harley Davidson vue 3" style={{width:'100%',height:'auto',display:'block'}} />
+            </div>
           </div>
           <DataCard>
-            <DataRow label="Titre généré" value="T-shirt Harley Davidson vintage Made in USA single stitch taille M" />
-            <DataRow label="Détails authentification" value="Hanes Beefy · Made in USA · Single stitch · Pre-shrunk" />
+            <DataRow label="Titre généré" value="T-shirt Harley Davidson vintage 90s · Taille M" />
             <div style={{padding:'18px 22px',borderBottom:'0.5px solid var(--border)'}}>
               <div style={{fontSize:'12px',color:'var(--text-dim)',fontWeight:500,marginBottom:'10px'}}>Description générée</div>
               <div style={{fontSize:'14px',color:'#fff',lineHeight:'1.7'}}>
                 Authentique t-shirt Harley Davidson vintage des années 90, imprimé Danbury Connecticut. Label Hanes Beefy 100% coton, made in USA, pre-shrunk. Single stitch confirmé sur les manches. Taille M, coupe loose vintage. Coloris gris washed, print en bon état, patine d'usage uniforme. Aucun trou ni tâche. Pièce de collection pour les amateurs de vintage americana et streetwear 90s. Envoi soigné sous 24h, certificat vidéo SellCov inclus.
+                <div style={{marginTop:'14px',color:'var(--text-muted)',fontSize:'13px'}}>
+                  #harleydavidson #vintage90s #vintageamericana #singlestitch #hanesbeefy #madeinusa #streetwear #grailed #depop #vintagetshirt
+                </div>
               </div>
             </div>
             <DataRow label="Plateformes recommandées" value={
