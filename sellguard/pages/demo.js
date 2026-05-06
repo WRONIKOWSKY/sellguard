@@ -60,7 +60,7 @@ export default function Demo() {
           title="Ta photo devient une annonce prête à publier."
           subtitle="L'IA SellCov analyse ta photo, identifie l'article, scrute les marketplaces et te donne le titre, la description, le prix et la meilleure plateforme. En 10 secondes."
         >
-          <div style={{marginBottom:'18px',borderRadius:'14px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)'}}>
+          <div style={{marginBottom:'18px',borderRadius:'14px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',maxWidth:'380px'}}>
             <img src="/demo-tshirt.jpg" alt="T-shirt vintage Warner Bros Looney Tunes" style={{width:'100%',height:'auto',display:'block'}} />
           </div>
           <DataCard>
