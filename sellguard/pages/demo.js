@@ -83,10 +83,10 @@ export default function Demo() {
           title="Filme 90 secondes. SellCov scelle la preuve."
           subtitle="Vidéo horodatée et signature cryptographique. Recevable juridiquement (art. 1366 du Code civil). Page de vérification publique partageable à l'acheteur ou à la plateforme."
         >
-          <div style={{marginBottom:'18px',borderRadius:'14px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',maxWidth:'380px',position:'relative'}}>
+          <div style={{marginBottom:'18px',borderRadius:'14px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',maxWidth:'600px',position:'relative'}}>
             <img src="/demovideo-tshirt.jpg" alt="Frame de la vidéo certifiée" style={{width:'100%',height:'auto',display:'block'}} />
-            <div style={{position:'absolute',bottom:'10px',left:'10px',padding:'5px 10px',borderRadius:'6px',background:'rgba(0,0,0,.7)',color:'#fff',fontSize:'11px',fontFamily:'JetBrains Mono,monospace',letterSpacing:'.08em',display:'flex',alignItems:'center',gap:'6px'}}>
-              <span style={{width:'7px',height:'7px',borderRadius:'50%',background:'var(--green)',display:'inline-block'}}></span>
+            <div style={{position:'absolute',bottom:'12px',left:'12px',padding:'6px 12px',borderRadius:'6px',background:'rgba(0,0,0,.75)',color:'#fff',fontSize:'12px',fontFamily:'JetBrains Mono,monospace',letterSpacing:'.08em',display:'flex',alignItems:'center',gap:'7px'}}>
+              <span style={{width:'8px',height:'8px',borderRadius:'50%',background:'var(--green)',display:'inline-block'}}></span>
               REC · 00:42
             </div>
           </div>
