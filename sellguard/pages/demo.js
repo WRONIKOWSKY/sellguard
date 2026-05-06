@@ -64,15 +64,15 @@ export default function Demo() {
             <img src="/demo-tshirt.jpg" alt="T-shirt vintage Warner Bros Looney Tunes" style={{width:'100%',height:'auto',display:'block'}} />
           </div>
           <DataCard>
-            <DataRow label="Titre généré" value="T-shirt vintage Warner Bros Looney Tunes 90s taille M" />
+            <DataRow label="Titre généré" value="T-shirt vintage Warner Bros Looney Tunes Motor Speedway 90s single stitch taille M" />
             <DataRow label="Plateformes recommandées" value={
               <span style={{display:'flex',gap:'8px',flexWrap:'wrap'}}>
                 <Pill text="Grailed 9/10" />
-                <Pill text="Vinted 7/10" />
-                <Pill text="Depop 7/10" />
+                <Pill text="Depop 8/10" />
+                <Pill text="Vinted 6/10" />
               </span>
             } />
-            <DataRow label="Prix conseillé" value={<span style={{fontFamily:'Playfair Display,serif',fontSize:'22px',fontWeight:700}}>65 à 95 €</span>} last />
+            <DataRow label="Prix conseillé" value={<span style={{fontFamily:'Playfair Display,serif',fontSize:'22px',fontWeight:700}}>85 à 130 €</span>} last />
           </DataCard>
         </Section>
 
