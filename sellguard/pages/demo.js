@@ -5,11 +5,11 @@ export default function Demo() {
   return (
     <>
       <Head>
-        <title>Démo — SellCov</title>
+        <title>Démo · SellCov</title>
         <meta name="description" content="Découvre en 30 secondes ce que SellCov fait : annonce IA, certificat vidéo horodaté, défense automatique en cas de litige." />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="robots" content="index,follow" />
-        <meta property="og:title" content="Démo — SellCov" />
+        <meta property="og:title" content="Démo · SellCov" />
         <meta property="og:description" content="Découvre en 30 secondes comment SellCov protège tes ventes Vinted, Depop, Grailed." />
         <meta property="og:image" content="https://www.sellcov.com/logo.png" />
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -51,23 +51,23 @@ export default function Demo() {
             Voilà ce que SellCov<br /><em style={{color:'var(--text-muted)',fontWeight:500}}>fait pour toi.</em>
           </h1>
           <p style={{color:'var(--text-muted)',fontSize:'17px',lineHeight:'1.7',maxWidth:'620px'}}>
-            Trois étapes pour vendre sans te faire arnaquer sur Vinted, Depop, Grailed, Vestiaire. Aucun compte requis pour découvrir.
+            Trois étapes pour vendre sans te faire arnaquer sur tes marketplaces. Aucun compte requis pour découvrir.
           </p>
         </div>
 
-        {/* Step 1 — Annonce */}
+        {/* Step 1 · Annonce */}
         <Section
           number="01"
           color="var(--violet)"
           colorBg="var(--violet-bg)"
           tag="Génère ton annonce"
-          title="Photo + état → annonce prête à publier."
+          title="Ta photo devient une annonce prête à publier."
           subtitle="L'IA SellCov analyse ta photo, identifie l'article, scrute les marketplaces et te donne le titre, la description, le prix et la meilleure plateforme. En 10 secondes."
         >
           <div style={{background:'var(--bg-card)',border:'1px solid var(--border)',borderRadius:'14px',padding:'22px',marginTop:'4px'}}>
             <div style={{display:'flex',gap:'18px',alignItems:'flex-start',flexWrap:'wrap'}}>
-              <div style={{width:'120px',height:'120px',borderRadius:'10px',background:'linear-gradient(135deg,#1a1a1a,#0a0a0a)',border:'1px solid var(--border)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'44px',flexShrink:0}}>
-                👜
+              <div style={{width:'120px',height:'120px',borderRadius:'10px',background:'linear-gradient(135deg,#1a1a1a,#0a0a0a)',border:'1px solid var(--border)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,fontFamily:'Playfair Display,serif',fontSize:'46px',fontStyle:'italic',color:'var(--violet)'}}>
+                Aa
               </div>
               <div style={{flex:'1 1 300px'}}>
                 <div style={{fontSize:'11px',color:'var(--text-dim)',letterSpacing:'.12em',textTransform:'uppercase',fontWeight:600,marginBottom:'8px'}}>Titre généré</div>
@@ -81,13 +81,13 @@ export default function Demo() {
                 </div>
 
                 <div style={{fontSize:'11px',color:'var(--text-dim)',letterSpacing:'.12em',textTransform:'uppercase',fontWeight:600,marginBottom:'8px'}}>Prix conseillé</div>
-                <div style={{fontSize:'18px',fontWeight:700,fontFamily:'Playfair Display,serif'}}>180 € — 240 €</div>
+                <div style={{fontSize:'18px',fontWeight:700,fontFamily:'Playfair Display,serif'}}>180 à 240 €</div>
               </div>
             </div>
           </div>
         </Section>
 
-        {/* Step 2 — Certificat */}
+        {/* Step 2 · Certificat */}
         <Section
           number="02"
           color="var(--green)"
@@ -98,8 +98,8 @@ export default function Demo() {
         >
           <div style={{background:'var(--bg-card)',border:'1px solid var(--border)',borderRadius:'14px',padding:'22px',marginTop:'4px'}}>
             <div style={{display:'flex',gap:'18px',alignItems:'flex-start',flexWrap:'wrap'}}>
-              <div style={{width:'120px',height:'120px',borderRadius:'10px',background:'linear-gradient(135deg,#0d3a26,#062318)',border:'1px solid var(--green-bg)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'40px',flexShrink:0}}>
-                🎬
+              <div style={{width:'120px',height:'120px',borderRadius:'10px',background:'linear-gradient(135deg,#0d3a26,#062318)',border:'1px solid var(--green-bg)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,fontFamily:'Playfair Display,serif',fontSize:'46px',fontStyle:'italic',color:'var(--green)'}}>
+                Sc
               </div>
               <div style={{flex:'1 1 300px',fontSize:'13px'}}>
                 <div style={{display:'flex',justifyContent:'space-between',padding:'8px 0',borderBottom:'0.5px solid var(--border)'}}>
@@ -127,7 +127,7 @@ export default function Demo() {
           </div>
         </Section>
 
-        {/* Step 3 — Litige */}
+        {/* Step 3 · Litige */}
         <Section
           number="03"
           color="var(--pink)"
@@ -166,7 +166,7 @@ export default function Demo() {
             Prêt à protéger ta prochaine vente ?
           </h2>
           <p style={{color:'var(--text-muted)',fontSize:'15px',marginBottom:'26px',maxWidth:'480px',margin:'0 auto 26px'}}>
-            Plan Découverte gratuit — 3 certificats par mois, sans carte bancaire.
+            Plan Découverte gratuit. 3 certificats par mois, sans carte bancaire.
           </p>
           <Link href="/compte" style={{display:'inline-block',padding:'15px 32px',background:'var(--green)',color:'#000',borderRadius:'999px',fontWeight:700,fontSize:'15px',textDecoration:'none'}}>
             Créer mon compte gratuit
