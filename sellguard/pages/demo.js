@@ -66,6 +66,12 @@ export default function Demo() {
           <DataCard>
             <DataRow label="Titre généré" value="T-shirt Harley Davidson vintage Made in USA single stitch taille M" />
             <DataRow label="Détails authentification" value="Hanes Beefy · Made in USA · Single stitch · Pre-shrunk" />
+            <div style={{padding:'18px 22px',borderBottom:'0.5px solid var(--border)'}}>
+              <div style={{fontSize:'12px',color:'var(--text-dim)',fontWeight:500,marginBottom:'10px'}}>Description générée</div>
+              <div style={{fontSize:'14px',color:'#fff',lineHeight:'1.7'}}>
+                Authentique t-shirt Harley Davidson vintage des années 90, imprimé Danbury Connecticut. Label Hanes Beefy 100% coton, made in USA, pre-shrunk. Single stitch confirmé sur les manches. Taille M, coupe loose vintage. Coloris gris washed, print en bon état, patine d'usage uniforme. Aucun trou ni tâche. Pièce de collection pour les amateurs de vintage americana et streetwear 90s. Envoi soigné sous 24h, certificat vidéo SellCov inclus.
+              </div>
+            </div>
             <DataRow label="Plateformes recommandées" value={
               <span style={{display:'flex',gap:'8px',flexWrap:'wrap'}}>
                 <Pill text="Grailed 9/10" />
@@ -107,23 +113,23 @@ export default function Demo() {
             <div style={{padding:'18px 22px',borderBottom:'0.5px solid var(--border)'}}>
               <div style={{fontSize:'11px',color:'var(--text-dim)',letterSpacing:'.12em',textTransform:'uppercase',fontWeight:600,marginBottom:'8px'}}>Message de l'acheteur</div>
               <div style={{fontSize:'14px',color:'var(--text-muted)',fontStyle:'italic',lineHeight:'1.6'}}>
-                « Le t-shirt a un trou à l'aisselle, il n'était pas mentionné dans l'annonce. Je veux un remboursement. »
+                « Le t-shirt reçu n'est pas authentique, le print est différent de celui de l'annonce. Je demande un remboursement intégral. »
               </div>
             </div>
 
             <div style={{padding:'18px 22px',borderBottom:'0.5px solid var(--border)'}}>
               <div style={{fontSize:'11px',color:'var(--text-dim)',letterSpacing:'.12em',textTransform:'uppercase',fontWeight:600,marginBottom:'10px'}}>Arguments de défense</div>
               <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
-                <ArgItem text="Le certificat vidéo SC-7K2F9X-A3B atteste de l'état complet du t-shirt à l'envoi, aisselles incluses, à 00:42." />
-                <ArgItem text="L'horodatage cryptographique du 05/05 14:23 prouve que l'envoi est antérieur à la réception et au défaut allégué." />
-                <ArgItem text="Le message ne mentionne aucun élément vérifiable post-réception (photo de l'acheteur, témoin, comparaison avec l'envoi)." />
+                <ArgItem text="Le certificat vidéo SC-7K2F9X-A3B montre l'article à 360° au moment de l'envoi, print Harley Davidson Danbury Connecticut clairement identifiable à 00:42." />
+                <ArgItem text="Les détails d'authentification (Hanes Beefy, single stitch, made in USA) sont visibles à 01:15 sur la vidéo horodatée et signée cryptographiquement." />
+                <ArgItem text="L'horodatage cryptographique HMAC SHA-256 prouve que la vidéo est antérieure à toute manipulation possible. L'article reçu est strictement celui qui a été expédié." />
               </div>
             </div>
 
             <div style={{padding:'18px 22px'}}>
               <div style={{fontSize:'11px',color:'var(--text-dim)',letterSpacing:'.12em',textTransform:'uppercase',fontWeight:600,marginBottom:'10px'}}>Réponse pré-rédigée</div>
               <div style={{fontSize:'14px',color:'#fff',lineHeight:'1.7'}}>
-                Bonjour, mon envoi est certifié par SellCov. L'état complet du t-shirt à l'expédition, aisselles incluses, est visible à 00:42 sur la vidéo horodatée. Je reste disponible pour échanger avec le service client si nécessaire.
+                Bonjour, mon envoi est certifié par SellCov via le certificat SC-7K2F9X-A3B. La vidéo horodatée à 360° montre le print exact, l'étiquette Hanes Beefy et les détails d'authentification (single stitch, made in USA). L'article que vous avez reçu est strictement celui qui a été expédié. Je reste disponible pour transmettre la vidéo au service client de la plateforme si nécessaire.
               </div>
             </div>
           </DataCard>
