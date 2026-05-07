@@ -62,13 +62,13 @@ export default function Demo() {
         >
           <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'12px',marginBottom:'18px',maxWidth:'750px'}}>
             <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)'}}>
+              <img src="/demophoto-tshirt2.jpg" alt="T-shirt Harley Davidson détail poche" style={{width:'100%',height:'auto',display:'block'}} />
+            </div>
+            <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)'}}>
               <img src="/demophoto-tshirt.jpg" alt="T-shirt Harley Davidson vue dos" style={{width:'100%',height:'auto',display:'block'}} />
             </div>
             <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)'}}>
-              <img src="/demophoto-tshirt2.jpg" alt="T-shirt Harley Davidson vue 2" style={{width:'100%',height:'auto',display:'block'}} />
-            </div>
-            <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)'}}>
-              <img src="/demophoto-tshirt3.jpg" alt="T-shirt Harley Davidson vue 3" style={{width:'100%',height:'auto',display:'block'}} />
+              <img src="/demophoto-tshirt3.jpg" alt="T-shirt Harley Davidson label" style={{width:'100%',height:'auto',display:'block'}} />
             </div>
           </div>
           <DataCard>
