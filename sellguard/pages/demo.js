@@ -97,7 +97,7 @@ export default function Demo() {
         <Section
           tag="Certifie ton envoi"
           title="Filme 90 secondes. SellCov scelle la preuve."
-          subtitle="Vidéo horodatée et signature cryptographique. Recevable juridiquement (art. 1366 du Code civil). Page de vérification publique partageable à l'acheteur ou à la plateforme."
+          subtitle="Vidéo horodatée et signature cryptographique. Recevable juridiquement (art. 1366 du Code civil). Chaque certificat est ancré dans la blockchain Bitcoin via OpenTimestamps : personne, même nous, ne peut modifier l'horodatage."
         >
           <div style={{marginBottom:'18px',borderRadius:'14px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',maxWidth:'750px',position:'relative'}}>
             <img src="/demovideo-tshirt.jpg" alt="Frame de la vidéo certifiée" style={{width:'100%',height:'auto',display:'block'}} />
@@ -109,6 +109,7 @@ export default function Demo() {
           <DataCard>
             <DataRow label="Identifiant" value={<span className="mono">SC-7K2F9X-A3B</span>} />
             <DataRow label="Signature" value={<span style={{color:'var(--green)',fontWeight:600}}>Validée</span>} />
+            <DataRow label="Ancrage Bitcoin" value={<span style={{color:'#F7931A',fontWeight:600}}>Confirmé</span>} />
             <DataRow label="Horodatage UTC" value="05/05/2026 14:23:18" last />
           </DataCard>
         </Section>

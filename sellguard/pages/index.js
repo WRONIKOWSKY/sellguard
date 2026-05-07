@@ -117,6 +117,11 @@ const PAGE_HTML = `
       <h3 class="legal-title" data-i18n="lg_c3_t">Recevable comme moyen de preuve</h3>
       <p class="legal-text" data-i18n="lg_c3_p">Article 1358 du Code civil : la preuve peut être apportée par tout moyen. Argument utilisable dans tes litiges Vinted, Depop, Leboncoin et procédures civiles.</p>
     </div>
+    <div class="legal-card reveal" style="border-color:rgba(247,147,26,.25)">
+      <div class="legal-icon" aria-hidden="true" style="color:#F7931A">₿</div>
+      <h3 class="legal-title" data-i18n="lg_c4_t">Ancrage Bitcoin</h3>
+      <p class="legal-text" data-i18n="lg_c4_p">Chaque certificat est ancré dans la blockchain Bitcoin via OpenTimestamps. L'horodatage est vérifiable indépendamment par n'importe qui, sans dépendre de SellCov. Personne, même nous, ne peut le modifier.</p>
+    </div>
   </div>
   <p class="legal-note reveal" data-i18n="lg_note">Ces preuves peuvent être contestées comme tout moyen de preuve. SellCov ne se substitue pas à un avocat.</p>
 </section>
@@ -246,6 +251,7 @@ const I18N = {
     lg_c1_t:"Article 1366 du Code civil",lg_c1_p:"L'écrit électronique a la même force probante que l'écrit papier dès lors que l'auteur est identifiable et l'intégrité garantie. Nos certificats cochent ces deux critères.",
     lg_c2_t:"Intégrité cryptographique",lg_c2_p:"Empreinte SHA-256 + signature HMAC sur chaque vidéo. Toute modification de la preuve est instantanément détectable et le certificat devient invalide.",
     lg_c3_t:"Recevable comme moyen de preuve",lg_c3_p:"Article 1358 du Code civil : la preuve peut être apportée par tout moyen. Argument utilisable dans tes litiges Vinted, Depop, Leboncoin et procédures civiles.",
+    lg_c4_t:"Ancrage Bitcoin",lg_c4_p:"Chaque certificat est ancré dans la blockchain Bitcoin via OpenTimestamps. L'horodatage est vérifiable indépendamment par n'importe qui, sans dépendre de SellCov. Personne, même nous, ne peut le modifier.",
     lg_note:"Comme toute preuve, un certificat peut être contesté. SellCov ne remplace pas un avocat.",
     sc_kicker:"Cas concrets",sc_t1:"Les arnaques qui coûtent",sc_t2:"le plus cher aux vendeurs.",sc_sub:"Trois cas typiques. Trois réponses SellCov.",
     s1_title:"Colis « jamais reçu »",s1_quote:"« Je n'ai jamais reçu le colis. Je demande un remboursement. »",s1_solve:"SellCov fournit la vidéo horodatée du dépôt et l'étiquette filmée.",
@@ -274,6 +280,7 @@ const I18N = {
     lg_c1_t:"Article 1366 French Civil Code",lg_c1_p:"Electronic writing has the same evidentiary force as paper, provided the author is identifiable and integrity guaranteed. Our certificates meet both criteria.",
     lg_c2_t:"Cryptographic integrity",lg_c2_p:"SHA-256 fingerprint + HMAC signature on every video. Any tampering is instantly detectable and the certificate becomes invalid.",
     lg_c3_t:"Admissible as evidence",lg_c3_p:"Article 1358 French Civil Code: evidence may be adduced by any means. Usable in your Vinted, Depop, eBay disputes and civil proceedings.",
+    lg_c4_t:"Bitcoin anchoring",lg_c4_p:"Each certificate is anchored in the Bitcoin blockchain via OpenTimestamps. The timestamp is independently verifiable by anyone, without relying on SellCov. Nobody, not even us, can modify it.",
     lg_note:"Like any evidence, a certificate can be challenged. SellCov does not replace a lawyer.",
     sc_kicker:"Real cases",sc_t1:"The scams that cost",sc_t2:"sellers the most.",sc_sub:"Three typical cases. Three SellCov answers.",
     s1_title:"Parcel \"never received\"",s1_quote:"\"I never received the parcel. I'm requesting a refund.\"",s1_solve:"SellCov provides the timestamped video of drop-off and the filmed label.",
@@ -302,6 +309,7 @@ const I18N = {
     lg_c1_t:"Artículo 1366 Código Civil francés",lg_c1_p:"El escrito electrónico tiene la misma fuerza probatoria que el papel, siempre que el autor sea identificable y se garantice la integridad. Nuestros certificados cumplen ambos criterios.",
     lg_c2_t:"Integridad criptográfica",lg_c2_p:"Huella SHA-256 + firma HMAC en cada vídeo. Toda modificación es detectable al instante y el certificado queda inválido.",
     lg_c3_t:"Admisible como prueba",lg_c3_p:"Artículo 1358 Código Civil francés: la prueba puede aportarse por cualquier medio. Argumento utilizable en tus litigios Vinted, Depop y procedimientos civiles.",
+    lg_c4_t:"Anclaje Bitcoin",lg_c4_p:"Cada certificado está anclado en la blockchain Bitcoin mediante OpenTimestamps. La marca de tiempo es verificable independientemente por cualquiera, sin depender de SellCov. Nadie, ni siquiera nosotros, puede modificarla.",
     lg_note:"Como toda prueba, un certificado puede ser impugnado. SellCov no reemplaza a un abogado.",
     sc_kicker:"Casos reales",sc_t1:"Las estafas que más cuestan",sc_t2:"a los vendedores.",sc_sub:"Tres casos típicos. Tres respuestas SellCov.",
     s1_title:"Paquete «nunca recibido»",s1_quote:"«Nunca recibí el paquete. Solicito un reembolso.»",s1_solve:"SellCov proporciona el video con marca de tiempo del depósito y la etiqueta filmada.",
@@ -330,6 +338,7 @@ const I18N = {
     lg_c1_t:"Articolo 1366 Codice civile francese",lg_c1_p:"Lo scritto elettronico ha la stessa forza probatoria della carta, purché l'autore sia identificabile e l'integrità garantita. I nostri certificati soddisfano entrambi i criteri.",
     lg_c2_t:"Integrità crittografica",lg_c2_p:"Impronta SHA-256 + firma HMAC su ogni video. Qualsiasi modifica è rilevabile istantaneamente e il certificato diventa invalido.",
     lg_c3_t:"Ammissibile come prova",lg_c3_p:"Articolo 1358 Codice civile francese: la prova può essere fornita con qualsiasi mezzo. Argomento utilizzabile nelle tue controversie Vinted, Depop e procedure civili.",
+    lg_c4_t:"Ancoraggio Bitcoin",lg_c4_p:"Ogni certificato è ancorato nella blockchain Bitcoin tramite OpenTimestamps. La marca temporale è verificabile in modo indipendente da chiunque, senza dipendere da SellCov. Nessuno, nemmeno noi, può modificarla.",
     lg_note:"Come ogni prova, un certificato può essere contestato. SellCov non sostituisce un avvocato.",
     sc_kicker:"Casi reali",sc_t1:"Le truffe che costano",sc_t2:"di più ai venditori.",sc_sub:"Tre casi tipici. Tre risposte SellCov.",
     s1_title:"Pacco «mai ricevuto»",s1_quote:"«Non ho mai ricevuto il pacco. Chiedo il rimborso.»",s1_solve:"SellCov fornisce il video con timestamp del deposito e l'etichetta filmata.",
