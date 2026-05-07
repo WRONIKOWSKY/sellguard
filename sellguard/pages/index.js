@@ -117,7 +117,7 @@ const PAGE_HTML = `
       <h3 class="legal-title" data-i18n="lg_c3_t">Recevable comme moyen de preuve</h3>
       <p class="legal-text" data-i18n="lg_c3_p">Article 1358 du Code civil : la preuve peut être apportée par tout moyen. Argument utilisable dans tes litiges Vinted, Depop, Leboncoin et procédures civiles.</p>
     </div>
-    <div class="legal-card reveal" style="border-color:rgba(247,147,26,.25)">
+    <div class="legal-card reveal" style="border-color:rgba(247,147,26,.25);grid-column:2/3">
       <div class="legal-icon" aria-hidden="true" style="color:#F7931A">₿</div>
       <h3 class="legal-title" data-i18n="lg_c4_t">Ancrage Bitcoin</h3>
       <p class="legal-text" data-i18n="lg_c4_p">Chaque certificat est ancré dans la blockchain Bitcoin via OpenTimestamps. L'horodatage est vérifiable indépendamment par n'importe qui, sans dépendre de SellCov. Personne, même nous, ne peut le modifier.</p>
