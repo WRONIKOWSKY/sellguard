@@ -61,14 +61,14 @@ export default function Demo() {
           subtitle="L'IA SellCov analyse ta photo, identifie l'article, scrute les marketplaces et te donne le titre, la description, le prix et la meilleure plateforme. En 10 secondes."
         >
           <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'12px',marginBottom:'18px',maxWidth:'750px'}}>
-            <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)'}}>
-              <img src="/demophoto-tshirt2.jpg" alt="T-shirt Harley Davidson détail poche" style={{width:'100%',height:'auto',display:'block'}} />
+            <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',aspectRatio:'3/4'}}>
+              <img src="/demophoto-tshirt2.jpg" alt="T-shirt Harley Davidson détail poche" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}} />
             </div>
-            <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)'}}>
-              <img src="/demophoto-tshirt.jpg" alt="T-shirt Harley Davidson vue dos" style={{width:'100%',height:'auto',display:'block'}} />
+            <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',aspectRatio:'3/4'}}>
+              <img src="/demophoto-tshirt.jpg" alt="T-shirt Harley Davidson vue dos" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}} />
             </div>
-            <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)'}}>
-              <img src="/demophoto-tshirt3.jpg" alt="T-shirt Harley Davidson label" style={{width:'100%',height:'auto',display:'block'}} />
+            <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',aspectRatio:'3/4'}}>
+              <img src="/demophoto-tshirt3.jpg" alt="T-shirt Harley Davidson label" style={{width:'100%',height:'100%',objectFit:'cover',display:'block'}} />
             </div>
           </div>
           <DataCard>
