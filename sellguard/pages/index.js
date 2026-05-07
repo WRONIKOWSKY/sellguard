@@ -102,6 +102,11 @@ const PAGE_HTML = `
     <p class="section-sub" data-i18n="lg_sub">Chaque certificat SellCov est conçu pour avoir valeur de preuve dans tes échanges avec acheteurs et marketplaces.</p>
   </div>
   <div class="legal-grid">
+    <div class="legal-card reveal" style="border-color:rgba(247,147,26,.25)">
+      <div class="legal-icon" aria-hidden="true" style="color:#F7931A">₿</div>
+      <h3 class="legal-title" data-i18n="lg_c4_t">Ancrage Bitcoin</h3>
+      <p class="legal-text" data-i18n="lg_c4_p">Chaque certificat est ancré dans la blockchain Bitcoin via OpenTimestamps. L'horodatage est vérifiable indépendamment par n'importe qui, sans dépendre de SellCov. Personne, même nous, ne peut le modifier.</p>
+    </div>
     <div class="legal-card reveal">
       <div class="legal-icon" aria-hidden="true">⚖︎</div>
       <h3 class="legal-title" data-i18n="lg_c1_t">Article 1366 du Code civil</h3>
@@ -117,11 +122,12 @@ const PAGE_HTML = `
       <h3 class="legal-title" data-i18n="lg_c3_t">Recevable comme moyen de preuve</h3>
       <p class="legal-text" data-i18n="lg_c3_p">Article 1358 du Code civil : la preuve peut être apportée par tout moyen. Argument utilisable dans tes litiges Vinted, Depop, Leboncoin et procédures civiles.</p>
     </div>
-    <div class="legal-card reveal" style="border-color:rgba(247,147,26,.25);grid-column:2/3">
-      <div class="legal-icon" aria-hidden="true" style="color:#F7931A">₿</div>
-      <h3 class="legal-title" data-i18n="lg_c4_t">Ancrage Bitcoin</h3>
-      <p class="legal-text" data-i18n="lg_c4_p">Chaque certificat est ancré dans la blockchain Bitcoin via OpenTimestamps. L'horodatage est vérifiable indépendamment par n'importe qui, sans dépendre de SellCov. Personne, même nous, ne peut le modifier.</p>
-    </div>
+  </div>
+  <div class="legal-dots" id="legal-dots">
+    <span class="legal-dot active"></span>
+    <span class="legal-dot"></span>
+    <span class="legal-dot"></span>
+    <span class="legal-dot"></span>
   </div>
   <p class="legal-note reveal" data-i18n="lg_note">Ces preuves peuvent être contestées comme tout moyen de preuve. SellCov ne se substitue pas à un avocat.</p>
 </section>
@@ -404,9 +410,31 @@ export default function Home() {
       updateScamsDots();
     }
 
+    // Carousel dots tracking pour la section "Recevabilité juridique" (mobile)
+    const legalContainer = document.querySelector('.legal-grid');
+    function updateLegalDots() {
+      if (!legalContainer) return;
+      const dots = document.querySelectorAll('#legal-dots .legal-dot');
+      if (!dots.length) return;
+      const cards = legalContainer.querySelectorAll('.legal-card');
+      const containerCenter = legalContainer.scrollLeft + legalContainer.clientWidth / 2;
+      let closestIdx = 0, closestDist = Infinity;
+      cards.forEach((c, i) => {
+        const cardCenter = c.offsetLeft + c.clientWidth / 2;
+        const dist = Math.abs(containerCenter - cardCenter);
+        if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle('active', i === closestIdx));
+    }
+    if (legalContainer) {
+      legalContainer.addEventListener('scroll', updateLegalDots, { passive: true });
+      updateLegalDots();
+    }
+
     return () => {
       io.disconnect();
       if (scamsContainer) scamsContainer.removeEventListener('scroll', updateScamsDots);
+      if (legalContainer) legalContainer.removeEventListener('scroll', updateLegalDots);
     };
   }, []);
 
@@ -534,8 +562,9 @@ export default function Home() {
         .feature-pink{background:linear-gradient(180deg,var(--pink-bg),transparent 70%),var(--bg-card)}
         .feature-pink .tag{color:var(--pink)}
         .feature .cta-area{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:auto;text-align:center}
-        .legal-grid{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-        @media(max-width:900px){.legal-grid{grid-template-columns:1fr}}
+        .legal-grid{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+        @media(max-width:1100px){.legal-grid{grid-template-columns:repeat(2,1fr)}}
+        .legal-dots{display:none}
         .legal-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:12px}
         .legal-icon{font-size:24px;color:var(--green);line-height:1}
         .legal-title{font-size:17px;font-weight:600;color:#fff;line-height:1.3}
@@ -617,6 +646,29 @@ export default function Home() {
           .scams-dots{display:flex;justify-content:center;gap:8px;margin-top:18px}
           .scams-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background .25s,width .25s;display:block}
           .scams-dot.active{background:var(--pink);width:22px;border-radius:6px}
+          .legal-grid{
+            grid-template-columns:none;
+            display:flex;
+            gap:14px;
+            overflow-x:auto;
+            overflow-y:hidden;
+            scroll-snap-type:x mandatory;
+            -webkit-overflow-scrolling:touch;
+            scrollbar-width:none;
+            padding:0 7.5vw 8px;
+            margin:0 -20px;
+            touch-action:pan-x;
+            overscroll-behavior-x:contain;
+          }
+          .legal-grid::-webkit-scrollbar{display:none}
+          .legal-card{
+            flex:0 0 85vw;
+            scroll-snap-align:center;
+            scroll-snap-stop:always;
+          }
+          .legal-dots{display:flex;justify-content:center;gap:8px;margin-top:18px}
+          .legal-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.18);transition:background .25s,width .25s;display:block}
+          .legal-dot.active{background:#F7931A;width:22px;border-radius:6px}
           .plan{padding:22px;gap:14px;max-width:380px;margin:0 auto;width:100%}
           .plan-price{font-size:38px}
           .hero{padding:110px 20px 40px}
