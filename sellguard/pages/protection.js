@@ -173,7 +173,9 @@ export default function Protection() {
     setStep("uploading");
     setError(null);
 
+    let stage = "init";
     try {
+      stage = "supabase_session";
       const sb = getSupabase();
       const sessRes = await sb.auth.getSession();
       const session = sessRes?.data?.session;
@@ -183,6 +185,7 @@ export default function Protection() {
         return;
       }
 
+      stage = "build_formdata";
       const formData = new FormData();
       const ext = (recordedMimeRef.current || "").includes("mp4") ? "mp4" : "webm";
       formData.append("video", videoBlob, `proof.${ext}`);
@@ -192,12 +195,14 @@ export default function Protection() {
       formData.append("tracking_carrier", trackingCarrier);
       formData.append("device_info", navigator.userAgent.substring(0, 200));
 
+      stage = "fetch_request";
       const res = await fetch("/api/upload", {
         method: "POST",
         headers: { Authorization: "Bearer " + session.access_token },
         body: formData,
       });
 
+      stage = "parse_response";
       const data = await res.json();
       if (res.status === 429) {
         throw new Error("Quota journalier atteint (50 certificats / jour). Reset à minuit UTC.");
@@ -209,7 +214,8 @@ export default function Protection() {
       setCert(data);
       setStep("done");
     } catch (e) {
-      setError(e.message || "Erreur");
+      const blobDbg = videoBlob ? `type=${videoBlob.type || "EMPTY"} size=${videoBlob.size}` : "noblob";
+      setError(`[stage:${stage}] ${e.message || e.name || "Erreur"} | ${blobDbg} | mimeRef=${recordedMimeRef.current}`);
       setStep("review");
     }
   }
