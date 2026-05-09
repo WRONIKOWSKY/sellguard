@@ -173,9 +173,7 @@ export default function Protection() {
     setStep("uploading");
     setError(null);
 
-    let stage = "init";
     try {
-      stage = "supabase_session";
       const sb = getSupabase();
       const sessRes = await sb.auth.getSession();
       const session = sessRes?.data?.session;
@@ -185,37 +183,58 @@ export default function Protection() {
         return;
       }
 
-      stage = "build_formdata";
-      const formData = new FormData();
-      const ext = (recordedMimeRef.current || "").includes("mp4") ? "mp4" : "webm";
-      formData.append("video", videoBlob, `proof.${ext}`);
-      formData.append("article", article);
-      formData.append("order_ref", orderRef);
-      formData.append("tracking_number", trackingNumber);
-      formData.append("tracking_carrier", trackingCarrier);
-      formData.append("device_info", navigator.userAgent.substring(0, 200));
+      const mime = recordedMimeRef.current || videoBlob.type || "video/webm";
+      const authHeader = "Bearer " + session.access_token;
 
-      stage = "fetch_request";
-      const res = await fetch("/api/upload", {
+      // 1. Init : obtenir cert_id + signed upload URL Supabase
+      const initRes = await fetch("/api/upload-init", {
         method: "POST",
-        headers: { Authorization: "Bearer " + session.access_token },
-        body: formData,
+        headers: { Authorization: authHeader, "Content-Type": "application/json" },
+        body: JSON.stringify({ mime }),
       });
+      const initData = await initRes.json().catch(() => ({}));
+      if (!initRes.ok) {
+        throw new Error(initData.error || "Erreur init upload");
+      }
+      const { video_path, upload_token } = initData;
 
-      stage = "parse_response";
-      const data = await res.json();
-      if (res.status === 429) {
+      // 2. Upload direct dans Supabase Storage (bypass la limite Vercel 4.5 MB).
+      //    uploadToSignedUrl envoie le binaire à Supabase sans transiter par
+      //    notre serveur Next.js.
+      const { error: upErr } = await sb.storage
+        .from("protection-videos")
+        .uploadToSignedUrl(video_path, upload_token, videoBlob, {
+          contentType: mime,
+        });
+      if (upErr) {
+        throw new Error("Upload Storage : " + (upErr.message || "erreur"));
+      }
+
+      // 3. Finalize : le serveur fetch la vidéo depuis Storage, hash, signe, insère DB
+      const finRes = await fetch("/api/upload", {
+        method: "POST",
+        headers: { Authorization: authHeader, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          video_path,
+          article,
+          order_ref: orderRef,
+          tracking_number: trackingNumber,
+          tracking_carrier: trackingCarrier,
+          device_info: navigator.userAgent.substring(0, 200),
+        }),
+      });
+      const finData = await finRes.json().catch(() => ({}));
+      if (finRes.status === 429) {
         throw new Error("Quota journalier atteint (50 certificats / jour). Reset à minuit UTC.");
       }
-      if (!res.ok) {
-        throw new Error(data.error || "Erreur upload");
+      if (!finRes.ok) {
+        throw new Error(finData.error || "Erreur finalisation");
       }
 
-      setCert(data);
+      setCert(finData);
       setStep("done");
     } catch (e) {
-      const blobDbg = videoBlob ? `type=${videoBlob.type || "EMPTY"} size=${videoBlob.size}` : "noblob";
-      setError(`[stage:${stage}] ${e.message || e.name || "Erreur"} | ${blobDbg} | mimeRef=${recordedMimeRef.current}`);
+      setError(e.message || "Erreur");
       setStep("review");
     }
   }

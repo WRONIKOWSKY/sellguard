@@ -1,60 +1,89 @@
-import formidable from "formidable";
-import fs from "fs";
 import crypto from "crypto";
 import { withAuth } from "../../lib/withAuth";
 import { getSupabaseAdmin } from "../../lib/supabaseAdmin";
-import { generateCertId, signHmac } from "../../lib/certUtils";
+import { signHmac } from "../../lib/certUtils";
 import { createOtsProof } from "../../lib/opentimestamps";
+
+// POST /api/upload — finalisation d'un upload (auth + quota)
+//
+// Le binaire de la vidéo n'est PLUS envoyé via cet endpoint (la limite Vercel
+// Hobby à 4.5 MB le rendait impossible pour les vidéos > quelques secondes).
+// Nouveau flow :
+//   1. Client appelle /api/upload-init → reçoit cert_id + signed upload URL
+//   2. Client uploade la vidéo direct dans Supabase Storage via cette URL
+//   3. Client appelle ce endpoint /api/upload avec le video_path + métadonnées
+//   4. Ce endpoint fetch la vidéo depuis Storage, la hash, signe, insère en DB
+//
+// Body JSON: { video_path, article, order_ref, tracking_number,
+//              tracking_carrier, device_info }
+// Réponses :
+//   201 { cert_id, hash, timestamp, signature } — succès
+//   400 — payload invalide / vidéo introuvable
+//   401 — pas authentifié (géré par withAuth)
+//   429 — quota journalier dépassé (géré par withAuth)
+//   500 — erreur serveur
 
 export const config = {
   api: {
-    bodyParser: false, // formidable parse le multipart, pas Next.js
+    // On ne reçoit que des métadonnées JSON, pas de binaire. 100kb suffit large.
+    bodyParser: { sizeLimit: "100kb" },
   },
 };
 
-// POST /api/upload (auth requis)
-// Reçoit en multipart : video (Blob), article (string), order_ref (string),
-// tracking_number (string), tracking_carrier (string), device_info (string)
-// Réponses :
-//   201 { cert_id, hash, timestamp, signature } — succès
-//   400 — payload invalide
-//   401 — pas authentifié (géré par withAuth)
-//   500 — erreur serveur
 async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
   const userId = req.user.id; // injecté par withAuth
 
-  // 1. Parser le multipart
-  const form = formidable({ maxFileSize: 50 * 1024 * 1024 }); // 50 MB max (cohérent avec le bucket)
-  let fields, files;
-  try {
-    [fields, files] = await form.parse(req);
-  } catch (e) {
-    console.error("[upload] formidable parse error:", e);
-    return res.status(400).json({ error: "Upload error" });
+  const body = req.body || {};
+  const videoPath = body.video_path;
+
+  // 1. Valider video_path : doit être ${userId}/SC-XXXXXXXX.{mp4|mov|webm}
+  //    Empêche un user d'attribuer à son cert le path d'un autre user.
+  if (typeof videoPath !== "string" || !videoPath.startsWith(userId + "/")) {
+    return res.status(400).json({ error: "video_path invalide ou volé" });
   }
+  const filename = videoPath.substring(userId.length + 1);
+  const m = filename.match(/^(SC-[A-Z0-9]{8})\.(mp4|mov|webm)$/);
+  if (!m) {
+    return res.status(400).json({ error: "video_path malformé" });
+  }
+  const certId = m[1];
+  const ext = m[2];
+  const mimeType = ext === "mp4" ? "video/mp4"
+    : ext === "mov" ? "video/quicktime"
+    : "video/webm";
 
-  const file = files.video?.[0];
-  if (!file) return res.status(400).json({ error: "Missing video file" });
+  // 2. Tronquer les métadonnées
+  const article = String(body.article || "").substring(0, 200);
+  const orderRef = String(body.order_ref || "").substring(0, 100);
+  const trackingNumber = String(body.tracking_number || "").substring(0, 100);
+  const trackingCarrier = String(body.tracking_carrier || "").substring(0, 50);
+  const deviceInfo = String(body.device_info || "").substring(0, 200);
 
-  const article = (fields.article?.[0] || "").substring(0, 200);
-  const orderRef = (fields.order_ref?.[0] || "").substring(0, 100);
-  const trackingNumber = (fields.tracking_number?.[0] || "").substring(0, 100);
-  const trackingCarrier = (fields.tracking_carrier?.[0] || "").substring(0, 50);
-  const deviceInfo = (fields.device_info?.[0] || "").substring(0, 200);
+  const supa = getSupabaseAdmin();
 
-  // 2. Lire le fichier en buffer + calculer hash
+  // 3. Fetch la vidéo depuis Supabase Storage
   let buffer;
   try {
-    buffer = fs.readFileSync(file.filepath);
+    const { data: blob, error: dlErr } = await supa.storage
+      .from("protection-videos")
+      .download(videoPath);
+    if (dlErr || !blob) {
+      console.error("[upload] download error:", dlErr);
+      return res.status(400).json({ error: "Vidéo introuvable. As-tu fini l'upload ?" });
+    }
+    const arrayBuffer = await blob.arrayBuffer();
+    buffer = Buffer.from(arrayBuffer);
   } catch (e) {
-    return res.status(500).json({ error: "Cannot read uploaded file" });
+    console.error("[upload] fetch error:", e);
+    return res.status(500).json({ error: "Erreur lecture vidéo" });
   }
+
+  // 4. Hash SHA-256
   const hash = crypto.createHash("sha256").update(buffer).digest("hex");
 
-  // 3. Générer cert_id, timestamp, signature HMAC
-  const certId = generateCertId();
+  // 5. Timestamp + signature HMAC
   const timestamp = new Date().toISOString();
   let signature;
   try {
@@ -64,31 +93,10 @@ async function handler(req, res) {
     return res.status(500).json({ error: "Server signing error" });
   }
 
-  // 4. Upload vidéo dans Supabase Storage
-  //    Path inclut l'extension qui matche le MIME réel — sinon iOS Safari refuse de
-  //    lire le fichier sur la page de vérification publique.
-  const supa = getSupabaseAdmin();
-  const mimeType = file.mimetype || "video/webm";
-  const ext = mimeType.includes("mp4") ? "mp4"
-    : mimeType.includes("quicktime") ? "mov"
-    : "webm";
-  const path = `${userId}/${certId}.${ext}`;
-  const { error: uploadErr } = await supa.storage
-    .from("protection-videos")
-    .upload(path, buffer, {
-      contentType: mimeType,
-      upsert: false,
-    });
-  if (uploadErr) {
-    console.error("[upload] Storage upload error:", uploadErr);
-    return res.status(500).json({ error: "Storage upload failed" });
-  }
-
-  // 5. Insert DB
+  // 6. Insert DB
   //    On passe explicitement created_at = timestamp pour que la valeur stockée
-  //    matche EXACTEMENT la valeur qu'on a signée. Sinon Postgres remplirait
-  //    avec now() qui peut différer de quelques ms du timestamp Node, et la
-  //    signature ne pourrait plus être vérifiée.
+  //    matche EXACTEMENT la valeur signée. Sinon Postgres remplirait avec now()
+  //    qui peut différer de quelques ms du timestamp Node.
   const { error: dbErr } = await supa.from("certificats").insert({
     user_id: userId,
     cert_id: certId,
@@ -96,7 +104,7 @@ async function handler(req, res) {
     order_ref: orderRef || null,
     tracking_number: trackingNumber || null,
     tracking_carrier: trackingCarrier || null,
-    video_path: path,
+    video_path: videoPath,
     video_size_bytes: buffer.length,
     video_hash: hash,
     video_mimetype: mimeType,
@@ -107,17 +115,12 @@ async function handler(req, res) {
   });
   if (dbErr) {
     console.error("[upload] DB insert error:", dbErr);
-    // rollback : supprimer la vidéo qu'on vient d'uploader
-    await supa.storage.from("protection-videos").remove([path]);
+    // Rollback : supprimer la vidéo qu'on vient d'uploader
+    await supa.storage.from("protection-videos").remove([videoPath]);
     return res.status(500).json({ error: "Database error" });
   }
 
-  // 6. Ancrage OpenTimestamps Bitcoin (non-bloquant pour le client)
-  //    On lance l'appel en arrière-plan : si OpenTimestamps est down ou lent,
-  //    le client reçoit son cert_id sans attendre. Le proof est stocké dans la
-  //    table dès qu'il revient. À t=0 c'est un proof "pending Bitcoin" déjà
-  //    valide juridiquement. Une route /api/ots-upgrade upgrade plus tard
-  //    pour avoir l'attestation Bitcoin définitive.
+  // 7. Ancrage OpenTimestamps Bitcoin (non-bloquant)
   createOtsProof(hash)
     .then(async (otsProofBase64) => {
       const { error } = await supa
@@ -128,10 +131,9 @@ async function handler(req, res) {
     })
     .catch((e) => {
       console.error("[upload] OTS stamp failed (non-fatal):", e.message);
-      // Le certificat reste valide via HMAC. Un cron pourra retry plus tard.
     });
 
-  // 7. OK — on rend le cert au client immédiatement
+  // 8. OK
   return res.status(201).json({
     cert_id: certId,
     hash,
