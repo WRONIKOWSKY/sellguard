@@ -148,6 +148,11 @@ export default function Verify() {
               {cert.video_url && (
                 <a
                   href={cert.video_url}
+                  download={`${cert.cert_id}.${
+                    (cert.video_mimetype || "").includes("mp4") ? "mp4"
+                    : (cert.video_mimetype || "").includes("quicktime") ? "mov"
+                    : "webm"
+                  }`}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{

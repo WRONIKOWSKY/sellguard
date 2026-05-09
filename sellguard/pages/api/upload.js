@@ -65,13 +65,18 @@ async function handler(req, res) {
   }
 
   // 4. Upload vidéo dans Supabase Storage
-  //    Path = userId/certId.webm — RLS policies le permettent uniquement pour le user owner
+  //    Path inclut l'extension qui matche le MIME réel — sinon iOS Safari refuse de
+  //    lire le fichier sur la page de vérification publique.
   const supa = getSupabaseAdmin();
-  const path = `${userId}/${certId}.webm`;
+  const mimeType = file.mimetype || "video/webm";
+  const ext = mimeType.includes("mp4") ? "mp4"
+    : mimeType.includes("quicktime") ? "mov"
+    : "webm";
+  const path = `${userId}/${certId}.${ext}`;
   const { error: uploadErr } = await supa.storage
     .from("protection-videos")
     .upload(path, buffer, {
-      contentType: file.mimetype || "video/webm",
+      contentType: mimeType,
       upsert: false,
     });
   if (uploadErr) {
@@ -94,6 +99,7 @@ async function handler(req, res) {
     video_path: path,
     video_size_bytes: buffer.length,
     video_hash: hash,
+    video_mimetype: mimeType,
     tsa_token: signature, // phase MVP : HMAC. Phase v1.1 : RFC 3161 token.
     tsa_provider: "sellcov-hmac-v1",
     device_info: deviceInfo || null,

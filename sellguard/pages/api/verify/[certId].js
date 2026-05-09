@@ -28,7 +28,7 @@ export default async function handler(req, res) {
   // 1. Lookup cert dans la DB (service_role bypass RLS)
   const { data: cert, error } = await supa
     .from("certificats")
-    .select("cert_id, article, order_ref, tracking_number, tracking_carrier, video_path, video_size_bytes, video_hash, tsa_token, tsa_provider, created_at, ots_status")
+    .select("cert_id, article, order_ref, tracking_number, tracking_carrier, video_path, video_size_bytes, video_hash, video_mimetype, tsa_token, tsa_provider, created_at, ots_status")
     .eq("cert_id", certId)
     .single();
 
@@ -45,11 +45,16 @@ export default async function handler(req, res) {
   const signatureValid = verifyHmac(cert.video_hash, signedTimestamp, cert.tsa_token);
 
   // 3. Générer signed URL pour la vidéo (valide 1h)
+  //    download: <filename> ajoute Content-Disposition: attachment côté Supabase,
+  //    sans quoi iOS Safari tente de lire la vidéo inline (et échoue sur certains
+  //    formats). Avec download, le navigateur sauvegarde direct dans la pellicule.
   let videoUrl = null;
   try {
+    const ext = (cert.video_path.split(".").pop() || "webm").toLowerCase();
+    const filename = `${cert.cert_id}.${ext}`;
     const { data: signed, error: signedErr } = await supa.storage
       .from("protection-videos")
-      .createSignedUrl(cert.video_path, 3600); // 1h
+      .createSignedUrl(cert.video_path, 3600, { download: filename }); // 1h
     if (!signedErr && signed) {
       videoUrl = signed.signedUrl;
     }
@@ -66,6 +71,7 @@ export default async function handler(req, res) {
     tracking_carrier: cert.tracking_carrier,
     video_size_bytes: cert.video_size_bytes,
     video_hash: cert.video_hash,
+    video_mimetype: cert.video_mimetype || null,
     timestamp: cert.created_at,
     signature: cert.tsa_token,
     signature_provider: cert.tsa_provider,
