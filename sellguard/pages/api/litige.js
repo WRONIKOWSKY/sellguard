@@ -1,4 +1,6 @@
-export default async function handler(req, res) {
+import { withAuth } from "../../lib/withAuth";
+
+async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
   const { type, buyerMessage, certRef, images } = req.body;
 
@@ -42,7 +44,7 @@ fraud_score : 0-3 légitime, 4-6 suspect, 7-10 fraude probable. Sois précis et 
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
-      body: JSON.stringify({ model: "claude-opus-4-5", max_tokens: 1500, messages: [{ role: "user", content }] })
+      body: JSON.stringify({ model: "claude-opus-4-7", max_tokens: 1500, messages: [{ role: "user", content }] })
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.error?.message || "Erreur API");
@@ -52,3 +54,5 @@ fraud_score : 0-3 légitime, 4-6 suspect, 7-10 fraude probable. Sois précis et 
     res.status(500).json({ error: e.message });
   }
 }
+
+export default withAuth(handler, { endpoint: "litige", dailyLimit: 10 });

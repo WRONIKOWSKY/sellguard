@@ -1,0 +1,83 @@
+import { getSupabaseAdmin } from "../../../lib/supabaseAdmin";
+import { verifyHmac } from "../../../lib/certUtils";
+
+// GET /api/verify/[certId]
+// PUBLIC — pas d'authentification. C'est l'endpoint que n'importe qui peut
+// consulter pour vérifier l'authenticité d'un certificat. C'est ce qui rend
+// la preuve "vérifiable par un tiers" au lieu d'un PDF cosmétique.
+//
+// Retourne :
+//   - les métadonnées du cert (article, tracking, hash, timestamp, ...)
+//   - une signed URL temporaire (1h) pour télécharger la vidéo originale
+//   - le résultat de la vérification HMAC (signature_valid: true/false)
+//
+// Erreurs :
+//   400 — cert_id invalide
+//   404 — cert introuvable
+//   500 — erreur serveur
+
+export default async function handler(req, res) {
+  const { certId } = req.query;
+
+  if (!certId || typeof certId !== "string" || !/^SC-[A-Z0-9]{8}$/.test(certId)) {
+    return res.status(400).json({ error: "Invalid cert_id format" });
+  }
+
+  const supa = getSupabaseAdmin();
+
+  // 1. Lookup cert dans la DB (service_role bypass RLS)
+  const { data: cert, error } = await supa
+    .from("certificats")
+    .select("cert_id, article, order_ref, tracking_number, tracking_carrier, video_path, video_size_bytes, video_hash, video_mimetype, tsa_token, tsa_provider, created_at, ots_status")
+    .eq("cert_id", certId)
+    .single();
+
+  if (error || !cert) {
+    return res.status(404).json({ error: "Certificat introuvable" });
+  }
+
+  // 2. Re-vérifier la signature HMAC : prouve que le cert n'a pas été altéré en DB
+  //    après création (ex: si quelqu'un avait accès direct à la DB et changeait le hash).
+  //    Note : Postgres TIMESTAMPTZ retourne le timestamp avec offset explicite (+00:00)
+  //    alors que Node.toISOString() retourne avec Z. On normalise via Date pour
+  //    que le format matche celui qui a été signé à l'upload.
+  const signedTimestamp = new Date(cert.created_at).toISOString();
+  const signatureValid = verifyHmac(cert.video_hash, signedTimestamp, cert.tsa_token);
+
+  // 3. Générer signed URL pour la vidéo (valide 1h)
+  //    download: <filename> ajoute Content-Disposition: attachment côté Supabase,
+  //    sans quoi iOS Safari tente de lire la vidéo inline (et échoue sur certains
+  //    formats). Avec download, le navigateur sauvegarde direct dans la pellicule.
+  let videoUrl = null;
+  try {
+    const ext = (cert.video_path.split(".").pop() || "webm").toLowerCase();
+    const filename = `${cert.cert_id}.${ext}`;
+    const { data: signed, error: signedErr } = await supa.storage
+      .from("protection-videos")
+      .createSignedUrl(cert.video_path, 3600, { download: filename }); // 1h
+    if (!signedErr && signed) {
+      videoUrl = signed.signedUrl;
+    }
+  } catch (e) {
+    console.error("[verify] signed URL error:", e);
+  }
+
+  // 4. Renvoyer les métadonnées (sans exposer user_id, video_path interne)
+  return res.status(200).json({
+    cert_id: cert.cert_id,
+    article: cert.article,
+    order_ref: cert.order_ref,
+    tracking_number: cert.tracking_number,
+    tracking_carrier: cert.tracking_carrier,
+    video_size_bytes: cert.video_size_bytes,
+    video_hash: cert.video_hash,
+    video_mimetype: cert.video_mimetype || null,
+    timestamp: cert.created_at,
+    signature: cert.tsa_token,
+    signature_provider: cert.tsa_provider,
+    signature_valid: signatureValid,
+    video_url: videoUrl, // null si erreur, sinon URL signée valide 1h
+    ots_status: cert.ots_status || null, // null | "pending_bitcoin" | "bitcoin_confirmed"
+    ots_proof_url: cert.ots_status ? `/api/ots-proof/${cert.cert_id}` : null,
+  });
+}
