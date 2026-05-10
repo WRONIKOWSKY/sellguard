@@ -3,6 +3,7 @@ import { withAuth } from "../../lib/withAuth";
 import { getSupabaseAdmin } from "../../lib/supabaseAdmin";
 import { signHmac } from "../../lib/certUtils";
 import { createOtsProof } from "../../lib/opentimestamps";
+import { rateLimit } from "../../lib/rateLimit";
 
 // POST /api/upload — finalisation d'un upload (auth + quota)
 //
@@ -32,6 +33,12 @@ export const config = {
 
 async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
+
+  const rl = await rateLimit(req, { name: "upload", limit: 30, windowSec: 60 });
+  if (!rl.ok) {
+    res.setHeader("Retry-After", rl.retryAfter);
+    return res.status(429).json({ error: "Trop de requêtes, réessaie dans une minute" });
+  }
 
   const userId = req.user.id; // injecté par withAuth
 

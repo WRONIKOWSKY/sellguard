@@ -1,4 +1,5 @@
 import { getSupabaseAdmin } from "../../lib/supabaseAdmin";
+import { rateLimit } from "../../lib/rateLimit";
 
 // GET /api/certificat?cert_id=SC-XXXXXXXX[&lang=fr]
 // Public — retourne le PDF certificat. Pas d'auth nécessaire car le cert_id
@@ -20,6 +21,12 @@ const CARRIER_LABELS = {
 };
 
 export default async function handler(req, res) {
+  const rl = await rateLimit(req, { name: "certificat", limit: 30, windowSec: 60 });
+  if (!rl.ok) {
+    res.setHeader("Retry-After", rl.retryAfter);
+    return res.status(429).json({ error: "Too many requests, retry in a minute" });
+  }
+
   // GET et POST acceptés (compat iOS qui peut bloquer GET pour certains téléchargements)
   const data = req.method === "GET" ? req.query : req.body;
   const certId = data.cert_id;
