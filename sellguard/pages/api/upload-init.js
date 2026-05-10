@@ -1,5 +1,6 @@
 import { getSupabaseAdmin } from "../../lib/supabaseAdmin";
 import { generateCertId } from "../../lib/certUtils";
+import { rateLimit } from "../../lib/rateLimit";
 
 // POST /api/upload-init
 //
@@ -21,6 +22,12 @@ const ALLOWED_MIMES = ["video/mp4", "video/webm", "video/quicktime"];
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
+
+  const rl = await rateLimit(req, { name: "upload-init", limit: 30, windowSec: 60 });
+  if (!rl.ok) {
+    res.setHeader("Retry-After", rl.retryAfter);
+    return res.status(429).json({ error: "Trop de requêtes, réessaie dans une minute" });
+  }
 
   // 1. Auth
   const authHeader = req.headers.authorization || "";

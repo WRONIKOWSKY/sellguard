@@ -1,5 +1,6 @@
 import { getSupabaseAdmin } from "../../../lib/supabaseAdmin";
 import { verifyHmac } from "../../../lib/certUtils";
+import { rateLimit } from "../../../lib/rateLimit";
 
 // GET /api/verify/[certId]
 // PUBLIC — pas d'authentification. C'est l'endpoint que n'importe qui peut
@@ -17,6 +18,12 @@ import { verifyHmac } from "../../../lib/certUtils";
 //   500 — erreur serveur
 
 export default async function handler(req, res) {
+  const rl = await rateLimit(req, { name: "verify", limit: 30, windowSec: 60 });
+  if (!rl.ok) {
+    res.setHeader("Retry-After", rl.retryAfter);
+    return res.status(429).json({ error: "Too many requests, retry in a minute" });
+  }
+
   const { certId } = req.query;
 
   if (!certId || typeof certId !== "string" || !/^SC-[A-Z0-9]{8}$/.test(certId)) {

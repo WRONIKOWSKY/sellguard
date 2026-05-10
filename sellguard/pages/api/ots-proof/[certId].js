@@ -11,12 +11,19 @@
 // d'attaque, juste la possibilité de vérifier l'authenticité.
 
 import { getSupabaseAdmin } from "../../../lib/supabaseAdmin";
+import { rateLimit } from "../../../lib/rateLimit";
 
 export default async function handler(req, res) {
   if (req.method !== "GET") return res.status(405).end();
 
+  const rl = await rateLimit(req, { name: "ots-proof", limit: 30, windowSec: 60 });
+  if (!rl.ok) {
+    res.setHeader("Retry-After", rl.retryAfter);
+    return res.status(429).json({ error: "Too many requests, retry in a minute" });
+  }
+
   const certId = (req.query.certId || "").toString().toUpperCase();
-  if (!/^SC-[A-Z0-9-]{6,32}$/.test(certId)) {
+  if (!/^SC-[A-Z0-9]{8}$/.test(certId)) {
     return res.status(400).json({ error: "Invalid cert_id format" });
   }
 
