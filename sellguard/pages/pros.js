@@ -377,13 +377,13 @@ export default function Pros() {
 
         {/* Form */}
         <section className="section" id="form">
-          <div className="section-kicker">Candidature</div>
-          <h2 className="serif">Postule en 60 secondes.</h2>
-          <p className="section-lead">On répond à toutes les candidatures sous 48h. Si ton profil colle, on te file un code d'accès Pro et un lien pour démarrer.</p>
+          <div className="section-kicker">Demande d'accès</div>
+          <h2 className="serif">Demande ton accès en 60 secondes.</h2>
+          <p className="section-lead">On répond à toutes les demandes sous 48h. Si ton profil colle, on te file un code d'accès Pro et un lien pour démarrer.</p>
 
           {status === "sent" ? (
             <div className="form-success">
-              <h3>✓ Candidature reçue</h3>
+              <h3>✓ Demande reçue</h3>
               <p>Merci. On regarde ton profil et on revient vers toi sous 48h sur {email}.</p>
             </div>
           ) : (
@@ -450,7 +450,7 @@ export default function Pros() {
               {errorMsg && <div className="form-error">{errorMsg}</div>}
 
               <button className="submit" type="submit" disabled={status === "sending"}>
-                {status === "sending" ? "Envoi..." : "Envoyer ma candidature"}
+                {status === "sending" ? "Envoi..." : "Demander mon accès"}
               </button>
             </form>
           )}
