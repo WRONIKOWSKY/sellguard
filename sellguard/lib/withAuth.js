@@ -1,12 +1,17 @@
 import { getSupabaseAdmin } from "./supabaseAdmin";
+import { getUserTier, getTierLimit } from "./tier";
 
 // Middleware HOF pour les endpoints qui call Anthropic.
 // Wrap un handler API Next.js, valide le JWT Supabase, applique le quota journalier.
 //
-// Usage :
-//   export default withAuth(handler, { endpoint: "analyze", dailyLimit: 10 });
+// Le quota dépend du tier de l'utilisateur (lu depuis user.app_metadata.tier
+// via lib/tier.js). opts.dailyLimit reste accepté comme fallback si l'endpoint
+// n'est pas mappé dans TIER_LIMITS.
 //
-// Le handler reçoit en plus req.user (objet user Supabase) après validation.
+// Usage :
+//   export default withAuth(handler, { endpoint: "analyze" });
+//
+// Le handler reçoit en plus req.user (objet user Supabase) et req.tier après validation.
 //
 // Côtés erreurs renvoyées :
 //   401 — pas de token / token invalide / expiré
@@ -18,7 +23,7 @@ export function withAuth(handler, opts) {
     throw new Error("withAuth: opts.endpoint is required");
   }
   const endpoint = opts.endpoint;
-  const dailyLimit = opts.dailyLimit || 10;
+  const fallbackLimit = opts.dailyLimit || 10;
 
   return async function wrappedHandler(req, res) {
     // 1. Extraire le bearer token
@@ -39,9 +44,14 @@ export function withAuth(handler, opts) {
       }
       userId = data.user.id;
       req.user = data.user;
+      req.tier = getUserTier(data.user);
     } catch (e) {
       return res.status(401).json({ error: "Échec validation token" });
     }
+
+    // Calcul de la limite journalière selon le tier de l'utilisateur.
+    // Si l'endpoint n'est pas mappé pour ce tier, on retombe sur opts.dailyLimit.
+    const dailyLimit = getTierLimit(req.tier, endpoint, fallbackLimit);
 
     // 3. Quota : incrément atomique via fonction Postgres
     //    La fonction increment_anthropic_usage fait l'INSERT/UPDATE atomique
@@ -70,6 +80,7 @@ export function withAuth(handler, opts) {
       return res.status(429).json({
         error: "Quota journalier dépassé",
         endpoint,
+        tier: req.tier,
         limit: dailyLimit,
         count: newCount,
         retryAfter: "Demain (reset à 00h UTC)"

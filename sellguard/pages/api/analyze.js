@@ -76,4 +76,4 @@ async function handler(req, res) {
   }
 }
 
-export default withAuth(handler, { endpoint: "analyze", dailyLimit: 10 });
+export default withAuth(handler, { endpoint: "analyze" });

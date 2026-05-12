@@ -149,4 +149,4 @@ async function handler(req, res) {
   });
 }
 
-export default withAuth(handler, { endpoint: "upload", dailyLimit: 50 });
+export default withAuth(handler, { endpoint: "upload" });

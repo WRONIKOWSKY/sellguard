@@ -124,4 +124,4 @@ fraud_score : 0-3 légitime, 4-6 suspect, 7-10 fraude probable. Sois précis et 
   }
 }
 
-export default withAuth(handler, { endpoint: "litige", dailyLimit: 10 });
+export default withAuth(handler, { endpoint: "litige" });
