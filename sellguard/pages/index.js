@@ -185,7 +185,7 @@ const PAGE_HTML = `
       <a href="/compte" class="btn btn-ghost" data-i18n="p1_btn">Tester gratuitement</a>
     </div>
     <div class="plan featured reveal">
-      <span class="plan-ribbon" data-i18n="p2_ribbon">★ Cœur de cible</span>
+      <span class="plan-ribbon" data-i18n="p2_ribbon">★ Recommandé</span>
       <h4 data-i18n="p2_name">Pro</h4>
       <div class="plan-price">49 € <small data-i18n="per_mo">/ mois</small></div>
       <p class="plan-desc" data-i18n="p2_desc">Pour les friperies pros et revendeurs vintage (50 à 500 ventes/mois).</p>
@@ -266,7 +266,7 @@ const I18N = {
     pl_kicker:"Nos offres",pl_t1:"Tarifs pour",pl_t2:"revendeurs réguliers.",pl_sub:"Aucun engagement, annulable en 1 clic.",
     per_mo:"/ mois",
     p1_name:"Découverte",p1_unit:"/ mois",p1_desc:"Pour tester l'outil sans engagement.",p1_f1:"1 certificat vidéo / mois",p1_f2:"IA défense automatique (1 cas)",p1_f3:"Génération d'annonce (3 / mois)",p1_f4:"Support email",p1_btn:"Tester gratuitement",
-    p2_ribbon:"★ Cœur de cible",p2_name:"Pro",p2_desc:"Pour les friperies pros et revendeurs vintage (50 à 500 ventes/mois).",p2_f1:"Certificats vidéo illimités",p2_f2:"IA défense automatique",p2_f3:"Génération d'annonce illimitée",p2_f4:"Support email prioritaire",p2_f5:"Ancrage Bitcoin (preuve indépendante)",p2_btn:"Choisir Pro",
+    p2_ribbon:"★ Recommandé",p2_name:"Pro",p2_desc:"Pour les friperies pros et revendeurs vintage (50 à 500 ventes/mois).",p2_f1:"Certificats vidéo illimités",p2_f2:"IA défense automatique",p2_f3:"Génération d'annonce illimitée",p2_f4:"Support email prioritaire",p2_f5:"Ancrage Bitcoin (preuve indépendante)",p2_btn:"Choisir Pro",
     p3_name:"Business",p3_desc:"Pour les boutiques avec équipe et gros volumes (500+ ventes/mois).",p3_f1:"Tout Pro inclus",p3_f2:"Comptes équipe (jusqu'à 5 utilisateurs)",p3_f3:"Support dédié sous 4h",p3_f4:"Onboarding personnalisé",p3_f5:"Accès anticipé aux nouveautés",p3_btn:"Choisir Business",
     fin_t1:"Protège ton argent",fin_t2:"maintenant.",fin_sub:"Génère une vidéo certifiée infalsifiable.",fin_cta:"Voir la démo",
     ft_faq:"FAQ",ft_contact:"Contact",ft_legal:"Mentions légales",ft_cgu:"CGU",ft_priv:"Confidentialité"
@@ -295,7 +295,7 @@ const I18N = {
     pl_kicker:"Our plans",pl_t1:"Pricing for",pl_t2:"regular resellers.",pl_sub:"No commitment, cancel anytime.",
     per_mo:"/ month",
     p1_name:"Discovery",p1_unit:"/ month",p1_desc:"Try the tool without commitment.",p1_f1:"1 video certificate / month",p1_f2:"AI automatic defence (1 case)",p1_f3:"Listing generation (3 / month)",p1_f4:"Email support",p1_btn:"Try for free",
-    p2_ribbon:"★ Core target",p2_name:"Pro",p2_desc:"For pro vintage shops and resellers (50 to 500 sales/month).",p2_f1:"Unlimited video certificates",p2_f2:"AI automatic defence",p2_f3:"Unlimited listing generation",p2_f4:"Priority email support",p2_f5:"Bitcoin anchoring (independent proof)",p2_btn:"Choose Pro",
+    p2_ribbon:"★ Recommended",p2_name:"Pro",p2_desc:"For pro vintage shops and resellers (50 to 500 sales/month).",p2_f1:"Unlimited video certificates",p2_f2:"AI automatic defence",p2_f3:"Unlimited listing generation",p2_f4:"Priority email support",p2_f5:"Bitcoin anchoring (independent proof)",p2_btn:"Choose Pro",
     p3_name:"Business",p3_desc:"For shops with teams and high volumes (500+ sales/month).",p3_f1:"Everything in Pro",p3_f2:"Team accounts (up to 5 users)",p3_f3:"Dedicated support within 4h",p3_f4:"Personalised onboarding",p3_f5:"Early access to new features",p3_btn:"Choose Business",
     fin_t1:"Protect your money",fin_t2:"now.",fin_sub:"Generate a tamper-proof certified video.",fin_cta:"See the demo",
     ft_faq:"FAQ",ft_contact:"Contact",ft_legal:"Legal notice",ft_cgu:"T&Cs",ft_priv:"Privacy"
@@ -324,7 +324,7 @@ const I18N = {
     pl_kicker:"Nuestros planes",pl_t1:"Tarifas para",pl_t2:"revendedores regulares.",pl_sub:"Sin compromiso, cancelable con 1 clic.",
     per_mo:"/ mes",
     p1_name:"Descubierta",p1_unit:"/ mes",p1_desc:"Probar la herramienta sin compromiso.",p1_f1:"1 certificado de video / mes",p1_f2:"IA defensa automática (1 caso)",p1_f3:"Generación de anuncio (3 / mes)",p1_f4:"Soporte email",p1_btn:"Probar gratis",
-    p2_ribbon:"★ Objetivo principal",p2_name:"Pro",p2_desc:"Para tiendas vintage profesionales y revendedores (50 a 500 ventas/mes).",p2_f1:"Certificados de video ilimitados",p2_f2:"IA defensa automática",p2_f3:"Generación de anuncio ilimitada",p2_f4:"Soporte email prioritario",p2_f5:"Anclaje Bitcoin (prueba independiente)",p2_btn:"Elegir Pro",
+    p2_ribbon:"★ Recomendado",p2_name:"Pro",p2_desc:"Para tiendas vintage profesionales y revendedores (50 a 500 ventas/mes).",p2_f1:"Certificados de video ilimitados",p2_f2:"IA defensa automática",p2_f3:"Generación de anuncio ilimitada",p2_f4:"Soporte email prioritario",p2_f5:"Anclaje Bitcoin (prueba independiente)",p2_btn:"Elegir Pro",
     p3_name:"Business",p3_desc:"Para tiendas con equipo y altos volúmenes (500+ ventas/mes).",p3_f1:"Todo Pro incluido",p3_f2:"Cuentas de equipo (hasta 5 usuarios)",p3_f3:"Soporte dedicado en 4h",p3_f4:"Onboarding personalizado",p3_f5:"Acceso anticipado a novedades",p3_btn:"Elegir Business",
     fin_t1:"Protege tu dinero",fin_t2:"ahora.",fin_sub:"Genera un video certificado infalsificable.",fin_cta:"Ver la demo",
     ft_faq:"FAQ",ft_contact:"Contacto",ft_legal:"Aviso legal",ft_cgu:"T&C",ft_priv:"Privacidad"
@@ -353,7 +353,7 @@ const I18N = {
     pl_kicker:"Le nostre offerte",pl_t1:"Tariffe per",pl_t2:"rivenditori regolari.",pl_sub:"Nessun impegno, annullabile in 1 clic.",
     per_mo:"/ mese",
     p1_name:"Scoperta",p1_unit:"/ mese",p1_desc:"Prova lo strumento senza impegno.",p1_f1:"1 certificato video / mese",p1_f2:"IA difesa automatica (1 caso)",p1_f3:"Generazione di annuncio (3 / mese)",p1_f4:"Supporto email",p1_btn:"Prova gratis",
-    p2_ribbon:"★ Target principale",p2_name:"Pro",p2_desc:"Per negozi vintage pro e rivenditori (50 a 500 vendite/mese).",p2_f1:"Certificati video illimitati",p2_f2:"IA difesa automatica",p2_f3:"Generazione annuncio illimitata",p2_f4:"Supporto email prioritario",p2_f5:"Ancoraggio Bitcoin (prova indipendente)",p2_btn:"Scegli Pro",
+    p2_ribbon:"★ Consigliato",p2_name:"Pro",p2_desc:"Per negozi vintage pro e rivenditori (50 a 500 vendite/mese).",p2_f1:"Certificati video illimitati",p2_f2:"IA difesa automatica",p2_f3:"Generazione annuncio illimitata",p2_f4:"Supporto email prioritario",p2_f5:"Ancoraggio Bitcoin (prova indipendente)",p2_btn:"Scegli Pro",
     p3_name:"Business",p3_desc:"Per negozi con team e alti volumi (500+ vendite/mese).",p3_f1:"Tutto Pro incluso",p3_f2:"Account team (fino a 5 utenti)",p3_f3:"Supporto dedicato entro 4h",p3_f4:"Onboarding personalizzato",p3_f5:"Accesso anticipato alle novità",p3_btn:"Scegli Business",
     fin_t1:"Proteggi il tuo denaro",fin_t2:"ora.",fin_sub:"Genera un video certificato infalsificabile.",fin_cta:"Vedi la demo",
     ft_faq:"FAQ",ft_contact:"Contatto",ft_legal:"Note legali",ft_cgu:"Termini e condizioni",ft_priv:"Privacy"
