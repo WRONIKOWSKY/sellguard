@@ -276,14 +276,14 @@ export default function Pros() {
 
         {/* Pour qui c'est */}
         <section className="section">
-          <div className="section-kicker">Pour qui c'est</div>
-          <h2 className="serif">Tu te reconnais dans <span className="italic">un de ces profils ?</span></h2>
+          <div className="section-kicker">Pour qui</div>
+          <h2 className="serif">Tu te reconnais dans <span className="italic">un de ces profils{' '}?</span></h2>
           <p className="section-lead">SellCov est pensé pour les revendeurs réguliers qui vendent des pièces avec une vraie valeur. Si tu vends 2 pulls par mois à 15 €, ce n'est pas pour toi (et c'est OK).</p>
 
           <div className="three-col">
             <div className="col-card">
               <h3>Friperie en ligne pro</h3>
-              <p>Tu vends 100-500 pièces vintage par mois sur Depop, Etsy ou Vinted Pro. Pièces 30-300 €.</p>
+              <p>Tu vends des pièces vintage en volume régulier sur Depop, Etsy ou Vinted Pro.</p>
               <ul>
                 <li>Stock curaté chaque semaine</li>
                 <li>Items uniques, irremplaçables</li>
@@ -292,7 +292,7 @@ export default function Pros() {
             </div>
             <div className="col-card">
               <h3>Reseller archive / streetwear</h3>
-              <p>Tu vends du workwear, du militaire, des archives Stone Island, Carhartt, Levi's. Items 80-1500 €.</p>
+              <p>Tu vends du workwear, du militaire, des archives de marques recherchées. Tickets élevés.</p>
               <ul>
                 <li>Tickets élevés = enjeu élevé</li>
                 <li>Acheteurs informés et pointilleux</li>
@@ -301,7 +301,7 @@ export default function Pros() {
             </div>
             <div className="col-card">
               <h3>Boutique multi-marketplace</h3>
-              <p>Tu vends en parallèle sur 3-5 plateformes avec une équipe. 500+ ventes/mois.</p>
+              <p>Tu vends en parallèle sur plusieurs plateformes avec une équipe, en volume soutenu.</p>
               <ul>
                 <li>Volume = nombre absolu de litiges</li>
                 <li>Process pro nécessaire</li>
