@@ -57,7 +57,7 @@ export default function Demo() {
         <Section
           tag="Génère ton annonce"
           title="Ta photo devient une annonce prête à publier."
-          subtitle="L'IA analyse ta photo, identifie l'article et te sort titre, description, prix et plateformes idéales. En 10 secondes."
+          subtitle="L'IA analyse ta photo, identifie l'article et te propose titre, description, prix et meilleures plateformes. En 10 secondes."
         >
           <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'12px',marginBottom:'18px',maxWidth:'750px'}}>
             <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',aspectRatio:'3/4'}}>
