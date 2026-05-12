@@ -128,16 +128,32 @@ async function handler(req, res) {
   }
 
   // 7. Ancrage OpenTimestamps Bitcoin (non-bloquant)
+  //    On track ots_attempts pour permettre au cron de retry les échecs.
+  const attemptAt = new Date().toISOString();
   createOtsProof(hash)
     .then(async (otsProofBase64) => {
       const { error } = await supa
         .from("certificats")
-        .update({ ots_proof: otsProofBase64, ots_status: "pending_bitcoin" })
+        .update({
+          ots_proof: otsProofBase64,
+          ots_status: "pending_bitcoin",
+          ots_attempts: 1,
+          last_ots_attempt_at: attemptAt,
+        })
         .eq("cert_id", certId);
       if (error) console.error("[upload] OTS proof DB update error:", error);
     })
-    .catch((e) => {
+    .catch(async (e) => {
       console.error("[upload] OTS stamp failed (non-fatal):", e.message);
+      const { error } = await supa
+        .from("certificats")
+        .update({
+          ots_status: "create_failed",
+          ots_attempts: 1,
+          last_ots_attempt_at: attemptAt,
+        })
+        .eq("cert_id", certId);
+      if (error) console.error("[upload] OTS failure DB update error:", error);
     });
 
   // 8. OK
