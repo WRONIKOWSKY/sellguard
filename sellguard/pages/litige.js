@@ -103,22 +103,19 @@ export default function Litige() {
         <title>SellCov {l.title}</title>
         <meta name="description" content="Génère une défense automatique pour répondre aux litiges acheteurs." />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
       <style jsx global>{`
         :root{--bg:#000;--bg-soft:#0a0a0a;--bg-card:#0e0e0e;--bg-panel:#141414;--border:#1e1e1e;--border-strong:#2a2a2a;--text:#fff;--text-muted:#9a9a9a;--text-dim:#5a5a5a;--violet:#8b7fff;--green:#5ee8a3;--pink:#f570aa;--green-bg:rgba(94,232,163,.07);--pink-bg:rgba(245,112,170,.07);--violet-bg:rgba(139,127,255,.09);--radius-sm:10px;--radius:18px;--radius-lg:28px;--maxw:1200px}
         *{box-sizing:border-box;margin:0;padding:0}
         html{scroll-behavior:smooth}
-        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+        body{font-family:var(--font-inter),system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
         a{color:inherit;text-decoration:none}
-        .serif{font-family:'Playfair Display',serif;font-weight:700;letter-spacing:-.01em}
+        .serif{font-family:var(--font-playfair),serif;font-weight:700;letter-spacing:-.01em}
         .italic{font-style:italic;color:var(--text-muted);font-weight:500}
         header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(0,0,0,.55);border-bottom:1px solid rgba(255,255,255,.04)}
         .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--maxw);margin:0 auto}
-        .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;font-size:20px}
+        .logo{display:flex;align-items:center;gap:10px;font-family:var(--font-playfair),serif;font-weight:700;font-size:20px}
         .logo-img{height:72px;width:auto;display:block}
         .nav-back{color:var(--text-muted);font-size:14px;transition:color .2s}
         .nav-back:hover{color:#fff}
@@ -133,7 +130,7 @@ export default function Litige() {
         main{min-height:calc(100vh - 160px);padding:140px 24px 80px;display:flex;align-items:flex-start;justify-content:center}
         .container{width:100%;max-width:640px}
         .intro{margin-bottom:36px}
-        .page-title{font-family:'Playfair Display',serif;font-size:clamp(34px,4.5vw,46px);line-height:1.02;letter-spacing:-.02em;margin-bottom:12px}
+        .page-title{font-family:var(--font-playfair),serif;font-size:clamp(34px,4.5vw,46px);line-height:1.02;letter-spacing:-.02em;margin-bottom:12px}
         .page-sub{color:var(--text-muted);font-size:15px;line-height:1.6}
         .field{margin-bottom:18px}
         .field-label{display:block;font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
@@ -150,7 +147,7 @@ export default function Litige() {
         .dropzone-previews img{width:90px;height:90px;max-width:90px;max-height:90px;border-radius:8px;object-fit:cover;display:block;flex-shrink:0}
         .error-box{margin-top:14px;padding:12px 16px;background:var(--pink-bg);border:1px solid rgba(245,112,170,.3);border-radius:12px;color:var(--pink);font-size:13px}
         .result-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;gap:16px;flex-wrap:wrap}
-        .result-title{font-family:'Playfair Display',serif;font-size:28px;line-height:1;letter-spacing:-.02em}
+        .result-title{font-family:var(--font-playfair),serif;font-size:28px;line-height:1;letter-spacing:-.02em}
         .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;margin-bottom:18px}
         .card-label{font-size:11px;font-weight:700;color:var(--green);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;display:block}
         .card-body{font-size:14px;color:#fff;line-height:1.75}
@@ -164,7 +161,7 @@ export default function Litige() {
         .fraud-card.fraud-low .fraud-text{color:var(--green)}
         .fraud-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:16px;flex-wrap:wrap}
         .fraud-label{font-size:13px;font-weight:700}
-        .fraud-score{font-family:'Playfair Display',serif;font-size:24px;font-weight:700}
+        .fraud-score{font-family:var(--font-playfair),serif;font-size:24px;font-weight:700}
         .fraud-analysis{font-size:13px;color:var(--text-muted);line-height:1.55}
         .arg-item{display:flex;gap:12px;padding:12px 16px;background:#060606;border:1px solid var(--border);border-radius:12px;margin-bottom:10px}
         .arg-item:last-child{margin-bottom:0}

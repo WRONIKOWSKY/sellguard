@@ -12,7 +12,6 @@ export default function Demo() {
         <meta property="og:title" content="Démo · SellCov" />
         <meta property="og:description" content="Découvre en 30 secondes comment SellCov protège tes ventes." />
         <meta property="og:image" content="https://www.sellcov.com/logo.png" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
       </Head>
 
       <style jsx global>{`
@@ -29,9 +28,9 @@ export default function Demo() {
           --maxw:880px;
         }
         *{box-sizing:border-box;margin:0;padding:0}
-        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+        body{font-family:var(--font-inter),system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
         a{color:inherit;text-decoration:none}
-        code,.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+        code,.mono{font-family:var(--font-mono),ui-monospace,monospace}
       `}</style>
 
       <div style={{maxWidth:'var(--maxw)',margin:'0 auto',padding:'60px 24px 80px'}}>
@@ -46,7 +45,7 @@ export default function Demo() {
 
         {/* Hero */}
         <div style={{marginBottom:'88px'}}>
-          <h1 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(38px,6vw,60px)',lineHeight:'1.05',letterSpacing:'-0.02em',marginBottom:'20px'}}>
+          <h1 style={{fontFamily:'var(--font-playfair),serif',fontSize:'clamp(38px,6vw,60px)',lineHeight:'1.05',letterSpacing:'-0.02em',marginBottom:'20px'}}>
             Voilà ce que SellCov<br /><em style={{color:'var(--text-muted)',fontWeight:500}}>fait pour toi.</em>
           </h1>
           <p style={{color:'var(--text-muted)',fontSize:'17px',lineHeight:'1.7',maxWidth:'600px'}}>
@@ -89,7 +88,7 @@ export default function Demo() {
                 <Pill text="Vinted 6/10" />
               </span>
             } />
-            <DataRow label="Prix conseillé" value={<span style={{fontFamily:'Playfair Display,serif',fontSize:'22px',fontWeight:700}}>120 à 180 €</span>} last />
+            <DataRow label="Prix conseillé" value={<span style={{fontFamily:'var(--font-playfair),serif',fontSize:'22px',fontWeight:700}}>120 à 180 €</span>} last />
           </DataCard>
         </Section>
 
@@ -148,7 +147,7 @@ export default function Demo() {
 
         {/* CTA final */}
         <div style={{marginTop:'88px',textAlign:'center',paddingTop:'48px',borderTop:'0.5px solid var(--border)'}}>
-          <h2 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(28px,4vw,38px)',lineHeight:'1.1',letterSpacing:'-0.02em',marginBottom:'14px'}}>
+          <h2 style={{fontFamily:'var(--font-playfair),serif',fontSize:'clamp(28px,4vw,38px)',lineHeight:'1.1',letterSpacing:'-0.02em',marginBottom:'14px'}}>
             Prêt à protéger ta prochaine vente ?
           </h2>
           <p style={{color:'var(--text-muted)',fontSize:'15px',marginBottom:'32px',maxWidth:'460px',margin:'0 auto 32px'}}>
@@ -170,7 +169,7 @@ function Section({ tag, title, subtitle, children }) {
       <div style={{fontSize:'11px',color:'var(--text-dim)',letterSpacing:'.14em',textTransform:'uppercase',fontWeight:700,marginBottom:'18px'}}>
         {tag}
       </div>
-      <h3 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(24px,3.6vw,34px)',lineHeight:'1.15',letterSpacing:'-0.01em',marginBottom:'14px'}}>
+      <h3 style={{fontFamily:'var(--font-playfair),serif',fontSize:'clamp(24px,3.6vw,34px)',lineHeight:'1.15',letterSpacing:'-0.01em',marginBottom:'14px'}}>
         {title}
       </h3>
       <p style={{color:'var(--text-muted)',fontSize:'15px',lineHeight:'1.7',marginBottom:'24px',maxWidth:'620px'}}>

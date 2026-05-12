@@ -461,19 +461,83 @@ export default function Home() {
         {/* Favicon iOS / Android */}
         <link rel="icon" type="image/png" href="/logo.png" />
         <link rel="apple-touch-icon" href="/logo.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="canonical" href="https://www.sellcov.com/" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://www.sellcov.com/#organization",
+                  name: "SellCov",
+                  url: "https://www.sellcov.com",
+                  logo: "https://www.sellcov.com/logo.png",
+                  sameAs: [
+                    "https://www.instagram.com/sellcov",
+                    "https://www.tiktok.com/@sellcov",
+                  ],
+                  contactPoint: {
+                    "@type": "ContactPoint",
+                    email: "hello@sellcov.com",
+                    contactType: "customer support",
+                    availableLanguage: ["French", "English", "Spanish", "Italian"],
+                  },
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://www.sellcov.com/#website",
+                  url: "https://www.sellcov.com",
+                  name: "SellCov",
+                  publisher: { "@id": "https://www.sellcov.com/#organization" },
+                  inLanguage: "fr-FR",
+                },
+                {
+                  "@type": "SoftwareApplication",
+                  name: "SellCov",
+                  applicationCategory: "BusinessApplication",
+                  operatingSystem: "Web",
+                  description:
+                    "Preuve vidéo horodatée + défense IA pour vendre en sécurité sur Vinted, Leboncoin, Depop, Vestiaire Collective, Grailed et Etsy.",
+                  offers: [
+                    {
+                      "@type": "Offer",
+                      name: "Découverte",
+                      price: "0",
+                      priceCurrency: "EUR",
+                      description: "3 certificats par mois, défense IA",
+                    },
+                    {
+                      "@type": "Offer",
+                      name: "Vendeur",
+                      price: "14.90",
+                      priceCurrency: "EUR",
+                      description: "30 certificats par mois, support prioritaire",
+                    },
+                    {
+                      "@type": "Offer",
+                      name: "Pro",
+                      price: "29.90",
+                      priceCurrency: "EUR",
+                      description: "Certificats illimités, support 24h",
+                    },
+                  ],
+                },
+              ],
+            }),
+          }}
+        />
       </Head>
 
       <style jsx global>{`
         :root{--bg:#000;--bg-soft:#0a0a0a;--bg-card:#0e0e0e;--bg-panel:#141414;--border:#1e1e1e;--border-strong:#2a2a2a;--text:#fff;--text-muted:#9a9a9a;--text-dim:#5a5a5a;--violet:#8b7fff;--green:#5ee8a3;--pink:#f570aa;--violet-bg:rgba(139,127,255,.09);--green-bg:rgba(94,232,163,.07);--pink-bg:rgba(245,112,170,.07);--radius-sm:10px;--radius:18px;--radius-lg:28px;--maxw:1200px}
         *{box-sizing:border-box;margin:0;padding:0}
         html{scroll-behavior:smooth}
-        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+        body{font-family:var(--font-inter),system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
         a{color:inherit;text-decoration:none}
         img{display:block;max-width:100%}
-        .serif{font-family:'Playfair Display',serif;font-weight:700;letter-spacing:-.01em}
+        .serif{font-family:var(--font-playfair),serif;font-weight:700;letter-spacing:-.01em}
         .italic{font-style:italic;color:var(--text-muted);font-weight:500}
         header{position:fixed;top:0;left:0;right:0;z-index:100;background:#000;border-bottom:1px solid rgba(255,255,255,.04)}
         .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--maxw);margin:0 auto}
@@ -510,7 +574,7 @@ export default function Home() {
         .platforms{color:var(--text-dim);font-size:12px;letter-spacing:.04em;opacity:.6}
         .platforms strong{color:var(--text-dim);font-weight:400;margin:0 4px}
         .demo{padding:60px 24px 100px;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:48px}
-        .demo-tagline{color:rgba(255,255,255,0.92);font-size:18px;text-align:center;font-family:'Playfair Display',serif;font-style:italic;letter-spacing:-.01em;margin:0}
+        .demo-tagline{color:rgba(255,255,255,0.92);font-size:18px;text-align:center;font-family:var(--font-playfair),serif;font-style:italic;letter-spacing:-.01em;margin:0}
         .phone-stage{position:relative;width:100%;max-width:820px;display:flex;justify-content:center;align-items:center}
         .phone-halo{position:absolute;inset:-80px;background:radial-gradient(ellipse at 50% 50%,rgba(94,232,163,.10) 0%,rgba(139,127,255,.04) 35%,rgba(0,0,0,0) 70%);filter:blur(50px);pointer-events:none;z-index:0}
         .phone-halo::after{content:"";position:absolute;bottom:-30px;left:10%;right:10%;height:60px;background:radial-gradient(ellipse,rgba(0,0,0,.85) 0%,rgba(0,0,0,0) 70%);filter:blur(40px)}
@@ -577,7 +641,7 @@ export default function Home() {
         .scams-dots{display:none}
         .scam-card:hover{border-color:var(--border-strong);transform:translateY(-2px)}
         .scam-number{color:var(--pink);font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:600;margin-bottom:-6px}
-        .scam-label{color:#fff;font-size:18px;font-weight:600;font-family:'Playfair Display',serif}
+        .scam-label{color:#fff;font-size:18px;font-weight:600;font-family:var(--font-playfair),serif}
         .scam-quote{background:#060606;border-left:3px solid var(--pink);padding:14px 16px;border-radius:6px;font-style:italic;color:#e5e5e5;font-size:14px;line-height:1.5}
         .scam-solve{display:flex;gap:12px;align-items:flex-start;font-size:14px}
         .scam-solve .check{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--green-bg);border:1px solid rgba(94,232,163,.35);display:grid;place-items:center;color:var(--green)}
@@ -588,8 +652,8 @@ export default function Home() {
         .plan.featured{border-color:var(--green);background:linear-gradient(180deg,var(--green-bg),transparent 80%),var(--bg-card)}
         .plan-ribbon{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;padding:4px 14px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.05em;white-space:nowrap}
         .plan h4{font-size:18px;font-weight:600}
-        .plan .plan-price{font-family:'Playfair Display',serif;font-size:46px;line-height:1}
-        .plan .plan-price small{font-family:'Inter',sans-serif;font-size:14px;color:var(--text-muted);font-weight:400}
+        .plan .plan-price{font-family:var(--font-playfair),serif;font-size:46px;line-height:1}
+        .plan .plan-price small{font-family:var(--font-inter),sans-serif;font-size:14px;color:var(--text-muted);font-weight:400}
         .plan-desc{color:var(--text-muted);font-size:14px;min-height:42px}
         .plan ul{list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;color:#ddd;flex:1}
         .plan li{display:flex;gap:10px;align-items:flex-start}

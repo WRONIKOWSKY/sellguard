@@ -132,17 +132,29 @@ export default function FAQ() {
         <title>FAQ — SellCov</title>
         <meta name="description" content="Questions fréquentes sur SellCov." />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="canonical" href="https://www.sellcov.com/faq" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: FAQ_DATA.fr.items.map((item) => ({
+                "@type": "Question",
+                name: item.q,
+                acceptedAnswer: { "@type": "Answer", text: item.a },
+              })),
+            }),
+          }}
+        />
       </Head>
 
       <style jsx global>{`
         :root{--bg:#000;--bg-card:#0e0e0e;--border:#1e1e1e;--text:#fff;--text-muted:#9a9a9a;--text-dim:#5a5a5a;--green:#5ee8a3;--maxw:820px}
         *{box-sizing:border-box;margin:0;padding:0}
-        body{font-family:'Inter',system-ui,sans-serif;background:#000;color:#fff;line-height:1.55;-webkit-font-smoothing:antialiased}
+        body{font-family:var(--font-inter),system-ui,sans-serif;background:#000;color:#fff;line-height:1.55;-webkit-font-smoothing:antialiased}
         a{color:inherit;text-decoration:none}
-        .serif{font-family:'Playfair Display',serif;font-weight:700;letter-spacing:-.01em}
+        .serif{font-family:var(--font-playfair),serif;font-weight:700;letter-spacing:-.01em}
         header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(0,0,0,.55);border-bottom:1px solid rgba(255,255,255,.04)}
         .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1200px;margin:0 auto}
         .logo{display:flex;align-items:center;gap:10px}
@@ -151,7 +163,7 @@ export default function FAQ() {
         .faq-page{max-width:var(--maxw);margin:0 auto;padding:140px 24px 100px}
         .faq-back{display:inline-block;color:var(--text-muted);font-size:14px;margin-bottom:30px;transition:color .2s}
         .faq-back:hover{color:#fff}
-        .faq-page h1{font-family:'Playfair Display',serif;font-size:clamp(40px,6vw,64px);line-height:1;letter-spacing:-.02em;margin-bottom:14px}
+        .faq-page h1{font-family:var(--font-playfair),serif;font-size:clamp(40px,6vw,64px);line-height:1;letter-spacing:-.02em;margin-bottom:14px}
         .faq-page .subtitle{color:var(--text-muted);font-size:17px;margin-bottom:50px}
         .faq-list{display:flex;flex-direction:column}
         .faq-item{border-bottom:1px solid var(--border);padding:22px 0;cursor:pointer}
@@ -178,7 +190,14 @@ export default function FAQ() {
         <Link href="/"><span className="faq-back" id="faq-back">← Retour</span></Link>
         <h1 id="faq-title">Questions fréquentes</h1>
         <p className="subtitle" id="faq-subtitle">Tout ce qu'il faut savoir sur SellCov.</p>
-        <div className="faq-list" id="faq-list"></div>
+        <div className="faq-list" id="faq-list">
+          {FAQ_DATA.fr.items.map((item, i) => (
+            <details className="faq-item" key={i}>
+              <summary className="faq-q">{item.q}</summary>
+              <p className="faq-a">{item.a}</p>
+            </details>
+          ))}
+        </div>
       </main>
     </>
   );

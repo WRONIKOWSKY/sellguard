@@ -11,13 +11,12 @@ export default function BlogIndex() {
         <title>Blog — SellCov</title>
         <meta name="description" content="Guides, conseils et analyses pour les vendeurs Vinted, Depop, Leboncoin et autres marketplaces." />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
       <style jsx global>{`
         :root{--bg:#000;--bg-card:#0e0e0e;--border:#1e1e1e;--text:#fff;--text-muted:#9a9a9a;--text-dim:#5a5a5a;--green:#5ee8a3;--maxw:880px}
         *{box-sizing:border-box;margin:0;padding:0}
-        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+        body{font-family:var(--font-inter),system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
         a{color:inherit;text-decoration:none}
       `}</style>
 
@@ -30,7 +29,7 @@ export default function BlogIndex() {
           <Link href="/" style={{fontSize:'14px',color:'var(--text-muted)'}}>Retour</Link>
         </div>
 
-        <h1 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(36px,6vw,56px)',lineHeight:'1.05',marginBottom:'12px',letterSpacing:'-0.02em'}}>
+        <h1 style={{fontFamily:'var(--font-playfair),serif',fontSize:'clamp(36px,6vw,56px)',lineHeight:'1.05',marginBottom:'12px',letterSpacing:'-0.02em'}}>
           Blog<br /><em style={{color:'var(--text-muted)',fontWeight:'500'}}>guides et analyses</em>
         </h1>
         <p style={{color:'var(--text-muted)',fontSize:'17px',marginBottom:'56px'}}>
@@ -57,7 +56,7 @@ export default function BlogIndex() {
                     {a.category}
                   </div>
                 )}
-                <h2 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(22px,3vw,28px)',lineHeight:'1.2',color:'#fff',marginBottom:'10px'}}>
+                <h2 style={{fontFamily:'var(--font-playfair),serif',fontSize:'clamp(22px,3vw,28px)',lineHeight:'1.2',color:'#fff',marginBottom:'10px'}}>
                   {a.title}
                 </h2>
                 <p style={{color:'var(--text-muted)',fontSize:'15px',marginBottom:'14px'}}>

@@ -17,8 +17,8 @@ export default function BlogArticle() {
           <title>Article introuvable — SellCov</title>
           <meta name="viewport" content="width=device-width,initial-scale=1" />
         </Head>
-        <div style={{maxWidth:'760px',margin:'0 auto',padding:'80px 24px',color:'#fff',fontFamily:"'Inter',system-ui,sans-serif",background:'#000',minHeight:'100vh'}}>
-          <h1 style={{fontFamily:"'Playfair Display',serif",fontSize:'32px',marginBottom:'16px'}}>Article introuvable</h1>
+        <div style={{maxWidth:'760px',margin:'0 auto',padding:'80px 24px',color:'#fff',fontFamily:"var(--font-inter),system-ui,sans-serif",background:'#000',minHeight:'100vh'}}>
+          <h1 style={{fontFamily:"var(--font-playfair),serif",fontSize:'32px',marginBottom:'16px'}}>Article introuvable</h1>
           <p style={{color:'#9a9a9a',marginBottom:'24px'}}>Cet article n'existe pas ou a été retiré.</p>
           <Link href="/blog" style={{color:'#5ee8a3'}}>Retour au blog</Link>
         </div>
@@ -36,13 +36,12 @@ export default function BlogArticle() {
         <meta property="og:title" content={article.title} />
         <meta property="og:description" content={article.description} />
         <meta property="og:image" content="https://www.sellcov.com/logo.png" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
       <style jsx global>{`
         :root{--bg:#000;--bg-card:#0e0e0e;--border:#1e1e1e;--text:#fff;--text-muted:#9a9a9a;--text-dim:#5a5a5a;--green:#5ee8a3;--maxw:760px}
         *{box-sizing:border-box;margin:0;padding:0}
-        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.85;-webkit-font-smoothing:antialiased}
+        body{font-family:var(--font-inter),system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.85;-webkit-font-smoothing:antialiased}
         a{color:var(--green);text-decoration:none}
         a:hover{text-decoration:underline}
       `}</style>
@@ -62,7 +61,7 @@ export default function BlogArticle() {
           </div>
         )}
 
-        <h1 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(30px,5vw,46px)',lineHeight:'1.15',letterSpacing:'-0.02em',marginBottom:'18px'}}>
+        <h1 style={{fontFamily:'var(--font-playfair),serif',fontSize:'clamp(30px,5vw,46px)',lineHeight:'1.15',letterSpacing:'-0.02em',marginBottom:'18px'}}>
           {article.title}
         </h1>
         <p style={{color:'var(--text-dim)',fontSize:'14px',marginBottom:'40px',borderBottom:'0.5px solid var(--border)',paddingBottom:'24px'}}>
@@ -73,7 +72,7 @@ export default function BlogArticle() {
           {(article.content || []).map((block, i) => {
             if (block.type === "h2") {
               return (
-                <h2 key={i} style={{fontFamily:'Playfair Display,serif',fontSize:'24px',color:'#fff',marginTop:'40px',marginBottom:'14px',lineHeight:'1.3'}}>
+                <h2 key={i} style={{fontFamily:'var(--font-playfair),serif',fontSize:'24px',color:'#fff',marginTop:'40px',marginBottom:'14px',lineHeight:'1.3'}}>
                   {block.text}
                 </h2>
               );

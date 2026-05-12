@@ -95,22 +95,19 @@ export default function Compte() {
         <title>Compte — SellCov</title>
         <meta name="description" content="Accède à ton espace SellCov. Gère tes envois certifiés et ton abonnement." />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
       <style jsx global>{`
         :root{--bg:#000;--bg-soft:#0a0a0a;--bg-card:#0e0e0e;--bg-panel:#141414;--border:#1e1e1e;--border-strong:#2a2a2a;--text:#fff;--text-muted:#9a9a9a;--text-dim:#5a5a5a;--violet:#8b7fff;--green:#5ee8a3;--pink:#f570aa;--green-bg:rgba(94,232,163,.07);--pink-bg:rgba(245,112,170,.07);--radius-sm:10px;--radius:18px;--radius-lg:28px;--maxw:1200px}
         *{box-sizing:border-box;margin:0;padding:0}
         html{scroll-behavior:smooth}
-        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+        body{font-family:var(--font-inter),system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
         a{color:inherit;text-decoration:none}
-        .serif{font-family:'Playfair Display',serif;font-weight:700;letter-spacing:-.01em}
+        .serif{font-family:var(--font-playfair),serif;font-weight:700;letter-spacing:-.01em}
         .italic{font-style:italic;color:var(--text-muted);font-weight:500}
         header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(0,0,0,.55);border-bottom:1px solid rgba(255,255,255,.04)}
         .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--maxw);margin:0 auto}
-        .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;font-size:20px}
+        .logo{display:flex;align-items:center;gap:10px;font-family:var(--font-playfair),serif;font-weight:700;font-size:20px}
         .logo-img{height:72px;width:auto;display:block}
         .nav-back{color:var(--text-muted);font-size:14px;transition:color .2s}
         .nav-back:hover{color:#fff}
@@ -124,7 +121,7 @@ export default function Compte() {
         main{min-height:calc(100vh - 160px);padding:140px 24px 80px;display:flex;align-items:flex-start;justify-content:center}
         .container{width:100%;max-width:560px}
         .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:36px}
-        .card-title{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,40px);line-height:1.05;letter-spacing:-.02em;margin-bottom:10px}
+        .card-title{font-family:var(--font-playfair),serif;font-size:clamp(32px,4vw,40px);line-height:1.05;letter-spacing:-.02em;margin-bottom:10px}
         .card-sub{color:var(--text-muted);font-size:15px;line-height:1.55;margin-bottom:28px}
         .input{width:100%;padding:15px 18px;font-size:15px;background:#060606;border:1px solid var(--border-strong);border-radius:999px;color:#fff;font-family:inherit;margin-bottom:12px;transition:border-color .15s}
         .input::placeholder{color:var(--text-dim)}
@@ -138,7 +135,7 @@ export default function Compte() {
         .value-email{font-size:17px;color:#fff;font-weight:500;word-break:break-all}
         .stats-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
         .stat-box{padding:16px 18px;background:#060606;border:1px solid var(--border);border-radius:12px}
-        .stat-value{font-size:18px;color:#fff;font-weight:600;font-family:'Playfair Display',serif}
+        .stat-value{font-size:18px;color:#fff;font-weight:600;font-family:var(--font-playfair),serif}
         .stat-value.accent{color:var(--green)}
         .section-title{font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin:28px 0 14px;font-weight:500}
         .empty{text-align:center;padding:36px 28px;color:var(--text-muted);font-size:14px;line-height:1.6}

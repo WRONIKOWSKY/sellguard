@@ -8,13 +8,12 @@ export default function MentionsLegales() {
         <title>Mentions légales — SellCov</title>
         <meta name="description" content="Mentions légales de SellCov — éditeur, hébergeur, propriété intellectuelle." />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
       <style jsx global>{`
         :root{--bg:#000;--bg-card:#0e0e0e;--border:#1e1e1e;--text:#fff;--text-muted:#9a9a9a;--text-dim:#5a5a5a;--green:#5ee8a3;--maxw:760px}
         *{box-sizing:border-box;margin:0;padding:0}
-        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;-webkit-font-smoothing:antialiased}
+        body{font-family:var(--font-inter),system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;-webkit-font-smoothing:antialiased}
         a{color:var(--green);text-decoration:none}
         a:hover{text-decoration:underline}
         p{margin-bottom:14px}
@@ -30,7 +29,7 @@ export default function MentionsLegales() {
           <Link href="/" style={{fontSize:'14px',color:'var(--text-muted)'}}>Retour</Link>
         </div>
 
-        <h1 style={{fontFamily:'Playfair Display,serif',fontSize:'clamp(28px,5vw,44px)',lineHeight:'1.1',marginBottom:'8px'}}>
+        <h1 style={{fontFamily:'var(--font-playfair),serif',fontSize:'clamp(28px,5vw,44px)',lineHeight:'1.1',marginBottom:'8px'}}>
           Mentions<br /><em style={{color:'var(--text-muted)',fontWeight:'500'}}>légales</em>
         </h1>
         <p style={{color:'var(--text-dim)',fontSize:'14px',marginBottom:'48px',borderBottom:'0.5px solid var(--border)',paddingBottom:'24px'}}>
@@ -94,7 +93,7 @@ function Section({ title, children }) {
   return (
     <div style={{marginBottom:'40px'}}>
       <h2 style={{
-        fontFamily:'Playfair Display,serif',
+        fontFamily:'var(--font-playfair),serif',
         fontSize:'17px',
         fontWeight:'600',
         color:'#fff',
