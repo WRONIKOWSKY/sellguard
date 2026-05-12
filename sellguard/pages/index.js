@@ -71,13 +71,13 @@ const PAGE_HTML = `
   <div class="section-head reveal">
     <div class="section-kicker" data-i18n="how_kicker">Comment ça marche</div>
     <h2 class="section-title serif"><span data-i18n="how_t1">Trois étapes,</span><br><span class="italic" data-i18n="how_t2">une seule mission.</span></h2>
-    <p class="section-sub nowrap" data-i18n="how_sub">De l'annonce à la défense en cas de litige, SellCov t'accompagne sur chaque étape d'une vente.</p>
+    <p class="section-sub nowrap" data-i18n="how_sub">De l'annonce à la défense en cas de litige, SellCov couvre chaque étape d'une vente.</p>
   </div>
   <div class="features">
     <div class="feature feature-green reveal">
       <span class="tag" data-i18n="f2_tag">Protection</span>
       <h3 class="serif"><span data-i18n="f2_h1">Certifie avant</span><br><span class="italic" data-i18n="f2_h2">d'expédier.</span></h3>
-      <p data-i18n="f2_p">Créer une preuve utilisable en cas de litige.</p>
+      <p data-i18n="f2_p">Crée une preuve utilisable en cas de litige.</p>
       <div class="cta-area"><a href="/protection" class="btn btn-green btn-sm" data-i18n="f2_btn">Protéger</a><span style="color:var(--text-dim);font-size:13px" data-i18n="f2_time">~1 min 30 par envoi</span></div>
     </div>
     <div class="feature feature-violet reveal">
@@ -99,13 +99,13 @@ const PAGE_HTML = `
   <div class="section-head reveal">
     <div class="section-kicker" data-i18n="lg_kicker">Recevabilité juridique</div>
     <h2 class="section-title serif"><span data-i18n="lg_t1">Tes preuves,</span><br><span class="italic" data-i18n="lg_t2">opposables en cas de litige.</span></h2>
-    <p class="section-sub" data-i18n="lg_sub">Chaque certificat SellCov est conçu pour avoir valeur de preuve dans tes échanges avec acheteurs et marketplaces.</p>
+    <p class="section-sub" data-i18n="lg_sub">Chaque certificat SellCov a valeur de preuve dans tes échanges avec acheteurs et marketplaces.</p>
   </div>
   <div class="legal-grid">
     <div class="legal-card reveal" style="border-color:rgba(247,147,26,.25)">
       <div class="legal-icon" aria-hidden="true" style="color:#F7931A">₿</div>
       <h3 class="legal-title" data-i18n="lg_c4_t">Ancrage Bitcoin</h3>
-      <p class="legal-text" data-i18n="lg_c4_p">Chaque certificat est ancré dans la blockchain Bitcoin via OpenTimestamps. L'horodatage est vérifiable indépendamment par n'importe qui, sans dépendre de SellCov. Personne, même nous, ne peut le modifier.</p>
+      <p class="legal-text" data-i18n="lg_c4_p">Chaque certificat est ancré dans la blockchain Bitcoin. Vérifiable par n'importe qui, sans dépendre de SellCov. Personne, pas même nous, ne peut le modifier.</p>
     </div>
     <div class="legal-card reveal">
       <div class="legal-icon" aria-hidden="true">⚖︎</div>
@@ -120,7 +120,7 @@ const PAGE_HTML = `
     <div class="legal-card reveal">
       <div class="legal-icon" aria-hidden="true">§</div>
       <h3 class="legal-title" data-i18n="lg_c3_t">Recevable comme moyen de preuve</h3>
-      <p class="legal-text" data-i18n="lg_c3_p">Article 1358 du Code civil : la preuve peut être apportée par tout moyen. Argument utilisable dans tes litiges Vinted, Depop, Leboncoin et procédures civiles.</p>
+      <p class="legal-text" data-i18n="lg_c3_p">Article 1358 du Code civil : la preuve peut être apportée par tout moyen. Argument utilisable dans tes litiges Depop, Etsy, Vinted Pro, Grailed, Vestiaire et procédures civiles.</p>
     </div>
   </div>
   <div class="legal-dots" id="legal-dots">
@@ -149,7 +149,7 @@ const PAGE_HTML = `
       <span class="scam-number">Arnaque 2</span>
       <span class="scam-label" data-i18n="s2_title">Article « abîmé »</span>
       <div class="scam-quote" data-i18n="s2_quote">« L'article est arrivé troué. Je veux être remboursé. »</div>
-      <div class="scam-solve"><span class="check">✓</span><span data-i18n="s2_solve">SellCov prouve l'état exact avant expédition grâce à la vidéo 360° horodatée.</span></div>
+      <div class="scam-solve"><span class="check">✓</span><span data-i18n="s2_solve">SellCov prouve l'état exact avant expédition avec la vidéo 360° horodatée.</span></div>
     </div>
     <div class="scam-card reveal">
       <span class="scam-number">Arnaque 3</span>
@@ -249,19 +249,19 @@ const I18N = {
     hero_cta:"Voir la démo",
     demo_tagline:"L'action complète prend moins de 2 minutes.",
     how_kicker:"Comment ça marche",how_t1:"Trois étapes,",how_t2:"une seule mission.",
-    how_sub:"De l'annonce à la défense en cas de litige, SellCov t'accompagne sur chaque étape d'une vente.",
+    how_sub:"De l'annonce à la défense en cas de litige, SellCov couvre chaque étape d'une vente.",
     f1_tag:"Annonce",f1_h1:"Génère ton annonce",f1_h2:"en 10 secondes.",f1_p:"Photographie l'article, reçois une annonce rédigée et prête à publier.",f1_btn:"Essayer",f1_time:"~10 sec par annonce",
-    f2_tag:"Protection",f2_h1:"Certifie avant",f2_h2:"d'expédier.",f2_p:"Créer une preuve utilisable en cas de litige.",f2_btn:"Protéger",f2_time:"~1 min 30 par envoi",
+    f2_tag:"Protection",f2_h1:"Certifie avant",f2_h2:"d'expédier.",f2_p:"Crée une preuve utilisable en cas de litige.",f2_btn:"Protéger",f2_time:"~1 min 30 par envoi",
     f3_tag:"Litige",f3_h1:"Défense automatique",f3_h2:"en 1 clic.",f3_p:"Un dossier de défense prêt à envoyer.",f3_btn:"Gérer un litige",f3_time:"~30 sec de rédaction",
-    lg_kicker:"Recevabilité juridique",lg_t1:"Tes preuves,",lg_t2:"opposables en cas de litige.",lg_sub:"Construit pour résister aux contestations dans tes litiges.",
+    lg_kicker:"Recevabilité juridique",lg_t1:"Tes preuves,",lg_t2:"opposables en cas de litige.",lg_sub:"Chaque certificat SellCov a valeur de preuve dans tes échanges avec acheteurs et marketplaces.",
     lg_c1_t:"Article 1366 du Code civil",lg_c1_p:"L'écrit électronique a la même force probante que l'écrit papier dès lors que l'auteur est identifiable et l'intégrité garantie. Nos certificats cochent ces deux critères.",
     lg_c2_t:"Intégrité cryptographique",lg_c2_p:"Empreinte SHA-256 + signature HMAC sur chaque vidéo. Toute modification de la preuve est instantanément détectable et le certificat devient invalide.",
-    lg_c3_t:"Recevable comme moyen de preuve",lg_c3_p:"Article 1358 du Code civil : la preuve peut être apportée par tout moyen. Argument utilisable dans tes litiges Vinted, Depop, Leboncoin et procédures civiles.",
-    lg_c4_t:"Ancrage Bitcoin",lg_c4_p:"Chaque certificat est ancré dans la blockchain Bitcoin via OpenTimestamps. L'horodatage est vérifiable indépendamment par n'importe qui, sans dépendre de SellCov. Personne, même nous, ne peut le modifier.",
+    lg_c3_t:"Recevable comme moyen de preuve",lg_c3_p:"Article 1358 du Code civil : la preuve peut être apportée par tout moyen. Argument utilisable dans tes litiges Depop, Etsy, Vinted Pro, Grailed, Vestiaire et procédures civiles.",
+    lg_c4_t:"Ancrage Bitcoin",lg_c4_p:"Chaque certificat est ancré dans la blockchain Bitcoin. Vérifiable par n'importe qui, sans dépendre de SellCov. Personne, pas même nous, ne peut le modifier.",
     lg_note:"Comme toute preuve, un certificat peut être contesté. SellCov ne remplace pas un avocat.",
     sc_kicker:"Cas concrets",sc_t1:"Les arnaques qui coûtent",sc_t2:"le plus cher aux revendeurs pros.",sc_sub:"Trois cas vus chaque semaine chez les friperies en ligne. Trois réponses SellCov.",
     s1_title:"Colis « jamais reçu »",s1_quote:"« Je n'ai jamais reçu le colis. Je demande un remboursement. »",s1_solve:"SellCov fournit la vidéo horodatée du dépôt et l'étiquette filmée.",
-    s2_title:"Article « abîmé »",s2_quote:"« L'article est arrivé troué. Je veux être remboursé. »",s2_solve:"SellCov prouve l'état exact avant expédition grâce à la vidéo 360° horodatée.",
+    s2_title:"Article « abîmé »",s2_quote:"« L'article est arrivé troué. Je veux être remboursé. »",s2_solve:"SellCov prouve l'état exact avant expédition avec la vidéo 360° horodatée.",
     s3_title:"Réclamation tardive",s3_quote:"« L'article a un défaut. » (3 semaines après réception)",s3_solve:"SellCov horodate l'état exact à l'envoi. Toute usure post-réception est exclue.",
     pl_kicker:"Nos offres",pl_t1:"Tarifs pour",pl_t2:"revendeurs réguliers.",pl_sub:"Aucun engagement, annulable en 1 clic.",
     per_mo:"/ mois",

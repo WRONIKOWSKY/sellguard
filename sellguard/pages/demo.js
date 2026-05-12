@@ -49,7 +49,7 @@ export default function Demo() {
             Voilà ce que SellCov<br /><em style={{color:'var(--text-muted)',fontWeight:500}}>fait pour toi.</em>
           </h1>
           <p style={{color:'var(--text-muted)',fontSize:'17px',lineHeight:'1.7',maxWidth:'600px'}}>
-            Trois étapes pour vendre sans te faire arnaquer sur tes marketplaces. Aucun compte requis pour découvrir.
+            Trois étapes pour vendre sans te faire arnaquer. Pas besoin de créer de compte pour découvrir.
           </p>
         </div>
 
@@ -57,7 +57,7 @@ export default function Demo() {
         <Section
           tag="Génère ton annonce"
           title="Ta photo devient une annonce prête à publier."
-          subtitle="L'IA SellCov analyse ta photo, identifie l'article, scrute les marketplaces et te donne le titre, la description, le prix et la meilleure plateforme. En 10 secondes."
+          subtitle="L'IA analyse ta photo, identifie l'article et te sort titre, description, prix et plateformes idéales. En 10 secondes."
         >
           <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'12px',marginBottom:'18px',maxWidth:'750px'}}>
             <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',aspectRatio:'3/4'}}>
@@ -96,7 +96,7 @@ export default function Demo() {
         <Section
           tag="Certifie ton envoi"
           title="Filme 90 secondes. SellCov scelle la preuve."
-          subtitle="Vidéo horodatée et signature cryptographique. Recevable juridiquement (art. 1366 du Code civil). Chaque certificat est ancré dans la blockchain Bitcoin via OpenTimestamps : personne, même nous, ne peut modifier l'horodatage."
+          subtitle="Vidéo horodatée et signature cryptographique. Recevable juridiquement (art. 1366 du Code civil). Chaque certificat est ancré dans la blockchain Bitcoin. Personne, pas même nous, ne peut modifier l'horodatage."
         >
           <div style={{marginBottom:'18px',borderRadius:'14px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',maxWidth:'750px',position:'relative'}}>
             <img src="/demovideo-tshirt.jpg" alt="Frame de la vidéo certifiée" style={{width:'100%',height:'auto',display:'block'}} />
@@ -117,7 +117,7 @@ export default function Demo() {
         <Section
           tag="Défends-toi en 1 clic"
           title="Litige reçu ? L'IA rédige ta défense."
-          subtitle="Tu colles le message de l'acheteur. SellCov détecte les signaux de fraude et te donne une réponse prête à envoyer. Avec ton certificat à la clé, l'arnaque s'effondre."
+          subtitle="Tu colles le message de l'acheteur. SellCov détecte les signaux de fraude et te donne une réponse prête à envoyer. Avec ton certificat en preuve, l'arnaque s'effondre."
         >
           <DataCard>
             <div style={{padding:'18px 22px',borderBottom:'0.5px solid var(--border)'}}>
@@ -132,7 +132,7 @@ export default function Demo() {
               <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
                 <ArgItem text="Le certificat vidéo SC-7K2F9X-A3B montre l'article à 360° au moment de l'envoi, print Harley Davidson Danbury Connecticut clairement identifiable à 00:42." />
                 <ArgItem text="Les détails d'authentification (Hanes Beefy, single stitch, made in USA) sont visibles à 01:15 sur la vidéo horodatée et signée cryptographiquement." />
-                <ArgItem text="L'horodatage cryptographique HMAC SHA-256 prouve que la vidéo est antérieure à toute manipulation possible. L'article reçu est strictement celui qui a été expédié." />
+                <ArgItem text="L'horodatage cryptographique HMAC SHA-256 prouve que la vidéo a été enregistrée avant l'envoi. L'article reçu est strictement celui qui a été expédié." />
               </div>
             </div>
 
@@ -151,7 +151,7 @@ export default function Demo() {
             Prêt à protéger ta prochaine vente ?
           </h2>
           <p style={{color:'var(--text-muted)',fontSize:'15px',marginBottom:'32px',maxWidth:'460px',margin:'0 auto 32px'}}>
-            Plan Découverte gratuit. 3 certificats par mois, sans carte bancaire.
+            Plan Découverte gratuit. 1 certificat par mois, sans carte bancaire.
           </p>
           <Link href="/compte" style={{display:'inline-block',padding:'15px 32px',background:'var(--green)',color:'#000',borderRadius:'999px',fontWeight:700,fontSize:'15px',textDecoration:'none'}}>
             Créer mon compte gratuit
