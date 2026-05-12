@@ -12,12 +12,15 @@
 //                         || '{"tier": "pro"}'::jsonb
 //   where email = 'user@example.com';
 //
-// Tiers possibles :
+// Tiers possibles (nom interne → libellé commercial sur la home) :
 //   - beta      : phase pré-lancement, tout le monde par défaut (généreux)
-//   - discovery : plan gratuit ≈ "3 certificats/mois" (CGU)
-//   - seller    : plan 14,90 €/mois ≈ "30 certificats/mois" (CGU)
-//   - pro       : plan 29,90 €/mois ≈ "illimité" (CGU)
+//   - discovery : plan "Découverte" 0 €/mois (1 certif/mois côté UX)
+//   - seller    : plan "Pro"        49 €/mois (illimité, cœur de cible)
+//   - pro       : plan "Business"   99 €/mois (team + support dédié)
 //   - admin     : compte interne, quasi-illimité
+//
+// Note : noms internes (seller/pro) ≠ noms affichés (Pro/Business). À renommer
+// plus tard quand on aura validé le pricing avec de vrais clients payants.
 
 export const DEFAULT_TIER = "beta";
 

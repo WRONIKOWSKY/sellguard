@@ -35,7 +35,7 @@ const PAGE_HTML = `
   <div class="cta-row">
     <a href="/demo" class="btn btn-primary" data-i18n="hero_cta">Voir la démo</a>
   </div>
-  <div class="platforms"><strong>Vinted</strong>·<strong>Leboncoin</strong>·<strong>Depop</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong>·<strong>Etsy</strong></div>
+  <div class="platforms"><strong>Depop</strong>·<strong>Etsy</strong>·<strong>Vinted Pro</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong></div>
 </section>
 
 <section class="demo" id="demo">
@@ -175,41 +175,41 @@ const PAGE_HTML = `
     <div class="plan reveal">
       <h4 data-i18n="p1_name">Découverte</h4>
       <div class="plan-price">0 € <small data-i18n="p1_unit">/ mois</small></div>
-      <p class="plan-desc" data-i18n="p1_desc">Pour tester sans engagement.</p>
+      <p class="plan-desc" data-i18n="p1_desc">Pour tester l'outil sans engagement.</p>
       <ul>
-        <li data-i18n="p1_f1">3 certificats vidéo / mois</li>
-        <li data-i18n="p1_f2">IA défense automatique</li>
-        <li data-i18n="p1_f3">Génération d'annonce</li>
+        <li data-i18n="p1_f1">1 certificat vidéo / mois</li>
+        <li data-i18n="p1_f2">IA défense automatique (1 cas)</li>
+        <li data-i18n="p1_f3">Génération d'annonce (3 / mois)</li>
         <li data-i18n="p1_f4">Support email</li>
       </ul>
-      <a href="/compte" class="btn btn-ghost" data-i18n="p1_btn">Commencer gratuitement</a>
+      <a href="/compte" class="btn btn-ghost" data-i18n="p1_btn">Tester gratuitement</a>
     </div>
     <div class="plan featured reveal">
-      <span class="plan-ribbon" data-i18n="p2_ribbon">★ Recommandé</span>
-      <h4 data-i18n="p2_name">Vendeur</h4>
-      <div class="plan-price">14,90 € <small data-i18n="per_mo">/ mois</small></div>
-      <p class="plan-desc" data-i18n="p2_desc">Pour les vendeurs réguliers (5 à 50 ventes/mois).</p>
+      <span class="plan-ribbon" data-i18n="p2_ribbon">★ Cœur de cible</span>
+      <h4 data-i18n="p2_name">Pro</h4>
+      <div class="plan-price">49 € <small data-i18n="per_mo">/ mois</small></div>
+      <p class="plan-desc" data-i18n="p2_desc">Pour les friperies pros et revendeurs vintage (50 à 500 ventes/mois).</p>
       <ul>
-        <li data-i18n="p2_f1">30 certificats vidéo / mois</li>
+        <li data-i18n="p2_f1">Certificats vidéo illimités</li>
         <li data-i18n="p2_f2">IA défense automatique</li>
-        <li data-i18n="p2_f3">Génération d'annonce</li>
+        <li data-i18n="p2_f3">Génération d'annonce illimitée</li>
         <li data-i18n="p2_f4">Support email prioritaire</li>
-        <li data-i18n="p2_f5">Guide des arnaques à éviter</li>
+        <li data-i18n="p2_f5">Ancrage Bitcoin (preuve indépendante)</li>
       </ul>
-      <a href="/compte" class="btn btn-primary" data-i18n="p2_btn">Choisir Vendeur</a>
+      <a href="/compte" class="btn btn-primary" data-i18n="p2_btn">Choisir Pro</a>
     </div>
     <div class="plan reveal">
-      <h4 data-i18n="p3_name">Pro</h4>
-      <div class="plan-price">29,90 € <small data-i18n="per_mo">/ mois</small></div>
-      <p class="plan-desc" data-i18n="p3_desc">Pour les pros et revendeurs (plus de 50 ventes/mois ou produits à forte valeur).</p>
+      <h4 data-i18n="p3_name">Business</h4>
+      <div class="plan-price">99 € <small data-i18n="per_mo">/ mois</small></div>
+      <p class="plan-desc" data-i18n="p3_desc">Pour les boutiques avec équipe et gros volumes (500+ ventes/mois).</p>
       <ul>
-        <li data-i18n="p3_f1">Certificats vidéo illimités</li>
-        <li data-i18n="p3_f2">IA défense automatique</li>
-        <li data-i18n="p3_f3">Génération d'annonce illimitée</li>
-        <li data-i18n="p3_f4">Support prioritaire 24h</li>
-        <li data-i18n="p3_f5">Accès aux nouvelles fonctionnalités en avant-première</li>
+        <li data-i18n="p3_f1">Tout Pro inclus</li>
+        <li data-i18n="p3_f2">Comptes équipe (jusqu'à 5 utilisateurs)</li>
+        <li data-i18n="p3_f3">Support dédié sous 4h</li>
+        <li data-i18n="p3_f4">Onboarding personnalisé</li>
+        <li data-i18n="p3_f5">Accès anticipé aux nouveautés</li>
       </ul>
-      <a href="/compte" class="btn btn-ghost" data-i18n="p3_btn">Choisir Pro</a>
+      <a href="/compte" class="btn btn-ghost" data-i18n="p3_btn">Choisir Business</a>
     </div>
   </div>
 </section>
@@ -218,7 +218,7 @@ const PAGE_HTML = `
   <h2 class="serif"><span data-i18n="fin_t1">Protège ton argent</span><br><span class="italic" data-i18n="fin_t2">maintenant.</span></h2>
   <p data-i18n="fin_sub">Génère une vidéo certifiée infalsifiable.</p>
   <a href="/demo" class="btn btn-primary" style="padding:16px 32px;font-size:16px" data-i18n="fin_cta">Voir la démo</a>
-  <div class="platforms" style="margin-top:34px"><strong>Vinted</strong>·<strong>Leboncoin</strong>·<strong>Depop</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong>·<strong>Etsy</strong></div>
+  <div class="platforms" style="margin-top:34px"><strong>Depop</strong>·<strong>Etsy</strong>·<strong>Vinted Pro</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong></div>
 </section>
 
 <footer>
@@ -243,8 +243,8 @@ const I18N = {
     nav_how:"Comment",nav_why:"Pourquoi",nav_pricing:"Tarifs",nav_faq:"FAQ",nav_cta:"Essayer",
     badge:"Lancement",
     hero_h1_1:"Revends",hero_h1_2:"sans te faire arnaquer.",
-    hero_sub:"Conçu pour les vendeurs Vinted. Marche aussi sur Depop, Leboncoin, Vestiaire et Grailed.",
-    hero_subsub:"Preuve horodatée. Défense automatique.",
+    hero_sub:"Pour les friperies pros et vendeurs vintage qui font 50+ ventes/mois sur Depop, Etsy, Vinted Pro, Grailed et Vestiaire.",
+    hero_subsub:"Une preuve par envoi, en 90 secondes. Défense IA en cas de litige.",
     stat1:"Preuves certifiées",stat2:"Données chiffrées en France",stat3:"Annulable en 1 clic",
     hero_cta:"Voir la démo",
     demo_tagline:"L'action complète prend moins de 2 minutes.",
@@ -259,15 +259,15 @@ const I18N = {
     lg_c3_t:"Recevable comme moyen de preuve",lg_c3_p:"Article 1358 du Code civil : la preuve peut être apportée par tout moyen. Argument utilisable dans tes litiges Vinted, Depop, Leboncoin et procédures civiles.",
     lg_c4_t:"Ancrage Bitcoin",lg_c4_p:"Chaque certificat est ancré dans la blockchain Bitcoin via OpenTimestamps. L'horodatage est vérifiable indépendamment par n'importe qui, sans dépendre de SellCov. Personne, même nous, ne peut le modifier.",
     lg_note:"Comme toute preuve, un certificat peut être contesté. SellCov ne remplace pas un avocat.",
-    sc_kicker:"Cas concrets",sc_t1:"Les arnaques qui coûtent",sc_t2:"le plus cher aux vendeurs.",sc_sub:"Trois cas typiques. Trois réponses SellCov.",
+    sc_kicker:"Cas concrets",sc_t1:"Les arnaques qui coûtent",sc_t2:"le plus cher aux revendeurs pros.",sc_sub:"Trois cas vus chaque semaine chez les friperies en ligne. Trois réponses SellCov.",
     s1_title:"Colis « jamais reçu »",s1_quote:"« Je n'ai jamais reçu le colis. Je demande un remboursement. »",s1_solve:"SellCov fournit la vidéo horodatée du dépôt et l'étiquette filmée.",
     s2_title:"Article « abîmé »",s2_quote:"« L'article est arrivé troué. Je veux être remboursé. »",s2_solve:"SellCov prouve l'état exact avant expédition grâce à la vidéo 360° horodatée.",
     s3_title:"Réclamation tardive",s3_quote:"« L'article a un défaut. » (3 semaines après réception)",s3_solve:"SellCov horodate l'état exact à l'envoi. Toute usure post-réception est exclue.",
-    pl_kicker:"Nos offres",pl_t1:"Simple,",pl_t2:"sans surprise.",pl_sub:"Aucun engagement, annulable en 1 clic.",
+    pl_kicker:"Nos offres",pl_t1:"Tarifs pour",pl_t2:"revendeurs réguliers.",pl_sub:"Aucun engagement, annulable en 1 clic.",
     per_mo:"/ mois",
-    p1_name:"Découverte",p1_unit:"/ mois",p1_desc:"Pour tester sans engagement.",p1_f1:"3 certificats vidéo / mois",p1_f2:"IA défense automatique",p1_f3:"Génération d'annonce",p1_f4:"Support email",p1_btn:"Commencer gratuitement",
-    p2_ribbon:"★ Recommandé",p2_name:"Vendeur",p2_desc:"Pour les vendeurs réguliers (5 à 50 ventes/mois).",p2_f1:"30 certificats vidéo / mois",p2_f2:"IA défense automatique",p2_f3:"Génération d'annonce",p2_f4:"Support email prioritaire",p2_f5:"Guide des arnaques à éviter",p2_btn:"Choisir Vendeur",
-    p3_name:"Pro",p3_desc:"Pour les pros et revendeurs (plus de 50 ventes/mois ou produits à forte valeur).",p3_f1:"Certificats vidéo illimités",p3_f2:"IA défense automatique",p3_f3:"Génération d'annonce illimitée",p3_f4:"Support prioritaire 24h",p3_f5:"Accès aux nouvelles fonctionnalités en avant-première",p3_btn:"Choisir Pro",
+    p1_name:"Découverte",p1_unit:"/ mois",p1_desc:"Pour tester l'outil sans engagement.",p1_f1:"1 certificat vidéo / mois",p1_f2:"IA défense automatique (1 cas)",p1_f3:"Génération d'annonce (3 / mois)",p1_f4:"Support email",p1_btn:"Tester gratuitement",
+    p2_ribbon:"★ Cœur de cible",p2_name:"Pro",p2_desc:"Pour les friperies pros et revendeurs vintage (50 à 500 ventes/mois).",p2_f1:"Certificats vidéo illimités",p2_f2:"IA défense automatique",p2_f3:"Génération d'annonce illimitée",p2_f4:"Support email prioritaire",p2_f5:"Ancrage Bitcoin (preuve indépendante)",p2_btn:"Choisir Pro",
+    p3_name:"Business",p3_desc:"Pour les boutiques avec équipe et gros volumes (500+ ventes/mois).",p3_f1:"Tout Pro inclus",p3_f2:"Comptes équipe (jusqu'à 5 utilisateurs)",p3_f3:"Support dédié sous 4h",p3_f4:"Onboarding personnalisé",p3_f5:"Accès anticipé aux nouveautés",p3_btn:"Choisir Business",
     fin_t1:"Protège ton argent",fin_t2:"maintenant.",fin_sub:"Génère une vidéo certifiée infalsifiable.",fin_cta:"Voir la démo",
     ft_faq:"FAQ",ft_contact:"Contact",ft_legal:"Mentions légales",ft_cgu:"CGU",ft_priv:"Confidentialité"
   },
@@ -275,7 +275,7 @@ const I18N = {
     nav_how:"How",nav_why:"Why",nav_pricing:"Pricing",nav_faq:"FAQ",nav_cta:"Try it",
     badge:"Launch",
     hero_h1_1:"Sell",hero_h1_2:"without getting scammed.",
-    hero_sub:"Built for Vinted sellers. Works on Depop, eBay, Leboncoin and Grailed too.",hero_subsub:"Timestamped proof. Automatic defence.",
+    hero_sub:"For pro vintage shops and resellers doing 50+ sales/month on Depop, Etsy, Vinted Pro, Grailed and Vestiaire.",hero_subsub:"One proof per shipment, in 90 seconds. AI defence in case of dispute.",
     stat1:"Certified proofs",stat2:"Data encrypted in France",stat3:"Cancel in 1 click",hero_cta:"See the demo",
     demo_tagline:"The whole process takes less than 2 minutes.",
     how_kicker:"How it works",how_t1:"Three steps,",how_t2:"one mission.",how_sub:"From listing to dispute defence, SellCov covers every step of your sale.",
@@ -292,11 +292,11 @@ const I18N = {
     s1_title:"Parcel \"never received\"",s1_quote:"\"I never received the parcel. I'm requesting a refund.\"",s1_solve:"SellCov provides the timestamped video of drop-off and the filmed label.",
     s2_title:"Item \"damaged\"",s2_quote:"\"The item arrived with a hole. I want a refund.\"",s2_solve:"SellCov proves the exact condition before shipping with a 360° timestamped video.",
     s3_title:"Late claim",s3_quote:"\"The item is defective.\" (3 weeks after delivery)",s3_solve:"SellCov timestamps exact condition at shipping. Post-delivery wear is excluded.",
-    pl_kicker:"Our plans",pl_t1:"Simple,",pl_t2:"no surprises.",pl_sub:"No commitment, cancel anytime.",
+    pl_kicker:"Our plans",pl_t1:"Pricing for",pl_t2:"regular resellers.",pl_sub:"No commitment, cancel anytime.",
     per_mo:"/ month",
-    p1_name:"Discovery",p1_unit:"/ month",p1_desc:"Try without commitment.",p1_f1:"3 video certificates / month",p1_f2:"AI automatic defence",p1_f3:"Listing generation",p1_f4:"Email support",p1_btn:"Start for free",
-    p2_ribbon:"★ Recommended",p2_name:"Seller",p2_desc:"For regular sellers (5 to 50 sales/month).",p2_f1:"30 video certificates / month",p2_f2:"AI automatic defence",p2_f3:"Listing generation",p2_f4:"Priority email support",p2_f5:"Guide to avoiding scams",p2_btn:"Choose Seller",
-    p3_name:"Pro",p3_desc:"For pros and resellers (50+ sales/month or high-value items).",p3_f1:"Unlimited video certificates",p3_f2:"AI automatic defence",p3_f3:"Unlimited listing generation",p3_f4:"24h priority support",p3_f5:"Early access to new features",p3_btn:"Choose Pro",
+    p1_name:"Discovery",p1_unit:"/ month",p1_desc:"Try the tool without commitment.",p1_f1:"1 video certificate / month",p1_f2:"AI automatic defence (1 case)",p1_f3:"Listing generation (3 / month)",p1_f4:"Email support",p1_btn:"Try for free",
+    p2_ribbon:"★ Core target",p2_name:"Pro",p2_desc:"For pro vintage shops and resellers (50 to 500 sales/month).",p2_f1:"Unlimited video certificates",p2_f2:"AI automatic defence",p2_f3:"Unlimited listing generation",p2_f4:"Priority email support",p2_f5:"Bitcoin anchoring (independent proof)",p2_btn:"Choose Pro",
+    p3_name:"Business",p3_desc:"For shops with teams and high volumes (500+ sales/month).",p3_f1:"Everything in Pro",p3_f2:"Team accounts (up to 5 users)",p3_f3:"Dedicated support within 4h",p3_f4:"Personalised onboarding",p3_f5:"Early access to new features",p3_btn:"Choose Business",
     fin_t1:"Protect your money",fin_t2:"now.",fin_sub:"Generate a tamper-proof certified video.",fin_cta:"See the demo",
     ft_faq:"FAQ",ft_contact:"Contact",ft_legal:"Legal notice",ft_cgu:"T&Cs",ft_priv:"Privacy"
   },
@@ -304,7 +304,7 @@ const I18N = {
     nav_how:"Cómo",nav_why:"Por qué",nav_pricing:"Precios",nav_faq:"FAQ",nav_cta:"Probar",
     badge:"Lanzamiento",
     hero_h1_1:"Vende",hero_h1_2:"sin que te estafen.",
-    hero_sub:"Diseñado para vendedores Vinted. Funciona también en Depop, Wallapop y Vestiaire.",hero_subsub:"Prueba con marca de tiempo. Defensa automática.",
+    hero_sub:"Para tiendas vintage profesionales y revendedores que hacen 50+ ventas/mes en Depop, Etsy, Vinted Pro, Grailed y Vestiaire.",hero_subsub:"Una prueba por envío, en 90 segundos. Defensa con IA en caso de litigio.",
     stat1:"Pruebas certificadas",stat2:"Datos cifrados en Francia",stat3:"Cancelable con 1 clic",hero_cta:"Ver la demo",
     demo_tagline:"Todo el proceso dura menos de 2 minutos.",
     how_kicker:"Cómo funciona",how_t1:"Tres pasos,",how_t2:"una sola misión.",how_sub:"Del anuncio a la defensa en caso de litigio, SellCov te acompaña en cada etapa.",
@@ -321,11 +321,11 @@ const I18N = {
     s1_title:"Paquete «nunca recibido»",s1_quote:"«Nunca recibí el paquete. Solicito un reembolso.»",s1_solve:"SellCov proporciona el video con marca de tiempo del depósito y la etiqueta filmada.",
     s2_title:"Artículo «dañado»",s2_quote:"«El artículo llegó con un agujero. Quiero un reembolso.»",s2_solve:"SellCov prueba el estado exacto antes del envío con un video 360° con marca de tiempo.",
     s3_title:"Reclamación tardía",s3_quote:"«El artículo tiene un defecto.» (3 semanas después de la recepción)",s3_solve:"SellCov fecha el estado exacto al envío. Cualquier desgaste posterior queda excluido.",
-    pl_kicker:"Nuestros planes",pl_t1:"Simple,",pl_t2:"sin sorpresas.",pl_sub:"Sin compromiso, cancelable con 1 clic.",
+    pl_kicker:"Nuestros planes",pl_t1:"Tarifas para",pl_t2:"revendedores regulares.",pl_sub:"Sin compromiso, cancelable con 1 clic.",
     per_mo:"/ mes",
-    p1_name:"Descubierta",p1_unit:"/ mes",p1_desc:"Probar sin compromiso.",p1_f1:"3 certificados de video / mes",p1_f2:"IA defensa automática",p1_f3:"Generación de anuncio",p1_f4:"Soporte email",p1_btn:"Empezar gratis",
-    p2_ribbon:"★ Recomendado",p2_name:"Vendedor",p2_desc:"Para vendedores regulares (5 a 50 ventas/mes).",p2_f1:"30 certificados de video / mes",p2_f2:"IA defensa automática",p2_f3:"Generación de anuncio",p2_f4:"Soporte email prioritario",p2_f5:"Guía de estafas a evitar",p2_btn:"Elegir Vendedor",
-    p3_name:"Pro",p3_desc:"Para pros y revendedores (más de 50 ventas/mes o productos de alto valor).",p3_f1:"Certificados de video ilimitados",p3_f2:"IA defensa automática",p3_f3:"Generación de anuncio ilimitada",p3_f4:"Soporte prioritario 24h",p3_f5:"Acceso anticipado a nuevas funciones",p3_btn:"Elegir Pro",
+    p1_name:"Descubierta",p1_unit:"/ mes",p1_desc:"Probar la herramienta sin compromiso.",p1_f1:"1 certificado de video / mes",p1_f2:"IA defensa automática (1 caso)",p1_f3:"Generación de anuncio (3 / mes)",p1_f4:"Soporte email",p1_btn:"Probar gratis",
+    p2_ribbon:"★ Objetivo principal",p2_name:"Pro",p2_desc:"Para tiendas vintage profesionales y revendedores (50 a 500 ventas/mes).",p2_f1:"Certificados de video ilimitados",p2_f2:"IA defensa automática",p2_f3:"Generación de anuncio ilimitada",p2_f4:"Soporte email prioritario",p2_f5:"Anclaje Bitcoin (prueba independiente)",p2_btn:"Elegir Pro",
+    p3_name:"Business",p3_desc:"Para tiendas con equipo y altos volúmenes (500+ ventas/mes).",p3_f1:"Todo Pro incluido",p3_f2:"Cuentas de equipo (hasta 5 usuarios)",p3_f3:"Soporte dedicado en 4h",p3_f4:"Onboarding personalizado",p3_f5:"Acceso anticipado a novedades",p3_btn:"Elegir Business",
     fin_t1:"Protege tu dinero",fin_t2:"ahora.",fin_sub:"Genera un video certificado infalsificable.",fin_cta:"Ver la demo",
     ft_faq:"FAQ",ft_contact:"Contacto",ft_legal:"Aviso legal",ft_cgu:"T&C",ft_priv:"Privacidad"
   },
@@ -333,7 +333,7 @@ const I18N = {
     nav_how:"Come",nav_why:"Perché",nav_pricing:"Prezzi",nav_faq:"FAQ",nav_cta:"Prova",
     badge:"Lancio",
     hero_h1_1:"Rivendi",hero_h1_2:"senza farti truffare.",
-    hero_sub:"Pensato per i venditori Vinted. Funziona anche su Depop, Subito e Vestiaire.",hero_subsub:"Prova con timestamp. Difesa automatica.",
+    hero_sub:"Per i negozi vintage pro e rivenditori vintage che fanno 50+ vendite/mese su Depop, Etsy, Vinted Pro, Grailed e Vestiaire.",hero_subsub:"Una prova per spedizione, in 90 secondi. Difesa IA in caso di controversia.",
     stat1:"Prove certificate",stat2:"Dati crittografati in Francia",stat3:"Annullabile in 1 clic",hero_cta:"Vedi la demo",
     demo_tagline:"L'intera operazione richiede meno di 2 minuti.",
     how_kicker:"Come funziona",how_t1:"Tre passi,",how_t2:"una sola missione.",how_sub:"Dall'annuncio alla difesa in caso di controversia, SellCov ti accompagna in ogni fase della vendita.",
@@ -350,11 +350,11 @@ const I18N = {
     s1_title:"Pacco «mai ricevuto»",s1_quote:"«Non ho mai ricevuto il pacco. Chiedo il rimborso.»",s1_solve:"SellCov fornisce il video con timestamp del deposito e l'etichetta filmata.",
     s2_title:"Articolo «danneggiato»",s2_quote:"«L'articolo è arrivato forato. Voglio essere rimborsato.»",s2_solve:"SellCov prova lo stato esatto prima della spedizione con un video 360° con timestamp.",
     s3_title:"Reclamo tardivo",s3_quote:"«L'articolo ha un difetto.» (3 settimane dopo la ricezione)",s3_solve:"SellCov fissa lo stato esatto alla spedizione. Ogni usura post-ricezione è esclusa.",
-    pl_kicker:"Le nostre offerte",pl_t1:"Semplice,",pl_t2:"senza sorprese.",pl_sub:"Nessun impegno, annullabile in 1 clic.",
+    pl_kicker:"Le nostre offerte",pl_t1:"Tariffe per",pl_t2:"rivenditori regolari.",pl_sub:"Nessun impegno, annullabile in 1 clic.",
     per_mo:"/ mese",
-    p1_name:"Scoperta",p1_unit:"/ mese",p1_desc:"Prova senza impegno.",p1_f1:"3 certificati video / mese",p1_f2:"IA difesa automatica",p1_f3:"Generazione di annuncio",p1_f4:"Supporto email",p1_btn:"Inizia gratis",
-    p2_ribbon:"★ Consigliato",p2_name:"Venditore",p2_desc:"Per venditori regolari (5 a 50 vendite/mese).",p2_f1:"30 certificati video / mese",p2_f2:"IA difesa automatica",p2_f3:"Generazione di annuncio",p2_f4:"Supporto email prioritario",p2_f5:"Guida alle truffe da evitare",p2_btn:"Scegli Venditore",
-    p3_name:"Pro",p3_desc:"Per pro e rivenditori (oltre 50 vendite/mese o prodotti di alto valore).",p3_f1:"Certificati video illimitati",p3_f2:"IA difesa automatica",p3_f3:"Generazione annuncio illimitata",p3_f4:"Supporto prioritario 24h",p3_f5:"Accesso anticipato alle nuove funzionalità",p3_btn:"Scegli Pro",
+    p1_name:"Scoperta",p1_unit:"/ mese",p1_desc:"Prova lo strumento senza impegno.",p1_f1:"1 certificato video / mese",p1_f2:"IA difesa automatica (1 caso)",p1_f3:"Generazione di annuncio (3 / mese)",p1_f4:"Supporto email",p1_btn:"Prova gratis",
+    p2_ribbon:"★ Target principale",p2_name:"Pro",p2_desc:"Per negozi vintage pro e rivenditori (50 a 500 vendite/mese).",p2_f1:"Certificati video illimitati",p2_f2:"IA difesa automatica",p2_f3:"Generazione annuncio illimitata",p2_f4:"Supporto email prioritario",p2_f5:"Ancoraggio Bitcoin (prova indipendente)",p2_btn:"Scegli Pro",
+    p3_name:"Business",p3_desc:"Per negozi con team e alti volumi (500+ vendite/mese).",p3_f1:"Tutto Pro incluso",p3_f2:"Account team (fino a 5 utenti)",p3_f3:"Supporto dedicato entro 4h",p3_f4:"Onboarding personalizzato",p3_f5:"Accesso anticipato alle novità",p3_btn:"Scegli Business",
     fin_t1:"Proteggi il tuo denaro",fin_t2:"ora.",fin_sub:"Genera un video certificato infalsificabile.",fin_cta:"Vedi la demo",
     ft_faq:"FAQ",ft_contact:"Contatto",ft_legal:"Note legali",ft_cgu:"Termini e condizioni",ft_priv:"Privacy"
   }
@@ -442,13 +442,13 @@ export default function Home() {
     <>
       <Head>
         <title>SellCov — Revends sans te faire arnaquer</title>
-        <meta name="description" content="Preuve vidéo horodatée + défense IA pour vendre en sécurité sur Vinted, Leboncoin, Depop, Vestiaire Collective, Grailed et Etsy." />
+        <meta name="description" content="Preuve vidéo horodatée + défense IA pour friperies pros et revendeurs vintage. Compatible Depop, Etsy, Vinted Pro, Grailed, Vestiaire." />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         {/* Open Graph (iMessage / WhatsApp / Slack / Discord / Facebook link previews) */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.sellcov.com" />
         <meta property="og:title" content="SellCov — Revends sans te faire arnaquer" />
-        <meta property="og:description" content="Preuve vidéo horodatée + défense IA pour vendre en sécurité sur Vinted, Leboncoin, Depop, Vestiaire Collective, Grailed et Etsy." />
+        <meta property="og:description" content="Preuve vidéo horodatée + défense IA pour friperies pros et revendeurs vintage. Compatible Depop, Etsy, Vinted Pro, Grailed, Vestiaire." />
         <meta property="og:image" content="https://www.sellcov.com/logo.png" />
         <meta property="og:image:alt" content="SellCov — hérisson protecteur" />
         <meta property="og:site_name" content="SellCov" />
@@ -456,7 +456,7 @@ export default function Home() {
         {/* Twitter / X card */}
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="SellCov — Revends sans te faire arnaquer" />
-        <meta name="twitter:description" content="Preuve vidéo horodatée + défense IA pour vendre en sécurité sur les marketplaces." />
+        <meta name="twitter:description" content="Preuve vidéo horodatée + défense IA pour friperies pros et revendeurs vintage." />
         <meta name="twitter:image" content="https://www.sellcov.com/logo.png" />
         {/* Favicon iOS / Android */}
         <link rel="icon" type="image/png" href="/logo.png" />
@@ -499,7 +499,7 @@ export default function Home() {
                   applicationCategory: "BusinessApplication",
                   operatingSystem: "Web",
                   description:
-                    "Preuve vidéo horodatée + défense IA pour vendre en sécurité sur Vinted, Leboncoin, Depop, Vestiaire Collective, Grailed et Etsy.",
+                    "Preuve vidéo horodatée + défense IA pour friperies pros et revendeurs vintage. Compatible Depop, Etsy, Vinted Pro, Grailed, Vestiaire.",
                   offers: [
                     {
                       "@type": "Offer",
