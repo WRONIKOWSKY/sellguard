@@ -2,6 +2,7 @@ const SITE = "https://www.sellcov.com";
 
 const STATIC_PATHS = [
   { path: "/", priority: "1.0", changefreq: "weekly" },
+  { path: "/pros", priority: "0.95", changefreq: "weekly" },
   { path: "/demo", priority: "0.9", changefreq: "monthly" },
   { path: "/protection", priority: "0.9", changefreq: "monthly" },
   { path: "/annonce", priority: "0.9", changefreq: "monthly" },
