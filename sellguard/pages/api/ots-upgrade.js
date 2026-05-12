@@ -3,11 +3,15 @@
 // Tente d'upgrader tous les proofs "pending_bitcoin" >2h en proofs
 // "bitcoin_confirmed" (avec attestation Bitcoin définitive). Idempotent.
 //
-// Sécurité : protégé par un secret partagé OTS_UPGRADE_SECRET.
-// Appelé par un Vercel Cron Job ou n8n / outil externe une fois par jour.
+// Configuré comme Vercel Cron Job dans vercel.json (1×/jour à 03:00 UTC).
+// Vercel envoie automatiquement: Authorization: Bearer ${CRON_SECRET}
+// quand l'env var CRON_SECRET est définie sur le projet.
+//
+// Deux méthodes d'auth acceptées (au choix) :
+//   - Authorization: Bearer <CRON_SECRET>      (utilisé par Vercel Cron)
+//   - x-cron-secret: <OTS_UPGRADE_SECRET>       (compat manuel / n8n)
 //
 // GET /api/ots-upgrade
-//   Header: x-cron-secret: <OTS_UPGRADE_SECRET>
 //   Réponse: { processed: N, upgraded: M, errors: [...] }
 
 import { getSupabaseAdmin } from "../../lib/supabaseAdmin";
@@ -18,10 +22,23 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const expected = process.env.OTS_UPGRADE_SECRET;
-  if (!expected) return res.status(500).json({ error: "OTS_UPGRADE_SECRET not configured" });
-  const provided = req.headers["x-cron-secret"];
-  if (provided !== expected) return res.status(401).json({ error: "Unauthorized" });
+  const cronSecret = process.env.CRON_SECRET;
+  const otsSecret = process.env.OTS_UPGRADE_SECRET;
+  if (!cronSecret && !otsSecret) {
+    return res.status(500).json({ error: "No cron secret configured (set CRON_SECRET or OTS_UPGRADE_SECRET)" });
+  }
+
+  const authHeader = req.headers.authorization || "";
+  const bearerMatch = authHeader.match(/^Bearer\s+(.+)$/i);
+  const bearerToken = bearerMatch ? bearerMatch[1] : null;
+  const headerSecret = req.headers["x-cron-secret"];
+
+  const isAuthorized =
+    (cronSecret && bearerToken === cronSecret) ||
+    (otsSecret && headerSecret === otsSecret) ||
+    (otsSecret && bearerToken === otsSecret);
+
+  if (!isAuthorized) return res.status(401).json({ error: "Unauthorized" });
 
   const supa = getSupabaseAdmin();
 
