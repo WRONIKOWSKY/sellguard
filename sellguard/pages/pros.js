@@ -256,21 +256,21 @@ export default function Pros() {
           <span className="italic">pour les vendeurs vintage qui jouent gros.</span>
         </h1>
         <p className="hero-sub">
-          Tu fais 50+ ventes/mois sur Depop, Etsy, Vinted Pro, Grailed ou Vestiaire. Un seul litige peut te coûter 200-2000 €. SellCov le tue avant qu'il commence : preuve vidéo horodatée, défense IA, ancrage Bitcoin.
+          Tu fais 50+ ventes/mois sur Depop, Etsy, Vinted Pro, Grailed ou Vestiaire. Un seul litige peut te coûter cher. SellCov le tue avant qu'il commence : preuve vidéo horodatée, défense IA, ancrage Bitcoin.
         </p>
 
         <div className="hero-stats">
           <div className="stat-card">
             <div className="stat-value">90 sec</div>
-            <div className="stat-label">Pour filmer un envoi, créer la preuve vidéo et générer le certificat horodaté.</div>
+            <div className="stat-label">Pour filmer un envoi et générer le certificat horodaté.</div>
           </div>
           <div className="stat-card">
             <div className="stat-value">Art. 1366</div>
-            <div className="stat-label">Du Code civil. Fondement juridique de tes preuves : empreinte SHA-256, signature HMAC, auteur identifiable.</div>
+            <div className="stat-label">Du Code civil. La base légale de tes preuves : SHA-256, signature HMAC, auteur identifiable.</div>
           </div>
           <div className="stat-card">
             <div className="stat-value">Bitcoin</div>
-            <div className="stat-label">Chaque certificat est ancré dans la blockchain via OpenTimestamps. Vérifiable sans dépendre de SellCov.</div>
+            <div className="stat-label">Chaque certificat est ancré dans la blockchain. Personne, pas même nous, ne peut le modifier.</div>
           </div>
         </div>
 
@@ -278,12 +278,12 @@ export default function Pros() {
         <section className="section">
           <div className="section-kicker">Pour qui</div>
           <h2 className="serif">Tu te reconnais dans <span className="italic">un de ces profils{' '}?</span></h2>
-          <p className="section-lead">SellCov est pensé pour les revendeurs réguliers qui vendent des pièces avec une vraie valeur. Si tu vends 2 pulls par mois à 15 €, ce n'est pas pour toi (et c'est OK).</p>
+          <p className="section-lead">C'est pour les revendeurs réguliers qui vendent des pièces avec une vraie valeur. Si tu vends 2 pulls par mois à 15 €, ce n'est pas pour toi (et c'est OK).</p>
 
           <div className="three-col">
             <div className="col-card">
               <h3>Friperie en ligne pro</h3>
-              <p>Tu vends des pièces vintage en volume régulier sur Depop, Etsy ou Vinted Pro.</p>
+              <p>Tu vends des pièces vintage régulièrement sur Depop, Etsy ou Vinted Pro.</p>
               <ul>
                 <li>Stock curaté chaque semaine</li>
                 <li>Items uniques, irremplaçables</li>
@@ -292,18 +292,18 @@ export default function Pros() {
             </div>
             <div className="col-card">
               <h3>Reseller archive / streetwear</h3>
-              <p>Tu vends du workwear, du militaire, des archives de marques recherchées. Tickets élevés.</p>
+              <p>Tu vends du workwear, du militaire, des archives de marques recherchées.</p>
               <ul>
-                <li>Tickets élevés = enjeu élevé</li>
+                <li>Tickets élevés, enjeu élevé</li>
                 <li>Acheteurs informés et pointilleux</li>
                 <li>Réputation = ton vrai capital</li>
               </ul>
             </div>
             <div className="col-card">
               <h3>Boutique multi-marketplace</h3>
-              <p>Tu vends en parallèle sur plusieurs plateformes avec une équipe, en volume soutenu.</p>
+              <p>Tu vends sur plusieurs plateformes avec une équipe. Gros volume.</p>
               <ul>
-                <li>Volume = nombre absolu de litiges</li>
+                <li>Volume = plus de litiges absolus</li>
                 <li>Process pro nécessaire</li>
                 <li>Comptes équipe requis</li>
               </ul>
@@ -314,8 +314,8 @@ export default function Pros() {
         {/* Combien ça vaut */}
         <section className="section">
           <div className="section-kicker">Combien ça vaut</div>
-          <h2 className="serif">Une logique simple <span className="italic">de coût d'opportunité.</span></h2>
-          <p className="section-lead">SellCov Pro coûte 49 €/mois. Voici comment ce prix se compare à un litige perdu sur une pièce vintage moyenne.</p>
+          <h2 className="serif">Une logique <span className="italic">simple.</span></h2>
+          <p className="section-lead">SellCov Pro coûte 49 €/mois. Compare avec un litige perdu sur une pièce moyenne :</p>
 
           <div className="roi-card">
             <div className="roi-line">
@@ -332,10 +332,10 @@ export default function Pros() {
             </div>
           </div>
           <p style={{ color: "var(--text-muted)", fontSize: 14, marginTop: 18, lineHeight: 1.6 }}>
-            SellCov ne garantit pas de gagner tous tes litiges. Ce qu'il fait : te donner une preuve <strong style={{ color: "#fff" }}>horodatée, intègre et opposable</strong> en médiation, là où aujourd'hui tu n'as souvent qu'un screenshot de bordereau. Pour un revendeur qui vend des pièces à 50 € et plus, un seul litige résolu en ta faveur dans l'année compense l'abonnement.
+            SellCov ne garantit pas que tu gagnes tous tes litiges. Ce qu'on te donne : une preuve <strong style={{ color: "#fff" }}>horodatée, intègre, opposable</strong> en médiation. Aujourd'hui tu n'as souvent qu'un screenshot de bordereau.
           </p>
           <p style={{ color: "var(--text-dim)", fontSize: 13, marginTop: 12, fontStyle: "italic" }}>
-            Aucun pourcentage de gain garanti. Les résultats dépendent de la médiation propre à chaque marketplace et de la qualité de tes preuves.
+            Pas de pourcentage de gain garanti. Le résultat dépend de chaque marketplace et de la qualité de tes preuves.
           </p>
         </section>
 
@@ -343,7 +343,7 @@ export default function Pros() {
         <section className="section">
           <div className="section-kicker">Offre bêta privée</div>
           <h2 className="serif">Pro illimité, <span className="italic">gratuit pendant 2 mois.</span></h2>
-          <p className="section-lead">On lance la bêta avec 20-30 revendeurs triés sur le volet. En échange d'un retour structuré, tu as accès gratuit au plan Pro pendant 2 mois. Pas d'engagement, pas de carte bancaire.</p>
+          <p className="section-lead">On lance la bêta avec 20-30 revendeurs sélectionnés. En échange de ton retour, accès gratuit au plan Pro pendant 2 mois. Pas d'engagement, pas de carte bancaire.</p>
 
           <div className="offer-box">
             <h3>Plan Pro · Accès bêta</h3>
@@ -357,7 +357,7 @@ export default function Pros() {
               <li>Aucune CB demandée. Pas d'engagement.</li>
             </ul>
             <p style={{ color: "var(--text-muted)", fontSize: 14, lineHeight: 1.6 }}>
-              <strong style={{ color: "#fff" }}>En échange :</strong> un appel de 20 minutes à 4 semaines pour partager ce qui marche, ce qui manque, ce qui pourrait être mieux. Pas de revente de données, pas de spam.
+              <strong style={{ color: "#fff" }}>En échange :</strong> un appel de 20 minutes à 4 semaines pour me dire ce qui marche et ce qui manque. Pas de revente de données, pas de spam.
             </p>
           </div>
         </section>
@@ -371,7 +371,7 @@ export default function Pros() {
           {status === "sent" ? (
             <div className="form-success">
               <h3>✓ Demande reçue</h3>
-              <p>Merci. On regarde ton profil et on revient vers toi sous 48h sur {email}.</p>
+              <p>Merci. On revient vers toi sous 48h sur {email}.</p>
             </div>
           ) : (
             <form className="app-form" onSubmit={onSubmit}>
@@ -450,7 +450,7 @@ export default function Pros() {
           <div style={{ marginTop: 18 }}>
             <details className="faq-item">
               <summary>Pourquoi vous demandez mon Instagram / Discord ?</summary>
-              <p>Pour vérifier rapidement que tu es bien un revendeur actif et pas un compte fictif. On ne te suit pas, on ne te DM pas. C'est juste un signal qu'on est en face d'un vrai pro.</p>
+              <p>Pour vérifier que tu es un vrai revendeur, pas un compte fictif. On ne te suit pas, on ne te DM pas.</p>
             </details>
             <details className="faq-item">
               <summary>Que se passe-t-il après les 2 mois gratuits ?</summary>
@@ -458,7 +458,7 @@ export default function Pros() {
             </details>
             <details className="faq-item">
               <summary>Et si je fais moins de 50 ventes par mois ?</summary>
-              <p>Le plan Découverte gratuit te permet de tester sur 1 envoi par mois. SellCov est pensé pour les pros. En dessous de 50 ventes/mois, le ROI n'est probablement pas là.</p>
+              <p>Le plan Découverte gratuit te permet de tester sur 1 envoi par mois. En dessous de 50 ventes/mois, l'abonnement Pro vaut probablement pas le coup.</p>
             </details>
             <details className="faq-item">
               <summary>Mes vidéos sont-elles vraiment privées ?</summary>
@@ -466,7 +466,7 @@ export default function Pros() {
             </details>
             <details className="faq-item">
               <summary>SellCov fonctionne sur Vinted standard ?</summary>
-              <p>Oui, mais notre cœur de cible reste Depop, Etsy, Vinted Pro, Grailed et Vestiaire, là où les tickets sont plus élevés et les revendeurs plus structurés. Sur Vinted standard la médiation accepte aussi nos preuves, mais l'enjeu moyen par vente est plus faible.</p>
+              <p>Oui. Mais notre cœur de cible reste Depop, Etsy, Vinted Pro, Grailed et Vestiaire, là où les tickets sont plus élevés. Sur Vinted standard l'enjeu moyen par vente est plus faible.</p>
             </details>
           </div>
         </section>
