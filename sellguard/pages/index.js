@@ -441,21 +441,21 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>SellCov — Revends sans te faire arnaquer</title>
+        <title>SellCov · Revends sans te faire arnaquer</title>
         <meta name="description" content="Preuve vidéo horodatée + défense IA pour friperies pros et revendeurs vintage. Compatible Depop, Etsy, Vinted Pro, Grailed, Vestiaire." />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         {/* Open Graph (iMessage / WhatsApp / Slack / Discord / Facebook link previews) */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.sellcov.com" />
-        <meta property="og:title" content="SellCov — Revends sans te faire arnaquer" />
+        <meta property="og:title" content="SellCov · Revends sans te faire arnaquer" />
         <meta property="og:description" content="Preuve vidéo horodatée + défense IA pour friperies pros et revendeurs vintage. Compatible Depop, Etsy, Vinted Pro, Grailed, Vestiaire." />
         <meta property="og:image" content="https://www.sellcov.com/logo.png" />
-        <meta property="og:image:alt" content="SellCov — hérisson protecteur" />
+        <meta property="og:image:alt" content="SellCov · hérisson protecteur" />
         <meta property="og:site_name" content="SellCov" />
         <meta property="og:locale" content="fr_FR" />
         {/* Twitter / X card */}
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="SellCov — Revends sans te faire arnaquer" />
+        <meta name="twitter:title" content="SellCov · Revends sans te faire arnaquer" />
         <meta name="twitter:description" content="Preuve vidéo horodatée + défense IA pour friperies pros et revendeurs vintage." />
         <meta name="twitter:image" content="https://www.sellcov.com/logo.png" />
         {/* Favicon iOS / Android */}

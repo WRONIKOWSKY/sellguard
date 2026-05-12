@@ -52,7 +52,7 @@ export default function Pros() {
   return (
     <>
       <Head>
-        <title>Accès Pro · Bêta privée — SellCov</title>
+        <title>Accès Pro · Bêta privée · SellCov</title>
         <meta
           name="description"
           content="Pour les friperies pros et revendeurs vintage qui font 50+ ventes/mois. Accès Pro illimité gratuit pendant la bêta privée."
@@ -61,7 +61,7 @@ export default function Pros() {
         <link rel="canonical" href="https://www.sellcov.com/pros" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.sellcov.com/pros" />
-        <meta property="og:title" content="Accès Pro · Bêta privée — SellCov" />
+        <meta property="og:title" content="Accès Pro · Bêta privée · SellCov" />
         <meta
           property="og:description"
           content="Pour les friperies pros et revendeurs vintage qui font 50+ ventes/mois. Pro illimité gratuit pendant la bêta."
@@ -256,21 +256,21 @@ export default function Pros() {
           <span className="italic">pour les vendeurs vintage qui jouent gros.</span>
         </h1>
         <p className="hero-sub">
-          Tu fais 50+ ventes/mois sur Depop, Etsy, Vinted Pro, Grailed ou Vestiaire. Un seul litige peut te coûter 200-2000 €. SellCov le tue avant qu'il commence — preuve vidéo horodatée, défense IA, ancrage Bitcoin.
+          Tu fais 50+ ventes/mois sur Depop, Etsy, Vinted Pro, Grailed ou Vestiaire. Un seul litige peut te coûter 200-2000 €. SellCov le tue avant qu'il commence : preuve vidéo horodatée, défense IA, ancrage Bitcoin.
         </p>
 
         <div className="hero-stats">
           <div className="stat-card">
-            <div className="stat-value">~3%</div>
-            <div className="stat-label">Taux de litige moyen sur les marketplaces vintage selon les revendeurs interrogés</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-value">70%</div>
-            <div className="stat-label">Des litiges peuvent être gagnés avec une preuve vidéo recevable</div>
-          </div>
-          <div className="stat-card">
             <div className="stat-value">90 sec</div>
-            <div className="stat-label">Le temps pour filmer + certifier un envoi avec SellCov</div>
+            <div className="stat-label">Pour filmer un envoi, créer la preuve vidéo et générer le certificat horodaté.</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-value">Art. 1366</div>
+            <div className="stat-label">Du Code civil. Fondement juridique de tes preuves : empreinte SHA-256, signature HMAC, auteur identifiable.</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-value">Bitcoin</div>
+            <div className="stat-label">Chaque certificat est ancré dans la blockchain via OpenTimestamps. Vérifiable sans dépendre de SellCov.</div>
           </div>
         </div>
 
@@ -311,44 +311,31 @@ export default function Pros() {
           </div>
         </section>
 
-        {/* ROI concret */}
+        {/* Combien ça vaut */}
         <section className="section">
-          <div className="section-kicker">Le ROI concret</div>
-          <h2 className="serif">Le calcul typique <span className="italic">d'un revendeur moyen.</span></h2>
-          <p className="section-lead">Estimation basée sur les retours des premiers testeurs. Ton volume varie, mais l'ordre de grandeur reste le même.</p>
+          <div className="section-kicker">Combien ça vaut</div>
+          <h2 className="serif">Une logique simple <span className="italic">de coût d'opportunité.</span></h2>
+          <p className="section-lead">SellCov Pro coûte 49 €/mois. Voici comment ce prix se compare à un litige perdu sur une pièce vintage moyenne.</p>
 
           <div className="roi-card">
             <div className="roi-line">
-              <span className="roi-label">Ventes mensuelles</span>
-              <span className="roi-value">200</span>
-            </div>
-            <div className="roi-line">
-              <span className="roi-label">Taux de litige (3%)</span>
-              <span className="roi-value">6 litiges</span>
-            </div>
-            <div className="roi-line">
-              <span className="roi-label">Coût moyen d'un litige perdu</span>
-              <span className="roi-value">80 €</span>
-            </div>
-            <div className="roi-line">
-              <span className="roi-label">Perte mensuelle sans protection</span>
-              <span className="roi-value">480 €</span>
-            </div>
-            <div className="roi-line">
-              <span className="roi-label">Récupération avec SellCov (~70%)</span>
-              <span className="roi-value">+ 336 €</span>
-            </div>
-            <div className="roi-line">
               <span className="roi-label">Abonnement SellCov Pro</span>
-              <span className="roi-value">- 49 €</span>
+              <span className="roi-value">49 € / mois</span>
+            </div>
+            <div className="roi-line">
+              <span className="roi-label">Un litige perdu sur un article à 200 €</span>
+              <span className="roi-value">- 200 €</span>
             </div>
             <div className="roi-line roi-total">
-              <span className="roi-label">Gain net mensuel</span>
-              <span className="roi-value">+ 287 €</span>
+              <span className="roi-label">Un seul litige évité dans l'année</span>
+              <span className="roi-value">= abonnement amorti</span>
             </div>
           </div>
-          <p style={{ color: "var(--text-dim)", fontSize: 13, marginTop: 14, fontStyle: "italic" }}>
-            Estimation indicative. Le résultat dépend de tes plateformes, de la qualité de tes preuves et de la médiation propre à chaque marketplace.
+          <p style={{ color: "var(--text-muted)", fontSize: 14, marginTop: 18, lineHeight: 1.6 }}>
+            SellCov ne garantit pas de gagner tous tes litiges. Ce qu'il fait : te donner une preuve <strong style={{ color: "#fff" }}>horodatée, intègre et opposable</strong> en médiation, là où aujourd'hui tu n'as souvent qu'un screenshot de bordereau. Pour un revendeur qui vend des pièces à 50 € et plus, un seul litige résolu en ta faveur dans l'année compense l'abonnement.
+          </p>
+          <p style={{ color: "var(--text-dim)", fontSize: 13, marginTop: 12, fontStyle: "italic" }}>
+            Aucun pourcentage de gain garanti. Les résultats dépendent de la médiation propre à chaque marketplace et de la qualité de tes preuves.
           </p>
         </section>
 
@@ -356,7 +343,7 @@ export default function Pros() {
         <section className="section">
           <div className="section-kicker">Offre bêta privée</div>
           <h2 className="serif">Pro illimité, <span className="italic">gratuit pendant 2 mois.</span></h2>
-          <p className="section-lead">On lance la bêta avec 20-30 revendeurs triés sur le volet. En échange d'un retour structuré, tu as accès gratuit au plan Pro pendant 2 mois — pas d'engagement, pas de carte bancaire.</p>
+          <p className="section-lead">On lance la bêta avec 20-30 revendeurs triés sur le volet. En échange d'un retour structuré, tu as accès gratuit au plan Pro pendant 2 mois. Pas d'engagement, pas de carte bancaire.</p>
 
           <div className="offer-box">
             <h3>Plan Pro · Accès bêta</h3>
@@ -467,11 +454,11 @@ export default function Pros() {
             </details>
             <details className="faq-item">
               <summary>Que se passe-t-il après les 2 mois gratuits ?</summary>
-              <p>Si tu veux continuer, le plan Pro reste à 49 €/mois sans engagement. Si tu veux arrêter, tu arrêtes — pas de prélèvement surprise puisqu'on ne t'a jamais demandé ta CB.</p>
+              <p>Si tu veux continuer, le plan Pro reste à 49 €/mois sans engagement. Si tu veux arrêter, tu arrêtes. Pas de prélèvement surprise puisqu'on ne t'a jamais demandé ta CB.</p>
             </details>
             <details className="faq-item">
               <summary>Et si je fais moins de 50 ventes par mois ?</summary>
-              <p>Le plan Découverte gratuit te permet de tester sur 1 envoi par mois. SellCov est pensé pour les pros — en dessous de 50 ventes/mois, le ROI n'est probablement pas là.</p>
+              <p>Le plan Découverte gratuit te permet de tester sur 1 envoi par mois. SellCov est pensé pour les pros. En dessous de 50 ventes/mois, le ROI n'est probablement pas là.</p>
             </details>
             <details className="faq-item">
               <summary>Mes vidéos sont-elles vraiment privées ?</summary>
@@ -479,7 +466,7 @@ export default function Pros() {
             </details>
             <details className="faq-item">
               <summary>SellCov fonctionne sur Vinted standard ?</summary>
-              <p>Oui, mais notre cœur de cible reste Depop, Etsy, Vinted Pro, Grailed et Vestiaire — là où les tickets sont plus élevés et les revendeurs plus structurés. Sur Vinted standard la médiation accepte aussi nos preuves, mais l'enjeu moyen par vente est plus faible.</p>
+              <p>Oui, mais notre cœur de cible reste Depop, Etsy, Vinted Pro, Grailed et Vestiaire, là où les tickets sont plus élevés et les revendeurs plus structurés. Sur Vinted standard la médiation accepte aussi nos preuves, mais l'enjeu moyen par vente est plus faible.</p>
             </details>
           </div>
         </section>
