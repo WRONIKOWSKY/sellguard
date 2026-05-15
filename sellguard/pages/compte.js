@@ -12,8 +12,13 @@ export default function Compte() {
   const [error, setError] = useState(null);
   const [profile, setProfile] = useState(null);
   const [envois, setEnvois] = useState([]);
+  const [upgrading, setUpgrading] = useState(false);
+  const [upgradedMsg, setUpgradedMsg] = useState(false);
 
   useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.search.includes('upgraded=1')) {
+      setUpgradedMsg(true);
+    }
     const sb = getSupabase();
     if (!sb) {
       setLoading(false);
@@ -87,6 +92,40 @@ export default function Compte() {
     setSession(null);
     setSent(false);
     setEmail('');
+  }
+
+  async function startCheckout() {
+    setError(null);
+    setUpgrading(true);
+    const sb = getSupabase();
+    if (!sb) {
+      setError('Connexion impossible.');
+      setUpgrading(false);
+      return;
+    }
+    const { data } = await sb.auth.getSession();
+    const token = data?.session?.access_token;
+    if (!token) {
+      setError('Session expirée, reconnecte-toi.');
+      setUpgrading(false);
+      return;
+    }
+    try {
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const json = await res.json();
+      if (res.ok && json.url) {
+        window.location.href = json.url;
+      } else {
+        setError(json.error || 'Erreur lors de la création du paiement.');
+        setUpgrading(false);
+      }
+    } catch (e) {
+      setError('Erreur réseau, réessaie.');
+      setUpgrading(false);
+    }
   }
 
   return (
@@ -229,8 +268,19 @@ export default function Compte() {
             </div>
           )}
 
-          {!loading && session && (
+          {!loading && session && (() => {
+            const tier = session.user.app_metadata?.tier;
+            const isPro = ['seller', 'pro', 'admin'].includes(tier);
+            return (
             <div>
+              {upgradedMsg && (
+                <div className="card" style={{ marginBottom: '12px', borderColor: 'rgba(94,232,163,.3)', background: 'var(--green-bg)' }}>
+                  <div style={{ color: 'var(--green)', fontWeight: 600, marginBottom: '6px' }}>Paiement confirmé</div>
+                  <div style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
+                    Ton plan Pro est en cours d'activation. Si l'accès n'est pas immédiat, déconnecte-toi puis reconnecte-toi (ton accès est lu à la connexion).
+                  </div>
+                </div>
+              )}
               <div className="card">
                 <div className="session-head">
                   <div>
@@ -244,8 +294,8 @@ export default function Compte() {
                 <div className="stats-row">
                   <div className="stat-box">
                     <div className="label">Plan</div>
-                    <div className={'stat-value' + (profile?.plan === 'pro' ? ' accent' : '')}>
-                      {profile?.plan === 'pro' ? 'Pro' : 'Gratuit'}
+                    <div className={'stat-value' + (isPro ? ' accent' : '')}>
+                      {tier === 'admin' ? 'Admin' : isPro ? 'Pro' : 'Découverte'}
                     </div>
                   </div>
                   <div className="stat-box">
@@ -254,6 +304,26 @@ export default function Compte() {
                   </div>
                 </div>
               </div>
+
+              {!isPro && (
+                <div className="card" style={{ marginTop: '12px' }}>
+                  <div className="label">Passer au plan Pro</div>
+                  <div style={{ fontFamily: 'var(--font-playfair),serif', fontSize: '28px', lineHeight: 1, margin: '8px 0 4px' }}>
+                    49 € <span style={{ fontSize: '14px', color: 'var(--text-muted)', fontFamily: 'var(--font-inter)' }}>/ mois</span>
+                  </div>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '14px', lineHeight: 1.55, margin: '10px 0 20px' }}>
+                    Certificats vidéo illimités, défense IA, génération d'annonce illimitée, ancrage Bitcoin, support prioritaire. Sans engagement, annulable en 1 clic.
+                  </p>
+                  <button
+                    onClick={startCheckout}
+                    className="btn btn-primary"
+                    disabled={upgrading}
+                  >
+                    {upgrading ? 'Redirection…' : 'Passer Pro'}
+                  </button>
+                  {error && <div className="error-msg">{error}</div>}
+                </div>
+              )}
 
               <div className="section-title">Derniers envois</div>
 
@@ -283,7 +353,8 @@ export default function Compte() {
                 </div>
               )}
             </div>
-          )}
+            );
+          })()}
 
         </div>
       </main>
