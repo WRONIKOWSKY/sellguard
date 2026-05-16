@@ -95,7 +95,7 @@ export default function Ventes() {
 
   return (
     <>
-      <Head><title>SellGuard — {t.title}</title></Head>
+      <Head><title>SellCov — {t.title}</title></Head>
       <Layout>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
           <div>

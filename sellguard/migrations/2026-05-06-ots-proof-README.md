@@ -19,7 +19,7 @@ npm install
 
 ## 3. Variable d'environnement Vercel
 
-Sur https://vercel.com/wronikowsky/sellguard/settings/environment-variables :
+Sur https://vercel.com/wronikowsky/sellcov/settings/environment-variables :
 
 Ajouter :
 - Name : `OTS_UPGRADE_SECRET`

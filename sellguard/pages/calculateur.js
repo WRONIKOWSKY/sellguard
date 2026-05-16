@@ -73,7 +73,7 @@ export default function Calculateur() {
 
   return (
     <>
-      <Head><title>SellGuard — {t.title}</title></Head>
+      <Head><title>SellCov — {t.title}</title></Head>
       <Layout>
         <div style={{ marginBottom: 28 }}>
           <h2 style={{ fontSize: 24, fontWeight: 800, color: "#fff", marginBottom: 6 }}>{"💰"} {t.title}</h2>
