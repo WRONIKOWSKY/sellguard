@@ -52,19 +52,19 @@ export default function Pros() {
   return (
     <>
       <Head>
-        <title>Accès Pro · Bêta privée · SellCov</title>
+        <title>Cohorte fondateurs · 10 places · SellCov</title>
         <meta
           name="description"
-          content="Pour les friperies pros et revendeurs vintage qui font 50+ ventes/mois. Accès Pro illimité gratuit pendant la bêta privée."
+          content="10 revendeurs vintage fondateurs, 50+ ventes/mois. 30 jours tout débloqué, mise en place avec le fondateur, tarif fondateur verrouillé ensuite. Sur candidature."
         />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="canonical" href="https://www.sellcov.com/pros" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.sellcov.com/pros" />
-        <meta property="og:title" content="Accès Pro · Bêta privée · SellCov" />
+        <meta property="og:title" content="Cohorte fondateurs · 10 places · SellCov" />
         <meta
           property="og:description"
-          content="Pour les friperies pros et revendeurs vintage qui font 50+ ventes/mois. Pro illimité gratuit pendant la bêta."
+          content="10 revendeurs vintage fondateurs. 30 jours tout débloqué + onboarding fondateur, puis tarif fondateur verrouillé. Sur candidature."
         />
         <meta property="og:image" content="https://www.sellcov.com/logo.png" />
         <link rel="icon" type="image/png" href="/logo.png" />
@@ -250,7 +250,7 @@ export default function Pros() {
 
       <main className="container">
         {/* Hero */}
-        <div className="eyebrow"><span className="dot"></span>Accès Pro · Bêta privée</div>
+        <div className="eyebrow"><span className="dot"></span>Cohorte fondateurs · 10 places</div>
         <h1 className="hero-h1">
           La preuve cryptographique
           <span className="italic">pour les vendeurs vintage qui jouent gros.</span>
@@ -341,37 +341,39 @@ export default function Pros() {
 
         {/* Offre bêta */}
         <section className="section">
-          <div className="section-kicker">Offre bêta privée</div>
-          <h2 className="serif">Pro illimité, <span className="italic">gratuit pendant 2 mois.</span></h2>
-          <p className="section-lead">On lance la bêta avec 20-30 revendeurs sélectionnés. En échange de ton retour, accès gratuit au plan Pro pendant 2 mois. Pas d'engagement, pas de carte bancaire.</p>
+          <div className="section-kicker">Cohorte fondateurs</div>
+          <h2 className="serif">Une cohorte de 10, <span className="italic">pas une bêta ouverte.</span></h2>
+          <p className="section-lead">On ouvre 10 places de revendeurs fondateurs. 30 jours tout débloqué et une mise en place en visio avec le fondateur. Ensuite tu gardes un tarif fondateur verrouillé pendant que le public passe à 49 ou 99. Tout ce qu'on te demande en retour : un retour franc, et le droit de raconter ton cas si ça marche.</p>
 
           <div className="offer-box">
-            <h3>Plan Pro · Accès bêta</h3>
-            <div className="price"><del>49 €</del>0 € <small>/ mois pendant 2 mois</small></div>
+            <h3>Place fondateur</h3>
+            <div className="price">0 € <small>les 30 premiers jours, tout débloqué</small></div>
             <ul className="offer-list">
               <li>Certificats vidéo illimités</li>
               <li>IA défense automatique (illimité)</li>
               <li>Génération d'annonce illimitée</li>
               <li>Ancrage Bitcoin sur chaque preuve</li>
+              <li>Mise en place en visio avec le fondateur</li>
               <li>Support email prioritaire (réponse sous 24h)</li>
+              <li>Tarif fondateur verrouillé après les 30 jours, sous le prix public</li>
               <li>Aucune CB demandée. Pas d'engagement.</li>
             </ul>
             <p style={{ color: "var(--text-muted)", fontSize: 14, lineHeight: 1.6 }}>
-              <strong style={{ color: "#fff" }}>En échange :</strong> un appel de 20 minutes à 4 semaines pour me dire ce qui marche et ce qui manque. Pas de revente de données, pas de spam.
+              <strong style={{ color: "#fff" }}>En échange :</strong> un retour franc sur ce qui marche et ce qui manque, et le droit de raconter ton cas si ça marche. Pas de revente de données, pas de spam.
             </p>
           </div>
         </section>
 
         {/* Form */}
         <section className="section" id="form">
-          <div className="section-kicker">Demande d'accès</div>
-          <h2 className="serif">Demande ton accès en 60 secondes.</h2>
-          <p className="section-lead">On répond à toutes les demandes sous 48h. Si ton profil colle, on te file un code d'accès Pro et un lien pour démarrer.</p>
+          <div className="section-kicker">Candidature</div>
+          <h2 className="serif">Candidate en 60 secondes.</h2>
+          <p className="section-lead">10 places, pas une de plus. On lit chaque candidature et on répond sous 48h. Si ton profil colle, on cale ta mise en place et on t'ouvre l'accès.</p>
 
           {status === "sent" ? (
             <div className="form-success">
-              <h3>✓ Demande reçue</h3>
-              <p>Merci. On revient vers toi sous 48h sur {email}.</p>
+              <h3>✓ Candidature reçue</h3>
+              <p>Merci. On lit ta candidature et on revient vers toi sous 48h sur {email}.</p>
             </div>
           ) : (
             <form className="app-form" onSubmit={onSubmit}>
@@ -437,7 +439,7 @@ export default function Pros() {
               {errorMsg && <div className="form-error">{errorMsg}</div>}
 
               <button className="submit" type="submit" disabled={status === "sending"}>
-                {status === "sending" ? "Envoi..." : "Demander mon accès"}
+                {status === "sending" ? "Envoi..." : "Envoyer ma candidature"}
               </button>
             </form>
           )}
@@ -453,8 +455,8 @@ export default function Pros() {
               <p>Pour vérifier que tu es un vrai revendeur, pas un compte fictif. On ne te suit pas, on ne te DM pas.</p>
             </details>
             <details className="faq-item">
-              <summary>Que se passe-t-il après les 2 mois gratuits ?</summary>
-              <p>Si tu veux continuer, le plan Pro reste à 49 €/mois sans engagement. Si tu veux arrêter, tu arrêtes. Pas de prélèvement surprise puisqu'on ne t'a jamais demandé ta CB.</p>
+              <summary>Que se passe-t-il après les 30 jours ?</summary>
+              <p>Si tu continues, tu gardes un tarif fondateur verrouillé, sous le prix public (49 ou 99 €/mois), tant que tu restes. Si tu arrêtes, tu arrêtes. Pas de prélèvement surprise puisqu'on ne t'a jamais demandé ta CB.</p>
             </details>
             <details className="faq-item">
               <summary>Et si je fais moins de 50 ventes par mois ?</summary>
