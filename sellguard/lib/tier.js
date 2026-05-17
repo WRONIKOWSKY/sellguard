@@ -41,7 +41,12 @@ const TIER_LIMITS = {
   },
   seller: {
     analyze: 50,
-    litige: 30,
+    // Capé bas volontairement : /api/litige tourne sur Opus 4.7 (modèle cher,
+    // ~0,15-0,25 € l'appel). 10/jour couvre large un mauvais jour de litiges
+    // légitime (un reseller a rarement >2-3 litiges/jour). Le vrai plafond de
+    // coût reste un cap MENSUEL (voir migration increment_anthropic_usage),
+    // un cap journalier seul ne borne pas le pire cas sur 30 jours.
+    litige: 10,
     upload: 30,
   },
   pro: {
