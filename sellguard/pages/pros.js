@@ -278,7 +278,7 @@ export default function Pros() {
         <section className="section">
           <div className="section-kicker">Pour qui</div>
           <h2 className="serif">Tu te reconnais dans <span className="italic">un de ces profils{' '}?</span></h2>
-          <p className="section-lead">C'est pour les revendeurs réguliers qui vendent des pièces avec une vraie valeur. Si tu vends 2 pulls par mois à 15 €, ce n'est pas pour toi (et c'est OK).</p>
+          <p className="section-lead">C'est pour les revendeurs réguliers qui vendent des pièces à vraie valeur et qui expédient en volume. Plus tu vends, plus un litige perdu coûte cher, et plus SellCov te rapporte.</p>
 
           <div className="three-col">
             <div className="col-card">
@@ -287,7 +287,7 @@ export default function Pros() {
               <ul>
                 <li>Stock curaté chaque semaine</li>
                 <li>Items uniques, irremplaçables</li>
-                <li>Litiges = perte sèche</li>
+                <li>Un litige perdu, c'est une perte sèche</li>
               </ul>
             </div>
             <div className="col-card">
@@ -296,14 +296,14 @@ export default function Pros() {
               <ul>
                 <li>Tickets élevés, enjeu élevé</li>
                 <li>Acheteurs informés et pointilleux</li>
-                <li>Réputation = ton vrai capital</li>
+                <li>Ta réputation, c'est ton vrai capital</li>
               </ul>
             </div>
             <div className="col-card">
               <h3>Boutique multi-marketplace</h3>
               <p>Tu vends sur plusieurs plateformes avec une équipe. Gros volume.</p>
               <ul>
-                <li>Volume = plus de litiges absolus</li>
+                <li>Plus de volume, plus de litiges en absolu</li>
                 <li>Process pro nécessaire</li>
                 <li>Comptes équipe requis</li>
               </ul>
@@ -320,15 +320,15 @@ export default function Pros() {
           <div className="roi-card">
             <div className="roi-line">
               <span className="roi-label">Abonnement SellCov Pro</span>
-              <span className="roi-value">49 € / mois</span>
+              <span className="roi-value">49 € par mois</span>
             </div>
             <div className="roi-line">
               <span className="roi-label">Un litige perdu sur un article à 200 €</span>
-              <span className="roi-value">- 200 €</span>
+              <span className="roi-value">200 € perdus</span>
             </div>
             <div className="roi-line roi-total">
               <span className="roi-label">Un seul litige évité dans l'année</span>
-              <span className="roi-value">= abonnement amorti</span>
+              <span className="roi-value">abonnement remboursé</span>
             </div>
           </div>
           <p style={{ color: "var(--text-muted)", fontSize: 14, marginTop: 18, lineHeight: 1.6 }}>
@@ -342,7 +342,7 @@ export default function Pros() {
         {/* Offre bêta */}
         <section className="section">
           <div className="section-kicker">Cohorte fondateurs</div>
-          <h2 className="serif">Une cohorte de 10, <span className="italic">pas une bêta ouverte.</span></h2>
+          <h2 className="serif">Dix places, <span className="italic">choisies à la main.</span></h2>
           <p className="section-lead">On ouvre 10 places de revendeurs fondateurs. 30 jours tout débloqué et une mise en place en visio avec le fondateur. Ensuite tu gardes un tarif fondateur verrouillé pendant que le public passe à 49 ou 99. Tout ce qu'on te demande en retour : un retour franc, et le droit de raconter ton cas si ça marche.</p>
 
           <div className="offer-box">
@@ -459,8 +459,8 @@ export default function Pros() {
               <p>Si tu continues, tu gardes un tarif fondateur verrouillé, sous le prix public (49 ou 99 €/mois), tant que tu restes. Si tu arrêtes, tu arrêtes. Pas de prélèvement surprise puisqu'on ne t'a jamais demandé ta CB.</p>
             </details>
             <details className="faq-item">
-              <summary>Et si je fais moins de 50 ventes par mois ?</summary>
-              <p>Le plan Découverte gratuit te permet de tester sur 1 envoi par mois. En dessous de 50 ventes/mois, l'abonnement Pro vaut probablement pas le coup.</p>
+              <summary>Et si je débute ou je fais peu de volume ?</summary>
+              <p>Le plan Découverte gratuit te laisse tester sur 1 envoi par mois, sans carte bancaire. Quand ton volume grimpe, la cohorte fondateurs t'attend.</p>
             </details>
             <details className="faq-item">
               <summary>Mes vidéos sont-elles vraiment privées ?</summary>
@@ -468,7 +468,7 @@ export default function Pros() {
             </details>
             <details className="faq-item">
               <summary>SellCov fonctionne sur Vinted standard ?</summary>
-              <p>Oui. Mais notre cœur de cible reste Depop, Etsy, Vinted Pro, Grailed et Vestiaire, là où les tickets sont plus élevés. Sur Vinted standard l'enjeu moyen par vente est plus faible.</p>
+              <p>Oui. Mais on est surtout calibré pour Depop, Etsy, Vinted Pro, Grailed et Vestiaire, là où les tickets sont plus élevés. Sur Vinted standard l'enjeu moyen par vente est plus faible.</p>
             </details>
           </div>
         </section>
