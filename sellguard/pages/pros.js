@@ -3,18 +3,18 @@ import Link from "next/link";
 import { useState } from "react";
 
 const PLATFORMS = [
-  { value: "depop", label: "Depop" },
-  { value: "etsy", label: "Etsy" },
   { value: "vinted_pro", label: "Vinted Pro" },
   { value: "grailed", label: "Grailed" },
-  { value: "vestiaire", label: "Vestiaire" },
+  { value: "etsy", label: "Etsy" },
+  { value: "depop", label: "Depop" },
+  { value: "vestiaire", label: "Vestiaire Collective" },
   { value: "autre", label: "Autre" },
 ];
 
 const VOLUMES = [
-  { value: "50_100", label: "50 à 100 ventes / mois" },
-  { value: "100_500", label: "100 à 500 ventes / mois" },
-  { value: "500_plus", label: "500+ ventes / mois" },
+  { value: "v30_50", label: "30 à 50 ventes par mois" },
+  { value: "v50_100", label: "entre 50 et 100 ventes par mois" },
+  { value: "v100_plus", label: "100 ventes ou plus par mois" },
 ];
 
 export default function Pros() {
@@ -52,19 +52,19 @@ export default function Pros() {
   return (
     <>
       <Head>
-        <title>Cohorte fondateurs · 10 places · SellCov</title>
+        <title>Cohorte fondateur, places limitées, SellCov</title>
         <meta
           name="description"
-          content="10 revendeurs vintage fondateurs, 50+ ventes/mois. 30 jours tout débloqué, mise en place avec le fondateur, tarif fondateur verrouillé ensuite. Sur candidature."
+          content="Cohorte fondateur pour revendeurs pros et boutiques vintage. 30 jours d'accès complet, mise en place avec le fondateur, tarif fondateur verrouillé ensuite. Sur candidature."
         />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="canonical" href="https://www.sellcov.com/pros" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.sellcov.com/pros" />
-        <meta property="og:title" content="Cohorte fondateurs · 10 places · SellCov" />
+        <meta property="og:title" content="Cohorte fondateur, places limitées, SellCov" />
         <meta
           property="og:description"
-          content="10 revendeurs vintage fondateurs. 30 jours tout débloqué + onboarding fondateur, puis tarif fondateur verrouillé. Sur candidature."
+          content="Cohorte fondateur pour revendeurs pros et boutiques vintage. 30 jours d'accès complet, mise en place avec le fondateur, puis tarif fondateur verrouillé. Sur candidature."
         />
         <meta property="og:image" content="https://www.sellcov.com/logo.png" />
         <link rel="icon" type="image/png" href="/logo.png" />
@@ -164,7 +164,7 @@ export default function Pros() {
         .col-card p { color: var(--text-muted); font-size: 14.5px; line-height: 1.55; }
         .col-card ul { list-style: none; padding: 0; margin-top: 14px; }
         .col-card li { color: var(--text-muted); font-size: 14px; padding: 6px 0; padding-left: 18px; position: relative; }
-        .col-card li::before { content: "·"; color: var(--green); position: absolute; left: 0; font-weight: 700; font-size: 18px; line-height: 1; }
+        .col-card li::before { content: ""; position: absolute; left: 0; top: 13px; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
 
         .roi-card {
           background: linear-gradient(180deg, var(--green-bg), transparent 90%), var(--bg-card);
@@ -187,7 +187,7 @@ export default function Pros() {
         .offer-box .price del { color: var(--text-dim); font-size: 18px; margin-right: 12px; font-family: var(--font-inter); }
         .offer-list { margin: 0 0 24px 0; padding: 0; list-style: none; }
         .offer-list li { color: var(--text); padding: 6px 0 6px 24px; position: relative; font-size: 14.5px; }
-        .offer-list li::before { content: "✓"; color: var(--green); position: absolute; left: 0; font-weight: 700; }
+        .offer-list li::before { content: ""; position: absolute; left: 0; top: 14px; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
 
         form.app-form {
           background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
@@ -231,9 +231,10 @@ export default function Pros() {
         .form-success p { color: var(--text-muted); }
 
         details.faq-item { border-bottom: 1px solid var(--border); padding: 18px 0; }
-        details.faq-item summary { font-size: 16px; font-weight: 500; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
-        details.faq-item summary::after { content: "+"; color: var(--text-muted); font-size: 22px; transition: transform .2s; }
-        details.faq-item[open] summary::after { transform: rotate(45deg); }
+        details.faq-item summary { font-size: 16px; font-weight: 500; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+        details.faq-item summary::-webkit-details-marker { display: none; }
+        details.faq-item summary::after { content: ""; flex-shrink: 0; width: 12px; height: 12px; border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted); transform: rotate(45deg); transition: transform .2s; margin-bottom: 4px; }
+        details.faq-item[open] summary::after { transform: rotate(-135deg); margin-bottom: 0; }
         details.faq-item p { color: var(--text-muted); margin-top: 10px; font-size: 14.5px; line-height: 1.6; }
 
         footer.pros-footer { border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; color: var(--text-dim); font-size: 13px; max-width: var(--maxw); margin: 60px auto 0; }
@@ -244,33 +245,33 @@ export default function Pros() {
       <header>
         <div className="nav">
           <Link href="/"><span style={{ display: "flex", alignItems: "center" }}><img src="/logo.png" alt="SellCov" className="logo-img" /></span></Link>
-          <Link href="/"><span className="nav-back">← Retour</span></Link>
+          <Link href="/"><span className="nav-back">Retour</span></Link>
         </div>
       </header>
 
       <main className="container">
         {/* Hero */}
-        <div className="eyebrow"><span className="dot"></span>Cohorte fondateurs · 10 places</div>
+        <div className="eyebrow"><span className="dot"></span>Cohorte fondateurs, places limitées</div>
         <h1 className="hero-h1">
-          La preuve cryptographique
-          <span className="italic">pour les vendeurs vintage qui jouent gros.</span>
+          Tes ventes,
+          <span className="italic">à l'abri des litiges.</span>
         </h1>
         <p className="hero-sub">
-          Tu fais 50+ ventes/mois sur Depop, Etsy, Vinted Pro, Grailed ou Vestiaire. Un seul litige peut te coûter cher. SellCov le tue avant qu'il commence : preuve vidéo horodatée, défense IA, ancrage Bitcoin.
+          Tu es vendeur professionnel ou tu possèdes une boutique en ligne sur les marketplaces. La vidéo horodatée dissuade l'arnaque avant qu'elle existe, et tient comme preuve si un litige arrive. Preuve vidéo horodatée, défense IA, ancrage Bitcoin.
         </p>
 
         <div className="hero-stats">
           <div className="stat-card">
-            <div className="stat-value">90 sec</div>
-            <div className="stat-label">Pour filmer un envoi et générer le certificat horodaté.</div>
+            <div className="stat-value">Dissuasion</div>
+            <div className="stat-label">Tu filmes l'envoi et tu génères un certificat horodaté. L'acheteur sait que la preuve existe, l'arnaque s'éteint avant le litige.</div>
           </div>
           <div className="stat-card">
-            <div className="stat-value">Art. 1366</div>
-            <div className="stat-label">Du Code civil. La base légale de tes preuves : SHA-256, signature HMAC, auteur identifiable.</div>
+            <div className="stat-value">Recevabilité</div>
+            <div className="stat-label">Articles 1366 et 1358 du Code civil. Auteur identifiable, intégrité garantie, preuve admissible par tout moyen.</div>
           </div>
           <div className="stat-card">
-            <div className="stat-value">Bitcoin</div>
-            <div className="stat-label">Chaque certificat est ancré dans la blockchain. Personne, pas même nous, ne peut le modifier.</div>
+            <div className="stat-value">Intégrité</div>
+            <div className="stat-label">Empreinte SHA-256, signature HMAC et ancrage Bitcoin sur chaque preuve. Personne, pas même nous, ne peut la modifier.</div>
           </div>
         </div>
 
@@ -278,88 +279,85 @@ export default function Pros() {
         <section className="section">
           <div className="section-kicker">Pour qui</div>
           <h2 className="serif">Tu te reconnais dans <span className="italic">un de ces profils{' '}?</span></h2>
-          <p className="section-lead">C'est pour les revendeurs réguliers qui vendent des pièces à vraie valeur et qui expédient en volume. Plus tu vends, plus un litige perdu coûte cher, et plus SellCov te rapporte.</p>
+          <p className="section-lead">C'est pour les revendeurs qui vendent des pièces à vraie valeur et qui expédient régulièrement. La vidéo horodatée protège chaque envoi et coupe court aux litiges avant qu'ils ne partent.</p>
 
           <div className="three-col">
             <div className="col-card">
-              <h3>Friperie en ligne pro</h3>
-              <p>Tu vends des pièces vintage régulièrement sur Depop, Etsy ou Vinted Pro.</p>
+              <h3>Boutique vintage en ligne</h3>
+              <p>Tu vends des pièces vintage de façon régulière sur Vinted Pro, Grailed, Etsy ou Depop.</p>
               <ul>
-                <li>Stock curaté chaque semaine</li>
-                <li>Items uniques, irremplaçables</li>
-                <li>Un litige perdu, c'est une perte sèche</li>
+                <li>Stock curaté en continu</li>
+                <li>Pièces uniques, difficiles à remplacer</li>
+                <li>Chaque envoi protégé par une preuve horodatée</li>
               </ul>
             </div>
             <div className="col-card">
-              <h3>Reseller archive / streetwear</h3>
+              <h3>Reseller archive et streetwear</h3>
               <p>Tu vends du workwear, du militaire, des archives de marques recherchées.</p>
               <ul>
-                <li>Tickets élevés, enjeu élevé</li>
-                <li>Acheteurs informés et pointilleux</li>
-                <li>Ta réputation, c'est ton vrai capital</li>
+                <li>Pièces à forte valeur, acheteurs exigeants</li>
+                <li>État précis filmé et horodaté au départ</li>
+                <li>Ta réputation de vendeur protégée</li>
               </ul>
             </div>
             <div className="col-card">
               <h3>Boutique multi-marketplace</h3>
-              <p>Tu vends sur plusieurs plateformes avec une équipe. Gros volume.</p>
+              <p>Tu vends sur plusieurs plateformes, avec un vrai volume d'envois.</p>
               <ul>
-                <li>Plus de volume, plus de litiges en absolu</li>
-                <li>Process pro nécessaire</li>
-                <li>Comptes équipe requis</li>
+                <li>Un process de preuve identique partout</li>
+                <li>Moins de litiges grâce à la dissuasion</li>
+                <li>Un dossier prêt si un acheteur conteste</li>
               </ul>
             </div>
           </div>
         </section>
 
-        {/* Combien ça vaut */}
+        {/* Ce que ça change */}
         <section className="section">
-          <div className="section-kicker">Combien ça vaut</div>
-          <h2 className="serif">Une logique <span className="italic">simple.</span></h2>
-          <p className="section-lead">SellCov Pro coûte 49 €/mois. Compare avec un litige perdu sur une pièce moyenne :</p>
+          <div className="section-kicker">Ce que ça change</div>
+          <h2 className="serif">Le vrai coût d'un litige <span className="italic">n'est pas que l'article.</span></h2>
+          <p className="section-lead">Une vidéo horodatée fait deux choses. Elle dissuade l'arnaque avant qu'elle existe, parce que l'acheteur sait que la preuve est là. Et si un litige arrive quand même, elle tient comme preuve dans tes échanges.</p>
 
-          <div className="roi-card">
-            <div className="roi-line">
-              <span className="roi-label">Abonnement SellCov Pro</span>
-              <span className="roi-value">49 € par mois</span>
+          <div className="three-col">
+            <div className="col-card">
+              <h3>Avant le litige</h3>
+              <p>L'acheteur voit que l'envoi est filmé et horodaté. La plupart des fausses réclamations ne partent jamais.</p>
             </div>
-            <div className="roi-line">
-              <span className="roi-label">Un litige perdu sur un article à 200 €</span>
-              <span className="roi-value">200 € perdus</span>
+            <div className="col-card">
+              <h3>Pendant le litige</h3>
+              <p>Tu réponds avec une preuve horodatée, intègre et opposable, au lieu d'un simple screenshot de bordereau.</p>
             </div>
-            <div className="roi-line roi-total">
-              <span className="roi-label">Un seul litige évité dans l'année</span>
-              <span className="roi-value">abonnement remboursé</span>
+            <div className="col-card">
+              <h3>Ce que tu protèges</h3>
+              <p>Pas seulement la pièce. Le temps passé à te défendre, ta note vendeur et la santé de ton compte.</p>
             </div>
           </div>
-          <p style={{ color: "var(--text-muted)", fontSize: 14, marginTop: 18, lineHeight: 1.6 }}>
-            SellCov ne garantit pas que tu gagnes tous tes litiges. Ce qu'on te donne : une preuve <strong style={{ color: "#fff" }}>horodatée, intègre, opposable</strong> en médiation. Aujourd'hui tu n'as souvent qu'un screenshot de bordereau.
-          </p>
-          <p style={{ color: "var(--text-dim)", fontSize: 13, marginTop: 12, fontStyle: "italic" }}>
-            Pas de pourcentage de gain garanti. Le résultat dépend de chaque marketplace et de la qualité de tes preuves.
+          <p style={{ color: "var(--text-dim)", fontSize: 13, marginTop: 18, fontStyle: "italic" }}>
+            SellCov ne garantit pas l'issue d'un litige. Le résultat dépend de chaque marketplace et de la qualité de tes preuves.
           </p>
         </section>
 
-        {/* Offre bêta */}
+        {/* Offre fondateur */}
         <section className="section">
           <div className="section-kicker">Cohorte fondateurs</div>
-          <h2 className="serif">Dix places, <span className="italic">choisies à la main.</span></h2>
-          <p className="section-lead">On ouvre 10 places de revendeurs fondateurs. 30 jours tout débloqué et une mise en place en visio avec le fondateur. Ensuite tu gardes un tarif fondateur verrouillé pendant que le public passe à 49 ou 99. Tout ce qu'on te demande en retour : un retour franc, et le droit de raconter ton cas si ça marche.</p>
+          <h2 className="serif">Cohorte fondateur <span className="italic">limitée.</span></h2>
+          <p className="section-lead">Tu démarres avec 30 jours d'accès complet et une mise en place en visio avec le fondateur. Ensuite tu gardes un tarif fondateur verrouillé pendant que le tarif public augmente. En contrepartie, un retour franc et le droit de raconter ton cas si ça marche.</p>
 
           <div className="offer-box">
             <h3>Place fondateur</h3>
-            <div className="price">0 € <small>les 30 premiers jours, tout débloqué</small></div>
+            <div className="price">0 € <small>les 30 premiers jours, accès complet</small></div>
             <ul className="offer-list">
               <li>Certificats vidéo illimités</li>
-              <li>IA défense automatique (illimité)</li>
+              <li>IA défense automatique illimitée</li>
               <li>Génération d'annonce illimitée</li>
               <li>Ancrage Bitcoin sur chaque preuve</li>
               <li>Mise en place en visio avec le fondateur</li>
-              <li>Support email prioritaire (réponse sous 24h)</li>
+              <li>Support email prioritaire</li>
               <li>Tarif fondateur verrouillé après les 30 jours, sous le prix public</li>
-              <li>Aucune CB demandée. Pas d'engagement.</li>
+              <li>Aucune carte bancaire demandée, pas d'engagement</li>
             </ul>
             <p style={{ color: "var(--text-muted)", fontSize: 14, lineHeight: 1.6 }}>
-              <strong style={{ color: "#fff" }}>En échange :</strong> un retour franc sur ce qui marche et ce qui manque, et le droit de raconter ton cas si ça marche. Pas de revente de données, pas de spam.
+              <strong style={{ color: "#fff" }}>En contrepartie :</strong> un retour franc sur ce qui marche et ce qui manque, et le droit de raconter ton cas si ça marche. Pas de revente de données, pas de spam.
             </p>
           </div>
         </section>
@@ -367,12 +365,12 @@ export default function Pros() {
         {/* Form */}
         <section className="section" id="form">
           <div className="section-kicker">Candidature</div>
-          <h2 className="serif">Candidate en 60 secondes.</h2>
-          <p className="section-lead">10 places, pas une de plus. On lit chaque candidature et on répond sous 48h. Si ton profil colle, on cale ta mise en place et on t'ouvre l'accès.</p>
+          <h2 className="serif">Candidate en quelques minutes.</h2>
+          <p className="section-lead">Les places sont limitées. On lit chaque candidature et on répond sous 48h. Si ton profil colle, on cale ta mise en place et on t'ouvre l'accès.</p>
 
           {status === "sent" ? (
             <div className="form-success">
-              <h3>✓ Candidature reçue</h3>
+              <h3>Candidature reçue</h3>
               <p>Merci. On lit ta candidature et on revient vers toi sous 48h sur {email}.</p>
             </div>
           ) : (
@@ -451,24 +449,24 @@ export default function Pros() {
           <h2 className="serif">Ce qu'on nous demande <span className="italic">le plus souvent.</span></h2>
           <div style={{ marginTop: 18 }}>
             <details className="faq-item">
-              <summary>Pourquoi vous demandez mon Instagram / Discord ?</summary>
+              <summary>Pourquoi vous demandez mon Instagram ou Discord ?</summary>
               <p>Pour vérifier que tu es un vrai revendeur, pas un compte fictif. On ne te suit pas, on ne te DM pas.</p>
             </details>
             <details className="faq-item">
               <summary>Que se passe-t-il après les 30 jours ?</summary>
-              <p>Si tu continues, tu gardes un tarif fondateur verrouillé, sous le prix public (49 ou 99 €/mois), tant que tu restes. Si tu arrêtes, tu arrêtes. Pas de prélèvement surprise puisqu'on ne t'a jamais demandé ta CB.</p>
+              <p>Si tu continues, tu gardes un tarif fondateur verrouillé, sous le prix public, tant que tu restes. Si tu arrêtes, tu arrêtes. Pas de prélèvement surprise puisqu'on ne t'a jamais demandé ta carte bancaire.</p>
             </details>
             <details className="faq-item">
               <summary>Et si je débute ou je fais peu de volume ?</summary>
-              <p>Le plan Découverte gratuit te laisse tester sur 1 envoi par mois, sans carte bancaire. Quand ton volume grimpe, la cohorte fondateurs t'attend.</p>
+              <p>Le plan Découverte gratuit te laisse tester sans carte bancaire, avec un certificat vidéo par mois. Quand ton volume grimpe, la cohorte fondateur t'attend.</p>
             </details>
             <details className="faq-item">
               <summary>Mes vidéos sont-elles vraiment privées ?</summary>
-              <p>Oui. Tes vidéos sont chiffrées, stockées sur serveurs européens (RGPD), accessibles uniquement depuis ton compte. On ne les visionne pas, on ne les revend pas, on ne les partage pas. L'empreinte SHA-256 + signature HMAC + ancrage Bitcoin garantissent l'intégrité sans qu'on accède au contenu.</p>
+              <p>Oui. Tes vidéos sont chiffrées, stockées sur serveurs européens (RGPD), accessibles uniquement depuis ton compte. On ne les visionne pas, on ne les revend pas, on ne les partage pas. L'empreinte SHA-256, la signature HMAC et l'ancrage Bitcoin garantissent l'intégrité sans qu'on accède au contenu.</p>
             </details>
             <details className="faq-item">
               <summary>SellCov fonctionne sur Vinted standard ?</summary>
-              <p>Oui. Mais on est surtout calibré pour Depop, Etsy, Vinted Pro, Grailed et Vestiaire, là où les tickets sont plus élevés. Sur Vinted standard l'enjeu moyen par vente est plus faible.</p>
+              <p>Oui. SellCov est surtout pensé pour Vinted Pro, Grailed, Etsy, Depop et Vestiaire Collective, là où les pièces ont une vraie valeur. Sur Vinted standard la valeur moyenne par vente est plus basse, mais la protection fonctionne de la même façon.</p>
             </details>
           </div>
         </section>
@@ -476,10 +474,10 @@ export default function Pros() {
 
       <footer className="pros-footer">
         <div style={{ marginBottom: 14 }}>
-          <Link href="/faq">FAQ</Link>·
-          <a href="mailto:hello@sellcov.com">Contact</a>·
-          <Link href="/mentions-legales">Mentions légales</Link>·
-          <Link href="/cgu">CGU</Link>·
+          <Link href="/faq">FAQ</Link>
+          <a href="mailto:hello@sellcov.com">Contact</a>
+          <Link href="/mentions-legales">Mentions légales</Link>
+          <Link href="/cgu">CGU</Link>
           <Link href="/confidentialite">Confidentialité</Link>
         </div>
         <div>© 2026 SellCov</div>

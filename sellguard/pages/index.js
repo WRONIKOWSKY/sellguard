@@ -25,17 +25,17 @@ const PAGE_HTML = `
 
 <section class="hero">
   <h1 class="h1 serif"><span data-i18n="hero_h1_1">Revends</span><span class="italic" data-i18n="hero_h1_2">sans te faire arnaquer.</span></h1>
-  <p class="hero-sub" data-i18n="hero_sub">Une preuve solide avant l'envoi. Un dossier complet en cas de litige.</p>
-  <p class="hero-subsub" data-i18n="hero_subsub">Preuve horodatée. Défense automatique.</p>
+  <p class="hero-sub" data-i18n="hero_sub">Pour les revendeurs pros et boutiques vintage sur les marketplaces. La vidéo horodatée protège ta vente avant même qu'un litige existe.</p>
+  <p class="hero-subsub" data-i18n="hero_subsub">Une preuve horodatée à chaque envoi. Défense IA si un litige arrive.</p>
   <div class="hero-stats">
     <span><strong data-i18n="stat1">Preuves certifiées</strong></span>
     <span><strong data-i18n="stat2">Données chiffrées en France</strong></span>
-    <span><strong data-i18n="stat3">Annulable en 1 clic</strong></span>
+    <span><strong data-i18n="stat3">Annulable à tout moment</strong></span>
   </div>
   <div class="cta-row">
     <a href="/demo" class="btn btn-primary" data-i18n="hero_cta">Voir la démo</a>
   </div>
-  <div class="platforms"><strong>Depop</strong>·<strong>Etsy</strong>·<strong>Vinted Pro</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong></div>
+  <div class="platforms"><strong>Vinted Pro</strong><strong>Grailed</strong><strong>Etsy</strong><strong>Depop</strong><strong>Vestiaire Collective</strong></div>
 </section>
 
 <section class="demo" id="demo">
@@ -78,19 +78,19 @@ const PAGE_HTML = `
       <span class="tag" data-i18n="f2_tag">Protection</span>
       <h3 class="serif"><span data-i18n="f2_h1">Certifie avant</span><br><span class="italic" data-i18n="f2_h2">d'expédier.</span></h3>
       <p data-i18n="f2_p">Crée une preuve utilisable en cas de litige.</p>
-      <div class="cta-area"><a href="/protection" class="btn btn-green btn-sm" data-i18n="f2_btn">Protéger</a><span style="color:var(--text-dim);font-size:13px" data-i18n="f2_time">~1 min 30 par envoi</span></div>
+      <div class="cta-area"><a href="/protection" class="btn btn-green btn-sm" data-i18n="f2_btn">Protéger</a><span style="color:var(--text-dim);font-size:13px" data-i18n="f2_time">Quelques minutes par envoi</span></div>
     </div>
     <div class="feature feature-violet reveal">
       <span class="tag" data-i18n="f1_tag">Annonce</span>
-      <h3 class="serif"><span data-i18n="f1_h1">Génère ton annonce</span><br><span class="italic" data-i18n="f1_h2">en 10 secondes.</span></h3>
+      <h3 class="serif"><span data-i18n="f1_h1">Génère ton annonce</span><br><span class="italic" data-i18n="f1_h2">en quelques secondes.</span></h3>
       <p data-i18n="f1_p">Photographie l'article, reçois une annonce rédigée et prête à publier.</p>
-      <div class="cta-area"><a href="/annonce" class="btn btn-violet btn-sm" data-i18n="f1_btn">Essayer</a><span style="color:var(--text-dim);font-size:13px" data-i18n="f1_time">~10 sec par annonce</span></div>
+      <div class="cta-area"><a href="/annonce" class="btn btn-violet btn-sm" data-i18n="f1_btn">Essayer</a><span style="color:var(--text-dim);font-size:13px" data-i18n="f1_time">Quelques secondes par annonce</span></div>
     </div>
     <div class="feature feature-pink reveal">
       <span class="tag" data-i18n="f3_tag">Litige</span>
       <h3 class="serif"><span data-i18n="f3_h1">Défense automatique</span><br><span class="italic" data-i18n="f3_h2">en 1 clic.</span></h3>
       <p data-i18n="f3_p">Un dossier de défense prêt à envoyer.</p>
-      <div class="cta-area"><a href="/litige" class="btn btn-pink btn-sm" data-i18n="f3_btn">Gérer un litige</a><span style="color:var(--text-dim);font-size:13px" data-i18n="f3_time">~30 sec de rédaction</span></div>
+      <div class="cta-area"><a href="/litige" class="btn btn-pink btn-sm" data-i18n="f3_btn">Gérer un litige</a><span style="color:var(--text-dim);font-size:13px" data-i18n="f3_time">Rédaction quasi instantanée</span></div>
     </div>
   </div>
 </section>
@@ -103,24 +103,20 @@ const PAGE_HTML = `
   </div>
   <div class="legal-grid">
     <div class="legal-card reveal" style="border-color:rgba(247,147,26,.25)">
-      <div class="legal-icon" aria-hidden="true" style="color:#F7931A">₿</div>
       <h3 class="legal-title" data-i18n="lg_c4_t">Ancrage Bitcoin</h3>
       <p class="legal-text" data-i18n="lg_c4_p">Chaque certificat est ancré dans la blockchain Bitcoin. Vérifiable par n'importe qui, sans dépendre de SellCov. Personne, pas même nous, ne peut le modifier.</p>
     </div>
     <div class="legal-card reveal">
-      <div class="legal-icon" aria-hidden="true">⚖︎</div>
       <h3 class="legal-title" data-i18n="lg_c1_t">Article 1366 du Code civil</h3>
       <p class="legal-text" data-i18n="lg_c1_p">L'écrit électronique a la même force probante que l'écrit papier dès lors que l'auteur est identifiable et l'intégrité garantie. Nos certificats cochent ces deux critères.</p>
     </div>
     <div class="legal-card reveal">
-      <div class="legal-icon" aria-hidden="true">⌘</div>
       <h3 class="legal-title" data-i18n="lg_c2_t">Intégrité cryptographique</h3>
-      <p class="legal-text" data-i18n="lg_c2_p">Empreinte SHA-256 + signature HMAC sur chaque vidéo. Toute modification de la preuve est instantanément détectable et le certificat devient invalide.</p>
+      <p class="legal-text" data-i18n="lg_c2_p">Empreinte SHA-256, signature HMAC et ancrage Bitcoin sur chaque vidéo. Toute modification de la preuve est instantanément détectable et le certificat devient invalide.</p>
     </div>
     <div class="legal-card reveal">
-      <div class="legal-icon" aria-hidden="true">§</div>
       <h3 class="legal-title" data-i18n="lg_c3_t">Recevable comme moyen de preuve</h3>
-      <p class="legal-text" data-i18n="lg_c3_p">Article 1358 du Code civil : la preuve peut être apportée par tout moyen. Argument utilisable dans tes litiges Depop, Etsy, Vinted Pro, Grailed, Vestiaire et procédures civiles.</p>
+      <p class="legal-text" data-i18n="lg_c3_p">Article 1358 du Code civil : la preuve peut être apportée par tout moyen. Argument utilisable dans tes litiges Vinted Pro, Grailed, Etsy, Depop, Vestiaire Collective et procédures civiles.</p>
     </div>
   </div>
   <div class="legal-dots" id="legal-dots">
@@ -136,26 +132,26 @@ const PAGE_HTML = `
   <div class="section-head reveal">
     <div class="section-kicker" data-i18n="sc_kicker">Les arnaques que tu vas rencontrer</div>
     <h2 class="section-title serif"><span data-i18n="sc_t1">Les arnaques qui coûtent</span><br><span class="italic" data-i18n="sc_t2">le plus cher aux vendeurs.</span></h2>
-    <p class="section-sub" data-i18n="sc_sub">Voici les arnaques les plus fréquentes et comment SellCov te protège.</p>
+    <p class="section-sub" data-i18n="sc_sub">Les arnaques que vivent les revendeurs pros, et la réponse SellCov pour chacune.</p>
   </div>
   <div class="scams scams-3">
     <div class="scam-card reveal">
       <span class="scam-number">Arnaque 1</span>
       <span class="scam-label" data-i18n="s1_title">Colis « jamais reçu »</span>
       <div class="scam-quote" data-i18n="s1_quote">« Je n'ai jamais reçu le colis. Je demande un remboursement. »</div>
-      <div class="scam-solve"><span class="check">✓</span><span data-i18n="s1_solve">SellCov fournit la vidéo horodatée du dépôt et l'étiquette filmée.</span></div>
+      <div class="scam-solve"><span class="check" aria-hidden="true"></span><span data-i18n="s1_solve">SellCov fournit la vidéo horodatée de l'envoi et le suivi du colis via le tracker.</span></div>
     </div>
     <div class="scam-card reveal">
       <span class="scam-number">Arnaque 2</span>
       <span class="scam-label" data-i18n="s2_title">Article « abîmé »</span>
       <div class="scam-quote" data-i18n="s2_quote">« L'article est arrivé troué. Je veux être remboursé. »</div>
-      <div class="scam-solve"><span class="check">✓</span><span data-i18n="s2_solve">SellCov prouve l'état exact avant expédition avec la vidéo 360° horodatée.</span></div>
+      <div class="scam-solve"><span class="check" aria-hidden="true"></span><span data-i18n="s2_solve">SellCov prouve l'état exact avant expédition avec la vidéo 360° horodatée.</span></div>
     </div>
     <div class="scam-card reveal">
       <span class="scam-number">Arnaque 3</span>
       <span class="scam-label" data-i18n="s3_title">Réclamation tardive</span>
-      <div class="scam-quote" data-i18n="s3_quote">« L'article a un défaut. » (3 semaines après réception)</div>
-      <div class="scam-solve"><span class="check">✓</span><span data-i18n="s3_solve">SellCov horodate l'état exact à l'envoi. Toute usure post-réception est exclue.</span></div>
+      <div class="scam-quote" data-i18n="s3_quote">« L'article a un défaut. » (plusieurs semaines après réception)</div>
+      <div class="scam-solve"><span class="check" aria-hidden="true"></span><span data-i18n="s3_solve">L'état de la pièce est filmé et horodaté au départ. Ce qui arrive après la réception ne t'est plus opposable.</span></div>
     </div>
   </div>
   <div class="scams-dots" id="scams-dots">
@@ -169,26 +165,26 @@ const PAGE_HTML = `
   <div class="section-head reveal">
     <div class="section-kicker" data-i18n="pl_kicker">Nos offres</div>
     <h2 class="section-title serif"><span data-i18n="pl_t1">Simple,</span><br><span class="italic" data-i18n="pl_t2">sans surprise.</span></h2>
-    <p class="section-sub" data-i18n="pl_sub">Aucun engagement, annulable en 1 clic.</p>
+    <p class="section-sub" data-i18n="pl_sub">Sans engagement, annulable à tout moment.</p>
   </div>
   <div class="pricing">
     <div class="plan reveal">
       <h4 data-i18n="p1_name">Découverte</h4>
-      <div class="plan-price">0 € <small data-i18n="p1_unit">/ mois</small></div>
+      <div class="plan-price">0 € <small data-i18n="p1_unit">par mois</small></div>
       <p class="plan-desc" data-i18n="p1_desc">Pour tester l'outil sans engagement.</p>
       <ul>
-        <li data-i18n="p1_f1">1 certificat vidéo / mois</li>
-        <li data-i18n="p1_f2">IA défense automatique (1 cas)</li>
-        <li data-i18n="p1_f3">Génération d'annonce (3 / mois)</li>
+        <li data-i18n="p1_f1">Un certificat vidéo par mois</li>
+        <li data-i18n="p1_f2">IA défense automatique</li>
+        <li data-i18n="p1_f3">Génération d'annonce limitée</li>
         <li data-i18n="p1_f4">Support email</li>
       </ul>
       <a href="/compte" class="btn btn-ghost" data-i18n="p1_btn">Tester gratuitement</a>
     </div>
     <div class="plan featured reveal">
-      <span class="plan-ribbon" data-i18n="p2_ribbon">★ Recommandé</span>
+      <span class="plan-ribbon" data-i18n="p2_ribbon">Recommandé</span>
       <h4 data-i18n="p2_name">Pro</h4>
-      <div class="plan-price">49 € <small data-i18n="per_mo">/ mois</small></div>
-      <p class="plan-desc" data-i18n="p2_desc">Pour les friperies pros et revendeurs vintage (50 à 500 ventes/mois).</p>
+      <div class="plan-price">49 € <small data-i18n="per_mo">par mois</small></div>
+      <p class="plan-desc" data-i18n="p2_desc">Pour les revendeurs pros et boutiques vintage sur les marketplaces.</p>
       <ul>
         <li data-i18n="p2_f1">Certificats vidéo illimités</li>
         <li data-i18n="p2_f2">IA défense automatique</li>
@@ -200,14 +196,13 @@ const PAGE_HTML = `
     </div>
     <div class="plan reveal">
       <h4 data-i18n="p3_name">Business</h4>
-      <div class="plan-price">99 € <small data-i18n="per_mo">/ mois</small></div>
-      <p class="plan-desc" data-i18n="p3_desc">Pour les boutiques avec équipe et gros volumes (500+ ventes/mois).</p>
+      <div class="plan-price">99 € <small data-i18n="per_mo">par mois</small></div>
+      <p class="plan-desc" data-i18n="p3_desc">Pour les boutiques et revendeurs à très gros volume de ventes.</p>
       <ul>
         <li data-i18n="p3_f1">Tout Pro inclus</li>
-        <li data-i18n="p3_f2">Comptes équipe (jusqu'à 5 utilisateurs)</li>
-        <li data-i18n="p3_f3">Support dédié sous 4h</li>
-        <li data-i18n="p3_f4">Onboarding personnalisé</li>
-        <li data-i18n="p3_f5">Accès anticipé aux nouveautés</li>
+        <li data-i18n="p3_f2">Support dédié sous 4h</li>
+        <li data-i18n="p3_f3">Ancrage Bitcoin sur chaque preuve</li>
+        <li data-i18n="p3_f4">Accès anticipé aux nouveautés</li>
       </ul>
       <a href="/compte" class="btn btn-ghost" data-i18n="p3_btn">Choisir Business</a>
     </div>
@@ -216,9 +211,9 @@ const PAGE_HTML = `
 
 <section class="final" id="cta">
   <h2 class="serif"><span data-i18n="fin_t1">Protège ton argent</span><br><span class="italic" data-i18n="fin_t2">maintenant.</span></h2>
-  <p data-i18n="fin_sub">Génère une vidéo certifiée infalsifiable.</p>
+  <p data-i18n="fin_sub">Génère une preuve vidéo horodatée.</p>
   <a href="/demo" class="btn btn-primary" style="padding:16px 32px;font-size:16px" data-i18n="fin_cta">Voir la démo</a>
-  <div class="platforms" style="margin-top:34px"><strong>Depop</strong>·<strong>Etsy</strong>·<strong>Vinted Pro</strong>·<strong>Grailed</strong>·<strong>Vestiaire Collective</strong></div>
+  <div class="platforms" style="margin-top:34px"><strong>Vinted Pro</strong><strong>Grailed</strong><strong>Etsy</strong><strong>Depop</strong><strong>Vestiaire Collective</strong></div>
 </section>
 
 <footer>
@@ -243,119 +238,119 @@ const I18N = {
     nav_how:"Comment",nav_why:"Pourquoi",nav_pricing:"Tarifs",nav_faq:"FAQ",nav_cta:"Essayer",
     badge:"Lancement",
     hero_h1_1:"Revends",hero_h1_2:"sans te faire arnaquer.",
-    hero_sub:"Pour les friperies pros et vendeurs vintage qui font 50+ ventes/mois sur Depop, Etsy, Vinted Pro, Grailed et Vestiaire.",
-    hero_subsub:"Une preuve par envoi, en 90 secondes. Défense IA en cas de litige.",
-    stat1:"Preuves certifiées",stat2:"Données chiffrées en France",stat3:"Annulable en 1 clic",
+    hero_sub:"Pour les revendeurs pros et boutiques vintage sur les marketplaces. La vidéo horodatée protège ta vente avant même qu'un litige existe.",
+    hero_subsub:"Une preuve horodatée à chaque envoi. Défense IA si un litige arrive.",
+    stat1:"Preuves certifiées",stat2:"Données chiffrées en France",stat3:"Annulable à tout moment",
     hero_cta:"Voir la démo",
     demo_tagline:"L'action complète prend moins de 2 minutes.",
     how_kicker:"Comment ça marche",how_t1:"Trois étapes,",how_t2:"une seule mission.",
     how_sub:"De l'annonce à la défense en cas de litige, SellCov couvre chaque étape d'une vente.",
-    f1_tag:"Annonce",f1_h1:"Génère ton annonce",f1_h2:"en 10 secondes.",f1_p:"Photographie l'article, reçois une annonce rédigée et prête à publier.",f1_btn:"Essayer",f1_time:"~10 sec par annonce",
-    f2_tag:"Protection",f2_h1:"Certifie avant",f2_h2:"d'expédier.",f2_p:"Crée une preuve utilisable en cas de litige.",f2_btn:"Protéger",f2_time:"~1 min 30 par envoi",
-    f3_tag:"Litige",f3_h1:"Défense automatique",f3_h2:"en 1 clic.",f3_p:"Un dossier de défense prêt à envoyer.",f3_btn:"Gérer un litige",f3_time:"~30 sec de rédaction",
+    f1_tag:"Annonce",f1_h1:"Génère ton annonce",f1_h2:"en quelques secondes.",f1_p:"Photographie l'article, reçois une annonce rédigée et prête à publier.",f1_btn:"Essayer",f1_time:"Quelques secondes par annonce",
+    f2_tag:"Protection",f2_h1:"Certifie avant",f2_h2:"d'expédier.",f2_p:"Crée une preuve utilisable en cas de litige.",f2_btn:"Protéger",f2_time:"Quelques minutes par envoi",
+    f3_tag:"Litige",f3_h1:"Défense automatique",f3_h2:"en 1 clic.",f3_p:"Un dossier de défense prêt à envoyer.",f3_btn:"Gérer un litige",f3_time:"Rédaction quasi instantanée",
     lg_kicker:"Recevabilité juridique",lg_t1:"Tes preuves,",lg_t2:"opposables en cas de litige.",lg_sub:"Chaque certificat SellCov a valeur de preuve dans tes échanges avec acheteurs et marketplaces.",
     lg_c1_t:"Article 1366 du Code civil",lg_c1_p:"L'écrit électronique a la même force probante que l'écrit papier dès lors que l'auteur est identifiable et l'intégrité garantie. Nos certificats cochent ces deux critères.",
-    lg_c2_t:"Intégrité cryptographique",lg_c2_p:"Empreinte SHA-256 + signature HMAC sur chaque vidéo. Toute modification de la preuve est instantanément détectable et le certificat devient invalide.",
-    lg_c3_t:"Recevable comme moyen de preuve",lg_c3_p:"Article 1358 du Code civil : la preuve peut être apportée par tout moyen. Argument utilisable dans tes litiges Depop, Etsy, Vinted Pro, Grailed, Vestiaire et procédures civiles.",
+    lg_c2_t:"Intégrité cryptographique",lg_c2_p:"Empreinte SHA-256, signature HMAC et ancrage Bitcoin sur chaque vidéo. Toute modification de la preuve est instantanément détectable et le certificat devient invalide.",
+    lg_c3_t:"Recevable comme moyen de preuve",lg_c3_p:"Article 1358 du Code civil : la preuve peut être apportée par tout moyen. Argument utilisable dans tes litiges Vinted Pro, Grailed, Etsy, Depop, Vestiaire Collective et procédures civiles.",
     lg_c4_t:"Ancrage Bitcoin",lg_c4_p:"Chaque certificat est ancré dans la blockchain Bitcoin. Vérifiable par n'importe qui, sans dépendre de SellCov. Personne, pas même nous, ne peut le modifier.",
     lg_note:"Comme toute preuve, un certificat peut être contesté. SellCov ne remplace pas un avocat.",
-    sc_kicker:"Cas concrets",sc_t1:"Les arnaques qui coûtent",sc_t2:"le plus cher aux revendeurs pros.",sc_sub:"Trois cas vus chaque semaine chez les friperies en ligne. Trois réponses SellCov.",
-    s1_title:"Colis « jamais reçu »",s1_quote:"« Je n'ai jamais reçu le colis. Je demande un remboursement. »",s1_solve:"SellCov fournit la vidéo horodatée du dépôt et l'étiquette filmée.",
+    sc_kicker:"Cas concrets",sc_t1:"Les arnaques qui coûtent",sc_t2:"le plus cher aux revendeurs pros.",sc_sub:"Les arnaques que vivent les revendeurs pros, et la réponse SellCov pour chacune.",
+    s1_title:"Colis « jamais reçu »",s1_quote:"« Je n'ai jamais reçu le colis. Je demande un remboursement. »",s1_solve:"SellCov fournit la vidéo horodatée de l'envoi et le suivi du colis via le tracker.",
     s2_title:"Article « abîmé »",s2_quote:"« L'article est arrivé troué. Je veux être remboursé. »",s2_solve:"SellCov prouve l'état exact avant expédition avec la vidéo 360° horodatée.",
-    s3_title:"Réclamation tardive",s3_quote:"« L'article a un défaut. » (3 semaines après réception)",s3_solve:"SellCov horodate l'état exact à l'envoi. Toute usure post-réception est exclue.",
-    pl_kicker:"Nos offres",pl_t1:"Tarifs pour",pl_t2:"revendeurs réguliers.",pl_sub:"Aucun engagement, annulable en 1 clic.",
-    per_mo:"/ mois",
-    p1_name:"Découverte",p1_unit:"/ mois",p1_desc:"Pour tester l'outil sans engagement.",p1_f1:"1 certificat vidéo / mois",p1_f2:"IA défense automatique (1 cas)",p1_f3:"Génération d'annonce (3 / mois)",p1_f4:"Support email",p1_btn:"Tester gratuitement",
-    p2_ribbon:"★ Recommandé",p2_name:"Pro",p2_desc:"Pour les friperies pros et revendeurs vintage (50 à 500 ventes/mois).",p2_f1:"Certificats vidéo illimités",p2_f2:"IA défense automatique",p2_f3:"Génération d'annonce illimitée",p2_f4:"Support email prioritaire",p2_f5:"Ancrage Bitcoin (preuve indépendante)",p2_btn:"Choisir Pro",
-    p3_name:"Business",p3_desc:"Pour les boutiques avec équipe et gros volumes (500+ ventes/mois).",p3_f1:"Tout Pro inclus",p3_f2:"Comptes équipe (jusqu'à 5 utilisateurs)",p3_f3:"Support dédié sous 4h",p3_f4:"Onboarding personnalisé",p3_f5:"Accès anticipé aux nouveautés",p3_btn:"Choisir Business",
-    fin_t1:"Protège ton argent",fin_t2:"maintenant.",fin_sub:"Génère une vidéo certifiée infalsifiable.",fin_cta:"Voir la démo",
+    s3_title:"Réclamation tardive",s3_quote:"« L'article a un défaut. » (plusieurs semaines après réception)",s3_solve:"L'état de la pièce est filmé et horodaté au départ. Ce qui arrive après la réception ne t'est plus opposable.",
+    pl_kicker:"Nos offres",pl_t1:"Simple,",pl_t2:"sans surprise.",pl_sub:"Sans engagement, annulable à tout moment.",
+    per_mo:"par mois",
+    p1_name:"Découverte",p1_unit:"par mois",p1_desc:"Pour tester l'outil sans engagement.",p1_f1:"Un certificat vidéo par mois",p1_f2:"IA défense automatique",p1_f3:"Génération d'annonce limitée",p1_f4:"Support email",p1_btn:"Tester gratuitement",
+    p2_ribbon:"Recommandé",p2_name:"Pro",p2_desc:"Pour les revendeurs pros et boutiques vintage sur les marketplaces.",p2_f1:"Certificats vidéo illimités",p2_f2:"IA défense automatique",p2_f3:"Génération d'annonce illimitée",p2_f4:"Support email prioritaire",p2_f5:"Ancrage Bitcoin (preuve indépendante)",p2_btn:"Choisir Pro",
+    p3_name:"Business",p3_desc:"Pour les boutiques et revendeurs à très gros volume de ventes.",p3_f1:"Tout Pro inclus",p3_f2:"Support dédié sous 4h",p3_f3:"Ancrage Bitcoin sur chaque preuve",p3_f4:"Accès anticipé aux nouveautés",p3_btn:"Choisir Business",
+    fin_t1:"Protège ton argent",fin_t2:"maintenant.",fin_sub:"Génère une preuve vidéo horodatée.",fin_cta:"Voir la démo",
     ft_faq:"FAQ",ft_contact:"Contact",ft_legal:"Mentions légales",ft_cgu:"CGU",ft_priv:"Confidentialité"
   },
   en:{
     nav_how:"How",nav_why:"Why",nav_pricing:"Pricing",nav_faq:"FAQ",nav_cta:"Try it",
     badge:"Launch",
     hero_h1_1:"Sell",hero_h1_2:"without getting scammed.",
-    hero_sub:"For pro vintage shops and resellers doing 50+ sales/month on Depop, Etsy, Vinted Pro, Grailed and Vestiaire.",hero_subsub:"One proof per shipment, in 90 seconds. AI defence in case of dispute.",
-    stat1:"Certified proofs",stat2:"Data encrypted in France",stat3:"Cancel in 1 click",hero_cta:"See the demo",
+    hero_sub:"For pro resellers and vintage shops on the marketplaces. The timestamped video protects your sale before a dispute even exists.",hero_subsub:"A timestamped proof on every shipment. AI defence if a dispute arises.",
+    stat1:"Certified proofs",stat2:"Data encrypted in France",stat3:"Cancel anytime",hero_cta:"See the demo",
     demo_tagline:"The whole process takes less than 2 minutes.",
     how_kicker:"How it works",how_t1:"Three steps,",how_t2:"one mission.",how_sub:"From listing to dispute defence, SellCov covers every step of your sale.",
-    f1_tag:"Listing",f1_h1:"Generate your listing",f1_h2:"in 10 seconds.",f1_p:"Photograph the item, get a written listing ready to publish.",f1_btn:"Try it",f1_time:"~10 sec per listing",
-    f2_tag:"Protection",f2_h1:"Certify before",f2_h2:"shipping.",f2_p:"Create proof that holds up in any dispute.",f2_btn:"Protect",f2_time:"~1 min 30 per shipment",
-    f3_tag:"Dispute",f3_h1:"Automatic defence",f3_h2:"in 1 click.",f3_p:"A defence file ready to send.",f3_btn:"Handle dispute",f3_time:"~30 sec to write",
+    f1_tag:"Listing",f1_h1:"Generate your listing",f1_h2:"in seconds.",f1_p:"Photograph the item, get a written listing ready to publish.",f1_btn:"Try it",f1_time:"Seconds per listing",
+    f2_tag:"Protection",f2_h1:"Certify before",f2_h2:"shipping.",f2_p:"Create proof that holds up in any dispute.",f2_btn:"Protect",f2_time:"A few minutes per shipment",
+    f3_tag:"Dispute",f3_h1:"Automatic defence",f3_h2:"in 1 click.",f3_p:"A defence file ready to send.",f3_btn:"Handle dispute",f3_time:"Near-instant drafting",
     lg_kicker:"Legal admissibility",lg_t1:"Your proofs,",lg_t2:"admissible in any dispute.",lg_sub:"Built to withstand challenges in your disputes.",
     lg_c1_t:"Article 1366 French Civil Code",lg_c1_p:"Electronic writing has the same evidentiary force as paper, provided the author is identifiable and integrity guaranteed. Our certificates meet both criteria.",
-    lg_c2_t:"Cryptographic integrity",lg_c2_p:"SHA-256 fingerprint + HMAC signature on every video. Any tampering is instantly detectable and the certificate becomes invalid.",
-    lg_c3_t:"Admissible as evidence",lg_c3_p:"Article 1358 French Civil Code: evidence may be adduced by any means. Usable in your Vinted, Depop, eBay disputes and civil proceedings.",
+    lg_c2_t:"Cryptographic integrity",lg_c2_p:"SHA-256 fingerprint, HMAC signature and Bitcoin anchoring on every video. Any tampering is instantly detectable and the certificate becomes invalid.",
+    lg_c3_t:"Admissible as evidence",lg_c3_p:"Article 1358 French Civil Code: evidence may be adduced by any means. Usable in your Vinted Pro, Grailed, Etsy, Depop, Vestiaire Collective disputes and civil proceedings.",
     lg_c4_t:"Bitcoin anchoring",lg_c4_p:"Each certificate is anchored in the Bitcoin blockchain via OpenTimestamps. The timestamp is independently verifiable by anyone, without relying on SellCov. Nobody, not even us, can modify it.",
     lg_note:"Like any evidence, a certificate can be challenged. SellCov does not replace a lawyer.",
-    sc_kicker:"Real cases",sc_t1:"The scams that cost",sc_t2:"sellers the most.",sc_sub:"Three typical cases. Three SellCov answers.",
-    s1_title:"Parcel \"never received\"",s1_quote:"\"I never received the parcel. I'm requesting a refund.\"",s1_solve:"SellCov provides the timestamped video of drop-off and the filmed label.",
+    sc_kicker:"Real cases",sc_t1:"The scams that cost",sc_t2:"sellers the most.",sc_sub:"The scams pro resellers face, and the SellCov answer for each.",
+    s1_title:"Parcel \"never received\"",s1_quote:"\"I never received the parcel. I'm requesting a refund.\"",s1_solve:"SellCov provides the timestamped video of the shipment and parcel tracking via the tracker.",
     s2_title:"Item \"damaged\"",s2_quote:"\"The item arrived with a hole. I want a refund.\"",s2_solve:"SellCov proves the exact condition before shipping with a 360° timestamped video.",
-    s3_title:"Late claim",s3_quote:"\"The item is defective.\" (3 weeks after delivery)",s3_solve:"SellCov timestamps exact condition at shipping. Post-delivery wear is excluded.",
-    pl_kicker:"Our plans",pl_t1:"Pricing for",pl_t2:"regular resellers.",pl_sub:"No commitment, cancel anytime.",
-    per_mo:"/ month",
-    p1_name:"Discovery",p1_unit:"/ month",p1_desc:"Try the tool without commitment.",p1_f1:"1 video certificate / month",p1_f2:"AI automatic defence (1 case)",p1_f3:"Listing generation (3 / month)",p1_f4:"Email support",p1_btn:"Try for free",
-    p2_ribbon:"★ Recommended",p2_name:"Pro",p2_desc:"For pro vintage shops and resellers (50 to 500 sales/month).",p2_f1:"Unlimited video certificates",p2_f2:"AI automatic defence",p2_f3:"Unlimited listing generation",p2_f4:"Priority email support",p2_f5:"Bitcoin anchoring (independent proof)",p2_btn:"Choose Pro",
-    p3_name:"Business",p3_desc:"For shops with teams and high volumes (500+ sales/month).",p3_f1:"Everything in Pro",p3_f2:"Team accounts (up to 5 users)",p3_f3:"Dedicated support within 4h",p3_f4:"Personalised onboarding",p3_f5:"Early access to new features",p3_btn:"Choose Business",
-    fin_t1:"Protect your money",fin_t2:"now.",fin_sub:"Generate a tamper-proof certified video.",fin_cta:"See the demo",
+    s3_title:"Late claim",s3_quote:"\"The item is defective.\" (weeks after delivery)",s3_solve:"The item's condition is filmed and timestamped at departure. What happens after delivery is no longer held against you.",
+    pl_kicker:"Our plans",pl_t1:"Simple,",pl_t2:"no surprises.",pl_sub:"No commitment, cancel anytime.",
+    per_mo:"per month",
+    p1_name:"Discovery",p1_unit:"per month",p1_desc:"Try the tool without commitment.",p1_f1:"One video certificate per month",p1_f2:"AI automatic defence",p1_f3:"Limited listing generation",p1_f4:"Email support",p1_btn:"Try for free",
+    p2_ribbon:"Recommended",p2_name:"Pro",p2_desc:"For pro resellers and vintage shops on the marketplaces.",p2_f1:"Unlimited video certificates",p2_f2:"AI automatic defence",p2_f3:"Unlimited listing generation",p2_f4:"Priority email support",p2_f5:"Bitcoin anchoring (independent proof)",p2_btn:"Choose Pro",
+    p3_name:"Business",p3_desc:"For shops and resellers with very high sales volume.",p3_f1:"Everything in Pro",p3_f2:"Dedicated support within 4h",p3_f3:"Bitcoin anchoring on every proof",p3_f4:"Early access to new features",p3_btn:"Choose Business",
+    fin_t1:"Protect your money",fin_t2:"now.",fin_sub:"Generate a timestamped video proof.",fin_cta:"See the demo",
     ft_faq:"FAQ",ft_contact:"Contact",ft_legal:"Legal notice",ft_cgu:"T&Cs",ft_priv:"Privacy"
   },
   es:{
     nav_how:"Cómo",nav_why:"Por qué",nav_pricing:"Precios",nav_faq:"FAQ",nav_cta:"Probar",
     badge:"Lanzamiento",
     hero_h1_1:"Vende",hero_h1_2:"sin que te estafen.",
-    hero_sub:"Para tiendas vintage profesionales y revendedores que hacen 50+ ventas/mes en Depop, Etsy, Vinted Pro, Grailed y Vestiaire.",hero_subsub:"Una prueba por envío, en 90 segundos. Defensa con IA en caso de litigio.",
-    stat1:"Pruebas certificadas",stat2:"Datos cifrados en Francia",stat3:"Cancelable con 1 clic",hero_cta:"Ver la demo",
+    hero_sub:"Para revendedores profesionales y tiendas vintage en los marketplaces. El vídeo con marca de tiempo protege tu venta antes incluso de que exista un litigio.",hero_subsub:"Una prueba con marca de tiempo en cada envío. Defensa con IA si surge un litigio.",
+    stat1:"Pruebas certificadas",stat2:"Datos cifrados en Francia",stat3:"Cancelable en cualquier momento",hero_cta:"Ver la demo",
     demo_tagline:"Todo el proceso dura menos de 2 minutos.",
     how_kicker:"Cómo funciona",how_t1:"Tres pasos,",how_t2:"una sola misión.",how_sub:"Del anuncio a la defensa en caso de litigio, SellCov te acompaña en cada etapa.",
-    f1_tag:"Anuncio",f1_h1:"Genera tu anuncio",f1_h2:"en 10 segundos.",f1_p:"Fotografía el artículo, recibe un anuncio redactado listo para publicar.",f1_btn:"Probar",f1_time:"~10 seg por anuncio",
-    f2_tag:"Protección",f2_h1:"Certifica antes",f2_h2:"de enviar.",f2_p:"Crea una prueba utilizable en caso de litigio.",f2_btn:"Proteger",f2_time:"~1 min 30 por envío",
-    f3_tag:"Litigio",f3_h1:"Defensa automática",f3_h2:"con 1 clic.",f3_p:"Un expediente de defensa listo para enviar.",f3_btn:"Gestionar litigio",f3_time:"~30 seg de redacción",
+    f1_tag:"Anuncio",f1_h1:"Genera tu anuncio",f1_h2:"en segundos.",f1_p:"Fotografía el artículo, recibe un anuncio redactado listo para publicar.",f1_btn:"Probar",f1_time:"Segundos por anuncio",
+    f2_tag:"Protección",f2_h1:"Certifica antes",f2_h2:"de enviar.",f2_p:"Crea una prueba utilizable en caso de litigio.",f2_btn:"Proteger",f2_time:"Unos minutos por envío",
+    f3_tag:"Litigio",f3_h1:"Defensa automática",f3_h2:"con 1 clic.",f3_p:"Un expediente de defensa listo para enviar.",f3_btn:"Gestionar litigio",f3_time:"Redacción casi instantánea",
     lg_kicker:"Admisibilidad legal",lg_t1:"Tus pruebas,",lg_t2:"oponibles en caso de litigio.",lg_sub:"Construido para resistir impugnaciones en tus litigios.",
     lg_c1_t:"Artículo 1366 Código Civil francés",lg_c1_p:"El escrito electrónico tiene la misma fuerza probatoria que el papel, siempre que el autor sea identificable y se garantice la integridad. Nuestros certificados cumplen ambos criterios.",
-    lg_c2_t:"Integridad criptográfica",lg_c2_p:"Huella SHA-256 + firma HMAC en cada vídeo. Toda modificación es detectable al instante y el certificado queda inválido.",
-    lg_c3_t:"Admisible como prueba",lg_c3_p:"Artículo 1358 Código Civil francés: la prueba puede aportarse por cualquier medio. Argumento utilizable en tus litigios Vinted, Depop y procedimientos civiles.",
+    lg_c2_t:"Integridad criptográfica",lg_c2_p:"Huella SHA-256, firma HMAC y anclaje Bitcoin en cada vídeo. Toda modificación es detectable al instante y el certificado queda inválido.",
+    lg_c3_t:"Admisible como prueba",lg_c3_p:"Artículo 1358 Código Civil francés: la prueba puede aportarse por cualquier medio. Argumento utilizable en tus litigios Vinted Pro, Grailed, Etsy, Depop, Vestiaire Collective y procedimientos civiles.",
     lg_c4_t:"Anclaje Bitcoin",lg_c4_p:"Cada certificado está anclado en la blockchain Bitcoin mediante OpenTimestamps. La marca de tiempo es verificable independientemente por cualquiera, sin depender de SellCov. Nadie, ni siquiera nosotros, puede modificarla.",
     lg_note:"Como toda prueba, un certificado puede ser impugnado. SellCov no reemplaza a un abogado.",
-    sc_kicker:"Casos reales",sc_t1:"Las estafas que más cuestan",sc_t2:"a los vendedores.",sc_sub:"Tres casos típicos. Tres respuestas SellCov.",
-    s1_title:"Paquete «nunca recibido»",s1_quote:"«Nunca recibí el paquete. Solicito un reembolso.»",s1_solve:"SellCov proporciona el video con marca de tiempo del depósito y la etiqueta filmada.",
+    sc_kicker:"Casos reales",sc_t1:"Las estafas que más cuestan",sc_t2:"a los vendedores.",sc_sub:"Las estafas que viven los revendedores profesionales, y la respuesta SellCov para cada una.",
+    s1_title:"Paquete «nunca recibido»",s1_quote:"«Nunca recibí el paquete. Solicito un reembolso.»",s1_solve:"SellCov proporciona el video con marca de tiempo del envío y el seguimiento del paquete vía el tracker.",
     s2_title:"Artículo «dañado»",s2_quote:"«El artículo llegó con un agujero. Quiero un reembolso.»",s2_solve:"SellCov prueba el estado exacto antes del envío con un video 360° con marca de tiempo.",
-    s3_title:"Reclamación tardía",s3_quote:"«El artículo tiene un defecto.» (3 semanas después de la recepción)",s3_solve:"SellCov fecha el estado exacto al envío. Cualquier desgaste posterior queda excluido.",
-    pl_kicker:"Nuestros planes",pl_t1:"Tarifas para",pl_t2:"revendedores regulares.",pl_sub:"Sin compromiso, cancelable con 1 clic.",
-    per_mo:"/ mes",
-    p1_name:"Descubierta",p1_unit:"/ mes",p1_desc:"Probar la herramienta sin compromiso.",p1_f1:"1 certificado de video / mes",p1_f2:"IA defensa automática (1 caso)",p1_f3:"Generación de anuncio (3 / mes)",p1_f4:"Soporte email",p1_btn:"Probar gratis",
-    p2_ribbon:"★ Recomendado",p2_name:"Pro",p2_desc:"Para tiendas vintage profesionales y revendedores (50 a 500 ventas/mes).",p2_f1:"Certificados de video ilimitados",p2_f2:"IA defensa automática",p2_f3:"Generación de anuncio ilimitada",p2_f4:"Soporte email prioritario",p2_f5:"Anclaje Bitcoin (prueba independiente)",p2_btn:"Elegir Pro",
-    p3_name:"Business",p3_desc:"Para tiendas con equipo y altos volúmenes (500+ ventas/mes).",p3_f1:"Todo Pro incluido",p3_f2:"Cuentas de equipo (hasta 5 usuarios)",p3_f3:"Soporte dedicado en 4h",p3_f4:"Onboarding personalizado",p3_f5:"Acceso anticipado a novedades",p3_btn:"Elegir Business",
-    fin_t1:"Protege tu dinero",fin_t2:"ahora.",fin_sub:"Genera un video certificado infalsificable.",fin_cta:"Ver la demo",
+    s3_title:"Reclamación tardía",s3_quote:"«El artículo tiene un defecto.» (semanas después de la recepción)",s3_solve:"El estado de la pieza se filma y se fecha en la salida. Lo que ocurre tras la recepción ya no se te puede oponer.",
+    pl_kicker:"Nuestros planes",pl_t1:"Simple,",pl_t2:"sin sorpresas.",pl_sub:"Sin compromiso, cancelable en cualquier momento.",
+    per_mo:"por mes",
+    p1_name:"Descubierta",p1_unit:"por mes",p1_desc:"Probar la herramienta sin compromiso.",p1_f1:"Un certificado de video por mes",p1_f2:"IA defensa automática",p1_f3:"Generación de anuncio limitada",p1_f4:"Soporte email",p1_btn:"Probar gratis",
+    p2_ribbon:"Recomendado",p2_name:"Pro",p2_desc:"Para revendedores profesionales y tiendas vintage en los marketplaces.",p2_f1:"Certificados de video ilimitados",p2_f2:"IA defensa automática",p2_f3:"Generación de anuncio ilimitada",p2_f4:"Soporte email prioritario",p2_f5:"Anclaje Bitcoin (prueba independiente)",p2_btn:"Elegir Pro",
+    p3_name:"Business",p3_desc:"Para tiendas y revendedores con muy alto volumen de ventas.",p3_f1:"Todo Pro incluido",p3_f2:"Soporte dedicado en 4h",p3_f3:"Anclaje Bitcoin en cada prueba",p3_f4:"Acceso anticipado a novedades",p3_btn:"Elegir Business",
+    fin_t1:"Protege tu dinero",fin_t2:"ahora.",fin_sub:"Genera una prueba de video con marca de tiempo.",fin_cta:"Ver la demo",
     ft_faq:"FAQ",ft_contact:"Contacto",ft_legal:"Aviso legal",ft_cgu:"T&C",ft_priv:"Privacidad"
   },
   it:{
     nav_how:"Come",nav_why:"Perché",nav_pricing:"Prezzi",nav_faq:"FAQ",nav_cta:"Prova",
     badge:"Lancio",
     hero_h1_1:"Rivendi",hero_h1_2:"senza farti truffare.",
-    hero_sub:"Per i negozi vintage pro e rivenditori vintage che fanno 50+ vendite/mese su Depop, Etsy, Vinted Pro, Grailed e Vestiaire.",hero_subsub:"Una prova per spedizione, in 90 secondi. Difesa IA in caso di controversia.",
-    stat1:"Prove certificate",stat2:"Dati crittografati in Francia",stat3:"Annullabile in 1 clic",hero_cta:"Vedi la demo",
+    hero_sub:"Per rivenditori professionali e negozi vintage sui marketplace. Il video con marca temporale protegge la tua vendita prima ancora che esista una controversia.",hero_subsub:"Una prova con marca temporale a ogni spedizione. Difesa IA se arriva una controversia.",
+    stat1:"Prove certificate",stat2:"Dati crittografati in Francia",stat3:"Annullabile in qualsiasi momento",hero_cta:"Vedi la demo",
     demo_tagline:"L'intera operazione richiede meno di 2 minuti.",
     how_kicker:"Come funziona",how_t1:"Tre passi,",how_t2:"una sola missione.",how_sub:"Dall'annuncio alla difesa in caso di controversia, SellCov ti accompagna in ogni fase della vendita.",
-    f1_tag:"Annuncio",f1_h1:"Genera il tuo annuncio",f1_h2:"in 10 secondi.",f1_p:"Fotografa l'articolo, ricevi un annuncio pronto da pubblicare.",f1_btn:"Provare",f1_time:"~10 sec per annuncio",
-    f2_tag:"Protezione",f2_h1:"Certifica prima",f2_h2:"di spedire.",f2_p:"Crea una prova utilizzabile in caso di controversia.",f2_btn:"Proteggere",f2_time:"~1 min 30 per spedizione",
-    f3_tag:"Controversia",f3_h1:"Difesa automatica",f3_h2:"in 1 clic.",f3_p:"Un dossier di difesa pronto da inviare.",f3_btn:"Gestire una controversia",f3_time:"~30 sec di redazione",
+    f1_tag:"Annuncio",f1_h1:"Genera il tuo annuncio",f1_h2:"in pochi secondi.",f1_p:"Fotografa l'articolo, ricevi un annuncio pronto da pubblicare.",f1_btn:"Provare",f1_time:"Pochi secondi per annuncio",
+    f2_tag:"Protezione",f2_h1:"Certifica prima",f2_h2:"di spedire.",f2_p:"Crea una prova utilizzabile in caso di controversia.",f2_btn:"Proteggere",f2_time:"Pochi minuti per spedizione",
+    f3_tag:"Controversia",f3_h1:"Difesa automatica",f3_h2:"in 1 clic.",f3_p:"Un dossier di difesa pronto da inviare.",f3_btn:"Gestire una controversia",f3_time:"Redazione quasi istantanea",
     lg_kicker:"Ammissibilità legale",lg_t1:"Le tue prove,",lg_t2:"opponibili in caso di controversia.",lg_sub:"Costruito per resistere alle contestazioni nelle tue controversie.",
     lg_c1_t:"Articolo 1366 Codice civile francese",lg_c1_p:"Lo scritto elettronico ha la stessa forza probatoria della carta, purché l'autore sia identificabile e l'integrità garantita. I nostri certificati soddisfano entrambi i criteri.",
-    lg_c2_t:"Integrità crittografica",lg_c2_p:"Impronta SHA-256 + firma HMAC su ogni video. Qualsiasi modifica è rilevabile istantaneamente e il certificato diventa invalido.",
-    lg_c3_t:"Ammissibile come prova",lg_c3_p:"Articolo 1358 Codice civile francese: la prova può essere fornita con qualsiasi mezzo. Argomento utilizzabile nelle tue controversie Vinted, Depop e procedure civili.",
+    lg_c2_t:"Integrità crittografica",lg_c2_p:"Impronta SHA-256, firma HMAC e ancoraggio Bitcoin su ogni video. Qualsiasi modifica è rilevabile istantaneamente e il certificato diventa invalido.",
+    lg_c3_t:"Ammissibile come prova",lg_c3_p:"Articolo 1358 Codice civile francese: la prova può essere fornita con qualsiasi mezzo. Argomento utilizzabile nelle tue controversie Vinted Pro, Grailed, Etsy, Depop, Vestiaire Collective e procedure civili.",
     lg_c4_t:"Ancoraggio Bitcoin",lg_c4_p:"Ogni certificato è ancorato nella blockchain Bitcoin tramite OpenTimestamps. La marca temporale è verificabile in modo indipendente da chiunque, senza dipendere da SellCov. Nessuno, nemmeno noi, può modificarla.",
     lg_note:"Come ogni prova, un certificato può essere contestato. SellCov non sostituisce un avvocato.",
-    sc_kicker:"Casi reali",sc_t1:"Le truffe che costano",sc_t2:"di più ai venditori.",sc_sub:"Tre casi tipici. Tre risposte SellCov.",
-    s1_title:"Pacco «mai ricevuto»",s1_quote:"«Non ho mai ricevuto il pacco. Chiedo il rimborso.»",s1_solve:"SellCov fornisce il video con timestamp del deposito e l'etichetta filmata.",
+    sc_kicker:"Casi reali",sc_t1:"Le truffe che costano",sc_t2:"di più ai venditori.",sc_sub:"Le truffe che vivono i rivenditori professionali, e la risposta SellCov per ciascuna.",
+    s1_title:"Pacco «mai ricevuto»",s1_quote:"«Non ho mai ricevuto il pacco. Chiedo il rimborso.»",s1_solve:"SellCov fornisce il video con timestamp della spedizione e il tracciamento del pacco tramite il tracker.",
     s2_title:"Articolo «danneggiato»",s2_quote:"«L'articolo è arrivato forato. Voglio essere rimborsato.»",s2_solve:"SellCov prova lo stato esatto prima della spedizione con un video 360° con timestamp.",
-    s3_title:"Reclamo tardivo",s3_quote:"«L'articolo ha un difetto.» (3 settimane dopo la ricezione)",s3_solve:"SellCov fissa lo stato esatto alla spedizione. Ogni usura post-ricezione è esclusa.",
-    pl_kicker:"Le nostre offerte",pl_t1:"Tariffe per",pl_t2:"rivenditori regolari.",pl_sub:"Nessun impegno, annullabile in 1 clic.",
-    per_mo:"/ mese",
-    p1_name:"Scoperta",p1_unit:"/ mese",p1_desc:"Prova lo strumento senza impegno.",p1_f1:"1 certificato video / mese",p1_f2:"IA difesa automatica (1 caso)",p1_f3:"Generazione di annuncio (3 / mese)",p1_f4:"Supporto email",p1_btn:"Prova gratis",
-    p2_ribbon:"★ Consigliato",p2_name:"Pro",p2_desc:"Per negozi vintage pro e rivenditori (50 a 500 vendite/mese).",p2_f1:"Certificati video illimitati",p2_f2:"IA difesa automatica",p2_f3:"Generazione annuncio illimitata",p2_f4:"Supporto email prioritario",p2_f5:"Ancoraggio Bitcoin (prova indipendente)",p2_btn:"Scegli Pro",
-    p3_name:"Business",p3_desc:"Per negozi con team e alti volumi (500+ vendite/mese).",p3_f1:"Tutto Pro incluso",p3_f2:"Account team (fino a 5 utenti)",p3_f3:"Supporto dedicato entro 4h",p3_f4:"Onboarding personalizzato",p3_f5:"Accesso anticipato alle novità",p3_btn:"Scegli Business",
-    fin_t1:"Proteggi il tuo denaro",fin_t2:"ora.",fin_sub:"Genera un video certificato infalsificabile.",fin_cta:"Vedi la demo",
+    s3_title:"Reclamo tardivo",s3_quote:"«L'articolo ha un difetto.» (settimane dopo la ricezione)",s3_solve:"Lo stato del capo è filmato e datato alla partenza. Ciò che accade dopo la ricezione non è più opponibile a te.",
+    pl_kicker:"Le nostre offerte",pl_t1:"Semplice,",pl_t2:"senza sorprese.",pl_sub:"Nessun impegno, annullabile in qualsiasi momento.",
+    per_mo:"al mese",
+    p1_name:"Scoperta",p1_unit:"al mese",p1_desc:"Prova lo strumento senza impegno.",p1_f1:"Un certificato video al mese",p1_f2:"IA difesa automatica",p1_f3:"Generazione di annuncio limitata",p1_f4:"Supporto email",p1_btn:"Prova gratis",
+    p2_ribbon:"Consigliato",p2_name:"Pro",p2_desc:"Per rivenditori professionali e negozi vintage sui marketplace.",p2_f1:"Certificati video illimitati",p2_f2:"IA difesa automatica",p2_f3:"Generazione annuncio illimitata",p2_f4:"Supporto email prioritario",p2_f5:"Ancoraggio Bitcoin (prova indipendente)",p2_btn:"Scegli Pro",
+    p3_name:"Business",p3_desc:"Per negozi e rivenditori con volume di vendite molto elevato.",p3_f1:"Tutto Pro incluso",p3_f2:"Supporto dedicato entro 4h",p3_f3:"Ancoraggio Bitcoin su ogni prova",p3_f4:"Accesso anticipato alle novità",p3_btn:"Scegli Business",
+    fin_t1:"Proteggi il tuo denaro",fin_t2:"ora.",fin_sub:"Genera una prova video con marca temporale.",fin_cta:"Vedi la demo",
     ft_faq:"FAQ",ft_contact:"Contatto",ft_legal:"Note legali",ft_cgu:"Termini e condizioni",ft_priv:"Privacy"
   }
 };
@@ -441,22 +436,22 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>SellCov · Revends sans te faire arnaquer</title>
-        <meta name="description" content="Preuve vidéo horodatée + défense IA pour friperies pros et revendeurs vintage. Compatible Depop, Etsy, Vinted Pro, Grailed, Vestiaire." />
+        <title>SellCov, revends sans te faire arnaquer</title>
+        <meta name="description" content="Preuve vidéo horodatée et défense IA pour revendeurs pros et boutiques vintage. Compatible Vinted Pro, Grailed, Etsy, Depop, Vestiaire Collective." />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        {/* Open Graph (iMessage / WhatsApp / Slack / Discord / Facebook link previews) */}
+        {/* Open Graph (iMessage, WhatsApp, Slack, Discord, Facebook link previews) */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.sellcov.com" />
-        <meta property="og:title" content="SellCov · Revends sans te faire arnaquer" />
-        <meta property="og:description" content="Preuve vidéo horodatée + défense IA pour friperies pros et revendeurs vintage. Compatible Depop, Etsy, Vinted Pro, Grailed, Vestiaire." />
+        <meta property="og:title" content="SellCov, revends sans te faire arnaquer" />
+        <meta property="og:description" content="Preuve vidéo horodatée et défense IA pour revendeurs pros et boutiques vintage. Compatible Vinted Pro, Grailed, Etsy, Depop, Vestiaire Collective." />
         <meta property="og:image" content="https://www.sellcov.com/logo.png" />
-        <meta property="og:image:alt" content="SellCov · hérisson protecteur" />
+        <meta property="og:image:alt" content="SellCov, hérisson protecteur" />
         <meta property="og:site_name" content="SellCov" />
         <meta property="og:locale" content="fr_FR" />
         {/* Twitter / X card */}
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="SellCov · Revends sans te faire arnaquer" />
-        <meta name="twitter:description" content="Preuve vidéo horodatée + défense IA pour friperies pros et revendeurs vintage." />
+        <meta name="twitter:title" content="SellCov, revends sans te faire arnaquer" />
+        <meta name="twitter:description" content="Preuve vidéo horodatée et défense IA pour revendeurs pros et boutiques vintage." />
         <meta name="twitter:image" content="https://www.sellcov.com/logo.png" />
         {/* Favicon iOS / Android */}
         <link rel="icon" type="image/png" href="/logo.png" />
@@ -499,28 +494,28 @@ export default function Home() {
                   applicationCategory: "BusinessApplication",
                   operatingSystem: "Web",
                   description:
-                    "Preuve vidéo horodatée + défense IA pour friperies pros et revendeurs vintage. Compatible Depop, Etsy, Vinted Pro, Grailed, Vestiaire.",
+                    "Preuve vidéo horodatée et défense IA pour revendeurs pros et boutiques vintage. Compatible Vinted Pro, Grailed, Etsy, Depop, Vestiaire Collective.",
                   offers: [
                     {
                       "@type": "Offer",
                       name: "Découverte",
                       price: "0",
                       priceCurrency: "EUR",
-                      description: "3 certificats par mois, défense IA",
-                    },
-                    {
-                      "@type": "Offer",
-                      name: "Vendeur",
-                      price: "14.90",
-                      priceCurrency: "EUR",
-                      description: "30 certificats par mois, support prioritaire",
+                      description: "Un certificat vidéo par mois, défense IA",
                     },
                     {
                       "@type": "Offer",
                       name: "Pro",
-                      price: "29.90",
+                      price: "49",
                       priceCurrency: "EUR",
-                      description: "Certificats illimités, support 24h",
+                      description: "Certificats illimités, défense IA, support prioritaire",
+                    },
+                    {
+                      "@type": "Offer",
+                      name: "Business",
+                      price: "99",
+                      priceCurrency: "EUR",
+                      description: "Tout Pro inclus, support dédié, ancrage Bitcoin sur chaque preuve",
                     },
                   ],
                 },

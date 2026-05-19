@@ -5,12 +5,12 @@ export default function Demo() {
   return (
     <>
       <Head>
-        <title>Démo · SellCov</title>
-        <meta name="description" content="Découvre en 30 secondes ce que SellCov fait : annonce IA, certificat vidéo horodaté, défense automatique en cas de litige." />
+        <title>Démo SellCov</title>
+        <meta name="description" content="Découvre ce que SellCov fait : annonce IA, certificat vidéo horodaté, défense automatique en cas de litige." />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="robots" content="index,follow" />
-        <meta property="og:title" content="Démo · SellCov" />
-        <meta property="og:description" content="Découvre en 30 secondes comment SellCov protège tes ventes." />
+        <meta property="og:title" content="Démo SellCov" />
+        <meta property="og:description" content="Découvre comment SellCov protège tes ventes." />
         <meta property="og:image" content="https://www.sellcov.com/logo.png" />
       </Head>
 
@@ -57,7 +57,7 @@ export default function Demo() {
         <Section
           tag="Génère ton annonce"
           title="Ta photo devient une annonce prête à publier."
-          subtitle="L'IA analyse ta photo, identifie l'article et te génère un titre, une description, le prix et la meilleure plateforme pour revendre. En 10 secondes."
+          subtitle="L'IA analyse ta photo, identifie l'article et te génère un titre, une description, le prix et la meilleure plateforme pour revendre. En quelques secondes."
         >
           <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'12px',marginBottom:'18px',maxWidth:'750px'}}>
             <div style={{borderRadius:'12px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',aspectRatio:'3/4'}}>
@@ -71,7 +71,7 @@ export default function Demo() {
             </div>
           </div>
           <DataCard>
-            <DataRow label="Titre généré" value="T-shirt Harley Davidson vintage 90s · Taille M" />
+            <DataRow label="Titre généré" value="T-shirt Harley Davidson vintage 90s, taille M" />
             <div style={{padding:'18px 22px',borderBottom:'0.5px solid var(--border)'}}>
               <div style={{fontSize:'12px',color:'var(--text-dim)',fontWeight:500,marginBottom:'10px'}}>Description générée</div>
               <div style={{fontSize:'14px',color:'#fff',lineHeight:'1.7'}}>
@@ -83,33 +83,33 @@ export default function Demo() {
             </div>
             <DataRow label="Plateformes recommandées" value={
               <span style={{display:'flex',gap:'8px',flexWrap:'wrap'}}>
-                <Pill text="Grailed 9/10" />
-                <Pill text="Depop 8/10" />
-                <Pill text="Vinted 6/10" />
+                <Pill text="Vinted Pro" />
+                <Pill text="Grailed" />
+                <Pill text="Depop" />
               </span>
             } />
-            <DataRow label="Prix conseillé" value={<span style={{fontFamily:'var(--font-playfair),serif',fontSize:'22px',fontWeight:700}}>120 à 180 €</span>} last />
+            <DataRow label="Prix conseillé" value={<span style={{fontFamily:'var(--font-playfair),serif',fontSize:'22px',fontWeight:700}}>90 à 150 €</span>} last />
           </DataCard>
         </Section>
 
         {/* Step 2 · Certificat */}
         <Section
           tag="Certifie ton envoi"
-          title="Filme 90 secondes. SellCov scelle la preuve."
+          title="Filme ta pièce et ton envoi. SellCov scelle la preuve."
           subtitle="Vidéo horodatée et signature cryptographique. Recevable juridiquement (art. 1366 du Code civil). Chaque certificat est ancré dans la blockchain Bitcoin. Personne, pas même nous, ne peut modifier l'horodatage."
         >
           <div style={{marginBottom:'18px',borderRadius:'14px',overflow:'hidden',border:'1px solid var(--border)',background:'var(--bg-card)',maxWidth:'750px',position:'relative'}}>
             <img src="/demovideo-tshirt.jpg" alt="Frame de la vidéo certifiée" style={{width:'100%',height:'auto',display:'block'}} />
             <div style={{position:'absolute',bottom:'14px',left:'14px',padding:'7px 13px',borderRadius:'7px',background:'rgba(0,0,0,.75)',color:'#fff',fontSize:'13px',fontFamily:'JetBrains Mono,monospace',letterSpacing:'.08em',display:'flex',alignItems:'center',gap:'8px'}}>
               <span style={{width:'9px',height:'9px',borderRadius:'50%',background:'var(--green)',display:'inline-block'}}></span>
-              REC · 00:42
+              REC 00:42
             </div>
           </div>
           <DataCard>
             <DataRow label="Identifiant" value={<span className="mono">SC-7K2F9X-A3B</span>} />
             <DataRow label="Signature" value={<span style={{color:'var(--green)',fontWeight:600}}>Validée</span>} />
             <DataRow label="Ancrage Bitcoin" value={<span style={{color:'#F7931A',fontWeight:600}}>Confirmé</span>} />
-            <DataRow label="Horodatage UTC" value="05/05/2026 14:23:18" last />
+            <DataRow label="Horodatage UTC" value="5 mai 2026 14:23 UTC" last />
           </DataCard>
         </Section>
 
@@ -151,7 +151,7 @@ export default function Demo() {
             Prêt à protéger ta prochaine vente ?
           </h2>
           <p style={{color:'var(--text-muted)',fontSize:'15px',marginBottom:'32px',maxWidth:'460px',margin:'0 auto 32px'}}>
-            Plan Découverte gratuit. 1 certificat par mois, sans carte bancaire.
+            Plan Découverte gratuit, un certificat par mois, sans carte bancaire.
           </p>
           <Link href="/compte" style={{display:'inline-block',padding:'15px 32px',background:'var(--green)',color:'#000',borderRadius:'999px',fontWeight:700,fontSize:'15px',textDecoration:'none'}}>
             Créer mon compte gratuit
@@ -208,7 +208,7 @@ function Pill({ text }) {
 function ArgItem({ text }) {
   return (
     <div style={{display:'flex',gap:'10px',alignItems:'flex-start'}}>
-      <span style={{flexShrink:0,width:'16px',height:'16px',borderRadius:'50%',background:'rgba(94,232,163,.1)',display:'grid',placeItems:'center',color:'var(--green)',fontSize:'10px',marginTop:'2px',fontWeight:700}}>✓</span>
+      <span aria-hidden="true" style={{flexShrink:0,width:'8px',height:'8px',borderRadius:'50%',background:'var(--green)',marginTop:'6px'}}></span>
       <p style={{fontSize:'13.5px',color:'var(--text-muted)',lineHeight:'1.6'}}>{text}</p>
     </div>
   );
