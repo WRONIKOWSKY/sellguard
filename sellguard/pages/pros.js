@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
+import styles from "../styles/pros.module.css";
 
 const PLATFORMS = [
   { value: "vinted_pro", label: "Vinted Pro" },
@@ -13,8 +14,8 @@ const PLATFORMS = [
 
 const VOLUMES = [
   { value: "v30_50", label: "30 à 50 ventes par mois" },
-  { value: "v50_100", label: "entre 50 et 100 ventes par mois" },
-  { value: "v100_plus", label: "100 ventes ou plus par mois" },
+  { value: "v50_100", label: "50 à 100 ventes par mois" },
+  { value: "v100_plus", label: "100 ventes et plus par mois" },
 ];
 
 export default function Pros() {
@@ -23,7 +24,7 @@ export default function Pros() {
   const [platform, setPlatform] = useState("");
   const [volume, setVolume] = useState("");
   const [note, setNote] = useState("");
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [status, setStatus] = useState("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
   async function onSubmit(e) {
@@ -52,19 +53,19 @@ export default function Pros() {
   return (
     <>
       <Head>
-        <title>Cohorte fondateur, places limitées, SellCov</title>
+        <title>Cohorte fondateurs, places limitées, SellCov</title>
         <meta
           name="description"
-          content="Cohorte fondateur pour revendeurs pros et boutiques vintage. 30 jours d'accès complet, mise en place avec le fondateur, tarif fondateur verrouillé ensuite. Sur candidature."
+          content="Cohorte fondateurs pour revendeurs vintage qui expédient en volume. 30 jours d'accès complet, mise en place avec le fondateur, tarif fondateur verrouillé ensuite. Sur candidature."
         />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="canonical" href="https://www.sellcov.com/pros" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.sellcov.com/pros" />
-        <meta property="og:title" content="Cohorte fondateur, places limitées, SellCov" />
+        <meta property="og:title" content="Cohorte fondateurs, places limitées, SellCov" />
         <meta
           property="og:description"
-          content="Cohorte fondateur pour revendeurs pros et boutiques vintage. 30 jours d'accès complet, mise en place avec le fondateur, puis tarif fondateur verrouillé. Sur candidature."
+          content="Cohorte fondateurs pour revendeurs vintage. 30 jours d'accès complet, mise en place avec le fondateur, tarif fondateur verrouillé ensuite. Sur candidature."
         />
         <meta property="og:image" content="https://www.sellcov.com/logo.png" />
         <link rel="icon" type="image/png" href="/logo.png" />
@@ -72,332 +73,595 @@ export default function Pros() {
 
       <style jsx global>{`
         :root {
-          --bg: #000;
-          --bg-card: #0e0e0e;
-          --bg-panel: #141414;
-          --border: #1e1e1e;
-          --border-strong: #2a2a2a;
-          --text: #fff;
-          --text-muted: #9a9a9a;
-          --text-dim: #5a5a5a;
-          --green: #5ee8a3;
-          --green-bg: rgba(94, 232, 163, 0.07);
-          --radius: 18px;
-          --maxw: 960px;
+          --bg: #f8f7f3;
+          --bg-soft: #ffffff;
+          --bg-card: #ffffff;
+          --ink: #111111;
+          --ink-soft: #2a2a2a;
+          --muted: #6b6b6b;
+          --dim: #a0a09a;
+          --line: #e6e4dc;
+          --line-strong: #d4d2c8;
+          --green: #1f9f5f;
+          --green-deep: #167a48;
+          --green-soft: #e7f3ec;
+          --bubble: #ffffff;
+          --radius: 16px;
+          --radius-lg: 28px;
+          --maxw: 720px;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
+        html, body { overflow-x: hidden; }
         body {
-          font-family: var(--font-inter), system-ui, sans-serif;
-          background: var(--bg); color: var(--text); line-height: 1.55;
+          font-family: var(--font-inter), -apple-system, system-ui, sans-serif;
+          background: var(--bg);
+          color: var(--ink);
+          line-height: 1.55;
           -webkit-font-smoothing: antialiased;
         }
         a { color: inherit; text-decoration: none; }
-        .serif { font-family: var(--font-playfair), serif; font-weight: 700; letter-spacing: -.01em; }
-        .italic { font-style: italic; color: var(--text-muted); font-weight: 500; }
+        img { display: block; max-width: 100%; }
+        button { font-family: inherit; }
+
         header {
-          position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-          backdrop-filter: blur(14px); background: rgba(0, 0, 0, 0.55);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+          position: sticky; top: 0; z-index: 50;
+          background: rgba(248, 247, 243, 0.92);
+          backdrop-filter: blur(10px);
         }
         .nav {
           display: flex; align-items: center; justify-content: space-between;
-          padding: 16px 24px; max-width: 1200px; margin: 0 auto;
+          padding: 14px 24px; max-width: 1100px; margin: 0 auto;
         }
-        .logo-img { height: 72px; width: auto; display: block; }
-        .nav-back { color: var(--text-muted); font-size: 14px; transition: color .2s; }
-        .nav-back:hover { color: #fff; }
+        .nav-logo { display: flex; align-items: center; gap: 10px; }
+        .nav-logo img { height: 44px; width: auto; display: block; }
+        .nav-logo span { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
+        .nav-back {
+          color: var(--muted); font-size: 14px; font-weight: 500;
+          padding: 8px 14px; border-radius: 999px; transition: background .15s;
+        }
+        .nav-back:hover { background: var(--line); color: var(--ink); }
 
-        .container { max-width: var(--maxw); margin: 0 auto; padding: 140px 24px 80px; }
+        main { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 
-        .eyebrow {
+        .block { padding: 48px 0; text-align: center; }
+        .block:first-of-type { padding-top: 56px; }
+        @media (min-width: 720px) {
+          .block { padding: 72px 0; }
+          .block:first-of-type { padding-top: 80px; }
+        }
+
+        .kicker {
+          display: inline-block;
+          font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+          text-transform: uppercase; color: var(--green-deep);
+          margin-bottom: 22px;
+        }
+
+        h1.title, h2.title {
+          font-family: var(--font-inter), -apple-system, system-ui, sans-serif;
+          font-weight: 800;
+          font-size: clamp(26px, 6.5vw, 44px);
+          line-height: 1.08;
+          letter-spacing: -0.025em;
+          color: var(--ink);
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          hyphens: none;
+          max-width: 100%;
+          text-wrap: balance;
+        }
+        h1.title { font-size: clamp(28px, 7.2vw, 52px); }
+        @media (min-width: 480px) {
+          h1.title { font-size: clamp(36px, 5.5vw, 52px); }
+          h2.title { font-size: clamp(30px, 5vw, 44px); }
+        }
+        .accent { color: var(--green); display: block; }
+        .sub {
+          color: var(--muted);
+          font-size: clamp(16px, 1.7vw, 18px);
+          line-height: 1.55;
+          max-width: 480px;
+          margin: 18px auto 0;
+        }
+
+        .mascot {
+          width: clamp(140px, 28vw, 200px);
+          height: auto;
+          margin: 0 auto 28px;
+        }
+        .mascot-sm {
+          width: clamp(80px, 16vw, 110px);
+          height: auto;
+          margin: 0 auto 22px;
+        }
+
+        .cta-row { margin-top: 36px; }
+        .btn-primary {
+          display: inline-flex; align-items: center; gap: 10px;
+          background: var(--green); color: #fff;
+          padding: 16px 28px; border-radius: 999px;
+          font-weight: 700; font-size: 15px;
+          border: none; cursor: pointer;
+          transition: transform .15s, background .15s, box-shadow .15s;
+          box-shadow: 0 6px 20px rgba(31, 159, 95, 0.22);
+        }
+        .btn-primary:hover {
+          background: var(--green-deep);
+          transform: translateY(-1px);
+          box-shadow: 0 10px 28px rgba(31, 159, 95, 0.32);
+        }
+        .btn-primary .icon-link {
+          width: 16px; height: 16px;
+        }
+        .btn-ghost {
           display: inline-flex; align-items: center; gap: 8px;
-          background: var(--green-bg); border: 1px solid rgba(94, 232, 163, .25);
-          padding: 7px 14px; border-radius: 999px; font-size: 13px; color: var(--green);
-          margin-bottom: 32px;
+          color: var(--ink); padding: 14px 24px;
+          border-radius: 999px; font-weight: 600; font-size: 14px;
+          border: 1.5px solid var(--line-strong);
+          transition: border-color .15s;
         }
-        .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
+        .btn-ghost:hover { border-color: var(--ink); }
 
-        h1.hero-h1 {
-          font-family: var(--font-playfair), serif; font-weight: 700;
-          font-size: clamp(40px, 6vw, 64px); line-height: 1.02; letter-spacing: -.02em;
-          margin-bottom: 24px;
+        .illus {
+          margin: 44px auto 0;
+          max-width: 320px;
+          width: 100%;
+          aspect-ratio: 1 / 1;
         }
-        h1.hero-h1 .italic { display: block; font-size: 0.85em; }
-        .hero-sub {
-          font-size: clamp(16px, 1.6vw, 19px); color: var(--text-muted);
-          max-width: 720px; line-height: 1.5; margin-bottom: 40px;
+        .illus svg, .illus img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          display: block;
+        }
+        .illus-photo { max-width: 320px; }
+
+        .sr-only {
+          position: absolute;
+          width: 1px; height: 1px;
+          padding: 0; margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+        .illus-montage {
+          max-width: 580px;
+          width: 100%;
+          margin: 0 auto;
+        }
+        .illus-montage img { width: 100%; height: auto; display: block; }
+
+        /* Renard centré, bulles flottant à côté du carton (à droite) */
+        .voleur-scene {
+          position: relative;
+          max-width: 440px;
+          margin: 36px auto 0;
+          aspect-ratio: 3 / 2;
+        }
+        .voleur-img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          display: block;
+        }
+        .voleur-bubbles {
+          position: absolute;
+          top: 28%;
+          left: 100%;
+          margin-left: 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          align-items: flex-start;
+        }
+        @media (max-width: 720px) {
+          .voleur-bubbles {
+            position: static;
+            margin: 16px auto 0;
+            align-items: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+          }
         }
 
-        .hero-stats {
-          display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
-          margin-bottom: 56px;
+        /* (ancien .bubbles conservé pour compat — non utilisé) */
+        .bubbles {
+          display: flex; flex-direction: column; gap: 8px;
+          align-items: center;
         }
-        @media(max-width: 720px) { .hero-stats { grid-template-columns: 1fr; } }
-        .stat-card {
-          background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-          padding: 22px 20px;
+        .bubble {
+          background: #ffffff;
+          border: 1.5px solid var(--line);
+          border-radius: 18px 18px 18px 4px;
+          padding: 9px 15px;
+          font-size: 14px;
+          color: var(--ink-soft);
+          font-weight: 500;
+          position: relative;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+          white-space: nowrap;
         }
-        .stat-value { font-family: var(--font-playfair), serif; font-size: 32px; line-height: 1; color: var(--green); margin-bottom: 8px; }
-        .stat-label { color: var(--text-muted); font-size: 13px; line-height: 1.4; }
+        .bubble::before {
+          content: none;
+        }
+        .bubble:nth-child(1) { transform: translateX(40px); }
+        .bubble:nth-child(2) { transform: translateX(-10px); }
+        @media (max-width: 480px) {
+          .bubbles { max-width: 280px; }
+          .bubble:nth-child(1) { transform: translateX(20px); }
+          .bubble:nth-child(2) { transform: translateX(-10px); }
+        }
 
-        .section { margin: 80px 0; }
-        .section-kicker {
-          display: inline-block; color: var(--green); font-size: 12px; letter-spacing: .12em;
-          text-transform: uppercase; font-weight: 600; margin-bottom: 18px;
+        /* Offre cohorte */
+        .offer-card {
+          background: var(--bg-card);
+          border: 1.5px solid var(--line);
+          border-radius: var(--radius-lg);
+          padding: 44px 28px;
+          margin-top: 32px;
+          text-align: left;
         }
-        .section h2 {
-          font-family: var(--font-playfair), serif; font-weight: 700;
-          font-size: clamp(28px, 4vw, 40px); line-height: 1.1; letter-spacing: -.02em;
-          margin-bottom: 18px;
+        .offer-badges {
+          display: flex; flex-direction: column; gap: 10px;
+          align-items: center; margin-bottom: 28px;
         }
-        .section h2 .italic { display: block; font-size: 0.92em; }
-        .section-lead { color: var(--text-muted); font-size: 17px; margin-bottom: 36px; max-width: 700px; line-height: 1.5; }
+        .offer-badge {
+          display: inline-flex; align-items: center; gap: 8px;
+          background: var(--green-soft);
+          color: var(--green-deep);
+          font-weight: 700; font-size: 14px;
+          padding: 10px 18px; border-radius: 999px;
+        }
+        .offer-badge.outline {
+          background: transparent;
+          border: 1.5px solid var(--line-strong);
+          color: var(--ink-soft);
+          font-weight: 600;
+        }
+        .offer-list {
+          list-style: none; padding: 0; margin: 0 0 28px;
+          display: flex; flex-direction: column; gap: 14px;
+        }
+        .offer-list li {
+          display: flex; align-items: flex-start; gap: 12px;
+          font-size: 15.5px; color: var(--ink-soft);
+          line-height: 1.5;
+        }
+        .offer-list li::before {
+          content: "";
+          flex-shrink: 0;
+          width: 22px; height: 22px;
+          border-radius: 50%;
+          background: var(--green-soft);
+          background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f9f5f' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='5 13 10 18 19 7'/></svg>");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 14px;
+          margin-top: 1px;
+        }
+        .offer-fineprint {
+          color: var(--ink-soft); font-size: 14px; line-height: 1.7;
+          font-style: italic;
+          text-align: center;
+          max-width: 460px;
+          margin: 36px auto 8px;
+          padding-top: 28px;
+          border-top: 1px solid var(--line);
+        }
 
-        .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-        @media(max-width: 820px) { .three-col { grid-template-columns: 1fr; } }
-        .col-card {
-          background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-          padding: 26px 24px;
+        /* Form */
+        .form-wrap {
+          background: var(--bg-card);
+          border: 1.5px solid var(--line);
+          border-radius: var(--radius-lg);
+          padding: 36px 28px;
+          margin-top: 32px;
+          text-align: left;
         }
-        .col-card h3 { font-family: var(--font-playfair), serif; font-size: 22px; margin-bottom: 12px; line-height: 1.15; }
-        .col-card p { color: var(--text-muted); font-size: 14.5px; line-height: 1.55; }
-        .col-card ul { list-style: none; padding: 0; margin-top: 14px; }
-        .col-card li { color: var(--text-muted); font-size: 14px; padding: 6px 0; padding-left: 18px; position: relative; }
-        .col-card li::before { content: ""; position: absolute; left: 0; top: 13px; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
-
-        .roi-card {
-          background: linear-gradient(180deg, var(--green-bg), transparent 90%), var(--bg-card);
-          border: 1px solid rgba(94, 232, 163, .2); border-radius: var(--radius);
-          padding: 32px;
+        .form-wrap label {
+          display: block; font-size: 13px; color: var(--muted);
+          margin-bottom: 8px; font-weight: 600;
+          letter-spacing: 0.02em;
         }
-        .roi-line { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
-        .roi-line:last-child { border-bottom: none; }
-        .roi-line .roi-label { color: var(--text-muted); }
-        .roi-line .roi-value { font-family: var(--font-playfair), serif; font-weight: 700; color: #fff; font-size: 18px; }
-        .roi-line.roi-total .roi-value { color: var(--green); font-size: 22px; }
-
-        .offer-box {
-          background: var(--bg-card); border: 1px dashed var(--border-strong); border-radius: var(--radius);
-          padding: 32px;
+        .form-input {
+          width: 100%; background: var(--bg-soft);
+          border: 1.5px solid var(--line-strong);
+          border-radius: 12px; padding: 13px 14px;
+          color: var(--ink); font-size: 15.5px; font-family: inherit;
+          transition: border-color .15s;
+          display: block;
         }
-        .offer-box h3 { font-family: var(--font-playfair), serif; font-size: 26px; margin-bottom: 14px; }
-        .offer-box .price { font-family: var(--font-playfair), serif; font-size: 44px; color: var(--green); line-height: 1; margin: 8px 0 18px; }
-        .offer-box .price small { font-size: 14px; color: var(--text-muted); font-weight: 400; }
-        .offer-box .price del { color: var(--text-dim); font-size: 18px; margin-right: 12px; font-family: var(--font-inter); }
-        .offer-list { margin: 0 0 24px 0; padding: 0; list-style: none; }
-        .offer-list li { color: var(--text); padding: 6px 0 6px 24px; position: relative; font-size: 14.5px; }
-        .offer-list li::before { content: ""; position: absolute; left: 0; top: 14px; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
-
-        form.app-form {
-          background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-          padding: 32px; display: flex; flex-direction: column; gap: 20px;
-        }
-        form.app-form label { display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; }
-        form.app-form input[type=email], form.app-form input[type=text], form.app-form textarea, form.app-form select {
-          width: 100%; background: var(--bg-panel); border: 1px solid var(--border-strong); border-radius: 10px;
-          padding: 12px 14px; color: #fff; font-size: 15px; font-family: inherit; transition: border-color .15s;
-        }
-        form.app-form input:focus, form.app-form textarea:focus, form.app-form select:focus {
+        .form-input:focus {
           outline: none; border-color: var(--green);
         }
-        form.app-form textarea { resize: vertical; min-height: 90px; }
-        .radios { display: flex; flex-direction: column; gap: 8px; }
+        .form-field { margin-bottom: 22px; }
         .radio-row { display: flex; gap: 8px; flex-wrap: wrap; }
         .radio-chip {
-          flex: 1 1 auto; min-width: 140px;
-          background: var(--bg-panel); border: 1px solid var(--border-strong); border-radius: 10px;
-          padding: 10px 14px; color: var(--text-muted); font-size: 14px; cursor: pointer;
-          transition: all .15s; user-select: none; text-align: center;
+          flex: 1 1 auto; min-width: 110px;
+          background: var(--bg-soft);
+          border: 1.5px solid var(--line-strong);
+          border-radius: 12px;
+          padding: 11px 14px;
+          color: var(--ink-soft);
+          font-size: 14px; font-weight: 500;
+          cursor: pointer;
+          transition: all .15s;
+          user-select: none; text-align: center;
         }
-        .radio-chip:hover { border-color: #4a4a4a; color: #fff; }
-        .radio-chip.active { background: var(--green-bg); border-color: var(--green); color: var(--green); }
+        .radio-chip:hover { border-color: var(--ink-soft); }
+        .radio-chip.active {
+          background: var(--green-soft);
+          border-color: var(--green);
+          color: var(--green-deep);
+          font-weight: 700;
+        }
         .radio-chip input { display: none; }
-
         button.submit {
-          background: var(--green); color: #000; border: none; padding: 14px 24px; border-radius: 999px;
-          font-weight: 700; font-size: 15px; cursor: pointer; font-family: inherit;
-          transition: transform .15s, box-shadow .15s; margin-top: 8px;
+          width: 100%;
+          background: var(--green); color: #fff;
+          border: none; padding: 16px 24px; border-radius: 999px;
+          font-weight: 700; font-size: 15px;
+          cursor: pointer;
+          transition: background .15s, transform .15s, box-shadow .15s;
+          box-shadow: 0 6px 20px rgba(31, 159, 95, 0.22);
         }
-        button.submit:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(94, 232, 163, .25); }
-        button.submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
-
-        .form-error { color: #f570aa; font-size: 14px; }
+        button.submit:hover {
+          background: var(--green-deep);
+          transform: translateY(-1px);
+          box-shadow: 0 10px 28px rgba(31, 159, 95, 0.32);
+        }
+        button.submit:disabled {
+          opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none;
+        }
+        .form-error {
+          color: #c0392b; font-size: 14px; margin-bottom: 14px;
+          font-weight: 500;
+        }
         .form-success {
-          background: var(--green-bg); border: 1px solid rgba(94, 232, 163, .3); border-radius: var(--radius);
-          padding: 32px; text-align: center;
+          background: var(--green-soft);
+          border: 1.5px solid var(--green);
+          border-radius: var(--radius-lg);
+          padding: 36px 28px; text-align: center;
+          margin-top: 32px;
         }
-        .form-success h3 { font-family: var(--font-playfair), serif; color: var(--green); font-size: 26px; margin-bottom: 12px; }
-        .form-success p { color: var(--text-muted); }
+        .form-success h3 {
+          font-weight: 800; color: var(--green-deep);
+          font-size: 24px; margin-bottom: 10px;
+          letter-spacing: -0.02em;
+        }
+        .form-success p { color: var(--ink-soft); font-size: 15px; }
 
-        details.faq-item { border-bottom: 1px solid var(--border); padding: 18px 0; }
-        details.faq-item summary { font-size: 16px; font-weight: 500; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+        /* FAQ */
+        .faq { text-align: left; margin-top: 32px; }
+        details.faq-item {
+          border-bottom: 1px solid var(--line);
+          padding: 20px 0;
+        }
+        details.faq-item summary {
+          font-size: 16px; font-weight: 600; color: var(--ink);
+          cursor: pointer; list-style: none;
+          display: flex; justify-content: space-between; align-items: center;
+          gap: 16px;
+        }
         details.faq-item summary::-webkit-details-marker { display: none; }
-        details.faq-item summary::after { content: ""; flex-shrink: 0; width: 12px; height: 12px; border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted); transform: rotate(45deg); transition: transform .2s; margin-bottom: 4px; }
-        details.faq-item[open] summary::after { transform: rotate(-135deg); margin-bottom: 0; }
-        details.faq-item p { color: var(--text-muted); margin-top: 10px; font-size: 14.5px; line-height: 1.6; }
+        details.faq-item summary::after {
+          content: "+"; flex-shrink: 0;
+          font-size: 22px; color: var(--muted);
+          font-weight: 400; line-height: 1;
+          transition: transform .2s;
+        }
+        details.faq-item[open] summary::after {
+          content: "−";
+        }
+        details.faq-item p {
+          color: var(--muted); margin-top: 10px;
+          font-size: 14.5px; line-height: 1.65;
+        }
 
-        footer.pros-footer { border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; color: var(--text-dim); font-size: 13px; max-width: var(--maxw); margin: 60px auto 0; }
-        footer.pros-footer a { color: var(--text-muted); margin: 0 10px; }
-        footer.pros-footer a:hover { color: #fff; }
+        /* Footer */
+        footer.pros-footer {
+          border-top: 1px solid var(--line);
+          padding: 36px 24px;
+          text-align: center;
+          color: var(--dim); font-size: 13px;
+          max-width: var(--maxw); margin: 60px auto 0;
+        }
+        footer.pros-footer .foot-links {
+          margin-bottom: 14px;
+          display: flex; gap: 18px; justify-content: center; flex-wrap: wrap;
+        }
+        footer.pros-footer a { color: var(--muted); font-size: 13px; }
+        footer.pros-footer a:hover { color: var(--ink); }
+
+        /* Petite ligne décorative verte sous certaines accent */
+        .underline-deco {
+          display: block;
+          width: 56px; height: 3px;
+          background: var(--green);
+          margin: 14px auto 0;
+          border-radius: 2px;
+        }
       `}</style>
 
       <header>
         <div className="nav">
-          <Link href="/"><span style={{ display: "flex", alignItems: "center" }}><img src="/logo.png" alt="SellCov" className="logo-img" /></span></Link>
-          <Link href="/"><span className="nav-back">Retour</span></Link>
+          <Link href="/" className="nav-logo">
+            <img src="/logo.png" alt="SellCov" />
+            <span>SellCov</span>
+          </Link>
         </div>
       </header>
 
-      <main className="container">
-        {/* Hero */}
-        <div className="eyebrow"><span className="dot"></span>Cohorte fondateurs, places limitées</div>
-        <h1 className="hero-h1">
-          Tes ventes,
-          <span className="italic">à l'abri des litiges.</span>
-        </h1>
-        <p className="hero-sub">
-          Tu es vendeur professionnel ou tu possèdes une boutique en ligne sur les marketplaces. La vidéo horodatée dissuade l'arnaque avant qu'elle existe, et tient comme preuve si un litige arrive. Preuve vidéo horodatée, défense IA, ancrage Bitcoin.
-        </p>
-
-        <div className="hero-stats">
-          <div className="stat-card">
-            <div className="stat-value">Dissuasion</div>
-            <div className="stat-label">Tu filmes l'envoi et tu génères un certificat horodaté. L'acheteur sait que la preuve existe, l'arnaque s'éteint avant le litige.</div>
+      <main>
+        {/* HERO */}
+        <section className="block">
+          <h1 className="title">
+            La preuve qui
+            <span className="accent">protège ta vente.</span>
+          </h1>
+          <p className="sub">Pour revendeurs vintage qui expédient en volume.</p>
+          <div className="cta-row">
+            <a href="#form" className="btn-primary">
+              <IconLink />
+              Candidater à la cohorte
+            </a>
           </div>
-          <div className="stat-card">
-            <div className="stat-value">Recevabilité</div>
-            <div className="stat-label">Articles 1366 et 1358 du Code civil. Auteur identifiable, intégrité garantie, preuve admissible par tout moyen.</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-value">Intégrité</div>
-            <div className="stat-label">Empreinte SHA-256, signature HMAC et ancrage Bitcoin sur chaque preuve. Personne, pas même nous, ne peut la modifier.</div>
-          </div>
-        </div>
+        </section>
 
-        {/* Pour qui c'est */}
-        <section className="section">
-          <div className="section-kicker">Pour qui</div>
-          <h2 className="serif">Tu te reconnais dans <span className="italic">un de ces profils{' '}?</span></h2>
-          <p className="section-lead">C'est pour les revendeurs qui vendent des pièces à vraie valeur et qui expédient régulièrement. La vidéo horodatée protège chaque envoi et coupe court aux litiges avant qu'ils ne partent.</p>
-
-          <div className="three-col">
-            <div className="col-card">
-              <h3>Boutique vintage en ligne</h3>
-              <p>Tu vends des pièces vintage de façon régulière sur Vinted Pro, Grailed, Etsy ou Depop.</p>
-              <ul>
-                <li>Stock curaté en continu</li>
-                <li>Pièces uniques, difficiles à remplacer</li>
-                <li>Chaque envoi protégé par une preuve horodatée</li>
-              </ul>
-            </div>
-            <div className="col-card">
-              <h3>Reseller archive et streetwear</h3>
-              <p>Tu vends du workwear, du militaire, des archives de marques recherchées.</p>
-              <ul>
-                <li>Pièces à forte valeur, acheteurs exigeants</li>
-                <li>État précis filmé et horodaté au départ</li>
-                <li>Ta réputation de vendeur protégée</li>
-              </ul>
-            </div>
-            <div className="col-card">
-              <h3>Boutique multi-marketplace</h3>
-              <p>Tu vends sur plusieurs plateformes, avec un vrai volume d'envois.</p>
-              <ul>
-                <li>Un process de preuve identique partout</li>
-                <li>Moins de litiges grâce à la dissuasion</li>
-                <li>Un dossier prêt si un acheteur conteste</li>
-              </ul>
+        {/* PROBLÈME — Sans preuve, tu perds */}
+        <section className="block">
+          <h2 className="title">
+            Sans preuve,
+            <span className="accent">l'acheteur a toujours raison.</span>
+          </h2>
+          <div className="voleur-scene">
+            <img
+              src="/illus/voleur-renard-v3.png"
+              alt="Voleur qui s'enfuit avec un colis non protégé par SellCov"
+              className="voleur-img"
+            />
+            <div className="voleur-bubbles">
+              <span className="bubble">Jamais reçu</span>
+              <span className="bubble">Pas conforme</span>
             </div>
           </div>
         </section>
 
-        {/* Ce que ça change */}
-        <section className="section">
-          <div className="section-kicker">Ce que ça change</div>
-          <h2 className="serif">Le vrai coût d'un litige <span className="italic">n'est pas que l'article.</span></h2>
-          <p className="section-lead">Une vidéo horodatée fait deux choses. Elle dissuade l'arnaque avant qu'elle existe, parce que l'acheteur sait que la preuve est là. Et si un litige arrive quand même, elle tient comme preuve dans tes échanges.</p>
-
-          <div className="three-col">
-            <div className="col-card">
-              <h3>Avant le litige</h3>
-              <p>L'acheteur voit que l'envoi est filmé et horodaté. La plupart des fausses réclamations ne partent jamais.</p>
-            </div>
-            <div className="col-card">
-              <h3>Pendant le litige</h3>
-              <p>Tu réponds avec une preuve horodatée, intègre et opposable, au lieu d'un simple screenshot de bordereau.</p>
-            </div>
-            <div className="col-card">
-              <h3>Ce que tu protèges</h3>
-              <p>Pas seulement la pièce. Le temps passé à te défendre, ta note vendeur et la santé de ton compte.</p>
-            </div>
+        {/* ÉTAPE 1 — Tu filmes l'envoi sans coupure */}
+        <section className="block">
+          <span className="kicker">Étape 1</span>
+          <h2 className="title">
+            Tu filmes l'envoi
+            <span className="accent">sans coupure</span>
+          </h2>
+          <span className="underline-deco" />
+          <p className="sub">L'article, l'emballage, la fermeture du colis. Une seule prise, horodatée.</p>
+          <div className="illus illus-photo">
+            <img src="/illus/step1-film.png" alt="Hérisson qui filme un article avant la mise en colis" />
           </div>
-          <p style={{ color: "var(--text-dim)", fontSize: 13, marginTop: 18, fontStyle: "italic" }}>
-            SellCov ne garantit pas l'issue d'un litige. Le résultat dépend de chaque marketplace et de la qualité de tes preuves.
-          </p>
         </section>
 
-        {/* Offre fondateur */}
-        <section className="section">
-          <div className="section-kicker">Cohorte fondateurs</div>
-          <h2 className="serif">Cohorte fondateur <span className="italic">limitée.</span></h2>
-          <p className="section-lead">Tu démarres avec 30 jours d'accès complet et une mise en place en visio avec le fondateur. Ensuite tu gardes un tarif fondateur verrouillé pendant que le tarif public augmente. En contrepartie, un retour franc et le droit de raconter ton cas si ça marche.</p>
+        {/* ÉTAPE 2 — Tu préviens l'acheteur au départ */}
+        <section className="block">
+          <span className="kicker">Étape 2</span>
+          <h2 className="title">
+            Un simple message
+            <span className="accent">suffit.</span>
+          </h2>
+          <span className="underline-deco" />
+          <p className="sub">Mieux vaut prévenir que prouver.</p>
+          <div className="illus illus-photo">
+            <img src="/illus/step2-prevenir.png" alt="Hérisson qui prévient l'acheteur que l'envoi est certifié SellCov" />
+          </div>
+        </section>
 
-          <div className="offer-box">
-            <h3>Place fondateur</h3>
-            <div className="price">0 € <small>les 30 premiers jours, accès complet</small></div>
+        {/* ÉTAPE 3 — Si un litige passe, la preuve répond */}
+        <section className="block">
+          <span className="kicker">Étape 3</span>
+          <h2 className="title">
+            En cas de litige,
+            <span className="accent">la vidéo plaide pour toi.</span>
+          </h2>
+          <span className="underline-deco" />
+          <p className="sub">Recevable, opposable, imparable.</p>
+          <div className="illus illus-photo">
+            <img src="/illus/step2-preuve.png" alt="Tampon de preuve horodatée SellCov" />
+          </div>
+        </section>
+
+        {/* OFFRE COHORTE */}
+        <section className="block" id="offre">
+          <h2 className="title">
+            Place de fondateur,
+            <span className="accent">limitée.</span>
+          </h2>
+          <div className="offer-card">
+            <div className="offer-badges">
+              <span className="offer-badge">
+                <IconPeople />
+                Cohorte fondateurs ouverte
+              </span>
+              <span className="offer-badge outline">
+                <IconStar />
+                Places limitées
+              </span>
+            </div>
             <ul className="offer-list">
-              <li>Certificats vidéo illimités</li>
-              <li>IA défense automatique illimitée</li>
-              <li>Génération d'annonce illimitée</li>
-              <li>Ancrage Bitcoin sur chaque preuve</li>
-              <li>Mise en place en visio avec le fondateur</li>
-              <li>Support email prioritaire</li>
-              <li>Tarif fondateur verrouillé après les 30 jours, sous le prix public</li>
-              <li>Aucune carte bancaire demandée, pas d'engagement</li>
+              <li>30 jours d'accès complet, sans carte bancaire.</li>
+              <li>Mise en place en visio avec le fondateur.</li>
+              <li>Certificats vidéo illimités et défense IA.</li>
+              <li>Ancrage Bitcoin sur chaque preuve.</li>
+              <li>Tarif fondateur verrouillé après les 30 jours, sous le prix public.</li>
             </ul>
-            <p style={{ color: "var(--text-muted)", fontSize: 14, lineHeight: 1.6 }}>
-              <strong style={{ color: "#fff" }}>En contrepartie :</strong> un retour franc sur ce qui marche et ce qui manque, et le droit de raconter ton cas si ça marche. Pas de revente de données, pas de spam.
+            <div className="cta-row" style={{ textAlign: "center", marginTop: 0 }}>
+              <a href="#form" className="btn-primary">
+                <IconLink />
+                Rejoindre la cohorte
+              </a>
+            </div>
+            <p
+              className="offer-fineprint"
+              style={{
+                textAlign: 'center',
+                maxWidth: '460px',
+                margin: '36px auto 8px',
+                paddingTop: '28px',
+                borderTop: '1px solid #e6e4dc',
+                lineHeight: 1.7,
+                fontStyle: 'italic',
+                fontSize: '14px',
+                color: '#2a2a2a',
+              }}
+            >
+              Contrepartie : un avis sans filtre, et le droit de partager ton succès.
             </p>
           </div>
         </section>
 
-        {/* Form */}
-        <section className="section" id="form">
-          <div className="section-kicker">Candidature</div>
-          <h2 className="serif">Candidate en quelques minutes.</h2>
-          <p className="section-lead">Les places sont limitées. On lit chaque candidature et on répond sous 48h. Si ton profil colle, on cale ta mise en place et on t'ouvre l'accès.</p>
+        {/* FORM */}
+        <section className="block" id="form">
+          <span className="kicker">Candidature</span>
+          <h2 className="title">
+            Candidate
+            <span className="accent">en deux minutes.</span>
+          </h2>
+          <p className="sub">On lit chaque candidature et on répond sous 48h.</p>
 
           {status === "sent" ? (
-            <div className="form-success">
-              <h3>Candidature reçue</h3>
-              <p>Merci. On lit ta candidature et on revient vers toi sous 48h sur {email}.</p>
+            <div className={styles.formSuccess}>
+              <h3>Candidature reçue.</h3>
+              <p>On revient vers toi sous 48h sur {email}.</p>
             </div>
           ) : (
-            <form className="app-form" onSubmit={onSubmit}>
-              <div>
+            <form className={styles.formWrap} onSubmit={onSubmit}>
+              <div className={styles.formField}>
                 <label htmlFor="email">Email *</label>
                 <input
+                  className={styles.formInput}
                   id="email" type="email" value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="ton@email.com" autoComplete="email" required
                 />
               </div>
 
-              <div>
-                <label htmlFor="handle">Handle Instagram, Discord ou Twitter *</label>
+              <div className={styles.formField}>
+                <label htmlFor="handle">Ton @ Instagram, Discord ou Twitter *</label>
                 <input
+                  className={styles.formInput}
                   id="handle" type="text" value={handle}
                   onChange={(e) => setHandle(e.target.value)}
-                  placeholder="@tonhandle ou tonhandle#1234" required
+                  placeholder="@tonpseudo" required
                 />
               </div>
 
-              <div>
+              <div className={styles.formField}>
                 <label>Plateforme principale *</label>
-                <div className="radio-row">
+                <div className={styles.radioRow}>
                   {PLATFORMS.map((p) => (
-                    <label key={p.value} className={`radio-chip${platform === p.value ? " active" : ""}`}>
+                    <label key={p.value} className={`${styles.radioChip}${platform === p.value ? " " + styles.radioChipActive : ""}`}>
                       <input
                         type="radio" name="platform" value={p.value}
                         checked={platform === p.value}
@@ -409,11 +673,11 @@ export default function Pros() {
                 </div>
               </div>
 
-              <div>
+              <div className={styles.formField}>
                 <label>Volume mensuel *</label>
-                <div className="radio-row">
+                <div className={styles.radioRow}>
                   {VOLUMES.map((v) => (
-                    <label key={v.value} className={`radio-chip${volume === v.value ? " active" : ""}`}>
+                    <label key={v.value} className={`${styles.radioChip}${volume === v.value ? " " + styles.radioChipActive : ""}`}>
                       <input
                         type="radio" name="volume" value={v.value}
                         checked={volume === v.value}
@@ -425,18 +689,20 @@ export default function Pros() {
                 </div>
               </div>
 
-              <div>
+              <div className={styles.formField}>
                 <label htmlFor="note">Note (optionnel)</label>
                 <textarea
-                  id="note" value={note} onChange={(e) => setNote(e.target.value.substring(0, 500))}
+                  className={`${styles.formInput} ${styles.textarea}`}
+                  id="note" value={note}
+                  onChange={(e) => setNote(e.target.value.substring(0, 500))}
                   placeholder="Une histoire de litige récente, un besoin spécifique, ou pourquoi ça t'intéresse..."
                   maxLength={500}
                 />
               </div>
 
-              {errorMsg && <div className="form-error">{errorMsg}</div>}
+              {errorMsg && <div className={styles.formError}>{errorMsg}</div>}
 
-              <button className="submit" type="submit" disabled={status === "sending"}>
+              <button className={styles.submit} type="submit" disabled={status === "sending"}>
                 {status === "sending" ? "Envoi..." : "Envoyer ma candidature"}
               </button>
             </form>
@@ -444,44 +710,153 @@ export default function Pros() {
         </section>
 
         {/* FAQ */}
-        <section className="section">
-          <div className="section-kicker">Questions fréquentes</div>
-          <h2 className="serif">Ce qu'on nous demande <span className="italic">le plus souvent.</span></h2>
-          <div style={{ marginTop: 18 }}>
-            <details className="faq-item">
-              <summary>Pourquoi vous demandez mon Instagram ou Discord ?</summary>
-              <p>Pour vérifier que tu es un vrai revendeur, pas un compte fictif. On ne te suit pas, on ne te DM pas.</p>
-            </details>
-            <details className="faq-item">
+        <section className="block">
+          <span className="kicker">Questions fréquentes</span>
+          <h2 className="title">
+            Ce qu'on nous
+            <span className="accent">demande souvent.</span>
+          </h2>
+          <div className={styles.faq}>
+            <details className={styles.faqItem}>
               <summary>Que se passe-t-il après les 30 jours ?</summary>
               <p>Si tu continues, tu gardes un tarif fondateur verrouillé, sous le prix public, tant que tu restes. Si tu arrêtes, tu arrêtes. Pas de prélèvement surprise puisqu'on ne t'a jamais demandé ta carte bancaire.</p>
             </details>
-            <details className="faq-item">
-              <summary>Et si je débute ou je fais peu de volume ?</summary>
-              <p>Le plan Découverte gratuit te laisse tester sans carte bancaire, avec un certificat vidéo par mois. Quand ton volume grimpe, la cohorte fondateur t'attend.</p>
+            <details className={styles.faqItem}>
+              <summary>Pourquoi mon Instagram ?</summary>
+              <p>Pour vérifier que tu es un vrai revendeur, pas un compte fictif. On ne te suit pas, on ne te DM pas.</p>
             </details>
-            <details className="faq-item">
+            <details className={styles.faqItem}>
               <summary>Mes vidéos sont-elles vraiment privées ?</summary>
-              <p>Oui. Tes vidéos sont chiffrées, stockées sur serveurs européens (RGPD), accessibles uniquement depuis ton compte. On ne les visionne pas, on ne les revend pas, on ne les partage pas. L'empreinte SHA-256, la signature HMAC et l'ancrage Bitcoin garantissent l'intégrité sans qu'on accède au contenu.</p>
-            </details>
-            <details className="faq-item">
-              <summary>SellCov fonctionne sur Vinted standard ?</summary>
-              <p>Oui. SellCov est surtout pensé pour Vinted Pro, Grailed, Etsy, Depop et Vestiaire Collective, là où les pièces ont une vraie valeur. Sur Vinted standard la valeur moyenne par vente est plus basse, mais la protection fonctionne de la même façon.</p>
+              <p>Oui. Tes vidéos sont chiffrées, stockées sur serveurs européens (RGPD), accessibles uniquement depuis ton compte. On ne les visionne pas, on ne les revend pas.</p>
             </details>
           </div>
         </section>
       </main>
 
-      <footer className="pros-footer">
-        <div style={{ marginBottom: 14 }}>
+      <footer className={styles.footer}>
+        <div className={styles.footerLinks}>
           <Link href="/faq">FAQ</Link>
           <a href="mailto:hello@sellcov.com">Contact</a>
           <Link href="/mentions-legales">Mentions légales</Link>
           <Link href="/cgu">CGU</Link>
           <Link href="/confidentialite">Confidentialité</Link>
         </div>
-        <div>© 2026 SellCov</div>
+        <div className={styles.footerCopy}>© 2026 SellCov</div>
       </footer>
     </>
+  );
+}
+
+/* ---------- Illustrations SVG inline (style linéaire carrousel) ---------- */
+
+function IllusFilm() {
+  return (
+    <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      {/* Main */}
+      <path d="M40 200 C 40 175, 55 165, 75 168 L 95 170 L 100 160 C 102 152, 110 148, 118 152 C 124 155, 126 162, 122 170 L 118 178" stroke="#111" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M70 200 L 70 220 L 130 220 L 130 200" stroke="#111" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+      {/* Phone tenu en main */}
+      <rect x="95" y="60" width="100" height="160" rx="12" stroke="#111" strokeWidth="2.5" fill="#fff"/>
+      <rect x="105" y="72" width="80" height="130" rx="4" stroke="#111" strokeWidth="1.5" fill="#f8f7f3"/>
+      {/* T-shirt sur l'écran */}
+      <path d="M125 102 L 135 95 L 155 95 L 165 102 L 165 118 L 155 118 L 155 165 L 135 165 L 135 118 L 125 118 Z" stroke="#111" strokeWidth="2" strokeLinejoin="round" fill="none"/>
+      {/* REC dot + texte */}
+      <circle cx="178" cy="86" r="4" fill="#1f9f5f"/>
+      <text x="186" y="90" fontSize="9" fontWeight="700" fill="#111" fontFamily="system-ui, sans-serif">REC</text>
+      {/* Crochets de viseur */}
+      <path d="M115 90 L 115 82 L 123 82 M 175 82 L 183 82 L 183 90 M 115 180 L 115 188 L 123 188 M 175 188 L 183 188 L 183 180" stroke="#1f9f5f" strokeWidth="2" strokeLinecap="round" fill="none"/>
+      {/* Colis à droite */}
+      <path d="M225 165 L 265 150 L 305 165 L 305 210 L 265 225 L 225 210 Z" stroke="#111" strokeWidth="2.5" strokeLinejoin="round" fill="#fff"/>
+      <path d="M225 165 L 265 180 L 305 165 M 265 180 L 265 225" stroke="#111" strokeWidth="2" strokeLinejoin="round"/>
+      <line x1="245" y1="157" x2="245" y2="217" stroke="#1f9f5f" strokeWidth="4"/>
+      <path d="M245 157 L 285 142" stroke="#1f9f5f" strokeWidth="3" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function IllusTampon() {
+  return (
+    <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      {/* Tampon - poignée */}
+      <rect x="135" y="40" width="50" height="14" rx="3" stroke="#111" strokeWidth="2.5" fill="#fff"/>
+      <line x1="160" y1="54" x2="160" y2="80" stroke="#111" strokeWidth="2.5"/>
+      {/* Tampon - corps */}
+      <rect x="110" y="80" width="100" height="36" rx="4" stroke="#111" strokeWidth="2.5" fill="#fff"/>
+      <rect x="120" y="116" width="80" height="14" rx="2" stroke="#111" strokeWidth="2.5" fill="#fff"/>
+      {/* Texte "PREUVE" sur tampon */}
+      <text x="160" y="103" fontSize="12" fontWeight="800" fill="#1f9f5f" textAnchor="middle" fontFamily="system-ui, sans-serif">PREUVE</text>
+      {/* Lignes d'impact */}
+      <path d="M70 90 L 95 90 M 70 100 L 95 100 M 245 90 L 270 90 M 245 100 L 270 100" stroke="#1f9f5f" strokeWidth="2.5" strokeLinecap="round"/>
+      {/* Cartouche horodatage */}
+      <rect x="95" y="160" width="130" height="50" rx="4" stroke="#1f9f5f" strokeWidth="2" fill="#e7f3ec" strokeDasharray="5 3"/>
+      <text x="160" y="180" fontSize="10" fontWeight="700" fill="#167a48" textAnchor="middle" fontFamily="system-ui, sans-serif">HORODATAGE</text>
+      <text x="160" y="198" fontSize="11" fontWeight="600" fill="#111" textAnchor="middle" fontFamily="ui-monospace, monospace">2026-05-21  14:32</text>
+    </svg>
+  );
+}
+
+function IllusBouclier() {
+  return (
+    <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      {/* Bulle de chat (le litige) à gauche */}
+      <path d="M40 70 L 130 70 Q 145 70 145 85 L 145 130 Q 145 145 130 145 L 75 145 L 60 162 L 60 145 L 55 145 Q 40 145 40 130 Z" stroke="#111" strokeWidth="2.5" strokeLinejoin="round" fill="#fff"/>
+      <line x1="55" y1="92" x2="125" y2="92" stroke="#111" strokeWidth="2" strokeLinecap="round" opacity="0.6"/>
+      <line x1="55" y1="108" x2="120" y2="108" stroke="#111" strokeWidth="2" strokeLinecap="round" opacity="0.6"/>
+      <line x1="55" y1="124" x2="105" y2="124" stroke="#111" strokeWidth="2" strokeLinecap="round" opacity="0.6"/>
+      {/* Flèche vers le bouclier */}
+      <path d="M165 110 L 195 110 M 188 103 L 195 110 L 188 117" stroke="#1f9f5f" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+      {/* Bouclier avec check */}
+      <path d="M250 50 L 210 68 L 210 130 Q 210 175 250 195 Q 290 175 290 130 L 290 68 Z" stroke="#1f9f5f" strokeWidth="3" strokeLinejoin="round" fill="#e7f3ec"/>
+      <path d="M228 125 L 244 142 L 274 108" stroke="#1f9f5f" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </svg>
+  );
+}
+
+function IllusColis() {
+  return (
+    <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      {/* Colis face */}
+      <path d="M80 110 L 160 80 L 240 110 L 240 200 L 160 230 L 80 200 Z" stroke="#111" strokeWidth="2.5" strokeLinejoin="round" fill="#fff"/>
+      <path d="M80 110 L 160 140 L 240 110" stroke="#111" strokeWidth="2.5" strokeLinejoin="round"/>
+      <line x1="160" y1="140" x2="160" y2="230" stroke="#111" strokeWidth="2.5"/>
+      {/* Scotch vert */}
+      <path d="M115 96 L 115 215" stroke="#1f9f5f" strokeWidth="10" strokeLinecap="butt" opacity="0.95"/>
+      <path d="M115 96 L 195 66" stroke="#1f9f5f" strokeWidth="8" strokeLinecap="butt" opacity="0.95"/>
+      {/* Flèche "ce côté en haut" */}
+      <g transform="translate(185 165)">
+        <path d="M0 18 L 0 -10 M -7 -3 L 0 -10 L 7 -3" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+        <path d="M-6 25 L 6 25" stroke="#111" strokeWidth="2" strokeLinecap="round"/>
+      </g>
+      {/* Petits traits d'effet */}
+      <path d="M40 90 L 50 100 M 30 130 L 45 130 M 280 90 L 270 100 M 290 130 L 275 130" stroke="#1f9f5f" strokeWidth="2" strokeLinecap="round" opacity="0.7"/>
+    </svg>
+  );
+}
+
+function IconLink() {
+  return (
+    <svg className="icon-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+    </svg>
+  );
+}
+
+function IconPeople() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+    </svg>
+  );
+}
+
+function IconStar() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/>
+    </svg>
   );
 }
