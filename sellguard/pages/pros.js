@@ -272,9 +272,7 @@ export default function Pros() {
             position: static;
             margin: 16px auto 0;
             align-items: center;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-direction: column;
           }
         }
 
@@ -733,7 +731,7 @@ export default function Pros() {
           </h2>
           <div className={styles.faq}>
             <details className={styles.faqItem}>
-              <summary>Que se passe-t-il après les 30 jours ?</summary>
+              <summary>{"Que se passe-t-il après les 30 jours ?"}</summary>
               <p>Si tu continues, tu gardes un tarif fondateur verrouillé, sous le prix public, tant que tu restes. Si tu arrêtes, tu arrêtes. Pas de prélèvement surprise puisqu'on ne t'a jamais demandé ta carte bancaire.</p>
             </details>
             <details className={styles.faqItem}>
@@ -741,7 +739,7 @@ export default function Pros() {
               <p>Pour vérifier que tu es un vrai revendeur, pas un compte fictif. On ne te suit pas, on ne te DM pas.</p>
             </details>
             <details className={styles.faqItem}>
-              <summary>Mes vidéos sont-elles vraiment privées ?</summary>
+              <summary>Mes vidéos sont-elles vraiment <span style={{ whiteSpace: "nowrap" }}>privées ?</span></summary>
               <p>Oui. Tes vidéos sont chiffrées, stockées sur serveurs européens (RGPD), accessibles uniquement depuis ton compte. On ne les visionne pas, on ne les revend pas.</p>
             </details>
           </div>
