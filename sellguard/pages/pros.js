@@ -739,7 +739,7 @@ export default function Pros() {
               <p>Pour vérifier que tu es un vrai revendeur, pas un compte fictif. On ne te suit pas, on ne te DM pas.</p>
             </details>
             <details className={styles.faqItem}>
-              <summary>Mes vidéos sont-elles vraiment <span style={{ whiteSpace: "nowrap" }}>privées ?</span></summary>
+              <summary>Mes vidéos sont-elles vraiment privées ?</summary>
               <p>Oui. Tes vidéos sont chiffrées, stockées sur serveurs européens (RGPD), accessibles uniquement depuis ton compte. On ne les visionne pas, on ne les revend pas.</p>
             </details>
           </div>

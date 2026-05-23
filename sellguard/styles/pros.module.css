@@ -158,21 +158,23 @@
   color: #111111;
   cursor: pointer;
   list-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
+  position: relative;
+  padding-right: 32px;
+  display: block;
+  line-height: 1.4;
 }
 .faqItem summary::-webkit-details-marker {
   display: none;
 }
 .faqItem summary::after {
   content: "+";
-  flex-shrink: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
   font-size: 22px;
   color: #6b6b6b;
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.4;
   transition: transform 0.2s;
 }
 .faqItem[open] summary::after {
