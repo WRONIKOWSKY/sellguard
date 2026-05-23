@@ -53,21 +53,26 @@ export default function Pros() {
   return (
     <>
       <Head>
-        <title>Cohorte fondateurs, places limitées, SellCov</title>
+        <title>SellCov — La preuve qui protège ta vente</title>
         <meta
           name="description"
-          content="Cohorte fondateurs pour revendeurs vintage qui expédient en volume. 30 jours d'accès complet, mise en place avec le fondateur, tarif fondateur verrouillé ensuite. Sur candidature."
+          content="La preuve vidéo horodatée qui protège chaque vente. Pour les revendeurs vintage qui expédient en volume. Cohorte fondateurs ouverte, sur candidature."
         />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="canonical" href="https://www.sellcov.com/pros" />
+        <link rel="canonical" href="https://www.sellcov.com/" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.sellcov.com/pros" />
-        <meta property="og:title" content="Cohorte fondateurs, places limitées, SellCov" />
+        <meta property="og:url" content="https://www.sellcov.com/" />
+        <meta property="og:title" content="La preuve qui protège ta vente." />
         <meta
           property="og:description"
-          content="Cohorte fondateurs pour revendeurs vintage. 30 jours d'accès complet, mise en place avec le fondateur, tarif fondateur verrouillé ensuite. Sur candidature."
+          content="Pour les revendeurs vintage qui expédient en volume. Cohorte fondateurs ouverte, sur candidature."
         />
-        <meta property="og:image" content="https://www.sellcov.com/logo.png" />
+        <meta property="og:image" content="https://www.sellcov.com/logo-full.png" />
+        <meta property="og:image:alt" content="SellCov — hérisson et bouclier" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="La preuve qui protège ta vente." />
+        <meta name="twitter:description" content="Pour les revendeurs vintage qui expédient en volume." />
+        <meta name="twitter:image" content="https://www.sellcov.com/logo-full.png" />
         <link rel="icon" type="image/png" href="/logo.png" />
       </Head>
 
