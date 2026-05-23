@@ -67,12 +67,12 @@ export default function Pros() {
           property="og:description"
           content="Cohorte fondateurs, places limitées."
         />
-        <meta property="og:image" content="https://www.sellcov.com/logo-full.png" />
+        <meta property="og:image" content="https://www.sellcov.com/og.png" />
         <meta property="og:image:alt" content="SellCov — hérisson et bouclier" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="La preuve qui protège ta vente." />
         <meta name="twitter:description" content="Cohorte fondateurs, places limitées." />
-        <meta name="twitter:image" content="https://www.sellcov.com/logo-full.png" />
+        <meta name="twitter:image" content="https://www.sellcov.com/og.png" />
         <link rel="icon" type="image/png" href="/logo.png" />
       </Head>
 
