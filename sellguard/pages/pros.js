@@ -113,9 +113,15 @@ export default function Pros() {
           display: flex; align-items: center; justify-content: space-between;
           padding: 14px 24px; max-width: 1100px; margin: 0 auto;
         }
-        .nav-logo { display: flex; align-items: center; gap: 10px; }
-        .nav-logo img { height: 44px; width: auto; display: block; }
-        .nav-logo span { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
+        .nav-logo { display: flex; align-items: center; }
+        .nav-logo img { height: 80px; width: auto; display: block; }
+        .lang-switcher {
+          display: flex; align-items: center; gap: 8px;
+          font-size: 14px; font-weight: 600;
+        }
+        .lang-active { color: var(--ink); }
+        .lang-disabled { color: var(--dim); cursor: not-allowed; opacity: 0.55; }
+        .lang-divider { color: var(--dim); }
         .nav-back {
           color: var(--muted); font-size: 14px; font-weight: 500;
           padding: 8px 14px; border-radius: 999px; transition: background .15s;
@@ -489,9 +495,13 @@ export default function Pros() {
       <header>
         <div className="nav">
           <Link href="/" className="nav-logo">
-            <img src="/logo.png" alt="SellCov" />
-            <span>SellCov</span>
+            <img src="/logo-full.png" alt="SellCov" />
           </Link>
+          <div className="lang-switcher">
+            <span className="lang-active">FR</span>
+            <span className="lang-divider">·</span>
+            <span className="lang-disabled" title="Coming soon">EN</span>
+          </div>
         </div>
       </header>
 
@@ -502,7 +512,7 @@ export default function Pros() {
             La preuve qui
             <span className="accent">protège ta vente.</span>
           </h1>
-          <p className="sub">Pour revendeurs vintage qui expédient en volume.</p>
+          <p className="sub">Pour les revendeurs vintage qui expédient en volume.</p>
           <div className="cta-row">
             <a href="#form" className="btn-primary">
               <IconLink />
@@ -628,7 +638,7 @@ export default function Pros() {
             Candidate
             <span className="accent">en deux minutes.</span>
           </h2>
-          <p className="sub">On lit chaque candidature et on répond sous 48h.</p>
+          <p className="sub">Tu candidates, on te répond. 48h max.</p>
 
           {status === "sent" ? (
             <div className={styles.formSuccess}>
@@ -737,6 +747,8 @@ export default function Pros() {
         <div className={styles.footerLinks}>
           <Link href="/faq">FAQ</Link>
           <a href="mailto:hello@sellcov.com">Contact</a>
+          <a href="https://www.instagram.com/sellcov" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://www.tiktok.com/@sellcov.com" target="_blank" rel="noopener noreferrer">TikTok</a>
           <Link href="/mentions-legales">Mentions légales</Link>
           <Link href="/cgu">CGU</Link>
           <Link href="/confidentialite">Confidentialité</Link>
