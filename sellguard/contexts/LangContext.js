@@ -51,9 +51,7 @@ export var T = {
       step3_sub: "Recevable, opposable, imparable.",
       step3_alt: "Tampon de preuve horodatée SellCov",
 
-      proof_kicker: "Preuve",
-      proof_text: "Tu doutes ? Vois un certificat en vrai.",
-      proof_cta: "Voir un certificat →",
+      proof_cta: "Preuve",
 
       offer_title_1: "Place de fondateur,",
       offer_title_2: "limitée.",
@@ -381,9 +379,7 @@ export var T = {
       step3_sub: "Admissible, enforceable, airtight.",
       step3_alt: "SellCov timestamped proof stamp",
 
-      proof_kicker: "Proof",
-      proof_text: "Skeptical? See a real certificate.",
-      proof_cta: "View a certificate →",
+      proof_cta: "Proof",
 
       offer_title_1: "Founder spot,",
       offer_title_2: "limited.",
