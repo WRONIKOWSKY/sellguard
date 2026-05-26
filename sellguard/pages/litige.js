@@ -83,11 +83,11 @@ export default function Litige() {
     setResult(null); setImages([]); setImagePreviews([]); setBuyerMessage(''); setCertRef(''); setError(null);
   }
 
-  const fraudClass = result?.fraud_score >= 7
-    ? 'fraud-high'
+  const fraudLevel = result?.fraud_score >= 7
+    ? 'high'
     : result?.fraud_score >= 4
-    ? 'fraud-mid'
-    : 'fraud-low';
+    ? 'mid'
+    : 'low';
 
   const fraudLabel = result?.fraud_score >= 7
     ? (lang === 'en' ? 'Likely fraud' : lang === 'es' ? 'Fraude probable' : lang === 'it' ? 'Frode probabile' : 'Fraude probable')
@@ -97,147 +97,124 @@ export default function Litige() {
 
   const selectPlaceholder = lang === 'en' ? 'Select type' : lang === 'es' ? 'Seleccionar tipo' : lang === 'it' ? 'Seleziona tipo' : 'Sélectionne le type';
 
+  const fraudColors = {
+    low:  { bg: '#e7f3ec', border: '#1f9f5f', text: '#167a48' },
+    mid:  { bg: '#fef3c7', border: '#f59e0b', text: '#92400e' },
+    high: { bg: '#fee2e2', border: '#c0392b', text: '#991b1b' },
+  };
+  const fc = fraudColors[fraudLevel];
+
   return (
     <>
       <Head>
-        <title>SellCov {l.title}</title>
+        <title>SellCov — {l.title}</title>
         <meta name="description" content="Génère une défense automatique pour répondre aux litiges acheteurs." />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
       </Head>
 
       <style jsx global>{`
-        :root{--bg:#000;--bg-soft:#0a0a0a;--bg-card:#0e0e0e;--bg-panel:#141414;--border:#1e1e1e;--border-strong:#2a2a2a;--text:#fff;--text-muted:#9a9a9a;--text-dim:#5a5a5a;--violet:#8b7fff;--green:#5ee8a3;--pink:#f570aa;--green-bg:rgba(94,232,163,.07);--pink-bg:rgba(245,112,170,.07);--violet-bg:rgba(139,127,255,.09);--radius-sm:10px;--radius:18px;--radius-lg:28px;--maxw:1200px}
-        *{box-sizing:border-box;margin:0;padding:0}
-        html{scroll-behavior:smooth}
-        body{font-family:var(--font-inter),system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
-        a{color:inherit;text-decoration:none}
-        .serif{font-family:var(--font-playfair),serif;font-weight:700;letter-spacing:-.01em}
-        .italic{font-style:italic;color:var(--text-muted);font-weight:500}
-        header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(0,0,0,.55);border-bottom:1px solid rgba(255,255,255,.04)}
-        .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--maxw);margin:0 auto}
-        .logo{display:flex;align-items:center;gap:10px;font-family:var(--font-playfair),serif;font-weight:700;font-size:20px}
-        .logo-img{height:72px;width:auto;display:block}
-        .nav-back{color:var(--text-muted);font-size:14px;transition:color .2s}
-        .nav-back:hover{color:#fff}
-        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .15s,box-shadow .15s,background .15s,opacity .15s;cursor:pointer;border:none;font-family:inherit;white-space:nowrap}
-        .btn-primary{background:#fff;color:#000;width:100%;padding:15px 22px}
-        .btn-primary:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 10px 30px rgba(255,255,255,.15)}
-        .btn-primary:disabled{background:rgba(255,255,255,.06);color:rgba(255,255,255,.25);cursor:not-allowed}
-        .btn-ghost{background:rgba(255,255,255,.04);color:var(--text-muted);border:1px solid var(--border-strong);padding:8px 16px;font-size:13px;border-radius:999px}
-        .btn-ghost:hover{border-color:#fff;color:#fff}
-        .btn-copy{background:rgba(255,255,255,.06);color:var(--text-muted);border:none;padding:5px 12px;font-size:12px;border-radius:999px;cursor:pointer;font-family:inherit;transition:background .15s}
-        .btn-copy:hover{background:rgba(255,255,255,.1);color:#fff}
-        main{min-height:calc(100vh - 160px);padding:140px 24px 80px;display:flex;align-items:flex-start;justify-content:center}
-        .container{width:100%;max-width:640px}
-        .intro{margin-bottom:36px}
-        .page-title{font-family:var(--font-playfair),serif;font-size:clamp(34px,4.5vw,46px);line-height:1.02;letter-spacing:-.02em;margin-bottom:12px}
-        .page-sub{color:var(--text-muted);font-size:15px;line-height:1.6}
-        .field{margin-bottom:18px}
-        .field-label{display:block;font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
-        .field-hint{font-weight:400;color:var(--text-dim);text-transform:none;letter-spacing:0}
-        .input,.select,.textarea{width:100%;padding:14px 18px;font-size:15px;background:#060606;border:1px solid var(--border-strong);border-radius:14px;color:#fff;font-family:inherit;transition:border-color .15s;outline:none}
-        .input:focus,.select:focus,.textarea:focus{border-color:var(--green)}
-        .input::placeholder,.textarea::placeholder{color:var(--text-dim)}
-        .select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239a9a9a' stroke-width='2.5'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right 18px center;padding-right:42px}
-        .textarea{resize:none;line-height:1.6}
-        .dropzone{border:1.5px dashed var(--border-strong);border-radius:14px;padding:20px;cursor:pointer;background:#060606;text-align:center;min-height:80px;display:flex;align-items:center;justify-content:center;transition:border-color .15s}
-        .dropzone:hover{border-color:var(--green)}
-        .dropzone-empty{font-size:13px;color:var(--text-dim)}
-        .dropzone-previews{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:100%}
-        .dropzone-previews img{width:90px;height:90px;max-width:90px;max-height:90px;border-radius:8px;object-fit:cover;display:block;flex-shrink:0}
-        .error-box{margin-top:14px;padding:12px 16px;background:var(--pink-bg);border:1px solid rgba(245,112,170,.3);border-radius:12px;color:var(--pink);font-size:13px}
-        .result-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;gap:16px;flex-wrap:wrap}
-        .result-title{font-family:var(--font-playfair),serif;font-size:28px;line-height:1;letter-spacing:-.02em}
-        .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;margin-bottom:18px}
-        .card-label{font-size:11px;font-weight:700;color:var(--green);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;display:block}
-        .card-body{font-size:14px;color:#fff;line-height:1.75}
-        .card-body-muted{font-size:14px;color:var(--text-muted);line-height:1.7}
-        .fraud-card{border-radius:var(--radius);padding:20px 24px;margin-bottom:14px;border:1px solid}
-        .fraud-card.fraud-high{background:rgba(220,38,38,.08);border-color:rgba(220,38,38,.3)}
-        .fraud-card.fraud-high .fraud-text{color:#f87171}
-        .fraud-card.fraud-mid{background:rgba(245,112,170,.08);border-color:rgba(245,112,170,.3)}
-        .fraud-card.fraud-mid .fraud-text{color:var(--pink)}
-        .fraud-card.fraud-low{background:var(--green-bg);border-color:rgba(94,232,163,.3)}
-        .fraud-card.fraud-low .fraud-text{color:var(--green)}
-        .fraud-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:16px;flex-wrap:wrap}
-        .fraud-label{font-size:13px;font-weight:700}
-        .fraud-score{font-family:var(--font-playfair),serif;font-size:24px;font-weight:700}
-        .fraud-analysis{font-size:13px;color:var(--text-muted);line-height:1.55}
-        .arg-item{display:flex;gap:12px;padding:12px 16px;background:#060606;border:1px solid var(--border);border-radius:12px;margin-bottom:10px}
-        .arg-item:last-child{margin-bottom:0}
-        .arg-check{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--green-bg);border:1px solid rgba(94,232,163,.3);display:grid;place-items:center;color:var(--green);font-size:12px;margin-top:1px}
-        .arg-text{font-size:13px;color:var(--text-muted);line-height:1.6}
-        .response-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:16px}
-        .response-body{font-size:14px;color:#fff;line-height:1.8;white-space:pre-wrap}
-        .steps-card{background:var(--violet-bg);border:1px solid rgba(139,127,255,.25);border-radius:var(--radius);padding:20px 24px}
-        .steps-label{font-size:11px;font-weight:700;color:var(--violet);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
-        .step-item{display:flex;gap:12px;margin-bottom:10px}
-        .step-item:last-child{margin-bottom:0}
-        .step-num{font-size:13px;font-weight:700;color:var(--violet);flex-shrink:0}
-        .step-text{font-size:13px;color:#cdc8ff;line-height:1.6}
-        @media(max-width:560px){
-          main{padding:120px 16px 60px}
-          .card,.fraud-card,.steps-card{padding:18px 20px}
-          .foot{flex-direction:column;gap:14px;text-align:center}
-          .foot-links{justify-content:center}
+        :root {
+          --bg: #f8f7f3;
+          --bg-soft: #ffffff;
+          --bg-card: #ffffff;
+          --ink: #111111;
+          --ink-soft: #2a2a2a;
+          --muted: #6b6b6b;
+          --dim: #a0a09a;
+          --line: #e6e4dc;
+          --line-strong: #d4d2c8;
+          --green: #1f9f5f;
+          --green-deep: #167a48;
+          --green-soft: #e7f3ec;
+          --danger: #c0392b;
+          --radius: 16px;
+          --radius-lg: 28px;
         }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { overflow-x: hidden; }
+        body {
+          font-family: var(--font-inter), -apple-system, system-ui, sans-serif;
+          background: var(--bg);
+          color: var(--ink);
+          line-height: 1.55;
+          -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; }
+        button { font-family: inherit; }
       `}</style>
 
-      <header>
-        <div className="nav">
-          <Link href="/" className="logo">
-            <img src="/logo.png" alt="SellCov" className="logo-img" />
+      <header style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(248,247,243,0.92)", backdropFilter: "blur(10px)" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 24px", maxWidth: 1100, margin: "0 auto" }}>
+          <Link href="/">
+            <span style={{ display: "inline-flex", alignItems: "center", cursor: "pointer" }}>
+              <img src="/logo-full.png" alt="SellCov" style={{ height: 80, width: "auto" }} />
+            </span>
           </Link>
-          <Link href="/" className="nav-back">Retour</Link>
+          <Link href="/">
+            <span style={{ color: "#6b6b6b", fontSize: 14, fontWeight: 500, padding: "8px 14px", borderRadius: 999, cursor: "pointer" }}>
+              Retour
+            </span>
+          </Link>
         </div>
       </header>
 
-      <main>
-        <div className="container">
-          {!result ? (
-            <>
-              <div className="intro">
-                <h1 className="page-title serif">
-                  {l.title}
-                </h1>
-                <p className="page-sub">{l.subtitle}</p>
-              </div>
+      <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px 80px" }}>
+        <div style={{ padding: "48px 0 24px", textAlign: "center" }}>
+          <h1 style={{ fontWeight: 800, fontSize: "clamp(28px, 6vw, 40px)", lineHeight: 1.1, letterSpacing: "-0.02em" }}>
+            {l.title}
+          </h1>
+          <p style={{ color: "#6b6b6b", fontSize: 16, marginTop: 14, maxWidth: 480, marginLeft: "auto", marginRight: "auto" }}>
+            {l.subtitle}
+          </p>
+        </div>
 
-              <div className="field">
-                <label className="field-label">{l.type_label}</label>
-                <select className="select" value={type} onChange={e => setType(e.target.value)}>
+        {!result ? (
+          <>
+            <div style={cardStyle}>
+              <Field label={l.type_label}>
+                <select value={type} onChange={e => setType(e.target.value)} style={inputStyle}>
                   <option value="">{selectPlaceholder}</option>
                   {l.types.map(ty => <option key={ty}>{ty}</option>)}
                 </select>
-              </div>
+              </Field>
 
-              <div className="field">
-                <label className="field-label">{l.msg_label}</label>
+              <Field label={l.msg_label}>
                 <textarea
-                  className="textarea"
                   value={buyerMessage}
                   onChange={e => setBuyerMessage(e.target.value)}
                   rows={5}
                   placeholder={l.msg_ph}
+                  style={{ ...inputStyle, resize: "none", lineHeight: 1.55 }}
                 />
-              </div>
+              </Field>
 
-              <div className="field">
-                <label className="field-label">
-                  {l.photos_label} <span className="field-hint">({l.photos_hint})</span>
-                </label>
+              <Field label={l.photos_label} hint={l.photos_hint}>
                 <div
-                  className="dropzone"
                   onClick={() => fileRef.current.click()}
                   onDragOver={e => e.preventDefault()}
                   onDrop={e => { e.preventDefault(); handleFiles(e.dataTransfer.files); }}
+                  style={{
+                    border: "1.5px dashed #d4d2c8",
+                    borderRadius: 14,
+                    padding: 20,
+                    cursor: "pointer",
+                    background: "#f8f7f3",
+                    textAlign: "center",
+                    minHeight: 80,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                 >
                   {imagePreviews.length > 0 ? (
-                    <div className="dropzone-previews">
-                      {imagePreviews.map((src, i) => <img key={i} src={src} alt="" />)}
+                    <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
+                      {imagePreviews.map((src, i) => (
+                        <img key={i} src={src} alt="" style={{ width: 90, height: 90, borderRadius: 10, objectFit: "cover" }} />
+                      ))}
                     </div>
                   ) : (
-                    <p className="dropzone-empty">{l.photos_add}</p>
+                    <p style={{ fontSize: 14, color: "#6b6b6b" }}>{l.photos_add}</p>
                   )}
                 </div>
                 <input
@@ -245,92 +222,179 @@ export default function Litige() {
                   type="file"
                   accept="image/*"
                   multiple
-                  style={{ display: 'none' }}
+                  style={{ display: "none" }}
                   onChange={e => handleFiles(e.target.files)}
                 />
-              </div>
+              </Field>
 
-              <div className="field">
-                <label className="field-label">
-                  {l.cert_label} <span className="field-hint">({l.cert_hint})</span>
-                </label>
+              <Field label={l.cert_label} hint={l.cert_hint}>
                 <input
-                  className="input"
+                  type="text"
                   value={certRef}
                   onChange={e => setCertRef(e.target.value)}
                   placeholder={l.cert_ph}
+                  style={inputStyle}
                 />
-              </div>
+              </Field>
 
               <button
-                className="btn btn-primary"
                 onClick={analyze}
                 disabled={loading || !buyerMessage.trim()}
+                style={{ ...btnPrimary, opacity: (loading || !buyerMessage.trim()) ? 0.5 : 1, cursor: (loading || !buyerMessage.trim()) ? "not-allowed" : "pointer" }}
               >
                 {loading ? l.analyzing : l.analyze_btn}
               </button>
 
-              {error && <div className="error-box">{error}</div>}
-            </>
-          ) : (
-            <>
-              <div className="result-head">
-                <h2 className="result-title serif">{l.title}</h2>
-                <button className="btn-ghost" onClick={reset} style={{cursor:'pointer',fontFamily:'inherit'}}>
-                  {l.back}
-                </button>
-              </div>
-
-              {result.fraud_score !== undefined && (
-                <div className={'fraud-card ' + fraudClass}>
-                  <div className="fraud-head">
-                    <p className="fraud-label fraud-text">
-                      {l.fraud_label} {fraudLabel}
-                    </p>
-                    <span className="fraud-score fraud-text">{result.fraud_score}/10</span>
-                  </div>
-                  <p className="fraud-analysis">{result.fraud_analysis}</p>
+              {error && (
+                <div style={{ marginTop: 14, padding: "12px 16px", background: "#fdecea", border: "1.5px solid #f5c2bc", borderRadius: 12, color: "#c0392b", fontSize: 14, fontWeight: 500 }}>
+                  {error}
                 </div>
               )}
+            </div>
+          </>
+        ) : (
+          <>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, gap: 16, flexWrap: "wrap" }}>
+              <h2 style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em" }}>{l.title}</h2>
+              <button onClick={reset} style={btnGhostSmall}>
+                {l.back}
+              </button>
+            </div>
 
-              <div className="card">
-                <p className="card-label">{l.verdict_l}</p>
-                <p className="card-body">{result.verdict}</p>
-              </div>
-
-              <div className="card">
-                <p className="card-label">{l.args_l}</p>
-                {result.arguments?.map((arg, i) => (
-                  <div key={i} className="arg-item">
-                    <span className="arg-check">✓</span>
-                    <p className="arg-text">{arg}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="card">
-                <div className="response-head">
-                  <p className="card-label" style={{marginBottom:0}}>{l.response_l}</p>
-                  <button className="btn-copy" onClick={() => copy(result.response)}>
-                    {copied ? l.copied : l.copy}
-                  </button>
+            {result.fraud_score !== undefined && (
+              <div style={{ background: fc.bg, border: `1.5px solid ${fc.border}`, borderRadius: 28, padding: "20px 24px", marginBottom: 16 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10, gap: 16, flexWrap: "wrap" }}>
+                  <p style={{ fontSize: 14, fontWeight: 700, color: fc.text }}>
+                    {l.fraud_label} {fraudLabel}
+                  </p>
+                  <span style={{ fontSize: 26, fontWeight: 800, color: fc.text, letterSpacing: "-0.02em" }}>
+                    {result.fraud_score}/10
+                  </span>
                 </div>
-                <p className="response-body">{result.response}</p>
+                <p style={{ fontSize: 14, color: "#2a2a2a", lineHeight: 1.55 }}>{result.fraud_analysis}</p>
               </div>
+            )}
 
-              <div className="steps-card">
-                <p className="steps-label">{l.steps_l}</p>
-                {result.next_steps?.map((step, i) => (
-                  <div key={i} className="step-item">
-                    <span className="step-num">{i + 1}.</span>
-                    <p className="step-text">{step}</p>
-                  </div>
-                ))}
+            <div style={cardStyle}>
+              <p style={labelStyle}>{l.verdict_l}</p>
+              <p style={{ fontSize: 15, color: "#111", lineHeight: 1.7 }}>{result.verdict}</p>
+            </div>
+
+            <div style={cardStyle}>
+              <p style={labelStyle}>{l.args_l}</p>
+              {result.arguments?.map((arg, i) => (
+                <div key={i} style={{ display: "flex", gap: 12, padding: "12px 16px", background: "#f8f7f3", border: "1.5px solid #e6e4dc", borderRadius: 12, marginBottom: 10 }}>
+                  <span style={{ flexShrink: 0, width: 22, height: 22, borderRadius: "50%", background: "#e7f3ec", color: "#167a48", fontWeight: 700, fontSize: 13, display: "inline-flex", alignItems: "center", justifyContent: "center", marginTop: 1 }}>
+                    ✓
+                  </span>
+                  <p style={{ fontSize: 14, color: "#2a2a2a", lineHeight: 1.6 }}>{arg}</p>
+                </div>
+              ))}
+            </div>
+
+            <div style={cardStyle}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14, gap: 16 }}>
+                <p style={{ ...labelStyle, marginBottom: 0 }}>{l.response_l}</p>
+                <button onClick={() => copy(result.response)} style={btnCopy}>
+                  {copied ? l.copied : l.copy}
+                </button>
               </div>
-            </>
-          )}
-        </div>
+              <p style={{ fontSize: 14.5, color: "#111", lineHeight: 1.8, whiteSpace: "pre-wrap" }}>{result.response}</p>
+            </div>
+
+            <div style={{ background: "#f8f7f3", border: "1.5px solid #d4d2c8", borderRadius: 28, padding: "22px 26px" }}>
+              <p style={labelStyle}>{l.steps_l}</p>
+              {result.next_steps?.map((step, i) => (
+                <div key={i} style={{ display: "flex", gap: 12, marginBottom: 10, alignItems: "flex-start" }}>
+                  <span style={{ flexShrink: 0, width: 22, height: 22, borderRadius: "50%", background: "#e7f3ec", color: "#167a48", fontWeight: 700, fontSize: 12, display: "inline-flex", alignItems: "center", justifyContent: "center", marginTop: 1 }}>
+                    {i + 1}
+                  </span>
+                  <p style={{ fontSize: 14, color: "#2a2a2a", lineHeight: 1.6 }}>{step}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </main>
     </>
+  );
+}
+
+const cardStyle = {
+  background: "#fff",
+  border: "1.5px solid #e6e4dc",
+  borderRadius: 28,
+  padding: "28px 26px",
+  marginBottom: 16,
+};
+
+const inputStyle = {
+  width: "100%",
+  background: "#fff",
+  border: "1.5px solid #d4d2c8",
+  borderRadius: 12,
+  padding: "13px 14px",
+  color: "#111",
+  fontSize: 15.5,
+  fontFamily: "inherit",
+  display: "block",
+  outline: "none",
+};
+
+const btnPrimary = {
+  width: "100%",
+  background: "#1f9f5f",
+  color: "#fff",
+  border: "none",
+  padding: "16px 24px",
+  borderRadius: 999,
+  fontWeight: 700,
+  fontSize: 15,
+  boxShadow: "0 6px 20px rgba(31,159,95,0.22)",
+  fontFamily: "inherit",
+};
+
+const btnGhostSmall = {
+  background: "transparent",
+  color: "#111",
+  border: "1.5px solid #d4d2c8",
+  padding: "8px 16px",
+  borderRadius: 999,
+  fontWeight: 600,
+  fontSize: 13,
+  cursor: "pointer",
+  fontFamily: "inherit",
+};
+
+const btnCopy = {
+  background: "#e7f3ec",
+  color: "#167a48",
+  border: "none",
+  padding: "6px 14px",
+  borderRadius: 999,
+  fontWeight: 700,
+  fontSize: 12,
+  cursor: "pointer",
+  fontFamily: "inherit",
+};
+
+const labelStyle = {
+  fontSize: 11,
+  fontWeight: 700,
+  color: "#167a48",
+  letterSpacing: "0.14em",
+  textTransform: "uppercase",
+  marginBottom: 14,
+};
+
+function Field({ label, hint, children }) {
+  return (
+    <div style={{ marginBottom: 18 }}>
+      <label style={{ display: "block", fontSize: 13, color: "#6b6b6b", marginBottom: 8, fontWeight: 600, letterSpacing: "0.02em" }}>
+        {label}
+        {hint && <span style={{ fontWeight: 400, color: "#a0a09a", marginLeft: 6 }}>({hint})</span>}
+      </label>
+      {children}
+    </div>
   );
 }

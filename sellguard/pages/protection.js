@@ -19,7 +19,7 @@ function pickMimeType() {
       if (MediaRecorder.isTypeSupported(t)) return t;
     } catch (_) {}
   }
-  return null; // navigateur choisit
+  return null;
 }
 
 const CARRIERS = [
@@ -33,7 +33,6 @@ const CARRIERS = [
   { id: "autre", label: "Autre" },
 ];
 
-// Mapping des transporteurs vers leurs URLs de tracking publiques
 const TRACKING_URLS = {
   colissimo: (n) => `https://www.laposte.fr/outils/suivre-vos-envois?code=${encodeURIComponent(n)}`,
   mondialrelay: (n) => `https://www.mondialrelay.fr/suivi-de-colis?numeroExpedition=${encodeURIComponent(n)}`,
@@ -46,9 +45,7 @@ const TRACKING_URLS = {
 
 export default function Protection() {
   const { t, lang } = useLang();
-  const p = (t && t.protection) || {};
 
-  // Étapes : "form" → "recording" → "review" → "uploading" → "done"
   const [step, setStep] = useState("form");
   const [article, setArticle] = useState("");
   const [orderRef, setOrderRef] = useState("");
@@ -57,7 +54,7 @@ export default function Protection() {
   const [videoBlob, setVideoBlob] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
   const [error, setError] = useState(null);
-  const [cert, setCert] = useState(null); // { cert_id, hash, timestamp, signature }
+  const [cert, setCert] = useState(null);
   const [copiedShare, setCopiedShare] = useState(null);
 
   const videoRef = useRef(null);
@@ -66,8 +63,6 @@ export default function Protection() {
   const streamRef = useRef(null);
   const recordedMimeRef = useRef(null);
 
-  // Attache le stream à l'élément <video> APRÈS qu'il soit rendu
-  // (sinon videoRef.current est null au moment du startCamera et on a écran noir)
   useEffect(() => {
     if (step === "recording" && streamRef.current && videoRef.current) {
       videoRef.current.srcObject = streamRef.current;
@@ -95,7 +90,6 @@ export default function Protection() {
     }
     setError(null);
 
-    // Vérifs préalables : APIs disponibles ?
     if (typeof navigator === "undefined" || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       setError("Ton navigateur ne supporte pas la caméra. Essaie Safari ou Chrome récent.");
       return;
@@ -111,7 +105,7 @@ export default function Protection() {
         audio: true,
       });
       streamRef.current = stream;
-      setStep("recording"); // déclenche le useEffect qui attache srcObject
+      setStep("recording");
 
       const mimeType = pickMimeType();
       const mr = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
@@ -122,8 +116,6 @@ export default function Protection() {
         if (e.data && e.data.size > 0) chunksRef.current.push(e.data);
       };
       mr.onstop = () => {
-        // Strip codecs string (ex: "video/mp4;codecs=avc1.42E01F,mp4a.40.2" → "video/mp4")
-        // iOS Safari rejette certaines combinaisons de MIME complexes pour Blob/FormData.
         const rawType = recordedMimeRef.current || "video/webm";
         const cleanType = rawType.split(";")[0].trim() || "video/webm";
         recordedMimeRef.current = cleanType;
@@ -142,7 +134,6 @@ export default function Protection() {
       };
       mr.start();
     } catch (e) {
-      // Messages d'erreur explicites en français selon le type d'erreur DOMException
       let msg;
       if (e && (e.name === "NotAllowedError" || e.name === "PermissionDeniedError")) {
         msg = "Permission caméra refusée. Sur iPhone : tape sur l'icône à gauche de la barre d'adresse → Réglages du site → Caméra → Autoriser. Puis recharge la page.";
@@ -186,7 +177,6 @@ export default function Protection() {
       const mime = recordedMimeRef.current || videoBlob.type || "video/webm";
       const authHeader = "Bearer " + session.access_token;
 
-      // 1. Init : obtenir cert_id + signed upload URL Supabase
       const initRes = await fetch("/api/upload-init", {
         method: "POST",
         headers: { Authorization: authHeader, "Content-Type": "application/json" },
@@ -198,9 +188,6 @@ export default function Protection() {
       }
       const { video_path, upload_token } = initData;
 
-      // 2. Upload direct dans Supabase Storage (bypass la limite Vercel 4.5 MB).
-      //    uploadToSignedUrl envoie le binaire à Supabase sans transiter par
-      //    notre serveur Next.js.
       const { error: upErr } = await sb.storage
         .from("protection-videos")
         .uploadToSignedUrl(video_path, upload_token, videoBlob, {
@@ -210,7 +197,6 @@ export default function Protection() {
         throw new Error("Upload Storage : " + (upErr.message || "erreur"));
       }
 
-      // 3. Finalize : le serveur fetch la vidéo depuis Storage, hash, signe, insère DB
       const finRes = await fetch("/api/upload", {
         method: "POST",
         headers: { Authorization: authHeader, "Content-Type": "application/json" },
@@ -239,222 +225,225 @@ export default function Protection() {
     }
   }
 
-  // Render helpers
-  const inputStyle = {
-    width: "100%",
-    padding: "12px 14px",
-    borderRadius: 10,
-    border: "1px solid rgba(255,255,255,0.12)",
-    background: "rgba(255,255,255,0.04)",
-    color: "#fff",
-    fontSize: 14,
-    fontFamily: "inherit",
-    boxSizing: "border-box",
-    marginBottom: 14,
-  };
-  const labelStyle = { display: "block", fontSize: 12, color: "#888", marginBottom: 6, marginTop: 4, fontWeight: 500 };
-  const btnPrimary = {
-    width: "100%",
-    padding: "14px",
-    borderRadius: 10,
-    border: "none",
-    background: "#fff",
-    color: "#000",
-    fontWeight: 600,
-    fontSize: 15,
-    cursor: "pointer",
-    fontFamily: "inherit",
-  };
-  const btnSecondary = { ...btnPrimary, background: "rgba(255,255,255,0.08)", color: "#fff" };
-  const btnDanger = { ...btnPrimary, background: "#FF3B30", color: "#fff" };
-
   return (
     <>
       <Head>
-        <title>SellCov — Protéger un envoi</title>
+        <title>SellCov — Certifier un envoi</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
       </Head>
-      <div style={{ minHeight: "100vh", background: "#000", color: "#fff", fontFamily: "'DM Sans', sans-serif" }}>
-        {/* Header */}
-        <div style={{ borderBottom: "0.5px solid rgba(255,255,255,0.07)" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto", padding: "14px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", boxSizing: "border-box" }}>
-            <Link href="/">
-              <span style={{ cursor: "pointer", display: "inline-flex", alignItems: "center" }}>
-                <img src="/logo.png" alt="SellCov" style={{ height: 72, width: "auto" }} />
-              </span>
-            </Link>
-            <Link href="/">
-              <span style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", cursor: "pointer" }}>Retour</span>
-            </Link>
-          </div>
-        </div>
 
-        <div style={{ maxWidth: 700, margin: "0 auto", padding: "32px 20px" }}>
-          <h1 style={{ fontSize: 28, fontWeight: 600, margin: "0 0 8px 0", fontFamily: "'DM Serif Display', serif" }}>
+      <style jsx global>{`
+        :root {
+          --bg: #f8f7f3;
+          --bg-soft: #ffffff;
+          --bg-card: #ffffff;
+          --ink: #111111;
+          --ink-soft: #2a2a2a;
+          --muted: #6b6b6b;
+          --dim: #a0a09a;
+          --line: #e6e4dc;
+          --line-strong: #d4d2c8;
+          --green: #1f9f5f;
+          --green-deep: #167a48;
+          --green-soft: #e7f3ec;
+          --danger: #c0392b;
+          --radius: 16px;
+          --radius-lg: 28px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { overflow-x: hidden; }
+        body {
+          font-family: var(--font-inter), -apple-system, system-ui, sans-serif;
+          background: var(--bg);
+          color: var(--ink);
+          line-height: 1.55;
+          -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; }
+        button { font-family: inherit; }
+      `}</style>
+
+      <header style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(248,247,243,0.92)", backdropFilter: "blur(10px)" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 24px", maxWidth: 1100, margin: "0 auto" }}>
+          <Link href="/">
+            <span style={{ display: "inline-flex", alignItems: "center", cursor: "pointer" }}>
+              <img src="/logo-full.png" alt="SellCov" style={{ height: 80, width: "auto" }} />
+            </span>
+          </Link>
+          <Link href="/">
+            <span style={{ color: "#6b6b6b", fontSize: 14, fontWeight: 500, padding: "8px 14px", borderRadius: 999, cursor: "pointer" }}>
+              Retour
+            </span>
+          </Link>
+        </div>
+      </header>
+
+      <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px 80px" }}>
+        <div style={{ padding: "48px 0 24px", textAlign: "center" }}>
+          <h1 style={{ fontWeight: 800, fontSize: "clamp(28px, 6vw, 40px)", lineHeight: 1.1, letterSpacing: "-0.02em" }}>
             Certifier un envoi
           </h1>
-          <p style={{ color: "#888", margin: "0 0 28px 0", fontSize: 14 }}>
-            Vidéo horodatée, signature cryptographique, certificat PDF vérifiable.
+          <p style={{ color: "#6b6b6b", fontSize: 16, marginTop: 14, maxWidth: 460, marginLeft: "auto", marginRight: "auto" }}>
+            Une vidéo en une prise, horodatée et signée. La preuve que tu ne peux pas perdre.
           </p>
+        </div>
 
-          {error && (
-            <div style={{ padding: "12px 14px", borderRadius: 10, background: "rgba(255,59,48,0.1)", color: "#FF3B30", fontSize: 13, marginBottom: 16 }}>
-              {error}
-            </div>
-          )}
+        {error && (
+          <div style={{ padding: "14px 18px", borderRadius: 16, background: "#fdecea", color: "#c0392b", fontSize: 14, fontWeight: 500, marginBottom: 20, border: "1.5px solid #f5c2bc" }}>
+            {error}
+          </div>
+        )}
 
-          {step === "form" && (
-            <>
-              <label style={labelStyle}>Nom de l'article *</label>
+        {step === "form" && (
+          <div style={cardStyle}>
+            <Field label="Nom de l'article *">
               <input
                 type="text"
                 value={article}
                 onChange={(e) => setArticle(e.target.value)}
-                placeholder="Ex: Levi's 501 W30 L32"
+                placeholder="Ex : Levi's 501 W30 L32"
                 style={inputStyle}
                 maxLength={200}
               />
+            </Field>
 
-              <label style={labelStyle}>Référence commande (optionnel)</label>
+            <Field label="Référence commande (optionnel)">
               <input
                 type="text"
                 value={orderRef}
                 onChange={(e) => setOrderRef(e.target.value)}
-                placeholder="Ex: Vinted #4829301"
+                placeholder="Ex : Vinted #4829301"
                 style={inputStyle}
                 maxLength={100}
               />
+            </Field>
 
-              <label style={labelStyle}>Transporteur</label>
+            <Field label="Transporteur">
               <select
                 value={trackingCarrier}
                 onChange={(e) => setTrackingCarrier(e.target.value)}
                 style={inputStyle}
               >
-                <option value="" style={{ background: "#000" }}>Sélectionne un transporteur</option>
+                <option value="">Sélectionne un transporteur</option>
                 {CARRIERS.map((c) => (
-                  <option key={c.id} value={c.id} style={{ background: "#000" }}>
-                    {c.label}
-                  </option>
+                  <option key={c.id} value={c.id}>{c.label}</option>
                 ))}
               </select>
+            </Field>
 
-              <label style={labelStyle}>Numéro de suivi (optionnel)</label>
+            <Field label="Numéro de suivi (optionnel)">
               <input
                 type="text"
                 value={trackingNumber}
                 onChange={(e) => setTrackingNumber(e.target.value)}
-                placeholder="Ex: 6A12345678901"
+                placeholder="Ex : 6A12345678901"
                 style={inputStyle}
                 maxLength={100}
               />
+            </Field>
 
-              <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid #1e1e1e", borderRadius: 12, padding: "14px 16px", margin: "16px 0" }}>
-                <p style={{ fontSize: 11, fontWeight: 700, color: "#5a5a5a", letterSpacing: ".12em", textTransform: "uppercase", marginBottom: 10 }}>Comment filmer ton envoi</p>
-                <div style={{ display: "flex", gap: 10, marginBottom: 8, fontSize: 13, color: "#bbb", lineHeight: 1.5 }}>
-                  <span style={{ color: "#5ee8a3", fontWeight: 700, flexShrink: 0 }}>1.</span>
-                  <span>Filme l'article dans tous ses détails (état, défauts, marque, étiquette).</span>
-                </div>
-                <div style={{ display: "flex", gap: 10, marginBottom: 8, fontSize: 13, color: "#bbb", lineHeight: 1.5 }}>
-                  <span style={{ color: "#5ee8a3", fontWeight: 700, flexShrink: 0 }}>2.</span>
-                  <span>Continue en filmant la fermeture complète du colis et la pose de l'étiquette d'envoi.</span>
-                </div>
-                <div style={{ display: "flex", gap: 10, marginBottom: 8, fontSize: 13, color: "#fff", lineHeight: 1.5 }}>
-                  <span style={{ color: "#5ee8a3", fontWeight: 700, flexShrink: 0 }}>3.</span>
-                  <span><strong style={{ color: "#fff", fontWeight: 600 }}>Le tout en une seule prise, sans couper la vidéo.</strong></span>
-                </div>
-                <p style={{ fontSize: 12, color: "#5a5a5a", marginTop: 10, fontStyle: "italic" }}>L'action complète prend moins de 2 minutes.</p>
-              </div>
-
-              <button onClick={startCamera} style={btnPrimary}>
-                Démarrer l'enregistrement
-              </button>
-            </>
-          )}
-
-          {step === "recording" && (
-            <>
-              <video ref={videoRef} autoPlay muted playsInline style={{ width: "100%", borderRadius: 12, background: "#000" }} />
-              <div style={{ marginTop: 16 }}>
-                <button onClick={stopRecording} style={btnDanger}>
-                  Stop & sauvegarder
-                </button>
-              </div>
-              <p style={{ fontSize: 12, color: "#888", marginTop: 12, textAlign: "center" }}>
-                ⏺ Enregistrement en cours
+            <div style={{ background: "#f8f7f3", border: "1.5px solid #e6e4dc", borderRadius: 16, padding: "20px 22px", margin: "8px 0 24px" }}>
+              <p style={{ fontSize: 12, fontWeight: 700, color: "#167a48", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 14 }}>
+                Comment filmer
               </p>
-            </>
-          )}
-
-          {step === "review" && (
-            <>
-              <p style={{ fontSize: 13, color: "#888", marginBottom: 12 }}>Vérifie ton aperçu avant de certifier :</p>
-              {videoUrl && <video src={videoUrl} controls style={{ width: "100%", borderRadius: 12, background: "#000" }} />}
-              <div style={{ marginTop: 20 }}>
-                <button onClick={uploadCert} style={btnPrimary}>
-                  Certifier maintenant
-                </button>
-                <div style={{ height: 10 }} />
-                <button onClick={reset} style={btnSecondary}>
-                  Refaire
-                </button>
-              </div>
-            </>
-          )}
-
-          {step === "uploading" && (
-            <div style={{ padding: "40px 20px", textAlign: "center" }}>
-              <p style={{ fontSize: 16 }}>Upload + horodatage en cours…</p>
-              <p style={{ fontSize: 12, color: "#888", marginTop: 8 }}>Ne ferme pas cette page.</p>
+              <Step n={1}>Filme l'article dans tous ses détails (état, défauts, marque, étiquette).</Step>
+              <Step n={2}>Continue en filmant la fermeture complète du colis et la pose de l'étiquette d'envoi.</Step>
+              <Step n={3} strong>Le tout en une seule prise, sans couper la vidéo.</Step>
+              <p style={{ fontSize: 13, color: "#6b6b6b", marginTop: 12, fontStyle: "italic" }}>
+                Moins de 2 minutes en tout.
+              </p>
             </div>
-          )}
 
-          {step === "done" && cert && (
-            <div style={{ padding: 24, borderRadius: 16, background: "rgba(74,222,128,0.08)", border: "1px solid rgba(74,222,128,0.3)" }}>
-              <p style={{ fontSize: 18, fontWeight: 600, margin: 0, color: "#4ADE80" }}>✓ Envoi certifié</p>
-              <p style={{ fontSize: 13, color: "#888", margin: "8px 0 20px 0" }}>
+            <button onClick={startCamera} style={btnPrimary}>
+              Démarrer l'enregistrement
+            </button>
+          </div>
+        )}
+
+        {step === "recording" && (
+          <div style={cardStyle}>
+            <video ref={videoRef} autoPlay muted playsInline style={{ width: "100%", borderRadius: 16, background: "#000" }} />
+            <div style={{ marginTop: 20 }}>
+              <button onClick={stopRecording} style={btnDanger}>
+                Stop et sauvegarder
+              </button>
+            </div>
+            <p style={{ fontSize: 13, color: "#6b6b6b", marginTop: 14, textAlign: "center", fontWeight: 500 }}>
+              <span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", background: "#c0392b", marginRight: 6, verticalAlign: "middle" }} />
+              Enregistrement en cours
+            </p>
+          </div>
+        )}
+
+        {step === "review" && (
+          <div style={cardStyle}>
+            <p style={{ fontSize: 14, color: "#6b6b6b", marginBottom: 14, fontWeight: 500 }}>
+              Vérifie ton aperçu avant de certifier :
+            </p>
+            {videoUrl && <video src={videoUrl} controls style={{ width: "100%", borderRadius: 16, background: "#000" }} />}
+            <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 10 }}>
+              <button onClick={uploadCert} style={btnPrimary}>Certifier maintenant</button>
+              <button onClick={reset} style={btnGhost}>Refaire</button>
+            </div>
+          </div>
+        )}
+
+        {step === "uploading" && (
+          <div style={{ ...cardStyle, textAlign: "center", padding: "56px 28px" }}>
+            <p style={{ fontSize: 17, fontWeight: 600 }}>Upload et horodatage en cours…</p>
+            <p style={{ fontSize: 14, color: "#6b6b6b", marginTop: 10 }}>Ne ferme pas cette page.</p>
+          </div>
+        )}
+
+        {step === "done" && cert && (
+          <>
+            <div style={{ background: "#e7f3ec", border: "1.5px solid #1f9f5f", borderRadius: 28, padding: "36px 28px", textAlign: "center", marginTop: 16 }}>
+              <p style={{ fontSize: 26, fontWeight: 800, color: "#167a48", letterSpacing: "-0.02em" }}>
+                Envoi certifié
+              </p>
+              <p style={{ fontSize: 15, color: "#2a2a2a", marginTop: 8 }}>
                 Ton certificat est créé, signé et stocké en sécurité.
               </p>
 
-              <div style={{ background: "#0A0A0A", padding: 14, borderRadius: 10, fontFamily: "monospace", fontSize: 13 }}>
-                <div style={{ color: "#888", fontSize: 11, marginBottom: 4 }}>RÉFÉRENCE CERTIFICAT</div>
-                <div style={{ fontSize: 18, fontWeight: 700, letterSpacing: "0.02em" }}>{cert.cert_id}</div>
+              <div style={{ background: "#fff", border: "1.5px solid #d4d2c8", borderRadius: 16, padding: "16px 18px", marginTop: 24, textAlign: "left" }}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: "#6b6b6b", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 6 }}>
+                  Référence certificat
+                </div>
+                <div style={{ fontSize: 20, fontWeight: 700, fontFamily: "var(--font-mono), monospace", letterSpacing: "0.02em" }}>
+                  {cert.cert_id}
+                </div>
               </div>
 
-              <div style={{ marginTop: 20 }}>
+              <div style={{ marginTop: 20, display: "flex", flexDirection: "column", gap: 10 }}>
                 <a
                   href={`/api/certificat?cert_id=${encodeURIComponent(cert.cert_id)}&lang=${lang || "fr"}`}
-                  style={{ ...btnPrimary, textDecoration: "none", display: "block", textAlign: "center", boxSizing: "border-box" }}
+                  style={{ ...btnPrimary, textDecoration: "none", textAlign: "center" }}
                 >
                   Télécharger le certificat PDF
                 </a>
-                <div style={{ height: 10 }} />
                 <Link href={`/verify/${cert.cert_id}`}>
-                  <span style={{ ...btnSecondary, textDecoration: "none", display: "block", textAlign: "center", boxSizing: "border-box" }}>
+                  <span style={{ ...btnGhost, textDecoration: "none", textAlign: "center", display: "block" }}>
                     Voir la page de vérification publique
                   </span>
                 </Link>
                 {trackingNumber && TRACKING_URLS[trackingCarrier] && (
-                  <>
-                    <div style={{ height: 10 }} />
-                    <a
-                      href={TRACKING_URLS[trackingCarrier](trackingNumber)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ ...btnSecondary, textDecoration: "none", display: "block", textAlign: "center", boxSizing: "border-box" }}
-                    >
-                      Suivre le colis ({CARRIERS.find((c) => c.id === trackingCarrier)?.label})
-                    </a>
-                  </>
+                  <a
+                    href={TRACKING_URLS[trackingCarrier](trackingNumber)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ ...btnGhost, textDecoration: "none", textAlign: "center" }}
+                  >
+                    Suivre le colis ({CARRIERS.find((c) => c.id === trackingCarrier)?.label})
+                  </a>
                 )}
-                <div style={{ height: 10 }} />
-                <button onClick={reset} style={btnSecondary}>
-                  Certifier un autre envoi
-                </button>
+                <button onClick={reset} style={btnGhost}>Certifier un autre envoi</button>
               </div>
 
-              {/* Partage social — moteur de croissance */}
-              <div style={{ marginTop: 24, paddingTop: 20, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-                <p style={{ fontSize: 12, fontWeight: 600, color: "#888", letterSpacing: ".08em", textTransform: "uppercase", marginBottom: 12 }}>Partage ton expérience</p>
+              <div style={{ marginTop: 28, paddingTop: 20, borderTop: "1px solid #d4d2c8" }}>
+                <p style={{ fontSize: 12, fontWeight: 700, color: "#6b6b6b", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 12 }}>
+                  Partage ton expérience
+                </p>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   <button
                     onClick={() => {
@@ -463,38 +452,137 @@ export default function Protection() {
                       setCopiedShare("link");
                       setTimeout(() => setCopiedShare(null), 1500);
                     }}
-                    style={{ flex: 1, minWidth: 110, padding: "10px 14px", fontSize: 13, fontWeight: 500, borderRadius: 999, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.04)", color: "#fff", cursor: "pointer", fontFamily: "inherit" }}
+                    style={pillStyle}
                   >
                     {copiedShare === "link" ? "✓ Copié" : "Copier le lien"}
                   </button>
                   <a
-                    href={typeof window !== "undefined" ? `https://twitter.com/intent/tweet?text=${encodeURIComponent("Je viens de certifier ma vente avec SellCov. Preuve vidéo horodatée + signature cryptographique. Plus jamais d'arnaque sur Vinted.")}&url=${encodeURIComponent(`${window.location.origin}/verify/${cert.cert_id}`)}` : "#"}
+                    href={typeof window !== "undefined" ? `https://twitter.com/intent/tweet?text=${encodeURIComponent("Je viens de certifier ma vente avec SellCov. Preuve vidéo horodatée + signature cryptographique.")}&url=${encodeURIComponent(`${window.location.origin}/verify/${cert.cert_id}`)}` : "#"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ flex: 1, minWidth: 110, padding: "10px 14px", fontSize: 13, fontWeight: 500, borderRadius: 999, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.04)", color: "#fff", textDecoration: "none", textAlign: "center", boxSizing: "border-box", fontFamily: "inherit" }}
+                    style={{ ...pillStyle, textDecoration: "none", textAlign: "center" }}
                   >
                     Partager sur X
                   </a>
                   <a
-                    href={typeof window !== "undefined" ? `https://wa.me/?text=${encodeURIComponent(`Je viens de certifier ma vente avec SellCov ✓ ${window.location.origin}/verify/${cert.cert_id}`)}` : "#"}
+                    href={typeof window !== "undefined" ? `https://wa.me/?text=${encodeURIComponent(`Je viens de certifier ma vente avec SellCov : ${window.location.origin}/verify/${cert.cert_id}`)}` : "#"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ flex: 1, minWidth: 110, padding: "10px 14px", fontSize: 13, fontWeight: 500, borderRadius: 999, border: "1px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.04)", color: "#fff", textDecoration: "none", textAlign: "center", boxSizing: "border-box", fontFamily: "inherit" }}
+                    style={{ ...pillStyle, textDecoration: "none", textAlign: "center" }}
                   >
                     WhatsApp
                   </a>
                 </div>
               </div>
 
-              <p style={{ fontSize: 11, color: "#666", marginTop: 20, lineHeight: 1.5 }}>
-                Hash SHA-256 : <span style={{ fontFamily: "monospace" }}>{cert.hash.substring(0, 32)}…</span>
+              <p style={{ fontSize: 11, color: "#a0a09a", marginTop: 22, lineHeight: 1.6, textAlign: "left", fontFamily: "var(--font-mono), monospace" }}>
+                Hash SHA-256 : {cert.hash.substring(0, 32)}…
                 <br />
                 Horodatage : {new Date(cert.timestamp).toLocaleString(lang === "en" ? "en-US" : "fr-FR", { dateStyle: "long", timeStyle: "medium" })}
               </p>
             </div>
-          )}
-        </div>
-      </div>
+          </>
+        )}
+      </main>
     </>
+  );
+}
+
+const cardStyle = {
+  background: "#fff",
+  border: "1.5px solid #e6e4dc",
+  borderRadius: 28,
+  padding: "32px 28px",
+  marginTop: 8,
+};
+
+const inputStyle = {
+  width: "100%",
+  background: "#fff",
+  border: "1.5px solid #d4d2c8",
+  borderRadius: 12,
+  padding: "13px 14px",
+  color: "#111",
+  fontSize: 15.5,
+  fontFamily: "inherit",
+  display: "block",
+  outline: "none",
+  transition: "border-color .15s",
+};
+
+const btnPrimary = {
+  width: "100%",
+  background: "#1f9f5f",
+  color: "#fff",
+  border: "none",
+  padding: "16px 24px",
+  borderRadius: 999,
+  fontWeight: 700,
+  fontSize: 15,
+  cursor: "pointer",
+  boxShadow: "0 6px 20px rgba(31,159,95,0.22)",
+  fontFamily: "inherit",
+};
+
+const btnGhost = {
+  width: "100%",
+  background: "transparent",
+  color: "#111",
+  border: "1.5px solid #d4d2c8",
+  padding: "14px 22px",
+  borderRadius: 999,
+  fontWeight: 600,
+  fontSize: 14.5,
+  cursor: "pointer",
+  fontFamily: "inherit",
+};
+
+const btnDanger = {
+  width: "100%",
+  background: "#c0392b",
+  color: "#fff",
+  border: "none",
+  padding: "16px 24px",
+  borderRadius: 999,
+  fontWeight: 700,
+  fontSize: 15,
+  cursor: "pointer",
+  boxShadow: "0 6px 20px rgba(192,57,43,0.22)",
+  fontFamily: "inherit",
+};
+
+const pillStyle = {
+  flex: "1 1 auto",
+  minWidth: 110,
+  padding: "11px 14px",
+  fontSize: 13,
+  fontWeight: 600,
+  borderRadius: 999,
+  border: "1.5px solid #d4d2c8",
+  background: "#fff",
+  color: "#111",
+  cursor: "pointer",
+  fontFamily: "inherit",
+};
+
+function Field({ label, children }) {
+  return (
+    <div style={{ marginBottom: 18 }}>
+      <label style={{ display: "block", fontSize: 13, color: "#6b6b6b", marginBottom: 8, fontWeight: 600, letterSpacing: "0.02em" }}>
+        {label}
+      </label>
+      {children}
+    </div>
+  );
+}
+
+function Step({ n, children, strong }) {
+  return (
+    <div style={{ display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 10, fontSize: 14.5, color: strong ? "#111" : "#2a2a2a", lineHeight: 1.5 }}>
+      <span style={{ flexShrink: 0, width: 22, height: 22, borderRadius: "50%", background: "#e7f3ec", color: "#167a48", fontWeight: 700, fontSize: 12, display: "inline-flex", alignItems: "center", justifyContent: "center", marginTop: 1 }}>
+        {n}
+      </span>
+      <span style={{ fontWeight: strong ? 600 : 500 }}>{children}</span>
+    </div>
   );
 }
