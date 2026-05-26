@@ -166,6 +166,10 @@ export default function Pros() {
           max-width: 480px;
           margin: 18px auto 0;
         }
+        .sub-hero {
+          color: var(--ink);
+          font-weight: 500;
+        }
 
         .mascot {
           width: clamp(140px, 28vw, 200px);
@@ -492,8 +496,8 @@ export default function Pros() {
         .hero-compat-list {
           display: block;
           font-size: 13.5px;
-          font-weight: 600;
-          color: var(--muted);
+          font-weight: 500;
+          color: var(--dim);
           letter-spacing: 0.01em;
           margin: 0 auto;
           max-width: 520px;
@@ -539,7 +543,7 @@ export default function Pros() {
             {p.hero_title_1}
             <span className="accent">{p.hero_title_2}</span>
           </h1>
-          <p className="sub">{p.hero_sub}</p>
+          <p className="sub sub-hero">{p.hero_sub}</p>
           <p className="hero-compat-label">{p.compat_label}</p>
           <p className="hero-compat-list">{p.compat_platforms}</p>
           <div className="cta-row">
