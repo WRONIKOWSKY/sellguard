@@ -338,7 +338,7 @@ export default function Compte() {
                 </p>
                 <Link href="/protection">
                   <span style={{ color: "#167a48", fontWeight: 700, cursor: "pointer", textDecoration: "underline" }}>
-                    Certifier mon premier envoi →
+                    Certifier mon premier envoi
                   </span>
                 </Link>
               </div>
