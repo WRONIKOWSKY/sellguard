@@ -480,16 +480,29 @@ export default function Pros() {
 
         /* Ligne compat plateformes (hero) */
         .hero-compat {
-          color: var(--dim);
-          font-size: 13.5px;
-          font-weight: 500;
-          letter-spacing: 0.01em;
-          margin: 14px auto 0;
-          max-width: 480px;
+          margin: 22px auto 0;
+          max-width: 520px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
           line-height: 1.5;
         }
+        .hero-compat-label {
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--dim);
+        }
+        .hero-compat-list {
+          font-size: 13.5px;
+          font-weight: 600;
+          color: var(--muted);
+          letter-spacing: 0.01em;
+        }
         @media (max-width: 480px) {
-          .hero-compat { font-size: 12.5px; }
+          .hero-compat-list { font-size: 12.5px; }
         }
 
       `}</style>
@@ -528,7 +541,10 @@ export default function Pros() {
             <span className="accent">{p.hero_title_2}</span>
           </h1>
           <p className="sub">{p.hero_sub}</p>
-          <p className="hero-compat">{p.compat_line}</p>
+          <p className="hero-compat">
+            <span className="hero-compat-label">{p.compat_label}</span>
+            <span className="hero-compat-list">{p.compat_platforms}</span>
+          </p>
           <div className="cta-row">
             <a href="#form" className="btn-primary">
               <IconLink />
