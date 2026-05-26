@@ -128,236 +128,373 @@ export default function Compte() {
     }
   }
 
+  const tier = session?.user?.app_metadata?.tier;
+  const isPro = ['seller', 'pro', 'admin'].includes(tier);
+  const planLabel = tier === 'admin' ? 'Admin' : isPro ? 'Pro' : 'Découverte';
+
   return (
     <>
       <Head>
-        <title>Compte — SellCov</title>
+        <title>SellCov — Mon compte</title>
         <meta name="description" content="Accède à ton espace SellCov. Gère tes envois certifiés et ton abonnement." />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
       </Head>
 
       <style jsx global>{`
-        :root{--bg:#000;--bg-soft:#0a0a0a;--bg-card:#0e0e0e;--bg-panel:#141414;--border:#1e1e1e;--border-strong:#2a2a2a;--text:#fff;--text-muted:#9a9a9a;--text-dim:#5a5a5a;--violet:#8b7fff;--green:#5ee8a3;--pink:#f570aa;--green-bg:rgba(94,232,163,.07);--pink-bg:rgba(245,112,170,.07);--radius-sm:10px;--radius:18px;--radius-lg:28px;--maxw:1200px}
-        *{box-sizing:border-box;margin:0;padding:0}
-        html{scroll-behavior:smooth}
-        body{font-family:var(--font-inter),system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
-        a{color:inherit;text-decoration:none}
-        .serif{font-family:var(--font-playfair),serif;font-weight:700;letter-spacing:-.01em}
-        .italic{font-style:italic;color:var(--text-muted);font-weight:500}
-        header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(0,0,0,.55);border-bottom:1px solid rgba(255,255,255,.04)}
-        .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--maxw);margin:0 auto}
-        .logo{display:flex;align-items:center;gap:10px;font-family:var(--font-playfair),serif;font-weight:700;font-size:20px}
-        .logo-img{height:72px;width:auto;display:block}
-        .nav-back{color:var(--text-muted);font-size:14px;transition:color .2s}
-        .nav-back:hover{color:#fff}
-        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .15s,box-shadow .15s,background .15s;cursor:pointer;border:none;font-family:inherit;white-space:nowrap}
-        .btn-primary{background:#fff;color:#000;width:100%}
-        .btn-primary:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 10px 30px rgba(255,255,255,.15)}
-        .btn-primary:disabled{opacity:.6;cursor:wait}
-        .btn-ghost{background:transparent;color:var(--text-muted);border:1px solid var(--border-strong);padding:8px 16px;font-size:13px;border-radius:999px}
-        .btn-ghost:hover{border-color:#fff;color:#fff}
-        .btn-sm{padding:9px 16px;font-size:13px}
-        main{min-height:calc(100vh - 160px);padding:140px 24px 80px;display:flex;align-items:flex-start;justify-content:center}
-        .container{width:100%;max-width:560px}
-        .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:36px}
-        .card-title{font-family:var(--font-playfair),serif;font-size:clamp(32px,4vw,40px);line-height:1.05;letter-spacing:-.02em;margin-bottom:10px}
-        .card-sub{color:var(--text-muted);font-size:15px;line-height:1.55;margin-bottom:28px}
-        .input{width:100%;padding:15px 18px;font-size:15px;background:#060606;border:1px solid var(--border-strong);border-radius:999px;color:#fff;font-family:inherit;margin-bottom:12px;transition:border-color .15s}
-        .input::placeholder{color:var(--text-dim)}
-        .input:focus{outline:none;border-color:var(--green)}
-        .error-msg{margin-top:12px;padding:12px 16px;background:var(--pink-bg);border:1px solid rgba(245,112,170,.3);border-radius:10px;color:var(--pink);font-size:13px}
-        .sent-card{text-align:center}
-        .sent-icon{width:64px;height:64px;margin:0 auto 18px;border-radius:50%;background:var(--green-bg);border:1px solid rgba(94,232,163,.3);display:grid;place-items:center;color:var(--green)}
-        .sent-email{color:#fff;font-weight:500}
-        .session-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;gap:16px;flex-wrap:wrap}
-        .label{font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;font-weight:500}
-        .value-email{font-size:17px;color:#fff;font-weight:500;word-break:break-all}
-        .stats-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
-        .stat-box{padding:16px 18px;background:#060606;border:1px solid var(--border);border-radius:12px}
-        .stat-value{font-size:18px;color:#fff;font-weight:600;font-family:var(--font-playfair),serif}
-        .stat-value.accent{color:var(--green)}
-        .section-title{font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin:28px 0 14px;font-weight:500}
-        .empty{text-align:center;padding:36px 28px;color:var(--text-muted);font-size:14px;line-height:1.6}
-        .empty-link{color:var(--green);font-weight:500;display:inline-block;margin-top:10px;transition:opacity .15s}
-        .empty-link:hover{opacity:.75}
-        .envoi-list{display:flex;flex-direction:column;gap:8px}
-        .envoi-item{padding:15px 18px;background:#060606;border:1px solid var(--border);border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:border-color .15s}
-        .envoi-item:hover{border-color:var(--border-strong)}
-        .envoi-name{font-size:14px;color:#fff;margin-bottom:3px}
-        .envoi-meta{font-size:11px;color:var(--text-dim)}
-        .envoi-id{font-size:10px;color:var(--text-dim);font-family:'SFMono-Regular',Menlo,monospace;flex-shrink:0}
-        .loading{text-align:center;color:var(--text-muted);padding:40px 28px;font-size:14px}
-        @media(max-width:560px){
-          .stats-row{grid-template-columns:1fr}
-          .card{padding:28px 24px}
-          main{padding:120px 16px 60px}
-          .envoi-item{flex-direction:column;align-items:flex-start;gap:6px}
-          .foot{flex-direction:column;gap:14px;text-align:center}
-          .foot-links{justify-content:center}
+        :root {
+          --bg: #f8f7f3;
+          --bg-soft: #ffffff;
+          --bg-card: #ffffff;
+          --ink: #111111;
+          --ink-soft: #2a2a2a;
+          --muted: #6b6b6b;
+          --dim: #a0a09a;
+          --line: #e6e4dc;
+          --line-strong: #d4d2c8;
+          --green: #1f9f5f;
+          --green-deep: #167a48;
+          --green-soft: #e7f3ec;
+          --danger: #c0392b;
+          --radius: 16px;
+          --radius-lg: 28px;
         }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { overflow-x: hidden; }
+        body {
+          font-family: var(--font-inter), -apple-system, system-ui, sans-serif;
+          background: var(--bg);
+          color: var(--ink);
+          line-height: 1.55;
+          -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; }
+        button { font-family: inherit; }
       `}</style>
 
-      <header>
-        <div className="nav">
-          <Link href="/" className="logo">
-            <img src="/logo.png" alt="SellCov" className="logo-img" />
+      <header style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(248,247,243,0.92)", backdropFilter: "blur(10px)" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 24px", maxWidth: 1100, margin: "0 auto" }}>
+          <Link href="/">
+            <span style={{ display: "inline-flex", alignItems: "center", cursor: "pointer" }}>
+              <img src="/logo-full.png" alt="SellCov" style={{ height: 80, width: "auto" }} />
+            </span>
           </Link>
-          <Link href="/" className="nav-back">Retour</Link>
+          <Link href="/">
+            <span style={{ color: "#6b6b6b", fontSize: 14, fontWeight: 500, padding: "8px 14px", borderRadius: 999, cursor: "pointer" }}>
+              Retour
+            </span>
+          </Link>
         </div>
       </header>
 
-      <main>
-        <div className="container">
+      <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px 80px" }}>
+        {loading && (
+          <div style={{ ...cardStyle, textAlign: "center", color: "#6b6b6b", marginTop: 48 }}>Chargement…</div>
+        )}
 
-          {loading && (
-            <div className="card loading">Chargement…</div>
-          )}
-
-          {!loading && !session && !sent && (
-            <div className="card">
-              <h1 className="card-title serif">
-                Mon <span className="italic">compte.</span>
+        {!loading && !session && !sent && (
+          <>
+            <div style={{ padding: "48px 0 24px", textAlign: "center" }}>
+              <h1 style={{ fontWeight: 800, fontSize: "clamp(28px, 6vw, 40px)", lineHeight: 1.1, letterSpacing: "-0.02em" }}>
+                Mon compte
               </h1>
-              <p className="card-sub">
-                Entre ton email. Tu recevras un lien de connexion sécurisé, sans mot de passe.
+              <p style={{ color: "#6b6b6b", fontSize: 16, marginTop: 14, maxWidth: 460, marginLeft: "auto", marginRight: "auto" }}>
+                Entre ton email. Tu reçois un lien de connexion sécurisé, sans mot de passe.
               </p>
+            </div>
+            <div style={cardStyle}>
               <form onSubmit={sendMagicLink}>
                 <input
                   type="email"
-                  className="input"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="ton@email.com"
                   required
+                  style={inputStyle}
                 />
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={sending}
-                >
-                  {sending ? 'Envoi…' : 'Recevoir le lien de connexion'}
+                <div style={{ height: 14 }} />
+                <button type="submit" disabled={sending} style={{ ...btnPrimary, opacity: sending ? 0.5 : 1, cursor: sending ? "wait" : "pointer" }}>
+                  {sending ? "Envoi…" : "Recevoir le lien de connexion"}
                 </button>
-                {error && <div className="error-msg">{error}</div>}
+                {error && (
+                  <div style={errorBox}>{error}</div>
+                )}
               </form>
             </div>
-          )}
+          </>
+        )}
 
-          {!loading && !session && sent && (
-            <div className="card sent-card">
-              <div className="sent-icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        {!loading && !session && sent && (
+          <>
+            <div style={{ padding: "48px 0 24px", textAlign: "center" }}>
+              <div style={{ width: 64, height: 64, margin: "0 auto 18px", borderRadius: "50%", background: "#e7f3ec", border: "1.5px solid #1f9f5f", display: "grid", placeItems: "center" }}>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#167a48" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
               </div>
-              <h2 className="card-title serif" style={{fontSize:'28px'}}>
-                Vérifie ta <span className="italic">boîte mail.</span>
+              <h2 style={{ fontWeight: 800, fontSize: "clamp(24px, 5vw, 32px)", lineHeight: 1.1, letterSpacing: "-0.02em" }}>
+                Vérifie ta boîte mail
               </h2>
-              <p className="card-sub">
+              <p style={{ color: "#6b6b6b", fontSize: 16, marginTop: 14, maxWidth: 460, marginLeft: "auto", marginRight: "auto" }}>
                 Un lien de connexion vient d'être envoyé à<br />
-                <span className="sent-email">{email}</span>.
-                <br /><br />
+                <span style={{ color: "#111", fontWeight: 600 }}>{email}</span>.<br /><br />
                 Clique dessus pour te connecter.
               </p>
-              <button
-                onClick={() => { setSent(false); setEmail(''); }}
-                className="btn btn-ghost"
-              >
+            </div>
+            <div style={{ textAlign: "center", marginTop: 8 }}>
+              <button onClick={() => { setSent(false); setEmail(''); }} style={btnGhostInline}>
                 Changer d'email
               </button>
             </div>
-          )}
+          </>
+        )}
 
-          {!loading && session && (() => {
-            const tier = session.user.app_metadata?.tier;
-            const isPro = ['seller', 'pro', 'admin'].includes(tier);
-            return (
-            <div>
-              {upgradedMsg && (
-                <div className="card" style={{ marginBottom: '12px', borderColor: 'rgba(94,232,163,.3)', background: 'var(--green-bg)' }}>
-                  <div style={{ color: 'var(--green)', fontWeight: 600, marginBottom: '6px' }}>Paiement confirmé</div>
-                  <div style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
-                    Ton plan Pro est en cours d'activation. Si l'accès n'est pas immédiat, déconnecte-toi puis reconnecte-toi (ton accès est lu à la connexion).
-                  </div>
-                </div>
-              )}
-              <div className="card">
-                <div className="session-head">
-                  <div>
-                    <div className="label">Connecté en tant que</div>
-                    <div className="value-email">{session.user.email}</div>
-                  </div>
-                  <button onClick={logout} className="btn btn-ghost">
-                    Déconnexion
-                  </button>
-                </div>
-                <div className="stats-row">
-                  <div className="stat-box">
-                    <div className="label">Plan</div>
-                    <div className={'stat-value' + (isPro ? ' accent' : '')}>
-                      {tier === 'admin' ? 'Admin' : isPro ? 'Pro' : 'Découverte'}
-                    </div>
-                  </div>
-                  <div className="stat-box">
-                    <div className="label">Envois certifiés</div>
-                    <div className="stat-value">{envois.length}</div>
-                  </div>
+        {!loading && session && (
+          <>
+            <div style={{ padding: "48px 0 24px", textAlign: "center" }}>
+              <h1 style={{ fontWeight: 800, fontSize: "clamp(28px, 6vw, 40px)", lineHeight: 1.1, letterSpacing: "-0.02em" }}>
+                Mon compte
+              </h1>
+            </div>
+
+            {upgradedMsg && (
+              <div style={{ background: "#e7f3ec", border: "1.5px solid #1f9f5f", borderRadius: 28, padding: "20px 24px", marginBottom: 16 }}>
+                <div style={{ color: "#167a48", fontWeight: 700, marginBottom: 6 }}>Paiement confirmé</div>
+                <div style={{ color: "#2a2a2a", fontSize: 14 }}>
+                  Ton plan Pro est en cours d'activation. Si l'accès n'est pas immédiat, déconnecte-toi puis reconnecte-toi (ton accès est lu à la connexion).
                 </div>
               </div>
+            )}
 
-              {!isPro && (
-                <div className="card" style={{ marginTop: '12px' }}>
-                  <div className="label">Passer au plan Pro</div>
-                  <div style={{ fontFamily: 'var(--font-playfair),serif', fontSize: '28px', lineHeight: 1, margin: '8px 0 4px' }}>
-                    49 € <span style={{ fontSize: '14px', color: 'var(--text-muted)', fontFamily: 'var(--font-inter)' }}>/ mois</span>
-                  </div>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '14px', lineHeight: 1.55, margin: '10px 0 20px' }}>
-                    Certificats vidéo illimités, défense IA, génération d'annonce illimitée, ancrage Bitcoin, support prioritaire. Sans engagement, annulable en 1 clic.
-                  </p>
-                  <button
-                    onClick={startCheckout}
-                    className="btn btn-primary"
-                    disabled={upgrading}
-                  >
-                    {upgrading ? 'Redirection…' : 'Passer Pro'}
-                  </button>
-                  {error && <div className="error-msg">{error}</div>}
+            <div style={cardStyle}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 16, flexWrap: "wrap", marginBottom: 20 }}>
+                <div>
+                  <div style={labelStyle}>Connecté en tant que</div>
+                  <div style={{ fontSize: 17, color: "#111", fontWeight: 600, wordBreak: "break-all" }}>{session.user.email}</div>
                 </div>
-              )}
-
-              <div className="section-title">Derniers envois</div>
-
-              {envois.length === 0 ? (
-                <div className="card empty">
-                  Aucun envoi certifié pour l'instant.
-                  <br />
-                  <Link href="/protection" className="empty-link">
-                    Protéger un envoi →
-                  </Link>
+                <button onClick={logout} style={btnGhostSmall}>Déconnexion</button>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div style={statBox}>
+                  <div style={labelStyle}>Plan</div>
+                  <div style={{ fontSize: 20, fontWeight: 800, color: isPro ? "#167a48" : "#111", letterSpacing: "-0.02em" }}>{planLabel}</div>
                 </div>
-              ) : (
-                <div className="envoi-list">
-                  {envois.slice(0, 10).map((e) => (
-                    <div key={e.id} className="envoi-item">
-                      <div>
-                        <div className="envoi-name">
-                          {e.article_name || 'Envoi sans titre'}
-                        </div>
-                        <div className="envoi-meta">
-                          {new Date(e.created_at).toLocaleString('fr-FR')} · {e.status}
-                        </div>
-                      </div>
-                      <div className="envoi-id">{e.id.substring(0, 8)}</div>
-                    </div>
-                  ))}
+                <div style={statBox}>
+                  <div style={labelStyle}>Envois certifiés</div>
+                  <div style={{ fontSize: 20, fontWeight: 800, color: "#111", letterSpacing: "-0.02em" }}>{envois.length}</div>
                 </div>
-              )}
+              </div>
             </div>
-            );
-          })()}
 
-        </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 16 }}>
+              <Link href="/protection">
+                <a style={dashCard}>
+                  <div style={dashIcon}>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#167a48" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="23 7 16 12 23 17 23 7" />
+                      <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                    </svg>
+                  </div>
+                  <div style={dashTitle}>Certifier un envoi</div>
+                  <div style={dashSub}>Filme, horodate, génère ton certificat.</div>
+                </a>
+              </Link>
+              <Link href="/litige">
+                <a style={dashCard}>
+                  <div style={dashIcon}>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#167a48" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                  </div>
+                  <div style={dashTitle}>Gérer un litige</div>
+                  <div style={dashSub}>L'IA monte ta défense en 30 secondes.</div>
+                </a>
+              </Link>
+            </div>
+
+            {!isPro && (
+              <div style={cardStyle}>
+                <div style={labelStyle}>Passer au plan Pro</div>
+                <div style={{ fontSize: 32, fontWeight: 800, lineHeight: 1, margin: "8px 0 4px", letterSpacing: "-0.02em" }}>
+                  49 € <span style={{ fontSize: 14, color: "#6b6b6b", fontWeight: 500 }}>/ mois</span>
+                </div>
+                <p style={{ color: "#6b6b6b", fontSize: 14.5, lineHeight: 1.6, margin: "12px 0 20px" }}>
+                  Certificats vidéo illimités, défense IA illimitée, ancrage Bitcoin sur chaque preuve, support prioritaire. Sans engagement, annulable en 1 clic.
+                </p>
+                <button onClick={startCheckout} disabled={upgrading} style={{ ...btnPrimary, opacity: upgrading ? 0.5 : 1, cursor: upgrading ? "wait" : "pointer" }}>
+                  {upgrading ? "Redirection…" : "Passer Pro"}
+                </button>
+                {error && <div style={errorBox}>{error}</div>}
+              </div>
+            )}
+
+            <div style={{ ...labelStyle, marginTop: 32, marginBottom: 14 }}>Derniers envois</div>
+
+            {envois.length === 0 ? (
+              <div style={{ ...cardStyle, textAlign: "center", padding: "32px 24px" }}>
+                <p style={{ color: "#6b6b6b", fontSize: 14.5, marginBottom: 12 }}>
+                  Aucun envoi certifié pour l'instant.
+                </p>
+                <Link href="/protection">
+                  <span style={{ color: "#167a48", fontWeight: 700, cursor: "pointer", textDecoration: "underline" }}>
+                    Certifier mon premier envoi →
+                  </span>
+                </Link>
+              </div>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {envois.slice(0, 10).map((e) => (
+                  <div key={e.id} style={envoiItem}>
+                    <div>
+                      <div style={{ fontSize: 14.5, color: "#111", fontWeight: 600, marginBottom: 3 }}>
+                        {e.article_name || "Envoi sans titre"}
+                      </div>
+                      <div style={{ fontSize: 12, color: "#6b6b6b" }}>
+                        {new Date(e.created_at).toLocaleString("fr-FR")} · {e.status}
+                      </div>
+                    </div>
+                    <div style={{ fontSize: 11, color: "#a0a09a", fontFamily: "var(--font-mono), monospace", flexShrink: 0 }}>
+                      {e.id.substring(0, 8)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
+        )}
       </main>
     </>
   );
 }
+
+const cardStyle = {
+  background: "#fff",
+  border: "1.5px solid #e6e4dc",
+  borderRadius: 28,
+  padding: "28px 26px",
+  marginBottom: 16,
+};
+
+const inputStyle = {
+  width: "100%",
+  background: "#fff",
+  border: "1.5px solid #d4d2c8",
+  borderRadius: 12,
+  padding: "13px 14px",
+  color: "#111",
+  fontSize: 15.5,
+  fontFamily: "inherit",
+  display: "block",
+  outline: "none",
+};
+
+const btnPrimary = {
+  width: "100%",
+  background: "#1f9f5f",
+  color: "#fff",
+  border: "none",
+  padding: "16px 24px",
+  borderRadius: 999,
+  fontWeight: 700,
+  fontSize: 15,
+  boxShadow: "0 6px 20px rgba(31,159,95,0.22)",
+  fontFamily: "inherit",
+};
+
+const btnGhostSmall = {
+  background: "transparent",
+  color: "#111",
+  border: "1.5px solid #d4d2c8",
+  padding: "8px 16px",
+  borderRadius: 999,
+  fontWeight: 600,
+  fontSize: 13,
+  cursor: "pointer",
+  fontFamily: "inherit",
+};
+
+const btnGhostInline = {
+  background: "transparent",
+  color: "#6b6b6b",
+  border: "1.5px solid #d4d2c8",
+  padding: "10px 18px",
+  borderRadius: 999,
+  fontWeight: 600,
+  fontSize: 14,
+  cursor: "pointer",
+  fontFamily: "inherit",
+};
+
+const labelStyle = {
+  fontSize: 11,
+  fontWeight: 700,
+  color: "#6b6b6b",
+  letterSpacing: "0.14em",
+  textTransform: "uppercase",
+  marginBottom: 6,
+};
+
+const statBox = {
+  padding: "16px 18px",
+  background: "#f8f7f3",
+  border: "1.5px solid #e6e4dc",
+  borderRadius: 16,
+};
+
+const errorBox = {
+  marginTop: 14,
+  padding: "12px 16px",
+  background: "#fdecea",
+  border: "1.5px solid #f5c2bc",
+  borderRadius: 12,
+  color: "#c0392b",
+  fontSize: 14,
+  fontWeight: 500,
+};
+
+const dashCard = {
+  background: "#fff",
+  border: "1.5px solid #e6e4dc",
+  borderRadius: 28,
+  padding: "26px 24px",
+  textDecoration: "none",
+  display: "block",
+  cursor: "pointer",
+  transition: "border-color .15s, transform .15s",
+};
+
+const dashIcon = {
+  width: 44,
+  height: 44,
+  borderRadius: "50%",
+  background: "#e7f3ec",
+  display: "grid",
+  placeItems: "center",
+  marginBottom: 14,
+};
+
+const dashTitle = {
+  fontSize: 17,
+  fontWeight: 800,
+  color: "#111",
+  letterSpacing: "-0.01em",
+  marginBottom: 6,
+};
+
+const dashSub = {
+  fontSize: 13.5,
+  color: "#6b6b6b",
+  lineHeight: 1.5,
+};
+
+const envoiItem = {
+  padding: "15px 18px",
+  background: "#fff",
+  border: "1.5px solid #e6e4dc",
+  borderRadius: 16,
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: 12,
+};

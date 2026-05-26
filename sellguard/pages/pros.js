@@ -73,7 +73,6 @@ export default function Pros() {
         <meta name="twitter:title" content="La preuve qui protège ta vente." />
         <meta name="twitter:description" content="Cohorte fondateurs, places limitées." />
         <meta name="twitter:image" content="https://www.sellcov.com/og.png" />
-        <link rel="icon" type="image/png" href="/logo.png" />
       </Head>
 
       <style jsx global>{`
