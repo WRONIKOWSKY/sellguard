@@ -543,9 +543,9 @@ export default function Pros() {
             {p.hero_title_1}
             <span className="accent">{p.hero_title_2}</span>
           </h1>
-          <p className="sub sub-hero">{p.hero_sub}</p>
-          <p className="hero-compat-label">{p.compat_label}</p>
-          <p className="hero-compat-list">{p.compat_platforms}</p>
+          <p className="sub" style={{ color: "#111", fontWeight: 500 }}>{p.hero_sub}</p>
+          <p className="hero-compat-label" style={{ color: "#a0a09a" }}>{p.compat_label}</p>
+          <p className="hero-compat-list" style={{ color: "#a0a09a" }}>{p.compat_platforms}</p>
           <div className="cta-row">
             <a href="#form" className="btn-primary">
               <IconLink />
