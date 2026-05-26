@@ -482,21 +482,6 @@ export default function Pros() {
           border-radius: 2px;
         }
 
-        /* Section Bitcoin */
-        .btc-kicker { color: #b56500; }
-        .btc-accent {
-          color: #f7931a;
-          display: inline-flex;
-          align-items: center;
-          gap: 12px;
-          justify-content: center;
-        }
-        .btc-accent svg {
-          width: clamp(28px, 5vw, 40px);
-          height: clamp(28px, 5vw, 40px);
-          flex-shrink: 0;
-        }
-        .btc-underline { background: #f7931a; }
 
         /* Compat label + plateformes (hero) */
         .hero-compat-label {
@@ -637,19 +622,6 @@ export default function Pros() {
             <IconLink />
             {p.proof_cta}
           </a>
-        </section>
-
-        <section className="block">
-          <span className="kicker btc-kicker">{p.btc_kicker}</span>
-          <h2 className="title">
-            <span className="btc-accent">
-              <BitcoinIcon />
-              {p.btc_title_1}
-            </span>
-            {p.btc_title_2}
-          </h2>
-          <span className="underline-deco btc-underline" />
-          <p className="sub">{p.btc_sub}</p>
         </section>
 
         <section className="block" id="offre">
@@ -854,10 +826,3 @@ function IconStar() {
   );
 }
 
-function BitcoinIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.05-1.244 15.525.36 9.105 1.962 2.67 8.475-1.243 14.9.358c6.43 1.605 10.342 8.115 8.738 14.546zm-6.35-4.613c.24-1.59-.974-2.45-2.64-3.03l.54-2.153-1.315-.328-.525 2.107c-.345-.087-.705-.167-1.064-.25l.526-2.127-1.32-.33-.54 2.165c-.285-.067-.565-.132-.84-.2l-1.815-.45-.35 1.407s.974.225.955.236c.535.136.63.486.615.766l-1.477 5.92c-.075.18-.24.45-.614.35.015.02-.96-.24-.96-.24l-.66 1.51 1.71.426.93.236-.54 2.19 1.32.327.54-2.17c.36.1.705.19 1.05.273l-.51 2.154 1.32.33.545-2.19c2.24.427 3.93.257 4.64-1.774.57-1.637-.03-2.58-1.217-3.196.854-.193 1.5-.76 1.68-1.93zm-3.012 4.22c-.41 1.64-3.165.75-4.06.53l.72-2.91c.895.225 3.77.67 3.34 2.38zm.41-4.24c-.375 1.5-2.665.735-3.41.55l.66-2.64c.745.185 3.13.535 2.75 2.09z"/>
-    </svg>
-  );
-}

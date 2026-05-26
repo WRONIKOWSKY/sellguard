@@ -54,11 +54,6 @@ export var T = {
 
       proof_cta: "Preuve",
 
-      btc_kicker: "Sécurité",
-      btc_title_1: "Ancrage Bitcoin",
-      btc_title_2: "sur chaque preuve.",
-      btc_sub: "L'empreinte de ta vidéo est inscrite dans la blockchain Bitcoin. Personne — pas même nous — ne peut modifier ta preuve après coup.",
-
       offer_title_1: "Place de fondateur,",
       offer_title_2: "limitée.",
       offer_badge_cohort: "Cohorte fondateurs ouverte",
@@ -389,11 +384,6 @@ export var T = {
       step3_alt: "SellCov timestamped proof stamp",
 
       proof_cta: "Proof",
-
-      btc_kicker: "Security",
-      btc_title_1: "Bitcoin anchored",
-      btc_title_2: "on every proof.",
-      btc_sub: "Your video fingerprint is recorded in the Bitcoin blockchain. No one — not even us — can alter your proof afterwards.",
 
       offer_title_1: "Founder spot,",
       offer_title_2: "limited.",
