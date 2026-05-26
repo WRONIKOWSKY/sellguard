@@ -41,7 +41,7 @@ export default function Litige() {
       const sessRes = await sb.auth.getSession();
       const session = sessRes?.data?.session;
       if (!session) {
-        setError('Tu dois être connecté pour gérer un litige. Va sur /compte.');
+        setError(l.err_login);
         setLoading(false);
         return;
       }
@@ -54,19 +54,19 @@ export default function Litige() {
         body: JSON.stringify({ type, buyerMessage, certRef, images })
       });
       const data = await res.json();
-      if (res.status === 429) throw new Error('Quota journalier atteint (10 litiges / jour). Reset à minuit UTC.');
-      if (!res.ok) throw new Error(data.error || 'Erreur');
+      if (res.status === 429) throw new Error(l.err_quota);
+      if (!res.ok) throw new Error(data.error || 'Error');
       setResult(data);
     } catch (e) {
       const msg = e.message || '';
-      if (msg.includes('Quota')) {
+      if (msg.includes('Quota') || msg.includes('quota')) {
         setError(msg);
       } else if (msg.includes('Failed to fetch') || msg.includes('NetworkError')) {
-        setError('Erreur de connexion. Vérifie ta connexion internet et réessaie.');
+        setError(l.err_network);
       } else if (msg.includes('503') || msg.includes('overloaded')) {
-        setError('Le serveur est occupé. Attends quelques secondes et réessaie.');
+        setError(l.err_overloaded);
       } else {
-        setError('Une erreur est survenue. Réessaie.');
+        setError(l.err_generic);
       }
     }
     setLoading(false);
@@ -90,12 +90,12 @@ export default function Litige() {
     : 'low';
 
   const fraudLabel = result?.fraud_score >= 7
-    ? (lang === 'en' ? 'Likely fraud' : lang === 'es' ? 'Fraude probable' : lang === 'it' ? 'Frode probabile' : 'Fraude probable')
+    ? l.fraud_high
     : result?.fraud_score >= 4
-    ? (lang === 'en' ? 'Suspicious' : lang === 'es' ? 'Sospechoso' : lang === 'it' ? 'Sospetto' : 'Suspect')
-    : (lang === 'en' ? 'Seems legitimate' : lang === 'es' ? 'Parece legítimo' : lang === 'it' ? 'Sembra legittimo' : 'Semble légitime');
+    ? l.fraud_mid
+    : l.fraud_low;
 
-  const selectPlaceholder = lang === 'en' ? 'Select type' : lang === 'es' ? 'Seleccionar tipo' : lang === 'it' ? 'Seleziona tipo' : 'Sélectionne le type';
+  const selectPlaceholder = l.type_placeholder;
 
   const fraudColors = {
     low:  { bg: '#e7f3ec', border: '#1f9f5f', text: '#167a48' },
@@ -108,7 +108,7 @@ export default function Litige() {
     <>
       <Head>
         <title>SellCov — {l.title}</title>
-        <meta name="description" content="Génère une défense automatique pour répondre aux litiges acheteurs." />
+        <meta name="description" content={l.meta_desc} />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
       </Head>
 
@@ -153,7 +153,7 @@ export default function Litige() {
           </Link>
           <Link href="/">
             <span style={{ color: "#6b6b6b", fontSize: 14, fontWeight: 500, padding: "8px 14px", borderRadius: 999, cursor: "pointer" }}>
-              Retour
+              {t.nav.back}
             </span>
           </Link>
         </div>

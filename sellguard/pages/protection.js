@@ -4,8 +4,6 @@ import Link from "next/link";
 import { useLang } from "../contexts/LangContext";
 import { getSupabase } from "../lib/supabaseClient";
 
-// Sélectionne le meilleur mimeType supporté par le navigateur.
-// iOS Safari ne supporte que mp4 ; Chrome/Firefox préfèrent webm.
 function pickMimeType() {
   if (typeof MediaRecorder === "undefined") return null;
   const candidates = [
@@ -45,6 +43,7 @@ const TRACKING_URLS = {
 
 export default function Protection() {
   const { t, lang } = useLang();
+  const p = t.protection;
 
   const [step, setStep] = useState("form");
   const [article, setArticle] = useState("");
@@ -85,17 +84,17 @@ export default function Protection() {
 
   async function startCamera() {
     if (!article.trim()) {
-      setError("Précise le nom de l'article avant de filmer.");
+      setError(p.err_article);
       return;
     }
     setError(null);
 
     if (typeof navigator === "undefined" || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      setError("Ton navigateur ne supporte pas la caméra. Essaie Safari ou Chrome récent.");
+      setError(p.err_no_camera_api);
       return;
     }
     if (typeof MediaRecorder === "undefined") {
-      setError("Ton navigateur ne supporte pas l'enregistrement vidéo. Mets à jour iOS / Safari.");
+      setError(p.err_no_mr);
       return;
     }
 
@@ -124,7 +123,7 @@ export default function Protection() {
           setVideoBlob(blob);
           setVideoUrl(URL.createObjectURL(blob));
         } catch (err) {
-          setError("Erreur création vidéo : " + (err.message || err.name || "inconnue"));
+          setError(p.err_video_create + (err.message || err.name || p.err_unknown));
         }
         if (streamRef.current) {
           streamRef.current.getTracks().forEach((track) => track.stop());
@@ -136,17 +135,17 @@ export default function Protection() {
     } catch (e) {
       let msg;
       if (e && (e.name === "NotAllowedError" || e.name === "PermissionDeniedError")) {
-        msg = "Permission caméra refusée. Sur iPhone : tape sur l'icône à gauche de la barre d'adresse → Réglages du site → Caméra → Autoriser. Puis recharge la page.";
+        msg = p.err_perm;
       } else if (e && e.name === "NotFoundError") {
-        msg = "Aucune caméra trouvée sur cet appareil.";
+        msg = p.err_notfound;
       } else if (e && e.name === "NotReadableError") {
-        msg = "La caméra est déjà utilisée par une autre app. Ferme les autres apps caméra puis réessaie.";
+        msg = p.err_busy;
       } else if (e && e.name === "OverconstrainedError") {
-        msg = "Cette caméra ne supporte pas la résolution demandée.";
+        msg = p.err_overcon;
       } else if (e && e.name === "SecurityError") {
-        msg = "Caméra bloquée pour raisons de sécurité (page non sécurisée ?). Vérifie que l'URL commence bien par https://.";
+        msg = p.err_security;
       } else {
-        msg = "Erreur caméra : " + ((e && (e.message || e.name)) || "inconnue");
+        msg = p.err_camera_generic + ((e && (e.message || e.name)) || p.err_unknown);
       }
       setError(msg);
       setStep("form");
@@ -169,7 +168,7 @@ export default function Protection() {
       const sessRes = await sb.auth.getSession();
       const session = sessRes?.data?.session;
       if (!session) {
-        setError("Tu dois être connecté pour certifier un envoi. Va sur /compte.");
+        setError(p.err_login);
         setStep("review");
         return;
       }
@@ -184,7 +183,7 @@ export default function Protection() {
       });
       const initData = await initRes.json().catch(() => ({}));
       if (!initRes.ok) {
-        throw new Error(initData.error || "Erreur init upload");
+        throw new Error(initData.error || p.err_init);
       }
       const { video_path, upload_token } = initData;
 
@@ -194,7 +193,7 @@ export default function Protection() {
           contentType: mime,
         });
       if (upErr) {
-        throw new Error("Upload Storage : " + (upErr.message || "erreur"));
+        throw new Error(p.err_storage + (upErr.message || "error"));
       }
 
       const finRes = await fetch("/api/upload", {
@@ -211,16 +210,16 @@ export default function Protection() {
       });
       const finData = await finRes.json().catch(() => ({}));
       if (finRes.status === 429) {
-        throw new Error("Quota journalier atteint (50 certificats / jour). Reset à minuit UTC.");
+        throw new Error(p.err_quota);
       }
       if (!finRes.ok) {
-        throw new Error(finData.error || "Erreur finalisation");
+        throw new Error(finData.error || p.err_final);
       }
 
       setCert(finData);
       setStep("done");
     } catch (e) {
-      setError(e.message || "Erreur");
+      setError(e.message || p.err_generic);
       setStep("review");
     }
   }
@@ -228,7 +227,7 @@ export default function Protection() {
   return (
     <>
       <Head>
-        <title>SellCov — Certifier un envoi</title>
+        <title>{p.meta_title}</title>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
       </Head>
 
@@ -273,7 +272,7 @@ export default function Protection() {
           </Link>
           <Link href="/">
             <span style={{ color: "#6b6b6b", fontSize: 14, fontWeight: 500, padding: "8px 14px", borderRadius: 999, cursor: "pointer" }}>
-              Retour
+              {t.nav.back}
             </span>
           </Link>
         </div>
@@ -282,10 +281,10 @@ export default function Protection() {
       <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px 80px" }}>
         <div style={{ padding: "48px 0 24px", textAlign: "center" }}>
           <h1 style={{ fontWeight: 800, fontSize: "clamp(28px, 6vw, 40px)", lineHeight: 1.1, letterSpacing: "-0.02em" }}>
-            Certifier un envoi
+            {p.title}
           </h1>
           <p style={{ color: "#6b6b6b", fontSize: 16, marginTop: 14, maxWidth: 460, marginLeft: "auto", marginRight: "auto" }}>
-            Une vidéo en une prise, horodatée et signée. La preuve que tu ne peux pas perdre.
+            {p.subtitle}
           </p>
         </div>
 
@@ -297,47 +296,47 @@ export default function Protection() {
 
         {step === "form" && (
           <div style={cardStyle}>
-            <Field label="Nom de l'article *">
+            <Field label={p.field_article}>
               <input
                 type="text"
                 value={article}
                 onChange={(e) => setArticle(e.target.value)}
-                placeholder="Ex : Levi's 501 W30 L32"
+                placeholder={p.ph_article}
                 style={inputStyle}
                 maxLength={200}
               />
             </Field>
 
-            <Field label="Référence commande (optionnel)">
+            <Field label={p.field_ref}>
               <input
                 type="text"
                 value={orderRef}
                 onChange={(e) => setOrderRef(e.target.value)}
-                placeholder="Ex : Vinted #4829301"
+                placeholder={p.ph_ref}
                 style={inputStyle}
                 maxLength={100}
               />
             </Field>
 
-            <Field label="Transporteur">
+            <Field label={p.field_carrier}>
               <select
                 value={trackingCarrier}
                 onChange={(e) => setTrackingCarrier(e.target.value)}
                 style={inputStyle}
               >
-                <option value="">Sélectionne un transporteur</option>
+                <option value="">{p.ph_carrier}</option>
                 {CARRIERS.map((c) => (
                   <option key={c.id} value={c.id}>{c.label}</option>
                 ))}
               </select>
             </Field>
 
-            <Field label="Numéro de suivi (optionnel)">
+            <Field label={p.field_tracking}>
               <input
                 type="text"
                 value={trackingNumber}
                 onChange={(e) => setTrackingNumber(e.target.value)}
-                placeholder="Ex : 6A12345678901"
+                placeholder={p.ph_tracking}
                 style={inputStyle}
                 maxLength={100}
               />
@@ -345,18 +344,18 @@ export default function Protection() {
 
             <div style={{ background: "#f8f7f3", border: "1.5px solid #e6e4dc", borderRadius: 16, padding: "20px 22px", margin: "8px 0 24px" }}>
               <p style={{ fontSize: 12, fontWeight: 700, color: "#167a48", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 14 }}>
-                Comment filmer
+                {p.how_to_film}
               </p>
-              <Step n={1}>Filme l'article dans tous ses détails (état, défauts, marque, étiquette).</Step>
-              <Step n={2}>Continue en filmant la fermeture complète du colis et la pose de l'étiquette d'envoi.</Step>
-              <Step n={3} strong>Le tout en une seule prise, sans couper la vidéo.</Step>
+              <Step n={1}>{p.film_step1}</Step>
+              <Step n={2}>{p.film_step2}</Step>
+              <Step n={3} strong>{p.film_step3}</Step>
               <p style={{ fontSize: 13, color: "#6b6b6b", marginTop: 12, fontStyle: "italic" }}>
-                Moins de 2 minutes en tout.
+                {p.film_time}
               </p>
             </div>
 
             <button onClick={startCamera} style={btnPrimary}>
-              Démarrer l'enregistrement
+              {p.start_rec}
             </button>
           </div>
         )}
@@ -366,12 +365,12 @@ export default function Protection() {
             <video ref={videoRef} autoPlay muted playsInline style={{ width: "100%", borderRadius: 16, background: "#000" }} />
             <div style={{ marginTop: 20 }}>
               <button onClick={stopRecording} style={btnDanger}>
-                Stop et sauvegarder
+                {p.stop_rec}
               </button>
             </div>
             <p style={{ fontSize: 13, color: "#6b6b6b", marginTop: 14, textAlign: "center", fontWeight: 500 }}>
               <span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", background: "#c0392b", marginRight: 6, verticalAlign: "middle" }} />
-              Enregistrement en cours
+              {p.rec_in_progress}
             </p>
           </div>
         )}
@@ -379,20 +378,20 @@ export default function Protection() {
         {step === "review" && (
           <div style={cardStyle}>
             <p style={{ fontSize: 14, color: "#6b6b6b", marginBottom: 14, fontWeight: 500 }}>
-              Vérifie ton aperçu avant de certifier :
+              {p.review_text}
             </p>
             {videoUrl && <video src={videoUrl} controls style={{ width: "100%", borderRadius: 16, background: "#000" }} />}
             <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 10 }}>
-              <button onClick={uploadCert} style={btnPrimary}>Certifier maintenant</button>
-              <button onClick={reset} style={btnGhost}>Refaire</button>
+              <button onClick={uploadCert} style={btnPrimary}>{p.certify_now}</button>
+              <button onClick={reset} style={btnGhost}>{p.redo}</button>
             </div>
           </div>
         )}
 
         {step === "uploading" && (
           <div style={{ ...cardStyle, textAlign: "center", padding: "56px 28px" }}>
-            <p style={{ fontSize: 17, fontWeight: 600 }}>Upload et horodatage en cours…</p>
-            <p style={{ fontSize: 14, color: "#6b6b6b", marginTop: 10 }}>Ne ferme pas cette page.</p>
+            <p style={{ fontSize: 17, fontWeight: 600 }}>{p.uploading}</p>
+            <p style={{ fontSize: 14, color: "#6b6b6b", marginTop: 10 }}>{p.do_not_close}</p>
           </div>
         )}
 
@@ -400,15 +399,15 @@ export default function Protection() {
           <>
             <div style={{ background: "#e7f3ec", border: "1.5px solid #1f9f5f", borderRadius: 28, padding: "36px 28px", textAlign: "center", marginTop: 16 }}>
               <p style={{ fontSize: 26, fontWeight: 800, color: "#167a48", letterSpacing: "-0.02em" }}>
-                Envoi certifié
+                {p.done_title}
               </p>
               <p style={{ fontSize: 15, color: "#2a2a2a", marginTop: 8 }}>
-                Ton certificat est créé, signé et stocké en sécurité.
+                {p.done_sub}
               </p>
 
               <div style={{ background: "#fff", border: "1.5px solid #d4d2c8", borderRadius: 16, padding: "16px 18px", marginTop: 24, textAlign: "left" }}>
                 <div style={{ fontSize: 11, fontWeight: 700, color: "#6b6b6b", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 6 }}>
-                  Référence certificat
+                  {p.cert_ref}
                 </div>
                 <div style={{ fontSize: 20, fontWeight: 700, fontFamily: "var(--font-mono), monospace", letterSpacing: "0.02em" }}>
                   {cert.cert_id}
@@ -420,11 +419,11 @@ export default function Protection() {
                   href={`/api/certificat?cert_id=${encodeURIComponent(cert.cert_id)}&lang=${lang || "fr"}`}
                   style={{ ...btnPrimary, textDecoration: "none", textAlign: "center" }}
                 >
-                  Télécharger le certificat PDF
+                  {p.download_pdf}
                 </a>
                 <Link href={`/verify/${cert.cert_id}`}>
                   <span style={{ ...btnGhost, textDecoration: "none", textAlign: "center", display: "block" }}>
-                    Voir la page de vérification publique
+                    {p.view_verify}
                   </span>
                 </Link>
                 {trackingNumber && TRACKING_URLS[trackingCarrier] && (
@@ -434,15 +433,15 @@ export default function Protection() {
                     rel="noopener noreferrer"
                     style={{ ...btnGhost, textDecoration: "none", textAlign: "center" }}
                   >
-                    Suivre le colis ({CARRIERS.find((c) => c.id === trackingCarrier)?.label})
+                    {p.track_pkg} ({CARRIERS.find((c) => c.id === trackingCarrier)?.label})
                   </a>
                 )}
-                <button onClick={reset} style={btnGhost}>Certifier un autre envoi</button>
+                <button onClick={reset} style={btnGhost}>{p.new_one}</button>
               </div>
 
               <div style={{ marginTop: 28, paddingTop: 20, borderTop: "1px solid #d4d2c8" }}>
                 <p style={{ fontSize: 12, fontWeight: 700, color: "#6b6b6b", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 12 }}>
-                  Partage ton expérience
+                  {p.share_label}
                 </p>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   <button
@@ -454,31 +453,31 @@ export default function Protection() {
                     }}
                     style={pillStyle}
                   >
-                    {copiedShare === "link" ? "✓ Copié" : "Copier le lien"}
+                    {copiedShare === "link" ? p.copied : p.copy_link}
                   </button>
                   <a
-                    href={typeof window !== "undefined" ? `https://twitter.com/intent/tweet?text=${encodeURIComponent("Je viens de certifier ma vente avec SellCov. Preuve vidéo horodatée + signature cryptographique.")}&url=${encodeURIComponent(`${window.location.origin}/verify/${cert.cert_id}`)}` : "#"}
+                    href={typeof window !== "undefined" ? `https://twitter.com/intent/tweet?text=${encodeURIComponent(p.share_tweet)}&url=${encodeURIComponent(`${window.location.origin}/verify/${cert.cert_id}`)}` : "#"}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ ...pillStyle, textDecoration: "none", textAlign: "center" }}
                   >
-                    Partager sur X
+                    {p.share_x}
                   </a>
                   <a
-                    href={typeof window !== "undefined" ? `https://wa.me/?text=${encodeURIComponent(`Je viens de certifier ma vente avec SellCov : ${window.location.origin}/verify/${cert.cert_id}`)}` : "#"}
+                    href={typeof window !== "undefined" ? `https://wa.me/?text=${encodeURIComponent(`${p.share_wa_text} ${window.location.origin}/verify/${cert.cert_id}`)}` : "#"}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ ...pillStyle, textDecoration: "none", textAlign: "center" }}
                   >
-                    WhatsApp
+                    {p.share_wa}
                   </a>
                 </div>
               </div>
 
               <p style={{ fontSize: 11, color: "#a0a09a", marginTop: 22, lineHeight: 1.6, textAlign: "left", fontFamily: "var(--font-mono), monospace" }}>
-                Hash SHA-256 : {cert.hash.substring(0, 32)}…
+                {p.hash_label} {cert.hash.substring(0, 32)}…
                 <br />
-                Horodatage : {new Date(cert.timestamp).toLocaleString(lang === "en" ? "en-US" : "fr-FR", { dateStyle: "long", timeStyle: "medium" })}
+                {p.timestamp_label} {new Date(cert.timestamp).toLocaleString(lang === "en" ? "en-US" : "fr-FR", { dateStyle: "long", timeStyle: "medium" })}
               </p>
             </div>
           </>

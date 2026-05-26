@@ -6,6 +6,7 @@ export default function MentionsLegales() {
     <LegalLayout
       title="Mentions légales"
       description="Mentions légales de SellCov — éditeur, hébergeur, propriété intellectuelle."
+      frenchOnly
     >
       <h1 className="legal-title">Mentions légales.</h1>
       <p className="legal-subtitle">Dernière mise à jour : 3 mai 2026.</p>

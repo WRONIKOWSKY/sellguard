@@ -1,7 +1,9 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useLang } from "../contexts/LangContext";
 
-export default function LegalLayout({ children, title, description }) {
+export default function LegalLayout({ children, title, description, frenchOnly }) {
+  const { t, lang, setLang } = useLang();
   const fullTitle = title ? `${title} — SellCov` : "SellCov";
   return (
     <>
@@ -49,14 +51,31 @@ export default function LegalLayout({ children, title, description }) {
         .legal-nav-logo { display: flex; align-items: center; }
         .legal-nav-logo img { height: 80px; width: auto; display: block; }
         .legal-lang { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
-        .legal-lang-active { color: var(--ink); }
-        .legal-lang-disabled { color: var(--dim); cursor: not-allowed; opacity: 0.55; }
+        .legal-lang-btn {
+          background: transparent; border: none; padding: 4px 6px;
+          font-family: inherit; font-size: 14px; font-weight: 600;
+          cursor: pointer; color: var(--dim);
+          transition: color .15s;
+        }
+        .legal-lang-btn:hover { color: var(--ink-soft); }
+        .legal-lang-btn.active { color: var(--ink); cursor: default; }
         .legal-lang-divider { color: var(--dim); }
 
         .legal-main {
           max-width: 720px;
           margin: 0 auto;
           padding: 48px 24px 80px;
+        }
+
+        .legal-only-fr {
+          background: #fef9e7;
+          border: 1.5px solid #f0d97d;
+          color: #6b5b14;
+          border-radius: 16px;
+          padding: 14px 18px;
+          margin-bottom: 28px;
+          font-size: 14px;
+          line-height: 1.55;
         }
 
         .legal-title {
@@ -106,7 +125,6 @@ export default function LegalLayout({ children, title, description }) {
         }
         .legal-content strong { font-weight: 700; color: var(--ink); }
 
-        /* FAQ items */
         .legal-faq details {
           border-bottom: 1px solid var(--line);
           padding: 20px 0;
@@ -129,7 +147,6 @@ export default function LegalLayout({ children, title, description }) {
           font-size: 14.5px; line-height: 1.65;
         }
 
-        /* Footer */
         .legal-footer {
           border-top: 1px solid var(--line);
           padding: 36px 24px;
@@ -151,26 +168,45 @@ export default function LegalLayout({ children, title, description }) {
             <img src="/logo-full.png" alt="SellCov" />
           </Link>
           <div className="legal-lang">
-            <span className="legal-lang-active">FR</span>
+            <button
+              type="button"
+              className={"legal-lang-btn" + (lang === "fr" ? " active" : "")}
+              onClick={() => setLang("fr")}
+              aria-pressed={lang === "fr"}
+            >
+              FR
+            </button>
             <span className="legal-lang-divider">·</span>
-            <span className="legal-lang-disabled" title="Coming soon">EN</span>
+            <button
+              type="button"
+              className={"legal-lang-btn" + (lang === "en" ? " active" : "")}
+              onClick={() => setLang("en")}
+              aria-pressed={lang === "en"}
+            >
+              EN
+            </button>
           </div>
         </div>
       </header>
 
-      <main className="legal-main">{children}</main>
+      <main className="legal-main">
+        {frenchOnly && lang === "en" && (
+          <div className="legal-only-fr">{t.legal_only_fr}</div>
+        )}
+        {children}
+      </main>
 
       <footer className="legal-footer">
         <div className="legal-footer-links">
-          <Link href="/faq">FAQ</Link>
-          <a href="mailto:hello@sellcov.com">Contact</a>
+          <Link href="/faq">{t.footer.faq}</Link>
+          <a href="mailto:hello@sellcov.com">{t.footer.contact}</a>
           <a href="https://www.instagram.com/sellcov" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href="https://www.tiktok.com/@sellcov.com" target="_blank" rel="noopener noreferrer">TikTok</a>
-          <Link href="/mentions-legales">Mentions légales</Link>
-          <Link href="/cgu">CGU</Link>
-          <Link href="/confidentialite">Confidentialité</Link>
+          <Link href="/mentions-legales">{t.footer.mentions}</Link>
+          <Link href="/cgu">{t.footer.cgu}</Link>
+          <Link href="/confidentialite">{t.footer.confidentialite}</Link>
         </div>
-        <div>© 2026 SellCov</div>
+        <div>{t.footer.copy}</div>
       </footer>
     </>
   );

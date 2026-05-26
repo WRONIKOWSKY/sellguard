@@ -5,6 +5,7 @@ export default function CGU() {
     <LegalLayout
       title="CGU"
       description="Conditions Générales d'Utilisation de SellCov."
+      frenchOnly
     >
       <h1 className="legal-title">Conditions Générales d'Utilisation.</h1>
       <p className="legal-subtitle">Version 1.0. En vigueur à compter du 1er mai 2026.</p>

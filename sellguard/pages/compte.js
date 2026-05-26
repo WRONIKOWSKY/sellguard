@@ -2,8 +2,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { getSupabase } from '../lib/supabaseClient';
+import { useLang } from '../contexts/LangContext';
 
 export default function Compte() {
+  const { t, lang } = useLang();
+  const c = t.compte;
+
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
@@ -60,11 +64,11 @@ export default function Compte() {
     setError(null);
     const sb = getSupabase();
     if (!sb) {
-      setError('Connexion impossible.');
+      setError(c.err_connect);
       return;
     }
     if (!email || !email.includes('@')) {
-      setError('Email invalide.');
+      setError(c.err_invalid_email);
       return;
     }
     setSending(true);
@@ -99,14 +103,14 @@ export default function Compte() {
     setUpgrading(true);
     const sb = getSupabase();
     if (!sb) {
-      setError('Connexion impossible.');
+      setError(c.err_connect);
       setUpgrading(false);
       return;
     }
     const { data } = await sb.auth.getSession();
     const token = data?.session?.access_token;
     if (!token) {
-      setError('Session expirée, reconnecte-toi.');
+      setError(c.err_session);
       setUpgrading(false);
       return;
     }
@@ -119,24 +123,24 @@ export default function Compte() {
       if (res.ok && json.url) {
         window.location.href = json.url;
       } else {
-        setError(json.error || 'Erreur lors de la création du paiement.');
+        setError(json.error || c.err_checkout);
         setUpgrading(false);
       }
     } catch (e) {
-      setError('Erreur réseau, réessaie.');
+      setError(c.err_network);
       setUpgrading(false);
     }
   }
 
   const tier = session?.user?.app_metadata?.tier;
   const isPro = ['seller', 'pro', 'admin'].includes(tier);
-  const planLabel = tier === 'admin' ? 'Admin' : isPro ? 'Pro' : 'Découverte';
+  const planLabel = tier === 'admin' ? c.plan_admin : isPro ? c.plan_pro : c.plan_free;
 
   return (
     <>
       <Head>
-        <title>SellCov — Mon compte</title>
-        <meta name="description" content="Accède à ton espace SellCov. Gère tes envois certifiés et ton abonnement." />
+        <title>{c.meta_title}</title>
+        <meta name="description" content={c.meta_desc} />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
       </Head>
 
@@ -181,7 +185,7 @@ export default function Compte() {
           </Link>
           <Link href="/">
             <span style={{ color: "#6b6b6b", fontSize: 14, fontWeight: 500, padding: "8px 14px", borderRadius: 999, cursor: "pointer" }}>
-              Retour
+              {t.nav.back}
             </span>
           </Link>
         </div>
@@ -189,17 +193,17 @@ export default function Compte() {
 
       <main style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px 80px" }}>
         {loading && (
-          <div style={{ ...cardStyle, textAlign: "center", color: "#6b6b6b", marginTop: 48 }}>Chargement…</div>
+          <div style={{ ...cardStyle, textAlign: "center", color: "#6b6b6b", marginTop: 48 }}>{c.loading}</div>
         )}
 
         {!loading && !session && !sent && (
           <>
             <div style={{ padding: "48px 0 24px", textAlign: "center" }}>
               <h1 style={{ fontWeight: 800, fontSize: "clamp(28px, 6vw, 40px)", lineHeight: 1.1, letterSpacing: "-0.02em" }}>
-                Mon compte
+                {c.title}
               </h1>
               <p style={{ color: "#6b6b6b", fontSize: 16, marginTop: 14, maxWidth: 460, marginLeft: "auto", marginRight: "auto" }}>
-                Entre ton email. Tu reçois un lien de connexion sécurisé, sans mot de passe.
+                {c.magic_intro}
               </p>
             </div>
             <div style={cardStyle}>
@@ -208,13 +212,13 @@ export default function Compte() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="ton@email.com"
+                  placeholder={c.email_ph}
                   required
                   style={inputStyle}
                 />
                 <div style={{ height: 14 }} />
                 <button type="submit" disabled={sending} style={{ ...btnPrimary, opacity: sending ? 0.5 : 1, cursor: sending ? "wait" : "pointer" }}>
-                  {sending ? "Envoi…" : "Recevoir le lien de connexion"}
+                  {sending ? c.sending : c.send_link}
                 </button>
                 {error && (
                   <div style={errorBox}>{error}</div>
@@ -234,17 +238,17 @@ export default function Compte() {
                 </svg>
               </div>
               <h2 style={{ fontWeight: 800, fontSize: "clamp(24px, 5vw, 32px)", lineHeight: 1.1, letterSpacing: "-0.02em" }}>
-                Vérifie ta boîte mail
+                {c.check_mail}
               </h2>
               <p style={{ color: "#6b6b6b", fontSize: 16, marginTop: 14, maxWidth: 460, marginLeft: "auto", marginRight: "auto" }}>
-                Un lien de connexion vient d'être envoyé à<br />
+                {c.mail_sent_1}<br />
                 <span style={{ color: "#111", fontWeight: 600 }}>{email}</span>.<br /><br />
-                Clique dessus pour te connecter.
+                {c.mail_sent_2}
               </p>
             </div>
             <div style={{ textAlign: "center", marginTop: 8 }}>
               <button onClick={() => { setSent(false); setEmail(''); }} style={btnGhostInline}>
-                Changer d'email
+                {c.change_email}
               </button>
             </div>
           </>
@@ -254,15 +258,15 @@ export default function Compte() {
           <>
             <div style={{ padding: "48px 0 24px", textAlign: "center" }}>
               <h1 style={{ fontWeight: 800, fontSize: "clamp(28px, 6vw, 40px)", lineHeight: 1.1, letterSpacing: "-0.02em" }}>
-                Mon compte
+                {c.title}
               </h1>
             </div>
 
             {upgradedMsg && (
               <div style={{ background: "#e7f3ec", border: "1.5px solid #1f9f5f", borderRadius: 28, padding: "20px 24px", marginBottom: 16 }}>
-                <div style={{ color: "#167a48", fontWeight: 700, marginBottom: 6 }}>Paiement confirmé</div>
+                <div style={{ color: "#167a48", fontWeight: 700, marginBottom: 6 }}>{c.paid_title}</div>
                 <div style={{ color: "#2a2a2a", fontSize: 14 }}>
-                  Ton plan Pro est en cours d'activation. Si l'accès n'est pas immédiat, déconnecte-toi puis reconnecte-toi (ton accès est lu à la connexion).
+                  {c.paid_sub}
                 </div>
               </div>
             )}
@@ -270,18 +274,18 @@ export default function Compte() {
             <div style={cardStyle}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 16, flexWrap: "wrap", marginBottom: 20 }}>
                 <div>
-                  <div style={labelStyle}>Connecté en tant que</div>
+                  <div style={labelStyle}>{c.logged_as}</div>
                   <div style={{ fontSize: 17, color: "#111", fontWeight: 600, wordBreak: "break-all" }}>{session.user.email}</div>
                 </div>
-                <button onClick={logout} style={btnGhostSmall}>Déconnexion</button>
+                <button onClick={logout} style={btnGhostSmall}>{c.logout}</button>
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                 <div style={statBox}>
-                  <div style={labelStyle}>Plan</div>
+                  <div style={labelStyle}>{c.plan_label}</div>
                   <div style={{ fontSize: 20, fontWeight: 800, color: isPro ? "#167a48" : "#111", letterSpacing: "-0.02em" }}>{planLabel}</div>
                 </div>
                 <div style={statBox}>
-                  <div style={labelStyle}>Envois certifiés</div>
+                  <div style={labelStyle}>{c.cert_count}</div>
                   <div style={{ fontSize: 20, fontWeight: 800, color: "#111", letterSpacing: "-0.02em" }}>{envois.length}</div>
                 </div>
               </div>
@@ -296,8 +300,8 @@ export default function Compte() {
                       <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
                     </svg>
                   </div>
-                  <div style={dashTitle}>Certifier un envoi</div>
-                  <div style={dashSub}>Filme, horodate, génère ton certificat.</div>
+                  <div style={dashTitle}>{c.dash_protection_title}</div>
+                  <div style={dashSub}>{c.dash_protection_sub}</div>
                 </a>
               </Link>
               <Link href="/litige">
@@ -307,38 +311,38 @@ export default function Compte() {
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                     </svg>
                   </div>
-                  <div style={dashTitle}>Gérer un litige</div>
-                  <div style={dashSub}>L'IA monte ta défense en 30 secondes.</div>
+                  <div style={dashTitle}>{c.dash_litige_title}</div>
+                  <div style={dashSub}>{c.dash_litige_sub}</div>
                 </a>
               </Link>
             </div>
 
             {!isPro && (
               <div style={cardStyle}>
-                <div style={labelStyle}>Passer au plan Pro</div>
+                <div style={labelStyle}>{c.upgrade_kicker}</div>
                 <div style={{ fontSize: 32, fontWeight: 800, lineHeight: 1, margin: "8px 0 4px", letterSpacing: "-0.02em" }}>
-                  49 € <span style={{ fontSize: 14, color: "#6b6b6b", fontWeight: 500 }}>/ mois</span>
+                  49 € <span style={{ fontSize: 14, color: "#6b6b6b", fontWeight: 500 }}>{c.upgrade_price_suffix}</span>
                 </div>
                 <p style={{ color: "#6b6b6b", fontSize: 14.5, lineHeight: 1.6, margin: "12px 0 20px" }}>
-                  Certificats vidéo illimités, défense IA illimitée, ancrage Bitcoin sur chaque preuve, support prioritaire. Sans engagement, annulable en 1 clic.
+                  {c.upgrade_desc}
                 </p>
                 <button onClick={startCheckout} disabled={upgrading} style={{ ...btnPrimary, opacity: upgrading ? 0.5 : 1, cursor: upgrading ? "wait" : "pointer" }}>
-                  {upgrading ? "Redirection…" : "Passer Pro"}
+                  {upgrading ? c.upgrade_redirect : c.upgrade_btn}
                 </button>
                 {error && <div style={errorBox}>{error}</div>}
               </div>
             )}
 
-            <div style={{ ...labelStyle, marginTop: 32, marginBottom: 14 }}>Derniers envois</div>
+            <div style={{ ...labelStyle, marginTop: 32, marginBottom: 14 }}>{c.last_envois}</div>
 
             {envois.length === 0 ? (
               <div style={{ ...cardStyle, textAlign: "center", padding: "32px 24px" }}>
                 <p style={{ color: "#6b6b6b", fontSize: 14.5, marginBottom: 12 }}>
-                  Aucun envoi certifié pour l'instant.
+                  {c.empty_envois}
                 </p>
                 <Link href="/protection">
                   <span style={{ color: "#167a48", fontWeight: 700, cursor: "pointer", textDecoration: "underline" }}>
-                    Certifier mon premier envoi
+                    {c.first_envoi_cta}
                   </span>
                 </Link>
               </div>
@@ -348,10 +352,10 @@ export default function Compte() {
                   <div key={e.id} style={envoiItem}>
                     <div>
                       <div style={{ fontSize: 14.5, color: "#111", fontWeight: 600, marginBottom: 3 }}>
-                        {e.article_name || "Envoi sans titre"}
+                        {e.article_name || c.untitled}
                       </div>
                       <div style={{ fontSize: 12, color: "#6b6b6b" }}>
-                        {new Date(e.created_at).toLocaleString("fr-FR")} · {e.status}
+                        {new Date(e.created_at).toLocaleString(lang === "en" ? "en-US" : "fr-FR")} · {e.status}
                       </div>
                     </div>
                     <div style={{ fontSize: 11, color: "#a0a09a", fontFamily: "var(--font-mono), monospace", flexShrink: 0 }}>

@@ -5,6 +5,7 @@ export default function Confidentialite() {
     <LegalLayout
       title="Politique de confidentialité"
       description="Politique de confidentialité de SellCov — traitement des données personnelles, RGPD."
+      frenchOnly
     >
       <h1 className="legal-title">Politique de confidentialité.</h1>
       <p className="legal-subtitle">Version 1.0. En vigueur à compter du 1er mai 2026. Dernière mise à jour : 3 mai 2026.</p>

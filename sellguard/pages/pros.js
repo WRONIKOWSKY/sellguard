@@ -2,23 +2,15 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 import styles from "../styles/pros.module.css";
+import { useLang } from "../contexts/LangContext";
 
-const PLATFORMS = [
-  { value: "vinted_pro", label: "Vinted Pro" },
-  { value: "grailed", label: "Grailed" },
-  { value: "etsy", label: "Etsy" },
-  { value: "depop", label: "Depop" },
-  { value: "vestiaire", label: "Vestiaire Collective" },
-  { value: "autre", label: "Autre" },
-];
-
-const VOLUMES = [
-  { value: "v30_50", label: "30 à 50 ventes par mois" },
-  { value: "v50_100", label: "50 à 100 ventes par mois" },
-  { value: "v100_plus", label: "100 ventes et plus par mois" },
-];
+const PLATFORM_KEYS = ["vinted_pro", "grailed", "etsy", "depop", "vestiaire", "autre"];
+const VOLUME_KEYS = ["v30_50", "v50_100", "v100_plus"];
 
 export default function Pros() {
+  const { t, lang, setLang } = useLang();
+  const p = t.pros;
+
   const [email, setEmail] = useState("");
   const [handle, setHandle] = useState("");
   const [platform, setPlatform] = useState("");
@@ -30,7 +22,7 @@ export default function Pros() {
   async function onSubmit(e) {
     e.preventDefault();
     if (!email || !handle || !platform || !volume) {
-      setErrorMsg("Tous les champs marqués * sont requis.");
+      setErrorMsg(p.form_required);
       return;
     }
     setStatus("sending");
@@ -42,36 +34,30 @@ export default function Pros() {
         body: JSON.stringify({ email, handle, platform, monthly_volume: volume, note }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Erreur");
+      if (!res.ok) throw new Error(data.error || "Error");
       setStatus("sent");
     } catch (err) {
       setStatus("error");
-      setErrorMsg(err.message || "Erreur réseau, réessaie.");
+      setErrorMsg(err.message || p.form_network_err);
     }
   }
 
   return (
     <>
       <Head>
-        <title>SellCov — La preuve qui protège ta vente</title>
-        <meta
-          name="description"
-          content="La preuve vidéo horodatée qui protège chaque vente. Pour les revendeurs vintage qui expédient en volume. Cohorte fondateurs ouverte, sur candidature."
-        />
+        <title>{p.meta_title}</title>
+        <meta name="description" content={p.meta_desc} />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="canonical" href="https://www.sellcov.com/" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.sellcov.com/" />
-        <meta property="og:title" content="La preuve qui protège ta vente." />
-        <meta
-          property="og:description"
-          content="Cohorte fondateurs, places limitées."
-        />
+        <meta property="og:title" content={p.og_title} />
+        <meta property="og:description" content={p.og_desc} />
         <meta property="og:image" content="https://www.sellcov.com/og.png" />
-        <meta property="og:image:alt" content="SellCov — hérisson et bouclier" />
+        <meta property="og:image:alt" content={p.og_image_alt} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="La preuve qui protège ta vente." />
-        <meta name="twitter:description" content="Cohorte fondateurs, places limitées." />
+        <meta name="twitter:title" content={p.og_title} />
+        <meta name="twitter:description" content={p.og_desc} />
         <meta name="twitter:image" content="https://www.sellcov.com/og.png" />
       </Head>
 
@@ -123,8 +109,14 @@ export default function Pros() {
           display: flex; align-items: center; gap: 8px;
           font-size: 14px; font-weight: 600;
         }
-        .lang-active { color: var(--ink); }
-        .lang-disabled { color: var(--dim); cursor: not-allowed; opacity: 0.55; }
+        .lang-btn {
+          background: transparent; border: none; padding: 4px 6px;
+          font-family: inherit; font-size: 14px; font-weight: 600;
+          cursor: pointer; color: var(--dim);
+          transition: color .15s;
+        }
+        .lang-btn:hover { color: var(--ink-soft); }
+        .lang-btn.active { color: var(--ink); cursor: default; }
         .lang-divider { color: var(--dim); }
         .nav-back {
           color: var(--muted); font-size: 14px; font-weight: 500;
@@ -243,7 +235,6 @@ export default function Pros() {
         }
         .illus-montage img { width: 100%; height: auto; display: block; }
 
-        /* Renard centré, bulles flottant à côté du carton (à droite) */
         .voleur-scene {
           position: relative;
           max-width: 440px;
@@ -275,7 +266,6 @@ export default function Pros() {
           }
         }
 
-        /* (ancien .bubbles conservé pour compat — non utilisé) */
         .bubbles {
           display: flex; flex-direction: column; gap: 8px;
           align-items: center;
@@ -303,7 +293,6 @@ export default function Pros() {
           .bubble:nth-child(2) { transform: translateX(-10px); }
         }
 
-        /* Offre cohorte */
         .offer-card {
           background: var(--bg-card);
           border: 1.5px solid var(--line);
@@ -360,7 +349,6 @@ export default function Pros() {
           border-top: 1px solid var(--line);
         }
 
-        /* Form */
         .form-wrap {
           background: var(--bg-card);
           border: 1.5px solid var(--line);
@@ -442,7 +430,6 @@ export default function Pros() {
         }
         .form-success p { color: var(--ink-soft); font-size: 15px; }
 
-        /* FAQ */
         .faq { text-align: left; margin-top: 32px; }
         details.faq-item {
           border-bottom: 1px solid var(--line);
@@ -469,7 +456,6 @@ export default function Pros() {
           font-size: 14.5px; line-height: 1.65;
         }
 
-        /* Footer */
         footer.pros-footer {
           border-top: 1px solid var(--line);
           padding: 36px 24px;
@@ -484,7 +470,6 @@ export default function Pros() {
         footer.pros-footer a { color: var(--muted); font-size: 13px; }
         footer.pros-footer a:hover { color: var(--ink); }
 
-        /* Petite ligne décorative verte sous certaines accent */
         .underline-deco {
           display: block;
           width: 56px; height: 3px;
@@ -500,118 +485,126 @@ export default function Pros() {
             <img src="/logo-full.png" alt="SellCov" />
           </Link>
           <div className="lang-switcher">
-            <span className="lang-active">FR</span>
+            <button
+              type="button"
+              className={"lang-btn" + (lang === "fr" ? " active" : "")}
+              onClick={() => setLang("fr")}
+              aria-pressed={lang === "fr"}
+            >
+              FR
+            </button>
             <span className="lang-divider">·</span>
-            <span className="lang-disabled" title="Coming soon">EN</span>
+            <button
+              type="button"
+              className={"lang-btn" + (lang === "en" ? " active" : "")}
+              onClick={() => setLang("en")}
+              aria-pressed={lang === "en"}
+            >
+              EN
+            </button>
           </div>
         </div>
       </header>
 
       <main>
-        {/* HERO */}
         <section className="block">
           <h1 className="title">
-            La preuve qui
-            <span className="accent">protège ta vente.</span>
+            {p.hero_title_1}
+            <span className="accent">{p.hero_title_2}</span>
           </h1>
-          <p className="sub">Pour les revendeurs vintage qui expédient en volume.</p>
+          <p className="sub">{p.hero_sub}</p>
           <div className="cta-row">
             <a href="#form" className="btn-primary">
               <IconLink />
-              Candidater à la cohorte
+              {p.hero_cta}
             </a>
           </div>
         </section>
 
-        {/* PROBLÈME — Sans preuve, tu perds */}
         <section className="block">
           <h2 className="title">
-            Sans preuve,
-            <span className="accent">l'acheteur a toujours raison.</span>
+            {p.problem_title_1}
+            <span className="accent">{p.problem_title_2}</span>
           </h2>
           <div className="voleur-scene">
             <img
               src="/illus/voleur-renard-v3.png"
-              alt="Voleur qui s'enfuit avec un colis non protégé par SellCov"
+              alt={p.problem_alt}
               className="voleur-img"
             />
             <div className="voleur-bubbles">
-              <span className="bubble">Jamais reçu</span>
-              <span className="bubble">Pas conforme</span>
+              <span className="bubble">{p.bubble_never}</span>
+              <span className="bubble">{p.bubble_not_conform}</span>
             </div>
           </div>
         </section>
 
-        {/* ÉTAPE 1 — Tu filmes l'envoi sans coupure */}
         <section className="block">
-          <span className="kicker">Étape 1</span>
+          <span className="kicker">{p.step1_kicker}</span>
           <h2 className="title">
-            Tu filmes l'envoi
-            <span className="accent">sans coupure</span>
+            {p.step1_title_1}
+            <span className="accent">{p.step1_title_2}</span>
           </h2>
           <span className="underline-deco" />
-          <p className="sub">L'article, l'emballage, la fermeture du colis. Une seule prise, horodatée.</p>
+          <p className="sub">{p.step1_sub}</p>
           <div className="illus illus-photo">
-            <img src="/illus/step1-film.png" alt="Hérisson qui filme un article avant la mise en colis" />
+            <img src="/illus/step1-film.png" alt={p.step1_alt} />
           </div>
         </section>
 
-        {/* ÉTAPE 2 — Tu préviens l'acheteur au départ */}
         <section className="block">
-          <span className="kicker">Étape 2</span>
+          <span className="kicker">{p.step2_kicker}</span>
           <h2 className="title">
-            Un simple message
-            <span className="accent">suffit.</span>
+            {p.step2_title_1}
+            <span className="accent">{p.step2_title_2}</span>
           </h2>
           <span className="underline-deco" />
-          <p className="sub">Mieux vaut prévenir que prouver.</p>
+          <p className="sub">{p.step2_sub}</p>
           <div className="illus illus-photo">
-            <img src="/illus/step2-prevenir.png" alt="Hérisson qui prévient l'acheteur que l'envoi est certifié SellCov" />
+            <img src="/illus/step2-prevenir.png" alt={p.step2_alt} />
           </div>
         </section>
 
-        {/* ÉTAPE 3 — Si un litige passe, la preuve répond */}
         <section className="block">
-          <span className="kicker">Étape 3</span>
+          <span className="kicker">{p.step3_kicker}</span>
           <h2 className="title">
-            En cas de litige,
-            <span className="accent">la vidéo plaide pour toi.</span>
+            {p.step3_title_1}
+            <span className="accent">{p.step3_title_2}</span>
           </h2>
           <span className="underline-deco" />
-          <p className="sub">Recevable, opposable, imparable.</p>
+          <p className="sub">{p.step3_sub}</p>
           <div className="illus illus-photo">
-            <img src="/illus/step2-preuve.png" alt="Tampon de preuve horodatée SellCov" />
+            <img src="/illus/step2-preuve.png" alt={p.step3_alt} />
           </div>
         </section>
 
-        {/* OFFRE COHORTE */}
         <section className="block" id="offre">
           <h2 className="title">
-            Place de fondateur,
-            <span className="accent">limitée.</span>
+            {p.offer_title_1}
+            <span className="accent">{p.offer_title_2}</span>
           </h2>
           <div className="offer-card">
             <div className="offer-badges">
               <span className="offer-badge">
                 <IconPeople />
-                Cohorte fondateurs ouverte
+                {p.offer_badge_cohort}
               </span>
               <span className="offer-badge outline">
                 <IconStar />
-                Places limitées
+                {p.offer_badge_limit}
               </span>
             </div>
             <ul className="offer-list">
-              <li>30 jours d'accès complet, sans carte bancaire.</li>
-              <li>Mise en place en visio avec le fondateur.</li>
-              <li>Certificats vidéo illimités et défense IA.</li>
-              <li>Ancrage Bitcoin sur chaque preuve.</li>
-              <li>Tarif fondateur verrouillé après les 30 jours, sous le prix public.</li>
+              <li>{p.offer_li_1}</li>
+              <li>{p.offer_li_2}</li>
+              <li>{p.offer_li_3}</li>
+              <li>{p.offer_li_4}</li>
+              <li>{p.offer_li_5}</li>
             </ul>
             <div className="cta-row" style={{ textAlign: "center", marginTop: 0 }}>
               <a href="#form" className="btn-primary">
                 <IconLink />
-                Rejoindre la cohorte
+                {p.offer_cta}
               </a>
             </div>
             <p
@@ -628,86 +621,85 @@ export default function Pros() {
                 color: '#2a2a2a',
               }}
             >
-              Contrepartie : un avis sans filtre, et le droit de partager ton succès.
+              {p.offer_fineprint}
             </p>
           </div>
         </section>
 
-        {/* FORM */}
         <section className="block" id="form">
-          <span className="kicker">Candidature</span>
+          <span className="kicker">{p.form_kicker}</span>
           <h2 className="title">
-            Candidate
-            <span className="accent">en deux minutes.</span>
+            {p.form_title_1}
+            <span className="accent">{p.form_title_2}</span>
           </h2>
-          <p className="sub">Tu candidates, on te répond. 48h max.</p>
+          <p className="sub">{p.form_sub}</p>
 
           {status === "sent" ? (
             <div className={styles.formSuccess}>
-              <h3>Candidature reçue.</h3>
-              <p>On revient vers toi sous 48h sur {email}.</p>
+              <h3>{p.form_success_title}</h3>
+              <p>{p.form_success_sub} {email}.</p>
             </div>
           ) : (
             <form className={styles.formWrap} onSubmit={onSubmit}>
               <div className={styles.formField}>
-                <label htmlFor="email">Email *</label>
+                <label htmlFor="email">{p.form_email_label}</label>
                 <input
                   className={styles.formInput}
                   id="email" type="email" value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="ton@email.com" autoComplete="email" required
+                  placeholder={p.form_email_ph} autoComplete="email" required
                 />
               </div>
 
               <div className={styles.formField}>
-                <label htmlFor="handle">Ton @ Instagram, Discord ou Twitter *</label>
+                <label htmlFor="handle">{p.form_handle_label}</label>
                 <input
                   className={styles.formInput}
                   id="handle" type="text" value={handle}
                   onChange={(e) => setHandle(e.target.value)}
-                  placeholder="@tonpseudo" required
+                  placeholder={p.form_handle_ph} required
                 />
               </div>
 
               <div className={styles.formField}>
-                <label>Plateforme principale *</label>
+                <label>{p.form_platform_label}</label>
                 <div className={styles.radioRow}>
-                  {PLATFORMS.map((p) => (
-                    <label key={p.value} className={`${styles.radioChip}${platform === p.value ? " " + styles.radioChipActive : ""}`}>
+                  {PLATFORM_KEYS.map((key) => (
+                    <label key={key} className={`${styles.radioChip}${platform === key ? " " + styles.radioChipActive : ""}`}>
                       <input
-                        type="radio" name="platform" value={p.value}
-                        checked={platform === p.value}
+                        type="radio" name="platform" value={key}
+                        checked={platform === key}
                         onChange={(e) => setPlatform(e.target.value)}
                       />
-                      {p.label}
+                      {p.platforms[key]}
                     </label>
                   ))}
                 </div>
               </div>
 
               <div className={styles.formField}>
-                <label>Volume mensuel *</label>
+                <label>{p.form_volume_label}</label>
                 <div className={styles.radioRow}>
-                  {VOLUMES.map((v) => (
-                    <label key={v.value} className={`${styles.radioChip}${volume === v.value ? " " + styles.radioChipActive : ""}`}>
+                  {VOLUME_KEYS.map((key) => (
+                    <label key={key} className={`${styles.radioChip}${volume === key ? " " + styles.radioChipActive : ""}`}>
                       <input
-                        type="radio" name="volume" value={v.value}
-                        checked={volume === v.value}
+                        type="radio" name="volume" value={key}
+                        checked={volume === key}
                         onChange={(e) => setVolume(e.target.value)}
                       />
-                      {v.label}
+                      {p.volumes[key]}
                     </label>
                   ))}
                 </div>
               </div>
 
               <div className={styles.formField}>
-                <label htmlFor="note">Note (optionnel)</label>
+                <label htmlFor="note">{p.form_note_label}</label>
                 <textarea
                   className={`${styles.formInput} ${styles.textarea}`}
                   id="note" value={note}
                   onChange={(e) => setNote(e.target.value.substring(0, 500))}
-                  placeholder="Une histoire de litige récente, un besoin spécifique, ou pourquoi ça t'intéresse..."
+                  placeholder={p.form_note_ph}
                   maxLength={500}
                 />
               </div>
@@ -715,31 +707,30 @@ export default function Pros() {
               {errorMsg && <div className={styles.formError}>{errorMsg}</div>}
 
               <button className={styles.submit} type="submit" disabled={status === "sending"}>
-                {status === "sending" ? "Envoi..." : "Envoyer ma candidature"}
+                {status === "sending" ? p.form_sending : p.form_submit}
               </button>
             </form>
           )}
         </section>
 
-        {/* FAQ */}
         <section className="block">
-          <span className="kicker">Questions fréquentes</span>
+          <span className="kicker">{p.faq_kicker}</span>
           <h2 className="title">
-            Ce qu'on nous
-            <span className="accent">demande souvent.</span>
+            {p.faq_title_1}
+            <span className="accent">{p.faq_title_2}</span>
           </h2>
           <div className={styles.faq}>
             <details className={styles.faqItem}>
-              <summary>{"Que se passe-t-il après les 30 jours ?"}</summary>
-              <p>Si tu continues, tu gardes un tarif fondateur verrouillé, sous le prix public, tant que tu restes. Si tu arrêtes, tu arrêtes. Pas de prélèvement surprise puisqu'on ne t'a jamais demandé ta carte bancaire.</p>
+              <summary>{p.faq_q1}</summary>
+              <p>{p.faq_a1}</p>
             </details>
             <details className={styles.faqItem}>
-              <summary>Pourquoi mon Instagram ?</summary>
-              <p>Pour vérifier que tu es un vrai revendeur, pas un compte fictif. On ne te suit pas, on ne te DM pas.</p>
+              <summary>{p.faq_q2}</summary>
+              <p>{p.faq_a2}</p>
             </details>
             <details className={styles.faqItem}>
-              <summary>Mes vidéos sont-elles vraiment privées ?</summary>
-              <p>Oui. Tes vidéos sont chiffrées, stockées sur serveurs européens (RGPD), accessibles uniquement depuis ton compte. On ne les visionne pas, on ne les revend pas.</p>
+              <summary>{p.faq_q3}</summary>
+              <p>{p.faq_a3}</p>
             </details>
           </div>
         </section>
@@ -747,103 +738,17 @@ export default function Pros() {
 
       <footer className={styles.footer}>
         <div className={styles.footerLinks}>
-          <Link href="/faq">FAQ</Link>
-          <a href="mailto:hello@sellcov.com">Contact</a>
+          <Link href="/faq">{t.footer.faq}</Link>
+          <a href="mailto:hello@sellcov.com">{t.footer.contact}</a>
           <a href="https://www.instagram.com/sellcov" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href="https://www.tiktok.com/@sellcov.com" target="_blank" rel="noopener noreferrer">TikTok</a>
-          <Link href="/mentions-legales">Mentions légales</Link>
-          <Link href="/cgu">CGU</Link>
-          <Link href="/confidentialite">Confidentialité</Link>
+          <Link href="/mentions-legales">{t.footer.mentions}</Link>
+          <Link href="/cgu">{t.footer.cgu}</Link>
+          <Link href="/confidentialite">{t.footer.confidentialite}</Link>
         </div>
-        <div className={styles.footerCopy}>© 2026 SellCov</div>
+        <div className={styles.footerCopy}>{t.footer.copy}</div>
       </footer>
     </>
-  );
-}
-
-/* ---------- Illustrations SVG inline (style linéaire carrousel) ---------- */
-
-function IllusFilm() {
-  return (
-    <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      {/* Main */}
-      <path d="M40 200 C 40 175, 55 165, 75 168 L 95 170 L 100 160 C 102 152, 110 148, 118 152 C 124 155, 126 162, 122 170 L 118 178" stroke="#111" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M70 200 L 70 220 L 130 220 L 130 200" stroke="#111" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-      {/* Phone tenu en main */}
-      <rect x="95" y="60" width="100" height="160" rx="12" stroke="#111" strokeWidth="2.5" fill="#fff"/>
-      <rect x="105" y="72" width="80" height="130" rx="4" stroke="#111" strokeWidth="1.5" fill="#f8f7f3"/>
-      {/* T-shirt sur l'écran */}
-      <path d="M125 102 L 135 95 L 155 95 L 165 102 L 165 118 L 155 118 L 155 165 L 135 165 L 135 118 L 125 118 Z" stroke="#111" strokeWidth="2" strokeLinejoin="round" fill="none"/>
-      {/* REC dot + texte */}
-      <circle cx="178" cy="86" r="4" fill="#1f9f5f"/>
-      <text x="186" y="90" fontSize="9" fontWeight="700" fill="#111" fontFamily="system-ui, sans-serif">REC</text>
-      {/* Crochets de viseur */}
-      <path d="M115 90 L 115 82 L 123 82 M 175 82 L 183 82 L 183 90 M 115 180 L 115 188 L 123 188 M 175 188 L 183 188 L 183 180" stroke="#1f9f5f" strokeWidth="2" strokeLinecap="round" fill="none"/>
-      {/* Colis à droite */}
-      <path d="M225 165 L 265 150 L 305 165 L 305 210 L 265 225 L 225 210 Z" stroke="#111" strokeWidth="2.5" strokeLinejoin="round" fill="#fff"/>
-      <path d="M225 165 L 265 180 L 305 165 M 265 180 L 265 225" stroke="#111" strokeWidth="2" strokeLinejoin="round"/>
-      <line x1="245" y1="157" x2="245" y2="217" stroke="#1f9f5f" strokeWidth="4"/>
-      <path d="M245 157 L 285 142" stroke="#1f9f5f" strokeWidth="3" strokeLinecap="round"/>
-    </svg>
-  );
-}
-
-function IllusTampon() {
-  return (
-    <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      {/* Tampon - poignée */}
-      <rect x="135" y="40" width="50" height="14" rx="3" stroke="#111" strokeWidth="2.5" fill="#fff"/>
-      <line x1="160" y1="54" x2="160" y2="80" stroke="#111" strokeWidth="2.5"/>
-      {/* Tampon - corps */}
-      <rect x="110" y="80" width="100" height="36" rx="4" stroke="#111" strokeWidth="2.5" fill="#fff"/>
-      <rect x="120" y="116" width="80" height="14" rx="2" stroke="#111" strokeWidth="2.5" fill="#fff"/>
-      {/* Texte "PREUVE" sur tampon */}
-      <text x="160" y="103" fontSize="12" fontWeight="800" fill="#1f9f5f" textAnchor="middle" fontFamily="system-ui, sans-serif">PREUVE</text>
-      {/* Lignes d'impact */}
-      <path d="M70 90 L 95 90 M 70 100 L 95 100 M 245 90 L 270 90 M 245 100 L 270 100" stroke="#1f9f5f" strokeWidth="2.5" strokeLinecap="round"/>
-      {/* Cartouche horodatage */}
-      <rect x="95" y="160" width="130" height="50" rx="4" stroke="#1f9f5f" strokeWidth="2" fill="#e7f3ec" strokeDasharray="5 3"/>
-      <text x="160" y="180" fontSize="10" fontWeight="700" fill="#167a48" textAnchor="middle" fontFamily="system-ui, sans-serif">HORODATAGE</text>
-      <text x="160" y="198" fontSize="11" fontWeight="600" fill="#111" textAnchor="middle" fontFamily="ui-monospace, monospace">2026-05-21  14:32</text>
-    </svg>
-  );
-}
-
-function IllusBouclier() {
-  return (
-    <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      {/* Bulle de chat (le litige) à gauche */}
-      <path d="M40 70 L 130 70 Q 145 70 145 85 L 145 130 Q 145 145 130 145 L 75 145 L 60 162 L 60 145 L 55 145 Q 40 145 40 130 Z" stroke="#111" strokeWidth="2.5" strokeLinejoin="round" fill="#fff"/>
-      <line x1="55" y1="92" x2="125" y2="92" stroke="#111" strokeWidth="2" strokeLinecap="round" opacity="0.6"/>
-      <line x1="55" y1="108" x2="120" y2="108" stroke="#111" strokeWidth="2" strokeLinecap="round" opacity="0.6"/>
-      <line x1="55" y1="124" x2="105" y2="124" stroke="#111" strokeWidth="2" strokeLinecap="round" opacity="0.6"/>
-      {/* Flèche vers le bouclier */}
-      <path d="M165 110 L 195 110 M 188 103 L 195 110 L 188 117" stroke="#1f9f5f" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-      {/* Bouclier avec check */}
-      <path d="M250 50 L 210 68 L 210 130 Q 210 175 250 195 Q 290 175 290 130 L 290 68 Z" stroke="#1f9f5f" strokeWidth="3" strokeLinejoin="round" fill="#e7f3ec"/>
-      <path d="M228 125 L 244 142 L 274 108" stroke="#1f9f5f" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-    </svg>
-  );
-}
-
-function IllusColis() {
-  return (
-    <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      {/* Colis face */}
-      <path d="M80 110 L 160 80 L 240 110 L 240 200 L 160 230 L 80 200 Z" stroke="#111" strokeWidth="2.5" strokeLinejoin="round" fill="#fff"/>
-      <path d="M80 110 L 160 140 L 240 110" stroke="#111" strokeWidth="2.5" strokeLinejoin="round"/>
-      <line x1="160" y1="140" x2="160" y2="230" stroke="#111" strokeWidth="2.5"/>
-      {/* Scotch vert */}
-      <path d="M115 96 L 115 215" stroke="#1f9f5f" strokeWidth="10" strokeLinecap="butt" opacity="0.95"/>
-      <path d="M115 96 L 195 66" stroke="#1f9f5f" strokeWidth="8" strokeLinecap="butt" opacity="0.95"/>
-      {/* Flèche "ce côté en haut" */}
-      <g transform="translate(185 165)">
-        <path d="M0 18 L 0 -10 M -7 -3 L 0 -10 L 7 -3" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-        <path d="M-6 25 L 6 25" stroke="#111" strokeWidth="2" strokeLinecap="round"/>
-      </g>
-      {/* Petits traits d'effet */}
-      <path d="M40 90 L 50 100 M 30 130 L 45 130 M 280 90 L 270 100 M 290 130 L 275 130" stroke="#1f9f5f" strokeWidth="2" strokeLinecap="round" opacity="0.7"/>
-    </svg>
   );
 }
 
