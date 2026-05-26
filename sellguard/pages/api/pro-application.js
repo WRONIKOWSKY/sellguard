@@ -22,7 +22,7 @@ import { rateLimit, getClientIp } from "../../lib/rateLimit";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const ALLOWED_PLATFORMS = ["depop", "etsy", "vinted_pro", "grailed", "vestiaire", "autre"];
-const ALLOWED_VOLUMES = ["50_100", "100_500", "500_plus"];
+const ALLOWED_VOLUMES = ["v30_50", "v50_100", "v100_plus"];
 const MAX_HANDLE = 80;
 const MAX_NOTE = 500;
 const MAX_EMAIL = 200;

@@ -7,7 +7,6 @@ const STATIC_PATHS = [
   { path: "/litige", priority: "0.9", changefreq: "monthly" },
   { path: "/faq", priority: "0.8", changefreq: "monthly" },
   { path: "/compte", priority: "0.6", changefreq: "monthly" },
-  { path: "/blog", priority: "0.7", changefreq: "weekly" },
   { path: "/mentions-legales", priority: "0.3", changefreq: "yearly" },
   { path: "/cgu", priority: "0.3", changefreq: "yearly" },
   { path: "/confidentialite", priority: "0.3", changefreq: "yearly" },

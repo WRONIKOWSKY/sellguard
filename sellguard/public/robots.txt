@@ -2,6 +2,5 @@ User-agent: *
 Allow: /
 
 Disallow: /api/
-Disallow: /verify/
 
 Sitemap: https://www.sellcov.com/sitemap.xml

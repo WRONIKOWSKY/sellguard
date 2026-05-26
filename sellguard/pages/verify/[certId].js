@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
+import { useLang } from "../../contexts/LangContext";
 
 const CARRIER_LABELS = {
   colissimo: "Colissimo (La Poste)",
@@ -14,14 +15,11 @@ const CARRIER_LABELS = {
   autre: "Autre",
 };
 
-// Page publique de vérification d'un certificat SellCov.
-// URL : /verify/SC-XXXXXXXX
-// Pas d'auth requise — n'importe qui (acheteur, plateforme, juge) peut
-// consulter cette page pour vérifier qu'un certificat est authentique.
-
 export default function Verify() {
   const router = useRouter();
   const { certId } = router.query;
+  const { t, lang } = useLang();
+  const v = t.verify;
 
   const [loading, setLoading] = useState(true);
   const [cert, setCert] = useState(null);
@@ -34,21 +32,21 @@ export default function Verify() {
       .then((r) => r.json().then((data) => ({ status: r.status, data })))
       .then(({ status, data }) => {
         if (status !== 200) {
-          setError(data.error || "Certificat introuvable");
+          setError(data.error || v.not_found);
           setCert(null);
         } else {
           setCert(data);
           setError(null);
         }
       })
-      .catch((e) => setError(e.message || "Erreur réseau"))
+      .catch((e) => setError(e.message || v.err_network))
       .finally(() => setLoading(false));
-  }, [certId]);
+  }, [certId, v.not_found, v.err_network]);
 
   return (
     <>
       <Head>
-        <title>SellCov — Vérification certificat {certId || ""}</title>
+        <title>{v.meta_title_prefix} {certId || ""}</title>
       </Head>
       <div style={{ minHeight: "100vh", background: "#000", color: "#fff", fontFamily: "'DM Sans', sans-serif" }}>
         <div style={{ borderBottom: "0.5px solid rgba(255,255,255,0.07)" }}>
@@ -58,93 +56,91 @@ export default function Verify() {
                 <img src="/logo.png" alt="SellCov" style={{ height: 72, width: "auto" }} />
               </span>
             </Link>
-            <span style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", letterSpacing: "0.04em" }}>VÉRIFICATION</span>
+            <span style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", letterSpacing: "0.04em" }}>{v.header_kicker}</span>
           </div>
         </div>
 
         <div style={{ maxWidth: 700, margin: "0 auto", padding: "32px 20px" }}>
           <h1 style={{ fontSize: 26, fontWeight: 600, margin: "0 0 8px 0", fontFamily: "'DM Serif Display', serif" }}>
-            Authenticité du certificat
+            {v.title}
           </h1>
           <p style={{ color: "#888", margin: "0 0 28px 0", fontSize: 14 }}>
-            Cette page valide qu'un certificat SellCov est authentique et n'a pas été altéré.
+            {v.sub}
           </p>
 
           {loading && (
-            <div style={{ padding: "40px 20px", textAlign: "center", color: "#888" }}>Vérification en cours…</div>
+            <div style={{ padding: "40px 20px", textAlign: "center", color: "#888" }}>{v.checking}</div>
           )}
 
           {!loading && error && (
             <div style={{ padding: 24, borderRadius: 12, background: "rgba(255,59,48,0.08)", border: "1px solid rgba(255,59,48,0.3)" }}>
-              <p style={{ fontSize: 16, fontWeight: 600, color: "#FF3B30", margin: 0 }}>✗ Certificat introuvable</p>
+              <p style={{ fontSize: 16, fontWeight: 600, color: "#FF3B30", margin: 0 }}>✗ {v.not_found}</p>
               <p style={{ fontSize: 13, color: "#888", margin: "8px 0 0 0" }}>
-                Le certificat <span style={{ fontFamily: "monospace" }}>{certId}</span> n'existe pas ou est invalide.
+                {v.not_found_sub.split("{certId}")[0]}
+                <span style={{ fontFamily: "monospace" }}>{certId}</span>
+                {v.not_found_sub.split("{certId}")[1]}
               </p>
             </div>
           )}
 
           {!loading && cert && (
             <>
-              {/* Bandeau valide / invalide */}
               {cert.signature_valid ? (
                 <div style={{ padding: 18, borderRadius: 12, background: "rgba(74,222,128,0.08)", border: "1px solid rgba(74,222,128,0.3)", marginBottom: 20 }}>
-                  <p style={{ fontSize: 16, fontWeight: 600, color: "#4ADE80", margin: 0 }}>✓ Certificat authentique</p>
+                  <p style={{ fontSize: 16, fontWeight: 600, color: "#4ADE80", margin: 0 }}>✓ {v.ok_title}</p>
                   <p style={{ fontSize: 12, color: "#888", margin: "6px 0 0 0" }}>
-                    Signature cryptographique vérifiée. Les données n'ont pas été altérées depuis la création.
+                    {v.ok_sub}
                   </p>
                 </div>
               ) : (
                 <div style={{ padding: 18, borderRadius: 12, background: "rgba(255,59,48,0.08)", border: "1px solid rgba(255,59,48,0.3)", marginBottom: 20 }}>
-                  <p style={{ fontSize: 16, fontWeight: 600, color: "#FF3B30", margin: 0 }}>⚠ Signature invalide</p>
+                  <p style={{ fontSize: 16, fontWeight: 600, color: "#FF3B30", margin: 0 }}>⚠ {v.bad_title}</p>
                   <p style={{ fontSize: 12, color: "#888", margin: "6px 0 0 0" }}>
-                    La signature ne correspond pas. Le certificat a peut-être été modifié.
+                    {v.bad_sub}
                   </p>
                 </div>
               )}
 
-              {/* Bandeau ancrage Bitcoin */}
               {cert.ots_status === "bitcoin_confirmed" && (
                 <div style={{ padding: 18, borderRadius: 12, background: "rgba(247,147,26,0.08)", border: "1px solid rgba(247,147,26,0.3)", marginBottom: 20 }}>
-                  <p style={{ fontSize: 16, fontWeight: 600, color: "#F7931A", margin: 0 }}>✓ Ancré dans Bitcoin</p>
+                  <p style={{ fontSize: 16, fontWeight: 600, color: "#F7931A", margin: 0 }}>✓ {v.btc_title}</p>
                   <p style={{ fontSize: 12, color: "#888", margin: "6px 0 10px 0" }}>
-                    L'horodatage est inscrit dans la blockchain Bitcoin via OpenTimestamps. Vérifiable indépendamment, irréversible.
+                    {v.btc_sub}
                   </p>
                   {cert.ots_proof_url && (
                     <a href={cert.ots_proof_url} style={{ fontSize: 12, color: "#F7931A", textDecoration: "underline" }}>
-                      Télécharger la preuve .ots
+                      {v.btc_proof}
                     </a>
                   )}
                 </div>
               )}
               {cert.ots_status === "pending_bitcoin" && (
                 <div style={{ padding: 18, borderRadius: 12, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", marginBottom: 20 }}>
-                  <p style={{ fontSize: 14, fontWeight: 600, color: "#fff", margin: 0 }}>Ancrage Bitcoin en cours</p>
+                  <p style={{ fontSize: 14, fontWeight: 600, color: "#fff", margin: 0 }}>{v.btc_pending_title}</p>
                   <p style={{ fontSize: 12, color: "#888", margin: "6px 0 0 0" }}>
-                    L'attestation de la blockchain Bitcoin sera disponible sous quelques heures (le temps qu'un bloc soit miné).
+                    {v.btc_pending_sub}
                   </p>
                 </div>
               )}
 
-              {/* Métadonnées */}
               <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: 12, padding: 20, marginBottom: 16 }}>
-                <Field label="Référence certificat" value={cert.cert_id} mono large />
-                <Field label="Article" value={cert.article || "—"} />
-                <Field label="Référence commande" value={cert.order_ref || "—"} />
-                <Field label="Numéro de suivi" value={cert.tracking_number || "—"} mono />
-                <Field label="Transporteur" value={CARRIER_LABELS[cert.tracking_carrier] || cert.tracking_carrier || "—"} />
+                <Field label={v.field_cert} value={cert.cert_id} mono large />
+                <Field label={v.field_article} value={cert.article || v.empty} />
+                <Field label={v.field_ref} value={cert.order_ref || v.empty} />
+                <Field label={v.field_tracking} value={cert.tracking_number || v.empty} mono />
+                <Field label={v.field_carrier} value={CARRIER_LABELS[cert.tracking_carrier] || cert.tracking_carrier || v.empty} />
                 <Field
-                  label="Date d'émission"
-                  value={new Date(cert.timestamp).toLocaleString("fr-FR", {
+                  label={v.field_date}
+                  value={new Date(cert.timestamp).toLocaleString(lang === "en" ? "en-US" : "fr-FR", {
                     timeZone: "Europe/Paris",
                     dateStyle: "long",
                     timeStyle: "medium",
                   })}
                 />
-                <Field label="Taille vidéo" value={cert.video_size_bytes ? Math.round(cert.video_size_bytes / 1024) + " KB" : "—"} />
-                <Field label="Empreinte SHA-256" value={cert.video_hash} mono small last />
+                <Field label={v.field_size} value={cert.video_size_bytes ? Math.round(cert.video_size_bytes / 1024) + " KB" : v.empty} />
+                <Field label={v.field_hash} value={cert.video_hash} mono small last />
               </div>
 
-              {/* Boutons d'action */}
               {cert.video_url && (
                 <a
                   href={cert.video_url}
@@ -170,11 +166,11 @@ export default function Verify() {
                     marginBottom: 10,
                   }}
                 >
-                  Télécharger la vidéo originale
+                  {v.download_video}
                 </a>
               )}
               <a
-                href={`/api/certificat?cert_id=${encodeURIComponent(cert.cert_id)}&lang=fr`}
+                href={`/api/certificat?cert_id=${encodeURIComponent(cert.cert_id)}&lang=${lang || "fr"}`}
                 style={{
                   display: "block",
                   width: "100%",
@@ -189,18 +185,17 @@ export default function Verify() {
                   boxSizing: "border-box",
                 }}
               >
-                Télécharger le certificat PDF
+                {v.download_pdf}
               </a>
 
               <p style={{ fontSize: 11, color: "#666", marginTop: 24, lineHeight: 1.5 }}>
-                Signature : {cert.signature_provider} · La vidéo originale est conservée chiffrée par SellCov.
-                URL de téléchargement valide 1h.
+                {cert.signature_provider ? `${cert.signature_provider} · ` : ""}{v.footer_note}
               </p>
 
               <div style={{ marginTop: 32, paddingTop: 20, borderTop: "1px solid rgba(255,255,255,0.06)", textAlign: "center" }}>
                 <Link href="/">
                   <span style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 6 }}>
-                    Découvrir SellCov <span style={{ fontSize: 14 }}>→</span>
+                    {v.discover} <span style={{ fontSize: 14 }}>→</span>
                   </span>
                 </Link>
               </div>
