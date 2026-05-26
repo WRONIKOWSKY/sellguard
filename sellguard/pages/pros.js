@@ -477,6 +477,43 @@ export default function Pros() {
           margin: 14px auto 0;
           border-radius: 2px;
         }
+
+        /* Bandeau compatibilité plateformes */
+        .compat-band {
+          padding: 32px 0 8px;
+          text-align: center;
+        }
+        .compat-kicker {
+          display: inline-block;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: var(--dim);
+          margin-bottom: 18px;
+        }
+        .compat-row {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          gap: 28px;
+          row-gap: 14px;
+          max-width: 640px;
+          margin: 0 auto;
+        }
+        .compat-name {
+          font-size: 16px;
+          font-weight: 700;
+          color: var(--muted);
+          letter-spacing: -0.01em;
+          opacity: 0.75;
+          white-space: nowrap;
+        }
+        @media (max-width: 480px) {
+          .compat-row { gap: 20px; row-gap: 12px; }
+          .compat-name { font-size: 14px; }
+        }
       `}</style>
 
       <header>
@@ -518,6 +555,17 @@ export default function Pros() {
               <IconLink />
               {p.hero_cta}
             </a>
+          </div>
+        </section>
+
+        <section className="compat-band">
+          <span className="compat-kicker">{p.compat_kicker}</span>
+          <div className="compat-row">
+            <span className="compat-name">Vinted</span>
+            <span className="compat-name">Depop</span>
+            <span className="compat-name">Grailed</span>
+            <span className="compat-name">Etsy</span>
+            <span className="compat-name">Vestiaire</span>
           </div>
         </section>
 

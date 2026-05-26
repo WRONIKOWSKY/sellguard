@@ -25,6 +25,8 @@ export var T = {
       hero_sub: "Pour les revendeurs vintage qui expédient en volume.",
       hero_cta: "Candidater à la cohorte",
 
+      compat_kicker: "Compatible avec",
+
       problem_title_1: "Sans preuve,",
       problem_title_2: "l'acheteur a toujours raison.",
       problem_alt: "Voleur qui s'enfuit avec un colis non protégé par SellCov",
@@ -345,6 +347,8 @@ export var T = {
       hero_title_2: "protects your sale.",
       hero_sub: "For vintage resellers who ship in volume.",
       hero_cta: "Apply to the cohort",
+
+      compat_kicker: "Works with",
 
       problem_title_1: "Without proof,",
       problem_title_2: "the buyer is always right.",
