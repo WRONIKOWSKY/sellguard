@@ -24,6 +24,7 @@ export default function Verify() {
   const [loading, setLoading] = useState(true);
   const [cert, setCert] = useState(null);
   const [error, setError] = useState(null);
+  const [showHash, setShowHash] = useState(false);
 
   useEffect(() => {
     if (!certId) return;
@@ -180,7 +181,50 @@ export default function Verify() {
                   timeStyle: "short",
                 })}
               />
-              <Field label={v.field_hash} value={cert.video_hash} mono small last />
+              <div style={{ padding: "11px 0 4px" }}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: "#6b6b6b", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 6 }}>
+                  {v.field_hash}
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12.5, color: "#b56500", fontWeight: 600 }}>
+                    <BitcoinIcon />
+                    {v.hash_anchor_note}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowHash((s) => !s)}
+                  style={{
+                    marginTop: 10,
+                    background: "transparent",
+                    border: "none",
+                    padding: 0,
+                    color: "#167a48",
+                    fontSize: 12.5,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                    fontFamily: "inherit",
+                  }}
+                >
+                  {showHash ? v.hash_hide : v.hash_show}
+                </button>
+                {showHash && (
+                  <div style={{
+                    marginTop: 8,
+                    fontSize: 11,
+                    fontFamily: "var(--font-mono), monospace",
+                    color: "#111",
+                    wordBreak: "break-all",
+                    background: "#f8f7f3",
+                    border: "1.5px solid #e6e4dc",
+                    borderRadius: 8,
+                    padding: "10px 12px",
+                  }}>
+                    {cert.video_hash}
+                  </div>
+                )}
+              </div>
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 4 }}>
