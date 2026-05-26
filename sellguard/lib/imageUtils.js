@@ -1,6 +1,6 @@
 // Utilitaire de compression photo côté front.
 // Resize une image à maxWidth max + ré-encode en JPEG qualité donnée.
-// Utilisé par /annonce et /litige pour rester sous la limite Next.js bodyParser
+// Utilisé par /litige pour rester sous la limite Next.js bodyParser
 // (1 MB par défaut) et économiser des tokens Anthropic en input vision.
 //
 // Usage : compressImage(file, 1200, 0.75, (dataUrl) => { ... })
