@@ -478,41 +478,18 @@ export default function Pros() {
           border-radius: 2px;
         }
 
-        /* Bandeau compatibilité plateformes */
-        .compat-band {
-          padding: 32px 0 8px;
-          text-align: center;
-        }
-        .compat-kicker {
-          display: inline-block;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
+        /* Ligne compat plateformes (hero) */
+        .hero-compat {
           color: var(--dim);
-          margin-bottom: 18px;
-        }
-        .compat-row {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          align-items: center;
-          gap: 28px;
-          row-gap: 14px;
-          max-width: 640px;
-          margin: 0 auto;
-        }
-        .compat-name {
-          font-size: 16px;
-          font-weight: 700;
-          color: var(--muted);
-          letter-spacing: -0.01em;
-          opacity: 0.75;
-          white-space: nowrap;
+          font-size: 13.5px;
+          font-weight: 500;
+          letter-spacing: 0.01em;
+          margin: 14px auto 0;
+          max-width: 480px;
+          line-height: 1.5;
         }
         @media (max-width: 480px) {
-          .compat-row { gap: 20px; row-gap: 12px; }
-          .compat-name { font-size: 14px; }
+          .hero-compat { font-size: 12.5px; }
         }
 
       `}</style>
@@ -551,22 +528,12 @@ export default function Pros() {
             <span className="accent">{p.hero_title_2}</span>
           </h1>
           <p className="sub">{p.hero_sub}</p>
+          <p className="hero-compat">{p.compat_line}</p>
           <div className="cta-row">
             <a href="#form" className="btn-primary">
               <IconLink />
               {p.hero_cta}
             </a>
-          </div>
-        </section>
-
-        <section className="compat-band">
-          <span className="compat-kicker">{p.compat_kicker}</span>
-          <div className="compat-row">
-            <span className="compat-name">Vinted</span>
-            <span className="compat-name">Depop</span>
-            <span className="compat-name">Grailed</span>
-            <span className="compat-name">Etsy</span>
-            <span className="compat-name">Vestiaire</span>
           </div>
         </section>
 

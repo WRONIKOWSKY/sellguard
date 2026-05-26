@@ -25,7 +25,7 @@ export var T = {
       hero_sub: "Pour les revendeurs vintage qui expédient en volume.",
       hero_cta: "Candidater à la cohorte",
 
-      compat_kicker: "Compatible avec",
+      compat_line: "Compatible avec Vinted · Depop · Grailed · Vestiaire Collective",
 
       problem_title_1: "Sans preuve,",
       problem_title_2: "l'acheteur a toujours raison.",
@@ -353,7 +353,7 @@ export var T = {
       hero_sub: "For vintage resellers who ship in volume.",
       hero_cta: "Apply to the cohort",
 
-      compat_kicker: "Works with",
+      compat_line: "Works with Vinted · Depop · Grailed · Vestiaire Collective",
 
       problem_title_1: "Without proof,",
       problem_title_2: "the buyer is always right.",
