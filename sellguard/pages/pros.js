@@ -482,10 +482,7 @@ export default function Pros() {
         .hero-compat {
           margin: 22px auto 0;
           max-width: 520px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 4px;
+          text-align: center;
           line-height: 1.5;
         }
         .hero-compat-label {
@@ -494,6 +491,7 @@ export default function Pros() {
           letter-spacing: 0.14em;
           text-transform: uppercase;
           color: var(--dim);
+          margin-bottom: 8px;
         }
         .hero-compat-list {
           font-size: 13.5px;
@@ -541,10 +539,10 @@ export default function Pros() {
             <span className="accent">{p.hero_title_2}</span>
           </h1>
           <p className="sub">{p.hero_sub}</p>
-          <p className="hero-compat">
-            <span className="hero-compat-label">{p.compat_label}</span>
-            <span className="hero-compat-list">{p.compat_platforms}</span>
-          </p>
+          <div className="hero-compat">
+            <div className="hero-compat-label">{p.compat_label}</div>
+            <div className="hero-compat-list">{p.compat_platforms}</div>
+          </div>
           <div className="cta-row">
             <a href="#form" className="btn-primary">
               <IconLink />
