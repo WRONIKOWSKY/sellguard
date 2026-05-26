@@ -514,6 +514,40 @@ export default function Pros() {
           .compat-row { gap: 20px; row-gap: 12px; }
           .compat-name { font-size: 14px; }
         }
+
+        /* Bloc preuve cliquable */
+        .proof-card {
+          background: var(--bg-card);
+          border: 1.5px solid var(--line);
+          border-radius: var(--radius-lg);
+          padding: 28px 26px;
+          margin-top: 32px;
+          text-align: center;
+        }
+        .proof-text {
+          color: var(--ink-soft);
+          font-size: 16px;
+          font-weight: 500;
+          margin-bottom: 16px;
+        }
+        .proof-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          color: var(--green-deep);
+          font-weight: 700;
+          font-size: 15px;
+          padding: 10px 18px;
+          border-radius: 999px;
+          border: 1.5px solid var(--green);
+          background: var(--green-soft);
+          transition: background .15s, transform .15s;
+        }
+        .proof-link:hover {
+          background: var(--green);
+          color: #fff;
+          transform: translateY(-1px);
+        }
       `}</style>
 
       <header>
@@ -623,6 +657,21 @@ export default function Pros() {
           <p className="sub">{p.step3_sub}</p>
           <div className="illus illus-photo">
             <img src="/illus/step2-preuve.png" alt={p.step3_alt} />
+          </div>
+        </section>
+
+        <section className="block">
+          <span className="kicker">{p.proof_kicker}</span>
+          <div className="proof-card">
+            <p className="proof-text">{p.proof_text}</p>
+            <a
+              href="/verify/SC-M5QTSF2Q"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="proof-link"
+            >
+              {p.proof_cta}
+            </a>
           </div>
         </section>
 

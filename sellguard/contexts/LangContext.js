@@ -51,6 +51,10 @@ export var T = {
       step3_sub: "Recevable, opposable, imparable.",
       step3_alt: "Tampon de preuve horodatée SellCov",
 
+      proof_kicker: "Preuve",
+      proof_text: "Tu doutes ? Vois un certificat en vrai.",
+      proof_cta: "Voir un certificat →",
+
       offer_title_1: "Place de fondateur,",
       offer_title_2: "limitée.",
       offer_badge_cohort: "Cohorte fondateurs ouverte",
@@ -166,8 +170,11 @@ export var T = {
       copied: "✓ Copié",
       share_x: "Partager sur X",
       share_wa: "WhatsApp",
+      share_vinted: "Vinted",
+      share_vinted_copied: "✓ Copié pour Vinted",
       share_tweet: "Je viens de certifier ma vente avec SellCov. Preuve vidéo horodatée + signature cryptographique.",
       share_wa_text: "Je viens de certifier ma vente avec SellCov :",
+      share_vinted_text: "Ta commande est protégée par une preuve vidéo certifiée SellCov :",
 
       hash_label: "Hash SHA-256 :",
       timestamp_label: "Horodatage :",
@@ -374,6 +381,10 @@ export var T = {
       step3_sub: "Admissible, enforceable, airtight.",
       step3_alt: "SellCov timestamped proof stamp",
 
+      proof_kicker: "Proof",
+      proof_text: "Skeptical? See a real certificate.",
+      proof_cta: "View a certificate →",
+
       offer_title_1: "Founder spot,",
       offer_title_2: "limited.",
       offer_badge_cohort: "Founders cohort open",
@@ -489,8 +500,11 @@ export var T = {
       copied: "✓ Copied",
       share_x: "Share on X",
       share_wa: "WhatsApp",
+      share_vinted: "Vinted",
+      share_vinted_copied: "✓ Copied for Vinted",
       share_tweet: "I just certified my sale with SellCov. Timestamped video proof + cryptographic signature.",
       share_wa_text: "I just certified my sale with SellCov:",
+      share_vinted_text: "Your order is protected by a SellCov certified video proof:",
 
       hash_label: "SHA-256 hash:",
       timestamp_label: "Timestamp:",

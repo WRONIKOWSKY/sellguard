@@ -471,6 +471,17 @@ export default function Protection() {
                   >
                     {p.share_wa}
                   </a>
+                  <button
+                    onClick={() => {
+                      const url = typeof window !== "undefined" ? `${window.location.origin}/verify/${cert.cert_id}` : "";
+                      navigator.clipboard.writeText(`${p.share_vinted_text} ${url}`);
+                      setCopiedShare("vinted");
+                      setTimeout(() => setCopiedShare(null), 2000);
+                    }}
+                    style={pillStyle}
+                  >
+                    {copiedShare === "vinted" ? p.share_vinted_copied : p.share_vinted}
+                  </button>
                 </div>
               </div>
 
