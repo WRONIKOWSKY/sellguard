@@ -440,7 +440,10 @@ function LeadDetailModal({ lead: initialLead, session, onClose, onChanged }) {
         }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Erreur envoi");
+      if (!res.ok) {
+        const detail = data.detail?.message || data.detail?.name || "";
+        throw new Error(detail ? `${data.error || "Erreur"} — ${detail}` : (data.error || "Erreur envoi"));
+      }
       setPreview(null);
       setPreviewKind(null);
       onChanged();
