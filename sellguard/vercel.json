@@ -5,5 +5,13 @@
       "path": "/api/ots-upgrade",
       "schedule": "0 3 * * *"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "sellcov.com" }],
+      "destination": "https://www.sellcov.com/:path*",
+      "permanent": true
+    }
   ]
 }
