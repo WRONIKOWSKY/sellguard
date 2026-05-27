@@ -39,7 +39,7 @@ Si tu veux qu'on en parle, dis-moi quel créneau t'arrange cette semaine.
 Voici un cert en vrai pour te faire une idée : https://www.sellcov.com/verify/SC-M5QTSF2Q
 
 Thomas
-sellcov.com · @sellcov`,
+www.sellcov.com · @sellcov`,
 };
 
 export const FOLLOWUP_J3 = {
@@ -66,7 +66,7 @@ Si le timing est mauvais ou que c'est pas pour toi, no stress, je te laisse tran
 Si tu veux qu'on s'appelle 15 min pour la cohorte fondateurs (29€/mois verrouillé à vie après les 30 jours offerts), c'est maintenant ou plus jamais à ce tarif.
 
 Thomas
-sellcov.com`,
+www.sellcov.com`,
 };
 
 export const TEMPLATES = {
