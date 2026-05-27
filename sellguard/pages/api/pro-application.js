@@ -50,7 +50,7 @@ async function notifyByEmail({ email, handle, platform, volume, note, ip }) {
   const subject = `Nouvelle candidature — ${handle}`;
 
   const lines = [
-    `Nouvelle candidature reçue sur sellcov.fr.`,
+    `Nouvelle candidature reçue sur sellcov.com.`,
     ``,
     `Email      : ${email}`,
     `Handle     : ${handle}`,

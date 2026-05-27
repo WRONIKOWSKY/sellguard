@@ -36,10 +36,10 @@ J'ouvre une cohorte de 10 fondateurs ce mois-ci.
 
 Si tu veux qu'on en parle, dis-moi quel créneau t'arrange cette semaine.
 
-Voici un cert en vrai pour te faire une idée : https://www.sellcov.fr/verify/SC-M5QTSF2Q
+Voici un cert en vrai pour te faire une idée : https://www.sellcov.com/verify/SC-M5QTSF2Q
 
 Thomas
-sellcov.fr · @sellcov`,
+sellcov.com · @sellcov`,
 };
 
 export const FOLLOWUP_J3 = {
@@ -50,7 +50,7 @@ Je relance vite, au cas où mon mail soit passé sous le radar.
 
 J'ai déjà 2 fondateurs validés sur les 10 places de la cohorte. Si tu veux que je te montre SellCov en visio (15 min), dis-moi un créneau cette semaine.
 
-Sinon, jeter un œil à un cert en vrai : https://www.sellcov.fr/verify/SC-M5QTSF2Q
+Sinon, jeter un œil à un cert en vrai : https://www.sellcov.com/verify/SC-M5QTSF2Q
 
 Thomas`,
 };
@@ -66,7 +66,7 @@ Si le timing est mauvais ou que c'est pas pour toi, no stress, je te laisse tran
 Si tu veux qu'on s'appelle 15 min pour la cohorte fondateurs (29€/mois verrouillé à vie après les 30 jours offerts), c'est maintenant ou plus jamais à ce tarif.
 
 Thomas
-sellcov.fr`,
+sellcov.com`,
 };
 
 export const TEMPLATES = {
