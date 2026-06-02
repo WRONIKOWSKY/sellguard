@@ -12,7 +12,7 @@ export default function Confidentialite() {
 
       <div className="legal-content">
         <h2>Article 1. Identité du responsable de traitement</h2>
-        <p>Le service SellCov (ci-après « le Service ») est édité à titre personnel dans le cadre d'un projet en bêta privée, en cours de structuration juridique. Aucune transaction commerciale n'est effectuée à ce jour.</p>
+        <p>Le service SellCov (ci-après « le Service ») est édité à titre personnel dans le cadre d'un projet en bêta privée, en cours de structuration juridique.</p>
         <p>Pour toute question relative au traitement de tes données personnelles, tu peux écrire à <a href="mailto:hello@sellcov.com">hello@sellcov.com</a>.</p>
 
         <h2>Article 2. Données personnelles collectées</h2>

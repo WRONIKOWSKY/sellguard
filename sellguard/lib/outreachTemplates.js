@@ -32,7 +32,7 @@ J'ouvre une cohorte de 10 fondateurs ce mois-ci.
 
 - 30 jours d'accès complet, sans CB
 - Mise en place visio avec moi (15 min)
-- Tarif fondateur verrouillé à vie ensuite, sous le prix public
+- Tarif fondateur garanti tant que tu restes dans la cohorte, sous le prix public
 
 Si tu veux qu'on en parle, dis-moi quel créneau t'arrange cette semaine.
 
@@ -63,7 +63,7 @@ Dernière relance promis.
 
 Si le timing est mauvais ou que c'est pas pour toi, no stress, je te laisse tranquille.
 
-Si tu veux qu'on s'appelle 15 min pour la cohorte fondateurs (29€/mois verrouillé à vie après les 30 jours offerts), c'est maintenant ou plus jamais à ce tarif.
+Si tu veux qu'on s'appelle 15 min pour la cohorte fondateurs, c'est le bon moment : le tarif fondateur reste sous le prix public tant que tu es dans la cohorte, et il reste des places.
 
 Thomas
 www.sellcov.com`,
