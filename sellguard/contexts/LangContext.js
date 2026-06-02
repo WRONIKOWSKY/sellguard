@@ -26,7 +26,7 @@ export var T = {
       hero_cta: "Candidater à la cohorte",
 
       compat_label: "Compatible avec",
-      compat_platforms: "Vinted · Depop · Grailed · Vestiaire Collective",
+      compat_platforms: "Vinted Pro · Grailed · Etsy · Depop · Vestiaire Collective",
 
       problem_title_1: "Sans preuve,",
       problem_title_2: "l'acheteur a toujours raison.",
@@ -49,7 +49,7 @@ export var T = {
       step3_kicker: "Étape 3",
       step3_title_1: "En cas de litige,",
       step3_title_2: "la vidéo plaide pour toi.",
-      step3_sub: "Recevable, opposable, imparable.",
+      step3_sub: "Recevable, horodatée, signée.",
       step3_alt: "Tampon de preuve horodatée SellCov",
 
       proof_cta: "Preuve",
@@ -310,7 +310,7 @@ export var T = {
       bad_title: "Signature invalide",
       bad_sub: "La signature ne correspond pas. Le certificat a peut-être été modifié.",
       btc_title: "Ancré dans Bitcoin",
-      btc_sub: "L'empreinte de cette preuve est inscrite dans la blockchain Bitcoin. Personne — pas même SellCov — ne peut modifier la date ou le contenu après coup.",
+      btc_sub: "L'empreinte de cette preuve est inscrite dans la blockchain Bitcoin. Personne ne peut modifier la date ou le contenu après coup, pas même SellCov.",
       btc_proof: "Télécharger la preuve technique (.ots)",
       btc_pending_title: "Ancrage Bitcoin en cours",
       btc_pending_sub: "L'inscription dans la blockchain Bitcoin sera confirmée sous quelques heures, le temps qu'un nouveau bloc soit miné.",
@@ -357,7 +357,7 @@ export var T = {
       hero_cta: "Apply to the cohort",
 
       compat_label: "Works with",
-      compat_platforms: "Vinted · Depop · Grailed · Vestiaire Collective",
+      compat_platforms: "Vinted Pro · Grailed · Etsy · Depop · Vestiaire Collective",
 
       problem_title_1: "Without proof,",
       problem_title_2: "the buyer is always right.",
@@ -380,7 +380,7 @@ export var T = {
       step3_kicker: "Step 3",
       step3_title_1: "If a dispute happens,",
       step3_title_2: "the video speaks for you.",
-      step3_sub: "Admissible, enforceable, airtight.",
+      step3_sub: "Admissible, timestamped, signed.",
       step3_alt: "SellCov timestamped proof stamp",
 
       proof_cta: "Proof",
@@ -641,7 +641,7 @@ export var T = {
       bad_title: "Invalid signature",
       bad_sub: "The signature doesn't match. The certificate may have been modified.",
       btc_title: "Anchored in Bitcoin",
-      btc_sub: "This proof's fingerprint is recorded in the Bitcoin blockchain. No one — not even SellCov — can alter the date or the content afterwards.",
+      btc_sub: "This proof's fingerprint is recorded in the Bitcoin blockchain. No one can alter the date or the content afterwards, not even SellCov.",
       btc_proof: "Download technical proof (.ots)",
       btc_pending_title: "Bitcoin anchoring in progress",
       btc_pending_sub: "Bitcoin blockchain registration will be confirmed within a few hours, the time for a new block to be mined.",

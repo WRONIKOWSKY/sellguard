@@ -14,7 +14,7 @@ export default function MentionsLegales() {
       <div className="legal-content">
         <h2>Édition du site</h2>
         <p>Le site sellcov.com est édité à titre personnel, dans le cadre d'un projet en bêta privée.</p>
-        <p>Le projet est en cours de structuration juridique. Aucune transaction commerciale n'est effectuée à ce jour sur le site.</p>
+        <p>Le projet est en cours de structuration juridique.</p>
         <p>
           Pour toute demande, contact : <a href="mailto:hello@sellcov.com">hello@sellcov.com</a>.
         </p>
