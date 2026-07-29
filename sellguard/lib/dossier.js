@@ -93,11 +93,45 @@ function signatureDiff(a, b) {
   return sum / a.length;
 }
 
+// Mesure de qualité d'une frame : luminosité moyenne + netteté (variance du
+// Laplacien sur une réduction 64px). Sert à pré-décocher les photos
+// probablement inexploitables (noires, floues) dans l'écran de sélection —
+// c'est l'utilisateur qui tranche, pas l'algorithme.
+const QUALITY_W = 64;
+function frameQuality(video, qCanvas) {
+  const qh = Math.max(8, Math.round((video.videoHeight / video.videoWidth) * QUALITY_W) || 36);
+  qCanvas.width = QUALITY_W;
+  qCanvas.height = qh;
+  const ctx = qCanvas.getContext("2d", { willReadFrequently: true });
+  ctx.drawImage(video, 0, 0, QUALITY_W, qh);
+  const { data } = ctx.getImageData(0, 0, QUALITY_W, qh);
+  const gray = new Float32Array(QUALITY_W * qh);
+  let sum = 0;
+  for (let i = 0; i < gray.length; i++) {
+    gray[i] = (data[i * 4] + data[i * 4 + 1] + data[i * 4 + 2]) / 3;
+    sum += gray[i];
+  }
+  const brightness = sum / gray.length;
+  let lapVar = 0;
+  let n = 0;
+  for (let y = 1; y < qh - 1; y++) {
+    for (let x = 1; x < QUALITY_W - 1; x++) {
+      const i = y * QUALITY_W + x;
+      const lap = 4 * gray[i] - gray[i - 1] - gray[i + 1] - gray[i - QUALITY_W] - gray[i + QUALITY_W];
+      lapVar += lap * lap;
+      n++;
+    }
+  }
+  return { brightness, sharpness: lapVar / n };
+}
+
 // Extrait jusqu'à `keep` photos distinctes de la vidéo. On échantillonne
 // `candidates` positions régulières, on écarte les frames identiques à la
 // précédente retenue (cas réel : caméra qui fige en cours d'enregistrement,
 // cf. bug SC-4M34TMHW), puis on resserre à `keep` photos réparties.
-export async function extractFrames(videoUrl, { candidates = 14, keep = 8, maxWidth = 1280, onProgress } = {}) {
+// Chaque photo reçoit un booléen `flagged` (sombre ou nettement plus floue
+// que les autres) pour pré-décocher dans l'écran de sélection.
+export async function extractFrames(videoUrl, { candidates = 16, keep = 12, maxWidth = 1280, onProgress } = {}) {
   const video = document.createElement("video");
   video.crossOrigin = "anonymous"; // signed URL Supabase → CORS *, canvas non taintée
   video.muted = true;
@@ -117,6 +151,7 @@ export async function extractFrames(videoUrl, { candidates = 14, keep = 8, maxWi
   const sigCanvas = document.createElement("canvas");
   sigCanvas.width = SIG_SIZE;
   sigCanvas.height = SIG_SIZE;
+  const qCanvas = document.createElement("canvas");
 
   const collected = [];
   let lastSig = null;
@@ -135,11 +170,14 @@ export async function extractFrames(videoUrl, { candidates = 14, keep = 8, maxWi
     }
     lastSig = sig;
     ctx.drawImage(video, 0, 0, w, h);
+    const quality = frameQuality(video, qCanvas);
     collected.push({
       dataUrl: canvas.toDataURL("image/jpeg", 0.82),
       timeSec: video.currentTime,
       width: w,
       height: h,
+      brightness: quality.brightness,
+      sharpness: quality.sharpness,
     });
     if (onProgress) onProgress(i + 1, candidates);
   }
@@ -148,14 +186,27 @@ export async function extractFrames(videoUrl, { candidates = 14, keep = 8, maxWi
   video.load();
 
   if (collected.length === 0) throw new Error("no frames extracted");
-  if (collected.length <= keep) return collected;
 
-  // Resserre à `keep` photos réparties sur toute la vidéo
-  const picked = [];
-  for (let i = 0; i < keep; i++) {
-    picked.push(collected[Math.round((i * (collected.length - 1)) / (keep - 1))]);
+  let frames = collected;
+  if (collected.length > keep) {
+    // Resserre à `keep` photos réparties sur toute la vidéo
+    const picked = [];
+    for (let i = 0; i < keep; i++) {
+      picked.push(collected[Math.round((i * (collected.length - 1)) / (keep - 1))]);
+    }
+    frames = [...new Set(picked)];
   }
-  return [...new Set(picked)];
+
+  // Marque les frames suspectes : très sombres, ou nettement plus floues que
+  // la médiane du lot (seuil relatif : une vidéo entièrement floue ne doit
+  // pas tout décocher).
+  const sharpnesses = frames.map((f) => f.sharpness).sort((a, b) => a - b);
+  const medianSharp = sharpnesses[Math.floor(sharpnesses.length / 2)] || 0;
+  frames.forEach((f) => {
+    f.flagged = f.brightness < 25 || (medianSharp > 0 && f.sharpness < medianSharp * 0.25);
+  });
+
+  return frames;
 }
 
 // ---------------------------------------------------------------------------
@@ -345,14 +396,9 @@ export async function buildDossierPdf({ cert, frames, lang, origin }) {
   return doc;
 }
 
-// Enchaîne extraction + PDF + téléchargement. onStep reçoit ("extract", i, n)
-// puis ("build").
-export async function generateDossier({ cert, lang, origin, onStep }) {
-  const frames = await extractFrames(cert.video_url, {
-    onProgress: (i, n) => onStep && onStep("extract", i, n),
-  });
-  if (onStep) onStep("build");
+// Assemble le PDF avec les photos retenues par l'utilisateur et déclenche le
+// téléchargement.
+export async function saveDossierPdf({ cert, frames, lang, origin }) {
   const doc = await buildDossierPdf({ cert, frames, lang, origin });
   doc.save(`SellCov_${cert.cert_id}_Dossier.pdf`);
-  return frames.length;
 }
