@@ -155,7 +155,7 @@ export async function extractFrames(videoUrl, opts = {}) {
   }
 }
 
-async function doExtractFrames(videoUrl, { candidates = 16, keep = 12, maxWidth = 1280, onProgress } = {}) {
+async function doExtractFrames(videoUrl, { candidates = 32, keep = 20, maxWidth = 1280, onProgress } = {}) {
   const video = document.createElement("video");
   video.crossOrigin = "anonymous"; // signed URL Supabase → CORS *, canvas non taintée
   video.muted = true;
