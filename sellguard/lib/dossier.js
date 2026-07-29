@@ -131,7 +131,31 @@ function frameQuality(video, qCanvas) {
 // cf. bug SC-4M34TMHW), puis on resserre à `keep` photos réparties.
 // Chaque photo reçoit un booléen `flagged` (sombre ou nettement plus floue
 // que les autres) pour pré-décocher dans l'écran de sélection.
-export async function extractFrames(videoUrl, { candidates = 16, keep = 12, maxWidth = 1280, onProgress } = {}) {
+//
+// Chrome gèle le chargement des vidéos dans un onglet caché : si
+// l'utilisateur change d'onglet pendant l'extraction, on attend qu'il
+// revienne et on réessaie au lieu d'afficher une erreur.
+export async function extractFrames(videoUrl, opts = {}) {
+  try {
+    return await doExtractFrames(videoUrl, opts);
+  } catch (e) {
+    if (typeof document !== "undefined" && document.hidden) {
+      await new Promise((resolve) => {
+        const onVisible = () => {
+          if (!document.hidden) {
+            document.removeEventListener("visibilitychange", onVisible);
+            resolve();
+          }
+        };
+        document.addEventListener("visibilitychange", onVisible);
+      });
+      return doExtractFrames(videoUrl, opts);
+    }
+    throw e;
+  }
+}
+
+async function doExtractFrames(videoUrl, { candidates = 16, keep = 12, maxWidth = 1280, onProgress } = {}) {
   const video = document.createElement("video");
   video.crossOrigin = "anonymous"; // signed URL Supabase → CORS *, canvas non taintée
   video.muted = true;
