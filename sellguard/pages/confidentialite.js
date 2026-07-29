@@ -59,7 +59,7 @@ export default function Confidentialite() {
         <h2>Article 6. Destinataires et sous-traitants</h2>
         <p>Tes données sont accessibles uniquement aux personnes habilitées au sein de SellCov, ainsi qu'aux sous-traitants techniques suivants, qui agissent sur instruction écrite de SellCov dans le respect du RGPD :</p>
         <ul>
-          <li><strong>Supabase Inc.</strong> (États-Unis, certifié Data Privacy Framework) : authentification, base de données, stockage des vidéos chiffrées.</li>
+          <li><strong>Supabase Inc.</strong> (États-Unis, certifié Data Privacy Framework) : authentification, base de données, stockage des vidéos chiffrées. Les données et vidéos sont hébergées au sein de l'Union européenne (région AWS eu-west-1, Irlande).</li>
           <li><strong>Vercel Inc.</strong> (États-Unis, certifié Data Privacy Framework) : hébergement de l'application web et CDN.</li>
           <li><strong>Anthropic PBC</strong> (États-Unis) : analyse d'images et génération de texte par intelligence artificielle pour les fonctionnalités d'annonce et de défense de litige. Aucune vidéo de certification n'est transmise à Anthropic.</li>
         </ul>
