@@ -112,7 +112,7 @@ export var T = {
     protection: {
       meta_title: "SellCov — Certifier un envoi",
       title: "Certifier un envoi",
-      subtitle: "Une vidéo en une prise, horodatée et signée. La preuve que tu ne peux pas perdre.",
+      subtitle: "Une vidéo en une prise, horodatée et signée. La preuve de ton côté en cas de litige.",
 
       err_article: "Précise le nom de l'article avant de filmer.",
       err_no_camera_api: "Ton navigateur ne supporte pas la caméra. Essaie Safari ou Chrome récent.",
@@ -443,7 +443,7 @@ export var T = {
     protection: {
       meta_title: "SellCov — Certify a shipment",
       title: "Certify a shipment",
-      subtitle: "One single take, timestamped and signed. Proof you can't lose.",
+      subtitle: "One single take, timestamped and signed. Proof on your side if a dispute comes up.",
 
       err_article: "Enter the item name before filming.",
       err_no_camera_api: "Your browser doesn't support camera. Try Safari or a recent Chrome.",
