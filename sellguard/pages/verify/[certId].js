@@ -25,6 +25,25 @@ export default function Verify() {
   const [cert, setCert] = useState(null);
   const [error, setError] = useState(null);
   const [showHash, setShowHash] = useState(false);
+  const [dossierState, setDossierState] = useState(null); // null | {step, i, n} | {error}
+
+  async function makeDossier() {
+    if (!cert?.video_url || dossierState?.step) return;
+    setDossierState({ step: "extract", i: 0, n: 0 });
+    try {
+      const { generateDossier } = await import("../../lib/dossier");
+      await generateDossier({
+        cert,
+        lang,
+        origin: window.location.origin,
+        onStep: (step, i, n) => setDossierState({ step, i, n }),
+      });
+      setDossierState(null);
+    } catch (e) {
+      console.error("[dossier]", e);
+      setDossierState({ error: true });
+    }
+  }
 
   useEffect(() => {
     if (!certId) return;
@@ -229,6 +248,30 @@ export default function Verify() {
 
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 4 }}>
               {cert.video_url && (
+                <>
+                  <button
+                    type="button"
+                    onClick={makeDossier}
+                    disabled={!!dossierState?.step}
+                    style={{ ...btnPrimary, border: "none", cursor: dossierState?.step ? "wait" : "pointer", opacity: dossierState?.step ? 0.6 : 1, fontFamily: "inherit" }}
+                  >
+                    {dossierState?.step === "extract"
+                      ? `${v.dossier_extracting} ${dossierState.n ? `(${dossierState.i}/${dossierState.n})` : ""}`
+                      : dossierState?.step === "build"
+                      ? v.dossier_building
+                      : v.dossier_btn}
+                  </button>
+                  {dossierState?.error && (
+                    <p style={{ fontSize: 13, color: "var(--danger)", margin: 0, textAlign: "center" }}>
+                      {v.dossier_err}
+                    </p>
+                  )}
+                  <p style={{ fontSize: 12, color: "var(--muted)", margin: "0 0 2px", textAlign: "center", lineHeight: 1.5 }}>
+                    {v.dossier_note}
+                  </p>
+                </>
+              )}
+              {cert.video_url && (
                 <a
                   href={cert.video_url}
                   download={`${cert.cert_id}.${
@@ -238,7 +281,7 @@ export default function Verify() {
                   }`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={btnPrimary}
+                  style={btnGhost}
                 >
                   {v.download_video}
                 </a>
