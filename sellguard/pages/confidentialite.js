@@ -50,7 +50,7 @@ export default function Confidentialite() {
         <p>Tes données sont conservées pendant les durées suivantes :</p>
         <ul>
           <li><strong>Données de compte</strong> : pendant toute la durée de ton inscription, puis 3 ans après suppression du compte (sauf opposition de ta part).</li>
-          <li><strong>Vidéos de certification</strong> : 5 ans à compter de leur création, durée correspondant au délai de prescription civile applicable aux litiges entre particuliers (article 2224 du Code civil).</li>
+          <li><strong>Vidéos de certification</strong> : 5 ans à compter de leur création, durée correspondant au délai de prescription civile applicable aux litiges entre particuliers (article 2224 du Code civil). En cas de résiliation du compte, elles sont supprimées 30 jours après la date d'effet de la résiliation, conformément aux CGU.</li>
           <li><strong>Logs techniques de connexion</strong> : 12 mois.</li>
           <li><strong>Données de facturation</strong> : 10 ans (obligation légale comptable).</li>
         </ul>
