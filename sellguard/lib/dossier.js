@@ -36,7 +36,11 @@ const SEEK_TIMEOUT_MS = 8000;
 // les métadonnées. On laisse large.
 const METADATA_TIMEOUT_MS = 30000;
 const SIG_SIZE = 8; // signature 8x8 en niveaux de gris pour la déduplication
-const SIG_DIFF_THRESHOLD = 6; // en dessous : frames considérées identiques
+// En dessous : frames considérées identiques. Une frame réellement figée
+// (caméra morte) a une différence quasi nulle (~0,1-0,5 de bruit de
+// décodage) ; un seuil bas élimine les vrais doublons sans écarter les
+// mouvements subtils entre deux frames voisines.
+const SIG_DIFF_THRESHOLD = 2;
 
 function waitForEvent(el, event, timeoutMs) {
   return new Promise((resolve, reject) => {
