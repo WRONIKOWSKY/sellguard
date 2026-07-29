@@ -25,6 +25,49 @@ export default function Verify() {
   const [cert, setCert] = useState(null);
   const [error, setError] = useState(null);
   const [showHash, setShowHash] = useState(false);
+  const [dossierState, setDossierState] = useState(null); // null | {step:"extract",i,n} | {step:"pick"} | {step:"build"} | {error}
+  const [dossierFrames, setDossierFrames] = useState([]); // [{dataUrl, timeSec, flagged, selected}]
+
+  async function makeDossier() {
+    if (!cert?.video_url || dossierState?.step) return;
+    setDossierState({ step: "extract", i: 0, n: 0 });
+    try {
+      const { extractFrames } = await import("../../lib/dossier");
+      const frames = await extractFrames(cert.video_url, {
+        onProgress: (i, n) => setDossierState({ step: "extract", i, n }),
+      });
+      setDossierFrames(frames.map((f) => ({ ...f, selected: !f.flagged })));
+      setDossierState({ step: "pick" });
+    } catch (e) {
+      console.error("[dossier]", e);
+      setDossierState({ error: true });
+    }
+  }
+
+  async function buildDossier() {
+    const frames = dossierFrames.filter((f) => f.selected);
+    if (frames.length === 0) return;
+    setDossierState({ step: "build" });
+    try {
+      const { saveDossierPdf } = await import("../../lib/dossier");
+      await saveDossierPdf({ cert, frames, lang, origin: window.location.origin });
+      setDossierState(null);
+      setDossierFrames([]);
+    } catch (e) {
+      console.error("[dossier]", e);
+      setDossierState({ error: true });
+    }
+  }
+
+  function toggleFrame(idx) {
+    setDossierFrames((fs) => fs.map((f, i) => (i === idx ? { ...f, selected: !f.selected } : f)));
+  }
+
+  function fmtTimecode(sec) {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  }
 
   useEffect(() => {
     if (!certId) return;
@@ -228,6 +271,82 @@ export default function Verify() {
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 4 }}>
+              {cert.video_url && dossierState?.step !== "pick" && (
+                <>
+                  <button
+                    type="button"
+                    onClick={makeDossier}
+                    disabled={!!dossierState?.step}
+                    style={{ ...btnPrimary, border: "none", cursor: dossierState?.step ? "wait" : "pointer", opacity: dossierState?.step ? 0.6 : 1, fontFamily: "inherit" }}
+                  >
+                    {dossierState?.step === "extract"
+                      ? `${v.dossier_extracting} ${dossierState.n ? `(${dossierState.i}/${dossierState.n})` : ""}`
+                      : dossierState?.step === "build"
+                      ? v.dossier_building
+                      : v.dossier_btn}
+                  </button>
+                  {dossierState?.error && (
+                    <p style={{ fontSize: 13, color: "var(--danger)", margin: 0, textAlign: "center" }}>
+                      {v.dossier_err}
+                    </p>
+                  )}
+                  <p style={{ fontSize: 12, color: "var(--muted)", margin: "0 0 2px", textAlign: "center", lineHeight: 1.5 }}>
+                    {v.dossier_note}
+                  </p>
+                </>
+              )}
+              {dossierState?.step === "pick" && (
+                <div style={{ background: "#fff", border: "1.5px solid #e6e4dc", borderRadius: 28, padding: "22px 22px 18px" }}>
+                  <div style={{ fontSize: 15.5, fontWeight: 800, color: "#111", marginBottom: 4 }}>
+                    {v.dossier_pick_title}
+                  </div>
+                  <p style={{ fontSize: 12.5, color: "var(--muted)", margin: "0 0 14px", lineHeight: 1.5 }}>
+                    {v.dossier_pick_note}
+                  </p>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: 10 }}>
+                    {dossierFrames.map((f, i) => (
+                      <div
+                        key={i}
+                        onClick={() => toggleFrame(i)}
+                        style={{
+                          position: "relative",
+                          cursor: "pointer",
+                          borderRadius: 10,
+                          overflow: "hidden",
+                          border: f.selected ? "2.5px solid var(--green)" : "2.5px solid #e6e4dc",
+                          opacity: f.selected ? 1 : 0.45,
+                        }}
+                      >
+                        <img src={f.dataUrl} alt={`Photo ${i + 1}`} style={{ display: "block", width: "100%", aspectRatio: `${f.width}/${f.height}`, objectFit: "cover" }} />
+                        <div style={{ position: "absolute", top: 5, left: 5, width: 20, height: 20, borderRadius: 6, background: f.selected ? "var(--green)" : "rgba(255,255,255,0.9)", border: "1.5px solid " + (f.selected ? "var(--green-deep)" : "#d4d2c8"), display: "grid", placeItems: "center", color: "#fff", fontSize: 13, fontWeight: 800 }}>
+                          {f.selected ? "✓" : ""}
+                        </div>
+                        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "rgba(0,0,0,0.55)", color: "#fff", fontSize: 10.5, padding: "3px 6px", display: "flex", justifyContent: "space-between", gap: 4 }}>
+                          <span>{fmtTimecode(f.timeSec)}</span>
+                          {f.flagged && <span style={{ color: "#ffd27a" }}>{v.dossier_pick_flagged}</span>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 16 }}>
+                    <button
+                      type="button"
+                      onClick={buildDossier}
+                      disabled={dossierFrames.filter((f) => f.selected).length === 0}
+                      style={{ ...btnPrimary, border: "none", fontFamily: "inherit", cursor: "pointer", opacity: dossierFrames.filter((f) => f.selected).length === 0 ? 0.4 : 1 }}
+                    >
+                      {v.dossier_pick_generate} ({dossierFrames.filter((f) => f.selected).length})
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setDossierState(null); setDossierFrames([]); }}
+                      style={{ ...btnGhost, fontFamily: "inherit", cursor: "pointer" }}
+                    >
+                      {v.dossier_pick_cancel}
+                    </button>
+                  </div>
+                </div>
+              )}
               {cert.video_url && (
                 <a
                   href={cert.video_url}
@@ -238,7 +357,7 @@ export default function Verify() {
                   }`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={btnPrimary}
+                  style={btnGhost}
                 >
                   {v.download_video}
                 </a>
