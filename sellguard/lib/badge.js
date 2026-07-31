@@ -61,9 +61,9 @@ export async function buildBadgeCanvas({ handle, slug, origin, lang = "fr" }) {
   // Logo (déjà servi par le site, même origine → canvas propre)
   try {
     const logo = await loadImage("/logo-full.png");
-    const lw = 380;
+    const lw = 330;
     const lh = (logo.height / logo.width) * lw;
-    ctx.drawImage(logo, (SIZE - lw) / 2, 96, lw, lh);
+    ctx.drawImage(logo, (SIZE - lw) / 2, 104, lw, lh);
   } catch (e) {
     ctx.fillStyle = GREEN_DEEP;
     ctx.font = "800 96px -apple-system, system-ui, sans-serif";
@@ -75,42 +75,66 @@ export async function buildBadgeCanvas({ handle, slug, origin, lang = "fr" }) {
 
   // Titre
   ctx.fillStyle = INK;
-  ctx.font = "800 76px -apple-system, system-ui, sans-serif";
-  ctx.fillText(isEn ? "Shipments filmed" : "Envois filmés", SIZE / 2, 520);
-  ctx.fillText(isEn ? "and certified" : "et certifiés", SIZE / 2, 610);
+  ctx.font = "800 72px -apple-system, system-ui, sans-serif";
+  ctx.fillText(isEn ? "Shipments filmed" : "Envois filmés", SIZE / 2, 490);
+  ctx.fillText(isEn ? "and certified" : "et certifiés", SIZE / 2, 572);
 
   // Pseudo dans une pastille verte
   const handleText = "@" + handle;
-  ctx.font = "700 54px -apple-system, system-ui, sans-serif";
-  const tw = ctx.measureText(handleText).width;
-  const pw = tw + 96;
+  const handleSize = fitFont(ctx, handleText, 860, 54, 700);
+  const pw = ctx.measureText(handleText).width + 96;
   ctx.fillStyle = "#e7f3ec";
   ctx.strokeStyle = GREEN;
   ctx.lineWidth = 4;
-  roundRect(ctx, (SIZE - pw) / 2, 660, pw, 92, 46);
+  roundRect(ctx, (SIZE - pw) / 2, 600, pw, 88, 44);
   ctx.fill();
   ctx.stroke();
   ctx.fillStyle = GREEN_DEEP;
-  ctx.fillText(handleText, SIZE / 2, 722);
+  ctx.font = `700 ${handleSize}px -apple-system, system-ui, sans-serif`;
+  ctx.fillText(handleText, SIZE / 2, 658);
 
-  // QR vers la page publique
-  const qrDataUrl = await QRCode.toDataURL(verifyUrl, { width: 512, margin: 1 });
-  const qrImg = await loadImage(qrDataUrl);
-  const qs = 260;
-  ctx.drawImage(qrImg, (SIZE - qs) / 2, 790, qs, qs);
+  // Adresse de vérification : l'élément principal. Sur mobile personne ne
+  // peut scanner le QR de son propre écran, c'est l'adresse écrite qui se
+  // lit et se retape. Elle rétrécit automatiquement pour les longs pseudos.
+  const shortUrl = verifyUrl.replace(/^https?:\/\/(www\.)?/, "");
+  ctx.fillStyle = BG;
+  ctx.strokeStyle = LINE;
+  ctx.lineWidth = 3;
+  roundRect(ctx, 100, 730, SIZE - 200, 130, 28);
+  ctx.fill();
+  ctx.stroke();
+  const urlSize = fitFont(ctx, shortUrl, 900, 50, 700);
+  ctx.fillStyle = INK;
+  ctx.font = `700 ${urlSize}px -apple-system, system-ui, sans-serif`;
+  ctx.fillText(shortUrl, SIZE / 2, 730 + 65 + urlSize / 3);
 
-  // URL en toutes lettres + mention
+  // Mention + QR (utile sur ordinateur et depuis une capture d'écran)
   ctx.fillStyle = MUTED;
-  ctx.font = "600 34px -apple-system, system-ui, sans-serif";
-  ctx.fillText(verifyUrl.replace(/^https?:\/\/(www\.)?/, ""), SIZE / 2, 1092);
   ctx.font = "500 28px -apple-system, system-ui, sans-serif";
   ctx.fillText(
-    isEn ? "Scan to verify this seller" : "Scanne pour vérifier ce vendeur",
+    isEn ? "Type this address or scan the code to verify" : "Tape cette adresse ou scanne le code pour vérifier",
     SIZE / 2,
-    1132
+    912
   );
 
+  const qrDataUrl = await QRCode.toDataURL(verifyUrl, { width: 512, margin: 1 });
+  const qrImg = await loadImage(qrDataUrl);
+  const qs = 150;
+  ctx.drawImage(qrImg, (SIZE - qs) / 2, 950, qs, qs);
+
   return canvas;
+}
+
+// Réduit la taille de police jusqu'à ce que le texte tienne dans maxWidth.
+function fitFont(ctx, text, maxWidth, startSize, weight) {
+  let size = startSize;
+  const family = "-apple-system, system-ui, sans-serif";
+  ctx.font = `${weight} ${size}px ${family}`;
+  while (ctx.measureText(text).width > maxWidth && size > 20) {
+    size -= 2;
+    ctx.font = `${weight} ${size}px ${family}`;
+  }
+  return size;
 }
 
 // Génère et télécharge le badge en PNG.
