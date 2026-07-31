@@ -18,6 +18,11 @@ export default function Compte() {
   const [envois, setEnvois] = useState([]);
   const [upgrading, setUpgrading] = useState(false);
   const [upgradedMsg, setUpgradedMsg] = useState(false);
+  const [badgeHandle, setBadgeHandle] = useState('');
+  const [badgePlatform, setBadgePlatform] = useState('vinted');
+  const [badgeBusy, setBadgeBusy] = useState(false);
+  const [badgeError, setBadgeError] = useState(null);
+  const [badgePreview, setBadgePreview] = useState(null); // {slug, dataUrl}
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.search.includes('upgraded=1')) {
@@ -52,7 +57,13 @@ export default function Compte() {
       .select('*')
       .eq('id', session.user.id)
       .single()
-      .then(({ data }) => setProfile(data));
+      .then(({ data }) => {
+        setProfile(data);
+        if (data?.public_handle) {
+          setBadgeHandle(data.public_handle);
+          if (data.handle_platform) setBadgePlatform(data.handle_platform);
+        }
+      });
     sb.from('envois')
       .select('*')
       .order('created_at', { ascending: false })
@@ -130,6 +141,54 @@ export default function Compte() {
       setError(c.err_network);
       setUpgrading(false);
     }
+  }
+
+  async function makeBadge() {
+    setBadgeError(null);
+    setBadgePreview(null);
+    const sb = getSupabase();
+    if (!sb) return;
+    const { data } = await sb.auth.getSession();
+    const token = data?.session?.access_token;
+    if (!token) {
+      setBadgeError(c.err_session);
+      return;
+    }
+    setBadgeBusy(true);
+    try {
+      const res = await fetch('/api/vendeur-claim', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ handle: badgeHandle, platform: badgePlatform }),
+      });
+      const json = await res.json();
+      if (!res.ok) {
+        setBadgeError(json.error || c.badge_err);
+        setBadgeBusy(false);
+        return;
+      }
+      const { buildBadgeCanvas } = await import('../lib/badge');
+      // Pas d'origin : le badge pointe toujours vers le domaine public,
+      // même généré depuis un preview (voir lib/badge.js).
+      const canvas = await buildBadgeCanvas({
+        handle: json.handle,
+        slug: json.slug,
+        lang,
+      });
+      setBadgePreview({ slug: json.slug, handle: json.handle, dataUrl: canvas.toDataURL('image/png') });
+    } catch (e) {
+      console.error('[badge]', e);
+      setBadgeError(c.badge_err);
+    }
+    setBadgeBusy(false);
+  }
+
+  function saveBadge() {
+    if (!badgePreview) return;
+    const a = document.createElement('a');
+    a.href = badgePreview.dataUrl;
+    a.download = `SellCov_badge_${badgePreview.slug}.png`;
+    a.click();
   }
 
   const tier = session?.user?.app_metadata?.tier;
@@ -315,6 +374,61 @@ export default function Compte() {
                   <div style={dashSub}>{c.dash_litige_sub}</div>
                 </a>
               </Link>
+            </div>
+
+            <div style={cardStyle}>
+              <div style={labelStyle}>{c.badge_kicker}</div>
+              <p style={{ color: "#6b6b6b", fontSize: 14, lineHeight: 1.6, margin: "8px 0 16px" }}>
+                {c.badge_desc}
+              </p>
+              <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                <input
+                  type="text"
+                  value={badgeHandle}
+                  onChange={(e) => setBadgeHandle(e.target.value)}
+                  placeholder={c.badge_handle_ph}
+                  style={{ ...inputStyle, flex: "1 1 180px", width: "auto" }}
+                />
+                <select
+                  value={badgePlatform}
+                  onChange={(e) => setBadgePlatform(e.target.value)}
+                  style={{ ...inputStyle, flex: "0 1 180px", width: "auto", cursor: "pointer" }}
+                >
+                  <option value="vinted">Vinted</option>
+                  <option value="depop">Depop</option>
+                  <option value="grailed">Grailed</option>
+                  <option value="vestiaire">Vestiaire Collective</option>
+                  <option value="etsy">Etsy</option>
+                  <option value="autre">{c.badge_platform_other}</option>
+                </select>
+              </div>
+              <div style={{ height: 12 }} />
+              <button
+                onClick={makeBadge}
+                disabled={badgeBusy || !badgeHandle.trim()}
+                style={{ ...btnPrimary, opacity: badgeBusy || !badgeHandle.trim() ? 0.5 : 1, cursor: badgeBusy ? "wait" : "pointer" }}
+              >
+                {badgeBusy ? c.badge_generating : c.badge_btn}
+              </button>
+              {badgeError && <div style={errorBox}>{badgeError}</div>}
+              {badgePreview && (
+                <div style={{ marginTop: 18, textAlign: "center" }}>
+                  <img
+                    src={badgePreview.dataUrl}
+                    alt={`Badge SellCov @${badgePreview.handle}`}
+                    style={{ width: "100%", maxWidth: 320, margin: "0 auto 12px", borderRadius: 16, border: "1.5px solid #e6e4dc" }}
+                  />
+                  <button onClick={saveBadge} style={{ ...btnPrimary, maxWidth: 320 }}>
+                    {c.badge_download}
+                  </button>
+                  <p style={{ fontSize: 12.5, color: "#6b6b6b", marginTop: 12, lineHeight: 1.6 }}>
+                    {c.badge_page_note}{" "}
+                    <a href={`/vendeur/${badgePreview.slug}`} style={{ color: "#167a48", fontWeight: 600, textDecoration: "underline" }}>
+                      sellcov.com/vendeur/{badgePreview.slug}
+                    </a>
+                  </p>
+                </div>
+              )}
             </div>
 
             {!isPro && (
