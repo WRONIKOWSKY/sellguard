@@ -122,16 +122,27 @@ export default function VendeurPublic() {
               <p style={{ fontSize: 13.5, color: "#2a2a2a", marginTop: 6, lineHeight: 1.55 }}>{s.ok_sub}</p>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 14 }}>
-              <div style={statBox}>
-                <div style={statLabel}>{s.stat_certs}</div>
-                <div style={statValue}>{seller.cert_count}</div>
+            {/* Sous 3 envois, afficher le compteur dessert le vendeur qui
+                démarre (« 0 envois certifiés » suggère l'inverse de ce que le
+                badge annonce). On montre alors la seule info utile et vraie :
+                le compte est bien vérifié, depuis telle date. */}
+            {seller.cert_count >= 3 ? (
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 14 }}>
+                <div style={statBox}>
+                  <div style={statLabel}>{s.stat_certs}</div>
+                  <div style={statValue}>{seller.cert_count}</div>
+                </div>
+                <div style={statBox}>
+                  <div style={statLabel}>{s.stat_since}</div>
+                  <div style={{ ...statValue, fontSize: 20 }}>{sinceStr || "—"}</div>
+                </div>
               </div>
-              <div style={statBox}>
-                <div style={statLabel}>{s.stat_since}</div>
+            ) : (
+              <div style={{ ...statBox, marginBottom: 14 }}>
+                <div style={statLabel}>{s.stat_verified}</div>
                 <div style={{ ...statValue, fontSize: 20 }}>{sinceStr || "—"}</div>
               </div>
-            </div>
+            )}
 
             <p style={{ fontSize: 12.5, color: "#6b6b6b", textAlign: "center", lineHeight: 1.6, marginTop: 18 }}>
               {s.footer_note}

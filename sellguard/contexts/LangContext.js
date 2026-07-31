@@ -258,7 +258,7 @@ export var T = {
       badge_btn: "Générer mon badge",
       badge_generating: "Génération…",
       badge_download: "Télécharger le badge (PNG)",
-      badge_err: "Erreur lors de la génération du badge.",
+      badge_err: "Erreur lors de la génération du badge. Recharge la page et réessaie.",
       badge_page_note: "Ta page publique de vérification :",
 
       upgrade_kicker: "Passer au plan Pro",
@@ -363,6 +363,7 @@ export var T = {
       sub_generic: "Vendeur en ligne",
       stat_certs: "Envois certifiés",
       stat_since: "Depuis",
+      stat_verified: "Compte vérifié depuis",
       footer_note: "Vérifie que le pseudo affiché ici correspond bien au profil du vendeur sur la plateforme. Un badge copié affiche le pseudo de son vrai propriétaire.",
       discover: "Découvrir SellCov",
     },
@@ -625,7 +626,7 @@ export var T = {
       badge_btn: "Generate my badge",
       badge_generating: "Generating…",
       badge_download: "Download badge (PNG)",
-      badge_err: "Error while generating the badge.",
+      badge_err: "Error while generating the badge. Reload the page and try again.",
       badge_page_note: "Your public verification page:",
 
       upgrade_kicker: "Upgrade to Pro",
@@ -730,6 +731,7 @@ export var T = {
       sub_generic: "Online seller",
       stat_certs: "Certified shipments",
       stat_since: "Since",
+      stat_verified: "Verified account since",
       footer_note: "Check that the handle shown here matches the seller's profile on the platform. A copied badge shows its real owner's handle.",
       discover: "Discover SellCov",
     },

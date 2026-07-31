@@ -9,6 +9,12 @@
 // SellCov qui confirme le pseudo et le nombre d'envois certifiés — page que
 // personne d'autre ne peut fabriquer.
 
+// Le badge vit des mois dans les photos d'une annonce : son adresse doit
+// toujours pointer vers le domaine public, jamais vers l'origine courante
+// (une URL de preview Vercel meurt avec le déploiement, et elle est
+// illisible sur une photo).
+const PUBLIC_ORIGIN = "https://www.sellcov.com";
+
 const SIZE = 1200;
 const INK = "#111111";
 const MUTED = "#6b6b6b";
@@ -41,7 +47,7 @@ function roundRect(ctx, x, y, w, h, r) {
 export async function buildBadgeCanvas({ handle, slug, origin, lang = "fr" }) {
   const QRCode = (await import("qrcode")).default;
   const isEn = lang === "en";
-  const verifyUrl = `${origin}/vendeur/${slug}`;
+  const verifyUrl = `${origin || PUBLIC_ORIGIN}/vendeur/${slug}`;
 
   const canvas = document.createElement("canvas");
   canvas.width = SIZE;

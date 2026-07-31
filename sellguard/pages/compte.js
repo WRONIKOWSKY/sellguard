@@ -168,10 +168,11 @@ export default function Compte() {
         return;
       }
       const { buildBadgeCanvas } = await import('../lib/badge');
+      // Pas d'origin : le badge pointe toujours vers le domaine public,
+      // même généré depuis un preview (voir lib/badge.js).
       const canvas = await buildBadgeCanvas({
         handle: json.handle,
         slug: json.slug,
-        origin: window.location.origin,
         lang,
       });
       setBadgePreview({ slug: json.slug, handle: json.handle, dataUrl: canvas.toDataURL('image/png') });
